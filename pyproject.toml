@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mdpcegis"
+version = "0.1.0"
+description = ""
+authors = ["Linus Heck <linus.heck@ru.nl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+cvc5 = "^1.2.0"
+z3-solver = "^4.13.3.0"
+pycarl = { path = "../stormpy/pycarl" }
+stormpy = { path = "../stormpy/stormpy" }
+payntbind = { path = "../stormpy/synthesis/payntbind", develop = true }
+paynt = { path = "../stormpy/synthesis" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
