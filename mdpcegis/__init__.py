@@ -56,8 +56,9 @@ class Plugin(z3.UserPropagateBase):
             self.variables.append(var)
 
     def push(self):
-        # print("push")
         self.fixed_count.append(len(self.fixed_values))
+        if len(self.fixed_values) == 0 and self.considered_models == 0:
+            self.analyse_current_model()
 
     def pop(self, num_scopes):
         for _scope in range(num_scopes):
@@ -69,6 +70,9 @@ class Plugin(z3.UserPropagateBase):
     def _fixed(self, ast, value):
         self.fixed_values.append(ast)
         self.partial_model[ast] = value
+        self.analyse_current_model()
+
+    def analyse_current_model(self):
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
         for hole in range(new_family.num_holes):
@@ -127,8 +131,8 @@ class Plugin(z3.UserPropagateBase):
                     choices = self.quotient.state_to_choice_to_choices(state_to_choice)
                     scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
 
-                    hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
-                    if not len(hole_scores) == 0:
+                    if any([len(x) > 1 for x in scheduler_selection]):
+                        hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
                         # argmax hole_scores
                         max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
                         max_hole_var = self.variables[max_hole]
@@ -136,8 +140,6 @@ class Plugin(z3.UserPropagateBase):
                         # split on max_hole_var
                         for i in range(32):
                             self.next_split(max_hole_var, i, 0)
-                    else:
-                        print("warning: no hole scores")
         if time.time() - self.time_last_print > 1:
             print(f"{self.considered_models} MC calls, ruled out {self.ruled_out_models}/{self.total_models} models")
             self.time_last_print = time.time()
@@ -148,18 +150,15 @@ class Plugin(z3.UserPropagateBase):
 
     def _created(self, e):
         pass
-        # print("_created called with e:", e)
 
     def _eq(self, e, ids):
         pass
-        # print("_eq called with e:", e, "ids:", ids)
     
     def _decide(self, a, b, c):
         pass
-        # print("_decide called with", a, b, c)
     
     def _final(self):
-        print("_final called with")
+        pass
 
 def example1(project_path):
 
