@@ -6,6 +6,7 @@ import payntbind.synthesis
 import z3
 import paynt.parser.sketch
 import sys
+import time
 
 class Plugin(z3.UserPropagateBase):
     def __init__(self, solver, quotient):
@@ -29,16 +30,22 @@ class Plugin(z3.UserPropagateBase):
         # list of Z3 variables, indexed by PAYNT hole
         self.variables = []
 
-        # initialize counterexample generator
-        state_to_holes_bv = self.quotient.coloring.getStateToHoles().copy()
-        state_to_holes = []
-        for _state, holes_bv in enumerate(state_to_holes_bv):
-            holes = set([hole for hole in holes_bv])
-            state_to_holes.append(holes)
-        formulae = self.quotient.specification.stormpy_formulae()
-        self.counterexample_generator = payntbind.synthesis.CounterexampleGeneratorMdp(
-            self.quotient.quotient_mdp, self.quotient.family.num_holes, state_to_holes, formulae
-        )
+        self.considered_models = 0
+        self.ruled_out_models = 0
+        self.total_models = self.quotient.family.size
+
+        self.time_last_print = time.time()
+
+        # # initialize counterexample generator
+        # state_to_holes_bv = self.quotient.coloring.getStateToHoles().copy()
+        # state_to_holes = []
+        # for _state, holes_bv in enumerate(state_to_holes_bv):
+        #     holes = set([hole for hole in holes_bv])
+        #     state_to_holes.append(holes)
+        # formulae = self.quotient.specification.stormpy_formulae()
+        # self.counterexample_generator = payntbind.synthesis.CounterexampleGeneratorMdp(
+        #     self.quotient.quotient_mdp, self.quotient.family.num_holes, state_to_holes, formulae
+        # )
 
 
     def register_variables(self, variables):
@@ -75,31 +82,65 @@ class Plugin(z3.UserPropagateBase):
         # questions:
         # - is it the case that the minimal probability is bigger than 1? (this is the case if the spec is unsat)
         # - is it the case that the maximal probability is smaller than 1? (this is the case if the spec is sat)
+        mdp = new_family.mdp
 
         prop = self.quotient.specification.all_properties()[0]
-        result = new_family.mdp.model_check_property(prop)
+        result = mdp.model_check_property(prop)
+        self.considered_models += 1
 
         all_violated = not result.sat
 
         if all_violated:
             # this DTMC or MDP refutes the spec
             self.conflict(self.fixed_values)
+            self.ruled_out_models += new_family.size
         else:
             if len(self.partial_model) == len(self.variables):
                 print(f"Found satisfying DTMC with value {result.value}")
-                # # check whether this MDP is all-sat
-                # prop_negate = self.quotient.specification.negate().all_properties()[0]
-                # result_negate = new_family.mdp.model_check_property(prop_negate)
+            else:
 
-                # all_sat = not result_negate.sat
-                # if all_sat:
-                #     # we found out with this MDP that this entire subfamily is sat
-                #     # just fix all of the rest of the values to zero
-                #     assertion = []
-                #     for var in self.variables:
-                #         if var not in self.partial_model:
-                #             assertion.append(var == z3.BitVecVal(0, 32))
-                #     self.propagate(z3.And(*assertion, self.solver.ctx), self.fixed_values, [])
+                # this doesnt work
+                # statements = []
+                # for hole, values in enumerate(scheduler_selection):
+                #     var = self.variables[hole]
+                #     if var not in self.partial_model and len(values) < len(new_family.hole_options(hole)):
+                #         if len(statements) > 0:
+                #             statements.clear()
+                #             break
+                #         for option in new_family.hole_options(hole):
+                #             if option not in values:
+                #                 statements.append(var != option)
+                        # if len(values) == 0:
+                        #     # just fix this variable to anything
+                        #     self.propagate(self.variables[hole] == 0, self.fixed_values)
+                        # if len(values) == 1:
+                        #     # variable is this value
+                        #     statements.append(self.variables[hole] == values[0])
+                # if len(statements) > 0:
+                #     print(statements)
+                #     self.propagate(z3.And(statements), self.fixed_values)
+
+                # figure out what to split on
+
+                if len(self.fixed_values) < len(self.variables) - 1:
+                    state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
+                    choices = self.quotient.state_to_choice_to_choices(state_to_choice)
+                    scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
+
+                    hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
+                    if not len(hole_scores) == 0:
+                        # argmax hole_scores
+                        max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
+                        max_hole_var = self.variables[max_hole]
+
+                        # split on max_hole_var
+                        for i in range(32):
+                            self.next_split(max_hole_var, i, 0)
+                    else:
+                        print("warning: no hole scores")
+        if time.time() - self.time_last_print > 1:
+            print(f"{self.considered_models} MC calls, ruled out {self.ruled_out_models}/{self.total_models} models")
+            self.time_last_print = time.time()
 
     def fresh(self, new_ctx):
         pass
@@ -154,6 +195,7 @@ def example1(project_path):
         var = variables[hole]
         new_family.hole_set_options(hole, [model.eval(var).as_long()])
     print(new_family)
+    print(f"Considered {p.considered_models} models")
 
 
 
