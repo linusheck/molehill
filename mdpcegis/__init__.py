@@ -7,10 +7,16 @@ import z3
 import paynt.parser.sketch
 import sys
 import time
+from stormpy import model_checking, compute_prob01max_states
+from stormpy.storage import BitVector
+
+# local imports
+import counterexamples
 
 class Plugin(z3.UserPropagateBase):
     def __init__(self, solver, quotient):
         super().__init__(solver, None)
+        # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
         self.quotient = quotient
         self.vars_registered = False
         self.add_fixed(self._fixed)
@@ -37,16 +43,18 @@ class Plugin(z3.UserPropagateBase):
         self.time_last_print = time.time()
 
         # # initialize counterexample generator
-        # state_to_holes_bv = self.quotient.coloring.getStateToHoles().copy()
-        # state_to_holes = []
-        # for _state, holes_bv in enumerate(state_to_holes_bv):
-        #     holes = set([hole for hole in holes_bv])
-        #     state_to_holes.append(holes)
-        # formulae = self.quotient.specification.stormpy_formulae()
-        # self.counterexample_generator = payntbind.synthesis.CounterexampleGeneratorMdp(
-        #     self.quotient.quotient_mdp, self.quotient.family.num_holes, state_to_holes, formulae
-        # )
+        state_to_holes_bv = self.quotient.coloring.getStateToHoles().copy()
+        self.state_to_holes = []
+        for _state, holes_bv in enumerate(state_to_holes_bv):
+            holes = set([hole for hole in holes_bv])
+            self.state_to_holes.append(holes)
 
+        prop = self.quotient.specification.all_properties()[0]
+        # does there exist a model that satisfies the property?
+        result = self.quotient.family.mdp.model_check_property(prop)
+        self.global_bounds = result.result
+
+        self.stored_counterexamples = [[] for _ in range(self.quotient.family.num_holes)]
 
     def register_variables(self, variables):
         assert not self.vars_registered
@@ -68,6 +76,7 @@ class Plugin(z3.UserPropagateBase):
                 self.partial_model.pop(self.fixed_values.pop())
 
     def _fixed(self, ast, value):
+        print("fixed", ast, value)
         self.fixed_values.append(ast)
         self.partial_model[ast] = value
         self.analyse_current_model()
@@ -89,6 +98,7 @@ class Plugin(z3.UserPropagateBase):
         mdp = new_family.mdp
 
         prop = self.quotient.specification.all_properties()[0]
+        # does there exist a model that satisfies the property?
         result = mdp.model_check_property(prop)
         self.considered_models += 1
 
@@ -96,13 +106,27 @@ class Plugin(z3.UserPropagateBase):
 
         if all_violated:
             # this DTMC or MDP refutes the spec
-            self.conflict(self.fixed_values)
             self.ruled_out_models += new_family.size
+            if len(self.partial_model) == len(self.variables):
+                counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, prop, self.global_bounds)
+                if counterexample is not None:
+                    counterexample_partial_model = {
+                        self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
+                    }
+                    print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed")
+                    term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
+                    print(f"Propagate {term}")
+                    self.propagate(term, [])
+                else:
+                    self.conflict(self.fixed_values)
+            else:
+                print("Conflict", self.fixed_values)
+                self.conflict(self.fixed_values)
         else:
             if len(self.partial_model) == len(self.variables):
                 print(f"Found satisfying DTMC with value {result.value}")
             else:
-
+                pass
                 # this doesnt work
                 # statements = []
                 # for hole, values in enumerate(scheduler_selection):
@@ -126,20 +150,20 @@ class Plugin(z3.UserPropagateBase):
 
                 # figure out what to split on
 
-                if len(self.fixed_values) < len(self.variables) - 1:
-                    state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
-                    choices = self.quotient.state_to_choice_to_choices(state_to_choice)
-                    scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
+                # if len(self.fixed_values) < len(self.variables) - 1:
+                #     state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
+                #     choices = self.quotient.state_to_choice_to_choices(state_to_choice)
+                #     scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
 
-                    if any([len(x) > 1 for x in scheduler_selection]):
-                        hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
-                        # argmax hole_scores
-                        max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
-                        max_hole_var = self.variables[max_hole]
+                #     # if any([len(x) > 1 for x in scheduler_selection]):
+                #     #     hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
+                #     #     # argmax hole_scores
+                #     #     max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
+                #     #     max_hole_var = self.variables[max_hole]
 
-                        # split on max_hole_var
-                        for i in range(32):
-                            self.next_split(max_hole_var, i, 0)
+                #     #     # split on max_hole_var
+                #     #     for i in range(32):
+                #     #         self.next_split(max_hole_var, i, 0)
         if time.time() - self.time_last_print > 1:
             print(f"{self.considered_models} MC calls, ruled out {self.ruled_out_models}/{self.total_models} models")
             self.time_last_print = time.time()
