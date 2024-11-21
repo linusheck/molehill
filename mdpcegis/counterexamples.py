@@ -3,8 +3,6 @@
 from stormpy import model_checking, parse_properties_without_context
 import stormpy.storage
 import stormpy.core
-import pathlib
-import sys
 
 def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_to_holes, prop, global_bounds):
     # pathlib.Path(f"dots/mdp_{partial_model}.dot").write_text(sub_mdp.model.to_dot(), encoding="utf-8")
@@ -96,11 +94,11 @@ def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_t
         new_mdp = stormpy.storage.SparseMdp(model_components)
 
         result2 = model_checking(new_mdp, new_property2)
-        print(included_holes, "result2", result2.at(sub_mdp.model.initial_states[0]))
+        # print(included_holes, "result2", result2.at(sub_mdp.model.initial_states[0]))
 
         result = model_checking(new_mdp, new_property)
         all_schedulers_violate = not result.at(sub_mdp.model.initial_states[0])
-        print("all schedulers violated", all_schedulers_violate)
+        # print("all schedulers violated", all_schedulers_violate)
 
         # pathlib.Path(f"dots/counterexample_{partial_model}_{len(included_holes)}.dot").write_text(new_mdp.to_dot(), encoding="utf-8")
 

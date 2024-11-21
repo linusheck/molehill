@@ -76,7 +76,7 @@ class Plugin(z3.UserPropagateBase):
                 self.partial_model.pop(self.fixed_values.pop())
 
     def _fixed(self, ast, value):
-        print("fixed", ast, value)
+        # print("fixed", ast, value)
         self.fixed_values.append(ast)
         self.partial_model[ast] = value
         self.analyse_current_model()
