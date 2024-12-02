@@ -11,7 +11,7 @@ import math
 from stormpy import model_checking, compute_prob01max_states
 from stormpy.storage import SparseMatrixBuilder
 import matplotlib.pyplot as plt
-
+from PIL import Image
 
 from curve_drawer import add_pixels, new_image
 
@@ -306,9 +306,9 @@ def example1(project_path):
         ints = tuple([int(255 * x) for x in color])
         add_pixels(pixels, size, model_numbers, ints)
         copied_image = image.copy()
-        # copied_image.resize((size * 10, size * 10))
-        images.append(image.copy())
-    images[0].save("image.gif", save_all=True, append_images=images[1:], duration=100, loop=0)
+        copied_image = copied_image.resize((size * 10, size * 10), Image.Resampling.NEAREST)
+        images.append(copied_image)
+    images[0].save("image.gif", save_all=True, append_images=images[1:] + [images[-1].copy()] * 10, duration=100, loop=0)
 
     image.resize((size * 10, size * 10))
     image.save("image.png")
