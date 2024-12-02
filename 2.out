@@ -1,0 +1,644 @@
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1]
+[]
+hole scores [63.0, 0, 0, 0, 63.0, 0, 0, 0]
+included hole M_0_1
+[0]
+hole scores [-1, 0, 0, 0, 63.0, 0, 0, 0]
+included hole P_0_1
+[0, 4]
+Found counterexample {M_0_1: 0, P_0_1: 2} while having 8 variables fixed
+Propagate Not(And(0 == M_0_1, 2 == P_0_1))
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_3_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_3_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_3_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_3_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_3_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_3_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_2_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1]
+Conflict [P_3_1, P_2_1, P_1_1, P_0_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1, M_0_1]
+Conflict [P_3_1, P_2_1, P_0_1, P_1_1, M_0_1, M_2_1, M_3_1]
+[]
+hole scores [33.0, 33.0, 0, 0, 33.0, 33.0, 0, 0]
+included hole M_0_1
+[0]
+hole scores [-1, 33.0, 0, 0, 33.0, 33.0, 0, 0]
+included hole M_1_1
+[0, 1]
+hole scores [-1, -1, 0, 0, 33.0, 33.0, 0, 0]
+included hole P_0_1
+[0, 1, 4]
+Found counterexample {M_0_1: 1, M_1_1: 0, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(1 == M_0_1, 0 == M_1_1, 0 == P_0_1))
+[]
+hole scores [10.267543200601052, 122.91735592938453, 119.24868536879389, 0, 10.267543200601052, 122.91735592938453, 119.24868536879389, 0]
+included hole M_1_1
+[1]
+hole scores [10.267543200601052, -1, 119.24868536879389, 0, 10.267543200601052, 122.91735592938453, 119.24868536879389, 0]
+included hole P_1_1
+[1, 5]
+hole scores [10.267543200601052, -1, 119.24868536879389, 0, 10.267543200601052, -1, 119.24868536879389, 0]
+included hole M_2_1
+[1, 5, 2]
+hole scores [10.267543200601052, -1, -1, 0, 10.267543200601052, -1, 119.24868536879389, 0]
+included hole P_2_1
+[1, 5, 2, 6]
+hole scores [10.267543200601052, -1, -1, 0, 10.267543200601052, -1, -1, 0]
+included hole M_0_1
+[1, 5, 2, 6, 0]
+hole scores [-1, -1, -1, 0, 10.267543200601052, -1, -1, 0]
+included hole P_0_1
+[1, 5, 2, 6, 0, 4]
+Found counterexample {M_1_1: 2, P_1_1: 2, M_2_1: 1, P_2_1: 1, M_0_1: 1, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(2 == M_1_1,
+        2 == P_1_1,
+        1 == M_2_1,
+        1 == P_2_1,
+        1 == M_0_1,
+        0 == P_0_1))
+67 MC calls, ruled out 4751/65536 models
+[]
+hole scores [3.0, 60.0, 0, 0, 3.0, 60.0, 0, 0]
+included hole M_1_1
+[1]
+hole scores [3.0, -1, 0, 0, 3.0, 60.0, 0, 0]
+included hole P_1_1
+[1, 5]
+hole scores [3.0, -1, 0, 0, 3.0, -1, 0, 0]
+included hole M_0_1
+[1, 5, 0]
+hole scores [-1, -1, 0, 0, 3.0, -1, 0, 0]
+included hole P_0_1
+[1, 5, 0, 4]
+Found counterexample {M_1_1: 1, P_1_1: 2, M_0_1: 1, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(1 == M_1_1, 2 == P_1_1, 1 == M_0_1, 0 == P_0_1))
+[]
+hole scores [10.814400354664935, 74.3132771033527, 76.94275945235975, 77.44442983511155, 10.814400354664935, 74.3132771033527, 76.94275945235975, 77.44442983511155]
+included hole M_3_1
+[3]
+hole scores [10.814400354664935, 74.3132771033527, 76.94275945235975, -1, 10.814400354664935, 74.3132771033527, 76.94275945235975, 77.44442983511155]
+included hole P_3_1
+[3, 7]
+hole scores [10.814400354664935, 74.3132771033527, 76.94275945235975, -1, 10.814400354664935, 74.3132771033527, 76.94275945235975, -1]
+included hole M_2_1
+[3, 7, 2]
+hole scores [10.814400354664935, 74.3132771033527, -1, -1, 10.814400354664935, 74.3132771033527, 76.94275945235975, -1]
+included hole P_2_1
+[3, 7, 2, 6]
+hole scores [10.814400354664935, 74.3132771033527, -1, -1, 10.814400354664935, 74.3132771033527, -1, -1]
+included hole M_1_1
+[3, 7, 2, 6, 1]
+hole scores [10.814400354664935, -1, -1, -1, 10.814400354664935, 74.3132771033527, -1, -1]
+included hole P_1_1
+[3, 7, 2, 6, 1, 5]
+hole scores [10.814400354664935, -1, -1, -1, 10.814400354664935, -1, -1, -1]
+included hole M_0_1
+[3, 7, 2, 6, 1, 5, 0]
+hole scores [-1, -1, -1, -1, 10.814400354664935, -1, -1, -1]
+included hole P_0_1
+[3, 7, 2, 6, 1, 5, 0, 4]
+Found counterexample {M_3_1: 2, P_3_1: 0, M_2_1: 1, P_2_1: 1, M_1_1: 3, P_1_1: 2, M_0_1: 1, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(2 == M_3_1,
+        0 == P_3_1,
+        1 == M_2_1,
+        1 == P_2_1,
+        3 == M_1_1,
+        2 == P_1_1,
+        1 == M_0_1,
+        0 == P_0_1))
+[]
+hole scores [3.0, 33.0, 0, 30.0, 3.0, 33.0, 0, 30.0]
+included hole M_1_1
+[1]
+hole scores [3.0, -1, 0, 30.0, 3.0, 33.0, 0, 30.0]
+included hole P_1_1
+[1, 5]
+hole scores [3.0, -1, 0, 30.0, 3.0, -1, 0, 30.0]
+included hole M_3_1
+[1, 5, 3]
+hole scores [3.0, -1, 0, -1, 3.0, -1, 0, 30.0]
+included hole P_3_1
+[1, 5, 3, 7]
+hole scores [3.0, -1, 0, -1, 3.0, -1, 0, -1]
+included hole M_0_1
+[1, 5, 3, 7, 0]
+hole scores [-1, -1, 0, -1, 3.0, -1, 0, -1]
+included hole P_0_1
+[1, 5, 3, 7, 0, 4]
+Found counterexample {M_1_1: 3, P_1_1: 2, M_3_1: 1, P_3_1: 0, M_0_1: 1, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(3 == M_1_1,
+        2 == P_1_1,
+        1 == M_3_1,
+        0 == P_3_1,
+        1 == M_0_1,
+        0 == P_0_1))
+[]
+hole scores [0.09000000000000001, 0.9, 0, 0.0, 0.09000000000000001, 0.9, 0, 0.0]
+included hole M_1_1
+[1]
+hole scores [0.09000000000000001, -1, 0, 0.0, 0.09000000000000001, 0.9, 0, 0.0]
+included hole P_1_1
+[1, 5]
+hole scores [0.09000000000000001, -1, 0, 0.0, 0.09000000000000001, -1, 0, 0.0]
+included hole M_0_1
+[1, 5, 0]
+hole scores [-1, -1, 0, 0.0, 0.09000000000000001, -1, 0, 0.0]
+included hole P_0_1
+[1, 5, 0, 4]
+hole scores [-1, -1, 0, 0.0, -1, -1, 0, 0.0]
+included hole M_2_1
+[1, 5, 0, 4, 2]
+hole scores [-1, -1, -1, 0.0, -1, -1, 0, 0.0]
+included hole M_3_1
+[1, 5, 0, 4, 2, 3]
+hole scores [-1, -1, -1, -1, -1, -1, 0, 0.0]
+included hole P_2_1
+[1, 5, 0, 4, 2, 3, 6]
+hole scores [-1, -1, -1, -1, -1, -1, -1, 0.0]
+included hole P_3_1
+[1, 5, 0, 4, 2, 3, 6, 7]
+Found counterexample {M_1_1: 3, P_1_1: 2, M_0_1: 1, P_0_1: 0, M_2_1: 1, M_3_1: 3, P_2_1: 1, P_3_1: 0} while having 8 variables fixed
+Propagate Not(And(3 == M_1_1,
+        2 == P_1_1,
+        1 == M_0_1,
+        0 == P_0_1,
+        1 == M_2_1,
+        3 == M_3_1,
+        1 == P_2_1,
+        0 == P_3_1))
+100 MC calls, ruled out 4755/65536 models
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+[]
+hole scores [87.105833522173, 81.37740921417661, 83.12009188067168, 0, 87.105833522173, 81.37740921417661, 83.12009188067168, 0]
+included hole M_0_1
+[0]
+hole scores [-1, 81.37740921417661, 83.12009188067168, 0, 87.105833522173, 81.37740921417661, 83.12009188067168, 0]
+included hole P_0_1
+[0, 4]
+Found counterexample {M_0_1: 1, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(1 == M_0_1, 0 == P_0_1))
+Conflict [P_0_1, P_3_1, P_1_1, P_2_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_1_1, P_2_1, M_0_1, M_2_1, M_3_1]
+[]
+hole scores [71.70249816990803, 61.293579287674774, 71.96063164870147, 66.50863290542972, 71.70249816990803, 61.293579287674774, 71.96063164870147, 66.50863290542972]
+included hole M_2_1
+[2]
+hole scores [71.70249816990803, 61.293579287674774, -1, 66.50863290542972, 71.70249816990803, 61.293579287674774, 71.96063164870147, 66.50863290542972]
+included hole P_2_1
+[2, 6]
+hole scores [71.70249816990803, 61.293579287674774, -1, 66.50863290542972, 71.70249816990803, 61.293579287674774, -1, 66.50863290542972]
+included hole M_0_1
+[2, 6, 0]
+hole scores [-1, 61.293579287674774, -1, 66.50863290542972, 71.70249816990803, 61.293579287674774, -1, 66.50863290542972]
+included hole P_0_1
+[2, 6, 0, 4]
+Found counterexample {M_2_1: 0, P_2_1: 1, M_0_1: 3, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(0 == M_2_1, 1 == P_2_1, 3 == M_0_1, 0 == P_0_1))
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+[]
+hole scores [24.0, 21.0, 24.0, 0, 24.0, 21.0, 24.0, 0]
+included hole M_0_1
+[0]
+hole scores [-1, 21.0, 24.0, 0, 24.0, 21.0, 24.0, 0]
+included hole M_2_1
+[0, 2]
+hole scores [-1, 21.0, -1, 0, 24.0, 21.0, 24.0, 0]
+included hole P_0_1
+[0, 2, 4]
+Found counterexample {M_0_1: 2, M_2_1: 1, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(2 == M_0_1, 1 == M_2_1, 0 == P_0_1))
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+[]
+hole scores [24.0, 21.0, 0, 24.0, 24.0, 21.0, 0, 24.0]
+included hole M_0_1
+[0]
+hole scores [-1, 21.0, 0, 24.0, 24.0, 21.0, 0, 24.0]
+included hole M_3_1
+[0, 3]
+hole scores [-1, 21.0, 0, -1, 24.0, 21.0, 0, 24.0]
+included hole P_0_1
+[0, 3, 4]
+Found counterexample {M_0_1: 3, M_3_1: 1, P_0_1: 0} while having 8 variables fixed
+Propagate Not(And(3 == M_0_1, 1 == M_3_1, 0 == P_0_1))
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+238 MC calls, ruled out 8383/65536 models
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+426 MC calls, ruled out 18627/65536 models
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+[]
+hole scores [33.0, 33.0, 0, 0, 33.0, 33.0, 0, 0]
+included hole M_0_1
+[0]
+hole scores [-1, 33.0, 0, 0, 33.0, 33.0, 0, 0]
+included hole M_1_1
+[0, 1]
+hole scores [-1, -1, 0, 0, 33.0, 33.0, 0, 0]
+included hole P_0_1
+[0, 1, 4]
+Found counterexample {M_0_1: 1, M_1_1: 0, P_0_1: 1} while having 8 variables fixed
+Propagate Not(And(1 == M_0_1, 0 == M_1_1, 1 == P_0_1))
+[]
+hole scores [3.0, 60.0, 0, 0, 3.0, 60.0, 0, 0]
+included hole M_1_1
+[1]
+hole scores [3.0, -1, 0, 0, 3.0, 60.0, 0, 0]
+included hole P_1_1
+[1, 5]
+hole scores [3.0, -1, 0, 0, 3.0, -1, 0, 0]
+included hole M_0_1
+[1, 5, 0]
+hole scores [-1, -1, 0, 0, 3.0, -1, 0, 0]
+included hole P_0_1
+[1, 5, 0, 4]
+Found counterexample {M_1_1: 1, P_1_1: 1, M_0_1: 1, P_0_1: 1} while having 8 variables fixed
+Propagate Not(And(1 == M_1_1, 1 == P_1_1, 1 == M_0_1, 1 == P_0_1))
+543 MC calls, ruled out 25605/65536 models
+[]
+hole scores [15.3195124082531, 8.663348569002963, 1.3404573364022399, 0, 15.3195124082531, 8.663348569002963, 1.3404573364022399, 0]
+included hole M_0_1
+[0]
+hole scores [-1, 8.663348569002963, 1.3404573364022399, 0, 15.3195124082531, 8.663348569002963, 1.3404573364022399, 0]
+included hole P_0_1
+[0, 4]
+Found counterexample {M_0_1: 1, P_0_1: 1} while having 8 variables fixed
+Propagate Not(And(1 == M_0_1, 1 == P_0_1))
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+[]
+hole scores [3.0, 30.0, 33.0, 0, 3.0, 30.0, 33.0, 0]
+included hole M_2_1
+[2]
+hole scores [3.0, 30.0, -1, 0, 3.0, 30.0, 33.0, 0]
+included hole P_2_1
+[2, 6]
+hole scores [3.0, 30.0, -1, 0, 3.0, 30.0, -1, 0]
+included hole M_1_1
+[2, 6, 1]
+hole scores [3.0, -1, -1, 0, 3.0, 30.0, -1, 0]
+included hole P_1_1
+[2, 6, 1, 5]
+hole scores [3.0, -1, -1, 0, 3.0, -1, -1, 0]
+included hole M_0_1
+[2, 6, 1, 5, 0]
+hole scores [-1, -1, -1, 0, 3.0, -1, -1, 0]
+included hole P_0_1
+[2, 6, 1, 5, 0, 4]
+Found counterexample {M_2_1: 1, P_2_1: 1, M_1_1: 2, P_1_1: 1, M_0_1: 2, P_0_1: 1} while having 8 variables fixed
+Propagate Not(And(1 == M_2_1,
+        1 == P_2_1,
+        2 == M_1_1,
+        1 == P_1_1,
+        2 == M_0_1,
+        1 == P_0_1))
+[]
+hole scores [24.0, 21.0, 24.0, 0, 24.0, 21.0, 24.0, 0]
+included hole M_0_1
+[0]
+hole scores [-1, 21.0, 24.0, 0, 24.0, 21.0, 24.0, 0]
+included hole M_2_1
+[0, 2]
+hole scores [-1, 21.0, -1, 0, 24.0, 21.0, 24.0, 0]
+included hole P_0_1
+[0, 2, 4]
+Found counterexample {M_0_1: 2, M_2_1: 1, P_0_1: 1} while having 8 variables fixed
+Propagate Not(And(2 == M_0_1, 1 == M_2_1, 1 == P_0_1))
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_3_1, P_2_1, P_1_1, M_0_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+637 MC calls, ruled out 28520/65536 models
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Conflict [P_0_1, P_2_1, P_1_1, P_3_1, M_0_1, M_2_1, M_3_1]
+Found satisfying DTMC with value 0.926767891907462
+sat
+M_0_1=2, M_1_1=0, M_2_1=3, M_3_1=1, P_0_1=2, P_1_1=3, P_2_1=2, P_3_1=2
+Considered 675 models

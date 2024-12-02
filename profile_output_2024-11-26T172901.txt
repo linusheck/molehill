@@ -1,0 +1,55 @@
+Timer unit: 1e-09 s
+
+Total time: 17.6288 s
+File: /Users/linusheck/git/mdpcegis/mdpcegis/counterexamples.py
+Function: _build_matrix at line 10
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    10                                           @profile
+    11                                           def _build_matrix(sub_mdp, transition_matrix, one_states, included_holes, included_choices, choice_to_assignment, global_bounds):
+    12        69     522000.0   7565.2      0.0      builder = stormpy.storage.SparseMatrixBuilder(has_custom_row_grouping=True)
+    13                                           
+    14        69     114000.0   1652.2      0.0      zero_state = sub_mdp.model.nr_states
+    15        69      51000.0    739.1      0.0      one_state = sub_mdp.model.nr_states + 1
+    16                                           
+    17        69       6000.0     87.0      0.0      new_row_counter = 0
+    18                                               # make iterator over quotient_choice_map
+    19        69      51000.0    739.1      0.0      quotient_choice_map_iter = iter(sub_mdp.quotient_choice_map)
+    20    313242   55394000.0    176.8      0.3      for state in range(sub_mdp.model.nr_states):
+    21    313173  118547000.0    378.5      0.7          row_group_start = transition_matrix.get_row_group_start(state)
+    22    313173  104727000.0    334.4      0.6          row_group_end = transition_matrix.get_row_group_end(state)
+    23    313173  108408000.0    346.2      0.6          builder.new_row_group(new_row_counter)
+    24    809466  158810000.0    196.2      0.9          for row in range(row_group_start, row_group_end):
+    25    496293  124222000.0    250.3      0.7              if next(quotient_choice_map_iter) in included_choices:
+    26                                                           # assert all([choice[0] in included_holes for choice in choice_to_assignment[sub_mdp.quotient_choice_map[row]]]):
+    27    803134        2e+10  19075.0     86.9                  for entry in transition_matrix.get_row(row):
+    28    471537  377599000.0    800.8      2.1                      builder.add_next_value(new_row_counter, entry.column, entry.value())
+    29                                                       else:
+    30                                                           # assert not all([choice[0] in included_holes for choice in choice_to_assignment[sub_mdp.quotient_choice_map[row]]]):
+    31    164696  101847000.0    618.4      0.6                  builder.add_next_value(new_row_counter, zero_state, global_bounds.at(state))
+    32    164696  105336000.0    639.6      0.6                  builder.add_next_value(new_row_counter, one_state, 1-global_bounds.at(state))
+    33    496293   91903000.0    185.2      0.5              new_row_counter += 1
+    34        69      34000.0    492.8      0.0      builder.new_row_group(new_row_counter)
+    35        69      44000.0    637.7      0.0      builder.add_next_value(new_row_counter, zero_state, 1)
+    36        69      29000.0    420.3      0.0      builder.new_row_group(new_row_counter + 1)
+    37        69      41000.0    594.2      0.0      builder.add_next_value(new_row_counter + 1, one_state, 1)
+    38                                           
+    39        69     321000.0   4652.2      0.0      state_labeling = stormpy.storage.StateLabeling(sub_mdp.model.nr_states + 2)
+    40        69     182000.0   2637.7      0.0      state_labeling.add_label("counterexample_target")
+    41    313242   59097000.0    188.7      0.3      for state in range(sub_mdp.model.nr_states):
+    42    631303  452721000.0    717.1      2.6          for label in sub_mdp.model.labeling.get_labels_of_state(state):
+    43    318130  117038000.0    367.9      0.7              if not state_labeling.contains_label(label):
+    44       267     258000.0    966.3      0.0                  state_labeling.add_label(label)
+    45    318130  120657000.0    379.3      0.7              state_labeling.add_label_to_state(label, state)
+    46    313173  206313000.0    658.8      1.2          if state in one_states:
+    47      4845    1912000.0    394.6      0.0              state_labeling.add_label_to_state("counterexample_target", state)
+    48        69      50000.0    724.6      0.0      state_labeling.add_label_to_state("counterexample_target", one_state)
+    49                                               
+    50        69     295000.0   4275.4      0.0      model_components = stormpy.storage.SparseModelComponents()
+    51        69    2205000.0  31956.5      0.0      model_components.transition_matrix = builder.build()
+    52        69     205000.0   2971.0      0.0      model_components.state_labeling = state_labeling
+    53                                               
+    54        69     129000.0   1869.6      0.0      return model_components
+
+ 17.63 seconds - /Users/linusheck/git/mdpcegis/mdpcegis/counterexamples.py:10 - _build_matrix

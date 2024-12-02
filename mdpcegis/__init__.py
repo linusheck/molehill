@@ -8,10 +8,34 @@ import paynt.parser.sketch
 import sys
 import time
 from stormpy import model_checking, compute_prob01max_states
-from stormpy.storage import BitVector
+from stormpy.storage import SparseMatrixBuilder
 
-# local imports
 import counterexamples
+
+def build_decision_matrix(transition_matrix, global_bounds):
+    print("Building decision matrix")
+    builder = SparseMatrixBuilder(has_custom_row_grouping=True)
+    zero_state = transition_matrix.nr_columns
+    one_state = transition_matrix.nr_columns + 1
+    new_row_counter = 0
+    # make iterator over quotient_choice_map
+    for state in range(transition_matrix.nr_columns):
+        row_group_start = transition_matrix.get_row_group_start(state)
+        row_group_end = transition_matrix.get_row_group_end(state)
+        builder.new_row_group(new_row_counter)
+        for row in range(row_group_start, row_group_end):
+            for entry in transition_matrix.get_row(row):
+                builder.add_next_value(new_row_counter, entry.column, entry.value())
+            new_row_counter += 1
+        builder.add_next_value(new_row_counter, zero_state, global_bounds.at(state))
+        builder.add_next_value(new_row_counter, one_state, 1-global_bounds.at(state))
+        new_row_counter += 1
+    builder.new_row_group(new_row_counter)
+    builder.add_next_value(new_row_counter, zero_state, 1)
+    builder.new_row_group(new_row_counter + 1)
+    builder.add_next_value(new_row_counter + 1, one_state, 1)
+    print("Done decision matrix")
+    return builder.build()
 
 class Plugin(z3.UserPropagateBase):
     def __init__(self, solver, quotient):
@@ -37,22 +61,26 @@ class Plugin(z3.UserPropagateBase):
         self.variables = []
 
         self.considered_models = 0
-        self.ruled_out_models = 0
+        # self.ruled_out_models = 0
         self.total_models = self.quotient.family.size
 
         self.time_last_print = time.time()
 
-        # # initialize counterexample generator
+        self.choice_to_assignment = self.quotient.coloring.getChoiceToAssignment()
         state_to_holes_bv = self.quotient.coloring.getStateToHoles().copy()
         self.state_to_holes = []
         for _state, holes_bv in enumerate(state_to_holes_bv):
             holes = set([hole for hole in holes_bv])
             self.state_to_holes.append(holes)
+        
+        # print(self.quotient.family.mdp.model.transition_matrix)
 
         prop = self.quotient.specification.all_properties()[0]
         # does there exist a model that satisfies the property?
-        result = self.quotient.family.mdp.model_check_property(prop)
+        result = self.quotient.family.mdp.model_check_property(prop.negate())
         self.global_bounds = result.result
+        
+        self.decision_matrix = build_decision_matrix(self.quotient.family.mdp.model.transition_matrix, self.global_bounds)
 
         self.stored_counterexamples = [[] for _ in range(self.quotient.family.num_holes)]
 
@@ -79,9 +107,9 @@ class Plugin(z3.UserPropagateBase):
         # print("fixed", ast, value)
         self.fixed_values.append(ast)
         self.partial_model[ast] = value
-        self.analyse_current_model()
+        self.analyse_current_model(ast)
 
-    def analyse_current_model(self):
+    def analyse_current_model(self, last_fixed_var=None):
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
         for hole in range(new_family.num_holes):
@@ -100,22 +128,24 @@ class Plugin(z3.UserPropagateBase):
         prop = self.quotient.specification.all_properties()[0]
         # does there exist a model that satisfies the property?
         result = mdp.model_check_property(prop)
+        # print("Value", result.value)
         self.considered_models += 1
 
         all_violated = not result.sat
 
         if all_violated:
             # this DTMC or MDP refutes the spec
-            self.ruled_out_models += new_family.size
-            if len(self.partial_model) == len(self.variables):
-                counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, prop, self.global_bounds)
+            compute_counterexample = True
+            # compute_counterexample = (len(self.partial_model) == len(self.variables))
+            if compute_counterexample:
+                counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.decision_matrix, last_fixed_var)
                 if counterexample is not None:
                     counterexample_partial_model = {
                         self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
                     }
-                    print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed")
+                    print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
                     term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
-                    print(f"Propagate {term}")
+                    # print(f"Propagate {term}")
                     self.propagate(term, [])
                 else:
                     self.conflict(self.fixed_values)
@@ -126,46 +156,23 @@ class Plugin(z3.UserPropagateBase):
             if len(self.partial_model) == len(self.variables):
                 print(f"Found satisfying DTMC with value {result.value}")
             else:
-                pass
-                # this doesnt work
-                # statements = []
-                # for hole, values in enumerate(scheduler_selection):
-                #     var = self.variables[hole]
-                #     if var not in self.partial_model and len(values) < len(new_family.hole_options(hole)):
-                #         if len(statements) > 0:
-                #             statements.clear()
-                #             break
-                #         for option in new_family.hole_options(hole):
-                #             if option not in values:
-                #                 statements.append(var != option)
-                        # if len(values) == 0:
-                        #     # just fix this variable to anything
-                        #     self.propagate(self.variables[hole] == 0, self.fixed_values)
-                        # if len(values) == 1:
-                        #     # variable is this value
-                        #     statements.append(self.variables[hole] == values[0])
-                # if len(statements) > 0:
-                #     print(statements)
-                #     self.propagate(z3.And(statements), self.fixed_values)
-
                 # figure out what to split on
+                if len(self.fixed_values) < len(self.variables) - 1:
+                    state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
+                    choices = self.quotient.state_to_choice_to_choices(state_to_choice)
+                    scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
 
-                # if len(self.fixed_values) < len(self.variables) - 1:
-                #     state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
-                #     choices = self.quotient.state_to_choice_to_choices(state_to_choice)
-                #     scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
+                    if any([len(x) > 1 for x in scheduler_selection]):
+                        hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
+                        # argmax hole_scores
+                        max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
+                        max_hole_var = self.variables[max_hole]
 
-                #     # if any([len(x) > 1 for x in scheduler_selection]):
-                #     #     hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
-                #     #     # argmax hole_scores
-                #     #     max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
-                #     #     max_hole_var = self.variables[max_hole]
-
-                #     #     # split on max_hole_var
-                #     #     for i in range(32):
-                #     #         self.next_split(max_hole_var, i, 0)
+                        # split on max_hole_var
+                        for i in range(32):
+                            self.next_split(max_hole_var, i, 0)
         if time.time() - self.time_last_print > 1:
-            print(f"{self.considered_models} MC calls, ruled out {self.ruled_out_models}/{self.total_models} models")
+            print(f"{self.considered_models} MC calls")
             self.time_last_print = time.time()
 
     def fresh(self, new_ctx):
@@ -209,6 +216,15 @@ def example1(project_path):
     # make plugin
     p = Plugin(s, quotient)
     p.register_variables(variables)
+    print(variables)
+    # M_0_1=1, M_1_1=3, M_2_1=0, M_3_1=2, P_0_1=2, P_1_1=2, P_2_1=3, P_3_1=2
+    # s.add(variables[0] == 3)
+    # s.add(variables[2] == 1)
+    # s.add(variables[3] == 1)
+    # s.add(variables[4] == 2)
+    # s.add(variables[5] == 2)
+    # s.add(variables[6] == 3)
+    # s.add(variables[7] == 2)
     print(s.check())
     model = s.model()
 
