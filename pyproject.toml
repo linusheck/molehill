@@ -13,6 +13,7 @@ pycarl = { path = "../stormpy/pycarl" }
 stormpy = { path = "../stormpy/stormpy" }
 payntbind = { path = "../stormpy/synthesis/payntbind", develop = true }
 paynt = { path = "../stormpy/synthesis" }
+matplotlib = "^3.9.3"
 
 [build-system]
 requires = ["poetry-core"]

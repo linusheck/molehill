@@ -7,8 +7,13 @@ import z3
 import paynt.parser.sketch
 import sys
 import time
+import math
 from stormpy import model_checking, compute_prob01max_states
 from stormpy.storage import SparseMatrixBuilder
+import matplotlib.pyplot as plt
+
+
+from curve_drawer import add_pixels, new_image
 
 import counterexamples
 
@@ -37,7 +42,43 @@ def build_decision_matrix(transition_matrix, global_bounds):
     print("Done decision matrix")
     return builder.build()
 
-class Plugin(z3.UserPropagateBase):
+class ModelEnumerator(z3.UserPropagateBase):
+    def __init__(self, solver):
+        super().__init__(solver, None)
+        # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
+        self.vars_registered = False
+        self.models = []
+        self.add_fixed(self._fixed)
+        self.fixed_values = []
+        self.fixed_count = []
+        self.variables = []
+        self.partial_model = {}
+    
+    def register_variables(self, variables):
+        assert not self.vars_registered
+        self.vars_registered = True
+        for var in variables:
+            self.add(var)
+            self.variables.append(var)
+        
+    def push(self):
+        self.fixed_count.append(len(self.fixed_values))
+
+    def pop(self, num_scopes):
+        for _scope in range(num_scopes):
+            # print("pop")
+            last_count = self.fixed_count.pop()
+            while len(self.fixed_values) > last_count:
+                self.partial_model.pop(self.fixed_values.pop())
+
+    def _fixed(self, ast, value):
+        self.fixed_values.append(ast)
+        self.partial_model[ast] = value
+        if len(self.fixed_values) == len(self.variables):
+            self.models.append([self.partial_model[var] for var in self.fixed_values])
+            self.conflict(self.fixed_values)
+
+class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(self, solver, quotient):
         super().__init__(solver, None)
         # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
@@ -80,9 +121,10 @@ class Plugin(z3.UserPropagateBase):
         result = self.quotient.family.mdp.model_check_property(prop.negate())
         self.global_bounds = result.result
         
-        self.decision_matrix = build_decision_matrix(self.quotient.family.mdp.model.transition_matrix, self.global_bounds)
+        self.complete_transition_matrix = self.quotient.family.mdp.model.transition_matrix
+        self.decision_matrix = build_decision_matrix(self.complete_transition_matrix, self.global_bounds)
 
-        self.stored_counterexamples = [[] for _ in range(self.quotient.family.num_holes)]
+        self.stored_assertions = []
 
     def register_variables(self, variables):
         assert not self.vars_registered
@@ -137,40 +179,38 @@ class Plugin(z3.UserPropagateBase):
             # this DTMC or MDP refutes the spec
             compute_counterexample = True
             # compute_counterexample = (len(self.partial_model) == len(self.variables))
-            if compute_counterexample:
-                counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.decision_matrix, last_fixed_var)
-                if counterexample is not None:
-                    counterexample_partial_model = {
-                        self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
-                    }
-                    print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
-                    term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
-                    # print(f"Propagate {term}")
-                    self.propagate(term, [])
-                else:
-                    self.conflict(self.fixed_values)
+            counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.decision_matrix, last_fixed_var, self.global_bounds, self.complete_transition_matrix)
+            if counterexample is not None:
+                counterexample_partial_model = {
+                    self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
+                }
+                print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
+                term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
+                # print(f"Propagate {term}")
+                self.propagate(term, [])
+                self.stored_assertions.append(term)
             else:
-                print("Conflict", self.fixed_values)
                 self.conflict(self.fixed_values)
-        else:
-            if len(self.partial_model) == len(self.variables):
-                print(f"Found satisfying DTMC with value {result.value}")
-            else:
-                # figure out what to split on
-                if len(self.fixed_values) < len(self.variables) - 1:
-                    state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
-                    choices = self.quotient.state_to_choice_to_choices(state_to_choice)
-                    scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
+                self.stored_assertions.append(z3.Not(z3.And([self.variables[c] == self.partial_model[self.variables[c]] for c in range(len(self.variables))])))
+        # else:
+        #     if len(self.partial_model) == len(self.variables):
+        #         print(f"Found satisfying DTMC with value {result.value}")
+        #     else:
+        #         # figure out what to split on
+        #         if len(self.fixed_values) < len(self.variables) - 1:
+        #             state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
+        #             choices = self.quotient.state_to_choice_to_choices(state_to_choice)
+        #             scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
 
-                    if any([len(x) > 1 for x in scheduler_selection]):
-                        hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
-                        # argmax hole_scores
-                        max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
-                        max_hole_var = self.variables[max_hole]
+        #             if any([len(x) > 1 for x in scheduler_selection]):
+        #                 hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
+        #                 # argmax hole_scores
+        #                 max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
+        #                 max_hole_var = self.variables[max_hole]
 
-                        # split on max_hole_var
-                        for i in range(32):
-                            self.next_split(max_hole_var, i, 0)
+        #                 # split on max_hole_var
+        #                 for i in range(32):
+        #                     self.next_split(max_hole_var, i, 0)
         if time.time() - self.time_last_print > 1:
             print(f"{self.considered_models} MC calls")
             self.time_last_print = time.time()
@@ -192,7 +232,6 @@ class Plugin(z3.UserPropagateBase):
         pass
 
 def example1(project_path):
-
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
@@ -204,17 +243,19 @@ def example1(project_path):
 
     variables = []
     # create variables
+    num_bits = max([math.ceil(math.log2(max(family.hole_options(hole)) + 1)) for hole in range(family.num_holes)]) + 1
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
         options = family.hole_options(hole)
-        var = z3.BitVec(name, 32)
+        var = z3.BitVec(name, num_bits)
         variables.append(var)
         # TODO hole options of full family should be a sorted vector of indices that is continous
-        s.add(z3.And(var >= z3.BitVecVal(min(options), 32), var <= z3.BitVecVal(max(options), 32)))
+        s.add(z3.And(var >= z3.BitVecVal(min(options), num_bits), var <= z3.BitVecVal(max(options), num_bits)))
+    print(s.assertions())
 
     # make z3 simple solver
     # make plugin
-    p = Plugin(s, quotient)
+    p = SearchMarkovChain(s, quotient)
     p.register_variables(variables)
     print(variables)
     # M_0_1=1, M_1_1=3, M_2_1=0, M_3_1=2, P_0_1=2, P_1_1=2, P_2_1=3, P_3_1=2
@@ -225,18 +266,52 @@ def example1(project_path):
     # s.add(variables[5] == 2)
     # s.add(variables[6] == 3)
     # s.add(variables[7] == 2)
-    print(s.check())
-    model = s.model()
+    if s.check() == z3.sat:
+        model = s.model()
+        print(model)
+        new_family = quotient.family.copy()
+        new_family.add_parent_info(quotient.family)
+        for hole in range(new_family.num_holes):
+            var = variables[hole]
+            new_family.hole_set_options(hole, [model.eval(var).as_long()])
+        print(new_family)
+        print(f"Considered {p.considered_models} models")
 
-    new_family = quotient.family.copy()
-    new_family.add_parent_info(quotient.family)
-    for hole in range(new_family.num_holes):
-        var = variables[hole]
-        new_family.hole_set_options(hole, [model.eval(var).as_long()])
-    print(new_family)
-    print(f"Considered {p.considered_models} models")
+    # do this hacky
+    
+    actual_bits = num_bits - 1
+    size = math.ceil(math.sqrt(2**(actual_bits * len(variables))))
+    image = new_image(size)
+    pixels = image.load()
+    N = min(30, len(p.stored_assertions))
+    images = []
+    for j in range(0, N):
+        i = int(min(j * (len(p.stored_assertions)/N), len(p.stored_assertions)))
+        print(i)
+        s2 = z3.Solver()
+        p2 = ModelEnumerator(s2)
+        p2.register_variables(variables)
 
+        for a in s.assertions():
+            s2.add(a)
+        for a in p.stored_assertions[:i]:
+            s2.add(a)
+        # get all models
+        model_numbers = []
+        assert s2.check() == z3.unsat
+        for m in p2.models:
+            variable_values = sum([m[i].as_long() * 2**(i * actual_bits) for i in range(len(variables))])
+            model_numbers.append(variable_values)
+        color = plt.cm.ocean(float(i) / float(len(p.stored_assertions)))
+        ints = tuple([int(255 * x) for x in color])
+        add_pixels(pixels, size, model_numbers, ints)
+        copied_image = image.copy()
+        # copied_image.resize((size * 10, size * 10))
+        images.append(image.copy())
+    images[0].save("image.gif", save_all=True, append_images=images[1:], duration=100, loop=0)
 
+    image.resize((size * 10, size * 10))
+    image.save("image.png")
 
 if __name__ == "__main__":
     example1(sys.argv[1])
