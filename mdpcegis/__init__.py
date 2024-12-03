@@ -2,14 +2,11 @@ import paynt.synthesizer
 import paynt.synthesizer.conflict_generator
 import paynt.verification
 import paynt.verification.property
-import payntbind.synthesis
 import z3
 import paynt.parser.sketch
 import sys
 import time
 import math
-from stormpy import model_checking, compute_prob01max_states
-from stormpy.storage import SparseMatrixBuilder
 import matplotlib.pyplot as plt
 from PIL import Image
 
@@ -17,66 +14,7 @@ from curve_drawer import add_pixels, new_image
 
 import counterexamples
 
-def build_decision_matrix(transition_matrix, global_bounds):
-    print("Building decision matrix")
-    builder = SparseMatrixBuilder(has_custom_row_grouping=True)
-    zero_state = transition_matrix.nr_columns
-    one_state = transition_matrix.nr_columns + 1
-    new_row_counter = 0
-    # make iterator over quotient_choice_map
-    for state in range(transition_matrix.nr_columns):
-        row_group_start = transition_matrix.get_row_group_start(state)
-        row_group_end = transition_matrix.get_row_group_end(state)
-        builder.new_row_group(new_row_counter)
-        for row in range(row_group_start, row_group_end):
-            for entry in transition_matrix.get_row(row):
-                builder.add_next_value(new_row_counter, entry.column, entry.value())
-            new_row_counter += 1
-        builder.add_next_value(new_row_counter, zero_state, global_bounds.at(state))
-        builder.add_next_value(new_row_counter, one_state, 1-global_bounds.at(state))
-        new_row_counter += 1
-    builder.new_row_group(new_row_counter)
-    builder.add_next_value(new_row_counter, zero_state, 1)
-    builder.new_row_group(new_row_counter + 1)
-    builder.add_next_value(new_row_counter + 1, one_state, 1)
-    print("Done decision matrix")
-    return builder.build()
-
-class ModelEnumerator(z3.UserPropagateBase):
-    def __init__(self, solver):
-        super().__init__(solver, None)
-        # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
-        self.vars_registered = False
-        self.models = []
-        self.add_fixed(self._fixed)
-        self.fixed_values = []
-        self.fixed_count = []
-        self.variables = []
-        self.partial_model = {}
-    
-    def register_variables(self, variables):
-        assert not self.vars_registered
-        self.vars_registered = True
-        for var in variables:
-            self.add(var)
-            self.variables.append(var)
-        
-    def push(self):
-        self.fixed_count.append(len(self.fixed_values))
-
-    def pop(self, num_scopes):
-        for _scope in range(num_scopes):
-            # print("pop")
-            last_count = self.fixed_count.pop()
-            while len(self.fixed_values) > last_count:
-                self.partial_model.pop(self.fixed_values.pop())
-
-    def _fixed(self, ast, value):
-        self.fixed_values.append(ast)
-        self.partial_model[ast] = value
-        if len(self.fixed_values) == len(self.variables):
-            self.models.append([self.partial_model[var] for var in self.fixed_values])
-            self.conflict(self.fixed_values)
+from model_counters import ModelCounter, ModelEnumeratingPlugin
 
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(self, solver, quotient):
@@ -113,8 +51,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         for _state, holes_bv in enumerate(state_to_holes_bv):
             holes = set([hole for hole in holes_bv])
             self.state_to_holes.append(holes)
-        
-        # print(self.quotient.family.mdp.model.transition_matrix)
 
         prop = self.quotient.specification.all_properties()[0]
         # does there exist a model that satisfies the property?
@@ -122,9 +58,14 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.global_bounds = result.result
         
         self.complete_transition_matrix = self.quotient.family.mdp.model.transition_matrix
-        self.decision_matrix = build_decision_matrix(self.complete_transition_matrix, self.global_bounds)
+        self.decision_matrix = counterexamples.build_decision_matrix(self.complete_transition_matrix, self.global_bounds)
 
-        self.stored_assertions = []
+        # run this model counter alongside and feed it all new assertions
+        self.model_counter = ModelCounter()
+        for a in solver.assertions():
+            self.model_counter.solver.add(a)
+        
+        self.last_decision_variable = None
 
     def register_variables(self, variables):
         assert not self.vars_registered
@@ -132,6 +73,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         for var in variables:
             self.add(var)
             self.variables.append(var)
+        self.model_counter.variables = variables
 
     def push(self):
         self.fixed_count.append(len(self.fixed_values))
@@ -146,12 +88,20 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.partial_model.pop(self.fixed_values.pop())
 
     def _fixed(self, ast, value):
-        # print("fixed", ast, value)
         self.fixed_values.append(ast)
         self.partial_model[ast] = value
+        # if str(self.last_decision_variable) == str(ast) or len(self.partial_model) == len(self.variables):
         self.analyse_current_model(ast)
+        # otherwise: this is just a propagation, no need to check anything here
 
     def analyse_current_model(self, last_fixed_var=None):
+        # Check model count if it's worth it to check MDP
+        # models_in_tree = self.model_counter.count_models(max_models=128, condition=z3.And([key == value for key, value in enumerate(self.partial_model)]))
+        # if len(self.partial_model) < len(self.variables):
+        #     print(models_in_tree)
+        # if len(self.partial_model) < len(self.variables) and models_in_tree < 128:
+        #     return
+
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
         for hole in range(new_family.num_holes):
@@ -177,9 +127,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         if all_violated:
             # this DTMC or MDP refutes the spec
-            compute_counterexample = True
-            # compute_counterexample = (len(self.partial_model) == len(self.variables))
-            counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.decision_matrix, last_fixed_var, self.global_bounds, self.complete_transition_matrix)
+            counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.decision_matrix, self.complete_transition_matrix, self.model_counter)
             if counterexample is not None:
                 counterexample_partial_model = {
                     self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
@@ -188,29 +136,14 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
                 # print(f"Propagate {term}")
                 self.propagate(term, [])
-                self.stored_assertions.append(term)
+                self.model_counter.solver.add(term)
             else:
+                print("No counterexample")
                 self.conflict(self.fixed_values)
-                self.stored_assertions.append(z3.Not(z3.And([self.variables[c] == self.partial_model[self.variables[c]] for c in range(len(self.variables))])))
-        # else:
-        #     if len(self.partial_model) == len(self.variables):
-        #         print(f"Found satisfying DTMC with value {result.value}")
-        #     else:
-        #         # figure out what to split on
-        #         if len(self.fixed_values) < len(self.variables) - 1:
-        #             state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
-        #             choices = self.quotient.state_to_choice_to_choices(state_to_choice)
-        #             scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
-
-        #             if any([len(x) > 1 for x in scheduler_selection]):
-        #                 hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
-        #                 # argmax hole_scores
-        #                 max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
-        #                 max_hole_var = self.variables[max_hole]
-
-        #                 # split on max_hole_var
-        #                 for i in range(32):
-        #                     self.next_split(max_hole_var, i, 0)
+                self.model_counter.solver.add(z3.Not(z3.And([key == value for key, value in enumerate(self.partial_model)])))
+        else:
+            if len(self.partial_model) == len(self.variables):
+                print(f"Found satisfying DTMC with value {result.value}")
         if time.time() - self.time_last_print > 1:
             print(f"{self.considered_models} MC calls")
             self.time_last_print = time.time()
@@ -226,7 +159,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         pass
     
     def _decide(self, a, b, c):
-        pass
+        self.last_decision_variable = a
     
     def _final(self):
         pass
@@ -267,34 +200,43 @@ def example1(project_path):
     # s.add(variables[6] == 3)
     # s.add(variables[7] == 2)
     if s.check() == z3.sat:
+        print("sat")
         model = s.model()
-        print(model)
         new_family = quotient.family.copy()
         new_family.add_parent_info(quotient.family)
         for hole in range(new_family.num_holes):
             var = variables[hole]
             new_family.hole_set_options(hole, [model.eval(var).as_long()])
-        print(new_family)
+        # check DTMC
+        quotient.build(new_family)
+        mdp = new_family.mdp
+        prop = quotient.specification.all_properties()[0]
+        result = mdp.model_check_property(prop)
+        print(f"Found {new_family} with value {result}")
         print(f"Considered {p.considered_models} models")
+    else:
+        print("unsat")
 
     # do this hacky
+    return
     
     actual_bits = num_bits - 1
     size = math.ceil(math.sqrt(2**(actual_bits * len(variables))))
     image = new_image(size)
     pixels = image.load()
-    N = min(30, len(p.stored_assertions))
+    new_assertions = p.model_counter.solver.assertions()[len(s.assertions()):]
+    N = len(new_assertions)
     images = []
     for j in range(0, N):
-        i = int(min(j * (len(p.stored_assertions)/N), len(p.stored_assertions)))
+        i = int(min(j * (float(len(new_assertions))/N), len(new_assertions)))
         print(i)
         s2 = z3.Solver()
-        p2 = ModelEnumerator(s2)
+        p2 = ModelEnumeratingPlugin(s2)
         p2.register_variables(variables)
 
         for a in s.assertions():
             s2.add(a)
-        for a in p.stored_assertions[:i]:
+        for a in new_assertions[:i]:
             s2.add(a)
         # get all models
         model_numbers = []
@@ -302,7 +244,7 @@ def example1(project_path):
         for m in p2.models:
             variable_values = sum([m[i].as_long() * 2**(i * actual_bits) for i in range(len(variables))])
             model_numbers.append(variable_values)
-        color = plt.cm.ocean(float(i) / float(len(p.stored_assertions)))
+        color = plt.cm.ocean(float(i) / float(len(new_assertions)))
         ints = tuple([int(255 * x) for x in color])
         add_pixels(pixels, size, model_numbers, ints)
         copied_image = image.copy()
@@ -310,7 +252,7 @@ def example1(project_path):
         images.append(copied_image)
     images[0].save("image.gif", save_all=True, append_images=images[1:] + [images[-1].copy()] * 10, duration=100, loop=0)
 
-    image.resize((size * 10, size * 10))
+    image = image.resize((size * 10, size * 10), Image.Resampling.NEAREST)
     image.save("image.png")
 
 if __name__ == "__main__":

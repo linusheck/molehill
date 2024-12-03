@@ -1,0 +1,16 @@
+        #     else:
+        #         # figure out what to split on
+        #         if len(self.fixed_values) < len(self.variables) - 1:
+        #             state_to_choice = self.quotient.scheduler_to_state_to_choice(mdp, result.result.scheduler, discard_unreachable_choices=False)
+        #             choices = self.quotient.state_to_choice_to_choices(state_to_choice)
+        #             scheduler_selection = self.quotient.coloring.collectHoleOptions(choices)
+
+        #             if any([len(x) > 1 for x in scheduler_selection]):
+        #                 hole_scores = self.quotient.scheduler_scores(new_family.mdp, prop, result.result, scheduler_selection)
+        #                 # argmax hole_scores
+        #                 max_hole = max(hole_scores.keys(), key=lambda hole: hole_scores[hole])
+        #                 max_hole_var = self.variables[max_hole]
+
+        #                 # split on max_hole_var
+        #                 for i in range(32):
+        #                     self.next_split(max_hole_var, i, 0)

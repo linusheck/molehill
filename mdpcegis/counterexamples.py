@@ -4,39 +4,34 @@ from stormpy import check_model_sparse, model_checking, parse_properties_without
 from stormpy import ExplicitModelCheckerHintDouble
 import stormpy.storage
 import stormpy.core
-import sys
+from stormpy import model_checking
+from stormpy.storage import SparseMatrixBuilder
+import z3
 
-# def _build_matrix2(sub_mdp, included_choices, global_bounds):
-#     transition_matrix = sub_mdp.model.transition_matrix
-
-#     builder = stormpy.storage.SparseMatrixBuilder(has_custom_row_grouping=True)
-
-#     zero_state = sub_mdp.model.nr_states
-#     one_state = sub_mdp.model.nr_states + 1
-
-#     new_row_counter = 0
-#     for state in range(sub_mdp.model.nr_states):
-#         row_group_start = transition_matrix.get_row_group_start(state)
-#         row_group_end = transition_matrix.get_row_group_end(state)
-#         builder.new_row_group(new_row_counter)
-#         added_something = False
-#         for row in range(row_group_start, row_group_end):
-#             if sub_mdp.quotient_choice_map[row] in included_choices:
-#                 added_something = True
-#                 for entry in transition_matrix.get_row(row):
-#                     builder.add_next_value(new_row_counter, entry.column, entry.value())
-#                 new_row_counter += 1
-#         if not added_something:
-#             builder.add_next_value(new_row_counter, zero_state, global_bounds.at(sub_mdp.quotient_state_map[state]))
-#             builder.add_next_value(new_row_counter, one_state, 1-global_bounds.at(sub_mdp.quotient_state_map[state]))
-#             new_row_counter += 1
-#     builder.new_row_group(new_row_counter)
-#     builder.add_next_value(new_row_counter, zero_state, 1)
-#     builder.new_row_group(new_row_counter + 1)
-#     builder.add_next_value(new_row_counter + 1, one_state, 1)
-    
-#     new_matrix = builder.build()
-#     return new_matrix
+def build_decision_matrix(transition_matrix, global_bounds):
+    print("Building decision matrix")
+    builder = SparseMatrixBuilder(has_custom_row_grouping=True)
+    zero_state = transition_matrix.nr_columns
+    one_state = transition_matrix.nr_columns + 1
+    new_row_counter = 0
+    # make iterator over quotient_choice_map
+    for state in range(transition_matrix.nr_columns):
+        row_group_start = transition_matrix.get_row_group_start(state)
+        row_group_end = transition_matrix.get_row_group_end(state)
+        builder.new_row_group(new_row_counter)
+        for row in range(row_group_start, row_group_end):
+            for entry in transition_matrix.get_row(row):
+                builder.add_next_value(new_row_counter, entry.column, entry.value())
+            new_row_counter += 1
+        builder.add_next_value(new_row_counter, zero_state, global_bounds.at(state))
+        builder.add_next_value(new_row_counter, one_state, 1-global_bounds.at(state))
+        new_row_counter += 1
+    builder.new_row_group(new_row_counter)
+    builder.add_next_value(new_row_counter, zero_state, 1)
+    builder.new_row_group(new_row_counter + 1)
+    builder.add_next_value(new_row_counter + 1, one_state, 1)
+    print("Done decision matrix")
+    return builder.build()
 
 def _build_matrix(sub_mdp, complete_transition_matrix, transition_matrix, decision_matrix, one_states, included_choices):
     include_row_bit_vector = stormpy.storage.BitVector(decision_matrix.nr_rows, False)
@@ -96,7 +91,7 @@ def _build_matrix(sub_mdp, complete_transition_matrix, transition_matrix, decisi
 
     return model_components
 
-def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_to_holes, choice_to_assignment, prop, decision_matrix, last_fixed_var, global_bounds, complete_transition_matrix):
+def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_to_holes, choice_to_assignment, prop, decision_matrix, complete_transition_matrix, model_counter):
     # pathlib.Path(f"dots/mdp_{partial_model}.dot").write_text(sub_mdp.model.to_dot(), encoding="utf-8")
     transition_matrix = sub_mdp.model.transition_matrix
 
@@ -113,17 +108,6 @@ def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_t
 
     while not all_schedulers_violate:
         model_components = _build_matrix(sub_mdp, complete_transition_matrix, transition_matrix, decision_matrix, one_states, included_choices)
-
-        # # TEST for filter impl
-        # model_components2 = _build_matrix2(sub_mdp, included_choices, global_bounds)
-        # if str(model_components.transition_matrix) != str(model_components2):
-        #     open("model1.txt", "w").write(str(model_components.transition_matrix))
-        #     open("model2.txt", "w").write(str(model_components2))
-        #     # print(model_components.transition_matrix)
-        #     # print(model_components2)
-        #     # print(list(difflib.ndiff(str(model_components.transition_matrix), str(model_components2))))
-        #     print(global_bounds.at(1447))
-        #     sys.exit(11)
 
         # TODO hack (i hate properties)
         new_property = parse_properties_without_context(str(prop.formula).split()[0] + f" [ F \"counterexample_target\" ]")[0]
@@ -145,8 +129,19 @@ def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_t
         # pathlib.Path(f"dots/counterexample_{partial_model}_{len(included_holes)}.dot").write_text(new_mdp.to_dot(), encoding="utf-8")
 
         if not all_schedulers_violate:
+            condition_before_candidate = z3.And(*[variables[hole] == partial_model[variables[hole]] for hole in included_fixed_holes])
+            assignment_candidates = [None if hole in included_holes else variables[hole] == partial_model[variables[hole]] for hole in range(len(variables))]
+
+            model_counts = []
+            for candidate in assignment_candidates:
+                if candidate is None:
+                    model_counts.append(0)
+                else:
+                    # model_counts.append(model_counter.count_models(max_models=64, condition=candidate))
+                    model_counts.append(int(model_counter.is_sat(z3.And(candidate, condition_before_candidate))))
+
             # choose a hole to include now
-            hole_scores = [-1 if hole in included_holes else 0 for hole in range(len(variables))]
+            hole_scores = [0.0] * len(variables)
             for state, quotient_state in enumerate(sub_mdp.quotient_state_map):
                 for hole in state_to_holes[quotient_state]:
                     if not hole in included_holes:
@@ -154,8 +149,19 @@ def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_t
 
             add_new_hole = True
 
+            print(model_counts)
+            print(hole_scores)
+
+            # score = [(int(hole_scores[hole] > 0), model_counts[hole], hole_scores[hole]) for hole in range(len(variables))]
+            score = [(int(hole_scores[hole] > 0), hole_scores[hole], hole_scores[hole]) for hole in range(len(variables))]
+            # print(score)
+
             while add_new_hole:
-                max_hole = max(range(len(hole_scores)), key=lambda hole: hole_scores[hole])
+                # max_hole = max(range(len(hole_scores)), key=lambda hole: hole_scores[hole])
+                max_hole = sorted(set(range(len(variables))) - set(included_holes), key=lambda hole: score[hole])[-1]
+                print("=>", max_hole)
+                if score[max_hole][1] * score[max_hole][2] <= 0.0:
+                    return None
                 included_holes.append(max_hole)
                 included_fixed_holes.append(max_hole)
                 hole_scores[max_hole] = -1
