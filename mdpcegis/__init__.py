@@ -96,11 +96,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
     def analyse_current_model(self, last_fixed_var=None):
         # Check model count if it's worth it to check MDP
-        # models_in_tree = self.model_counter.count_models(max_models=128, condition=z3.And([key == value for key, value in enumerate(self.partial_model)]))
-        # if len(self.partial_model) < len(self.variables):
-        #     print(models_in_tree)
-        # if len(self.partial_model) < len(self.variables) and models_in_tree < 128:
-        #     return
+        if len(self.partial_model) < len(self.variables):
+            models_in_tree = self.model_counter.count_models(max_models=16, condition=z3.And([key == value for key, value in self.partial_model.items()]))
+            # if len(self.partial_model) < len(self.variables):
+            #     print("models in tree", models_in_tree)
+            if len(self.partial_model) < len(self.variables) and models_in_tree < 16:
+                return
 
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
@@ -127,7 +128,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         if all_violated:
             # this DTMC or MDP refutes the spec
-            counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.decision_matrix, self.complete_transition_matrix, self.model_counter)
+            if len(self.partial_model) == len(self.variables):
+                counterexample = None
+            else:
+                counterexample = counterexamples.compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.decision_matrix, self.complete_transition_matrix, self.model_counter)
             if counterexample is not None:
                 counterexample_partial_model = {
                     self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
@@ -138,9 +142,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.propagate(term, [])
                 self.model_counter.solver.add(term)
             else:
-                print("No counterexample")
                 self.conflict(self.fixed_values)
-                self.model_counter.solver.add(z3.Not(z3.And([key == value for key, value in enumerate(self.partial_model)])))
+                conflicting_term = z3.Not(z3.And([key == value for key, value in self.partial_model.items()]))
+                self.model_counter.solver.add(conflicting_term)
         else:
             if len(self.partial_model) == len(self.variables):
                 print(f"Found satisfying DTMC with value {result.value}")
@@ -184,7 +188,7 @@ def example1(project_path):
         variables.append(var)
         # TODO hole options of full family should be a sorted vector of indices that is continous
         s.add(z3.And(var >= z3.BitVecVal(min(options), num_bits), var <= z3.BitVecVal(max(options), num_bits)))
-    print(s.assertions())
+    # print(s.assertions())
 
     # make z3 simple solver
     # make plugin
@@ -199,6 +203,7 @@ def example1(project_path):
     # s.add(variables[5] == 2)
     # s.add(variables[6] == 3)
     # s.add(variables[7] == 2)
+    model = None
     if s.check() == z3.sat:
         print("sat")
         model = s.model()
@@ -217,39 +222,59 @@ def example1(project_path):
     else:
         print("unsat")
 
-    # do this hacky
-    return
+    # # do this hacky
+    # return
     
     actual_bits = num_bits - 1
     size = math.ceil(math.sqrt(2**(actual_bits * len(variables))))
     image = new_image(size)
     pixels = image.load()
     new_assertions = p.model_counter.solver.assertions()[len(s.assertions()):]
-    N = len(new_assertions)
+    N = 100
     images = []
-    for j in range(0, N):
+    possible_models = set([i for i in range(2**(actual_bits * len(variables)))])
+    color = (245, 245, 220, 255)
+    add_pixels(pixels, size, possible_models, color)
+    for j in range(0, N+1):
         i = int(min(j * (float(len(new_assertions))/N), len(new_assertions)))
-        print(i)
         s2 = z3.Solver()
         p2 = ModelEnumeratingPlugin(s2)
         p2.register_variables(variables)
 
         for a in s.assertions():
             s2.add(a)
-        for a in new_assertions[:i]:
+        for a in new_assertions[:i+1]:
             s2.add(a)
         # get all models
-        model_numbers = []
+        model_numbers = set()
         assert s2.check() == z3.unsat
         for m in p2.models:
-            variable_values = sum([m[i].as_long() * 2**(i * actual_bits) for i in range(len(variables))])
-            model_numbers.append(variable_values)
+            variable_values = sum([m[i][1].as_long() * 2**(i * actual_bits) for i in range(len(variables))])
+            model_numbers.add(variable_values)
+        # if possible_models_vars is not None:
+        #     print(len(possible_models_vars), len(models_vars))
+        #     print(models_vars - possible_models_vars)
+        #     print(new_assertions[i])
+        #     print(possible_models_vars - models_vars)
+        assert model_numbers <= possible_models
+        ruled_out_models = possible_models - model_numbers
+        possible_models = model_numbers
         color = plt.cm.ocean(float(i) / float(len(new_assertions)))
         ints = tuple([int(255 * x) for x in color])
-        add_pixels(pixels, size, model_numbers, ints)
+        add_pixels(pixels, size, ruled_out_models, ints)
+        if model is not None and i == N:
+            model_tuples = [(var, model.eval(var)) for var in variables]
+            x = sorted(model_tuples, key=lambda x: str(x[0]))
+            print(model_tuples)
+            print(possible_models)
+            model_number =  sum([x[i][1].as_long() * 2**(i * actual_bits) for i in range(len(variables))])
+            print(model_number)
+            assert model_number in possible_models
+            add_pixels(pixels, size, set([model_number]), (255, 0, 0, 255))
         copied_image = image.copy()
         copied_image = copied_image.resize((size * 10, size * 10), Image.Resampling.NEAREST)
         images.append(copied_image)
+    print([bin(x) for x in possible_models])
     images[0].save("image.gif", save_all=True, append_images=images[1:] + [images[-1].copy()] * 10, duration=100, loop=0)
 
     image = image.resize((size * 10, size * 10), Image.Resampling.NEAREST)

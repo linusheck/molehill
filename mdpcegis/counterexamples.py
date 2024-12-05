@@ -99,6 +99,15 @@ def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_t
     included_choices = set([choice for choice in range(len(choice_to_assignment)) if all([hole in included_holes for hole, _ in choice_to_assignment[choice]])])
     included_fixed_holes = []
 
+    # compute hole_scores
+    hole_scores = [0.0] * len(variables)
+    for state, quotient_state in enumerate(sub_mdp.quotient_state_map):
+        for hole in state_to_holes[quotient_state]:
+            if not hole in included_holes:
+                hole_scores[hole] += mc_result.at(state)
+    if not any([score > 0.0 for score in hole_scores]):
+        return None
+
     all_schedulers_violate = False
 
     target_state = model_checking(sub_mdp.model, prop.formula.subformula.subformula).get_truth_values()
@@ -130,41 +139,32 @@ def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_t
 
         if not all_schedulers_violate:
             condition_before_candidate = z3.And(*[variables[hole] == partial_model[variables[hole]] for hole in included_fixed_holes])
-            assignment_candidates = [None if hole in included_holes else variables[hole] == partial_model[variables[hole]] for hole in range(len(variables))]
+            assignment_candidates = [None if (hole in included_holes or hole_scores[hole] == 0) else variables[hole] == partial_model[variables[hole]] for hole in range(len(variables))]
 
             model_counts = []
             for candidate in assignment_candidates:
                 if candidate is None:
                     model_counts.append(0)
                 else:
-                    # model_counts.append(model_counter.count_models(max_models=64, condition=candidate))
-                    model_counts.append(int(model_counter.is_sat(z3.And(candidate, condition_before_candidate))))
-
-            # choose a hole to include now
-            hole_scores = [0.0] * len(variables)
-            for state, quotient_state in enumerate(sub_mdp.quotient_state_map):
-                for hole in state_to_holes[quotient_state]:
-                    if not hole in included_holes:
-                        hole_scores[hole] += mc_result.at(state)
+                    model_counts.append(model_counter.count_models(max_models=64, condition=z3.And(candidate, condition_before_candidate)))
+                    # model_counts.append(int(model_counter.is_sat(z3.And(candidate, condition_before_candidate))))
 
             add_new_hole = True
 
-            print(model_counts)
-            print(hole_scores)
+            score = [(int(hole_scores[hole] > 0), model_counts[hole], hole_scores[hole]) for hole in range(len(variables))]
 
-            # score = [(int(hole_scores[hole] > 0), model_counts[hole], hole_scores[hole]) for hole in range(len(variables))]
-            score = [(int(hole_scores[hole] > 0), hole_scores[hole], hole_scores[hole]) for hole in range(len(variables))]
+            # if any([score[hole][0] == 0 and  for hole in range(len(variables))]):
             # print(score)
 
             while add_new_hole:
                 # max_hole = max(range(len(hole_scores)), key=lambda hole: hole_scores[hole])
                 max_hole = sorted(set(range(len(variables))) - set(included_holes), key=lambda hole: score[hole])[-1]
-                print("=>", max_hole)
-                if score[max_hole][1] * score[max_hole][2] <= 0.0:
+                # print("=>", max_hole)
+                if score[max_hole][2] <= 0.0:
                     return None
                 included_holes.append(max_hole)
                 included_fixed_holes.append(max_hole)
-                hole_scores[max_hole] = -1
+                hole_scores[max_hole] = 0
                 if len(included_holes) == len(variables):
                     return included_fixed_holes
                 # Check if we have enabled a new action

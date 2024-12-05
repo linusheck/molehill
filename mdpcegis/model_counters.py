@@ -5,8 +5,9 @@ class ModelEnumeratingPlugin(z3.UserPropagateBase):
     def __init__(self, solver):
         super().__init__(solver, None)
         self.vars_registered = False
-        self.models = []
+        self.models = set()
         self.add_fixed(self._fixed)
+        self.add_final(self._final)
         self.fixed_values = []
         self.fixed_count = []
         self.variables = []
@@ -31,8 +32,10 @@ class ModelEnumeratingPlugin(z3.UserPropagateBase):
     def _fixed(self, ast, value):
         self.fixed_values.append(ast)
         self.partial_model[ast] = value
+
+    def _final(self):
         if len(self.fixed_values) == len(self.variables):
-            self.models.append([self.partial_model[var] for var in self.fixed_values])
+            self.models.add(tuple(sorted(list(self.partial_model.items()), key=lambda x: str(x[0]))))
             self.conflict(self.fixed_values)
 
 class ModelCountingPlugin(z3.UserPropagateBase):
@@ -41,6 +44,7 @@ class ModelCountingPlugin(z3.UserPropagateBase):
         super().__init__(solver, None)
         self.vars_registered = False
         self.add_fixed(self._fixed)
+        self.add_final(self._final)
         self.reset(max_models=max_models)
     
     def reset(self, max_models = None):
@@ -69,6 +73,8 @@ class ModelCountingPlugin(z3.UserPropagateBase):
 
     def _fixed(self, ast, value):
         self.fixed_values.append(ast)
+
+    def _final(self):
         if len(self.fixed_values) == len(self.variables):
             self.num_models += 1
             if self.max_models is None or self.num_models < self.max_models:

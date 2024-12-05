@@ -1,0 +1,81 @@
+[And(0 <= M_0_1, 3 >= M_0_1),
+ And(0 <= M_1_1, 3 >= M_1_1),
+ And(0 <= M_2_1, 3 >= M_2_1),
+ And(0 <= M_3_1, 3 >= M_3_1),
+ And(0 <= P_0_1, 3 >= P_0_1)]
+Building decision matrix
+Done decision matrix
+[M_0_1, M_1_1, M_2_1, M_3_1, P_0_1]
+1 MC calls
+Found counterexample {M_3_1: 0, P_0_1: 0} while having 2 variables fixed: {P_0_1: 0, M_3_1: 0}
+Found counterexample {M_0_1: 0, P_0_1: 1} while having 5 variables fixed: {M_3_1: 0, P_0_1: 1, M_2_1: 0, M_1_1: 0, M_0_1: 0}
+Found counterexample {M_0_1: 1, P_0_1: 1, M_1_1: 0} while having 4 variables fixed: {M_3_1: 0, P_0_1: 1, M_1_1: 0, M_0_1: 1}
+Found counterexample {M_0_1: 2, P_0_1: 1} while having 4 variables fixed: {P_0_1: 1, M_1_1: 0, M_0_1: 2, M_2_1: 0}
+Found counterexample {M_0_1: 2, P_0_1: 0} while having 2 variables fixed: {M_0_1: 2, P_0_1: 0}
+Found counterexample {M_0_1: 2, P_0_1: 2} while having 2 variables fixed: {M_0_1: 2, P_0_1: 2}
+Found counterexample {M_0_1: 2, P_0_1: 3} while having 2 variables fixed: {M_0_1: 2, P_0_1: 3}
+Found counterexample {M_0_1: 0, P_0_1: 0} while having 2 variables fixed: {P_0_1: 0, M_0_1: 0}
+Found counterexample {M_3_1: 1, M_0_1: 1, P_0_1: 0} while having 3 variables fixed: {P_0_1: 0, M_0_1: 1, M_3_1: 1}
+Found counterexample {M_0_1: 1, M_1_1: 0, P_0_1: 0} while having 3 variables fixed: {P_0_1: 0, M_0_1: 1, M_1_1: 0}
+Found counterexample {M_0_1: 1, M_1_1: 1, P_0_1: 0} while having 3 variables fixed: {P_0_1: 0, M_0_1: 1, M_1_1: 1}
+Found counterexample {M_2_1: 0, M_1_1: 2, M_0_1: 1, P_0_1: 0} while having 5 variables fixed: {P_0_1: 0, M_0_1: 1, M_3_1: 2, M_1_1: 2, M_2_1: 0}
+Found counterexample {M_2_1: 2, M_1_1: 2, M_0_1: 1, P_0_1: 0} while having 5 variables fixed: {P_0_1: 0, M_0_1: 1, M_3_1: 2, M_1_1: 2, M_2_1: 2}
+42 MC calls
+Found counterexample {M_2_1: 1, M_1_1: 2, M_0_1: 1, P_0_1: 0} while having 5 variables fixed: {P_0_1: 0, M_0_1: 1, M_3_1: 2, M_1_1: 2, M_2_1: 1}
+Found counterexample {M_2_1: 3, M_3_1: 2, M_0_1: 1, P_0_1: 0, M_1_1: 2} while having 5 variables fixed: {P_0_1: 0, M_0_1: 1, M_3_1: 2, M_1_1: 2, M_2_1: 3}
+Found counterexample {M_3_1: 2, M_2_1: 0, M_1_1: 3, M_0_1: 1, P_0_1: 0} while having 5 variables fixed: {P_0_1: 0, M_2_1: 0, M_0_1: 1, M_1_1: 3, M_3_1: 2}
+Found counterexample {M_3_1: 3, M_0_1: 1, M_1_1: 3, P_0_1: 0} while having 5 variables fixed: {P_0_1: 0, M_2_1: 0, M_0_1: 1, M_1_1: 3, M_3_1: 3}
+Found counterexample {M_3_1: 3, M_0_1: 1, M_1_1: 3, P_0_1: 0} while having 5 variables fixed: {P_0_1: 0, M_2_1: 0, M_0_1: 1, M_1_1: 3, M_3_1: 3}
+Found counterexample {M_3_1: 2, M_2_1: 0, M_0_1: 3, P_0_1: 0} while having 4 variables fixed: {P_0_1: 0, M_2_1: 0, M_0_1: 3, M_3_1: 2}
+Found counterexample {M_0_1: 3, P_0_1: 1} while having 4 variables fixed: {M_3_1: 0, M_1_1: 0, P_0_1: 1, M_0_1: 3}
+Found counterexample {M_0_1: 3, P_0_1: 1} while having 4 variables fixed: {M_3_1: 0, M_1_1: 0, P_0_1: 1, M_0_1: 3}
+Found counterexample {M_0_1: 0, P_0_1: 2} while having 4 variables fixed: {M_3_1: 0, M_1_1: 0, M_0_1: 0, P_0_1: 2}
+Found counterexample {M_0_1: 0, P_0_1: 3} while having 2 variables fixed: {M_0_1: 0, P_0_1: 3}
+Found counterexample {M_0_1: 0, P_0_1: 3} while having 2 variables fixed: {M_0_1: 0, P_0_1: 3}
+Found counterexample {M_0_1: 3, P_0_1: 2} while having 2 variables fixed: {M_0_1: 3, P_0_1: 2}
+Found counterexample {M_0_1: 1, P_0_1: 2} while having 2 variables fixed: {P_0_1: 2, M_0_1: 1}
+88 MC calls
+Found counterexample {M_2_1: 3, M_3_1: 2, M_0_1: 1, P_0_1: 0, M_1_1: 2} while having 5 variables fixed: {M_0_1: 1, P_0_1: 0, M_3_1: 2, M_1_1: 2, M_2_1: 3}
+Found counterexample {M_3_1: 2, M_1_1: 3, M_0_1: 1, P_0_1: 0} while having 4 variables fixed: {M_0_1: 1, P_0_1: 0, M_3_1: 2, M_1_1: 3}
+Found counterexample {M_3_1: 3, M_0_1: 1, M_1_1: 3, P_0_1: 0} while having 5 variables fixed: {M_0_1: 1, P_0_1: 0, M_2_1: 1, M_1_1: 3, M_3_1: 3}
+Found counterexample {M_3_1: 3, M_0_1: 1, M_1_1: 2, M_2_1: 3} while having 4 variables fixed: {M_0_1: 1, M_1_1: 2, M_2_1: 3, M_3_1: 3}
+Found counterexample {M_0_1: 1, P_0_1: 3} while having 2 variables fixed: {P_0_1: 3, M_0_1: 1}
+Found counterexample {M_0_1: 1, P_0_1: 1} while having 2 variables fixed: {P_0_1: 1, M_0_1: 1}
+Found counterexample {M_2_1: 3, P_0_1: 0, M_1_1: 2, M_3_1: 3} while having 4 variables fixed: {P_0_1: 0, M_1_1: 2, M_2_1: 3, M_3_1: 3}
+Found counterexample {M_3_1: 1, M_0_1: 3, P_0_1: 0} while having 3 variables fixed: {M_0_1: 3, P_0_1: 0, M_3_1: 1}
+Found counterexample {M_3_1: 3, M_0_1: 3, P_0_1: 0} while having 3 variables fixed: {M_0_1: 3, P_0_1: 0, M_3_1: 3}
+Found counterexample {M_3_1: 3, M_0_1: 3, P_0_1: 0} while having 3 variables fixed: {M_0_1: 3, P_0_1: 0, M_3_1: 3}
+Found counterexample {M_0_1: 3, P_0_1: 3} while having 2 variables fixed: {M_0_1: 3, P_0_1: 3}
+121 MC calls
+Found counterexample {M_3_1: 2, M_0_1: 3, P_0_1: 0} while having 3 variables fixed: {M_0_1: 3, P_0_1: 0, M_3_1: 2}
+Found counterexample {M_3_1: 3, M_0_1: 1, M_1_1: 2, M_2_1: 3} while having 4 variables fixed: {M_0_1: 1, M_1_1: 2, M_3_1: 3, M_2_1: 3}
+0
+1
+2
+3
+5
+6
+7
+9
+10
+11
+13
+14
+15
+16
+18
+19
+20
+22
+23
+24
+26
+27
+28
+29
+31
+32
+33
+35
+36
+37
