@@ -12,14 +12,14 @@ class ModelEnumeratingPlugin(z3.UserPropagateBase):
         self.fixed_count = []
         self.variables = []
         self.partial_model = {}
-    
+
     def register_variables(self, variables):
         assert not self.vars_registered
         self.vars_registered = True
         for var in variables:
             self.add(var)
             self.variables.append(var)
-        
+
     def push(self):
         self.fixed_count.append(len(self.fixed_values))
 
