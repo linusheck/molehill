@@ -88,7 +88,6 @@ def draw_curve(num_bits, variables, s, p, model=None):
         elif model is not None:
             draw.text((0, size * 10), "model found:" + "\n".join([f"{var}={model.eval(var)}" for var in variables]), font=font, fill="black")
         images.append(new_image)
-    print([bin(x) for x in possible_models])
     images[0].save("image.gif", save_all=True, append_images=images[1:] + [images[-1].copy()] * 10, duration=100, loop=0)
 
     image = image.resize((size * 10, size * 10), Image.Resampling.NEAREST)

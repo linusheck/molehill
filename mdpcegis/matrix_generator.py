@@ -21,8 +21,8 @@ class MatrixGenerator:
                 for entry in self.complete_transition_matrix.get_row(row):
                     builder.add_next_value(new_row_counter, entry.column, entry.value())
                 new_row_counter += 1
-            builder.add_next_value(new_row_counter, zero_state, self.global_bounds.at(state))
-            builder.add_next_value(new_row_counter, one_state, 1 - self.global_bounds.at(state))
+            builder.add_next_value(new_row_counter, zero_state, 1-self.global_bounds[state])
+            builder.add_next_value(new_row_counter, one_state, self.global_bounds[state])
             new_row_counter += 1
         builder.new_row_group(new_row_counter)
         builder.add_next_value(new_row_counter, zero_state, 1)
@@ -30,6 +30,36 @@ class MatrixGenerator:
         builder.add_next_value(new_row_counter + 1, one_state, 1)
         print("Done decision matrix")
         return builder.build()
+
+    def build_matrix2(self, sub_mdp, included_choices):
+        transition_matrix = sub_mdp.model.transition_matrix
+        builder = SparseMatrixBuilder(has_custom_row_grouping=True)
+        zero_state = sub_mdp.model.nr_states
+        one_state = sub_mdp.model.nr_states + 1
+        new_row_counter = 0
+        for state in range(sub_mdp.model.nr_states):
+            row_group_start = transition_matrix.get_row_group_start(state)
+            row_group_end = transition_matrix.get_row_group_end(state)
+            builder.new_row_group(new_row_counter)
+            added_something = False
+            for row in range(row_group_start, row_group_end):
+                if sub_mdp.quotient_choice_map[row] in included_choices:
+                    added_something = True
+                    for entry in transition_matrix.get_row(row):
+                        builder.add_next_value(new_row_counter, entry.column, entry.value())
+                    new_row_counter += 1
+            if not added_something:
+                builder.add_next_value(new_row_counter, zero_state, 1-self.global_bounds[sub_mdp.quotient_state_map[state]])
+                builder.add_next_value(new_row_counter, one_state, self.global_bounds[sub_mdp.quotient_state_map[state]])
+                new_row_counter += 1
+        builder.new_row_group(new_row_counter)
+        builder.add_next_value(new_row_counter, zero_state, 1)
+        builder.new_row_group(new_row_counter + 1)
+        builder.add_next_value(new_row_counter + 1, one_state, 1)
+        
+        new_matrix = builder.build()
+        return new_matrix
+
 
     def build_matrix(self, sub_mdp, included_choices):
         include_row_bit_vector = BitVector(self.decision_matrix.nr_rows, False)
@@ -69,9 +99,6 @@ class MatrixGenerator:
             include_column_bit_vector.set(self.decision_matrix.nr_columns - i, True)
             include_row_bit_vector.set(self.decision_matrix.nr_rows - i, True)
         
-        print(self.decision_matrix)
-        print(include_row_bit_vector)
-
         submatrix = self.decision_matrix.submatrix(include_row_bit_vector, include_column_bit_vector, False, False)
         return submatrix
 

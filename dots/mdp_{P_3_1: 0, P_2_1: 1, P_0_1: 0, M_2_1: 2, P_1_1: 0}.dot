@@ -1,0 +1,3918 @@
+digraph model {
+	0 [ label = "0[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=0	& y=0	& o=0	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), init}" ];
+	1 [ label = "1[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	2 [ label = "2[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	3 [ label = "3[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	4 [ label = "4[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	5 [ label = "5[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	6 [ label = "6[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	7 [ label = "7[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	8 [ label = "8[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	9 [ label = "9[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	10 [ label = "10[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	11 [ label = "11[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	12 [ label = "12[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	13 [ label = "13[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	14 [ label = "14[!goal	& !bad	& c=0	& pick=0	& mem=0	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	15 [ label = "15[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	16 [ label = "16[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	17 [ label = "17[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	18 [ label = "18[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	19 [ label = "19[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	20 [ label = "20[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	21 [ label = "21[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	22 [ label = "22[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	23 [ label = "23[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	24 [ label = "24[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	25 [ label = "25[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	26 [ label = "26[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	27 [ label = "27[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	28 [ label = "28[!goal	& !bad	& c=1	& pick=1	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	29 [ label = "29[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	30 [ label = "30[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	31 [ label = "31[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	32 [ label = "32[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	33 [ label = "33[!goal	& bad	& c=1	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	34 [ label = "34[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	35 [ label = "35[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	36 [ label = "36[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	37 [ label = "37[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	38 [ label = "38[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	39 [ label = "39[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	40 [ label = "40[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	41 [ label = "41[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	42 [ label = "42[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	43 [ label = "43[!goal	& !bad	& c=1	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	44 [ label = "44[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	45 [ label = "45[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	46 [ label = "46[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	47 [ label = "47[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	48 [ label = "48[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	49 [ label = "49[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	50 [ label = "50[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	51 [ label = "51[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	52 [ label = "52[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	53 [ label = "53[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	54 [ label = "54[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	55 [ label = "55[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	56 [ label = "56[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	57 [ label = "57[!goal	& !bad	& c=2	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	58 [ label = "58[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	59 [ label = "59[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	60 [ label = "60[!goal	& bad	& c=2	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	61 [ label = "61[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	62 [ label = "62[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	63 [ label = "63[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	64 [ label = "64[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	65 [ label = "65[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	66 [ label = "66[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	67 [ label = "67[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	68 [ label = "68[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	69 [ label = "69[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	70 [ label = "70[goal	& !bad	& c=2	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	71 [ label = "71[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	72 [ label = "72[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	73 [ label = "73[!goal	& !bad	& c=2	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	74 [ label = "74[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	75 [ label = "75[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	76 [ label = "76[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	77 [ label = "77[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	78 [ label = "78[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	79 [ label = "79[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	80 [ label = "80[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	81 [ label = "81[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	82 [ label = "82[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	83 [ label = "83[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	84 [ label = "84[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	85 [ label = "85[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	86 [ label = "86[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	87 [ label = "87[!goal	& !bad	& c=3	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	88 [ label = "88[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	89 [ label = "89[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	90 [ label = "90[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	91 [ label = "91[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	92 [ label = "92[!goal	& bad	& c=3	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	93 [ label = "93[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	94 [ label = "94[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	95 [ label = "95[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	96 [ label = "96[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	97 [ label = "97[goal	& !bad	& c=3	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	98 [ label = "98[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	99 [ label = "99[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	100 [ label = "100[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	101 [ label = "101[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	102 [ label = "102[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	103 [ label = "103[!goal	& !bad	& c=3	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	104 [ label = "104[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	105 [ label = "105[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	106 [ label = "106[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	107 [ label = "107[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	108 [ label = "108[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	109 [ label = "109[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	110 [ label = "110[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	111 [ label = "111[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	112 [ label = "112[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	113 [ label = "113[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	114 [ label = "114[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	115 [ label = "115[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	116 [ label = "116[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	117 [ label = "117[!goal	& !bad	& c=4	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	118 [ label = "118[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	119 [ label = "119[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	120 [ label = "120[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	121 [ label = "121[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	122 [ label = "122[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	123 [ label = "123[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	124 [ label = "124[!goal	& bad	& c=4	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	125 [ label = "125[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	126 [ label = "126[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	127 [ label = "127[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	128 [ label = "128[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	129 [ label = "129[goal	& !bad	& c=4	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	130 [ label = "130[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	131 [ label = "131[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	132 [ label = "132[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	133 [ label = "133[!goal	& !bad	& c=4	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	134 [ label = "134[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	135 [ label = "135[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	136 [ label = "136[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	137 [ label = "137[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	138 [ label = "138[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	139 [ label = "139[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	140 [ label = "140[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	141 [ label = "141[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	142 [ label = "142[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	143 [ label = "143[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	144 [ label = "144[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	145 [ label = "145[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	146 [ label = "146[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	147 [ label = "147[!goal	& !bad	& c=5	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	148 [ label = "148[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	149 [ label = "149[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	150 [ label = "150[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	151 [ label = "151[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	152 [ label = "152[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	153 [ label = "153[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	154 [ label = "154[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	155 [ label = "155[!goal	& bad	& c=5	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	156 [ label = "156[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	157 [ label = "157[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	158 [ label = "158[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	159 [ label = "159[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	160 [ label = "160[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	161 [ label = "161[goal	& !bad	& c=5	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	162 [ label = "162[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	163 [ label = "163[!goal	& !bad	& c=5	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	164 [ label = "164[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	165 [ label = "165[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	166 [ label = "166[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	167 [ label = "167[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	168 [ label = "168[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	169 [ label = "169[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	170 [ label = "170[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	171 [ label = "171[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	172 [ label = "172[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	173 [ label = "173[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	174 [ label = "174[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	175 [ label = "175[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	176 [ label = "176[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	177 [ label = "177[!goal	& !bad	& c=6	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	178 [ label = "178[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	179 [ label = "179[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	180 [ label = "180[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	181 [ label = "181[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	182 [ label = "182[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	183 [ label = "183[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	184 [ label = "184[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	185 [ label = "185[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	186 [ label = "186[!goal	& bad	& c=6	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	187 [ label = "187[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	188 [ label = "188[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	189 [ label = "189[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	190 [ label = "190[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	191 [ label = "191[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	192 [ label = "192[!goal	& !bad	& c=6	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	193 [ label = "193[goal	& !bad	& c=6	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	194 [ label = "194[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	195 [ label = "195[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	196 [ label = "196[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	197 [ label = "197[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	198 [ label = "198[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	199 [ label = "199[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	200 [ label = "200[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	201 [ label = "201[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	202 [ label = "202[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	203 [ label = "203[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	204 [ label = "204[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	205 [ label = "205[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	206 [ label = "206[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	207 [ label = "207[!goal	& !bad	& c=7	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	208 [ label = "208[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	209 [ label = "209[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	210 [ label = "210[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	211 [ label = "211[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	212 [ label = "212[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	213 [ label = "213[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	214 [ label = "214[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	215 [ label = "215[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	216 [ label = "216[!goal	& bad	& c=7	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	217 [ label = "217[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	218 [ label = "218[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	219 [ label = "219[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	220 [ label = "220[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	221 [ label = "221[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	222 [ label = "222[!goal	& !bad	& c=7	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	223 [ label = "223[goal	& !bad	& c=7	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	224 [ label = "224[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	225 [ label = "225[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	226 [ label = "226[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	227 [ label = "227[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	228 [ label = "228[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	229 [ label = "229[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	230 [ label = "230[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	231 [ label = "231[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	232 [ label = "232[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	233 [ label = "233[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	234 [ label = "234[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	235 [ label = "235[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	236 [ label = "236[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	237 [ label = "237[!goal	& !bad	& c=8	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	238 [ label = "238[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	239 [ label = "239[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	240 [ label = "240[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	241 [ label = "241[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	242 [ label = "242[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	243 [ label = "243[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	244 [ label = "244[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	245 [ label = "245[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	246 [ label = "246[!goal	& bad	& c=8	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	247 [ label = "247[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	248 [ label = "248[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	249 [ label = "249[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	250 [ label = "250[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	251 [ label = "251[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	252 [ label = "252[!goal	& !bad	& c=8	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	253 [ label = "253[goal	& !bad	& c=8	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	254 [ label = "254[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	255 [ label = "255[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	256 [ label = "256[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	257 [ label = "257[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	258 [ label = "258[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	259 [ label = "259[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	260 [ label = "260[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	261 [ label = "261[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	262 [ label = "262[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	263 [ label = "263[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	264 [ label = "264[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	265 [ label = "265[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	266 [ label = "266[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	267 [ label = "267[!goal	& !bad	& c=9	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	268 [ label = "268[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	269 [ label = "269[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	270 [ label = "270[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	271 [ label = "271[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	272 [ label = "272[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	273 [ label = "273[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	274 [ label = "274[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	275 [ label = "275[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	276 [ label = "276[!goal	& bad	& c=9	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	277 [ label = "277[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	278 [ label = "278[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	279 [ label = "279[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	280 [ label = "280[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	281 [ label = "281[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	282 [ label = "282[!goal	& !bad	& c=9	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	283 [ label = "283[goal	& !bad	& c=9	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	284 [ label = "284[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	285 [ label = "285[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	286 [ label = "286[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	287 [ label = "287[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	288 [ label = "288[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	289 [ label = "289[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	290 [ label = "290[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	291 [ label = "291[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	292 [ label = "292[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	293 [ label = "293[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	294 [ label = "294[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	295 [ label = "295[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	296 [ label = "296[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	297 [ label = "297[!goal	& !bad	& c=10	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	298 [ label = "298[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	299 [ label = "299[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	300 [ label = "300[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	301 [ label = "301[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	302 [ label = "302[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	303 [ label = "303[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	304 [ label = "304[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	305 [ label = "305[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	306 [ label = "306[!goal	& bad	& c=10	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	307 [ label = "307[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	308 [ label = "308[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	309 [ label = "309[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	310 [ label = "310[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	311 [ label = "311[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	312 [ label = "312[!goal	& !bad	& c=10	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	313 [ label = "313[goal	& !bad	& c=10	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	314 [ label = "314[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	315 [ label = "315[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	316 [ label = "316[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	317 [ label = "317[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	318 [ label = "318[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	319 [ label = "319[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	320 [ label = "320[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	321 [ label = "321[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	322 [ label = "322[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	323 [ label = "323[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	324 [ label = "324[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	325 [ label = "325[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	326 [ label = "326[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	327 [ label = "327[!goal	& !bad	& c=11	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	328 [ label = "328[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	329 [ label = "329[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	330 [ label = "330[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	331 [ label = "331[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	332 [ label = "332[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	333 [ label = "333[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	334 [ label = "334[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	335 [ label = "335[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	336 [ label = "336[!goal	& bad	& c=11	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	337 [ label = "337[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	338 [ label = "338[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	339 [ label = "339[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	340 [ label = "340[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	341 [ label = "341[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	342 [ label = "342[!goal	& !bad	& c=11	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	343 [ label = "343[goal	& !bad	& c=11	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	344 [ label = "344[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	345 [ label = "345[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	346 [ label = "346[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	347 [ label = "347[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	348 [ label = "348[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	349 [ label = "349[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	350 [ label = "350[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	351 [ label = "351[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	352 [ label = "352[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	353 [ label = "353[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	354 [ label = "354[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	355 [ label = "355[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	356 [ label = "356[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	357 [ label = "357[!goal	& !bad	& c=12	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	358 [ label = "358[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	359 [ label = "359[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	360 [ label = "360[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	361 [ label = "361[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	362 [ label = "362[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	363 [ label = "363[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	364 [ label = "364[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	365 [ label = "365[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	366 [ label = "366[!goal	& bad	& c=12	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	367 [ label = "367[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	368 [ label = "368[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	369 [ label = "369[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	370 [ label = "370[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	371 [ label = "371[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	372 [ label = "372[!goal	& !bad	& c=12	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	373 [ label = "373[goal	& !bad	& c=12	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	374 [ label = "374[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	375 [ label = "375[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	376 [ label = "376[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	377 [ label = "377[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	378 [ label = "378[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	379 [ label = "379[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	380 [ label = "380[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	381 [ label = "381[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	382 [ label = "382[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	383 [ label = "383[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	384 [ label = "384[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	385 [ label = "385[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	386 [ label = "386[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	387 [ label = "387[!goal	& !bad	& c=13	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	388 [ label = "388[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	389 [ label = "389[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	390 [ label = "390[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	391 [ label = "391[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	392 [ label = "392[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	393 [ label = "393[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	394 [ label = "394[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	395 [ label = "395[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	396 [ label = "396[!goal	& bad	& c=13	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	397 [ label = "397[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	398 [ label = "398[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	399 [ label = "399[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	400 [ label = "400[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	401 [ label = "401[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	402 [ label = "402[!goal	& !bad	& c=13	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	403 [ label = "403[goal	& !bad	& c=13	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	404 [ label = "404[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	405 [ label = "405[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	406 [ label = "406[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	407 [ label = "407[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	408 [ label = "408[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	409 [ label = "409[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	410 [ label = "410[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	411 [ label = "411[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	412 [ label = "412[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	413 [ label = "413[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	414 [ label = "414[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	415 [ label = "415[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	416 [ label = "416[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	417 [ label = "417[!goal	& !bad	& c=14	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	418 [ label = "418[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	419 [ label = "419[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	420 [ label = "420[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	421 [ label = "421[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	422 [ label = "422[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	423 [ label = "423[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	424 [ label = "424[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	425 [ label = "425[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	426 [ label = "426[!goal	& bad	& c=14	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	427 [ label = "427[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	428 [ label = "428[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	429 [ label = "429[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	430 [ label = "430[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	431 [ label = "431[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	432 [ label = "432[!goal	& !bad	& c=14	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	433 [ label = "433[goal	& !bad	& c=14	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	434 [ label = "434[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	435 [ label = "435[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	436 [ label = "436[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	437 [ label = "437[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	438 [ label = "438[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	439 [ label = "439[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	440 [ label = "440[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	441 [ label = "441[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	442 [ label = "442[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	443 [ label = "443[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	444 [ label = "444[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	445 [ label = "445[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	446 [ label = "446[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	447 [ label = "447[!goal	& !bad	& c=15	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	448 [ label = "448[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	449 [ label = "449[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	450 [ label = "450[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	451 [ label = "451[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	452 [ label = "452[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	453 [ label = "453[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	454 [ label = "454[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	455 [ label = "455[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	456 [ label = "456[!goal	& bad	& c=15	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	457 [ label = "457[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	458 [ label = "458[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	459 [ label = "459[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	460 [ label = "460[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	461 [ label = "461[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	462 [ label = "462[!goal	& !bad	& c=15	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	463 [ label = "463[goal	& !bad	& c=15	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	464 [ label = "464[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	465 [ label = "465[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	466 [ label = "466[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	467 [ label = "467[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	468 [ label = "468[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	469 [ label = "469[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	470 [ label = "470[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	471 [ label = "471[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	472 [ label = "472[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	473 [ label = "473[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	474 [ label = "474[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	475 [ label = "475[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	476 [ label = "476[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	477 [ label = "477[!goal	& !bad	& c=16	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	478 [ label = "478[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	479 [ label = "479[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	480 [ label = "480[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	481 [ label = "481[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	482 [ label = "482[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	483 [ label = "483[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	484 [ label = "484[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	485 [ label = "485[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	486 [ label = "486[!goal	& bad	& c=16	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	487 [ label = "487[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	488 [ label = "488[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	489 [ label = "489[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	490 [ label = "490[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	491 [ label = "491[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	492 [ label = "492[!goal	& !bad	& c=16	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	493 [ label = "493[goal	& !bad	& c=16	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	494 [ label = "494[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	495 [ label = "495[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	496 [ label = "496[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	497 [ label = "497[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	498 [ label = "498[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	499 [ label = "499[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	500 [ label = "500[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	501 [ label = "501[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	502 [ label = "502[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	503 [ label = "503[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	504 [ label = "504[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	505 [ label = "505[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	506 [ label = "506[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	507 [ label = "507[!goal	& !bad	& c=17	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	508 [ label = "508[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	509 [ label = "509[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	510 [ label = "510[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	511 [ label = "511[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	512 [ label = "512[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	513 [ label = "513[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	514 [ label = "514[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	515 [ label = "515[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	516 [ label = "516[!goal	& bad	& c=17	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	517 [ label = "517[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	518 [ label = "518[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	519 [ label = "519[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	520 [ label = "520[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	521 [ label = "521[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	522 [ label = "522[!goal	& !bad	& c=17	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	523 [ label = "523[goal	& !bad	& c=17	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	524 [ label = "524[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	525 [ label = "525[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	526 [ label = "526[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	527 [ label = "527[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	528 [ label = "528[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	529 [ label = "529[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	530 [ label = "530[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	531 [ label = "531[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	532 [ label = "532[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	533 [ label = "533[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	534 [ label = "534[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	535 [ label = "535[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	536 [ label = "536[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	537 [ label = "537[!goal	& !bad	& c=18	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	538 [ label = "538[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	539 [ label = "539[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	540 [ label = "540[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	541 [ label = "541[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	542 [ label = "542[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	543 [ label = "543[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	544 [ label = "544[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	545 [ label = "545[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	546 [ label = "546[!goal	& bad	& c=18	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	547 [ label = "547[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	548 [ label = "548[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	549 [ label = "549[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	550 [ label = "550[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	551 [ label = "551[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	552 [ label = "552[!goal	& !bad	& c=18	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	553 [ label = "553[goal	& !bad	& c=18	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	554 [ label = "554[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	555 [ label = "555[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	556 [ label = "556[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	557 [ label = "557[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	558 [ label = "558[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	559 [ label = "559[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	560 [ label = "560[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	561 [ label = "561[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	562 [ label = "562[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	563 [ label = "563[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	564 [ label = "564[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	565 [ label = "565[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	566 [ label = "566[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	567 [ label = "567[!goal	& !bad	& c=19	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	568 [ label = "568[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	569 [ label = "569[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	570 [ label = "570[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	571 [ label = "571[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	572 [ label = "572[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	573 [ label = "573[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	574 [ label = "574[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	575 [ label = "575[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	576 [ label = "576[!goal	& bad	& c=19	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), bad}" ];
+	577 [ label = "577[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	578 [ label = "578[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	579 [ label = "579[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	580 [ label = "580[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	581 [ label = "581[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	582 [ label = "582[!goal	& !bad	& c=19	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20)}" ];
+	583 [ label = "583[goal	& !bad	& c=19	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {(c < 20), goal}" ];
+	584 [ label = "584[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	585 [ label = "585[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	586 [ label = "586[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	587 [ label = "587[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	588 [ label = "588[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	589 [ label = "589[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	590 [ label = "590[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	591 [ label = "591[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	592 [ label = "592[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	593 [ label = "593[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	594 [ label = "594[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	595 [ label = "595[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	596 [ label = "596[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	597 [ label = "597[!goal	& !bad	& c=20	& pick=2	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	598 [ label = "598[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=0	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	599 [ label = "599[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=1	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	600 [ label = "600[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=0	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	601 [ label = "601[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=2	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	602 [ label = "602[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=1	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	603 [ label = "603[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=0	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	604 [ label = "604[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=3	& y=3	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	605 [ label = "605[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=2	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	606 [ label = "606[!goal	& bad	& c=20	& pick=0	& mem=2	& x=1	& y=1	& o=3	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {bad}" ];
+	607 [ label = "607[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=0	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	608 [ label = "608[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=3	& y=2	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	609 [ label = "609[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=2	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	610 [ label = "610[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=1	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	611 [ label = "611[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=3	& y=1	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	612 [ label = "612[!goal	& !bad	& c=20	& pick=0	& mem=2	& x=2	& y=0	& o=1	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {}" ];
+	613 [ label = "613[goal	& !bad	& c=20	& pick=0	& mem=2	& x=3	& y=0	& o=2	& _loc_prism2jani_countermodule_=0	& _loc_prism2jani_strategy_=0	& _loc_prism2jani_grid_=0	& default_reward_model=0]
+: {goal}" ];
+	"0c0" [shape = "point"];
+	0 -> "0c0" [ label = "{grid_cmd_9}"]
+;
+	"0c0" -> 1 [ label= "0.0714286" ];
+	"0c0" -> 2 [ label= "0.0714286" ];
+	"0c0" -> 3 [ label= "0.0714286" ];
+	"0c0" -> 4 [ label= "0.0714286" ];
+	"0c0" -> 5 [ label= "0.0714286" ];
+	"0c0" -> 6 [ label= "0.0714286" ];
+	"0c0" -> 7 [ label= "0.0714286" ];
+	"0c0" -> 8 [ label= "0.0714286" ];
+	"0c0" -> 9 [ label= "0.0714286" ];
+	"0c0" -> 10 [ label= "0.0714286" ];
+	"0c0" -> 11 [ label= "0.0714286" ];
+	"0c0" -> 12 [ label= "0.0714286" ];
+	"0c0" -> 13 [ label= "0.0714286" ];
+	"0c0" -> 14 [ label= "0.0714286" ];
+	"1c0" [shape = "point"];
+	1 -> "1c0" [ label = "{p}"]
+;
+	"1c0" -> 15 [ label= "1" ];
+	"2c0" [shape = "point"];
+	2 -> "2c0" [ label = "{p}"]
+;
+	"2c0" -> 16 [ label= "1" ];
+	"3c0" [shape = "point"];
+	3 -> "3c0" [ label = "{p}"]
+;
+	"3c0" -> 17 [ label= "1" ];
+	"4c0" [shape = "point"];
+	4 -> "4c0" [ label = "{p}"]
+;
+	"4c0" -> 18 [ label= "1" ];
+	"5c0" [shape = "point"];
+	5 -> "5c0" [ label = "{p}"]
+;
+	"5c0" -> 19 [ label= "1" ];
+	"6c0" [shape = "point"];
+	6 -> "6c0" [ label = "{p}"]
+;
+	"6c0" -> 20 [ label= "1" ];
+	"7c0" [shape = "point"];
+	7 -> "7c0" [ label = "{p}"]
+;
+	"7c0" -> 21 [ label= "1" ];
+	"8c0" [shape = "point"];
+	8 -> "8c0" [ label = "{p}"]
+;
+	"8c0" -> 22 [ label= "1" ];
+	"9c0" [shape = "point"];
+	9 -> "9c0" [ label = "{p}"]
+;
+	"9c0" -> 23 [ label= "1" ];
+	"10c0" [shape = "point"];
+	10 -> "10c0" [ label = "{p}"]
+;
+	"10c0" -> 24 [ label= "1" ];
+	"11c0" [shape = "point"];
+	11 -> "11c0" [ label = "{p}"]
+;
+	"11c0" -> 25 [ label= "1" ];
+	"12c0" [shape = "point"];
+	12 -> "12c0" [ label = "{p}"]
+;
+	"12c0" -> 26 [ label= "1" ];
+	"13c0" [shape = "point"];
+	13 -> "13c0" [ label = "{p}"]
+;
+	"13c0" -> 27 [ label= "1" ];
+	"14c0" [shape = "point"];
+	14 -> "14c0" [ label = "{p}"]
+;
+	"14c0" -> 28 [ label= "1" ];
+	"15c0" [shape = "point"];
+	15 -> "15c0" [ label = "{north}"]
+;
+	"15c0" -> 29 [ label= "0.9" ];
+	"15c0" -> 30 [ label= "0.1" ];
+	"16c0" [shape = "point"];
+	16 -> "16c0" [ label = "{north}"]
+;
+	"16c0" -> 29 [ label= "0.1" ];
+	"16c0" -> 32 [ label= "0.9" ];
+	"17c0" [shape = "point"];
+	17 -> "17c0" [ label = "{north}"]
+;
+	"17c0" -> 32 [ label= "0.1" ];
+	"17c0" -> 34 [ label= "0.9" ];
+	"18c0" [shape = "point"];
+	18 -> "18c0" [ label = "{north}"]
+;
+	"18c0" -> 34 [ label= "1" ];
+	"19c0" [shape = "point"];
+	19 -> "19c0" [ label = "{north}"]
+;
+	"19c0" -> 31 [ label= "0.1" ];
+	"19c0" -> 33 [ label= "0.9" ];
+	"20c0" [shape = "point"];
+	20 -> "20c0" [ label = "{north}"]
+;
+	"20c0" -> 35 [ label= "0.1" ];
+	"20c0" -> 36 [ label= "0.9" ];
+	"21c0" [shape = "point"];
+	21 -> "21c0" [ label = "{north}"]
+;
+	"21c0" -> 36 [ label= "1" ];
+	"22c0" [shape = "point"];
+	22 -> "22c0" [ label = "{north}"]
+;
+	"22c0" -> 37 [ label= "0.1" ];
+	"22c0" -> 40 [ label= "0.9" ];
+	"23c0" [shape = "point"];
+	23 -> "23c0" [ label = "{north}"]
+;
+	"23c0" -> 38 [ label= "0.9" ];
+	"23c0" -> 40 [ label= "0.1" ];
+	"24c0" [shape = "point"];
+	24 -> "24c0" [ label = "{north}"]
+;
+	"24c0" -> 38 [ label= "0.1" ];
+	"24c0" -> 39 [ label= "0.9" ];
+	"25c0" [shape = "point"];
+	25 -> "25c0" [ label = "{north}"]
+;
+	"25c0" -> 39 [ label= "1" ];
+	"26c0" [shape = "point"];
+	26 -> "26c0" [ label = "{north}"]
+;
+	"26c0" -> 41 [ label= "0.1" ];
+	"26c0" -> 42 [ label= "0.9" ];
+	"27c0" [shape = "point"];
+	27 -> "27c0" [ label = "{north}"]
+;
+	"27c0" -> 42 [ label= "0.1" ];
+	"27c0" -> 43 [ label= "0.9" ];
+	"28c0" [shape = "point"];
+	28 -> "28c0" [ label = "{north}"]
+;
+	"28c0" -> 43 [ label= "1" ];
+	"29c0" [shape = "point"];
+	29 -> "29c0" [ label = "{p}"]
+;
+	"29c0" -> 44 [ label= "1" ];
+	"30c0" [shape = "point"];
+	30 -> "30c0" [ label = "{p}"]
+;
+	"30c0" -> 45 [ label= "1" ];
+	"31c0" [shape = "point"];
+	31 -> "31c0" [ label = "{p}"]
+;
+	"31c0" -> 46 [ label= "1" ];
+	"32c0" [shape = "point"];
+	32 -> "32c0" [ label = "{p}"]
+;
+	"32c0" -> 47 [ label= "1" ];
+	"33c0" [shape = "point"];
+	33 -> "33c0" [ label = "{bad}"]
+;
+	"33c0" -> 33 [ label= "1" ];
+	"34c0" [shape = "point"];
+	34 -> "34c0" [ label = "{p}"]
+;
+	"34c0" -> 48 [ label= "1" ];
+	"35c0" [shape = "point"];
+	35 -> "35c0" [ label = "{p}"]
+;
+	"35c0" -> 49 [ label= "1" ];
+	"36c0" [shape = "point"];
+	36 -> "36c0" [ label = "{p}"]
+;
+	"36c0" -> 50 [ label= "1" ];
+	"37c0" [shape = "point"];
+	37 -> "37c0" [ label = "{p}"]
+;
+	"37c0" -> 51 [ label= "1" ];
+	"38c0" [shape = "point"];
+	38 -> "38c0" [ label = "{p}"]
+;
+	"38c0" -> 52 [ label= "1" ];
+	"39c0" [shape = "point"];
+	39 -> "39c0" [ label = "{p}"]
+;
+	"39c0" -> 53 [ label= "1" ];
+	"40c0" [shape = "point"];
+	40 -> "40c0" [ label = "{p}"]
+;
+	"40c0" -> 54 [ label= "1" ];
+	"41c0" [shape = "point"];
+	41 -> "41c0" [ label = "{p}"]
+;
+	"41c0" -> 55 [ label= "1" ];
+	"42c0" [shape = "point"];
+	42 -> "42c0" [ label = "{p}"]
+;
+	"42c0" -> 56 [ label= "1" ];
+	"43c0" [shape = "point"];
+	43 -> "43c0" [ label = "{p}"]
+;
+	"43c0" -> 57 [ label= "1" ];
+	"44c0" [shape = "point"];
+	44 -> "44c0" [ label = "{east}"]
+;
+	"44c0" -> 59 [ label= "0.1" ];
+	"44c0" -> 60 [ label= "0.9" ];
+	"45c0" [shape = "point"];
+	45 -> "45c0" [ label = "{east}"]
+;
+	"45c0" -> 61 [ label= "0.1" ];
+	"45c0" -> 62 [ label= "0.9" ];
+	"46c0" [shape = "point"];
+	46 -> "46c0" [ label = "{east}"]
+;
+	"46c0" -> 62 [ label= "0.1" ];
+	"46c0" -> 63 [ label= "0.9" ];
+	"47c0" [shape = "point"];
+	47 -> "47c0" [ label = "{east}"]
+;
+	"47c0" -> 58 [ label= "0.1" ];
+	"47c0" -> 65 [ label= "0.9" ];
+	"48c0" [shape = "point"];
+	48 -> "48c0" [ label = "{east}"]
+;
+	"48c0" -> 64 [ label= "0.1" ];
+	"48c0" -> 66 [ label= "0.9" ];
+	"49c0" [shape = "point"];
+	49 -> "49c0" [ label = "{east}"]
+;
+	"49c0" -> 65 [ label= "0.1" ];
+	"49c0" -> 67 [ label= "0.9" ];
+	"50c0" [shape = "point"];
+	50 -> "50c0" [ label = "{east}"]
+;
+	"50c0" -> 66 [ label= "0.1" ];
+	"50c0" -> 68 [ label= "0.9" ];
+	"51c0" [shape = "point"];
+	51 -> "51c0" [ label = "{east}"]
+;
+	"51c0" -> 63 [ label= "0.1" ];
+	"51c0" -> 70 [ label= "0.9" ];
+	"52c0" [shape = "point"];
+	52 -> "52c0" [ label = "{east}"]
+;
+	"52c0" -> 67 [ label= "0.1" ];
+	"52c0" -> 71 [ label= "0.9" ];
+	"53c0" [shape = "point"];
+	53 -> "53c0" [ label = "{east}"]
+;
+	"53c0" -> 68 [ label= "0.1" ];
+	"53c0" -> 72 [ label= "0.9" ];
+	"54c0" [shape = "point"];
+	54 -> "54c0" [ label = "{east}"]
+;
+	"54c0" -> 69 [ label= "0.1" ];
+	"54c0" -> 73 [ label= "0.9" ];
+	"55c0" [shape = "point"];
+	55 -> "55c0" [ label = "{east}"]
+;
+	"55c0" -> 73 [ label= "1" ];
+	"56c0" [shape = "point"];
+	56 -> "56c0" [ label = "{east}"]
+;
+	"56c0" -> 71 [ label= "1" ];
+	"57c0" [shape = "point"];
+	57 -> "57c0" [ label = "{east}"]
+;
+	"57c0" -> 72 [ label= "1" ];
+	"58c0" [shape = "point"];
+	58 -> "58c0" [ label = "{p}"]
+;
+	"58c0" -> 74 [ label= "1" ];
+	"59c0" [shape = "point"];
+	59 -> "59c0" [ label = "{p}"]
+;
+	"59c0" -> 75 [ label= "1" ];
+	"60c0" [shape = "point"];
+	60 -> "60c0" [ label = "{bad}"]
+;
+	"60c0" -> 60 [ label= "1" ];
+	"61c0" [shape = "point"];
+	61 -> "61c0" [ label = "{p}"]
+;
+	"61c0" -> 76 [ label= "1" ];
+	"62c0" [shape = "point"];
+	62 -> "62c0" [ label = "{p}"]
+;
+	"62c0" -> 77 [ label= "1" ];
+	"63c0" [shape = "point"];
+	63 -> "63c0" [ label = "{p}"]
+;
+	"63c0" -> 78 [ label= "1" ];
+	"64c0" [shape = "point"];
+	64 -> "64c0" [ label = "{p}"]
+;
+	"64c0" -> 79 [ label= "1" ];
+	"65c0" [shape = "point"];
+	65 -> "65c0" [ label = "{p}"]
+;
+	"65c0" -> 80 [ label= "1" ];
+	"66c0" [shape = "point"];
+	66 -> "66c0" [ label = "{p}"]
+;
+	"66c0" -> 81 [ label= "1" ];
+	"67c0" [shape = "point"];
+	67 -> "67c0" [ label = "{p}"]
+;
+	"67c0" -> 82 [ label= "1" ];
+	"68c0" [shape = "point"];
+	68 -> "68c0" [ label = "{p}"]
+;
+	"68c0" -> 83 [ label= "1" ];
+	"69c0" [shape = "point"];
+	69 -> "69c0" [ label = "{p}"]
+;
+	"69c0" -> 84 [ label= "1" ];
+	"70c0" [shape = "point"];
+	70 -> "70c0" [ label = "{done}"]
+;
+	"70c0" -> 70 [ label= "1" ];
+	"71c0" [shape = "point"];
+	71 -> "71c0" [ label = "{p}"]
+;
+	"71c0" -> 85 [ label= "1" ];
+	"72c0" [shape = "point"];
+	72 -> "72c0" [ label = "{p}"]
+;
+	"72c0" -> 86 [ label= "1" ];
+	"73c0" [shape = "point"];
+	73 -> "73c0" [ label = "{p}"]
+;
+	"73c0" -> 87 [ label= "1" ];
+	"74c0" [shape = "point"];
+	74 -> "74c0" [ label = "{east}"]
+;
+	"74c0" -> 89 [ label= "0.1" ];
+	"74c0" -> 90 [ label= "0.9" ];
+	"75c0" [shape = "point"];
+	75 -> "75c0" [ label = "{east}"]
+;
+	"75c0" -> 91 [ label= "0.1" ];
+	"75c0" -> 92 [ label= "0.9" ];
+	"76c0" [shape = "point"];
+	76 -> "76c0" [ label = "{east}"]
+;
+	"76c0" -> 93 [ label= "0.1" ];
+	"76c0" -> 94 [ label= "0.9" ];
+	"77c0" [shape = "point"];
+	77 -> "77c0" [ label = "{east}"]
+;
+	"77c0" -> 94 [ label= "0.1" ];
+	"77c0" -> 95 [ label= "0.9" ];
+	"78c0" [shape = "point"];
+	78 -> "78c0" [ label = "{east}"]
+;
+	"78c0" -> 95 [ label= "0.1" ];
+	"78c0" -> 97 [ label= "0.9" ];
+	"79c0" [shape = "point"];
+	79 -> "79c0" [ label = "{east}"]
+;
+	"79c0" -> 88 [ label= "0.1" ];
+	"79c0" -> 98 [ label= "0.9" ];
+	"80c0" [shape = "point"];
+	80 -> "80c0" [ label = "{east}"]
+;
+	"80c0" -> 90 [ label= "0.1" ];
+	"80c0" -> 99 [ label= "0.9" ];
+	"81c0" [shape = "point"];
+	81 -> "81c0" [ label = "{east}"]
+;
+	"81c0" -> 98 [ label= "0.1" ];
+	"81c0" -> 100 [ label= "0.9" ];
+	"82c0" [shape = "point"];
+	82 -> "82c0" [ label = "{east}"]
+;
+	"82c0" -> 99 [ label= "0.1" ];
+	"82c0" -> 101 [ label= "0.9" ];
+	"83c0" [shape = "point"];
+	83 -> "83c0" [ label = "{east}"]
+;
+	"83c0" -> 100 [ label= "0.1" ];
+	"83c0" -> 102 [ label= "0.9" ];
+	"84c0" [shape = "point"];
+	84 -> "84c0" [ label = "{east}"]
+;
+	"84c0" -> 96 [ label= "0.1" ];
+	"84c0" -> 103 [ label= "0.9" ];
+	"85c0" [shape = "point"];
+	85 -> "85c0" [ label = "{east}"]
+;
+	"85c0" -> 101 [ label= "1" ];
+	"86c0" [shape = "point"];
+	86 -> "86c0" [ label = "{east}"]
+;
+	"86c0" -> 102 [ label= "1" ];
+	"87c0" [shape = "point"];
+	87 -> "87c0" [ label = "{east}"]
+;
+	"87c0" -> 103 [ label= "1" ];
+	"88c0" [shape = "point"];
+	88 -> "88c0" [ label = "{p}"]
+;
+	"88c0" -> 104 [ label= "1" ];
+	"89c0" [shape = "point"];
+	89 -> "89c0" [ label = "{p}"]
+;
+	"89c0" -> 105 [ label= "1" ];
+	"90c0" [shape = "point"];
+	90 -> "90c0" [ label = "{p}"]
+;
+	"90c0" -> 106 [ label= "1" ];
+	"91c0" [shape = "point"];
+	91 -> "91c0" [ label = "{p}"]
+;
+	"91c0" -> 107 [ label= "1" ];
+	"92c0" [shape = "point"];
+	92 -> "92c0" [ label = "{bad}"]
+;
+	"92c0" -> 92 [ label= "1" ];
+	"93c0" [shape = "point"];
+	93 -> "93c0" [ label = "{p}"]
+;
+	"93c0" -> 108 [ label= "1" ];
+	"94c0" [shape = "point"];
+	94 -> "94c0" [ label = "{p}"]
+;
+	"94c0" -> 109 [ label= "1" ];
+	"95c0" [shape = "point"];
+	95 -> "95c0" [ label = "{p}"]
+;
+	"95c0" -> 110 [ label= "1" ];
+	"96c0" [shape = "point"];
+	96 -> "96c0" [ label = "{p}"]
+;
+	"96c0" -> 111 [ label= "1" ];
+	"97c0" [shape = "point"];
+	97 -> "97c0" [ label = "{done}"]
+;
+	"97c0" -> 97 [ label= "1" ];
+	"98c0" [shape = "point"];
+	98 -> "98c0" [ label = "{p}"]
+;
+	"98c0" -> 112 [ label= "1" ];
+	"99c0" [shape = "point"];
+	99 -> "99c0" [ label = "{p}"]
+;
+	"99c0" -> 113 [ label= "1" ];
+	"100c0" [shape = "point"];
+	100 -> "100c0" [ label = "{p}"]
+;
+	"100c0" -> 114 [ label= "1" ];
+	"101c0" [shape = "point"];
+	101 -> "101c0" [ label = "{p}"]
+;
+	"101c0" -> 115 [ label= "1" ];
+	"102c0" [shape = "point"];
+	102 -> "102c0" [ label = "{p}"]
+;
+	"102c0" -> 116 [ label= "1" ];
+	"103c0" [shape = "point"];
+	103 -> "103c0" [ label = "{p}"]
+;
+	"103c0" -> 117 [ label= "1" ];
+	"104c0" [shape = "point"];
+	104 -> "104c0" [ label = "{east}"]
+;
+	"104c0" -> 118 [ label= "0.1" ];
+	"104c0" -> 119 [ label= "0.9" ];
+	"105c0" [shape = "point"];
+	105 -> "105c0" [ label = "{east}"]
+;
+	"105c0" -> 120 [ label= "0.1" ];
+	"105c0" -> 121 [ label= "0.9" ];
+	"106c0" [shape = "point"];
+	106 -> "106c0" [ label = "{east}"]
+;
+	"106c0" -> 121 [ label= "0.1" ];
+	"106c0" -> 123 [ label= "0.9" ];
+	"107c0" [shape = "point"];
+	107 -> "107c0" [ label = "{east}"]
+;
+	"107c0" -> 122 [ label= "0.1" ];
+	"107c0" -> 124 [ label= "0.9" ];
+	"108c0" [shape = "point"];
+	108 -> "108c0" [ label = "{east}"]
+;
+	"108c0" -> 125 [ label= "0.1" ];
+	"108c0" -> 126 [ label= "0.9" ];
+	"109c0" [shape = "point"];
+	109 -> "109c0" [ label = "{east}"]
+;
+	"109c0" -> 126 [ label= "0.1" ];
+	"109c0" -> 127 [ label= "0.9" ];
+	"110c0" [shape = "point"];
+	110 -> "110c0" [ label = "{east}"]
+;
+	"110c0" -> 127 [ label= "0.1" ];
+	"110c0" -> 129 [ label= "0.9" ];
+	"111c0" [shape = "point"];
+	111 -> "111c0" [ label = "{east}"]
+;
+	"111c0" -> 128 [ label= "0.1" ];
+	"111c0" -> 130 [ label= "0.9" ];
+	"112c0" [shape = "point"];
+	112 -> "112c0" [ label = "{east}"]
+;
+	"112c0" -> 119 [ label= "0.1" ];
+	"112c0" -> 131 [ label= "0.9" ];
+	"113c0" [shape = "point"];
+	113 -> "113c0" [ label = "{east}"]
+;
+	"113c0" -> 123 [ label= "0.1" ];
+	"113c0" -> 132 [ label= "0.9" ];
+	"114c0" [shape = "point"];
+	114 -> "114c0" [ label = "{east}"]
+;
+	"114c0" -> 131 [ label= "0.1" ];
+	"114c0" -> 133 [ label= "0.9" ];
+	"115c0" [shape = "point"];
+	115 -> "115c0" [ label = "{east}"]
+;
+	"115c0" -> 132 [ label= "1" ];
+	"116c0" [shape = "point"];
+	116 -> "116c0" [ label = "{east}"]
+;
+	"116c0" -> 133 [ label= "1" ];
+	"117c0" [shape = "point"];
+	117 -> "117c0" [ label = "{east}"]
+;
+	"117c0" -> 130 [ label= "1" ];
+	"118c0" [shape = "point"];
+	118 -> "118c0" [ label = "{p}"]
+;
+	"118c0" -> 134 [ label= "1" ];
+	"119c0" [shape = "point"];
+	119 -> "119c0" [ label = "{p}"]
+;
+	"119c0" -> 135 [ label= "1" ];
+	"120c0" [shape = "point"];
+	120 -> "120c0" [ label = "{p}"]
+;
+	"120c0" -> 136 [ label= "1" ];
+	"121c0" [shape = "point"];
+	121 -> "121c0" [ label = "{p}"]
+;
+	"121c0" -> 137 [ label= "1" ];
+	"122c0" [shape = "point"];
+	122 -> "122c0" [ label = "{p}"]
+;
+	"122c0" -> 138 [ label= "1" ];
+	"123c0" [shape = "point"];
+	123 -> "123c0" [ label = "{p}"]
+;
+	"123c0" -> 139 [ label= "1" ];
+	"124c0" [shape = "point"];
+	124 -> "124c0" [ label = "{bad}"]
+;
+	"124c0" -> 124 [ label= "1" ];
+	"125c0" [shape = "point"];
+	125 -> "125c0" [ label = "{p}"]
+;
+	"125c0" -> 140 [ label= "1" ];
+	"126c0" [shape = "point"];
+	126 -> "126c0" [ label = "{p}"]
+;
+	"126c0" -> 141 [ label= "1" ];
+	"127c0" [shape = "point"];
+	127 -> "127c0" [ label = "{p}"]
+;
+	"127c0" -> 142 [ label= "1" ];
+	"128c0" [shape = "point"];
+	128 -> "128c0" [ label = "{p}"]
+;
+	"128c0" -> 143 [ label= "1" ];
+	"129c0" [shape = "point"];
+	129 -> "129c0" [ label = "{done}"]
+;
+	"129c0" -> 129 [ label= "1" ];
+	"130c0" [shape = "point"];
+	130 -> "130c0" [ label = "{p}"]
+;
+	"130c0" -> 144 [ label= "1" ];
+	"131c0" [shape = "point"];
+	131 -> "131c0" [ label = "{p}"]
+;
+	"131c0" -> 145 [ label= "1" ];
+	"132c0" [shape = "point"];
+	132 -> "132c0" [ label = "{p}"]
+;
+	"132c0" -> 146 [ label= "1" ];
+	"133c0" [shape = "point"];
+	133 -> "133c0" [ label = "{p}"]
+;
+	"133c0" -> 147 [ label= "1" ];
+	"134c0" [shape = "point"];
+	134 -> "134c0" [ label = "{east}"]
+;
+	"134c0" -> 148 [ label= "0.1" ];
+	"134c0" -> 149 [ label= "0.9" ];
+	"135c0" [shape = "point"];
+	135 -> "135c0" [ label = "{east}"]
+;
+	"135c0" -> 149 [ label= "0.1" ];
+	"135c0" -> 151 [ label= "0.9" ];
+	"136c0" [shape = "point"];
+	136 -> "136c0" [ label = "{east}"]
+;
+	"136c0" -> 150 [ label= "0.1" ];
+	"136c0" -> 152 [ label= "0.9" ];
+	"137c0" [shape = "point"];
+	137 -> "137c0" [ label = "{east}"]
+;
+	"137c0" -> 152 [ label= "0.1" ];
+	"137c0" -> 154 [ label= "0.9" ];
+	"138c0" [shape = "point"];
+	138 -> "138c0" [ label = "{east}"]
+;
+	"138c0" -> 153 [ label= "0.1" ];
+	"138c0" -> 155 [ label= "0.9" ];
+	"139c0" [shape = "point"];
+	139 -> "139c0" [ label = "{east}"]
+;
+	"139c0" -> 154 [ label= "0.1" ];
+	"139c0" -> 157 [ label= "0.9" ];
+	"140c0" [shape = "point"];
+	140 -> "140c0" [ label = "{east}"]
+;
+	"140c0" -> 156 [ label= "0.1" ];
+	"140c0" -> 159 [ label= "0.9" ];
+	"141c0" [shape = "point"];
+	141 -> "141c0" [ label = "{east}"]
+;
+	"141c0" -> 159 [ label= "0.1" ];
+	"141c0" -> 160 [ label= "0.9" ];
+	"142c0" [shape = "point"];
+	142 -> "142c0" [ label = "{east}"]
+;
+	"142c0" -> 160 [ label= "0.1" ];
+	"142c0" -> 161 [ label= "0.9" ];
+	"143c0" [shape = "point"];
+	143 -> "143c0" [ label = "{east}"]
+;
+	"143c0" -> 158 [ label= "0.1" ];
+	"143c0" -> 162 [ label= "0.9" ];
+	"144c0" [shape = "point"];
+	144 -> "144c0" [ label = "{east}"]
+;
+	"144c0" -> 162 [ label= "1" ];
+	"145c0" [shape = "point"];
+	145 -> "145c0" [ label = "{east}"]
+;
+	"145c0" -> 151 [ label= "0.1" ];
+	"145c0" -> 163 [ label= "0.9" ];
+	"146c0" [shape = "point"];
+	146 -> "146c0" [ label = "{east}"]
+;
+	"146c0" -> 157 [ label= "1" ];
+	"147c0" [shape = "point"];
+	147 -> "147c0" [ label = "{east}"]
+;
+	"147c0" -> 163 [ label= "1" ];
+	"148c0" [shape = "point"];
+	148 -> "148c0" [ label = "{p}"]
+;
+	"148c0" -> 164 [ label= "1" ];
+	"149c0" [shape = "point"];
+	149 -> "149c0" [ label = "{p}"]
+;
+	"149c0" -> 165 [ label= "1" ];
+	"150c0" [shape = "point"];
+	150 -> "150c0" [ label = "{p}"]
+;
+	"150c0" -> 166 [ label= "1" ];
+	"151c0" [shape = "point"];
+	151 -> "151c0" [ label = "{p}"]
+;
+	"151c0" -> 167 [ label= "1" ];
+	"152c0" [shape = "point"];
+	152 -> "152c0" [ label = "{p}"]
+;
+	"152c0" -> 168 [ label= "1" ];
+	"153c0" [shape = "point"];
+	153 -> "153c0" [ label = "{p}"]
+;
+	"153c0" -> 169 [ label= "1" ];
+	"154c0" [shape = "point"];
+	154 -> "154c0" [ label = "{p}"]
+;
+	"154c0" -> 170 [ label= "1" ];
+	"155c0" [shape = "point"];
+	155 -> "155c0" [ label = "{bad}"]
+;
+	"155c0" -> 155 [ label= "1" ];
+	"156c0" [shape = "point"];
+	156 -> "156c0" [ label = "{p}"]
+;
+	"156c0" -> 171 [ label= "1" ];
+	"157c0" [shape = "point"];
+	157 -> "157c0" [ label = "{p}"]
+;
+	"157c0" -> 172 [ label= "1" ];
+	"158c0" [shape = "point"];
+	158 -> "158c0" [ label = "{p}"]
+;
+	"158c0" -> 173 [ label= "1" ];
+	"159c0" [shape = "point"];
+	159 -> "159c0" [ label = "{p}"]
+;
+	"159c0" -> 174 [ label= "1" ];
+	"160c0" [shape = "point"];
+	160 -> "160c0" [ label = "{p}"]
+;
+	"160c0" -> 175 [ label= "1" ];
+	"161c0" [shape = "point"];
+	161 -> "161c0" [ label = "{done}"]
+;
+	"161c0" -> 161 [ label= "1" ];
+	"162c0" [shape = "point"];
+	162 -> "162c0" [ label = "{p}"]
+;
+	"162c0" -> 176 [ label= "1" ];
+	"163c0" [shape = "point"];
+	163 -> "163c0" [ label = "{p}"]
+;
+	"163c0" -> 177 [ label= "1" ];
+	"164c0" [shape = "point"];
+	164 -> "164c0" [ label = "{east}"]
+;
+	"164c0" -> 178 [ label= "0.1" ];
+	"164c0" -> 179 [ label= "0.9" ];
+	"165c0" [shape = "point"];
+	165 -> "165c0" [ label = "{east}"]
+;
+	"165c0" -> 179 [ label= "0.1" ];
+	"165c0" -> 181 [ label= "0.9" ];
+	"166c0" [shape = "point"];
+	166 -> "166c0" [ label = "{east}"]
+;
+	"166c0" -> 180 [ label= "0.1" ];
+	"166c0" -> 182 [ label= "0.9" ];
+	"167c0" [shape = "point"];
+	167 -> "167c0" [ label = "{east}"]
+;
+	"167c0" -> 181 [ label= "0.1" ];
+	"167c0" -> 184 [ label= "0.9" ];
+	"168c0" [shape = "point"];
+	168 -> "168c0" [ label = "{east}"]
+;
+	"168c0" -> 182 [ label= "0.1" ];
+	"168c0" -> 185 [ label= "0.9" ];
+	"169c0" [shape = "point"];
+	169 -> "169c0" [ label = "{east}"]
+;
+	"169c0" -> 183 [ label= "0.1" ];
+	"169c0" -> 186 [ label= "0.9" ];
+	"170c0" [shape = "point"];
+	170 -> "170c0" [ label = "{east}"]
+;
+	"170c0" -> 185 [ label= "0.1" ];
+	"170c0" -> 188 [ label= "0.9" ];
+	"171c0" [shape = "point"];
+	171 -> "171c0" [ label = "{east}"]
+;
+	"171c0" -> 187 [ label= "0.1" ];
+	"171c0" -> 190 [ label= "0.9" ];
+	"172c0" [shape = "point"];
+	172 -> "172c0" [ label = "{east}"]
+;
+	"172c0" -> 188 [ label= "1" ];
+	"173c0" [shape = "point"];
+	173 -> "173c0" [ label = "{east}"]
+;
+	"173c0" -> 189 [ label= "0.1" ];
+	"173c0" -> 191 [ label= "0.9" ];
+	"174c0" [shape = "point"];
+	174 -> "174c0" [ label = "{east}"]
+;
+	"174c0" -> 190 [ label= "0.1" ];
+	"174c0" -> 192 [ label= "0.9" ];
+	"175c0" [shape = "point"];
+	175 -> "175c0" [ label = "{east}"]
+;
+	"175c0" -> 192 [ label= "0.1" ];
+	"175c0" -> 193 [ label= "0.9" ];
+	"176c0" [shape = "point"];
+	176 -> "176c0" [ label = "{east}"]
+;
+	"176c0" -> 191 [ label= "1" ];
+	"177c0" [shape = "point"];
+	177 -> "177c0" [ label = "{east}"]
+;
+	"177c0" -> 184 [ label= "1" ];
+	"178c0" [shape = "point"];
+	178 -> "178c0" [ label = "{p}"]
+;
+	"178c0" -> 194 [ label= "1" ];
+	"179c0" [shape = "point"];
+	179 -> "179c0" [ label = "{p}"]
+;
+	"179c0" -> 195 [ label= "1" ];
+	"180c0" [shape = "point"];
+	180 -> "180c0" [ label = "{p}"]
+;
+	"180c0" -> 196 [ label= "1" ];
+	"181c0" [shape = "point"];
+	181 -> "181c0" [ label = "{p}"]
+;
+	"181c0" -> 197 [ label= "1" ];
+	"182c0" [shape = "point"];
+	182 -> "182c0" [ label = "{p}"]
+;
+	"182c0" -> 198 [ label= "1" ];
+	"183c0" [shape = "point"];
+	183 -> "183c0" [ label = "{p}"]
+;
+	"183c0" -> 199 [ label= "1" ];
+	"184c0" [shape = "point"];
+	184 -> "184c0" [ label = "{p}"]
+;
+	"184c0" -> 200 [ label= "1" ];
+	"185c0" [shape = "point"];
+	185 -> "185c0" [ label = "{p}"]
+;
+	"185c0" -> 201 [ label= "1" ];
+	"186c0" [shape = "point"];
+	186 -> "186c0" [ label = "{bad}"]
+;
+	"186c0" -> 186 [ label= "1" ];
+	"187c0" [shape = "point"];
+	187 -> "187c0" [ label = "{p}"]
+;
+	"187c0" -> 202 [ label= "1" ];
+	"188c0" [shape = "point"];
+	188 -> "188c0" [ label = "{p}"]
+;
+	"188c0" -> 203 [ label= "1" ];
+	"189c0" [shape = "point"];
+	189 -> "189c0" [ label = "{p}"]
+;
+	"189c0" -> 204 [ label= "1" ];
+	"190c0" [shape = "point"];
+	190 -> "190c0" [ label = "{p}"]
+;
+	"190c0" -> 205 [ label= "1" ];
+	"191c0" [shape = "point"];
+	191 -> "191c0" [ label = "{p}"]
+;
+	"191c0" -> 206 [ label= "1" ];
+	"192c0" [shape = "point"];
+	192 -> "192c0" [ label = "{p}"]
+;
+	"192c0" -> 207 [ label= "1" ];
+	"193c0" [shape = "point"];
+	193 -> "193c0" [ label = "{done}"]
+;
+	"193c0" -> 193 [ label= "1" ];
+	"194c0" [shape = "point"];
+	194 -> "194c0" [ label = "{east}"]
+;
+	"194c0" -> 208 [ label= "0.1" ];
+	"194c0" -> 209 [ label= "0.9" ];
+	"195c0" [shape = "point"];
+	195 -> "195c0" [ label = "{east}"]
+;
+	"195c0" -> 209 [ label= "0.1" ];
+	"195c0" -> 211 [ label= "0.9" ];
+	"196c0" [shape = "point"];
+	196 -> "196c0" [ label = "{east}"]
+;
+	"196c0" -> 210 [ label= "0.1" ];
+	"196c0" -> 212 [ label= "0.9" ];
+	"197c0" [shape = "point"];
+	197 -> "197c0" [ label = "{east}"]
+;
+	"197c0" -> 211 [ label= "0.1" ];
+	"197c0" -> 214 [ label= "0.9" ];
+	"198c0" [shape = "point"];
+	198 -> "198c0" [ label = "{east}"]
+;
+	"198c0" -> 212 [ label= "0.1" ];
+	"198c0" -> 215 [ label= "0.9" ];
+	"199c0" [shape = "point"];
+	199 -> "199c0" [ label = "{east}"]
+;
+	"199c0" -> 213 [ label= "0.1" ];
+	"199c0" -> 216 [ label= "0.9" ];
+	"200c0" [shape = "point"];
+	200 -> "200c0" [ label = "{east}"]
+;
+	"200c0" -> 214 [ label= "1" ];
+	"201c0" [shape = "point"];
+	201 -> "201c0" [ label = "{east}"]
+;
+	"201c0" -> 215 [ label= "0.1" ];
+	"201c0" -> 218 [ label= "0.9" ];
+	"202c0" [shape = "point"];
+	202 -> "202c0" [ label = "{east}"]
+;
+	"202c0" -> 217 [ label= "0.1" ];
+	"202c0" -> 220 [ label= "0.9" ];
+	"203c0" [shape = "point"];
+	203 -> "203c0" [ label = "{east}"]
+;
+	"203c0" -> 218 [ label= "1" ];
+	"204c0" [shape = "point"];
+	204 -> "204c0" [ label = "{east}"]
+;
+	"204c0" -> 219 [ label= "0.1" ];
+	"204c0" -> 221 [ label= "0.9" ];
+	"205c0" [shape = "point"];
+	205 -> "205c0" [ label = "{east}"]
+;
+	"205c0" -> 220 [ label= "0.1" ];
+	"205c0" -> 222 [ label= "0.9" ];
+	"206c0" [shape = "point"];
+	206 -> "206c0" [ label = "{east}"]
+;
+	"206c0" -> 221 [ label= "1" ];
+	"207c0" [shape = "point"];
+	207 -> "207c0" [ label = "{east}"]
+;
+	"207c0" -> 222 [ label= "0.1" ];
+	"207c0" -> 223 [ label= "0.9" ];
+	"208c0" [shape = "point"];
+	208 -> "208c0" [ label = "{p}"]
+;
+	"208c0" -> 224 [ label= "1" ];
+	"209c0" [shape = "point"];
+	209 -> "209c0" [ label = "{p}"]
+;
+	"209c0" -> 225 [ label= "1" ];
+	"210c0" [shape = "point"];
+	210 -> "210c0" [ label = "{p}"]
+;
+	"210c0" -> 226 [ label= "1" ];
+	"211c0" [shape = "point"];
+	211 -> "211c0" [ label = "{p}"]
+;
+	"211c0" -> 227 [ label= "1" ];
+	"212c0" [shape = "point"];
+	212 -> "212c0" [ label = "{p}"]
+;
+	"212c0" -> 228 [ label= "1" ];
+	"213c0" [shape = "point"];
+	213 -> "213c0" [ label = "{p}"]
+;
+	"213c0" -> 229 [ label= "1" ];
+	"214c0" [shape = "point"];
+	214 -> "214c0" [ label = "{p}"]
+;
+	"214c0" -> 230 [ label= "1" ];
+	"215c0" [shape = "point"];
+	215 -> "215c0" [ label = "{p}"]
+;
+	"215c0" -> 231 [ label= "1" ];
+	"216c0" [shape = "point"];
+	216 -> "216c0" [ label = "{bad}"]
+;
+	"216c0" -> 216 [ label= "1" ];
+	"217c0" [shape = "point"];
+	217 -> "217c0" [ label = "{p}"]
+;
+	"217c0" -> 232 [ label= "1" ];
+	"218c0" [shape = "point"];
+	218 -> "218c0" [ label = "{p}"]
+;
+	"218c0" -> 233 [ label= "1" ];
+	"219c0" [shape = "point"];
+	219 -> "219c0" [ label = "{p}"]
+;
+	"219c0" -> 234 [ label= "1" ];
+	"220c0" [shape = "point"];
+	220 -> "220c0" [ label = "{p}"]
+;
+	"220c0" -> 235 [ label= "1" ];
+	"221c0" [shape = "point"];
+	221 -> "221c0" [ label = "{p}"]
+;
+	"221c0" -> 236 [ label= "1" ];
+	"222c0" [shape = "point"];
+	222 -> "222c0" [ label = "{p}"]
+;
+	"222c0" -> 237 [ label= "1" ];
+	"223c0" [shape = "point"];
+	223 -> "223c0" [ label = "{done}"]
+;
+	"223c0" -> 223 [ label= "1" ];
+	"224c0" [shape = "point"];
+	224 -> "224c0" [ label = "{east}"]
+;
+	"224c0" -> 238 [ label= "0.1" ];
+	"224c0" -> 239 [ label= "0.9" ];
+	"225c0" [shape = "point"];
+	225 -> "225c0" [ label = "{east}"]
+;
+	"225c0" -> 239 [ label= "0.1" ];
+	"225c0" -> 241 [ label= "0.9" ];
+	"226c0" [shape = "point"];
+	226 -> "226c0" [ label = "{east}"]
+;
+	"226c0" -> 240 [ label= "0.1" ];
+	"226c0" -> 242 [ label= "0.9" ];
+	"227c0" [shape = "point"];
+	227 -> "227c0" [ label = "{east}"]
+;
+	"227c0" -> 241 [ label= "0.1" ];
+	"227c0" -> 244 [ label= "0.9" ];
+	"228c0" [shape = "point"];
+	228 -> "228c0" [ label = "{east}"]
+;
+	"228c0" -> 242 [ label= "0.1" ];
+	"228c0" -> 245 [ label= "0.9" ];
+	"229c0" [shape = "point"];
+	229 -> "229c0" [ label = "{east}"]
+;
+	"229c0" -> 243 [ label= "0.1" ];
+	"229c0" -> 246 [ label= "0.9" ];
+	"230c0" [shape = "point"];
+	230 -> "230c0" [ label = "{east}"]
+;
+	"230c0" -> 244 [ label= "1" ];
+	"231c0" [shape = "point"];
+	231 -> "231c0" [ label = "{east}"]
+;
+	"231c0" -> 245 [ label= "0.1" ];
+	"231c0" -> 248 [ label= "0.9" ];
+	"232c0" [shape = "point"];
+	232 -> "232c0" [ label = "{east}"]
+;
+	"232c0" -> 247 [ label= "0.1" ];
+	"232c0" -> 250 [ label= "0.9" ];
+	"233c0" [shape = "point"];
+	233 -> "233c0" [ label = "{east}"]
+;
+	"233c0" -> 248 [ label= "1" ];
+	"234c0" [shape = "point"];
+	234 -> "234c0" [ label = "{east}"]
+;
+	"234c0" -> 249 [ label= "0.1" ];
+	"234c0" -> 251 [ label= "0.9" ];
+	"235c0" [shape = "point"];
+	235 -> "235c0" [ label = "{east}"]
+;
+	"235c0" -> 250 [ label= "0.1" ];
+	"235c0" -> 252 [ label= "0.9" ];
+	"236c0" [shape = "point"];
+	236 -> "236c0" [ label = "{east}"]
+;
+	"236c0" -> 251 [ label= "1" ];
+	"237c0" [shape = "point"];
+	237 -> "237c0" [ label = "{east}"]
+;
+	"237c0" -> 252 [ label= "0.1" ];
+	"237c0" -> 253 [ label= "0.9" ];
+	"238c0" [shape = "point"];
+	238 -> "238c0" [ label = "{p}"]
+;
+	"238c0" -> 254 [ label= "1" ];
+	"239c0" [shape = "point"];
+	239 -> "239c0" [ label = "{p}"]
+;
+	"239c0" -> 255 [ label= "1" ];
+	"240c0" [shape = "point"];
+	240 -> "240c0" [ label = "{p}"]
+;
+	"240c0" -> 256 [ label= "1" ];
+	"241c0" [shape = "point"];
+	241 -> "241c0" [ label = "{p}"]
+;
+	"241c0" -> 257 [ label= "1" ];
+	"242c0" [shape = "point"];
+	242 -> "242c0" [ label = "{p}"]
+;
+	"242c0" -> 258 [ label= "1" ];
+	"243c0" [shape = "point"];
+	243 -> "243c0" [ label = "{p}"]
+;
+	"243c0" -> 259 [ label= "1" ];
+	"244c0" [shape = "point"];
+	244 -> "244c0" [ label = "{p}"]
+;
+	"244c0" -> 260 [ label= "1" ];
+	"245c0" [shape = "point"];
+	245 -> "245c0" [ label = "{p}"]
+;
+	"245c0" -> 261 [ label= "1" ];
+	"246c0" [shape = "point"];
+	246 -> "246c0" [ label = "{bad}"]
+;
+	"246c0" -> 246 [ label= "1" ];
+	"247c0" [shape = "point"];
+	247 -> "247c0" [ label = "{p}"]
+;
+	"247c0" -> 262 [ label= "1" ];
+	"248c0" [shape = "point"];
+	248 -> "248c0" [ label = "{p}"]
+;
+	"248c0" -> 263 [ label= "1" ];
+	"249c0" [shape = "point"];
+	249 -> "249c0" [ label = "{p}"]
+;
+	"249c0" -> 264 [ label= "1" ];
+	"250c0" [shape = "point"];
+	250 -> "250c0" [ label = "{p}"]
+;
+	"250c0" -> 265 [ label= "1" ];
+	"251c0" [shape = "point"];
+	251 -> "251c0" [ label = "{p}"]
+;
+	"251c0" -> 266 [ label= "1" ];
+	"252c0" [shape = "point"];
+	252 -> "252c0" [ label = "{p}"]
+;
+	"252c0" -> 267 [ label= "1" ];
+	"253c0" [shape = "point"];
+	253 -> "253c0" [ label = "{done}"]
+;
+	"253c0" -> 253 [ label= "1" ];
+	"254c0" [shape = "point"];
+	254 -> "254c0" [ label = "{east}"]
+;
+	"254c0" -> 268 [ label= "0.1" ];
+	"254c0" -> 269 [ label= "0.9" ];
+	"255c0" [shape = "point"];
+	255 -> "255c0" [ label = "{east}"]
+;
+	"255c0" -> 269 [ label= "0.1" ];
+	"255c0" -> 271 [ label= "0.9" ];
+	"256c0" [shape = "point"];
+	256 -> "256c0" [ label = "{east}"]
+;
+	"256c0" -> 270 [ label= "0.1" ];
+	"256c0" -> 272 [ label= "0.9" ];
+	"257c0" [shape = "point"];
+	257 -> "257c0" [ label = "{east}"]
+;
+	"257c0" -> 271 [ label= "0.1" ];
+	"257c0" -> 274 [ label= "0.9" ];
+	"258c0" [shape = "point"];
+	258 -> "258c0" [ label = "{east}"]
+;
+	"258c0" -> 272 [ label= "0.1" ];
+	"258c0" -> 275 [ label= "0.9" ];
+	"259c0" [shape = "point"];
+	259 -> "259c0" [ label = "{east}"]
+;
+	"259c0" -> 273 [ label= "0.1" ];
+	"259c0" -> 276 [ label= "0.9" ];
+	"260c0" [shape = "point"];
+	260 -> "260c0" [ label = "{east}"]
+;
+	"260c0" -> 274 [ label= "1" ];
+	"261c0" [shape = "point"];
+	261 -> "261c0" [ label = "{east}"]
+;
+	"261c0" -> 275 [ label= "0.1" ];
+	"261c0" -> 278 [ label= "0.9" ];
+	"262c0" [shape = "point"];
+	262 -> "262c0" [ label = "{east}"]
+;
+	"262c0" -> 277 [ label= "0.1" ];
+	"262c0" -> 280 [ label= "0.9" ];
+	"263c0" [shape = "point"];
+	263 -> "263c0" [ label = "{east}"]
+;
+	"263c0" -> 278 [ label= "1" ];
+	"264c0" [shape = "point"];
+	264 -> "264c0" [ label = "{east}"]
+;
+	"264c0" -> 279 [ label= "0.1" ];
+	"264c0" -> 281 [ label= "0.9" ];
+	"265c0" [shape = "point"];
+	265 -> "265c0" [ label = "{east}"]
+;
+	"265c0" -> 280 [ label= "0.1" ];
+	"265c0" -> 282 [ label= "0.9" ];
+	"266c0" [shape = "point"];
+	266 -> "266c0" [ label = "{east}"]
+;
+	"266c0" -> 281 [ label= "1" ];
+	"267c0" [shape = "point"];
+	267 -> "267c0" [ label = "{east}"]
+;
+	"267c0" -> 282 [ label= "0.1" ];
+	"267c0" -> 283 [ label= "0.9" ];
+	"268c0" [shape = "point"];
+	268 -> "268c0" [ label = "{p}"]
+;
+	"268c0" -> 284 [ label= "1" ];
+	"269c0" [shape = "point"];
+	269 -> "269c0" [ label = "{p}"]
+;
+	"269c0" -> 285 [ label= "1" ];
+	"270c0" [shape = "point"];
+	270 -> "270c0" [ label = "{p}"]
+;
+	"270c0" -> 286 [ label= "1" ];
+	"271c0" [shape = "point"];
+	271 -> "271c0" [ label = "{p}"]
+;
+	"271c0" -> 287 [ label= "1" ];
+	"272c0" [shape = "point"];
+	272 -> "272c0" [ label = "{p}"]
+;
+	"272c0" -> 288 [ label= "1" ];
+	"273c0" [shape = "point"];
+	273 -> "273c0" [ label = "{p}"]
+;
+	"273c0" -> 289 [ label= "1" ];
+	"274c0" [shape = "point"];
+	274 -> "274c0" [ label = "{p}"]
+;
+	"274c0" -> 290 [ label= "1" ];
+	"275c0" [shape = "point"];
+	275 -> "275c0" [ label = "{p}"]
+;
+	"275c0" -> 291 [ label= "1" ];
+	"276c0" [shape = "point"];
+	276 -> "276c0" [ label = "{bad}"]
+;
+	"276c0" -> 276 [ label= "1" ];
+	"277c0" [shape = "point"];
+	277 -> "277c0" [ label = "{p}"]
+;
+	"277c0" -> 292 [ label= "1" ];
+	"278c0" [shape = "point"];
+	278 -> "278c0" [ label = "{p}"]
+;
+	"278c0" -> 293 [ label= "1" ];
+	"279c0" [shape = "point"];
+	279 -> "279c0" [ label = "{p}"]
+;
+	"279c0" -> 294 [ label= "1" ];
+	"280c0" [shape = "point"];
+	280 -> "280c0" [ label = "{p}"]
+;
+	"280c0" -> 295 [ label= "1" ];
+	"281c0" [shape = "point"];
+	281 -> "281c0" [ label = "{p}"]
+;
+	"281c0" -> 296 [ label= "1" ];
+	"282c0" [shape = "point"];
+	282 -> "282c0" [ label = "{p}"]
+;
+	"282c0" -> 297 [ label= "1" ];
+	"283c0" [shape = "point"];
+	283 -> "283c0" [ label = "{done}"]
+;
+	"283c0" -> 283 [ label= "1" ];
+	"284c0" [shape = "point"];
+	284 -> "284c0" [ label = "{east}"]
+;
+	"284c0" -> 298 [ label= "0.1" ];
+	"284c0" -> 299 [ label= "0.9" ];
+	"285c0" [shape = "point"];
+	285 -> "285c0" [ label = "{east}"]
+;
+	"285c0" -> 299 [ label= "0.1" ];
+	"285c0" -> 301 [ label= "0.9" ];
+	"286c0" [shape = "point"];
+	286 -> "286c0" [ label = "{east}"]
+;
+	"286c0" -> 300 [ label= "0.1" ];
+	"286c0" -> 302 [ label= "0.9" ];
+	"287c0" [shape = "point"];
+	287 -> "287c0" [ label = "{east}"]
+;
+	"287c0" -> 301 [ label= "0.1" ];
+	"287c0" -> 304 [ label= "0.9" ];
+	"288c0" [shape = "point"];
+	288 -> "288c0" [ label = "{east}"]
+;
+	"288c0" -> 302 [ label= "0.1" ];
+	"288c0" -> 305 [ label= "0.9" ];
+	"289c0" [shape = "point"];
+	289 -> "289c0" [ label = "{east}"]
+;
+	"289c0" -> 303 [ label= "0.1" ];
+	"289c0" -> 306 [ label= "0.9" ];
+	"290c0" [shape = "point"];
+	290 -> "290c0" [ label = "{east}"]
+;
+	"290c0" -> 304 [ label= "1" ];
+	"291c0" [shape = "point"];
+	291 -> "291c0" [ label = "{east}"]
+;
+	"291c0" -> 305 [ label= "0.1" ];
+	"291c0" -> 308 [ label= "0.9" ];
+	"292c0" [shape = "point"];
+	292 -> "292c0" [ label = "{east}"]
+;
+	"292c0" -> 307 [ label= "0.1" ];
+	"292c0" -> 310 [ label= "0.9" ];
+	"293c0" [shape = "point"];
+	293 -> "293c0" [ label = "{east}"]
+;
+	"293c0" -> 308 [ label= "1" ];
+	"294c0" [shape = "point"];
+	294 -> "294c0" [ label = "{east}"]
+;
+	"294c0" -> 309 [ label= "0.1" ];
+	"294c0" -> 311 [ label= "0.9" ];
+	"295c0" [shape = "point"];
+	295 -> "295c0" [ label = "{east}"]
+;
+	"295c0" -> 310 [ label= "0.1" ];
+	"295c0" -> 312 [ label= "0.9" ];
+	"296c0" [shape = "point"];
+	296 -> "296c0" [ label = "{east}"]
+;
+	"296c0" -> 311 [ label= "1" ];
+	"297c0" [shape = "point"];
+	297 -> "297c0" [ label = "{east}"]
+;
+	"297c0" -> 312 [ label= "0.1" ];
+	"297c0" -> 313 [ label= "0.9" ];
+	"298c0" [shape = "point"];
+	298 -> "298c0" [ label = "{p}"]
+;
+	"298c0" -> 314 [ label= "1" ];
+	"299c0" [shape = "point"];
+	299 -> "299c0" [ label = "{p}"]
+;
+	"299c0" -> 315 [ label= "1" ];
+	"300c0" [shape = "point"];
+	300 -> "300c0" [ label = "{p}"]
+;
+	"300c0" -> 316 [ label= "1" ];
+	"301c0" [shape = "point"];
+	301 -> "301c0" [ label = "{p}"]
+;
+	"301c0" -> 317 [ label= "1" ];
+	"302c0" [shape = "point"];
+	302 -> "302c0" [ label = "{p}"]
+;
+	"302c0" -> 318 [ label= "1" ];
+	"303c0" [shape = "point"];
+	303 -> "303c0" [ label = "{p}"]
+;
+	"303c0" -> 319 [ label= "1" ];
+	"304c0" [shape = "point"];
+	304 -> "304c0" [ label = "{p}"]
+;
+	"304c0" -> 320 [ label= "1" ];
+	"305c0" [shape = "point"];
+	305 -> "305c0" [ label = "{p}"]
+;
+	"305c0" -> 321 [ label= "1" ];
+	"306c0" [shape = "point"];
+	306 -> "306c0" [ label = "{bad}"]
+;
+	"306c0" -> 306 [ label= "1" ];
+	"307c0" [shape = "point"];
+	307 -> "307c0" [ label = "{p}"]
+;
+	"307c0" -> 322 [ label= "1" ];
+	"308c0" [shape = "point"];
+	308 -> "308c0" [ label = "{p}"]
+;
+	"308c0" -> 323 [ label= "1" ];
+	"309c0" [shape = "point"];
+	309 -> "309c0" [ label = "{p}"]
+;
+	"309c0" -> 324 [ label= "1" ];
+	"310c0" [shape = "point"];
+	310 -> "310c0" [ label = "{p}"]
+;
+	"310c0" -> 325 [ label= "1" ];
+	"311c0" [shape = "point"];
+	311 -> "311c0" [ label = "{p}"]
+;
+	"311c0" -> 326 [ label= "1" ];
+	"312c0" [shape = "point"];
+	312 -> "312c0" [ label = "{p}"]
+;
+	"312c0" -> 327 [ label= "1" ];
+	"313c0" [shape = "point"];
+	313 -> "313c0" [ label = "{done}"]
+;
+	"313c0" -> 313 [ label= "1" ];
+	"314c0" [shape = "point"];
+	314 -> "314c0" [ label = "{east}"]
+;
+	"314c0" -> 328 [ label= "0.1" ];
+	"314c0" -> 329 [ label= "0.9" ];
+	"315c0" [shape = "point"];
+	315 -> "315c0" [ label = "{east}"]
+;
+	"315c0" -> 329 [ label= "0.1" ];
+	"315c0" -> 331 [ label= "0.9" ];
+	"316c0" [shape = "point"];
+	316 -> "316c0" [ label = "{east}"]
+;
+	"316c0" -> 330 [ label= "0.1" ];
+	"316c0" -> 332 [ label= "0.9" ];
+	"317c0" [shape = "point"];
+	317 -> "317c0" [ label = "{east}"]
+;
+	"317c0" -> 331 [ label= "0.1" ];
+	"317c0" -> 334 [ label= "0.9" ];
+	"318c0" [shape = "point"];
+	318 -> "318c0" [ label = "{east}"]
+;
+	"318c0" -> 332 [ label= "0.1" ];
+	"318c0" -> 335 [ label= "0.9" ];
+	"319c0" [shape = "point"];
+	319 -> "319c0" [ label = "{east}"]
+;
+	"319c0" -> 333 [ label= "0.1" ];
+	"319c0" -> 336 [ label= "0.9" ];
+	"320c0" [shape = "point"];
+	320 -> "320c0" [ label = "{east}"]
+;
+	"320c0" -> 334 [ label= "1" ];
+	"321c0" [shape = "point"];
+	321 -> "321c0" [ label = "{east}"]
+;
+	"321c0" -> 335 [ label= "0.1" ];
+	"321c0" -> 338 [ label= "0.9" ];
+	"322c0" [shape = "point"];
+	322 -> "322c0" [ label = "{east}"]
+;
+	"322c0" -> 337 [ label= "0.1" ];
+	"322c0" -> 340 [ label= "0.9" ];
+	"323c0" [shape = "point"];
+	323 -> "323c0" [ label = "{east}"]
+;
+	"323c0" -> 338 [ label= "1" ];
+	"324c0" [shape = "point"];
+	324 -> "324c0" [ label = "{east}"]
+;
+	"324c0" -> 339 [ label= "0.1" ];
+	"324c0" -> 341 [ label= "0.9" ];
+	"325c0" [shape = "point"];
+	325 -> "325c0" [ label = "{east}"]
+;
+	"325c0" -> 340 [ label= "0.1" ];
+	"325c0" -> 342 [ label= "0.9" ];
+	"326c0" [shape = "point"];
+	326 -> "326c0" [ label = "{east}"]
+;
+	"326c0" -> 341 [ label= "1" ];
+	"327c0" [shape = "point"];
+	327 -> "327c0" [ label = "{east}"]
+;
+	"327c0" -> 342 [ label= "0.1" ];
+	"327c0" -> 343 [ label= "0.9" ];
+	"328c0" [shape = "point"];
+	328 -> "328c0" [ label = "{p}"]
+;
+	"328c0" -> 344 [ label= "1" ];
+	"329c0" [shape = "point"];
+	329 -> "329c0" [ label = "{p}"]
+;
+	"329c0" -> 345 [ label= "1" ];
+	"330c0" [shape = "point"];
+	330 -> "330c0" [ label = "{p}"]
+;
+	"330c0" -> 346 [ label= "1" ];
+	"331c0" [shape = "point"];
+	331 -> "331c0" [ label = "{p}"]
+;
+	"331c0" -> 347 [ label= "1" ];
+	"332c0" [shape = "point"];
+	332 -> "332c0" [ label = "{p}"]
+;
+	"332c0" -> 348 [ label= "1" ];
+	"333c0" [shape = "point"];
+	333 -> "333c0" [ label = "{p}"]
+;
+	"333c0" -> 349 [ label= "1" ];
+	"334c0" [shape = "point"];
+	334 -> "334c0" [ label = "{p}"]
+;
+	"334c0" -> 350 [ label= "1" ];
+	"335c0" [shape = "point"];
+	335 -> "335c0" [ label = "{p}"]
+;
+	"335c0" -> 351 [ label= "1" ];
+	"336c0" [shape = "point"];
+	336 -> "336c0" [ label = "{bad}"]
+;
+	"336c0" -> 336 [ label= "1" ];
+	"337c0" [shape = "point"];
+	337 -> "337c0" [ label = "{p}"]
+;
+	"337c0" -> 352 [ label= "1" ];
+	"338c0" [shape = "point"];
+	338 -> "338c0" [ label = "{p}"]
+;
+	"338c0" -> 353 [ label= "1" ];
+	"339c0" [shape = "point"];
+	339 -> "339c0" [ label = "{p}"]
+;
+	"339c0" -> 354 [ label= "1" ];
+	"340c0" [shape = "point"];
+	340 -> "340c0" [ label = "{p}"]
+;
+	"340c0" -> 355 [ label= "1" ];
+	"341c0" [shape = "point"];
+	341 -> "341c0" [ label = "{p}"]
+;
+	"341c0" -> 356 [ label= "1" ];
+	"342c0" [shape = "point"];
+	342 -> "342c0" [ label = "{p}"]
+;
+	"342c0" -> 357 [ label= "1" ];
+	"343c0" [shape = "point"];
+	343 -> "343c0" [ label = "{done}"]
+;
+	"343c0" -> 343 [ label= "1" ];
+	"344c0" [shape = "point"];
+	344 -> "344c0" [ label = "{east}"]
+;
+	"344c0" -> 358 [ label= "0.1" ];
+	"344c0" -> 359 [ label= "0.9" ];
+	"345c0" [shape = "point"];
+	345 -> "345c0" [ label = "{east}"]
+;
+	"345c0" -> 359 [ label= "0.1" ];
+	"345c0" -> 361 [ label= "0.9" ];
+	"346c0" [shape = "point"];
+	346 -> "346c0" [ label = "{east}"]
+;
+	"346c0" -> 360 [ label= "0.1" ];
+	"346c0" -> 362 [ label= "0.9" ];
+	"347c0" [shape = "point"];
+	347 -> "347c0" [ label = "{east}"]
+;
+	"347c0" -> 361 [ label= "0.1" ];
+	"347c0" -> 364 [ label= "0.9" ];
+	"348c0" [shape = "point"];
+	348 -> "348c0" [ label = "{east}"]
+;
+	"348c0" -> 362 [ label= "0.1" ];
+	"348c0" -> 365 [ label= "0.9" ];
+	"349c0" [shape = "point"];
+	349 -> "349c0" [ label = "{east}"]
+;
+	"349c0" -> 363 [ label= "0.1" ];
+	"349c0" -> 366 [ label= "0.9" ];
+	"350c0" [shape = "point"];
+	350 -> "350c0" [ label = "{east}"]
+;
+	"350c0" -> 364 [ label= "1" ];
+	"351c0" [shape = "point"];
+	351 -> "351c0" [ label = "{east}"]
+;
+	"351c0" -> 365 [ label= "0.1" ];
+	"351c0" -> 368 [ label= "0.9" ];
+	"352c0" [shape = "point"];
+	352 -> "352c0" [ label = "{east}"]
+;
+	"352c0" -> 367 [ label= "0.1" ];
+	"352c0" -> 370 [ label= "0.9" ];
+	"353c0" [shape = "point"];
+	353 -> "353c0" [ label = "{east}"]
+;
+	"353c0" -> 368 [ label= "1" ];
+	"354c0" [shape = "point"];
+	354 -> "354c0" [ label = "{east}"]
+;
+	"354c0" -> 369 [ label= "0.1" ];
+	"354c0" -> 371 [ label= "0.9" ];
+	"355c0" [shape = "point"];
+	355 -> "355c0" [ label = "{east}"]
+;
+	"355c0" -> 370 [ label= "0.1" ];
+	"355c0" -> 372 [ label= "0.9" ];
+	"356c0" [shape = "point"];
+	356 -> "356c0" [ label = "{east}"]
+;
+	"356c0" -> 371 [ label= "1" ];
+	"357c0" [shape = "point"];
+	357 -> "357c0" [ label = "{east}"]
+;
+	"357c0" -> 372 [ label= "0.1" ];
+	"357c0" -> 373 [ label= "0.9" ];
+	"358c0" [shape = "point"];
+	358 -> "358c0" [ label = "{p}"]
+;
+	"358c0" -> 374 [ label= "1" ];
+	"359c0" [shape = "point"];
+	359 -> "359c0" [ label = "{p}"]
+;
+	"359c0" -> 375 [ label= "1" ];
+	"360c0" [shape = "point"];
+	360 -> "360c0" [ label = "{p}"]
+;
+	"360c0" -> 376 [ label= "1" ];
+	"361c0" [shape = "point"];
+	361 -> "361c0" [ label = "{p}"]
+;
+	"361c0" -> 377 [ label= "1" ];
+	"362c0" [shape = "point"];
+	362 -> "362c0" [ label = "{p}"]
+;
+	"362c0" -> 378 [ label= "1" ];
+	"363c0" [shape = "point"];
+	363 -> "363c0" [ label = "{p}"]
+;
+	"363c0" -> 379 [ label= "1" ];
+	"364c0" [shape = "point"];
+	364 -> "364c0" [ label = "{p}"]
+;
+	"364c0" -> 380 [ label= "1" ];
+	"365c0" [shape = "point"];
+	365 -> "365c0" [ label = "{p}"]
+;
+	"365c0" -> 381 [ label= "1" ];
+	"366c0" [shape = "point"];
+	366 -> "366c0" [ label = "{bad}"]
+;
+	"366c0" -> 366 [ label= "1" ];
+	"367c0" [shape = "point"];
+	367 -> "367c0" [ label = "{p}"]
+;
+	"367c0" -> 382 [ label= "1" ];
+	"368c0" [shape = "point"];
+	368 -> "368c0" [ label = "{p}"]
+;
+	"368c0" -> 383 [ label= "1" ];
+	"369c0" [shape = "point"];
+	369 -> "369c0" [ label = "{p}"]
+;
+	"369c0" -> 384 [ label= "1" ];
+	"370c0" [shape = "point"];
+	370 -> "370c0" [ label = "{p}"]
+;
+	"370c0" -> 385 [ label= "1" ];
+	"371c0" [shape = "point"];
+	371 -> "371c0" [ label = "{p}"]
+;
+	"371c0" -> 386 [ label= "1" ];
+	"372c0" [shape = "point"];
+	372 -> "372c0" [ label = "{p}"]
+;
+	"372c0" -> 387 [ label= "1" ];
+	"373c0" [shape = "point"];
+	373 -> "373c0" [ label = "{done}"]
+;
+	"373c0" -> 373 [ label= "1" ];
+	"374c0" [shape = "point"];
+	374 -> "374c0" [ label = "{east}"]
+;
+	"374c0" -> 388 [ label= "0.1" ];
+	"374c0" -> 389 [ label= "0.9" ];
+	"375c0" [shape = "point"];
+	375 -> "375c0" [ label = "{east}"]
+;
+	"375c0" -> 389 [ label= "0.1" ];
+	"375c0" -> 391 [ label= "0.9" ];
+	"376c0" [shape = "point"];
+	376 -> "376c0" [ label = "{east}"]
+;
+	"376c0" -> 390 [ label= "0.1" ];
+	"376c0" -> 392 [ label= "0.9" ];
+	"377c0" [shape = "point"];
+	377 -> "377c0" [ label = "{east}"]
+;
+	"377c0" -> 391 [ label= "0.1" ];
+	"377c0" -> 394 [ label= "0.9" ];
+	"378c0" [shape = "point"];
+	378 -> "378c0" [ label = "{east}"]
+;
+	"378c0" -> 392 [ label= "0.1" ];
+	"378c0" -> 395 [ label= "0.9" ];
+	"379c0" [shape = "point"];
+	379 -> "379c0" [ label = "{east}"]
+;
+	"379c0" -> 393 [ label= "0.1" ];
+	"379c0" -> 396 [ label= "0.9" ];
+	"380c0" [shape = "point"];
+	380 -> "380c0" [ label = "{east}"]
+;
+	"380c0" -> 394 [ label= "1" ];
+	"381c0" [shape = "point"];
+	381 -> "381c0" [ label = "{east}"]
+;
+	"381c0" -> 395 [ label= "0.1" ];
+	"381c0" -> 398 [ label= "0.9" ];
+	"382c0" [shape = "point"];
+	382 -> "382c0" [ label = "{east}"]
+;
+	"382c0" -> 397 [ label= "0.1" ];
+	"382c0" -> 400 [ label= "0.9" ];
+	"383c0" [shape = "point"];
+	383 -> "383c0" [ label = "{east}"]
+;
+	"383c0" -> 398 [ label= "1" ];
+	"384c0" [shape = "point"];
+	384 -> "384c0" [ label = "{east}"]
+;
+	"384c0" -> 399 [ label= "0.1" ];
+	"384c0" -> 401 [ label= "0.9" ];
+	"385c0" [shape = "point"];
+	385 -> "385c0" [ label = "{east}"]
+;
+	"385c0" -> 400 [ label= "0.1" ];
+	"385c0" -> 402 [ label= "0.9" ];
+	"386c0" [shape = "point"];
+	386 -> "386c0" [ label = "{east}"]
+;
+	"386c0" -> 401 [ label= "1" ];
+	"387c0" [shape = "point"];
+	387 -> "387c0" [ label = "{east}"]
+;
+	"387c0" -> 402 [ label= "0.1" ];
+	"387c0" -> 403 [ label= "0.9" ];
+	"388c0" [shape = "point"];
+	388 -> "388c0" [ label = "{p}"]
+;
+	"388c0" -> 404 [ label= "1" ];
+	"389c0" [shape = "point"];
+	389 -> "389c0" [ label = "{p}"]
+;
+	"389c0" -> 405 [ label= "1" ];
+	"390c0" [shape = "point"];
+	390 -> "390c0" [ label = "{p}"]
+;
+	"390c0" -> 406 [ label= "1" ];
+	"391c0" [shape = "point"];
+	391 -> "391c0" [ label = "{p}"]
+;
+	"391c0" -> 407 [ label= "1" ];
+	"392c0" [shape = "point"];
+	392 -> "392c0" [ label = "{p}"]
+;
+	"392c0" -> 408 [ label= "1" ];
+	"393c0" [shape = "point"];
+	393 -> "393c0" [ label = "{p}"]
+;
+	"393c0" -> 409 [ label= "1" ];
+	"394c0" [shape = "point"];
+	394 -> "394c0" [ label = "{p}"]
+;
+	"394c0" -> 410 [ label= "1" ];
+	"395c0" [shape = "point"];
+	395 -> "395c0" [ label = "{p}"]
+;
+	"395c0" -> 411 [ label= "1" ];
+	"396c0" [shape = "point"];
+	396 -> "396c0" [ label = "{bad}"]
+;
+	"396c0" -> 396 [ label= "1" ];
+	"397c0" [shape = "point"];
+	397 -> "397c0" [ label = "{p}"]
+;
+	"397c0" -> 412 [ label= "1" ];
+	"398c0" [shape = "point"];
+	398 -> "398c0" [ label = "{p}"]
+;
+	"398c0" -> 413 [ label= "1" ];
+	"399c0" [shape = "point"];
+	399 -> "399c0" [ label = "{p}"]
+;
+	"399c0" -> 414 [ label= "1" ];
+	"400c0" [shape = "point"];
+	400 -> "400c0" [ label = "{p}"]
+;
+	"400c0" -> 415 [ label= "1" ];
+	"401c0" [shape = "point"];
+	401 -> "401c0" [ label = "{p}"]
+;
+	"401c0" -> 416 [ label= "1" ];
+	"402c0" [shape = "point"];
+	402 -> "402c0" [ label = "{p}"]
+;
+	"402c0" -> 417 [ label= "1" ];
+	"403c0" [shape = "point"];
+	403 -> "403c0" [ label = "{done}"]
+;
+	"403c0" -> 403 [ label= "1" ];
+	"404c0" [shape = "point"];
+	404 -> "404c0" [ label = "{east}"]
+;
+	"404c0" -> 418 [ label= "0.1" ];
+	"404c0" -> 419 [ label= "0.9" ];
+	"405c0" [shape = "point"];
+	405 -> "405c0" [ label = "{east}"]
+;
+	"405c0" -> 419 [ label= "0.1" ];
+	"405c0" -> 421 [ label= "0.9" ];
+	"406c0" [shape = "point"];
+	406 -> "406c0" [ label = "{east}"]
+;
+	"406c0" -> 420 [ label= "0.1" ];
+	"406c0" -> 422 [ label= "0.9" ];
+	"407c0" [shape = "point"];
+	407 -> "407c0" [ label = "{east}"]
+;
+	"407c0" -> 421 [ label= "0.1" ];
+	"407c0" -> 424 [ label= "0.9" ];
+	"408c0" [shape = "point"];
+	408 -> "408c0" [ label = "{east}"]
+;
+	"408c0" -> 422 [ label= "0.1" ];
+	"408c0" -> 425 [ label= "0.9" ];
+	"409c0" [shape = "point"];
+	409 -> "409c0" [ label = "{east}"]
+;
+	"409c0" -> 423 [ label= "0.1" ];
+	"409c0" -> 426 [ label= "0.9" ];
+	"410c0" [shape = "point"];
+	410 -> "410c0" [ label = "{east}"]
+;
+	"410c0" -> 424 [ label= "1" ];
+	"411c0" [shape = "point"];
+	411 -> "411c0" [ label = "{east}"]
+;
+	"411c0" -> 425 [ label= "0.1" ];
+	"411c0" -> 428 [ label= "0.9" ];
+	"412c0" [shape = "point"];
+	412 -> "412c0" [ label = "{east}"]
+;
+	"412c0" -> 427 [ label= "0.1" ];
+	"412c0" -> 430 [ label= "0.9" ];
+	"413c0" [shape = "point"];
+	413 -> "413c0" [ label = "{east}"]
+;
+	"413c0" -> 428 [ label= "1" ];
+	"414c0" [shape = "point"];
+	414 -> "414c0" [ label = "{east}"]
+;
+	"414c0" -> 429 [ label= "0.1" ];
+	"414c0" -> 431 [ label= "0.9" ];
+	"415c0" [shape = "point"];
+	415 -> "415c0" [ label = "{east}"]
+;
+	"415c0" -> 430 [ label= "0.1" ];
+	"415c0" -> 432 [ label= "0.9" ];
+	"416c0" [shape = "point"];
+	416 -> "416c0" [ label = "{east}"]
+;
+	"416c0" -> 431 [ label= "1" ];
+	"417c0" [shape = "point"];
+	417 -> "417c0" [ label = "{east}"]
+;
+	"417c0" -> 432 [ label= "0.1" ];
+	"417c0" -> 433 [ label= "0.9" ];
+	"418c0" [shape = "point"];
+	418 -> "418c0" [ label = "{p}"]
+;
+	"418c0" -> 434 [ label= "1" ];
+	"419c0" [shape = "point"];
+	419 -> "419c0" [ label = "{p}"]
+;
+	"419c0" -> 435 [ label= "1" ];
+	"420c0" [shape = "point"];
+	420 -> "420c0" [ label = "{p}"]
+;
+	"420c0" -> 436 [ label= "1" ];
+	"421c0" [shape = "point"];
+	421 -> "421c0" [ label = "{p}"]
+;
+	"421c0" -> 437 [ label= "1" ];
+	"422c0" [shape = "point"];
+	422 -> "422c0" [ label = "{p}"]
+;
+	"422c0" -> 438 [ label= "1" ];
+	"423c0" [shape = "point"];
+	423 -> "423c0" [ label = "{p}"]
+;
+	"423c0" -> 439 [ label= "1" ];
+	"424c0" [shape = "point"];
+	424 -> "424c0" [ label = "{p}"]
+;
+	"424c0" -> 440 [ label= "1" ];
+	"425c0" [shape = "point"];
+	425 -> "425c0" [ label = "{p}"]
+;
+	"425c0" -> 441 [ label= "1" ];
+	"426c0" [shape = "point"];
+	426 -> "426c0" [ label = "{bad}"]
+;
+	"426c0" -> 426 [ label= "1" ];
+	"427c0" [shape = "point"];
+	427 -> "427c0" [ label = "{p}"]
+;
+	"427c0" -> 442 [ label= "1" ];
+	"428c0" [shape = "point"];
+	428 -> "428c0" [ label = "{p}"]
+;
+	"428c0" -> 443 [ label= "1" ];
+	"429c0" [shape = "point"];
+	429 -> "429c0" [ label = "{p}"]
+;
+	"429c0" -> 444 [ label= "1" ];
+	"430c0" [shape = "point"];
+	430 -> "430c0" [ label = "{p}"]
+;
+	"430c0" -> 445 [ label= "1" ];
+	"431c0" [shape = "point"];
+	431 -> "431c0" [ label = "{p}"]
+;
+	"431c0" -> 446 [ label= "1" ];
+	"432c0" [shape = "point"];
+	432 -> "432c0" [ label = "{p}"]
+;
+	"432c0" -> 447 [ label= "1" ];
+	"433c0" [shape = "point"];
+	433 -> "433c0" [ label = "{done}"]
+;
+	"433c0" -> 433 [ label= "1" ];
+	"434c0" [shape = "point"];
+	434 -> "434c0" [ label = "{east}"]
+;
+	"434c0" -> 448 [ label= "0.1" ];
+	"434c0" -> 449 [ label= "0.9" ];
+	"435c0" [shape = "point"];
+	435 -> "435c0" [ label = "{east}"]
+;
+	"435c0" -> 449 [ label= "0.1" ];
+	"435c0" -> 451 [ label= "0.9" ];
+	"436c0" [shape = "point"];
+	436 -> "436c0" [ label = "{east}"]
+;
+	"436c0" -> 450 [ label= "0.1" ];
+	"436c0" -> 452 [ label= "0.9" ];
+	"437c0" [shape = "point"];
+	437 -> "437c0" [ label = "{east}"]
+;
+	"437c0" -> 451 [ label= "0.1" ];
+	"437c0" -> 454 [ label= "0.9" ];
+	"438c0" [shape = "point"];
+	438 -> "438c0" [ label = "{east}"]
+;
+	"438c0" -> 452 [ label= "0.1" ];
+	"438c0" -> 455 [ label= "0.9" ];
+	"439c0" [shape = "point"];
+	439 -> "439c0" [ label = "{east}"]
+;
+	"439c0" -> 453 [ label= "0.1" ];
+	"439c0" -> 456 [ label= "0.9" ];
+	"440c0" [shape = "point"];
+	440 -> "440c0" [ label = "{east}"]
+;
+	"440c0" -> 454 [ label= "1" ];
+	"441c0" [shape = "point"];
+	441 -> "441c0" [ label = "{east}"]
+;
+	"441c0" -> 455 [ label= "0.1" ];
+	"441c0" -> 458 [ label= "0.9" ];
+	"442c0" [shape = "point"];
+	442 -> "442c0" [ label = "{east}"]
+;
+	"442c0" -> 457 [ label= "0.1" ];
+	"442c0" -> 460 [ label= "0.9" ];
+	"443c0" [shape = "point"];
+	443 -> "443c0" [ label = "{east}"]
+;
+	"443c0" -> 458 [ label= "1" ];
+	"444c0" [shape = "point"];
+	444 -> "444c0" [ label = "{east}"]
+;
+	"444c0" -> 459 [ label= "0.1" ];
+	"444c0" -> 461 [ label= "0.9" ];
+	"445c0" [shape = "point"];
+	445 -> "445c0" [ label = "{east}"]
+;
+	"445c0" -> 460 [ label= "0.1" ];
+	"445c0" -> 462 [ label= "0.9" ];
+	"446c0" [shape = "point"];
+	446 -> "446c0" [ label = "{east}"]
+;
+	"446c0" -> 461 [ label= "1" ];
+	"447c0" [shape = "point"];
+	447 -> "447c0" [ label = "{east}"]
+;
+	"447c0" -> 462 [ label= "0.1" ];
+	"447c0" -> 463 [ label= "0.9" ];
+	"448c0" [shape = "point"];
+	448 -> "448c0" [ label = "{p}"]
+;
+	"448c0" -> 464 [ label= "1" ];
+	"449c0" [shape = "point"];
+	449 -> "449c0" [ label = "{p}"]
+;
+	"449c0" -> 465 [ label= "1" ];
+	"450c0" [shape = "point"];
+	450 -> "450c0" [ label = "{p}"]
+;
+	"450c0" -> 466 [ label= "1" ];
+	"451c0" [shape = "point"];
+	451 -> "451c0" [ label = "{p}"]
+;
+	"451c0" -> 467 [ label= "1" ];
+	"452c0" [shape = "point"];
+	452 -> "452c0" [ label = "{p}"]
+;
+	"452c0" -> 468 [ label= "1" ];
+	"453c0" [shape = "point"];
+	453 -> "453c0" [ label = "{p}"]
+;
+	"453c0" -> 469 [ label= "1" ];
+	"454c0" [shape = "point"];
+	454 -> "454c0" [ label = "{p}"]
+;
+	"454c0" -> 470 [ label= "1" ];
+	"455c0" [shape = "point"];
+	455 -> "455c0" [ label = "{p}"]
+;
+	"455c0" -> 471 [ label= "1" ];
+	"456c0" [shape = "point"];
+	456 -> "456c0" [ label = "{bad}"]
+;
+	"456c0" -> 456 [ label= "1" ];
+	"457c0" [shape = "point"];
+	457 -> "457c0" [ label = "{p}"]
+;
+	"457c0" -> 472 [ label= "1" ];
+	"458c0" [shape = "point"];
+	458 -> "458c0" [ label = "{p}"]
+;
+	"458c0" -> 473 [ label= "1" ];
+	"459c0" [shape = "point"];
+	459 -> "459c0" [ label = "{p}"]
+;
+	"459c0" -> 474 [ label= "1" ];
+	"460c0" [shape = "point"];
+	460 -> "460c0" [ label = "{p}"]
+;
+	"460c0" -> 475 [ label= "1" ];
+	"461c0" [shape = "point"];
+	461 -> "461c0" [ label = "{p}"]
+;
+	"461c0" -> 476 [ label= "1" ];
+	"462c0" [shape = "point"];
+	462 -> "462c0" [ label = "{p}"]
+;
+	"462c0" -> 477 [ label= "1" ];
+	"463c0" [shape = "point"];
+	463 -> "463c0" [ label = "{done}"]
+;
+	"463c0" -> 463 [ label= "1" ];
+	"464c0" [shape = "point"];
+	464 -> "464c0" [ label = "{east}"]
+;
+	"464c0" -> 478 [ label= "0.1" ];
+	"464c0" -> 479 [ label= "0.9" ];
+	"465c0" [shape = "point"];
+	465 -> "465c0" [ label = "{east}"]
+;
+	"465c0" -> 479 [ label= "0.1" ];
+	"465c0" -> 481 [ label= "0.9" ];
+	"466c0" [shape = "point"];
+	466 -> "466c0" [ label = "{east}"]
+;
+	"466c0" -> 480 [ label= "0.1" ];
+	"466c0" -> 482 [ label= "0.9" ];
+	"467c0" [shape = "point"];
+	467 -> "467c0" [ label = "{east}"]
+;
+	"467c0" -> 481 [ label= "0.1" ];
+	"467c0" -> 484 [ label= "0.9" ];
+	"468c0" [shape = "point"];
+	468 -> "468c0" [ label = "{east}"]
+;
+	"468c0" -> 482 [ label= "0.1" ];
+	"468c0" -> 485 [ label= "0.9" ];
+	"469c0" [shape = "point"];
+	469 -> "469c0" [ label = "{east}"]
+;
+	"469c0" -> 483 [ label= "0.1" ];
+	"469c0" -> 486 [ label= "0.9" ];
+	"470c0" [shape = "point"];
+	470 -> "470c0" [ label = "{east}"]
+;
+	"470c0" -> 484 [ label= "1" ];
+	"471c0" [shape = "point"];
+	471 -> "471c0" [ label = "{east}"]
+;
+	"471c0" -> 485 [ label= "0.1" ];
+	"471c0" -> 488 [ label= "0.9" ];
+	"472c0" [shape = "point"];
+	472 -> "472c0" [ label = "{east}"]
+;
+	"472c0" -> 487 [ label= "0.1" ];
+	"472c0" -> 490 [ label= "0.9" ];
+	"473c0" [shape = "point"];
+	473 -> "473c0" [ label = "{east}"]
+;
+	"473c0" -> 488 [ label= "1" ];
+	"474c0" [shape = "point"];
+	474 -> "474c0" [ label = "{east}"]
+;
+	"474c0" -> 489 [ label= "0.1" ];
+	"474c0" -> 491 [ label= "0.9" ];
+	"475c0" [shape = "point"];
+	475 -> "475c0" [ label = "{east}"]
+;
+	"475c0" -> 490 [ label= "0.1" ];
+	"475c0" -> 492 [ label= "0.9" ];
+	"476c0" [shape = "point"];
+	476 -> "476c0" [ label = "{east}"]
+;
+	"476c0" -> 491 [ label= "1" ];
+	"477c0" [shape = "point"];
+	477 -> "477c0" [ label = "{east}"]
+;
+	"477c0" -> 492 [ label= "0.1" ];
+	"477c0" -> 493 [ label= "0.9" ];
+	"478c0" [shape = "point"];
+	478 -> "478c0" [ label = "{p}"]
+;
+	"478c0" -> 494 [ label= "1" ];
+	"479c0" [shape = "point"];
+	479 -> "479c0" [ label = "{p}"]
+;
+	"479c0" -> 495 [ label= "1" ];
+	"480c0" [shape = "point"];
+	480 -> "480c0" [ label = "{p}"]
+;
+	"480c0" -> 496 [ label= "1" ];
+	"481c0" [shape = "point"];
+	481 -> "481c0" [ label = "{p}"]
+;
+	"481c0" -> 497 [ label= "1" ];
+	"482c0" [shape = "point"];
+	482 -> "482c0" [ label = "{p}"]
+;
+	"482c0" -> 498 [ label= "1" ];
+	"483c0" [shape = "point"];
+	483 -> "483c0" [ label = "{p}"]
+;
+	"483c0" -> 499 [ label= "1" ];
+	"484c0" [shape = "point"];
+	484 -> "484c0" [ label = "{p}"]
+;
+	"484c0" -> 500 [ label= "1" ];
+	"485c0" [shape = "point"];
+	485 -> "485c0" [ label = "{p}"]
+;
+	"485c0" -> 501 [ label= "1" ];
+	"486c0" [shape = "point"];
+	486 -> "486c0" [ label = "{bad}"]
+;
+	"486c0" -> 486 [ label= "1" ];
+	"487c0" [shape = "point"];
+	487 -> "487c0" [ label = "{p}"]
+;
+	"487c0" -> 502 [ label= "1" ];
+	"488c0" [shape = "point"];
+	488 -> "488c0" [ label = "{p}"]
+;
+	"488c0" -> 503 [ label= "1" ];
+	"489c0" [shape = "point"];
+	489 -> "489c0" [ label = "{p}"]
+;
+	"489c0" -> 504 [ label= "1" ];
+	"490c0" [shape = "point"];
+	490 -> "490c0" [ label = "{p}"]
+;
+	"490c0" -> 505 [ label= "1" ];
+	"491c0" [shape = "point"];
+	491 -> "491c0" [ label = "{p}"]
+;
+	"491c0" -> 506 [ label= "1" ];
+	"492c0" [shape = "point"];
+	492 -> "492c0" [ label = "{p}"]
+;
+	"492c0" -> 507 [ label= "1" ];
+	"493c0" [shape = "point"];
+	493 -> "493c0" [ label = "{done}"]
+;
+	"493c0" -> 493 [ label= "1" ];
+	"494c0" [shape = "point"];
+	494 -> "494c0" [ label = "{east}"]
+;
+	"494c0" -> 508 [ label= "0.1" ];
+	"494c0" -> 509 [ label= "0.9" ];
+	"495c0" [shape = "point"];
+	495 -> "495c0" [ label = "{east}"]
+;
+	"495c0" -> 509 [ label= "0.1" ];
+	"495c0" -> 511 [ label= "0.9" ];
+	"496c0" [shape = "point"];
+	496 -> "496c0" [ label = "{east}"]
+;
+	"496c0" -> 510 [ label= "0.1" ];
+	"496c0" -> 512 [ label= "0.9" ];
+	"497c0" [shape = "point"];
+	497 -> "497c0" [ label = "{east}"]
+;
+	"497c0" -> 511 [ label= "0.1" ];
+	"497c0" -> 514 [ label= "0.9" ];
+	"498c0" [shape = "point"];
+	498 -> "498c0" [ label = "{east}"]
+;
+	"498c0" -> 512 [ label= "0.1" ];
+	"498c0" -> 515 [ label= "0.9" ];
+	"499c0" [shape = "point"];
+	499 -> "499c0" [ label = "{east}"]
+;
+	"499c0" -> 513 [ label= "0.1" ];
+	"499c0" -> 516 [ label= "0.9" ];
+	"500c0" [shape = "point"];
+	500 -> "500c0" [ label = "{east}"]
+;
+	"500c0" -> 514 [ label= "1" ];
+	"501c0" [shape = "point"];
+	501 -> "501c0" [ label = "{east}"]
+;
+	"501c0" -> 515 [ label= "0.1" ];
+	"501c0" -> 518 [ label= "0.9" ];
+	"502c0" [shape = "point"];
+	502 -> "502c0" [ label = "{east}"]
+;
+	"502c0" -> 517 [ label= "0.1" ];
+	"502c0" -> 520 [ label= "0.9" ];
+	"503c0" [shape = "point"];
+	503 -> "503c0" [ label = "{east}"]
+;
+	"503c0" -> 518 [ label= "1" ];
+	"504c0" [shape = "point"];
+	504 -> "504c0" [ label = "{east}"]
+;
+	"504c0" -> 519 [ label= "0.1" ];
+	"504c0" -> 521 [ label= "0.9" ];
+	"505c0" [shape = "point"];
+	505 -> "505c0" [ label = "{east}"]
+;
+	"505c0" -> 520 [ label= "0.1" ];
+	"505c0" -> 522 [ label= "0.9" ];
+	"506c0" [shape = "point"];
+	506 -> "506c0" [ label = "{east}"]
+;
+	"506c0" -> 521 [ label= "1" ];
+	"507c0" [shape = "point"];
+	507 -> "507c0" [ label = "{east}"]
+;
+	"507c0" -> 522 [ label= "0.1" ];
+	"507c0" -> 523 [ label= "0.9" ];
+	"508c0" [shape = "point"];
+	508 -> "508c0" [ label = "{p}"]
+;
+	"508c0" -> 524 [ label= "1" ];
+	"509c0" [shape = "point"];
+	509 -> "509c0" [ label = "{p}"]
+;
+	"509c0" -> 525 [ label= "1" ];
+	"510c0" [shape = "point"];
+	510 -> "510c0" [ label = "{p}"]
+;
+	"510c0" -> 526 [ label= "1" ];
+	"511c0" [shape = "point"];
+	511 -> "511c0" [ label = "{p}"]
+;
+	"511c0" -> 527 [ label= "1" ];
+	"512c0" [shape = "point"];
+	512 -> "512c0" [ label = "{p}"]
+;
+	"512c0" -> 528 [ label= "1" ];
+	"513c0" [shape = "point"];
+	513 -> "513c0" [ label = "{p}"]
+;
+	"513c0" -> 529 [ label= "1" ];
+	"514c0" [shape = "point"];
+	514 -> "514c0" [ label = "{p}"]
+;
+	"514c0" -> 530 [ label= "1" ];
+	"515c0" [shape = "point"];
+	515 -> "515c0" [ label = "{p}"]
+;
+	"515c0" -> 531 [ label= "1" ];
+	"516c0" [shape = "point"];
+	516 -> "516c0" [ label = "{bad}"]
+;
+	"516c0" -> 516 [ label= "1" ];
+	"517c0" [shape = "point"];
+	517 -> "517c0" [ label = "{p}"]
+;
+	"517c0" -> 532 [ label= "1" ];
+	"518c0" [shape = "point"];
+	518 -> "518c0" [ label = "{p}"]
+;
+	"518c0" -> 533 [ label= "1" ];
+	"519c0" [shape = "point"];
+	519 -> "519c0" [ label = "{p}"]
+;
+	"519c0" -> 534 [ label= "1" ];
+	"520c0" [shape = "point"];
+	520 -> "520c0" [ label = "{p}"]
+;
+	"520c0" -> 535 [ label= "1" ];
+	"521c0" [shape = "point"];
+	521 -> "521c0" [ label = "{p}"]
+;
+	"521c0" -> 536 [ label= "1" ];
+	"522c0" [shape = "point"];
+	522 -> "522c0" [ label = "{p}"]
+;
+	"522c0" -> 537 [ label= "1" ];
+	"523c0" [shape = "point"];
+	523 -> "523c0" [ label = "{done}"]
+;
+	"523c0" -> 523 [ label= "1" ];
+	"524c0" [shape = "point"];
+	524 -> "524c0" [ label = "{east}"]
+;
+	"524c0" -> 538 [ label= "0.1" ];
+	"524c0" -> 539 [ label= "0.9" ];
+	"525c0" [shape = "point"];
+	525 -> "525c0" [ label = "{east}"]
+;
+	"525c0" -> 539 [ label= "0.1" ];
+	"525c0" -> 541 [ label= "0.9" ];
+	"526c0" [shape = "point"];
+	526 -> "526c0" [ label = "{east}"]
+;
+	"526c0" -> 540 [ label= "0.1" ];
+	"526c0" -> 542 [ label= "0.9" ];
+	"527c0" [shape = "point"];
+	527 -> "527c0" [ label = "{east}"]
+;
+	"527c0" -> 541 [ label= "0.1" ];
+	"527c0" -> 544 [ label= "0.9" ];
+	"528c0" [shape = "point"];
+	528 -> "528c0" [ label = "{east}"]
+;
+	"528c0" -> 542 [ label= "0.1" ];
+	"528c0" -> 545 [ label= "0.9" ];
+	"529c0" [shape = "point"];
+	529 -> "529c0" [ label = "{east}"]
+;
+	"529c0" -> 543 [ label= "0.1" ];
+	"529c0" -> 546 [ label= "0.9" ];
+	"530c0" [shape = "point"];
+	530 -> "530c0" [ label = "{east}"]
+;
+	"530c0" -> 544 [ label= "1" ];
+	"531c0" [shape = "point"];
+	531 -> "531c0" [ label = "{east}"]
+;
+	"531c0" -> 545 [ label= "0.1" ];
+	"531c0" -> 548 [ label= "0.9" ];
+	"532c0" [shape = "point"];
+	532 -> "532c0" [ label = "{east}"]
+;
+	"532c0" -> 547 [ label= "0.1" ];
+	"532c0" -> 550 [ label= "0.9" ];
+	"533c0" [shape = "point"];
+	533 -> "533c0" [ label = "{east}"]
+;
+	"533c0" -> 548 [ label= "1" ];
+	"534c0" [shape = "point"];
+	534 -> "534c0" [ label = "{east}"]
+;
+	"534c0" -> 549 [ label= "0.1" ];
+	"534c0" -> 551 [ label= "0.9" ];
+	"535c0" [shape = "point"];
+	535 -> "535c0" [ label = "{east}"]
+;
+	"535c0" -> 550 [ label= "0.1" ];
+	"535c0" -> 552 [ label= "0.9" ];
+	"536c0" [shape = "point"];
+	536 -> "536c0" [ label = "{east}"]
+;
+	"536c0" -> 551 [ label= "1" ];
+	"537c0" [shape = "point"];
+	537 -> "537c0" [ label = "{east}"]
+;
+	"537c0" -> 552 [ label= "0.1" ];
+	"537c0" -> 553 [ label= "0.9" ];
+	"538c0" [shape = "point"];
+	538 -> "538c0" [ label = "{p}"]
+;
+	"538c0" -> 554 [ label= "1" ];
+	"539c0" [shape = "point"];
+	539 -> "539c0" [ label = "{p}"]
+;
+	"539c0" -> 555 [ label= "1" ];
+	"540c0" [shape = "point"];
+	540 -> "540c0" [ label = "{p}"]
+;
+	"540c0" -> 556 [ label= "1" ];
+	"541c0" [shape = "point"];
+	541 -> "541c0" [ label = "{p}"]
+;
+	"541c0" -> 557 [ label= "1" ];
+	"542c0" [shape = "point"];
+	542 -> "542c0" [ label = "{p}"]
+;
+	"542c0" -> 558 [ label= "1" ];
+	"543c0" [shape = "point"];
+	543 -> "543c0" [ label = "{p}"]
+;
+	"543c0" -> 559 [ label= "1" ];
+	"544c0" [shape = "point"];
+	544 -> "544c0" [ label = "{p}"]
+;
+	"544c0" -> 560 [ label= "1" ];
+	"545c0" [shape = "point"];
+	545 -> "545c0" [ label = "{p}"]
+;
+	"545c0" -> 561 [ label= "1" ];
+	"546c0" [shape = "point"];
+	546 -> "546c0" [ label = "{bad}"]
+;
+	"546c0" -> 546 [ label= "1" ];
+	"547c0" [shape = "point"];
+	547 -> "547c0" [ label = "{p}"]
+;
+	"547c0" -> 562 [ label= "1" ];
+	"548c0" [shape = "point"];
+	548 -> "548c0" [ label = "{p}"]
+;
+	"548c0" -> 563 [ label= "1" ];
+	"549c0" [shape = "point"];
+	549 -> "549c0" [ label = "{p}"]
+;
+	"549c0" -> 564 [ label= "1" ];
+	"550c0" [shape = "point"];
+	550 -> "550c0" [ label = "{p}"]
+;
+	"550c0" -> 565 [ label= "1" ];
+	"551c0" [shape = "point"];
+	551 -> "551c0" [ label = "{p}"]
+;
+	"551c0" -> 566 [ label= "1" ];
+	"552c0" [shape = "point"];
+	552 -> "552c0" [ label = "{p}"]
+;
+	"552c0" -> 567 [ label= "1" ];
+	"553c0" [shape = "point"];
+	553 -> "553c0" [ label = "{done}"]
+;
+	"553c0" -> 553 [ label= "1" ];
+	"554c0" [shape = "point"];
+	554 -> "554c0" [ label = "{east}"]
+;
+	"554c0" -> 568 [ label= "0.1" ];
+	"554c0" -> 569 [ label= "0.9" ];
+	"555c0" [shape = "point"];
+	555 -> "555c0" [ label = "{east}"]
+;
+	"555c0" -> 569 [ label= "0.1" ];
+	"555c0" -> 571 [ label= "0.9" ];
+	"556c0" [shape = "point"];
+	556 -> "556c0" [ label = "{east}"]
+;
+	"556c0" -> 570 [ label= "0.1" ];
+	"556c0" -> 572 [ label= "0.9" ];
+	"557c0" [shape = "point"];
+	557 -> "557c0" [ label = "{east}"]
+;
+	"557c0" -> 571 [ label= "0.1" ];
+	"557c0" -> 574 [ label= "0.9" ];
+	"558c0" [shape = "point"];
+	558 -> "558c0" [ label = "{east}"]
+;
+	"558c0" -> 572 [ label= "0.1" ];
+	"558c0" -> 575 [ label= "0.9" ];
+	"559c0" [shape = "point"];
+	559 -> "559c0" [ label = "{east}"]
+;
+	"559c0" -> 573 [ label= "0.1" ];
+	"559c0" -> 576 [ label= "0.9" ];
+	"560c0" [shape = "point"];
+	560 -> "560c0" [ label = "{east}"]
+;
+	"560c0" -> 574 [ label= "1" ];
+	"561c0" [shape = "point"];
+	561 -> "561c0" [ label = "{east}"]
+;
+	"561c0" -> 575 [ label= "0.1" ];
+	"561c0" -> 578 [ label= "0.9" ];
+	"562c0" [shape = "point"];
+	562 -> "562c0" [ label = "{east}"]
+;
+	"562c0" -> 577 [ label= "0.1" ];
+	"562c0" -> 580 [ label= "0.9" ];
+	"563c0" [shape = "point"];
+	563 -> "563c0" [ label = "{east}"]
+;
+	"563c0" -> 578 [ label= "1" ];
+	"564c0" [shape = "point"];
+	564 -> "564c0" [ label = "{east}"]
+;
+	"564c0" -> 579 [ label= "0.1" ];
+	"564c0" -> 581 [ label= "0.9" ];
+	"565c0" [shape = "point"];
+	565 -> "565c0" [ label = "{east}"]
+;
+	"565c0" -> 580 [ label= "0.1" ];
+	"565c0" -> 582 [ label= "0.9" ];
+	"566c0" [shape = "point"];
+	566 -> "566c0" [ label = "{east}"]
+;
+	"566c0" -> 581 [ label= "1" ];
+	"567c0" [shape = "point"];
+	567 -> "567c0" [ label = "{east}"]
+;
+	"567c0" -> 582 [ label= "0.1" ];
+	"567c0" -> 583 [ label= "0.9" ];
+	"568c0" [shape = "point"];
+	568 -> "568c0" [ label = "{p}"]
+;
+	"568c0" -> 584 [ label= "1" ];
+	"569c0" [shape = "point"];
+	569 -> "569c0" [ label = "{p}"]
+;
+	"569c0" -> 585 [ label= "1" ];
+	"570c0" [shape = "point"];
+	570 -> "570c0" [ label = "{p}"]
+;
+	"570c0" -> 586 [ label= "1" ];
+	"571c0" [shape = "point"];
+	571 -> "571c0" [ label = "{p}"]
+;
+	"571c0" -> 587 [ label= "1" ];
+	"572c0" [shape = "point"];
+	572 -> "572c0" [ label = "{p}"]
+;
+	"572c0" -> 588 [ label= "1" ];
+	"573c0" [shape = "point"];
+	573 -> "573c0" [ label = "{p}"]
+;
+	"573c0" -> 589 [ label= "1" ];
+	"574c0" [shape = "point"];
+	574 -> "574c0" [ label = "{p}"]
+;
+	"574c0" -> 590 [ label= "1" ];
+	"575c0" [shape = "point"];
+	575 -> "575c0" [ label = "{p}"]
+;
+	"575c0" -> 591 [ label= "1" ];
+	"576c0" [shape = "point"];
+	576 -> "576c0" [ label = "{bad}"]
+;
+	"576c0" -> 576 [ label= "1" ];
+	"577c0" [shape = "point"];
+	577 -> "577c0" [ label = "{p}"]
+;
+	"577c0" -> 592 [ label= "1" ];
+	"578c0" [shape = "point"];
+	578 -> "578c0" [ label = "{p}"]
+;
+	"578c0" -> 593 [ label= "1" ];
+	"579c0" [shape = "point"];
+	579 -> "579c0" [ label = "{p}"]
+;
+	"579c0" -> 594 [ label= "1" ];
+	"580c0" [shape = "point"];
+	580 -> "580c0" [ label = "{p}"]
+;
+	"580c0" -> 595 [ label= "1" ];
+	"581c0" [shape = "point"];
+	581 -> "581c0" [ label = "{p}"]
+;
+	"581c0" -> 596 [ label= "1" ];
+	"582c0" [shape = "point"];
+	582 -> "582c0" [ label = "{p}"]
+;
+	"582c0" -> 597 [ label= "1" ];
+	"583c0" [shape = "point"];
+	583 -> "583c0" [ label = "{done}"]
+;
+	"583c0" -> 583 [ label= "1" ];
+	"584c0" [shape = "point"];
+	584 -> "584c0" [ label = "{east}"]
+;
+	"584c0" -> 598 [ label= "0.1" ];
+	"584c0" -> 599 [ label= "0.9" ];
+	"585c0" [shape = "point"];
+	585 -> "585c0" [ label = "{east}"]
+;
+	"585c0" -> 599 [ label= "0.1" ];
+	"585c0" -> 601 [ label= "0.9" ];
+	"586c0" [shape = "point"];
+	586 -> "586c0" [ label = "{east}"]
+;
+	"586c0" -> 600 [ label= "0.1" ];
+	"586c0" -> 602 [ label= "0.9" ];
+	"587c0" [shape = "point"];
+	587 -> "587c0" [ label = "{east}"]
+;
+	"587c0" -> 601 [ label= "0.1" ];
+	"587c0" -> 604 [ label= "0.9" ];
+	"588c0" [shape = "point"];
+	588 -> "588c0" [ label = "{east}"]
+;
+	"588c0" -> 602 [ label= "0.1" ];
+	"588c0" -> 605 [ label= "0.9" ];
+	"589c0" [shape = "point"];
+	589 -> "589c0" [ label = "{east}"]
+;
+	"589c0" -> 603 [ label= "0.1" ];
+	"589c0" -> 606 [ label= "0.9" ];
+	"590c0" [shape = "point"];
+	590 -> "590c0" [ label = "{east}"]
+;
+	"590c0" -> 604 [ label= "1" ];
+	"591c0" [shape = "point"];
+	591 -> "591c0" [ label = "{east}"]
+;
+	"591c0" -> 605 [ label= "0.1" ];
+	"591c0" -> 608 [ label= "0.9" ];
+	"592c0" [shape = "point"];
+	592 -> "592c0" [ label = "{east}"]
+;
+	"592c0" -> 607 [ label= "0.1" ];
+	"592c0" -> 610 [ label= "0.9" ];
+	"593c0" [shape = "point"];
+	593 -> "593c0" [ label = "{east}"]
+;
+	"593c0" -> 608 [ label= "1" ];
+	"594c0" [shape = "point"];
+	594 -> "594c0" [ label = "{east}"]
+;
+	"594c0" -> 609 [ label= "0.1" ];
+	"594c0" -> 611 [ label= "0.9" ];
+	"595c0" [shape = "point"];
+	595 -> "595c0" [ label = "{east}"]
+;
+	"595c0" -> 610 [ label= "0.1" ];
+	"595c0" -> 612 [ label= "0.9" ];
+	"596c0" [shape = "point"];
+	596 -> "596c0" [ label = "{east}"]
+;
+	"596c0" -> 611 [ label= "1" ];
+	"597c0" [shape = "point"];
+	597 -> "597c0" [ label = "{east}"]
+;
+	"597c0" -> 612 [ label= "0.1" ];
+	"597c0" -> 613 [ label= "0.9" ];
+	"598c0" [shape = "point"];
+	598 -> "598c0" [ label = "{p}"]
+;
+	"598c0" -> 584 [ label= "1" ];
+	"599c0" [shape = "point"];
+	599 -> "599c0" [ label = "{p}"]
+;
+	"599c0" -> 585 [ label= "1" ];
+	"600c0" [shape = "point"];
+	600 -> "600c0" [ label = "{p}"]
+;
+	"600c0" -> 586 [ label= "1" ];
+	"601c0" [shape = "point"];
+	601 -> "601c0" [ label = "{p}"]
+;
+	"601c0" -> 587 [ label= "1" ];
+	"602c0" [shape = "point"];
+	602 -> "602c0" [ label = "{p}"]
+;
+	"602c0" -> 588 [ label= "1" ];
+	"603c0" [shape = "point"];
+	603 -> "603c0" [ label = "{p}"]
+;
+	"603c0" -> 589 [ label= "1" ];
+	"604c0" [shape = "point"];
+	604 -> "604c0" [ label = "{p}"]
+;
+	"604c0" -> 590 [ label= "1" ];
+	"605c0" [shape = "point"];
+	605 -> "605c0" [ label = "{p}"]
+;
+	"605c0" -> 591 [ label= "1" ];
+	"606c0" [shape = "point"];
+	606 -> "606c0" [ label = "{bad}"]
+;
+	"606c0" -> 606 [ label= "1" ];
+	"607c0" [shape = "point"];
+	607 -> "607c0" [ label = "{p}"]
+;
+	"607c0" -> 592 [ label= "1" ];
+	"608c0" [shape = "point"];
+	608 -> "608c0" [ label = "{p}"]
+;
+	"608c0" -> 593 [ label= "1" ];
+	"609c0" [shape = "point"];
+	609 -> "609c0" [ label = "{p}"]
+;
+	"609c0" -> 594 [ label= "1" ];
+	"610c0" [shape = "point"];
+	610 -> "610c0" [ label = "{p}"]
+;
+	"610c0" -> 595 [ label= "1" ];
+	"611c0" [shape = "point"];
+	611 -> "611c0" [ label = "{p}"]
+;
+	"611c0" -> 596 [ label= "1" ];
+	"612c0" [shape = "point"];
+	612 -> "612c0" [ label = "{p}"]
+;
+	"612c0" -> 597 [ label= "1" ];
+	"613c0" [shape = "point"];
+	613 -> "613c0" [ label = "{done}"]
+;
+	"613c0" -> 613 [ label= "1" ];
+}

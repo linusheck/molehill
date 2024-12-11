@@ -17,7 +17,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.add_eq(self._eq)
         # TODO decide is broken in Z3, do we need it?
         self.decide = None
-        self.add_decide(self._decide)
+        # self.add_decide(self._decide)
         self.add_final(self._final)
         
         # stack of fixed values
@@ -43,9 +43,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
             self.state_to_holes.append(holes)
 
         prop = self.quotient.specification.all_properties()[0]
+        # open("whole_mdp.dot", "w").write(self.quotient.family.mdp.model.to_dot())
         # does there exist a model that satisfies the property?
-        result = self.quotient.family.mdp.model_check_property(prop.negate())
-        self.global_bounds = result.result
+        result = self.quotient.family.mdp.model_check_property(prop)
+        self.global_bounds = result.result.get_values()
         
         self.complete_transition_matrix = self.quotient.family.mdp.model.transition_matrix
 
@@ -71,8 +72,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
     def push(self):
         self.fixed_count.append(len(self.fixed_values))
-        if len(self.fixed_values) == 0 and self.considered_models == 0:
-            self.analyse_current_model()
 
     def pop(self, num_scopes):
         for _scope in range(num_scopes):
@@ -85,8 +84,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.fixed_values.append(ast)
         self.partial_model[ast] = value
         # if str(self.last_decision_variable) == str(ast) or len(self.partial_model) == len(self.variables):
-        self.analyse_current_model(ast)
         # otherwise: this is just a propagation, no need to check anything here
+        self.analyse_current_model()
 
     def analyse_current_model(self, last_fixed_var=None):
         # Check model count if it's worth it to check MDP
@@ -114,8 +113,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         prop = self.quotient.specification.all_properties()[0]
         # does there exist a model that satisfies the property?
+        print(prop)
         result = mdp.model_check_property(prop)
-        print("Value", result.value)
+        print("MC value", result.value)
         self.considered_models += 1
 
         all_violated = not result.sat
@@ -124,7 +124,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
             # this DTMC or MDP refutes the spec
             model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
             counterexample = compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.matrix_generator, self.model_counter)
-            print("Final holes", counterexample)
+            # print("Final holes", counterexample)
             # model at M_2_1=1, P_0_1=2, P_1_1=2
             # assignment at M_2_1=1, P_0_1=1, P_1_1=1
             if counterexample is not None:
@@ -147,6 +147,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 conflicting_term = z3.Not(z3.And([key == value for key, value in self.partial_model.items()]))
                 self.model_counter.solver.add(conflicting_term)
                 self.reasons.append(f"{model} reject {len(self.fixed_values)}")
+                print("Rejecting", self.partial_model)
         else:
             if len(self.partial_model) == len(self.variables):
                 print(f"Found satisfying DTMC with value {result.value}")
@@ -164,8 +165,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
     def _eq(self, e, ids):
         pass
     
-    def _decide(self, a, b, c):
-        self.last_decision_variable = a
+    # def _decide(self, a, b, c):
+    #     self.last_decision_variable = a
     
     def _final(self):
-        pass
+        self.analyse_current_model()
