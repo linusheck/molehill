@@ -2,7 +2,7 @@
 
 import pytest
 from paynt.parser.sketch import Sketch
-from mdpcegis.plugin import SearchMarkovChain
+from molehill.plugin import SearchMarkovChain
 import z3
 import math
 from stormpy import model_checking, check_model_sparse, parse_properties_without_context
