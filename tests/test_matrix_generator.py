@@ -17,7 +17,6 @@ def is_smaller(list_a, list_b, tol=1e-6):
     return all(a < b + tol for a, b in zip(list_a, list_b))
 
 @pytest.mark.parametrize("project_path", ["resources/grid", "resources/test/grid"])
-# @pytest.mark.parametrize("project_path", ["resources/"])
 def test_matrix_generator(project_path):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -61,9 +60,10 @@ def test_matrix_generator(project_path):
         included_holes = [hole for hole in range(len(variables)) if len(new_family.hole_options(hole)) == 1]
         included_choices = set([choice for choice in range(len(choice_to_assignment)) if all([hole in included_holes for hole, _ in choice_to_assignment[choice]])])
 
-        matrix_nondet = matrix_generator.build_matrix(sub_mdp, set(range(len(choice_to_assignment))))
-        matrix_holes = matrix_generator.build_matrix(sub_mdp, included_choices)
-        labeling = matrix_generator.build_state_labeling(sub_mdp, one_states)
+        print(sub_mdp.model.nr_states, sub_mdp.model.transition_matrix.nr_rows, sub_mdp.model.transition_matrix.nr_columns)
+        matrix_nondet = matrix_generator.build_matrix(sub_mdp.quotient_state_map, sub_mdp.model.transition_matrix, set(range(len(choice_to_assignment))))
+        matrix_holes = matrix_generator.build_matrix(sub_mdp.quotient_state_map, sub_mdp.model.transition_matrix, included_choices)
+        labeling = matrix_generator.build_state_labeling(sub_mdp.model.transition_matrix, sub_mdp.model.labeling, one_states)
 
         model_components = SparseModelComponents()
         model_components.state_labeling = labeling

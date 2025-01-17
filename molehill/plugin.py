@@ -2,7 +2,7 @@
 
 import time
 import z3
-from molehill.matrix_generator import MatrixGenerator
+from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import compute_counterexample
 

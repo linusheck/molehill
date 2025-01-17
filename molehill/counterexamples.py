@@ -34,12 +34,12 @@ def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_t
     hint = None
 
     model_components = stormpy.storage.SparseModelComponents()
-    state_labeling = matrix_generator.build_state_labeling(sub_mdp, one_states)
+    state_labeling = matrix_generator.build_state_labeling(sub_mdp.model.transition_matrix, sub_mdp.model.labeling, one_states)
     model_components.state_labeling = state_labeling
 
     while not all_schedulers_violate:
         included_choices = set([choice for choice in range(len(choice_to_assignment)) if all([hole in included_holes for hole, _ in choice_to_assignment[choice]])])
-        submatrix = matrix_generator.build_matrix(sub_mdp, included_choices)
+        submatrix = matrix_generator.build_matrix(sub_mdp.quotient_state_map, sub_mdp.model.transition_matrix, included_choices)
 
         model_components.transition_matrix = submatrix
 

@@ -54,9 +54,8 @@ set(STORM_VERSION ${storm_VERSION})
 # endif()
 
 # Add the module
-pybind11_add_module(fastmole
-    fastmole/src/main.cpp  # Add your source files here
-)
+file(GLOB_RECURSE FASTMOLE_SOURCES "fastmole/src/*.cpp" "fastmole/src/*.h")
+pybind11_add_module(fastmole ${FASTMOLE_SOURCES})
 
 # Link Storm library
 target_link_libraries(fastmole PRIVATE storm)
