@@ -35,7 +35,6 @@ PYBIND11_MODULE(fastmole, m) {
 
     // Create bindings for MatrixGenerator
     py::class_<MatrixGenerator<double>>(m, "MatrixGenerator")
-        .def(py::init<storm::storage::SparseMatrix<double> const&, std::vector<double> const&>())
-        .def("build_matrix", &MatrixGenerator<double>::buildMatrix, py::arg("quotient_state_map"), py::arg("sub_mdp_matrix"), py::arg("included_choices"), "Build matrix")
-        .def("build_state_labeling", &MatrixGenerator<double>::buildStateLabeling, py::arg("sub_mdp_matrix"), py::arg("sub_mdp_labeling"), py::arg("one_states"), "Build state labeling");
+        .def(py::init<const storm::models::sparse::Mdp<double>&, storm::storage::BitVector, const std::vector<double>&>())
+        .def("build_submodel", &MatrixGenerator<double>::buildSubModel, py::arg("included_choices"), "Build matrix");
 }

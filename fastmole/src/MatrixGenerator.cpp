@@ -1,21 +1,23 @@
 
 #include "MatrixGenerator.h"
-#include <storm/models/sparse/StateLabeling.h>
+#include <queue>
+#include <storm/storage/BitVector.h>
+#include <storm/storage/sparse/ModelComponents.h>
 
 template <typename ValueType>
-MatrixGenerator<ValueType>::MatrixGenerator(const storm::storage::SparseMatrix<ValueType>& completeTransitionMatrix, const std::vector<ValueType>& globalBounds)
-    : completeTransitionMatrix(completeTransitionMatrix), globalBounds(globalBounds) {
+MatrixGenerator<ValueType>::MatrixGenerator(const storm::models::sparse::Mdp<ValueType>& quotient, storm::storage::BitVector targetStates, const std::vector<ValueType>& globalBounds)
+    : quotient(quotient), targetStates(targetStates), globalBounds(globalBounds) {
     decisionMatrix = buildDecisionMatrix();
 }
 template <typename ValueType>
 storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisionMatrix() {
+    auto const& completeTransitionMatrix = quotient.getTransitionMatrix();
     storm::storage::SparseMatrixBuilder<ValueType> builder(0, 0, 0, true, true);
-    std::cout << "completeTransitionMatrix.getRowCount(): " << completeTransitionMatrix.getRowCount() << std::endl;
-    std::cout << "completeTransitionMatrix.getColumnCount(): " << completeTransitionMatrix.getColumnCount() << std::endl;
     auto zeroState = completeTransitionMatrix.getColumnCount();
     auto oneState = completeTransitionMatrix.getColumnCount() + 1;
     std::size_t newRowCounter = 0;
 
+    // The decision matrix has one additional row and column for the hole inclusion.
     for (std::size_t state = 0; state < completeTransitionMatrix.getColumnCount(); ++state) {
         auto rowGroupStart = completeTransitionMatrix.getRowGroupIndices()[state];
         auto rowGroupEnd = completeTransitionMatrix.getRowGroupIndices()[state + 1];
@@ -35,89 +37,91 @@ storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisio
     builder.newRowGroup(newRowCounter + 1);
     builder.addNextValue(newRowCounter + 1, oneState, storm::utility::one<ValueType>());
 
-    return builder.build();
+    auto const& decisionMatrix = builder.build();
+    std::cout << "Decision matrix: " << decisionMatrix << std::endl;
+    return decisionMatrix;
 }
 template <typename ValueType>
-storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildMatrix(
-    const std::vector<uint64_t> quotientStateMap,
-    const storm::storage::SparseMatrix<ValueType>& subMdpMatrix,
-    const std::set<uint64_t> includedChoices
+std::pair<storm::models::sparse::Mdp<ValueType>, storm::storage::BitVector> MatrixGenerator<ValueType>::buildSubModel(
+    const storm::storage::BitVector includedChoices
 ) {
+    auto const& completeTransitionMatrix = quotient.getTransitionMatrix();
+
     storm::storage::BitVector includeRowBitVector(decisionMatrix.getRowCount(), false);
-    storm::storage::BitVector includeColumnBitVector(decisionMatrix.getColumnCount(), false);
 
-    std::size_t nextQuotientChoiceIndex = 0;
-    std::size_t stateInQuotientIndex = 0;
-    for (std::size_t stateInDecisionMatrix = 0; stateInDecisionMatrix < decisionMatrix.getColumnCount() - 2; ++stateInDecisionMatrix) {
-        auto stateInQuotient = (stateInQuotientIndex < quotientStateMap.size()) ? quotientStateMap.at(stateInQuotientIndex) : std::numeric_limits<uint64_t>::max();
-        auto rowGroupStart = decisionMatrix.getRowGroupIndices()[stateInDecisionMatrix];
-        auto rowGroupEnd = decisionMatrix.getRowGroupIndices()[stateInDecisionMatrix + 1];
-
-        if (stateInQuotient != stateInDecisionMatrix) {
-            continue;
-        }
-
-        auto quotientRowGroupEnd = subMdpMatrix.getRowGroupIndices()[stateInQuotientIndex + 1];
-        auto completeRowGroupStart = completeTransitionMatrix.getRowGroupIndices()[stateInQuotient];
-
-        while (nextQuotientChoiceIndex < quotientStateMap.size() && nextQuotientChoiceIndex < quotientRowGroupEnd) {
-            auto choice = quotientStateMap.at(nextQuotientChoiceIndex);
-            if (std::find(includedChoices.begin(), includedChoices.end(), choice) != includedChoices.end()) {
-                includeRowBitVector.set(rowGroupStart + (choice - completeRowGroupStart), true);
-            } else {
-                includeRowBitVector.set(rowGroupEnd - 1, true);
-            }
-            includeColumnBitVector.set(stateInDecisionMatrix, true);
-            ++nextQuotientChoiceIndex;
-        }
-        ++stateInQuotientIndex;
+    storm::storage::BitVector reachableStates(decisionMatrix.getColumnCount(), false);
+    std::queue<uint64_t> statesToProcess;
+    for (auto const& initialState : this->quotient.getInitialStates()) {
+        reachableStates.set(initialState, true);
+        statesToProcess.push(initialState);
     }
 
+    // The row in the quotient (= complete transition matrix) that we are currently looking at
+    while (!statesToProcess.empty()) {
+        auto state = statesToProcess.front();
+        statesToProcess.pop();
+        if (!reachableStates.get(state)) {
+            continue;
+        }
+        // This row group in the quotient (this is what the includedChoices BitVector is based on)
+        auto rowGroupStartQuotient = completeTransitionMatrix.getRowGroupIndices()[state];
+        auto rowGroupEndQuotient = completeTransitionMatrix.getRowGroupIndices()[state + 1];
+        // This row group in the decision matrix (this is what our includeRowBitVector is based on)
+        auto rowGroupStartDecision = decisionMatrix.getRowGroupIndices()[state];
+        auto rowGroupEndDecision = decisionMatrix.getRowGroupIndices()[state + 1];
+
+        bool someChoiceIncluded = false;
+        for (uint64_t row = rowGroupStartQuotient; row < rowGroupEndQuotient; ++row) {
+            if (includedChoices.get(row)) {
+                someChoiceIncluded = true;
+                // Include this choice
+                includeRowBitVector.set(rowGroupStartDecision + (row - rowGroupStartQuotient), true);
+
+                // Successors of this choice are reachable
+                for (auto const& entry : completeTransitionMatrix.getRow(row)) {
+                    if (!reachableStates.get(entry.getColumn())) {
+                        reachableStates.set(entry.getColumn(), true);
+                        statesToProcess.push(entry.getColumn());
+                    }
+                }
+            }
+        }
+        if (!someChoiceIncluded) {
+            // No choice is included, so we need to include the last row of the row group
+            includeRowBitVector.set(rowGroupEndDecision - 1, true);
+        }
+    }
+
+    // Always include the last two columns
     for (std::size_t i = 1; i <= 2; ++i) {
-        includeColumnBitVector.set(decisionMatrix.getColumnCount() - i, true);
+        reachableStates.set(decisionMatrix.getColumnCount() - i, true);
         includeRowBitVector.set(decisionMatrix.getRowCount() - i, true);
     }
 
-    auto submatrix = decisionMatrix.getSubmatrix(false, includeRowBitVector, includeColumnBitVector, false);
-    return submatrix;
-}
+    auto const& submatrix = decisionMatrix.getSubmatrix(false, includeRowBitVector, reachableStates, false);
 
-    // def build_state_labeling(self, sub_mdp, one_states):
-    //     state_labeling = StateLabeling(sub_mdp.model.nr_states + 2)
-    //     state_labeling.add_label("counterexample_target")
-    //     for state in range(sub_mdp.model.nr_states):
-    //         for label in sub_mdp.model.labeling.get_labels_of_state(state):
-    //             if not state_labeling.contains_label(label):
-    //                 state_labeling.add_label(label)
-    //             state_labeling.add_label_to_state(label, state)
-    //         if state in one_states:
-    //             state_labeling.add_label_to_state("counterexample_target", state)
-    //     state_labeling.add_label_to_state("counterexample_target", sub_mdp.model.nr_states + 1)
-    //     return state_labeling
-template <typename ValueType>
-storm::models::sparse::StateLabeling MatrixGenerator<ValueType>::buildStateLabeling(
-    const storm::storage::SparseMatrix<ValueType>& subMdpMatrix,
-    const storm::models::sparse::StateLabeling& subMdpLabeling,
-    const std::vector<std::size_t>& oneStates
-) {
-    std::cout << "subMdpMatrix.getColumnCount(): " << subMdpMatrix.getColumnCount() << std::endl;
-    storm::models::sparse::StateLabeling stateLabeling(subMdpMatrix.getColumnCount() + 2);
+    storm::models::sparse::StateLabeling stateLabeling(submatrix.getColumnCount());
     stateLabeling.addLabel("counterexample_target");
 
-    for (std::size_t state = 0; state < subMdpMatrix.getColumnCount(); ++state) {
-        for (const auto& label : subMdpLabeling.getLabelsOfState(state)) {
+    std::cout << "Counterexample Targets: " << targetStates << std::endl;
+    auto reachableStatesIterator = reachableStates.begin();
+    for (std::size_t state = 0; state < submatrix.getColumnCount() - 2; ++state) {
+        for (const auto& label : this->quotient.getLabelsOfState(state)) {
             if (!stateLabeling.containsLabel(label)) {
                 stateLabeling.addLabel(label);
             }
             stateLabeling.addLabelToState(label, state);
         }
-        if (std::find(oneStates.begin(), oneStates.end(), state) != oneStates.end()) {
+        if (targetStates.get(*reachableStatesIterator)) {
             stateLabeling.addLabelToState("counterexample_target", state);
         }
+        reachableStatesIterator++;
     }
-    stateLabeling.addLabelToState("counterexample_target", subMdpMatrix.getColumnCount() + 1);
+    stateLabeling.addLabelToState("counterexample_target", submatrix.getColumnCount() - 1);
 
-    return stateLabeling;
+    storm::storage::sparse::ModelComponents<ValueType> modelComponents(submatrix, stateLabeling);
+
+    return std::make_pair(storm::models::sparse::Mdp<ValueType>(modelComponents), reachableStates);
 }
 
 template class MatrixGenerator<double>;

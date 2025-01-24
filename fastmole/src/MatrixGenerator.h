@@ -5,29 +5,44 @@
 #include "storm/utility/graph.h"
 #include "storm/utility/constants.h"
 #include "storm/models/sparse/StateLabeling.h"
+#include "storm/models/sparse/Mdp.h"
 
 
 template <typename ValueType>
 class MatrixGenerator {
 public:
-    MatrixGenerator<ValueType>(const storm::storage::SparseMatrix<ValueType>& completeTransitionMatrix, const std::vector<ValueType>& globalBounds);
+    /**
+     * @brief Construct a new Matrix Generator object
+     * 
+     * @param completeTransitionMatrix The quotient MDP's transition matrix. Must be topologically sorted.
+     * @param globalBounds 
+     */
+    MatrixGenerator<ValueType>(const storm::models::sparse::Mdp<ValueType>& quotient, storm::storage::BitVector targetStates, const std::vector<ValueType>& globalBounds);
 
-    storm::storage::SparseMatrix<ValueType> buildMatrix(
-        const std::vector<uint64_t> quotientStateMap,
-        const storm::storage::SparseMatrix<ValueType>& subMdpMatrix,
-        const std::set<uint64_t> includedChoices
-    );
-
-    storm::models::sparse::StateLabeling buildStateLabeling(
-        const storm::storage::SparseMatrix<ValueType>& subMdpMatrix,
-        const storm::models::sparse::StateLabeling& subMdpLabeling,
-        const std::vector<std::size_t>& oneStates
+    /**
+     * @brief Builds a sub-model of the decision matrix, representing an MDP
+     * with holes.
+     * 
+     * @param quotientStateMap 
+     * @param includedChoices A BitVector representing which choices (=rows in the original MDP) are included in the submatrix.
+     * @return storm::storage::SparseMatrix<ValueType> 
+     */
+    std::pair<storm::models::sparse::Mdp<ValueType>, storm::storage::BitVector> buildSubModel(
+        const storm::storage::BitVector includedChoices
     );
 
 private:
+    /**
+     * @brief Builds the "decision matrix", which is an internal representation
+     * containing the entire MDP's transition matrix, and an additional row and
+     * column for hole inclusions.
+     * 
+     * @return storm::storage::SparseMatrix<ValueType> 
+     */
     storm::storage::SparseMatrix<ValueType> buildDecisionMatrix();
 
-    storm::storage::SparseMatrix<ValueType> completeTransitionMatrix;
+    storm::models::sparse::Mdp<ValueType> quotient;
+    storm::storage::BitVector targetStates;
     std::vector<ValueType> globalBounds;
     storm::storage::SparseMatrix<ValueType> decisionMatrix;
 };

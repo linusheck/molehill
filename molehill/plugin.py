@@ -5,6 +5,7 @@ import z3
 from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import compute_counterexample
+from stormpy import model_checking
 
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(self, solver, quotient):
@@ -42,6 +43,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
             holes = set([hole for hole in holes_bv])
             self.state_to_holes.append(holes)
 
+        quotient.build(quotient.family)
+
         prop = self.quotient.specification.all_properties()[0]
         # open("whole_mdp.dot", "w").write(self.quotient.family.mdp.model.to_dot())
         # does there exist a model that satisfies the property?
@@ -49,6 +52,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.global_bounds = result.result.get_values()
         
         self.complete_transition_matrix = self.quotient.family.mdp.model.transition_matrix
+        assert len(self.quotient.family.mdp.model.initial_states) == 1
 
         # run this model counter alongside and feed it all new assertions
         self.model_counter = ModelCounter()
@@ -58,7 +62,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # reasons for new assertion
         self.reasons = []
 
-        self.matrix_generator = MatrixGenerator(self.complete_transition_matrix, self.global_bounds)
+        # TODO make this call general
+        target_state = model_checking(self.quotient.family.mdp.model, prop.formula.subformula.subformula).get_truth_values()
+
+        self.matrix_generator = MatrixGenerator(self.quotient.family.mdp.model, target_state, self.global_bounds)
         
         self.last_decision_variable = None
 
