@@ -28,17 +28,30 @@ def _get_possible_and_certain_choices(choice_to_assignment, abstracted_holes, fa
 
 def _check_model(mdp, prop, hint):
     exact_environment = stormpy.core.Environment()
-    exact_environment.solver_environment.minmax_solver_environment.precision = Rational(1e-10)
-    exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.sound_value_iteration
-    print("Check whether all schedulers violate")
+    exact_environment.solver_environment.minmax_solver_environment.precision = Rational(1e-6)
+    exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.optimistic_value_iteration
 
     # TODO hack (i hate properties)
     new_prop = parse_properties_without_context(str(prop.formula).split()[0] + " [ F \"counterexample_target\" ]")[0]
 
     result = check_model_sparse(mdp, new_prop, extract_scheduler=True, hint=hint, environment=exact_environment)
     all_schedulers_violate = not prop.satisfies_threshold(result.at(mdp.initial_states[0]))
-    print("All schedulers violate:", all_schedulers_violate)
     return all_schedulers_violate, result
+
+def hint_convert(result, old_reachable_states, new_reachable_states):
+    # perhaps one of the biggest flaws of my submodel approach is this function
+    # the result was produced by model checking the old_reachable_states
+    # we want a hint w.r.t the new_reachable_states
+    assert len(old_reachable_states) == len(new_reachable_states)
+    hint_values = []
+    for state in range(len(old_reachable_states)):
+        if old_reachable_states[state] and new_reachable_states[state]:
+            hint_values.append(result.at(state))
+        elif new_reachable_states[state]:
+            hint_values.append(0.0)
+    hint = stormpy.ExplicitModelCheckerHintDouble()
+    hint.set_result_hint(hint_values)
+    return hint
 
 def hole_order(bfs_order, choice_to_assignment):
     order = []
@@ -49,14 +62,18 @@ def hole_order(bfs_order, choice_to_assignment):
     return order
 
 def check(matrix_generator, choice_to_assignment, family, prop):
+    fixed_holes = [hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1]
     possible_choices = _get_possible_and_certain_choices(choice_to_assignment, [], family)
     matrix_generator.build_submodel(possible_choices)
     mdp = matrix_generator.get_current_mdp()
-    all_schedulers_violate, result = _check_model(mdp, prop, None)
-    if all_schedulers_violate:
+    all_schedulers_violate_full, result = _check_model(mdp, prop, None)
+    if all_schedulers_violate_full:
+        # always keep track of the previous reachable states
+        old_reachable_states = matrix_generator.get_current_reachable_states()
+
         bfs_order = matrix_generator.get_current_bfs_order()
         # we abstract in the order of which holes we saw first, which holes we saw second, etc
-        abstracted_holes = hole_order(bfs_order, choice_to_assignment)
+        abstracted_holes = [hole for hole in hole_order(bfs_order, choice_to_assignment) if hole in fixed_holes]
         all_schedulers_violate = False
         while not all_schedulers_violate:
             # try to get an unsat core!!
@@ -64,16 +81,20 @@ def check(matrix_generator, choice_to_assignment, family, prop):
             possible_choices = _get_possible_and_certain_choices(choice_to_assignment, abstracted_holes, family)
             matrix_generator.build_submodel(possible_choices)
             mdp_holes = matrix_generator.get_current_mdp()
-            all_schedulers_violate, result = _check_model(mdp_holes, prop, None)
+            hint = hint_convert(result, old_reachable_states, matrix_generator.get_current_reachable_states())
+            all_schedulers_violate, result = _check_model(mdp_holes, prop, hint)
+            print(abstracted_holes, result.get_values()[mdp_holes.initial_states[0]], prop, all_schedulers_violate)
             if all_schedulers_violate:
                 # yaay we have a counterexample!!
-                print("Counterexample found", abstracted_holes, family)
-                return all_schedulers_violate, abstracted_holes, result
+                counterexample_holes = [hole for hole in fixed_holes if hole not in abstracted_holes]
+                print("Counterexample found", counterexample_holes, family)
+                return all_schedulers_violate, counterexample_holes, result
             # abstract fewer holes
             abstracted_holes = abstracted_holes[1:]
             if len(abstracted_holes) == 0:
                 break
-    return all_schedulers_violate, list(range(0, family.num_holes)), result
+            old_reachable_states = matrix_generator.get_current_reachable_states()
+    return all_schedulers_violate_full, fixed_holes, result
 
 # def compute_counterexample(sub_mdp, mc_result, variables, partial_model, state_to_holes, choice_to_assignment, prop, matrix_generator, model_counter):
 #     # pathlib.Path(f"dots/mdp_{partial_model}.dot").write_text(sub_mdp.model.to_dot(), encoding="utf-8")

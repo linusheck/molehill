@@ -82,6 +82,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
     def push(self):
         self.fixed_count.append(len(self.fixed_values))
+        self.analyse_current_model()
 
     def pop(self, num_scopes):
         for _scope in range(num_scopes):
@@ -95,16 +96,19 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.partial_model[ast] = value
         # if str(self.last_decision_variable) == str(ast) or len(self.partial_model) == len(self.variables):
         # otherwise: this is just a propagation, no need to check anything here
-        self.analyse_current_model()
 
     def analyse_current_model(self, last_fixed_var=None):
-        # Check model count if it's worth it to check MDP
-        if len(self.partial_model) < len(self.variables):
-            models_in_tree = self.model_counter.count_models(max_models=16, condition=z3.And([key == value for key, value in self.partial_model.items()]))
-            # if len(self.partial_model) < len(self.variables):
-            #     print("models in tree", models_in_tree)
-            if len(self.partial_model) < len(self.variables) and models_in_tree < 16:
-                return
+        # print("Analyse current model", self.partial_model)
+        # # Check model count if it's worth it to check MDP
+        # if len(self.partial_model) < len(self.variables):
+        #     models_in_tree = self.model_counter.count_models(max_models=16, condition=z3.And([key == value for key, value in self.partial_model.items()]))
+        #     # if len(self.partial_model) < len(self.variables):
+        #     #     print("models in tree", models_in_tree)
+        #     if len(self.partial_model) < len(self.variables) and models_in_tree < 16:
+        #         return
+        model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
+        if model == "MDP":
+            return
 
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
@@ -122,7 +126,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
             }
             print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
             term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
-            # print(f"Propagate {term}")
+            print(f"Propagate {term}")
             self.propagate(term, [])
             self.model_counter.solver.add(term)
 
@@ -131,30 +135,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.reasons.append(f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}")
             else:
                 self.reasons.append(f"{model} reject {len(self.fixed_values)}")
-
-
-        # if all_violated:
-            # this DTMC or MDP refutes the spec. thats great, because we can rule out all models that are more specific
-        #     # this DTMC or MDP refutes the spec
-        #     model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
-        #     counterexample = compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.matrix_generator, self.model_counter)
-        #     # print("Final holes", counterexample)
-        #     # model at M_2_1=1, P_0_1=2, P_1_1=2
-        #     # assignment at M_2_1=1, P_0_1=1, P_1_1=1
-        #     if counterexample is not None:
-        #     # if False:
-        #     else:
-        #         self.conflict(self.fixed_values)
-        #         conflicting_term = z3.Not(z3.And([key == value for key, value in self.partial_model.items()]))
-        #         self.model_counter.solver.add(conflicting_term)
-        #         self.reasons.append(f"{model} reject {len(self.fixed_values)}")
-        #         # print("Rejecting", self.partial_model)
-        # else:
-        #     if len(self.partial_model) == len(self.variables):
-        #         print(f"Found satisfying DTMC with value {result.value}")
-        # if time.time() - self.time_last_print > 1:
-        #     print(f"{self.considered_models} MC calls, best value {self.best_value}")
-        #     self.time_last_print = time.time()
 
     def fresh(self, new_ctx):
         pass

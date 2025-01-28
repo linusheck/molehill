@@ -35,6 +35,14 @@ def example1(project_path):
         # TODO hole options of full family should be a sorted vector of indices that is continous
         s.add(z3.And(var >= z3.BitVecVal(min(options), num_bits), var <= z3.BitVecVal(max(options), num_bits)))
 
+    # add test z3 constraints
+    # M_0_1=0, M_1_1=0, M_2_1=2, M_3_1=2, P_0_1=4
+    # s.add(variables[0] == 3)
+    # s.add(variables[1] == 0)
+    # s.add(variables[2] == 2)
+    # s.add(variables[3] == 2)
+    # s.add(variables[4] == 0)
+
     p = SearchMarkovChain(s, quotient)
     p.register_variables(variables)
     print(variables)
