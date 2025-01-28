@@ -6,6 +6,8 @@
 #include "storm/utility/constants.h"
 #include "storm/models/sparse/StateLabeling.h"
 #include "storm/models/sparse/Mdp.h"
+#include <optional>
+#include <vector>
 
 
 template <typename ValueType>
@@ -25,11 +27,32 @@ public:
      * 
      * @param quotientStateMap 
      * @param includedChoices A BitVector representing which choices (=rows in the original MDP) are included in the submatrix.
-     * @return storm::storage::SparseMatrix<ValueType> 
+     * @return void
      */
-    std::pair<storm::models::sparse::Mdp<ValueType>, storm::storage::BitVector> buildSubModel(
+    void buildSubModel(
         const storm::storage::BitVector includedChoices
     );
+
+    /**
+     * @brief Get the current MDP
+     * 
+     * @return const storm::models::sparse::Mdp<ValueType>& 
+     */
+    const storm::models::sparse::Mdp<ValueType>& getCurrentMDP() const;
+
+    /**
+     * @brief Get the current reachable states
+     * 
+     * @return const storm::storage::BitVector& 
+     */
+    const storm::storage::BitVector& getCurrentReachableStates() const;
+
+    /**
+     * @brief Get the current BFS order
+     * 
+     * @return const std::vector<uint64_t>& 
+     */
+    const std::vector<uint64_t>& getCurrentBFSOrder() const;
 
 private:
     /**
@@ -40,6 +63,10 @@ private:
      * @return storm::storage::SparseMatrix<ValueType> 
      */
     storm::storage::SparseMatrix<ValueType> buildDecisionMatrix();
+
+    std::optional<storm::models::sparse::Mdp<ValueType>> currentMDP;
+    std::optional<storm::storage::BitVector> currentReachableStates;
+    std::optional<std::vector<uint64_t>> currentBFSOrder;
 
     storm::models::sparse::Mdp<ValueType> quotient;
     storm::storage::BitVector targetStates;

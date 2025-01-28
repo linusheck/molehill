@@ -1,8 +1,10 @@
 
 #include "MatrixGenerator.h"
+#include <_types/_uint64_t.h>
 #include <queue>
 #include <storm/storage/BitVector.h>
 #include <storm/storage/sparse/ModelComponents.h>
+#include <vector>
 
 template <typename ValueType>
 MatrixGenerator<ValueType>::MatrixGenerator(const storm::models::sparse::Mdp<ValueType>& quotient, storm::storage::BitVector targetStates, const std::vector<ValueType>& globalBounds)
@@ -37,12 +39,10 @@ storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisio
     builder.newRowGroup(newRowCounter + 1);
     builder.addNextValue(newRowCounter + 1, oneState, storm::utility::one<ValueType>());
 
-    auto const& decisionMatrix = builder.build();
-    std::cout << "Decision matrix: " << decisionMatrix << std::endl;
-    return decisionMatrix;
+    return builder.build();
 }
 template <typename ValueType>
-std::pair<storm::models::sparse::Mdp<ValueType>, storm::storage::BitVector> MatrixGenerator<ValueType>::buildSubModel(
+void MatrixGenerator<ValueType>::buildSubModel(
     const storm::storage::BitVector includedChoices
 ) {
     auto const& completeTransitionMatrix = quotient.getTransitionMatrix();
@@ -50,6 +50,7 @@ std::pair<storm::models::sparse::Mdp<ValueType>, storm::storage::BitVector> Matr
     storm::storage::BitVector includeRowBitVector(decisionMatrix.getRowCount(), false);
 
     storm::storage::BitVector reachableStates(decisionMatrix.getColumnCount(), false);
+    std::vector<uint64_t> bfsOrder;
     std::queue<uint64_t> statesToProcess;
     for (auto const& initialState : this->quotient.getInitialStates()) {
         reachableStates.set(initialState, true);
@@ -79,9 +80,10 @@ std::pair<storm::models::sparse::Mdp<ValueType>, storm::storage::BitVector> Matr
 
                 // Successors of this choice are reachable
                 for (auto const& entry : completeTransitionMatrix.getRow(row)) {
-                    if (!reachableStates.get(entry.getColumn())) {
+                    if (!reachableStates.get(entry.getColumn()) && entry.getValue() != storm::utility::zero<ValueType>()) {
                         reachableStates.set(entry.getColumn(), true);
                         statesToProcess.push(entry.getColumn());
+                        bfsOrder.push_back(entry.getColumn());
                     }
                 }
             }
@@ -103,10 +105,9 @@ std::pair<storm::models::sparse::Mdp<ValueType>, storm::storage::BitVector> Matr
     storm::models::sparse::StateLabeling stateLabeling(submatrix.getColumnCount());
     stateLabeling.addLabel("counterexample_target");
 
-    std::cout << "Counterexample Targets: " << targetStates << std::endl;
     auto reachableStatesIterator = reachableStates.begin();
     for (std::size_t state = 0; state < submatrix.getColumnCount() - 2; ++state) {
-        for (const auto& label : this->quotient.getLabelsOfState(state)) {
+        for (const auto& label : this->quotient.getLabelsOfState(*reachableStatesIterator)) {
             if (!stateLabeling.containsLabel(label)) {
                 stateLabeling.addLabel(label);
             }
@@ -120,8 +121,25 @@ std::pair<storm::models::sparse::Mdp<ValueType>, storm::storage::BitVector> Matr
     stateLabeling.addLabelToState("counterexample_target", submatrix.getColumnCount() - 1);
 
     storm::storage::sparse::ModelComponents<ValueType> modelComponents(submatrix, stateLabeling);
+    
+    currentMDP = storm::models::sparse::Mdp<ValueType>(modelComponents);
+    currentReachableStates = reachableStates;
+    currentBFSOrder = bfsOrder;
+}
 
-    return std::make_pair(storm::models::sparse::Mdp<ValueType>(modelComponents), reachableStates);
+template <typename ValueType>
+const storm::models::sparse::Mdp<ValueType>& MatrixGenerator<ValueType>::getCurrentMDP() const {
+    return *this->currentMDP;
+}
+
+template <typename ValueType>
+const storm::storage::BitVector& MatrixGenerator<ValueType>::getCurrentReachableStates() const {
+    return *this->currentReachableStates;
+}
+
+template <typename ValueType>
+const std::vector<uint64_t>& MatrixGenerator<ValueType>::getCurrentBFSOrder() const {
+    return *this->currentBFSOrder;
 }
 
 template class MatrixGenerator<double>;

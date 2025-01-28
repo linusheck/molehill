@@ -36,5 +36,8 @@ PYBIND11_MODULE(fastmole, m) {
     // Create bindings for MatrixGenerator
     py::class_<MatrixGenerator<double>>(m, "MatrixGenerator")
         .def(py::init<const storm::models::sparse::Mdp<double>&, storm::storage::BitVector, const std::vector<double>&>())
-        .def("build_submodel", &MatrixGenerator<double>::buildSubModel, py::arg("included_choices"), "Build matrix");
+        .def("build_submodel", &MatrixGenerator<double>::buildSubModel, py::arg("included_choices"), "Build matrix")
+        .def("get_current_mdp", &MatrixGenerator<double>::getCurrentMDP, "Get current MDP")
+        .def("get_current_reachable_states", &MatrixGenerator<double>::getCurrentReachableStates, "Get current reachable states")
+        .def("get_current_bfs_order", &MatrixGenerator<double>::getCurrentBFSOrder, "Get current BFS order");
 }

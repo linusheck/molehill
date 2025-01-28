@@ -4,7 +4,7 @@ import time
 import z3
 from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
-from molehill.counterexamples import compute_counterexample
+from molehill.counterexamples import check
 from stormpy import model_checking
 
 class SearchMarkovChain(z3.UserPropagateBase):
@@ -65,6 +65,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # TODO make this call general
         target_state = model_checking(self.quotient.family.mdp.model, prop.formula.subformula.subformula).get_truth_values()
 
+        # get type of MatrixGenerator constructor
         self.matrix_generator = MatrixGenerator(self.quotient.family.mdp.model, target_state, self.global_bounds)
         
         self.last_decision_variable = None
@@ -111,60 +112,49 @@ class SearchMarkovChain(z3.UserPropagateBase):
             var = self.variables[hole]
             if var in self.partial_model:
                 new_family.hole_set_options(hole, [self.partial_model[var].as_long()])
-        self.quotient.build(new_family)
-
-        # e.g. spec is R{"lost"} <= 1 [ F "finished" ]
-        # task: find a satisfying assignment
-        # questions:
-        # - is it the case that the minimal probability is bigger than 1? (this is the case if the spec is unsat)
-        # - is it the case that the maximal probability is smaller than 1? (this is the case if the spec is sat)
-        mdp = new_family.mdp
 
         prop = self.quotient.specification.all_properties()[0]
-        # does there exist a model that satisfies the property?
-        # print(prop)
-        result = mdp.model_check_property(prop)
-        if result.value > self.best_value and len(self.partial_model) == len(self.variables):
-            self.best_value = result.value
-        # print("MC value", result.value)
-        self.considered_models += 1
-
-        all_violated = not result.sat
+        all_violated, counterexample, result = check(self.matrix_generator, self.choice_to_assignment, new_family, prop)
 
         if all_violated:
-            # this DTMC or MDP refutes the spec
-            model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
-            counterexample = compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.matrix_generator, self.model_counter)
-            # print("Final holes", counterexample)
-            # model at M_2_1=1, P_0_1=2, P_1_1=2
-            # assignment at M_2_1=1, P_0_1=1, P_1_1=1
-            if counterexample is not None:
-            # if False:
-                counterexample_partial_model = {
-                    self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
-                }
-                print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
-                term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
-                # print(f"Propagate {term}")
-                self.propagate(term, [])
-                self.model_counter.solver.add(term)
+            counterexample_partial_model = {
+                self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
+            }
+            print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
+            term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
+            # print(f"Propagate {term}")
+            self.propagate(term, [])
+            self.model_counter.solver.add(term)
 
-                if len(counterexample) < len(self.fixed_values):
-                    self.reasons.append(f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}")
-                else:
-                    self.reasons.append(f"{model} reject {len(self.fixed_values)}")
+            model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
+            if len(counterexample) < len(self.fixed_values):
+                self.reasons.append(f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}")
             else:
-                self.conflict(self.fixed_values)
-                conflicting_term = z3.Not(z3.And([key == value for key, value in self.partial_model.items()]))
-                self.model_counter.solver.add(conflicting_term)
                 self.reasons.append(f"{model} reject {len(self.fixed_values)}")
-                # print("Rejecting", self.partial_model)
-        else:
-            if len(self.partial_model) == len(self.variables):
-                print(f"Found satisfying DTMC with value {result.value}")
-        if time.time() - self.time_last_print > 1:
-            print(f"{self.considered_models} MC calls, best value {self.best_value}")
-            self.time_last_print = time.time()
+
+
+        # if all_violated:
+            # this DTMC or MDP refutes the spec. thats great, because we can rule out all models that are more specific
+        #     # this DTMC or MDP refutes the spec
+        #     model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
+        #     counterexample = compute_counterexample(mdp, result.result, self.variables, self.partial_model, self.state_to_holes, self.choice_to_assignment, prop, self.matrix_generator, self.model_counter)
+        #     # print("Final holes", counterexample)
+        #     # model at M_2_1=1, P_0_1=2, P_1_1=2
+        #     # assignment at M_2_1=1, P_0_1=1, P_1_1=1
+        #     if counterexample is not None:
+        #     # if False:
+        #     else:
+        #         self.conflict(self.fixed_values)
+        #         conflicting_term = z3.Not(z3.And([key == value for key, value in self.partial_model.items()]))
+        #         self.model_counter.solver.add(conflicting_term)
+        #         self.reasons.append(f"{model} reject {len(self.fixed_values)}")
+        #         # print("Rejecting", self.partial_model)
+        # else:
+        #     if len(self.partial_model) == len(self.variables):
+        #         print(f"Found satisfying DTMC with value {result.value}")
+        # if time.time() - self.time_last_print > 1:
+        #     print(f"{self.considered_models} MC calls, best value {self.best_value}")
+        #     self.time_last_print = time.time()
 
     def fresh(self, new_ctx):
         pass
