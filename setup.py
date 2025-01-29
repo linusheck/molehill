@@ -51,6 +51,8 @@ class CMakeBuild(build_ext):
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={extdir}",
             f"-DPYBIND_VERSION={pycarl_pybind_version}",
             "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+            # set mode to release with debug info
+            "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
         ]
 
         subprocess.check_call(["cmake", ext.sourcedir] + cmake_args, cwd=build_temp)

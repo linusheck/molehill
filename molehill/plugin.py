@@ -18,7 +18,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.add_eq(self._eq)
         # TODO decide is broken in Z3, do we need it?
         self.decide = None
-        # self.add_decide(self._decide)
         self.add_final(self._final)
         
         # stack of fixed values
@@ -30,6 +29,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # list of Z3 variables, indexed by PAYNT hole
         self.variables = []
 
+        # keep a set of analysed models
+        self.analysed_models = set()
+
         self.considered_models = 0
         # self.ruled_out_models = 0
         self.total_models = self.quotient.family.size
@@ -37,11 +39,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.time_last_print = time.time()
 
         self.choice_to_assignment = self.quotient.coloring.getChoiceToAssignment()
-        state_to_holes_bv = self.quotient.coloring.getStateToHoles().copy()
-        self.state_to_holes = []
-        for _state, holes_bv in enumerate(state_to_holes_bv):
-            holes = set([hole for hole in holes_bv])
-            self.state_to_holes.append(holes)
 
         quotient.build(quotient.family)
 
@@ -62,16 +59,18 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # reasons for new assertion
         self.reasons = []
 
+        self.fixed_something = False
+
         # TODO make this call general
         target_state = model_checking(self.quotient.family.mdp.model, prop.formula.subformula.subformula).get_truth_values()
 
         # get type of MatrixGenerator constructor
-        self.matrix_generator = MatrixGenerator(self.quotient.family.mdp.model, target_state, self.global_bounds)
+        self.matrix_generator = MatrixGenerator(self.quotient.family.mdp.model, target_state, self.global_bounds, self.choice_to_assignment)
         
         self.last_decision_variable = None
 
         self.best_value = 0.0
-
+    
     def register_variables(self, variables):
         assert not self.vars_registered
         self.vars_registered = True
@@ -82,7 +81,14 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
     def push(self):
         self.fixed_count.append(len(self.fixed_values))
-        self.analyse_current_model()
+        # print("PUSH", self.fixed_count)
+        # print("push -> analyse current model", self.partial_model)
+        model_as_list = tuple([self.partial_model[var] if var in self.partial_model else None for var in self.variables])
+        if model_as_list in self.analysed_models:
+            return
+        self.analysed_models.add(model_as_list)
+        if len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]:
+            self.analyse_current_model()
 
     def pop(self, num_scopes):
         for _scope in range(num_scopes):
@@ -94,7 +100,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
     def _fixed(self, ast, value):
         self.fixed_values.append(ast)
         self.partial_model[ast] = value
-        # if str(self.last_decision_variable) == str(ast) or len(self.partial_model) == len(self.variables):
         # otherwise: this is just a propagation, no need to check anything here
 
     def analyse_current_model(self, last_fixed_var=None):
@@ -107,8 +112,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         #     if len(self.partial_model) < len(self.variables) and models_in_tree < 16:
         #         return
         model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
-        if model == "MDP":
-            return
+        # if model == "MDP":
+        #     return
 
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
@@ -120,14 +125,17 @@ class SearchMarkovChain(z3.UserPropagateBase):
         prop = self.quotient.specification.all_properties()[0]
         all_violated, counterexample, result = check(self.matrix_generator, self.choice_to_assignment, new_family, prop)
 
+        self.considered_models += 1
+
         if all_violated:
             counterexample_partial_model = {
                 self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
             }
-            print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
+            # print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
             term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
-            print(f"Propagate {term}")
-            self.propagate(term, [])
+            # print(f"Propagate {term}")
+            # self.propagate(term, [])
+            self.conflict([self.variables[c] for c in counterexample])
             self.model_counter.solver.add(term)
 
             model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
@@ -150,4 +158,5 @@ class SearchMarkovChain(z3.UserPropagateBase):
     #     self.last_decision_variable = a
     
     def _final(self):
+        # print("final -> analyse current model", self.partial_model)
         self.analyse_current_model()

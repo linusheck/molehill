@@ -19,18 +19,19 @@ public:
      * @param completeTransitionMatrix The quotient MDP's transition matrix. Must be topologically sorted.
      * @param globalBounds 
      */
-    MatrixGenerator<ValueType>(const storm::models::sparse::Mdp<ValueType>& quotient, storm::storage::BitVector targetStates, const std::vector<ValueType>& globalBounds);
+    MatrixGenerator<ValueType>(const storm::models::sparse::Mdp<ValueType>& quotient, storm::storage::BitVector targetStates, const std::vector<ValueType>& globalBounds, const std::vector<std::vector<std::pair<int, int>>>& choiceToAssignment);
 
     /**
-     * @brief Builds a sub-model of the decision matrix, representing an MDP
-     * with holes.
+     * @brief Builds a sub-model of the decision matrix, representing an MDP * with holes.
      * 
-     * @param quotientStateMap 
-     * @param includedChoices A BitVector representing which choices (=rows in the original MDP) are included in the submatrix.
+     * @param choiceToAssignment
+     * @param abstractedHoles
+     * @param holeOptions
      * @return void
      */
-    void buildSubModel(
-        const storm::storage::BitVector includedChoices
+     void buildSubModel(
+        const storm::storage::BitVector& abstractedHoles,
+        const std::vector<storm::storage::BitVector>& holeOptions
     );
 
     /**
@@ -64,10 +65,24 @@ private:
      */
     storm::storage::SparseMatrix<ValueType> buildDecisionMatrix();
 
+    /**
+     * @brief Checks if a choice is possible given the abstracted holes and hole options.
+     * 
+     * @param abstractedHoles 
+     * @param holeOptions 
+     * @param choice 
+     * @return bool 
+     */
+    bool isChoicePossible(
+        const storm::storage::BitVector& abstractedHoles,
+        const std::vector<storm::storage::BitVector>& holeOptions,
+        uint64_t choice);
+
     std::optional<storm::models::sparse::Mdp<ValueType>> currentMDP;
     std::optional<storm::storage::BitVector> currentReachableStates;
     std::optional<std::vector<uint64_t>> currentBFSOrder;
 
+    std::vector<std::vector<std::pair<int, int>>> choiceToAssignment;
     storm::models::sparse::Mdp<ValueType> quotient;
     storm::storage::BitVector targetStates;
     std::vector<ValueType> globalBounds;

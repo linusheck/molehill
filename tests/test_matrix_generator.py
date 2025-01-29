@@ -3,6 +3,7 @@
 import pytest
 from paynt.parser.sketch import Sketch
 from molehill.plugin import SearchMarkovChain
+from fastmole import get_possible_choices
 import z3
 import math
 from stormpy import model_checking, check_model_sparse, parse_properties_without_context
@@ -20,7 +21,7 @@ def is_smaller(list_a, list_b, tol=1e-6):
 def pad_vector_to_size(vector, size):
     return vector + [0.0] * (size - len(vector))
 
-@pytest.mark.parametrize("project_path", ["resources/grid", "resources/safety"])
+@pytest.mark.parametrize("project_path", ["resources/grid", "resources/safety", "resources/liveness"])
 def test_matrix_generator(project_path):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"

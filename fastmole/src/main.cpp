@@ -4,6 +4,7 @@
 #include <pybind11/stl.h>
 
 #include "MatrixGenerator.h"
+#include "utils.h"
 
 #include "storm/adapters/RationalFunctionAdapter.h"
 #include "storm/storage/SparseMatrix.h"
@@ -21,10 +22,6 @@ PYBIND11_MODULE(fastmole, m) {
            :toctree: _generate
     )pbdoc";
 
-    // m.def("hello", &helloWorld, R"pbdoc(
-    //     Return a string "Hello, World!".
-    // )pbdoc");
-
     m.def("submatrix", [](storm::storage::SparseMatrix<double> const& matrix, storm::storage::BitVector const& rowConstraint, storm::storage::BitVector const& columnConstraint, bool insertDiagonalEntries = false, bool useGroups = true) {
         return matrix.getSubmatrix(useGroups, rowConstraint, columnConstraint, insertDiagonalEntries);
     }, py::arg("matrix"), py::arg("row_constraint"), py::arg("column_constraint"), py::arg("insert_diagonal_entries") = false, py::arg("use_groups") = true, "Get submatrix");
@@ -35,9 +32,11 @@ PYBIND11_MODULE(fastmole, m) {
 
     // Create bindings for MatrixGenerator
     py::class_<MatrixGenerator<double>>(m, "MatrixGenerator")
-        .def(py::init<const storm::models::sparse::Mdp<double>&, storm::storage::BitVector, const std::vector<double>&>())
-        .def("build_submodel", &MatrixGenerator<double>::buildSubModel, py::arg("included_choices"), "Build matrix")
+        .def(py::init<const storm::models::sparse::Mdp<double>&, storm::storage::BitVector, const std::vector<double>&, const std::vector<std::vector<std::pair<int, int>>>&>())
+        .def("build_submodel", &MatrixGenerator<double>::buildSubModel, py::arg("abstracted_holes"), py::arg("hole_options"), "Build sub model")
         .def("get_current_mdp", &MatrixGenerator<double>::getCurrentMDP, "Get current MDP")
         .def("get_current_reachable_states", &MatrixGenerator<double>::getCurrentReachableStates, "Get current reachable states")
         .def("get_current_bfs_order", &MatrixGenerator<double>::getCurrentBFSOrder, "Get current BFS order");
+    
+    m.def("hint_convert", &hintConvert<double>, py::arg("result"), py::arg("old_reachable_states"), py::arg("new_reachable_states"), "Convert hint");
 }

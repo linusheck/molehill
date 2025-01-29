@@ -7,8 +7,8 @@
 #include <vector>
 
 template <typename ValueType>
-MatrixGenerator<ValueType>::MatrixGenerator(const storm::models::sparse::Mdp<ValueType>& quotient, storm::storage::BitVector targetStates, const std::vector<ValueType>& globalBounds)
-    : quotient(quotient), targetStates(targetStates), globalBounds(globalBounds) {
+MatrixGenerator<ValueType>::MatrixGenerator(const storm::models::sparse::Mdp<ValueType>& quotient, storm::storage::BitVector targetStates, const std::vector<ValueType>& globalBounds, const std::vector<std::vector<std::pair<int, int>>>& choiceToAssignment)
+    : quotient(quotient), targetStates(targetStates), globalBounds(globalBounds), choiceToAssignment(choiceToAssignment) {
     decisionMatrix = buildDecisionMatrix();
 }
 template <typename ValueType>
@@ -41,9 +41,30 @@ storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisio
 
     return builder.build();
 }
+
+template <typename ValueType>
+bool MatrixGenerator<ValueType>::isChoicePossible(
+        const storm::storage::BitVector& abstractedHoles,
+        const std::vector<storm::storage::BitVector>& holeOptions,
+        uint64_t choice
+    ) {
+    for (auto const& [hole, assignment] : this->choiceToAssignment[choice]) {
+        if (abstractedHoles.get(hole)) {
+            // This choice is abstracted
+            return false;
+        }
+        if (!holeOptions.at(hole).get(assignment)) {
+            // This choice is not possible
+            return false;
+        }
+    }
+    return true;
+}
+
 template <typename ValueType>
 void MatrixGenerator<ValueType>::buildSubModel(
-    const storm::storage::BitVector includedChoices
+    const storm::storage::BitVector& abstractedHoles,
+    const std::vector<storm::storage::BitVector>& holeOptions
 ) {
     auto const& completeTransitionMatrix = quotient.getTransitionMatrix();
 
@@ -73,17 +94,18 @@ void MatrixGenerator<ValueType>::buildSubModel(
 
         bool someChoiceIncluded = false;
         for (uint64_t row = rowGroupStartQuotient; row < rowGroupEndQuotient; ++row) {
-            if (includedChoices.get(row)) {
+            if (isChoicePossible(abstractedHoles, holeOptions, row)) {
                 someChoiceIncluded = true;
                 // Include this choice
                 includeRowBitVector.set(rowGroupStartDecision + (row - rowGroupStartQuotient), true);
+                // BFS order is over the rows of the original matrix
+                bfsOrder.push_back(row);
 
                 // Successors of this choice are reachable
                 for (auto const& entry : completeTransitionMatrix.getRow(row)) {
                     if (!reachableStates.get(entry.getColumn()) && entry.getValue() != storm::utility::zero<ValueType>()) {
                         reachableStates.set(entry.getColumn(), true);
                         statesToProcess.push(entry.getColumn());
-                        bfsOrder.push_back(entry.getColumn());
                     }
                 }
             }
