@@ -64,10 +64,10 @@ def example1(project_path):
         prop = quotient.specification.all_properties()[0]
         result = mdp.model_check_property(prop)
         print(f"Found {new_family} with value {result}")
-        print(f"Considered {p.considered_models} models")
     else:
         print("unsat")
-        print(f"Considered {p.considered_models} models")
+    print(f"Considered {p.considered_models} models")
+    print(f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)")
 
     # draw_curve(num_bits, variables, s, p, model)
 

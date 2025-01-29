@@ -6,6 +6,7 @@ from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
 from stormpy import model_checking
+import random
 
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(self, solver, quotient):
@@ -20,6 +21,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.decide = None
         self.add_final(self._final)
         
+        # models we have already analyzed
+        self.accepting_models = set()
+        self.rejecting_models = set()
         # stack of fixed values
         self.fixed_values = []
         # stack of scopes
@@ -28,9 +32,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.partial_model = {}
         # list of Z3 variables, indexed by PAYNT hole
         self.variables = []
-
-        # keep a set of analysed models
-        self.analysed_models = set()
 
         self.considered_models = 0
         # self.ruled_out_models = 0
@@ -70,6 +71,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.last_decision_variable = None
 
         self.best_value = 0.0
+
+        self.mdp_fails_and_wins = [0, 0]
     
     def register_variables(self, variables):
         assert not self.vars_registered
@@ -83,12 +86,22 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.fixed_count.append(len(self.fixed_values))
         # print("PUSH", self.fixed_count)
         # print("push -> analyse current model", self.partial_model)
-        model_as_list = tuple([self.partial_model[var] if var in self.partial_model else None for var in self.variables])
-        if model_as_list in self.analysed_models:
+        frozen_partial_model = frozenset(self.partial_model.items())
+        if not (len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]):
             return
-        self.analysed_models.add(model_as_list)
-        if len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]:
-            self.analyse_current_model()
+        if frozen_partial_model in self.rejecting_models:
+            # we already know this model rejects
+            # we also know this if any model above rejects, which we could check with subsets
+            # but this is slow and Z3 doesn't go here in that case
+            return
+        if frozen_partial_model in self.accepting_models:
+            # we already know this model accepts
+            return
+        all_violated = self.analyse_current_model()
+        if all_violated:
+            self.rejecting_models.add(frozen_partial_model)
+        else:
+            self.accepting_models.add(frozen_partial_model)
 
     def pop(self, num_scopes):
         for _scope in range(num_scopes):
@@ -98,11 +111,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.partial_model.pop(self.fixed_values.pop())
 
     def _fixed(self, ast, value):
-        self.fixed_values.append(ast)
-        self.partial_model[ast] = value
+        ast_str = str(ast)
+        self.fixed_values.append(ast_str)
+        self.partial_model[ast_str] = value
         # otherwise: this is just a propagation, no need to check anything here
 
-    def analyse_current_model(self, last_fixed_var=None):
+    def analyse_current_model(self):
         # print("Analyse current model", self.partial_model)
         # # Check model count if it's worth it to check MDP
         # if len(self.partial_model) < len(self.variables):
@@ -112,13 +126,11 @@ class SearchMarkovChain(z3.UserPropagateBase):
         #     if len(self.partial_model) < len(self.variables) and models_in_tree < 16:
         #         return
         model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
-        # if model == "MDP":
-        #     return
 
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
         for hole in range(new_family.num_holes):
-            var = self.variables[hole]
+            var = str(self.variables[hole])
             if var in self.partial_model:
                 new_family.hole_set_options(hole, [self.partial_model[var].as_long()])
 
@@ -127,22 +139,25 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         self.considered_models += 1
 
+        if model == "MDP":
+            if all_violated:
+                self.mdp_fails_and_wins[1] += 1
+            else:
+                self.mdp_fails_and_wins[0] += 1
+
         if all_violated:
-            counterexample_partial_model = {
-                self.variables[c]: self.partial_model[self.variables[c]] for c in counterexample
-            }
-            # print(f"Found counterexample {counterexample_partial_model} while having {len(self.partial_model)} variables fixed: {self.partial_model}")
-            term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
-            # print(f"Propagate {term}")
-            # self.propagate(term, [])
             self.conflict([self.variables[c] for c in counterexample])
-            self.model_counter.solver.add(term)
+            # term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
+            # self.model_counter.solver.add(term)
 
             model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
             if len(counterexample) < len(self.fixed_values):
                 self.reasons.append(f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}")
             else:
                 self.reasons.append(f"{model} reject {len(self.fixed_values)}")
+            return True
+        else:
+            return False
 
     def fresh(self, new_ctx):
         pass

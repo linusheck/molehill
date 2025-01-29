@@ -56,12 +56,9 @@ def check(matrix_generator, choice_to_assignment, family, prop):
             if all_schedulers_violate:
                 # yaay we have a counterexample!!
                 counterexample_holes = [hole for hole in fixed_holes if hole not in abstracted_holes]
-                # print("Counterexample found", counterexample_holes, family)
                 return all_schedulers_violate, counterexample_holes, result
             # abstract fewer holes
-            ## TODO this might be useful - recompute order?
-            # new_bfs_order = matrix_generator.get_current_bfs_order()
-            # abstracted_holes = hole_order(new_bfs_order, choice_to_assignment, abstracted_holes)
+            # TODO check if the abstracted hole actually removes nondeterminism
             abstracted_holes = abstracted_holes[1:]
             if len(abstracted_holes) == 0:
                 break
