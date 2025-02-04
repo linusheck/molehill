@@ -1,30 +1,27 @@
 #pragma once
+#include <algorithm>
+#include <cassert>
+#include <storm/modelchecker/hints/ExplicitModelCheckerHint.h>
+#include <storm/storage/BitVector.h>
 #include <storm/utility/constants.h>
 #include <vector>
-#include <algorithm>
-#include <storm/storage/BitVector.h>
-#include <cassert>
-#include <vector>
-#include <storm/modelchecker/hints/ExplicitModelCheckerHint.h>
 
 /**
  * @brief Get possible choices for a given set of abstracted holes
- * 
- * @param choiceToAssignment 
- * @param abstractedHoles 
- * @param holeOptions 
- * @return storm::storage::BitVector 
+ *
+ * @param choiceToAssignment
+ * @param abstractedHoles
+ * @param holeOptions
+ * @return storm::storage::BitVector
  */
-storm::storage::BitVector getPossibleChoices(
-    const std::vector<std::vector<std::pair<int, int>>>& choiceToAssignment,
-    const storm::storage::BitVector& abstractedHoles,
-    const std::vector<storm::storage::BitVector>& holeOptions) {
+storm::storage::BitVector getPossibleChoices(const std::vector<std::vector<std::pair<int, int>>> &choiceToAssignment,
+                                             const storm::storage::BitVector &abstractedHoles, const std::vector<storm::storage::BitVector> &holeOptions) {
     storm::storage::BitVector selectedChoices(choiceToAssignment.size(), false);
     uint64_t choice = 0;
-    for (auto const& holeToAssignment : choiceToAssignment) {
+    for (auto const &holeToAssignment : choiceToAssignment) {
         bool possible = true;
         bool holeAbstracted = false;
-        for (auto const& [hole, assignment] : holeToAssignment) {
+        for (auto const &[hole, assignment] : holeToAssignment) {
             if (abstractedHoles.get(hole)) {
                 holeAbstracted = true;
                 break;
@@ -45,13 +42,10 @@ storm::storage::BitVector getPossibleChoices(
 }
 
 template<typename ValueType>
-storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(
-    const std::vector<ValueType>& result,
-    const storm::storage::BitVector& oldReachableStates,
-    const storm::storage::BitVector& newReachableStates) {
-    
+storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(const std::vector<ValueType> &result, const storm::storage::BitVector &oldReachableStates,
+                                                                     const storm::storage::BitVector &newReachableStates) {
     assert(oldReachableStates.getNumberOfSetBits() == result.size());
-    
+
     std::vector<double> hintValues(newReachableStates.getNumberOfSetBits());
     for (uint64_t state : newReachableStates) {
         if (oldReachableStates[state]) {
@@ -60,7 +54,7 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(
             hintValues.push_back(storm::utility::zero<ValueType>());
         }
     }
-    
+
     storm::modelchecker::ExplicitModelCheckerHint<ValueType> hint;
     hint.setResultHint(hintValues);
     return hint;

@@ -9,8 +9,9 @@ import math
 
 # from molehill.curve_drawer import draw_curve
 from molehill.plugin import SearchMarkovChain
+import argparse
 
-def example1(project_path):
+def run(project_path, image):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
@@ -36,18 +37,9 @@ def example1(project_path):
         s.add(z3.And(var >= z3.BitVecVal(min(options), num_bits), var <= z3.BitVecVal(max(options), num_bits)))
 
     # add test z3 constraints
-    # M_0_1=0, M_1_1=0, M_2_1=0, M_3_1=0, P_0_1=1, P_1_1=1, P_2_1=1, P_3_1=1
-    # s.add(variables[0] == 0)
-    # s.add(variables[1] == 0)
-    # s.add(variables[2] == 0)
-    # s.add(variables[3] == 0)
-    # s.add(variables[4] == 1)
-    # s.add(variables[5] == 1)
-    # s.add(variables[6] == 1)
-    # s.add(variables[7] == 1)
-    #[[0, 3, 4]]
+    s.add(variables[0] + variables[1] == variables[2])
 
-    p = SearchMarkovChain(s, quotient)
+    p = SearchMarkovChain(s, quotient, draw_image=image)
     p.register_variables(variables)
     print(variables)
     model = None
@@ -71,7 +63,14 @@ def example1(project_path):
     if sum(p.mdp_fails_and_wins) > 0:
         print(f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)")
 
-    # draw_curve(num_bits, variables, s, p, model)
+    if image:
+        print("Drawing image")
+        from molehill.curve_drawer import draw_curve
+        draw_curve(num_bits, variables, s, p, model)
 
 if __name__ == "__main__":
-    example1(sys.argv[1])
+    parser = argparse.ArgumentParser(description="Run the Markov Chain search on a given project path.")
+    parser.add_argument("project_path", type=str, help="The path to the project directory.")
+    parser.add_argument("--image", action="store_true", help="Generate an image of the curve.")
+    args = parser.parse_args()
+    run(args.project_path, args.image)

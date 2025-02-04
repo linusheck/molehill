@@ -5,11 +5,10 @@ import z3
 from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
-from stormpy import model_checking
-import random
+from stormpy import model_checking, CheckTask
 
 class SearchMarkovChain(z3.UserPropagateBase):
-    def __init__(self, solver, quotient):
+    def __init__(self, solver, quotient, draw_image=False):
         super().__init__(solver, None)
         # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
         self.quotient = quotient
@@ -44,7 +43,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         quotient.build(quotient.family)
 
         prop = self.quotient.specification.all_properties()[0]
-        # open("whole_mdp.dot", "w").write(self.quotient.family.mdp.model.to_dot())
         # does there exist a model that satisfies the property?
         result = self.quotient.family.mdp.model_check_property(prop)
         self.global_bounds = result.result.get_values()
@@ -65,8 +63,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # TODO make this call general
         target_state = model_checking(self.quotient.family.mdp.model, prop.formula.subformula.subformula).get_truth_values()
 
+        self.check_task = CheckTask(prop.formula)
         # get type of MatrixGenerator constructor
-        self.matrix_generator = MatrixGenerator(self.quotient.family.mdp.model, target_state, self.global_bounds, self.choice_to_assignment)
+        self.matrix_generator = MatrixGenerator(self.quotient.family.mdp.model, self.check_task, target_state, self.global_bounds, self.choice_to_assignment)
 
         print("Quotient size", self.quotient.family.mdp.model.transition_matrix.nr_rows)
         
@@ -75,6 +74,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.best_value = 0.0
 
         self.mdp_fails_and_wins = [0, 0]
+        
+        self.draw_image = draw_image
+        if self.draw_image:
+            self.image_assertions = []
     
     def register_variables(self, variables):
         assert not self.vars_registered
@@ -88,8 +91,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.fixed_count.append(len(self.fixed_values))
         # print("PUSH", self.fixed_count)
         # print("push -> analyse current model", self.partial_model)
-
         return
+
         frozen_partial_model = frozenset(self.partial_model.items())
         if not (len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]):
             return
@@ -152,7 +155,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
         if all_violated:
             self.conflict([self.variables[c] for c in counterexample])
             print("Counterexample", counterexample)
-            # term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
+            if self.draw_image:
+                term = z3.Not(z3.And([self.variables[c] == self.partial_model[str(self.variables[c])] for c in counterexample]))
+                self.image_assertions.append(term)
             # self.model_counter.solver.add(term)
 
             model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"

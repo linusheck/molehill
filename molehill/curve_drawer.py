@@ -42,7 +42,7 @@ def draw_curve(num_bits, variables, s, p, model=None, gif=True):
     print(size, size)
     image = Image.new("RGBA", (size, size), "black")
     pixels = image.load()
-    new_assertions = p.model_counter.solver.assertions()[len(s.assertions()):]
+    new_assertions = p.image_assertions
     N = len(new_assertions)
     images = []
     possible_models = set([i for i in range(2**(actual_bits * len(variables)))])
@@ -72,9 +72,9 @@ def draw_curve(num_bits, variables, s, p, model=None, gif=True):
         # make a table of four colors that fit (245, 245, 220, 255)
         high_contrast_colors = [
             (31, 119, 180, 255),  # Blue
-            (255, 127, 14, 255),  # Orange
+            (174, 199, 232, 255), # Light Blue
             (44, 160, 44, 255),   # Green
-            (214, 39, 40, 255)    # Red
+            (152, 223, 138, 255)  # Light Green
         ]
         reasons = [
             "DTMC reject",
@@ -85,12 +85,15 @@ def draw_curve(num_bits, variables, s, p, model=None, gif=True):
 
         # color = plt.cm.ocean(float(i) / float(len(new_assertions)))
         color = (255, 0, 0, 255)
-        if i < len(p.reasons):
-            reason = p.reasons[i]
-            for j, r in enumerate(reasons):
-                if r in reason:
-                    color = high_contrast_colors[j]
-                    break
+        if i < len(p.reasons) + 1:
+            if i == 0:
+                color = (245, 245, 220, 255)
+            else:
+                reason = p.reasons[i - 1]
+                for j, r in enumerate(reasons):
+                    if r in reason:
+                        color = high_contrast_colors[j - 1]
+                        break
 
         # ints = tuple([int(255 * x) for x in color])
         add_pixels(pixels, size, ruled_out_models, color)
@@ -107,8 +110,10 @@ def draw_curve(num_bits, variables, s, p, model=None, gif=True):
             new_image.paste(copied_image, (0, 0))
             # write reason into image
             draw = ImageDraw.Draw(new_image)
-            if i < len(p.reasons):
-                draw.text((0, size * 10), p.reasons[i]+f"\n{len(possible_models)} models left\n"+str(new_assertions[i]), font=font, fill="black")
+            if i == 0:
+                draw.text("Z3")
+            elif i < len(p.reasons) + 1:
+                draw.text((0, size * 10), p.reasons[i-1]+f"\n{len(possible_models)} models left\n"+str(new_assertions[i]), font=font, fill="black")
             elif model is not None:
                 draw.text((0, size * 10), "model found:" + "\n".join([f"{var}={model.eval(var)}" for var in variables]), font=font, fill="black")
             images.append(new_image)
