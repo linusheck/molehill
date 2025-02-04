@@ -67,6 +67,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         # get type of MatrixGenerator constructor
         self.matrix_generator = MatrixGenerator(self.quotient.family.mdp.model, target_state, self.global_bounds, self.choice_to_assignment)
+
+        print("Quotient size", self.quotient.family.mdp.model.transition_matrix.nr_rows)
         
         self.last_decision_variable = None
 
@@ -86,6 +88,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.fixed_count.append(len(self.fixed_values))
         # print("PUSH", self.fixed_count)
         # print("push -> analyse current model", self.partial_model)
+
+        return
         frozen_partial_model = frozenset(self.partial_model.items())
         if not (len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]):
             return
@@ -147,6 +151,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         if all_violated:
             self.conflict([self.variables[c] for c in counterexample])
+            print("Counterexample", counterexample)
             # term = z3.Not(z3.And([self.variables[c] == counterexample_partial_model[self.variables[c]] for c in counterexample]))
             # self.model_counter.solver.add(term)
 

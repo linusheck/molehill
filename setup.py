@@ -20,7 +20,7 @@ class CMakeBuild(build_ext):
             subprocess.check_call(["git", "fetch"], cwd=folder)
             subprocess.check_call(["git", "reset", "--hard", f"origin/{branch}"], cwd=folder)
 
-    def build_extension(self, ext):
+    def build_extension(self, ext, debug=False):
         print("sys executable", sys.executable)
         subprocess.check_call([sys.executable, "-m", "ensurepip"])
 
@@ -52,7 +52,7 @@ class CMakeBuild(build_ext):
             f"-DPYBIND_VERSION={pycarl_pybind_version}",
             "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
             # set mode to release with debug info
-            "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+            "-DCMAKE_BUILD_TYPE={}".format("Debug" if debug else "Release"),
         ]
 
         subprocess.check_call(["cmake", ext.sourcedir] + cmake_args, cwd=build_temp)

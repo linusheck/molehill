@@ -50,7 +50,7 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(
     const storm::storage::BitVector& oldReachableStates,
     const storm::storage::BitVector& newReachableStates) {
     
-    assert(oldReachableStates.size() == result.size());
+    assert(oldReachableStates.getNumberOfSetBits() == result.size());
     
     std::vector<double> hintValues(newReachableStates.getNumberOfSetBits());
     for (uint64_t state : newReachableStates) {

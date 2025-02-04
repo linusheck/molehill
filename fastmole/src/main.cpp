@@ -1,3 +1,5 @@
+#include <pybind11/cast.h>
+#include <pybind11/pytypes.h>
 #include <string>
 #include <vector>
 #include <pybind11/pybind11.h>
@@ -33,7 +35,7 @@ PYBIND11_MODULE(fastmole, m) {
     // Create bindings for MatrixGenerator
     py::class_<MatrixGenerator<double>>(m, "MatrixGenerator")
         .def(py::init<const storm::models::sparse::Mdp<double>&, storm::storage::BitVector, const std::vector<double>&, const std::vector<std::vector<std::pair<int, int>>>&>())
-        .def("build_submodel", &MatrixGenerator<double>::buildSubModel, py::arg("abstracted_holes"), py::arg("hole_options"), "Build sub model")
+        .def("build_submodel", &MatrixGenerator<double>::buildSubModel, py::arg("abstracted_holes"), py::arg("hole_options"), py::arg("reachable_states") = py::none(), "Build sub model")
         .def("get_current_mdp", &MatrixGenerator<double>::getCurrentMDP, "Get current MDP")
         .def("get_current_reachable_states", &MatrixGenerator<double>::getCurrentReachableStates, "Get current reachable states")
         .def("get_current_bfs_order", &MatrixGenerator<double>::getCurrentBFSOrder, "Get current BFS order");

@@ -36,14 +36,15 @@ def example1(project_path):
         s.add(z3.And(var >= z3.BitVecVal(min(options), num_bits), var <= z3.BitVecVal(max(options), num_bits)))
 
     # add test z3 constraints
-    # # M_0_1=0, M_1_1=0, M_2_1=2, M_3_1=2, P_0_1=4
-    # s.add(variables[0] == 2)
-    # s.add(variables[1] == 1)
-    # s.add(variables[2] == 1)
-    # s.add(variables[3] == 3)
+    # M_0_1=0, M_1_1=0, M_2_1=0, M_3_1=0, P_0_1=1, P_1_1=1, P_2_1=1, P_3_1=1
+    # s.add(variables[0] == 0)
+    # s.add(variables[1] == 0)
+    # s.add(variables[2] == 0)
+    # s.add(variables[3] == 0)
     # s.add(variables[4] == 1)
-    # s.add(variables[5] == 3)
-    # s.add(variables[6] == 2)
+    # s.add(variables[5] == 1)
+    # s.add(variables[6] == 1)
+    # s.add(variables[7] == 1)
     #[[0, 3, 4]]
 
     p = SearchMarkovChain(s, quotient)
@@ -67,7 +68,8 @@ def example1(project_path):
     else:
         print("unsat")
     print(f"Considered {p.considered_models} models")
-    print(f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)")
+    if sum(p.mdp_fails_and_wins) > 0:
+        print(f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)")
 
     # draw_curve(num_bits, variables, s, p, model)
 

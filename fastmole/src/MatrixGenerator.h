@@ -19,7 +19,12 @@ public:
      * @param completeTransitionMatrix The quotient MDP's transition matrix. Must be topologically sorted.
      * @param globalBounds 
      */
-    MatrixGenerator<ValueType>(const storm::models::sparse::Mdp<ValueType>& quotient, storm::storage::BitVector targetStates, const std::vector<ValueType>& globalBounds, const std::vector<std::vector<std::pair<int, int>>>& choiceToAssignment);
+    MatrixGenerator<ValueType>(
+        const storm::models::sparse::Mdp<ValueType>& quotient,
+        storm::storage::BitVector targetStates,
+        const std::vector<ValueType>& globalBounds,
+        const std::vector<std::vector<std::pair<int, int>>>& choiceToAssignment
+    );
 
     /**
      * @brief Builds a sub-model of the decision matrix, representing an MDP * with holes.
@@ -31,7 +36,8 @@ public:
      */
      void buildSubModel(
         const storm::storage::BitVector& abstractedHoles,
-        const std::vector<storm::storage::BitVector>& holeOptions
+        const std::vector<storm::storage::BitVector>& holeOptions,
+        const std::optional<storm::storage::BitVector>& reachableStatesFixed = std::nullopt
     );
 
     /**
