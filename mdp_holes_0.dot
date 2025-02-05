@@ -1,0 +1,14 @@
+digraph model {
+	0 [ label = "0: {init, s0}" ];
+	1 [ label = "1: {counterexample_target}" ];
+	2 [ label = "2: {counterexample_target}" ];
+	"0c0" [shape = "point"];
+	0 -> "0c0";
+	"0c0" -> 2 [ label= "1" ];
+	"1c0" [shape = "point"];
+	1 -> "1c0";
+	"1c0" -> 1 [ label= "1" ];
+	"2c0" [shape = "point"];
+	2 -> "2c0";
+	"2c0" -> 2 [ label= "1" ];
+}

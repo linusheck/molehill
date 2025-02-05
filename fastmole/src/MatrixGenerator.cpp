@@ -7,6 +7,7 @@
 #include <storm/models/sparse/StandardRewardModel.h>
 #include <storm/storage/BitVector.h>
 #include <storm/storage/sparse/ModelComponents.h>
+#include <storm/utility/constants.h>
 #include <storm/utility/macros.h>
 #include <vector>
 
@@ -16,8 +17,12 @@ MatrixGenerator<ValueType>::MatrixGenerator(const storm::models::sparse::Mdp<Val
                                             const storm::storage::BitVector &targetStates, const std::vector<ValueType> &globalBounds,
                                             const std::vector<std::vector<std::pair<int, int>>> &choiceToAssignment)
     : quotient(quotient), checkTask(checkTask), targetStates(targetStates), globalBounds(globalBounds), choiceToAssignment(choiceToAssignment) {
-    decisionMatrix = buildDecisionMatrix();
+    this->decisionMatrix = std::move(buildDecisionMatrix());
+    if (this->rewards && this->rewards->size() != this->decisionMatrix.getRowCount()) {
+        throw std::runtime_error("Invalid size of rewards");
+    }
 }
+
 template<typename ValueType>
 storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisionMatrix() {
     auto const &completeTransitionMatrix = quotient.getTransitionMatrix();
@@ -31,33 +36,18 @@ storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisio
     }
     bool checkRewards = checkTask.getFormula().isRewardOperatorFormula();
 
-    ValueType maximumReward = storm::utility::one<ValueType>();
-    // if (checkRewards) {
-    //     // auto const& rewardModel = quotient.getRewardModel(checkTask.getRewardModel());
-    //     auto const& rewardModel = quotient.getUniqueRewardModel();
-
-    //     if (!rewardModel.hasStateActionRewards()) {
-    //         throw std::runtime_error("Reward model must only have state actions rewards");
-    //     }
-    //     auto const &stateRewards = rewardModel.getStateActionRewardVector();
-    //     if (stateRewards.size() != completeTransitionMatrix.getRowCount()) {
-    //         throw std::runtime_error("Invalid size of state rewards");
-    //     }
-    //     maximumReward = storm::utility::zero<ValueType>();
-    //     for (auto const &reward : stateRewards) {
-    //         if (reward > maximumReward) {
-    //             maximumReward = reward;
-    //         }
-    //     }
-
-    //     std::vector<ValueType> newRewards(stateRewards.size() + 2, storm::utility::zero<ValueType>());
-    //     // Copy the rewards
-    //     for (std::size_t i = 0; i < stateRewards.size(); ++i) {
-    //         newRewards[i] = stateRewards[i];
-    //     }
-    //     // Give the second-to-last state the maximum reward
-    //     newRewards[stateRewards.size()] = maximumReward;
-    // }
+    std::optional<std::vector<ValueType>> stateActionRewardVector;
+    if (checkRewards) {
+        auto const& rewardModel = quotient.getRewardModel(checkTask.getRewardModel());
+        if (!rewardModel.hasStateActionRewards()) {
+            throw std::runtime_error("Reward model must only have state actions rewards");
+        }
+        stateActionRewardVector = rewardModel.getStateActionRewardVector();
+        if (stateActionRewardVector->size() != completeTransitionMatrix.getRowCount()) {
+            throw std::runtime_error("Invalid size of state rewards");
+        }
+        this->rewards = std::vector<ValueType>();
+    }
 
     // The decision matrix has one additional row and column for the hole
     // inclusion.
@@ -69,22 +59,27 @@ storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisio
             for (const auto &entry : completeTransitionMatrix.getRow(row)) {
                 builder.addNextValue(newRowCounter, entry.getColumn(), entry.getValue());
             }
+            if (this->rewards) {
+                this->rewards->push_back(stateActionRewardVector->at(row));
+            }
             ++newRowCounter;
         }
-        builder.addNextValue(newRowCounter, zeroState, storm::utility::one<ValueType>() - (globalBounds[state] / maximumReward));
-        builder.addNextValue(newRowCounter, oneState, (globalBounds[state] / maximumReward));
+        if (this->rewards) {
+            builder.addNextValue(newRowCounter, oneState, storm::utility::one<ValueType>());
+            this->rewards->push_back(globalBounds[state]);
+        } else {
+            builder.addNextValue(newRowCounter, zeroState, storm::utility::one<ValueType>() - globalBounds[state]);
+            builder.addNextValue(newRowCounter, oneState, globalBounds[state]);
+        }
         ++newRowCounter;
     }
     builder.newRowGroup(newRowCounter);
-    if (checkRewards) {
-        // Here, we collect the reward, then go to good state
-        builder.addNextValue(newRowCounter, oneState, storm::utility::one<ValueType>());
-    } else {
-        // Here, we never reach the good state
-        builder.addNextValue(newRowCounter, zeroState, storm::utility::one<ValueType>());
-    }
+    builder.addNextValue(newRowCounter, zeroState, storm::utility::one<ValueType>());
     builder.newRowGroup(newRowCounter + 1);
     builder.addNextValue(newRowCounter + 1, oneState, storm::utility::one<ValueType>());
+
+    this->rewards->push_back(storm::utility::zero<ValueType>());
+    this->rewards->push_back(storm::utility::zero<ValueType>());
 
     return builder.build();
 }
@@ -179,6 +174,9 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
 
         currentBFSOrder = bfsOrder;
     } else {
+        // WARNING: I'm not using this code path right now, it might be broken.
+        // I still think it's a good idea to keep it around for now.
+        std::runtime_error("Using fixed reachable states is not supported right now");
         if (reachableStatesFixed->size() != decisionMatrix.getColumnCount()) {
             throw std::runtime_error("Invalid size of reachable states");
         }
@@ -245,9 +243,26 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
         }
         reachableStatesIterator++;
     }
+    if (this->rewards) {
+        // Target is the zeroState (we collect reward at oneState before)
+        stateLabeling.addLabelToState("counterexample_target", submatrix.getColumnCount() - 2);
+    }
+    // Target is the oneState
     stateLabeling.addLabelToState("counterexample_target", submatrix.getColumnCount() - 1);
 
-    storm::storage::sparse::ModelComponents<ValueType> modelComponents(submatrix, stateLabeling);
+    std::unordered_map<std::string, storm::models::sparse::StandardRewardModel<ValueType>> rewardModels;
+    if (this->rewards) {
+        std::vector<ValueType> filteredRewards(submatrix.getRowCount(), storm::utility::zero<ValueType>());
+        auto includeIterator = includeRowBitVector.begin();
+        for (std::size_t row = 0; row < submatrix.getRowCount(); ++row) {
+            filteredRewards[row] = this->rewards->at(*includeIterator);
+            includeIterator++;
+        }
+        storm::models::sparse::StandardRewardModel<ValueType> rewardModel(std::nullopt, filteredRewards);
+        rewardModels[checkTask.getRewardModel()] = rewardModel;
+    }
+
+    storm::storage::sparse::ModelComponents<ValueType> modelComponents(submatrix, stateLabeling, rewardModels);
 
     currentMDP = storm::models::sparse::Mdp<ValueType>(modelComponents);
     currentReachableStates = reachableStates;

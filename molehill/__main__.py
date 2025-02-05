@@ -37,7 +37,9 @@ def run(project_path, image):
         s.add(z3.And(var >= z3.BitVecVal(min(options), num_bits), var <= z3.BitVecVal(max(options), num_bits)))
 
     # add test z3 constraints
-    s.add(variables[0] + variables[1] == variables[2])
+    # s.add(variables[0] + variables[1] == variables[2])
+    # s.add(variables[0] == 0)
+    # s.add(variables[1] == 0)
 
     p = SearchMarkovChain(s, quotient, draw_image=image)
     p.register_variables(variables)
@@ -51,7 +53,7 @@ def run(project_path, image):
         for hole in range(new_family.num_holes):
             var = variables[hole]
             new_family.hole_set_options(hole, [model.eval(var).as_long()])
-        # check DTMC
+        # re-check DTMC
         quotient.build(new_family)
         mdp = new_family.mdp
         prop = quotient.specification.all_properties()[0]

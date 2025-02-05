@@ -1,7 +1,8 @@
 #pragma once
 #include <optional>
-#include <storm/modelchecker/CheckTask.h>
 #include <vector>
+#include <map>
+#include <storm/modelchecker/CheckTask.h>
 #include "storm/adapters/RationalFunctionAdapter.h"
 #include "storm/models/sparse/Mdp.h"
 #include "storm/models/sparse/StateLabeling.h"
@@ -87,5 +88,6 @@ class MatrixGenerator {
     storm::storage::BitVector targetStates;
     std::vector<ValueType> globalBounds;
     storm::storage::SparseMatrix<ValueType> decisionMatrix;
+    std::optional<std::vector<ValueType>> rewards;
     storm::modelchecker::CheckTask<storm::logic::Formula, ValueType> checkTask;
 };

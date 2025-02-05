@@ -4,23 +4,24 @@ dtmc
 const double p=0.4;
 const double q=0.8;
 
-hole int x1 in {1,2,3,4};
-hole int x2 in {1,2,3,4};
+hole int x1 in {4,5,6};
+hole int x2 in {4,5,6};
 
 module die
 	// local state
 	s : [0..7] init 0;
 
 	[] s=0 -> q : (s'=x1) + 1-q : (s'=1);
-	[] s=1 -> p : (s'=x2) + 1-p : (s'=2);
+	[] s=1 -> p : (s'=x2) + 1-p : (s'=3);
 	[] s=3 -> 0.1 : (s'=x1) + 0.9 : (s'=x2);
 	[] s=4 -> 0.25 : (s'=5) + 0.75 : (s'=6);
 	[] s=5 -> 1: (s'=7);
 	[] s=6 -> 1: (s'=7);
+	[] s=7 -> 1: (s'=7);
 endmodule
 
 rewards "coin_flips"
-	true : 1;
+	s<7 : 1;
 endrewards
 
 label "s0" = s=0;
@@ -29,4 +30,4 @@ label "s2" = s=2;
 label "s3" = s=3;
 label "s4" = s=4;
 label "s5" = s=5;
-label "done" = s=6;
+label "done" = s=7;
