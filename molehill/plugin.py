@@ -7,6 +7,7 @@ from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
 from stormpy import model_checking, CheckTask
 
+
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(self, solver, quotient, draw_image=False):
         super().__init__(solver, None)
@@ -19,7 +20,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # TODO decide is broken in Z3, do we need it?
         self.decide = None
         self.add_final(self._final)
-        
+
         # models we have already analyzed
         self.accepting_models = set()
         self.rejecting_models = set()
@@ -46,38 +47,47 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # does there exist a model that satisfies the property?
         result = self.quotient.family.mdp.model_check_property(prop)
         self.global_bounds = result.result.get_values()
-        
-        self.complete_transition_matrix = self.quotient.family.mdp.model.transition_matrix
+
+        self.complete_transition_matrix = (
+            self.quotient.family.mdp.model.transition_matrix
+        )
         assert len(self.quotient.family.mdp.model.initial_states) == 1
 
         # run this model counter alongside and feed it all new assertions
         self.model_counter = ModelCounter()
         for a in solver.assertions():
             self.model_counter.solver.add(a)
-        
+
         # reasons for new assertion
         self.reasons = []
 
         self.fixed_something = False
 
         # TODO make this call general
-        target_state = model_checking(self.quotient.family.mdp.model, prop.formula.subformula.subformula).get_truth_values()
+        target_state = model_checking(
+            self.quotient.family.mdp.model, prop.formula.subformula.subformula
+        ).get_truth_values()
 
         self.check_task = CheckTask(prop.formula)
         # get type of MatrixGenerator constructor
-        self.matrix_generator = MatrixGenerator(self.quotient.family.mdp.model, self.check_task, target_state, self.global_bounds, self.choice_to_assignment)
+        self.matrix_generator = MatrixGenerator(
+            self.quotient.family.mdp.model,
+            self.check_task,
+            target_state,
+            self.global_bounds,
+            self.choice_to_assignment,
+        )
 
-        
         self.last_decision_variable = None
 
         self.best_value = 0.0
 
         self.mdp_fails_and_wins = [0, 0]
-        
+
         self.draw_image = draw_image
         if self.draw_image:
             self.image_assertions = []
-    
+
     def register_variables(self, variables):
         assert not self.vars_registered
         self.vars_registered = True
@@ -90,9 +100,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.fixed_count.append(len(self.fixed_values))
         # print("PUSH", self.fixed_count)
         # print("push -> analyse current model", self.partial_model)
-
         frozen_partial_model = frozenset(self.partial_model.items())
-        if not (len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]):
+        if not (
+            len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]
+        ):
             return
         if frozen_partial_model in self.rejecting_models:
             # we already know this model rejects
@@ -122,7 +133,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # otherwise: this is just a propagation, no need to check anything here
 
     def analyse_current_model(self):
-        # print("Analyse current model", self.partial_model)
+        print("Analyse current model", self.partial_model)
         # # Check model count if it's worth it to check MDP
         # if len(self.partial_model) < len(self.variables):
         #     models_in_tree = self.model_counter.count_models(max_models=16, condition=z3.And([key == value for key, value in self.partial_model.items()]))
@@ -140,7 +151,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 new_family.hole_set_options(hole, [self.partial_model[var].as_long()])
 
         prop = self.quotient.specification.all_properties()[0]
-        all_violated, counterexample, result = check(self.matrix_generator, self.choice_to_assignment, new_family, prop)
+        all_violated, counterexample, _result = check(
+            self.matrix_generator, self.choice_to_assignment, new_family, prop
+        )
 
         self.considered_models += 1
 
@@ -152,15 +165,24 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         if all_violated:
             self.conflict([self.variables[c] for c in counterexample])
-            # print("Counterexample", counterexample, result.get_values())
             if self.draw_image:
-                term = z3.Not(z3.And([self.variables[c] == self.partial_model[str(self.variables[c])] for c in counterexample]))
+                term = z3.Not(
+                    z3.And(
+                        [
+                            self.variables[c]
+                            == self.partial_model[str(self.variables[c])]
+                            for c in counterexample
+                        ]
+                    )
+                )
                 self.image_assertions.append(term)
             # self.model_counter.solver.add(term)
 
             model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
             if len(counterexample) < len(self.fixed_values):
-                self.reasons.append(f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}")
+                self.reasons.append(
+                    f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}"
+                )
             else:
                 self.reasons.append(f"{model} reject {len(self.fixed_values)}")
             return True
@@ -176,10 +198,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
     def _eq(self, e, ids):
         pass
-    
+
     # def _decide(self, a, b, c):
     #     self.last_decision_variable = a
-    
+
     def _final(self):
         # print("final -> analyse current model", self.partial_model)
         self.analyse_current_model()

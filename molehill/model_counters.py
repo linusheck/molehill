@@ -1,7 +1,9 @@
 import z3
 
+
 class ModelEnumeratingPlugin(z3.UserPropagateBase):
     """Z3 plugin that enumerates all models."""
+
     def __init__(self, solver):
         super().__init__(solver, None)
         self.vars_registered = False
@@ -35,19 +37,23 @@ class ModelEnumeratingPlugin(z3.UserPropagateBase):
 
     def _final(self):
         if len(self.fixed_values) == len(self.variables):
-            self.models.add(tuple(sorted(list(self.partial_model.items()), key=lambda x: str(x[0]))))
+            self.models.add(
+                tuple(sorted(list(self.partial_model.items()), key=lambda x: str(x[0])))
+            )
             self.conflict(self.fixed_values)
+
 
 class ModelCountingPlugin(z3.UserPropagateBase):
     """Z3 plugin that counts the number of models. Used by remaining_models."""
-    def __init__(self, solver, max_models = None):
+
+    def __init__(self, solver, max_models=None):
         super().__init__(solver, None)
         self.vars_registered = False
         self.add_fixed(self._fixed)
         self.add_final(self._final)
         self.reset(max_models=max_models)
-    
-    def reset(self, max_models = None):
+
+    def reset(self, max_models=None):
         self.models = []
         self.fixed_values = []
         self.fixed_count = []
@@ -80,14 +86,16 @@ class ModelCountingPlugin(z3.UserPropagateBase):
             if self.max_models is None or self.num_models < self.max_models:
                 self.conflict(self.fixed_values)
 
+
 class ModelCounter:
     """Holds a Z3 solver that counts the number of models."""
+
     def __init__(self):
         self.solver = z3.Solver()
         # this gets set when variables are registered
         self.variables = None
 
-    def count_models(self, max_models = None, condition = None):
+    def count_models(self, max_models=None, condition=None):
         """Count the number of models of a solver."""
         assertions = self.solver.assertions()
         self.solver.reset()

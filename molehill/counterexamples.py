@@ -1,6 +1,11 @@
 """Compute counterexamples."""
 
-from stormpy import check_model_sparse, model_checking, parse_properties_without_context, get_reachable_states
+from stormpy import (
+    check_model_sparse,
+    model_checking,
+    parse_properties_without_context,
+    get_reachable_states,
+)
 from stormpy.storage import BitVector
 from stormpy.core import ExplicitModelCheckerHintDouble
 import stormpy.storage
@@ -8,19 +13,29 @@ import stormpy.core
 from fastmole import hint_convert
 from pycarl.gmp import Rational
 
+
 def _check_model(mdp, prop, hint):
     exact_environment = stormpy.core.Environment()
-    exact_environment.solver_environment.minmax_solver_environment.precision = Rational(1e-4)
-    exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.optimistic_value_iteration
+    exact_environment.solver_environment.minmax_solver_environment.precision = Rational(
+        1e-4
+    )
+    # exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.optimistic_value_iteration
     # exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.sound_value_iteration
 
     # TODO hack (i hate properties)
-    new_prop = parse_properties_without_context(str(prop.formula).split()[0] + " [ F \"counterexample_target\" ]")[0]
+    new_prop = parse_properties_without_context(
+        str(prop.formula).split()[0] + ' [ F "counterexample_target" ]'
+    )[0]
 
-    result = check_model_sparse(mdp, new_prop, extract_scheduler=True, hint=hint, environment=exact_environment)
-    all_schedulers_violate = not prop.satisfies_threshold(result.at(mdp.initial_states[0]))
+    result = check_model_sparse(
+        mdp, new_prop, extract_scheduler=True, hint=hint, environment=exact_environment
+    )
+    all_schedulers_violate = not prop.satisfies_threshold(
+        result.at(mdp.initial_states[0])
+    )
 
     return all_schedulers_violate, result
+
 
 def hole_order(bfs_order, choice_to_assignment, possible_holes):
     order = []
@@ -33,11 +48,20 @@ def hole_order(bfs_order, choice_to_assignment, possible_holes):
             order.append(hole)
     return order
 
+
 def check(matrix_generator, choice_to_assignment, family, prop):
-    hole_options = [family.family.holeOptionsMask(hole) for hole in range(family.num_holes)]
-    fixed_holes = [hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1]
+    hole_options = [
+        family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
+    ]
+    fixed_holes = [
+        hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1
+    ]
+    print("Building model")
     matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
     mdp = matrix_generator.get_current_mdp()
+
+    open("mdp.dot", "w").write(mdp.to_dot())
+    print("Checking model")
     all_schedulers_violate_full, result = _check_model(mdp, prop, None)
     if all_schedulers_violate_full:
         old_reachable_states = matrix_generator.get_current_reachable_states()
@@ -51,7 +75,9 @@ def check(matrix_generator, choice_to_assignment, family, prop):
         while not all_schedulers_violate:
             # try to get an unsat core!!
             # let's start with abstracting all of the nondeterminism into holes
-            matrix_generator.build_submodel(BitVector(family.num_holes, abstracted_holes), hole_options)
+            matrix_generator.build_submodel(
+                BitVector(family.num_holes, abstracted_holes), hole_options
+            )
             mdp_holes = matrix_generator.get_current_mdp()
 
             hint_obj = None
@@ -64,7 +90,9 @@ def check(matrix_generator, choice_to_assignment, family, prop):
 
             if all_schedulers_violate:
                 # yaay we have a counterexample!!
-                counterexample_holes = [hole for hole in fixed_holes if hole not in abstracted_holes]
+                counterexample_holes = [
+                    hole for hole in fixed_holes if hole not in abstracted_holes
+                ]
                 return all_schedulers_violate, counterexample_holes, result
             # abstract fewer holes
             # TODO check if the abstracted hole actually removes nondeterminism

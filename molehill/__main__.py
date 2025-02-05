@@ -1,17 +1,21 @@
+import paynt.quotient
 import paynt.synthesizer
 import paynt.synthesizer.conflict_generator
 import paynt.verification
 import paynt.verification.property
 import z3
 import paynt.parser.sketch
-import sys
+import json
 import math
 
+
 # from molehill.curve_drawer import draw_curve
+from molehill.decision_tree import build_decision_tree, draw_tree
 from molehill.plugin import SearchMarkovChain
 import argparse
 
-def run(project_path, image):
+
+def run(project_path, image, tree, nodes):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
@@ -19,7 +23,10 @@ def run(project_path, image):
     # print all python properties of quotient
     family = quotient.family
 
+    print("Building quotient")
     quotient.build(family)
+
+    print("Done")
     s = z3.Solver()
 
     # set random phase selection
@@ -27,14 +34,30 @@ def run(project_path, image):
 
     variables = []
     # create variables
-    num_bits = max([math.ceil(math.log2(max(family.hole_options(hole)) + 1)) for hole in range(family.num_holes)]) + 1
+    num_bits = (
+        max(
+            [
+                math.ceil(math.log2(max(family.hole_options(hole)) + 1))
+                for hole in range(family.num_holes)
+            ]
+        )
+        + 1
+    )
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
         options = family.hole_options(hole)
         var = z3.BitVec(name, num_bits)
         variables.append(var)
         # TODO hole options of full family should be a sorted vector of indices that is continous
-        s.add(z3.And(var >= z3.BitVecVal(min(options), num_bits), var <= z3.BitVecVal(max(options), num_bits)))
+        s.add(
+            z3.And(
+                var >= z3.BitVecVal(min(options), num_bits),
+                var <= z3.BitVecVal(max(options), num_bits),
+            )
+        )
+
+    if tree:
+        s.add(build_decision_tree(variables, nodes))
 
     # add test z3 constraints
     # s.add(variables[0] + variables[1] == variables[2])
@@ -43,11 +66,12 @@ def run(project_path, image):
 
     p = SearchMarkovChain(s, quotient, draw_image=image)
     p.register_variables(variables)
-    print(variables)
     model = None
     if s.check() == z3.sat:
         print("sat")
         model = s.model()
+        if tree:
+            draw_tree(model)
         new_family = quotient.family.copy()
         new_family.add_parent_info(quotient.family)
         for hole in range(new_family.num_holes):
@@ -63,16 +87,29 @@ def run(project_path, image):
         print("unsat")
     print(f"Considered {p.considered_models} models")
     if sum(p.mdp_fails_and_wins) > 0:
-        print(f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)")
+        print(
+            f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)"
+        )
 
     if image:
         print("Drawing image")
         from molehill.curve_drawer import draw_curve
+
         draw_curve(num_bits, variables, s, p, model)
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run the Markov Chain search on a given project path.")
-    parser.add_argument("project_path", type=str, help="The path to the project directory.")
-    parser.add_argument("--image", action="store_true", help="Generate an image of the curve.")
+    parser = argparse.ArgumentParser(
+        description="Run the Markov Chain search on a given project path."
+    )
+    parser.add_argument(
+        "project_path", type=str, help="The path to the project directory."
+    )
+    parser.add_argument(
+        "--image", action="store_true", help="Generate an image of the curve."
+    )
+    parser.add_argument("--tree", action="store_true", help="Build a tree.")
+    # number of tree nodes
+    parser.add_argument("--nodes", type=int, help="Number of tree nodes.", default=10)
     args = parser.parse_args()
-    run(args.project_path, args.image)
+    run(args.project_path, args.image, args.tree, args.nodes)
