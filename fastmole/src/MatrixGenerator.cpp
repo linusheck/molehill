@@ -17,10 +17,10 @@ MatrixGenerator<ValueType>::MatrixGenerator(const storm::models::sparse::Mdp<Val
                                             const storm::storage::BitVector &targetStates, const std::vector<ValueType> &globalBounds,
                                             const std::vector<std::vector<std::pair<int, int>>> &choiceToAssignment)
     : quotient(quotient), checkTask(checkTask), targetStates(targetStates), globalBounds(globalBounds), choiceToAssignment(choiceToAssignment) {
-    this->decisionMatrix = std::move(buildDecisionMatrix());
     if (this->rewards && this->rewards->size() != this->decisionMatrix.getRowCount()) {
         throw std::runtime_error("Invalid size of rewards");
     }
+    this->decisionMatrix = buildDecisionMatrix();
 }
 
 template<typename ValueType>
@@ -78,8 +78,10 @@ storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisio
     builder.newRowGroup(newRowCounter + 1);
     builder.addNextValue(newRowCounter + 1, oneState, storm::utility::one<ValueType>());
 
-    this->rewards->push_back(storm::utility::zero<ValueType>());
-    this->rewards->push_back(storm::utility::zero<ValueType>());
+    if (this->rewards) {
+        this->rewards->push_back(storm::utility::zero<ValueType>());
+        this->rewards->push_back(storm::utility::zero<ValueType>());
+    }
 
     return builder.build();
 }

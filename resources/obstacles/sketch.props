@@ -1,1 +1,1 @@
-R{"time"}<=1000 [F "goal"]
+R{"time"}>=10 [F "goal"]

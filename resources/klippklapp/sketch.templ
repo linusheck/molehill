@@ -1,0 +1,132 @@
+pomdp 
+
+observable "thrown" = thrown;
+observable "s" = s;
+observable "s1" = s1;
+observable "s2" = s2;
+observable "s3" = s3;
+observable "s4" = s4;
+observable "s5" = s5;
+observable "s6" = s6;
+observable "s7" = s7;
+observable "s8" = s8;
+observable "s9" = s9;
+
+const one_die_allowed = 1;
+
+module shutthebox
+ // local state
+ s : [0..4] init 0;
+ // last thrown value
+ thrown : [0..12] init 0;
+ // open shutters
+ s1: [0..1] init 1;
+ s2: [0..1] init 1;
+ s3: [0..1] init 1;
+ s4: [0..1] init 1;
+ s5: [0..1] init 1;
+ s6: [0..1] init 1;
+ s7: [0..1] init 1;
+ s8: [0..1] init 1;
+ s9: [0..1] init 1;
+
+ // Reset thrown
+ [] s=0 -> 1 : (thrown'=0) & (s'=1);
+ // Throw both die
+ [] s=1 -> 1/6 : (thrown'=thrown+1) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+2) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+3) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+4) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+5) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+6) & (s'=s+1);
+ [] s=2 -> 1/6 : (thrown'=thrown+1) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+2) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+3) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+4) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+5) & (s'=s+1)
+         + 1/6 : (thrown'=thrown+6) & (s'=s+1);
+
+[t1c1] s=3 & thrown=1 & s1=1 -> (s1'=0) & (s'=0);
+[t2c2] s=3 & thrown=2 & s2=1 -> (s2'=0) & (s'=0);
+[t3c12] s=3 & thrown=3 & s1=1 & s2=1 -> (s1'=0) & (s2'=0) & (s'=0);
+[t3c3] s=3 & thrown=3 & s3=1 -> (s3'=0) & (s'=0);
+[t4c13] s=3 & thrown=4 & s1=1 & s3=1 -> (s1'=0) & (s3'=0) & (s'=0);
+[t4c4] s=3 & thrown=4 & s4=1 -> (s4'=0) & (s'=0);
+[t5c14] s=3 & thrown=5 & s1=1 & s4=1 -> (s1'=0) & (s4'=0) & (s'=0);
+[t5c23] s=3 & thrown=5 & s2=1 & s3=1 -> (s2'=0) & (s3'=0) & (s'=0);
+[t5c5] s=3 & thrown=5 & s5=1 -> (s5'=0) & (s'=0);
+[t6c123] s=3 & thrown=6 & s1=1 & s2=1 & s3=1 -> (s1'=0) & (s2'=0) & (s3'=0) & (s'=0);
+[t6c15] s=3 & thrown=6 & s1=1 & s5=1 -> (s1'=0) & (s5'=0) & (s'=0);
+[t6c24] s=3 & thrown=6 & s2=1 & s4=1 -> (s2'=0) & (s4'=0) & (s'=0);
+[t6c6] s=3 & thrown=6 & s6=1 -> (s6'=0) & (s'=0);
+[t7c124] s=3 & thrown=7 & s1=1 & s2=1 & s4=1 -> (s1'=0) & (s2'=0) & (s4'=0) & (s'=0);
+[t7c16] s=3 & thrown=7 & s1=1 & s6=1 -> (s1'=0) & (s6'=0) & (s'=0);
+[t7c25] s=3 & thrown=7 & s2=1 & s5=1 -> (s2'=0) & (s5'=0) & (s'=0);
+[t7c34] s=3 & thrown=7 & s3=1 & s4=1 -> (s3'=0) & (s4'=0) & (s'=0);
+[t7c7] s=3 & thrown=7 & s7=1 -> (s7'=0) & (s'=0);
+[t8c125] s=3 & thrown=8 & s1=1 & s2=1 & s5=1 -> (s1'=0) & (s2'=0) & (s5'=0) & (s'=0);
+[t8c134] s=3 & thrown=8 & s1=1 & s3=1 & s4=1 -> (s1'=0) & (s3'=0) & (s4'=0) & (s'=0);
+[t8c17] s=3 & thrown=8 & s1=1 & s7=1 -> (s1'=0) & (s7'=0) & (s'=0);
+[t8c26] s=3 & thrown=8 & s2=1 & s6=1 -> (s2'=0) & (s6'=0) & (s'=0);
+[t8c35] s=3 & thrown=8 & s3=1 & s5=1 -> (s3'=0) & (s5'=0) & (s'=0);
+[t8c8] s=3 & thrown=8 & s8=1 -> (s8'=0) & (s'=0);
+[t9c126] s=3 & thrown=9 & s1=1 & s2=1 & s6=1 -> (s1'=0) & (s2'=0) & (s6'=0) & (s'=0);
+[t9c135] s=3 & thrown=9 & s1=1 & s3=1 & s5=1 -> (s1'=0) & (s3'=0) & (s5'=0) & (s'=0);
+[t9c18] s=3 & thrown=9 & s1=1 & s8=1 -> (s1'=0) & (s8'=0) & (s'=0);
+[t9c234] s=3 & thrown=9 & s2=1 & s3=1 & s4=1 -> (s2'=0) & (s3'=0) & (s4'=0) & (s'=0);
+[t9c27] s=3 & thrown=9 & s2=1 & s7=1 -> (s2'=0) & (s7'=0) & (s'=0);
+[t9c36] s=3 & thrown=9 & s3=1 & s6=1 -> (s3'=0) & (s6'=0) & (s'=0);
+[t9c45] s=3 & thrown=9 & s4=1 & s5=1 -> (s4'=0) & (s5'=0) & (s'=0);
+[t9c9] s=3 & thrown=9 & s9=1 -> (s9'=0) & (s'=0);
+[t10c1234] s=3 & thrown=10 & s1=1 & s2=1 & s3=1 & s4=1 -> (s1'=0) & (s2'=0) & (s3'=0) & (s4'=0) & (s'=0);
+[t10c127] s=3 & thrown=10 & s1=1 & s2=1 & s7=1 -> (s1'=0) & (s2'=0) & (s7'=0) & (s'=0);
+[t10c136] s=3 & thrown=10 & s1=1 & s3=1 & s6=1 -> (s1'=0) & (s3'=0) & (s6'=0) & (s'=0);
+[t10c145] s=3 & thrown=10 & s1=1 & s4=1 & s5=1 -> (s1'=0) & (s4'=0) & (s5'=0) & (s'=0);
+[t10c19] s=3 & thrown=10 & s1=1 & s9=1 -> (s1'=0) & (s9'=0) & (s'=0);
+[t10c235] s=3 & thrown=10 & s2=1 & s3=1 & s5=1 -> (s2'=0) & (s3'=0) & (s5'=0) & (s'=0);
+[t10c28] s=3 & thrown=10 & s2=1 & s8=1 -> (s2'=0) & (s8'=0) & (s'=0);
+[t10c37] s=3 & thrown=10 & s3=1 & s7=1 -> (s3'=0) & (s7'=0) & (s'=0);
+[t10c46] s=3 & thrown=10 & s4=1 & s6=1 -> (s4'=0) & (s6'=0) & (s'=0);
+[t11c1235] s=3 & thrown=11 & s1=1 & s2=1 & s3=1 & s5=1 -> (s1'=0) & (s2'=0) & (s3'=0) & (s5'=0) & (s'=0);
+[t11c128] s=3 & thrown=11 & s1=1 & s2=1 & s8=1 -> (s1'=0) & (s2'=0) & (s8'=0) & (s'=0);
+[t11c137] s=3 & thrown=11 & s1=1 & s3=1 & s7=1 -> (s1'=0) & (s3'=0) & (s7'=0) & (s'=0);
+[t11c146] s=3 & thrown=11 & s1=1 & s4=1 & s6=1 -> (s1'=0) & (s4'=0) & (s6'=0) & (s'=0);
+[t11c236] s=3 & thrown=11 & s2=1 & s3=1 & s6=1 -> (s2'=0) & (s3'=0) & (s6'=0) & (s'=0);
+[t11c245] s=3 & thrown=11 & s2=1 & s4=1 & s5=1 -> (s2'=0) & (s4'=0) & (s5'=0) & (s'=0);
+[t11c29] s=3 & thrown=11 & s2=1 & s9=1 -> (s2'=0) & (s9'=0) & (s'=0);
+[t11c38] s=3 & thrown=11 & s3=1 & s8=1 -> (s3'=0) & (s8'=0) & (s'=0);
+[t11c47] s=3 & thrown=11 & s4=1 & s7=1 -> (s4'=0) & (s7'=0) & (s'=0);
+[t11c56] s=3 & thrown=11 & s5=1 & s6=1 -> (s5'=0) & (s6'=0) & (s'=0);
+[t12c1236] s=3 & thrown=12 & s1=1 & s2=1 & s3=1 & s6=1 -> (s1'=0) & (s2'=0) & (s3'=0) & (s6'=0) & (s'=0);
+[t12c1245] s=3 & thrown=12 & s1=1 & s2=1 & s4=1 & s5=1 -> (s1'=0) & (s2'=0) & (s4'=0) & (s5'=0) & (s'=0);
+[t12c129] s=3 & thrown=12 & s1=1 & s2=1 & s9=1 -> (s1'=0) & (s2'=0) & (s9'=0) & (s'=0);
+[t12c138] s=3 & thrown=12 & s1=1 & s3=1 & s8=1 -> (s1'=0) & (s3'=0) & (s8'=0) & (s'=0);
+[t12c147] s=3 & thrown=12 & s1=1 & s4=1 & s7=1 -> (s1'=0) & (s4'=0) & (s7'=0) & (s'=0);
+[t12c156] s=3 & thrown=12 & s1=1 & s5=1 & s6=1 -> (s1'=0) & (s5'=0) & (s6'=0) & (s'=0);
+[t12c237] s=3 & thrown=12 & s2=1 & s3=1 & s7=1 -> (s2'=0) & (s3'=0) & (s7'=0) & (s'=0);
+[t12c246] s=3 & thrown=12 & s2=1 & s4=1 & s6=1 -> (s2'=0) & (s4'=0) & (s6'=0) & (s'=0);
+[t12c345] s=3 & thrown=12 & s3=1 & s4=1 & s5=1 -> (s3'=0) & (s4'=0) & (s5'=0) & (s'=0);
+[t12c39] s=3 & thrown=12 & s3=1 & s9=1 -> (s3'=0) & (s9'=0) & (s'=0);
+[t12c48] s=3 & thrown=12 & s4=1 & s8=1 -> (s4'=0) & (s8'=0) & (s'=0);
+[t12c57] s=3 & thrown=12 & s5=1 & s7=1 -> (s5'=0) & (s7'=0) & (s'=0);
+[fail] s=3 & !(thrown=1 & s1=1)&!(thrown=2 & s2=1)&!(thrown=3 & s1=1 & s2=1)&!(thrown=3 & s3=1)&!(thrown=4 & s1=1 & s3=1)&!(thrown=4 & s4=1)&!(thrown=5 & s1=1 & s4=1)&!(thrown=5 & s2=1 & s3=1)&!(thrown=5 & s5=1)&!(thrown=6 & s1=1 & s2=1 & s3=1)&!(thrown=6 & s1=1 & s5=1)&!(thrown=6 & s2=1 & s4=1)&!(thrown=6 & s6=1)&!(thrown=7 & s1=1 & s2=1 & s4=1)&!(thrown=7 & s1=1 & s6=1)&!(thrown=7 & s2=1 & s5=1)&!(thrown=7 & s3=1 & s4=1)&!(thrown=7 & s7=1)&!(thrown=8 & s1=1 & s2=1 & s5=1)&!(thrown=8 & s1=1 & s3=1 & s4=1)&!(thrown=8 & s1=1 & s7=1)&!(thrown=8 & s2=1 & s6=1)&!(thrown=8 & s3=1 & s5=1)&!(thrown=8 & s8=1)&!(thrown=9 & s1=1 & s2=1 & s6=1)&!(thrown=9 & s1=1 & s3=1 & s5=1)&!(thrown=9 & s1=1 & s8=1)&!(thrown=9 & s2=1 & s3=1 & s4=1)&!(thrown=9 & s2=1 & s7=1)&!(thrown=9 & s3=1 & s6=1)&!(thrown=9 & s4=1 & s5=1)&!(thrown=9 & s9=1)&!(thrown=10 & s1=1 & s2=1 & s3=1 & s4=1)&!(thrown=10 & s1=1 & s2=1 & s7=1)&!(thrown=10 & s1=1 & s3=1 & s6=1)&!(thrown=10 & s1=1 & s4=1 & s5=1)&!(thrown=10 & s1=1 & s9=1)&!(thrown=10 & s2=1 & s3=1 & s5=1)&!(thrown=10 & s2=1 & s8=1)&!(thrown=10 & s3=1 & s7=1)&!(thrown=10 & s4=1 & s6=1)&!(thrown=11 & s1=1 & s2=1 & s3=1 & s5=1)&!(thrown=11 & s1=1 & s2=1 & s8=1)&!(thrown=11 & s1=1 & s3=1 & s7=1)&!(thrown=11 & s1=1 & s4=1 & s6=1)&!(thrown=11 & s2=1 & s3=1 & s6=1)&!(thrown=11 & s2=1 & s4=1 & s5=1)&!(thrown=11 & s2=1 & s9=1)&!(thrown=11 & s3=1 & s8=1)&!(thrown=11 & s4=1 & s7=1)&!(thrown=11 & s5=1 & s6=1)&!(thrown=12 & s1=1 & s2=1 & s3=1 & s6=1)&!(thrown=12 & s1=1 & s2=1 & s4=1 & s5=1)&!(thrown=12 & s1=1 & s2=1 & s9=1)&!(thrown=12 & s1=1 & s3=1 & s8=1)&!(thrown=12 & s1=1 & s4=1 & s7=1)&!(thrown=12 & s1=1 & s5=1 & s6=1)&!(thrown=12 & s2=1 & s3=1 & s7=1)&!(thrown=12 & s2=1 & s4=1 & s6=1)&!(thrown=12 & s3=1 & s4=1 & s5=1)&!(thrown=12 & s3=1 & s9=1)&!(thrown=12 & s4=1 & s8=1)&!(thrown=12 & s5=1 & s7=1) -> (s'=4);
+
+ [] s=4 -> (s'=5);
+ [] s=5 -> (s'=5);
+endmodule
+
+rewards "score"
+ [] s=4 : s1*1+s2*2+s3*3+s4*4+s5*5+s6*6+s7*7+s8*8+s9*9;
+endrewards
+
+rewards "numtiles"
+ [] s=4 : s1+s2+s3+s4+s5+s6+s7+s8+s9;
+endrewards
+
+rewards "time"
+ [] s=0 : 1;
+endrewards
+
+label "roundstart" = s=1;
+label "done" = s=5;
+label "allshut" = s=5 & s1*1+s2*2+s3*3+s4*4+s5*5+s6*6+s7*7+s8*8+s9*9=0;

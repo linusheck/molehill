@@ -1,4 +1,4 @@
-R{"steps"}<=10 [ F "goal" | "bad" ]
+R{"steps"}<=3 [ F "goal" | "bad" ]
 
 //R{"steps"}min=? [ F "goal" | "bad" ]
 

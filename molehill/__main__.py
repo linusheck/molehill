@@ -70,8 +70,6 @@ def run(project_path, image, tree, nodes):
     if s.check() == z3.sat:
         print("sat")
         model = s.model()
-        if tree:
-            draw_tree(model)
         new_family = quotient.family.copy()
         new_family.add_parent_info(quotient.family)
         for hole in range(new_family.num_holes):
@@ -83,6 +81,9 @@ def run(project_path, image, tree, nodes):
         prop = quotient.specification.all_properties()[0]
         result = mdp.model_check_property(prop)
         print(f"Found {new_family} with value {result}")
+        open("output.dot", "w").write(mdp.model.to_dot())
+        if tree:
+            draw_tree(model, nodes, variables)
     else:
         print("unsat")
     print(f"Considered {p.considered_models} models")

@@ -6,7 +6,8 @@ from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
 from stormpy import model_checking, CheckTask
-
+from stormpy import model_checking
+import random
 
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(self, solver, quotient, draw_image=False):
@@ -15,8 +16,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.quotient = quotient
         self.vars_registered = False
         self.add_fixed(self._fixed)
-        self.add_created(self._created)
-        self.add_eq(self._eq)
+        # self.add_created(self._created)
+        # self.add_eq(self._eq)
         # TODO decide is broken in Z3, do we need it?
         self.decide = None
         self.add_final(self._final)
@@ -32,6 +33,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.partial_model = {}
         # list of Z3 variables, indexed by PAYNT hole
         self.variables = []
+        self.variable_names = []
 
         self.considered_models = 0
         # self.ruled_out_models = 0
@@ -45,8 +47,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         prop = self.quotient.specification.all_properties()[0]
         # does there exist a model that satisfies the property?
-        result = self.quotient.family.mdp.model_check_property(prop)
-        self.global_bounds = result.result.get_values()
+        print("Quotient size", self.quotient.family.mdp.model.nr_states)
+        print("Checking quotient")
+        result = model_checking(
+            self.quotient.family.mdp.model, prop.formula
+        )
+        print("Done")
+        self.global_bounds = result.get_values()
 
         self.complete_transition_matrix = (
             self.quotient.family.mdp.model.transition_matrix
@@ -95,11 +102,17 @@ class SearchMarkovChain(z3.UserPropagateBase):
             self.add(var)
             self.variables.append(var)
         self.model_counter.variables = variables
+        self.variable_names = [str(var) for var in variables]
 
     def push(self):
         self.fixed_count.append(len(self.fixed_values))
-        # print("PUSH", self.fixed_count)
+        if time.time() - self.time_last_print > 1:
+            print("Considered", self.considered_models, "models so far")
+            self.time_last_print = time.time()
+        # print("PUSH", self.fixed_values)
         # print("push -> analyse current model", self.partial_model)
+        if random.random() < 0.99:
+            return
         frozen_partial_model = frozenset(self.partial_model.items())
         if not (
             len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]
@@ -126,14 +139,22 @@ class SearchMarkovChain(z3.UserPropagateBase):
             while len(self.fixed_values) > last_count:
                 self.partial_model.pop(self.fixed_values.pop())
 
+    ast_map = {}
     def _fixed(self, ast, value):
-        ast_str = str(ast)
+        # print methods of ast
+        ast_str = None
+        ast_hash = hash(ast)
+        if ast_hash in self.ast_map:
+            ast_str = self.ast_map[ast_hash]
+        else:
+            ast_str = ast.decl().name()
+            self.ast_map[ast_hash] = ast_str
         self.fixed_values.append(ast_str)
         self.partial_model[ast_str] = value
         # otherwise: this is just a propagation, no need to check anything here
 
     def analyse_current_model(self):
-        print("Analyse current model", self.partial_model)
+        # print("Analyse current model", self.partial_model)
         # # Check model count if it's worth it to check MDP
         # if len(self.partial_model) < len(self.variables):
         #     models_in_tree = self.model_counter.count_models(max_models=16, condition=z3.And([key == value for key, value in self.partial_model.items()]))
@@ -146,7 +167,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
         for hole in range(new_family.num_holes):
-            var = str(self.variables[hole])
+            var = self.variable_names[hole]
             if var in self.partial_model:
                 new_family.hole_set_options(hole, [self.partial_model[var].as_long()])
 
@@ -190,8 +211,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
             return False
 
     def fresh(self, new_ctx):
-        pass
-        # print("fresh called with new_ctx:", new_ctx)
+        return self
 
     def _created(self, e):
         pass
