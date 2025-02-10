@@ -5,9 +5,9 @@ import z3
 from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
+from molehill.bandit import get_bandit
 from stormpy import model_checking, CheckTask
-from stormpy import model_checking
-import random
+from stormpy.storage import BitVector
 
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(self, solver, quotient, draw_image=False):
@@ -85,6 +85,11 @@ class SearchMarkovChain(z3.UserPropagateBase):
             self.choice_to_assignment,
         )
 
+        global_hint_vec = self.global_bounds.copy()
+        # extend global hint by two zeros for the two new states in decision matrix
+        global_hint_vec.extend([0.0, 0.0])
+        self.global_hint = (global_hint_vec, BitVector(len(global_hint_vec), True))
+
         self.last_decision_variable = None
 
         self.best_value = 0.0
@@ -94,6 +99,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.draw_image = draw_image
         if self.draw_image:
             self.image_assertions = []
+        
+        # self.bandit = get_bandit()
 
     def register_variables(self, variables):
         assert not self.vars_registered
@@ -109,15 +116,14 @@ class SearchMarkovChain(z3.UserPropagateBase):
         if time.time() - self.time_last_print > 1:
             print("Considered", self.considered_models, "models so far")
             self.time_last_print = time.time()
-        # print("PUSH", self.fixed_values)
-        # print("push -> analyse current model", self.partial_model)
-        if random.random() < 0.99:
-            return
+        
         frozen_partial_model = frozenset(self.partial_model.items())
+
         if not (
             len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]
         ):
             return
+
         if frozen_partial_model in self.rejecting_models:
             # we already know this model rejects
             # we also know this if any model above rejects, which we could check with subsets
@@ -126,11 +132,24 @@ class SearchMarkovChain(z3.UserPropagateBase):
         if frozen_partial_model in self.accepting_models:
             # we already know this model accepts
             return
-        all_violated = self.analyse_current_model()
+
+        models_below = len(self.variables) - len(self.fixed_values)
+
+        # action = self.bandit.pull()
+        # if action[0] == 1:
+        #     self.bandit.update([0])
+        #     return
+
+        measured_time = time.time()
+        all_violated, counterexample = self.analyse_current_model()
+        measured_time = time.time() - measured_time
+
         if all_violated:
             self.rejecting_models.add(frozen_partial_model)
+            # self.bandit.update([models_below])
         else:
             self.accepting_models.add(frozen_partial_model)
+            # self.bandit.update([-models_below])
 
     def pop(self, num_scopes):
         for _scope in range(num_scopes):
@@ -154,14 +173,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # otherwise: this is just a propagation, no need to check anything here
 
     def analyse_current_model(self):
-        # print("Analyse current model", self.partial_model)
-        # # Check model count if it's worth it to check MDP
-        # if len(self.partial_model) < len(self.variables):
-        #     models_in_tree = self.model_counter.count_models(max_models=16, condition=z3.And([key == value for key, value in self.partial_model.items()]))
-        #     # if len(self.partial_model) < len(self.variables):
-        #     #     print("models in tree", models_in_tree)
-        #     if len(self.partial_model) < len(self.variables) and models_in_tree < 16:
-        #         return
         model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
 
         new_family = self.quotient.family.copy()
@@ -173,7 +184,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         prop = self.quotient.specification.all_properties()[0]
         all_violated, counterexample, _result = check(
-            self.matrix_generator, self.choice_to_assignment, new_family, prop
+            self.matrix_generator, self.choice_to_assignment, new_family, prop, self.global_hint
         )
 
         self.considered_models += 1
@@ -185,6 +196,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.mdp_fails_and_wins[0] += 1
 
         if all_violated:
+            print(len(self.fixed_values), "->", len(counterexample))
             self.conflict([self.variables[c] for c in counterexample])
             if self.draw_image:
                 term = z3.Not(
@@ -206,9 +218,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 )
             else:
                 self.reasons.append(f"{model} reject {len(self.fixed_values)}")
-            return True
+            return True, counterexample
         else:
-            return False
+            return False, None
 
     def fresh(self, new_ctx):
         return self

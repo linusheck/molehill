@@ -1,4 +1,9 @@
-mdp
+pomdp
+
+observables
+	w12, y1, y2, x1, s1, w21, z1, z2, x2, s2
+endobservables
+
 const int deadline = 1;
 const int rc_fast_max = 85;
 const int rc_fast_min = 76;
@@ -7,7 +12,6 @@ const int rc_slow_min = 159;
 const int delay = 3;
 const double fast = 1/2;
 const double slow = (1 - 1/2);
-
 
 module wire12
 	w12: [0..9] init 0;

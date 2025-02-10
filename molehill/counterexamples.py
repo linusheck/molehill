@@ -18,7 +18,7 @@ def hole_order(bfs_order, choice_to_assignment, possible_holes):
     return order
 
 
-def check(matrix_generator, choice_to_assignment, family, prop):
+def check(matrix_generator, choice_to_assignment, family, prop, global_hint=None):
     hole_options = [
         family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
     ]
@@ -27,17 +27,23 @@ def check(matrix_generator, choice_to_assignment, family, prop):
     ]
     matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
     mdp = matrix_generator.get_current_mdp()
+    old_reachable_states = matrix_generator.get_current_reachable_states()
+    
+    hint_full = None
+    if global_hint is not None:
+        hint_full = hint_convert(global_hint[0], global_hint[1], old_reachable_states)
+    all_schedulers_violate_full, result = check_model(mdp, prop, hint_full)
 
-    all_schedulers_violate_full, result = check_model(mdp, prop, None)
     if all_schedulers_violate_full:
-        old_reachable_states = matrix_generator.get_current_reachable_states()
         bfs_order = matrix_generator.get_current_bfs_order()
         # we abstract in the order of which holes we saw first, which holes we saw second, etc
         abstracted_holes = hole_order(bfs_order, choice_to_assignment, fixed_holes)
-        # abstracted_holes = [0, 3, 6, 2, 5, 4, 1]
+
         all_schedulers_violate = False
         hint = None
         hint_obj = ExplicitModelCheckerHintDouble()
+
+        # TODO do binary search for the right number of abstracted holes
         while not all_schedulers_violate:
             # try to get an unsat core!!
             # let's start with abstracting all of the nondeterminism into holes
@@ -52,6 +58,7 @@ def check(matrix_generator, choice_to_assignment, family, prop):
                 hint_obj = hint_convert(hint, old_reachable_states, reachable_states)
 
             all_schedulers_violate, result = check_model(mdp_holes, prop, hint_obj)
+            print(result.get_values()[mdp_holes.initial_states[0]])
             hint = result.get_values()
 
             if all_schedulers_violate:

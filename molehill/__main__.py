@@ -15,7 +15,7 @@ from molehill.plugin import SearchMarkovChain
 import argparse
 
 
-def run(project_path, image, tree, nodes):
+def run(project_path, image, tree, depth, nodes):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
@@ -43,21 +43,24 @@ def run(project_path, image, tree, nodes):
         )
         + 1
     )
+    
+    ranges = []
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
         options = family.hole_options(hole)
         var = z3.BitVec(name, num_bits)
         variables.append(var)
         # TODO hole options of full family should be a sorted vector of indices that is continous
-        s.add(
+        ranges.append(
             z3.And(
                 var >= z3.BitVecVal(min(options), num_bits),
                 var <= z3.BitVecVal(max(options), num_bits),
             )
         )
 
+    s.add(ranges)
     if tree:
-        s.add(build_decision_tree(variables, nodes))
+        s.add(build_decision_tree(variables, depth, nodes))
 
     # add test z3 constraints
     # s.add(variables[0] + variables[1] == variables[2])
@@ -83,7 +86,7 @@ def run(project_path, image, tree, nodes):
         print(f"Found {new_family} with value {result}")
         open("output.dot", "w").write(mdp.model.to_dot())
         if tree:
-            draw_tree(model, nodes, variables)
+            draw_tree(model, depth, variables)
     else:
         print("unsat")
     print(f"Considered {p.considered_models} models")
@@ -111,6 +114,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--tree", action="store_true", help="Build a tree.")
     # number of tree nodes
-    parser.add_argument("--nodes", type=int, help="Number of tree nodes.", default=10)
+    parser.add_argument("--depth", type=int, help="Depth of the tree.", default=4)
+    parser.add_argument("--nodes", type=int, help="Number of enabled nodes in the tree.", default=None)
     args = parser.parse_args()
-    run(args.project_path, args.image, args.tree, args.nodes)
+    run(args.project_path, args.image, args.tree, args.depth, args.nodes)

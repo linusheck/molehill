@@ -24,7 +24,7 @@ def get_property_values(variable_name):
         ].split("&")
     ]
 
-def build_decision_tree(variables, tree_depth):
+def build_decision_tree(variables, tree_depth, num_enabled_nodes):
     # variables have names of the form
     # A([picked0=1       & picked1=0     & picked2=1     & picked3=1     & picked4=0     & picked5=1     & picked6=1     & x=3   & y=2],0
     first_variable_name = str(variables[0])
@@ -46,8 +46,13 @@ def build_decision_tree(variables, tree_depth):
 
     constraints = []
 
+    # tree is structured as follows
+    # 0 
+    # 1 2
+    # 3 4 5 6
+    # 7 8 9 10 11 12 13 14
+
     num_nodes = 2 ** tree_depth - 1
-    
     leaf_values = [z3.BitVec(f"leaf_{i}", max_action_size) for i in range(num_nodes + 1)]
 
     # make weight nodes for constraints
@@ -66,10 +71,26 @@ def build_decision_tree(variables, tree_depth):
         node_constants.append(constant_var)
         constraints.append(constant_var >= 0)
 
-    def decision_at_node(node: int, properties):
-        return z3.Sum([z3.If(node_property[node] == i, properties[i], 0) for i in range(num_properties)]) <= node_constants[node]
+        # if the constant of this node is > 0, this is also true for the parent
+        # this breaks symmetry for disabled nodes
+        if i > 0:
+            constraints.append(
+                z3.Implies(
+                    node_constants[i] > 0,
+                    node_constants[(i - 1) // 2] > 0
+                )
+            )
+        # if the constant is 0, the property must be 0
+        constraints.append(z3.Implies(node_constants[i] == 0, node_property[i] == 0))
 
-    def traverse_tree(node: int, properties: list[int]):
+    # only num_enabled_nodes nodes can have constant > 0
+    if num_enabled_nodes is not None:
+        constraints.append(z3.Sum([z3.If(node_constants[i] > 0, 1, 0) for i in range(num_nodes)]) == num_enabled_nodes)
+
+    def decision_at_node(node: int, properties):
+        return z3.Or(node_constants[node] == 0, z3.Sum([z3.If(node_property[node] == i, properties[i], 0) for i in range(num_properties)]) >= node_constants[node])
+
+    def traverse_tree(node: int, properties: list[z3.Int]):
         if node >= num_nodes:
             return leaf_values[node - num_nodes]
         else:
@@ -101,9 +122,12 @@ def draw_tree(model, tree_depth, variables):
             i = node_index
             node_prop = z3.Int(f"node_{i}")
             node_constant = z3.Int(f"const_{i}")
-            calc = property_names[model[node_prop].as_long()] + f" <= {model[node_constant]}?"
+            calc = property_names[model[node_prop].as_long()] + f" >= {model[node_constant]}?"
             node = Node(calc)
-            node.children = [build_anytree(2 * node_index + 1, depth + 1), build_anytree(2 * node_index + 2, depth + 1)]
+            if model[node_constant].as_long() > 0:
+                node.children = [build_anytree(2 * node_index + 1, depth + 1), build_anytree(2 * node_index + 2, depth + 1)]
+            else:
+                return build_anytree(2 * node_index + 1, depth + 1)
             return node
 
     root = build_anytree(0, 0)
