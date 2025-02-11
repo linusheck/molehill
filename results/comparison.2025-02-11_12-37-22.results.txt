@@ -1,0 +1,34 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison.xml
+name:                    comparison
+run sets:
+date:                    Tue, 2025-02-11 12:37:22 CET
+tool:                    DummyTool
+tool executable:         /usr/bin/shuf
+options:
+resource limits:
+- memory:                10000.0 MB
+- time:                  60 s
+hardware requirements:
+- memory:                10000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    ernie
+os:                      Linux-6.1.0-25-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   True
+ram:                     540666.585088 MB
+------------------------------------------------------------
+
+
+Statistics:              0 Files
+  correct:               0
+    correct true:        0
+    correct false:       0
+  incorrect:             0
+    incorrect true:      0
+    incorrect false:     0
+  unknown:               0

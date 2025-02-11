@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<benchmark tool="example-tool">
+    <tasks>
+        <include>/bin/true</include>
+    </tasks>
+
+    <run name="TestRun">
+        <command>
+            <binary>/bin/true</binary>
+        </command>
+    </run>
+</benchmark>
+

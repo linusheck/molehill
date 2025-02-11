@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark 
-    tool="synthesis-methods"
-    version="1.0"
-    xmlns="http://www.benchexec.org/1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.benchexec.org/1.0 http://www.benchexec.org/benchmark.xsd">
-
-    <!-- Define limits -->
-    <option name="hardlimit">600</option>
+<benchmark tool="molehill.synthesis" timelimit="60s" hardtimelimit="90s" memlimit="10GB">
 
     <!-- Define benchmarks -->
     <tasks>
@@ -24,7 +16,7 @@
     </tasks>
 
     <!-- Define executors -->
-    <run name="Molehill">
+    <rundefinition name="Molehill">
         <column title="Molehill Execution Time" />
         <require cpuCores="1"/>
         <command>
@@ -33,9 +25,9 @@
             <option>molehill</option>
             <inputfiles>@task</inputfiles>
         </command>
-    </run>
+    </rundefinition>
 
-    <run name="Paynt-AR">
+    <rundefinition name="Paynt-AR">
         <column title="Paynt AR Execution Time" />
         <require cpuCores="1"/>
         <command>
@@ -45,9 +37,9 @@
             <option>ar</option>
             <inputfiles>@task</inputfiles>
         </command>
-    </run>
+    </rundefinition>
 
-    <run name="Paynt-CEGIS">
+    <rundefinition name="Paynt-CEGIS">
         <column title="Paynt CEGIS Execution Time" />
         <require cpuCores="1"/>
         <command>
@@ -57,9 +49,9 @@
             <option>cegis</option>
             <inputfiles>@task</inputfiles>
         </command>
-    </run>
+    </rundefinition>
 
-    <run name="Paynt-Hybrid">
+    <rundefinition name="Paynt-Hybrid">
         <column title="Paynt Hybrid Execution Time" />
         <require cpuCores="1"/>
         <command>
@@ -69,6 +61,6 @@
             <option>hybrid</option>
             <inputfiles>@task</inputfiles>
         </command>
-    </run>
-
+    </rundefinition>
 </benchmark>
+
