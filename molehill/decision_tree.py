@@ -1,8 +1,6 @@
 """Decision tree business."""
 
 import z3
-from anytree import Node
-from anytree.exporter import UniqueDotExporter
 
 def piecewise_select(array, z3_int):
     """Select an element of an array based on a z3 integer."""
@@ -107,6 +105,8 @@ def build_decision_tree(variables, tree_depth, num_enabled_nodes):
     return constraints
 
 def draw_tree(model, tree_depth, variables):
+    from anytree import Node
+    from anytree.exporter import UniqueDotExporter
     first_variable_name = str(variables[0])
     property_names = get_property_names(first_variable_name)
     num_properties = len(property_names)

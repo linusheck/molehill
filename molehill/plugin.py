@@ -5,7 +5,7 @@ import z3
 from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
-from molehill.bandit import get_bandit
+#from molehill.bandit import get_bandit
 from stormpy import model_checking, CheckTask
 from stormpy.storage import BitVector
 
@@ -196,7 +196,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.mdp_fails_and_wins[0] += 1
 
         if all_violated:
-            print(len(self.fixed_values), "->", len(counterexample))
+            #print(len(self.fixed_values), "->", len(counterexample))
             self.conflict([self.variables[c] for c in counterexample])
             if self.draw_image:
                 term = z3.Not(

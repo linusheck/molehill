@@ -30,8 +30,9 @@ def check(matrix_generator, choice_to_assignment, family, prop, global_hint=None
     old_reachable_states = matrix_generator.get_current_reachable_states()
     
     hint_full = None
-    if global_hint is not None:
-        hint_full = hint_convert(global_hint[0], global_hint[1], old_reachable_states)
+    # TODO hints are broken!
+    #if global_hint is not None:
+        #hint_full = hint_convert(global_hint[0], global_hint[1], old_reachable_states)
     all_schedulers_violate_full, result = check_model(mdp, prop, hint_full)
 
     if all_schedulers_violate_full:

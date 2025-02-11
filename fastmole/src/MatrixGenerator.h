@@ -21,7 +21,7 @@ class MatrixGenerator {
      * be topologically sorted.
      * @param globalBounds
      */
-    MatrixGenerator<ValueType>(const storm::models::sparse::Mdp<ValueType> &quotient,
+    MatrixGenerator(const storm::models::sparse::Mdp<ValueType> &quotient,
                                const storm::modelchecker::CheckTask<storm::logic::Formula, ValueType> &checkTask, const storm::storage::BitVector &targetStates,
                                const std::vector<ValueType> &globalBounds, const std::vector<std::vector<std::pair<int, int>>> &choiceToAssignment);
 
