@@ -1,1 +1,1 @@
-P>=0.91 [ F "goal" & c<CMAX ]
+Pmax=? [ F "goal" ]
