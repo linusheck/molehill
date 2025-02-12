@@ -1,0 +1,49 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison.xml
+name:                    comparison
+run sets:                Molehill, Paynt-AR, Paynt-CEGIS, Paynt-Hybrid
+date:                    Wed, 2025-02-12 14:44:23 CET
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python3
+options:
+parallel runs:           32
+resource limits:
+- memory:                10000.0 MB
+- time:                  600 s
+hardware requirements:
+- memory:                10000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    ernie
+os:                      Linux-6.1.0-25-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   True
+ram:                     540666.585088 MB
+------------------------------------------------------------
+
+
+
+Molehill
+Run set 1 of 4 with options '-m molehill' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+sat_grid                   done                             0.67        1.71        None
+sat_maze                   done                             0.67        1.62        None
+unsat_grid                 done                             0.80        1.67        None
+unsat_refuel-06-res        done                             0.87        1.68        None
+unsat_maze                 done                             0.94        1.74        None
+unsat_pole-res             done                             1.01        1.80        None
+sat_refuel-06-res          done                             1.32        2.24        None
+sat_pole-res               done                             1.56        2.51        None
+unsat_dpm                  done                             2.66        3.54        None
+sat_dpm                    done                             4.16        5.18        None
+unsat_pole                 done                             6.66        7.44        None
+sat_pole                   done                             7.17        8.14        None
+unsat_grid-10-sl-4fsc      done                             8.21        9.11        None
+sat_grid-meet-sl-2fsc      done                            14.42       15.46        None
+sat_herman                 done                            73.66       74.68        None
+unsat_herman               done                           118.03      118.83        None

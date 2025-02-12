@@ -3,26 +3,27 @@
 	
     <!-- Define benchmarks -->
     <tasks>
-        <withoutfile>resources/benchmark/jair_sat/dpm</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/grid</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/grid-10-sl-4fsc</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/grid-meet-sl-2fsc</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/herman</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/maze</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/maze-sl-5</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/pole</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/pole-res</withoutfile>
-        <withoutfile>resources/benchmark/jair_sat/refuel-06-res</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/dpm</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/grid</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/grid-10-sl-4fsc</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/grid-meet-sl-2fsc</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/herman</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/maze</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/maze-sl-5</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/pole</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/pole-res</withoutfile>
-        <withoutfile>resources/benchmark/jair_unsat/refuel-06-res</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_dpm</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_grid</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_grid-10-sl-4fsc</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_grid-meet-sl-2fsc</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_herman</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_maze</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_maze-sl-5</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_pole</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_pole-res</withoutfile>
+        <withoutfile>resources/benchmark/jair/sat_refuel-06-res</withoutfile>
+
+        <withoutfile>resources/benchmark/jair/unsat_dpm</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_grid</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_grid-10-sl-4fsc</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_grid-meet-sl-2fsc</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_herman</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_maze</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_maze-sl-5</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_pole</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_pole-res</withoutfile>
+        <withoutfile>resources/benchmark/jair/unsat_refuel-06-res</withoutfile>
     </tasks>
 
     <!-- Define executors -->
