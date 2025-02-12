@@ -84,7 +84,6 @@ def run(project_path, image, tree, depth, nodes):
         prop = quotient.specification.all_properties()[0]
         result = mdp.model_check_property(prop)
         print(f"Found {new_family} with value {result}")
-        open("output.dot", "w").write(mdp.model.to_dot())
         if tree:
             draw_tree(model, depth, variables)
     else:
