@@ -133,7 +133,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
             # we already know this model accepts
             return
 
-        models_below = len(self.variables) - len(self.fixed_values)
+        # models_below = len(self.variables) - len(self.fixed_values)
 
         # action = self.bandit.pull()
         # if action[0] == 1:
@@ -141,7 +141,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
         #     return
 
         measured_time = time.time()
-        all_violated, counterexample = self.analyse_current_model()
+        # counterexample is already propagated to the solver inside of this
+        # function, we don't need it
+        all_violated, _counterexample = self.analyse_current_model()
         measured_time = time.time() - measured_time
 
         if all_violated:
