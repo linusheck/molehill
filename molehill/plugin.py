@@ -68,6 +68,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # reasons for new assertion
         self.reasons = []
 
+        self.counterexamples = []
+
         self.fixed_something = False
 
         # TODO make this call general
@@ -143,11 +145,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
         measured_time = time.time()
         # counterexample is already propagated to the solver inside of this
         # function, we don't need it
-        all_violated, _counterexample = self.analyse_current_model()
+        all_violated, counterexample = self.analyse_current_model()
         measured_time = time.time() - measured_time
+
 
         if all_violated:
             self.rejecting_models.add(frozen_partial_model)
+            self.counterexamples.append([(self.variable_names[i], self.partial_model[self.variable_names[i]]) for i in counterexample])
             # self.bandit.update([models_below])
         else:
             self.accepting_models.add(frozen_partial_model)
@@ -239,4 +243,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
     def _final(self):
         # print("final -> analyse current model", self.partial_model)
-        self.analyse_current_model()
+        _result, counterexample = self.analyse_current_model()
+        if counterexample is not None:
+            self.counterexamples.append([(self.variable_names[i], self.partial_model[self.variable_names[i]]) for i in counterexample])

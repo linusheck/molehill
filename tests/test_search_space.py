@@ -10,7 +10,7 @@ from stormpy.storage import BitVector
 from molehill import run
 from functools import reduce
 
-@pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman"])
+@pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
 def test_search_space(project_path):
     def custom_solver_settings(s):
         s.set(unsat_core=True)
@@ -19,7 +19,7 @@ def test_search_space(project_path):
     assert model is None
 
     # check that all rejecting models actually reject
-    for model in plugin.rejecting_models:
+    for model in plugin.counterexamples:
         model = {x[0]: x[1] for x in model}
         family = plugin.quotient.family.copy()
         family.add_parent_info(plugin.quotient.family)
@@ -46,22 +46,25 @@ def test_search_space(project_path):
     # check that plugin.rejecting_models covers the whole search space
     variables = []
     new_solver = z3.Solver()
+    family = plugin.quotient.family.copy()
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
         options = family.hole_options(hole)
         var = z3.Int(name)
         variables.append(var)
+        print(name, options)
         new_solver.add(
             z3.And(
                 var >= min(options),
                 var <= max(options),
             )
         )
-    print(plugin.rejecting_models)
-    for model in plugin.rejecting_models:
+    for model in plugin.counterexamples:
         model = {x[0]: x[1].as_long() for x in model}
+        statement = []
         for hole in range(family.num_holes):
             var = variables[hole]
             if str(var) in model:
-                new_solver.add(var != model[str(var)])
+                statement.append(var == model[str(var)])
+        new_solver.add(z3.Not(z3.And(*statement)))
     assert new_solver.check() == z3.unsat
