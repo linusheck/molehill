@@ -27,7 +27,6 @@ def check(matrix_generator, choice_to_assignment, family, prop, global_hint=None
     ]
     matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
     mdp = matrix_generator.get_current_mdp()
-    old_reachable_states = matrix_generator.get_current_reachable_states()
     
     hint_full = None
     # TODO hints are broken!
