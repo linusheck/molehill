@@ -1,13 +1,10 @@
 from benchexec.tools.template import BaseTool
+import sys
 
 class Tool(BaseTool):
     def executable(self):
         # Specify the path to the Python executable or any executable
-        return "/home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python"
-
-    def version(self, executable):
-        # Return the version of the tool (optional)
-        return "unknown"
+        return sys.executable
 
     def name(self):
         # Return the name of your tool

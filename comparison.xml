@@ -1,66 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="molehill.synthesis" timelimit="60s" hardtimelimit="90s" memlimit="10GB">
-
+<benchmark tool="tools.synthesis" timelimit="600s" hardtimelimit="600s" memlimit="10GB">
+	
     <!-- Define benchmarks -->
     <tasks>
-        <include>resources/jair/dpm</include>
-        <include>resources/jair/grid</include>
-        <include>resources/jair/grid-10-sl-4fsc</include>
-        <include>resources/jair/grid-meet-sl-2fsc</include>
-        <include>resources/jair/herman</include>
-        <include>resources/jair/maze</include>
-        <include>resources/jair/maze-sl-5</include>
-        <include>resources/jair/pole</include>
-        <include>resources/jair/pole-res</include>
-        <include>resources/jair/refuel-06-res</include>
+        <withoutfile>resources/jair/dpm</withoutfile>
+        <withoutfile>resources/jair/grid</withoutfile>
+        <withoutfile>resources/jair/grid-10-sl-4fsc</withoutfile>
+        <withoutfile>resources/jair/grid-meet-sl-2fsc</withoutfile>
+        <withoutfile>resources/jair/herman</withoutfile>
+        <withoutfile>resources/jair/maze</withoutfile>
+        <withoutfile>resources/jair/maze-sl-5</withoutfile>
+        <withoutfile>resources/jair/pole</withoutfile>
+        <withoutfile>resources/jair/pole-res</withoutfile>
+        <withoutfile>resources/jair/refuel-06-res</withoutfile>
     </tasks>
 
     <!-- Define executors -->
     <rundefinition name="Molehill">
         <column title="Molehill Execution Time" />
         <require cpuCores="1"/>
-        <command>
-            <binary>/home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python</binary>
-            <option>-m</option>
-            <option>molehill</option>
-            <inputfiles>@task</inputfiles>
-        </command>
+    <option>-m</option>
+    <option>molehill</option>
     </rundefinition>
 
     <rundefinition name="Paynt-AR">
         <column title="Paynt AR Execution Time" />
         <require cpuCores="1"/>
-        <command>
-            <binary>/home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python</binary>
-            <option>build/paynt/paynt.py</option>
-            <option>--method</option>
-            <option>ar</option>
-            <inputfiles>@task</inputfiles>
-        </command>
+    <option>build/paynt/paynt.py</option>
+    <option>--method</option>
+    <option>ar</option>
     </rundefinition>
 
     <rundefinition name="Paynt-CEGIS">
         <column title="Paynt CEGIS Execution Time" />
         <require cpuCores="1"/>
-        <command>
-            <binary>/home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python</binary>
-            <option>build/paynt/paynt.py</option>
-            <option>--method</option>
-            <option>cegis</option>
-            <inputfiles>@task</inputfiles>
-        </command>
+    <option>build/paynt/paynt.py</option>
+    <option>--method</option>
+    <option>cegis</option>
     </rundefinition>
 
     <rundefinition name="Paynt-Hybrid">
         <column title="Paynt Hybrid Execution Time" />
         <require cpuCores="1"/>
-        <command>
-            <binary>/home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python</binary>
-            <option>build/paynt/paynt.py</option>
-            <option>--method</option>
-            <option>hybrid</option>
-            <inputfiles>@task</inputfiles>
-        </command>
+    <option>build/paynt/paynt.py</option>
+    <option>--method</option>
+    <option>hybrid</option>
     </rundefinition>
 </benchmark>
 

@@ -1,1 +1,1 @@
-R{"rounds"}max=? [ F dead ]
+R{"rounds"}>=20 [ F dead ]
