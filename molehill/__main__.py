@@ -15,7 +15,7 @@ from molehill.plugin import SearchMarkovChain
 import argparse
 
 
-def run(project_path, image, tree, depth, nodes):
+def run(project_path, image, custom_constraint_lambda=None):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
@@ -23,7 +23,6 @@ def run(project_path, image, tree, depth, nodes):
     # print all python properties of quotient
     family = quotient.family
 
-    print("Building quotient")
     quotient.build(family)
 
     print("Done")
@@ -59,8 +58,13 @@ def run(project_path, image, tree, depth, nodes):
         )
 
     s.add(ranges)
+
+    if custom_constraint_lambda:
+        s.add(custom_constraint_lambda(variables))
+
+
     if tree:
-        s.add(build_decision_tree(variables, depth, nodes))
+        s.add()
 
     # add test z3 constraints
     # s.add(variables[0] + variables[1] == variables[2])
@@ -100,6 +104,9 @@ def run(project_path, image, tree, depth, nodes):
 
         draw_curve(num_bits, variables, s, p, model)
 
+    # return is for testing purposes
+    return model, s, p
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -116,4 +123,9 @@ if __name__ == "__main__":
     parser.add_argument("--depth", type=int, help="Depth of the tree.", default=4)
     parser.add_argument("--nodes", type=int, help="Number of enabled nodes in the tree.", default=None)
     args = parser.parse_args()
-    run(args.project_path, args.image, args.tree, args.depth, args.nodes)
+
+    constraint_lambda = None
+    if args.tree:
+        constraint_lambda = lambda variables: build_decision_tree(variables, args.depth, args.nodes)
+
+    run(args.project_path, args.image, constraint_lambda)

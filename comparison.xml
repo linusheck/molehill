@@ -28,34 +28,34 @@
 
     <!-- Define executors -->
     <rundefinition name="Molehill">
-        <column title="Molehill Execution Time" />
+        <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
-    <option>-m</option>
-    <option>molehill</option>
+        <option>-m</option>
+        <option>molehill</option>
     </rundefinition>
 
     <rundefinition name="Paynt-AR">
-        <column title="Paynt AR Execution Time" />
+        <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
-    <option>build/paynt/paynt.py</option>
-    <option>--method</option>
-    <option>ar</option>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>ar</option>
     </rundefinition>
 
     <rundefinition name="Paynt-CEGIS">
-        <column title="Paynt CEGIS Execution Time" />
+        <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
-    <option>build/paynt/paynt.py</option>
-    <option>--method</option>
-    <option>cegis</option>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>cegis</option>
     </rundefinition>
 
     <rundefinition name="Paynt-Hybrid">
-        <column title="Paynt Hybrid Execution Time" />
+        <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
-    <option>build/paynt/paynt.py</option>
-    <option>--method</option>
-    <option>hybrid</option>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>hybrid</option>
     </rundefinition>
 </benchmark>
 

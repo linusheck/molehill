@@ -4,8 +4,8 @@ dtmc
 const double p=0.4;
 const double q=0.8;
 
-hole int x1 in {4,5,6};
-hole int x2 in {4,5,6};
+hole int x1 in {4};
+hole int x2 in {4};
 
 module die
 	// local state
@@ -30,4 +30,5 @@ label "s2" = s=2;
 label "s3" = s=3;
 label "s4" = s=4;
 label "s5" = s=5;
+label "good" = s!=5;
 label "done" = s=7;

@@ -71,7 +71,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.fixed_something = False
 
         # TODO make this call general
-        target_state = model_checking(
+        target_states = model_checking(
             self.quotient.family.mdp.model, prop.formula.subformula.subformula
         ).get_truth_values()
 
@@ -80,7 +80,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.matrix_generator = MatrixGenerator(
             self.quotient.family.mdp.model,
             self.check_task,
-            target_state,
+            target_states,
             self.global_bounds,
             self.choice_to_assignment,
         )
@@ -183,6 +183,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 new_family.hole_set_options(hole, [self.partial_model[var].as_long()])
 
         prop = self.quotient.specification.all_properties()[0]
+        # prop is always rechability, even if our input was until (thanks paynt :))
         all_violated, counterexample, _result = check(
             self.matrix_generator, self.choice_to_assignment, new_family, prop, self.global_hint
         )
