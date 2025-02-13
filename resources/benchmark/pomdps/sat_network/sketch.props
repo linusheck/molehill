@@ -1,0 +1,1 @@
+R{"dropped_packets"}<=10.6[F sched=0 & t=T-1 & k=K-1 ];

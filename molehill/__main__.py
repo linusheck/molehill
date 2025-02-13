@@ -19,6 +19,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--ce", type=str, default="all", help="types of counterexamples to consider", choices=["all", "mc", "none"]
     )
+    parser.add_argument("--deterministic", action="store_true", help="Deterministic Z3 assignment.", default=None)
     args = parser.parse_args()
 
     constraint_lambda = None
@@ -27,4 +28,4 @@ if __name__ == "__main__":
         constraint_lambda = lambda variables: build_decision_tree(variables, args.depth, args.nodes)
         postprocess_lambda = lambda model, variables: draw_tree(model, args.depth, variables)
 
-    run(args.project_path, args.image, args.ce, None, constraint_lambda, postprocess_lambda)
+    run(args.project_path, args.image, args.ce, None, constraint_lambda, postprocess_lambda, not args.deterministic)

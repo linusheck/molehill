@@ -14,7 +14,6 @@
         <withoutfile>resources/benchmark/jair/sat_pole</withoutfile>
         <withoutfile>resources/benchmark/jair/sat_pole-res</withoutfile>
         <withoutfile>resources/benchmark/jair/sat_refuel-06-res</withoutfile>
-
         <withoutfile>resources/benchmark/jair/unsat_dpm</withoutfile>
         <withoutfile>resources/benchmark/jair/unsat_grid</withoutfile>
         <withoutfile>resources/benchmark/jair/unsat_grid-10-sl-4fsc</withoutfile>
@@ -25,6 +24,18 @@
         <withoutfile>resources/benchmark/jair/unsat_pole</withoutfile>
         <withoutfile>resources/benchmark/jair/unsat_pole-res</withoutfile>
         <withoutfile>resources/benchmark/jair/unsat_refuel-06-res</withoutfile>
+
+        <!-- Benchmarks from POMDPs -->
+        <withoutfile>resources/benchmark/pomdps/dontknow_crypt</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/dontknow_drone</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/dontknow_network-priorities</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/sat_network</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/sat_network-priorities</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/sat_samplerocks</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/unsat_network</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/unsat_samplerocks</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/dontknow_hallway</withoutfile>
+        <withoutfile>resources/benchmark/pomdps/sat_hallway</withoutfile>
     </tasks>
 
     <!-- Define executors -->
@@ -33,6 +44,14 @@
         <require cpuCores="1"/>
         <option>-m</option>
         <option>molehill</option>
+    </rundefinition>
+
+    <rundefinition name="Molehill (Deterministic)">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>-m</option>
+        <option>molehill</option>
+        <option>--deterministic</option>
     </rundefinition>
 
     <rundefinition name="Molehill (only MC-CE)">
