@@ -10,7 +10,7 @@ from stormpy import model_checking, CheckTask
 from stormpy.storage import BitVector
 
 class SearchMarkovChain(z3.UserPropagateBase):
-    def __init__(self, solver, quotient, draw_image=False):
+    def __init__(self, solver, quotient, draw_image=False, considered_counterexamples="all"):
         super().__init__(solver, None)
         # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
         self.quotient = quotient
@@ -101,6 +101,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.draw_image = draw_image
         if self.draw_image:
             self.image_assertions = []
+        self.considered_counterexamples = considered_counterexamples
         
         # self.bandit = get_bandit()
 
@@ -148,10 +149,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
         all_violated, counterexample = self.analyse_current_model()
         measured_time = time.time() - measured_time
 
-
         if all_violated:
             self.rejecting_models.add(frozen_partial_model)
-            self.counterexamples.append([(self.variable_names[i], self.partial_model[self.variable_names[i]]) for i in counterexample])
+            if self.draw_image:
+                self.counterexamples.append([(self.variable_names[i], self.partial_model[self.variable_names[i]]) for i in counterexample])
             # self.bandit.update([models_below])
         else:
             self.accepting_models.add(frozen_partial_model)
@@ -190,8 +191,16 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         prop = self.quotient.specification.all_properties()[0]
         # prop is always rechability, even if our input was until (thanks paynt :))
+
+        model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
+        compute_counterexample = True
+        if self.considered_counterexamples == "none":
+            compute_counterexample = False
+        elif self.considered_counterexamples == "mc" and model == "MDP":
+            compute_counterexample = False
+
         all_violated, counterexample, _result = check(
-            self.matrix_generator, self.choice_to_assignment, new_family, prop, self.global_hint
+            self.matrix_generator, self.choice_to_assignment, new_family, prop, self.global_hint, compute_counterexample
         )
 
         self.considered_models += 1
@@ -218,7 +227,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.image_assertions.append(term)
             # self.model_counter.solver.add(term)
 
-            model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
             if len(counterexample) < len(self.fixed_values):
                 self.reasons.append(
                     f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}"
@@ -244,5 +252,5 @@ class SearchMarkovChain(z3.UserPropagateBase):
     def _final(self):
         # print("final -> analyse current model", self.partial_model)
         _result, counterexample = self.analyse_current_model()
-        if counterexample is not None:
+        if counterexample is not None and self.draw_image:
             self.counterexamples.append([(self.variable_names[i], self.partial_model[self.variable_names[i]]) for i in counterexample])

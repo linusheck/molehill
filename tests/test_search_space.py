@@ -1,20 +1,16 @@
 """Test matrix generator"""
 
 import pytest
-from paynt.parser.sketch import Sketch
-from molehill.plugin import SearchMarkovChain
-from molehill.counterexamples import hole_order
 import z3
 from stormpy import check_model_sparse, parse_properties_without_context
 from stormpy.storage import BitVector
 from molehill import run
-from functools import reduce
 
 @pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
 def test_search_space(project_path):
     def custom_solver_settings(s):
         s.set(unsat_core=True)
-    model, _solver, plugin = run(project_path, False, custom_solver_settings)
+    model, _solver, plugin = run(project_path, True, custom_solver_settings)
     # all of our models are unsat, we want to check if we have really considered the whole search space
     assert model is None
 

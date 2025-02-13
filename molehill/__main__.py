@@ -16,6 +16,9 @@ if __name__ == "__main__":
     # number of tree nodes
     parser.add_argument("--depth", type=int, help="Depth of the tree.", default=4)
     parser.add_argument("--nodes", type=int, help="Number of enabled nodes in the tree.", default=None)
+    parser.add_argument(
+        "--ce", type=str, default="all", help="types of counterexamples to consider", choices=["all", "mc", "none"]
+    )
     args = parser.parse_args()
 
     constraint_lambda = None
@@ -24,4 +27,4 @@ if __name__ == "__main__":
         constraint_lambda = lambda variables: build_decision_tree(variables, args.depth, args.nodes)
         postprocess_lambda = lambda model, variables: draw_tree(model, args.depth, variables)
 
-    run(args.project_path, args.image, None, constraint_lambda, postprocess_lambda)
+    run(args.project_path, args.image, args.ce, None, constraint_lambda, postprocess_lambda)

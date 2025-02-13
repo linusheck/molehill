@@ -18,7 +18,7 @@ def hole_order(bfs_order, choice_to_assignment, possible_holes):
     return order
 
 
-def check(matrix_generator, choice_to_assignment, family, prop, global_hint=None):
+def check(matrix_generator, choice_to_assignment, family, prop, global_hint=None, compute_counterexample=True):
     hole_options = [
         family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
     ]
@@ -34,7 +34,7 @@ def check(matrix_generator, choice_to_assignment, family, prop, global_hint=None
         #hint_full = hint_convert(global_hint[0], global_hint[1], old_reachable_states)
     all_schedulers_violate_full, result = check_model(mdp, prop, hint_full)
 
-    if all_schedulers_violate_full:
+    if all_schedulers_violate_full and compute_counterexample:
         bfs_order = matrix_generator.get_current_bfs_order()
         # we abstract in the order of which holes we saw first, which holes we saw second, etc
         abstracted_holes = hole_order(bfs_order, choice_to_assignment, fixed_holes)

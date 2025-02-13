@@ -34,6 +34,24 @@
         <option>molehill</option>
     </rundefinition>
 
+    <rundefinition name="Molehill (only MC-CE)">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>-m</option>
+        <option>molehill</option>
+        <option>--ce</option>
+        <option>mc</option>
+    </rundefinition>
+
+    <rundefinition name="Molehill (No CE)">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>-m</option>
+        <option>molehill</option>
+        <option>--ce</option>
+        <option>none</option>
+    </rundefinition>
+
     <rundefinition name="Paynt-AR">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
