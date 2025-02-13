@@ -1,0 +1,4 @@
+tool	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set	Molehill.0	Molehill.0	Molehill.0	Molehill.0	Molehill.0	Paynt-AR.0	Paynt-AR.0	Paynt-AR.0	Paynt-AR.0	Paynt-AR.0	Paynt-CEGIS.0	Paynt-CEGIS.0	Paynt-CEGIS.0	Paynt-CEGIS.0	Paynt-CEGIS.0	Paynt-Hybrid.0	Paynt-Hybrid.0	Paynt-Hybrid.0	Paynt-Hybrid.0	Paynt-Hybrid.0
+resources/benchmark/jair/	status	CPU Time (s)	Wall Time (s)	Memory (MB)	Iterations	status	CPU Time (s)	Wall Time (s)	Memory (MB)	Iterations	status	CPU Time (s)	Wall Time (s)	Memory (MB)	Iterations	status	CPU Time (s)	Wall Time (s)	Memory (MB)	Iterations
+sat_dpm	done	4.040884	4.259779203683138	230.199296	39	done	2.555319	2.7749071456491947	282.103808	7	done	1.622841	1.8453362006694078	218.132480	1	done	3.835405	4.060158198699355	373.792768	10
