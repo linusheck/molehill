@@ -1,0 +1,209 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison.xml
+name:                    comparison
+run sets:                Molehill, Molehill (only MC-CE), Molehill (No CE), Paynt-AR, Paynt-CEGIS, Paynt-Hybrid
+date:                    Thu, 2025-02-13 11:54:04 CET
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python3
+options:
+parallel runs:           32
+resource limits:
+- memory:                10000.0 MB
+- time:                  600 s
+hardware requirements:
+- memory:                10000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    ernie
+os:                      Linux-6.1.0-25-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   True
+ram:                     540666.585088 MB
+------------------------------------------------------------
+
+
+
+Molehill
+Run set 1 of 6 with options '-m molehill' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+sat_dpm                    done                             4.06        5.11        None
+sat_grid                   done                             0.65        1.69        None
+sat_grid-10-sl-4fsc        TIMEOUT                        600.33      601.37        None
+sat_grid-meet-sl-2fsc      done                            14.44       15.44        None
+sat_herman                 done                            73.27       74.28        None
+sat_maze                   done                             0.68        1.67        None
+sat_maze-sl-5              TIMEOUT                        600.33      601.35        None
+sat_pole                   done                             7.16        8.14        None
+sat_pole-res               done                             1.58        2.52        None
+sat_refuel-06-res          done                             1.29        2.17        None
+unsat_dpm                  done                             2.71        3.61        None
+unsat_grid                 done                             0.77        1.67        None
+unsat_grid-10-sl-4fsc      done                             8.18        9.07        None
+unsat_grid-meet-sl-2fsc    done                           350.35      351.24        None
+unsat_herman               done                           118.72      119.51        None
+unsat_maze                 done                             0.90        1.68        None
+unsat_maze-sl-5            TIMEOUT                        600.34      601.15        None
+unsat_pole                 done                             6.60        7.40        None
+unsat_pole-res             done                             1.02        1.82        None
+unsat_refuel-06-res        done                             0.86        1.66        None
+----------------------------------------------------------------------------------------
+Run set 1                  done                          2394.92      602.19           -
+
+
+Molehill (only MC-CE)
+Run set 2 of 6 with options '-m molehill --ce mc' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+sat_dpm                    done                             3.13        4.18        None
+sat_grid                   done                             0.68        1.73        None
+sat_grid-10-sl-4fsc        TIMEOUT                        600.32      601.40        None
+sat_grid-meet-sl-2fsc      done                            25.66       26.67        None
+sat_herman                 done                            73.09       74.05        None
+sat_maze                   done                             0.70        1.69        None
+sat_maze-sl-5              TIMEOUT                        600.33      601.33        None
+sat_pole                   done                             5.97        6.90        None
+sat_pole-res               done                             1.08        2.04        None
+sat_refuel-06-res          done                             2.23        3.14        None
+unsat_dpm                  done                             2.69        3.58        None
+unsat_grid                 done                             1.07        1.96        None
+unsat_grid-10-sl-4fsc      done                             6.27        7.12        None
+unsat_grid-meet-sl-2fsc    done                            87.68       88.54        None
+unsat_herman               done                           157.50      158.37        None
+unsat_maze                 done                             1.09        1.95        None
+unsat_maze-sl-5            TIMEOUT                        600.34      601.19        None
+unsat_pole                 done                             7.03        7.86        None
+unsat_pole-res             done                             1.06        1.89        None
+unsat_refuel-06-res        done                             0.87        1.69        None
+----------------------------------------------------------------------------------------
+Run set 2                  done                          2179.50      602.17           -
+
+
+Molehill (No CE)
+Run set 3 of 6 with options '-m molehill --ce none' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+sat_dpm                    done                             3.06        4.10        None
+sat_grid                   done                             0.64        1.67        None
+sat_grid-10-sl-4fsc        TIMEOUT                        600.32      601.39        None
+sat_grid-meet-sl-2fsc      done                            20.84       21.87        None
+sat_herman                 done                            73.60       74.60        None
+sat_maze                   done                             0.63        1.61        None
+sat_maze-sl-5              TIMEOUT                        600.33      601.31        None
+sat_pole                   done                             5.86        6.79        None
+sat_pole-res               done                             1.09        2.03        None
+sat_refuel-06-res          done                             2.27        3.20        None
+unsat_dpm                  done                             2.78        3.67        None
+unsat_grid                 done                             1.10        1.99        None
+unsat_grid-10-sl-4fsc      done                             6.29        7.13        None
+unsat_grid-meet-sl-2fsc    done                            90.87       91.75        None
+unsat_herman               done                           158.27      159.11        None
+unsat_maze                 done                             1.09        1.94        None
+unsat_maze-sl-5            TIMEOUT                        600.34      601.17        None
+unsat_pole                 done                             6.98        7.78        None
+unsat_pole-res             done                             1.01        1.83        None
+unsat_refuel-06-res        done                             0.88        1.68        None
+----------------------------------------------------------------------------------------
+Run set 3                  done                          2178.92      602.18           -
+
+
+Paynt-AR
+Run set 4 of 6 with options 'build/paynt/paynt.py --method ar' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+sat_dpm                    done                             2.59        3.61        None
+sat_grid                   done                             2.67        3.69        None
+sat_grid-10-sl-4fsc        TIMEOUT                        600.33      601.33        None
+sat_grid-meet-sl-2fsc      TIMEOUT                        600.53      601.57        None
+sat_herman                 done                            70.83       71.80        None
+sat_maze                   TIMEOUT                        600.33      601.29        None
+sat_maze-sl-5              TIMEOUT                        600.33      601.33        None
+sat_pole                   done                             1.55        2.50        None
+sat_pole-res               done                             1.28        2.24        None
+sat_refuel-06-res          done                             0.91        1.81        None
+unsat_dpm                  done                             1.45        2.33        None
+unsat_grid                 done                             4.42        5.28        None
+unsat_grid-10-sl-4fsc      TIMEOUT                        600.35      601.22        None
+unsat_grid-meet-sl-2fsc    done                           488.01      488.93        None
+unsat_herman               done                           147.58      148.46        None
+unsat_maze                 TIMEOUT                        600.34      601.19        None
+unsat_maze-sl-5            TIMEOUT                        600.34      601.17        None
+unsat_pole                 done                             1.99        2.81        None
+unsat_pole-res             done                             0.88        1.72        None
+unsat_refuel-06-res        done                             0.89        1.71        None
+----------------------------------------------------------------------------------------
+Run set 4                  done                          4928.32      602.23           -
+
+
+Paynt-CEGIS
+Run set 5 of 6 with options 'build/paynt/paynt.py --method cegis' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+sat_dpm                    done                             1.67        2.71        None
+sat_grid                   done                             1.15        2.20        None
+sat_grid-10-sl-4fsc        done                            41.85       42.88        None
+sat_grid-meet-sl-2fsc      done                            54.54       55.57        None
+sat_herman                 done                            70.87       71.87        None
+sat_maze                   TIMEOUT                        600.33      601.35        None
+sat_maze-sl-5              TIMEOUT                        600.32      601.36        None
+sat_pole                   ERROR (1)                        0.79        1.72        None
+sat_pole-res               ERROR (1)                        0.82        1.71        None
+sat_refuel-06-res          TIMEOUT                        600.34      601.27        None
+unsat_dpm                  TIMEOUT                        600.35      601.28        None
+unsat_grid                 done                             1.04        1.93        None
+unsat_grid-10-sl-4fsc      done                            41.78       42.64        None
+unsat_grid-meet-sl-2fsc    TIMEOUT                        600.38      601.30        None
+unsat_herman               TIMEOUT                        600.43      601.27        None
+unsat_maze                 TIMEOUT                        600.34      601.21        None
+unsat_maze-sl-5            TIMEOUT                        600.34      601.21        None
+unsat_pole                 ERROR (1)                        0.81        1.66        None
+unsat_pole-res             ERROR (1)                        0.71        1.52        None
+unsat_refuel-06-res        TIMEOUT                        600.35      601.18        None
+----------------------------------------------------------------------------------------
+Run set 5                  done                          5619.93      602.27           -
+
+
+Paynt-Hybrid
+Run set 6 of 6 with options 'build/paynt/paynt.py --method hybrid' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+sat_dpm                    done                             3.86        4.90        None
+sat_grid                   done                             6.75        7.79        None
+sat_grid-10-sl-4fsc        TIMEOUT                        600.33      601.38        None
+sat_grid-meet-sl-2fsc      TIMEOUT                        600.52      601.57        None
+sat_herman                 TIMEOUT                        600.59      601.60        None
+sat_maze                   TIMEOUT                        600.33      601.33        None
+sat_maze-sl-5              TIMEOUT                        600.34      601.29        None
+sat_pole                   ERROR (1)                        0.80        1.73        None
+sat_pole-res               ERROR (1)                        0.72        1.65        None
+sat_refuel-06-res          done                             1.15        2.06        None
+unsat_dpm                  done                             1.68        2.57        None
+unsat_grid                 done                             2.35        3.24        None
+unsat_grid-10-sl-4fsc      TIMEOUT                        600.35      601.24        None
+unsat_grid-meet-sl-2fsc    TIMEOUT                        600.58      601.47        None
+unsat_herman               done                            98.86       99.71        None
+unsat_maze                 TIMEOUT                        600.34      601.19        None
+unsat_maze-sl-5            TIMEOUT                        600.33      601.23        None
+unsat_pole                 ERROR (1)                        0.83        1.67        None
+unsat_pole-res             ERROR (1)                        0.75        1.57        None
+unsat_refuel-06-res        done                             1.18        2.01        None
+----------------------------------------------------------------------------------------
+Run set 6                  done                          5523.36      602.43           -
+
+Statistics:            120 Files
+  correct:               0
+    correct true:        0
+    correct false:       0
+  incorrect:             0
+    incorrect true:      0
+    incorrect false:     0
+  unknown:              42
