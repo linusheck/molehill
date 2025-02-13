@@ -1,6 +1,6 @@
 from molehill import run
 import argparse
-
+from molehill.decision_tree import build_decision_tree, draw_tree
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

@@ -7,10 +7,11 @@ from stormpy.storage import BitVector
 from molehill import run
 
 @pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
-def test_search_space(project_path):
+@pytest.mark.parametrize("considered_counterexamples", ["all", "mc", "none"])
+def test_search_space(project_path, considered_counterexamples):
     def custom_solver_settings(s):
         s.set(unsat_core=True)
-    model, _solver, plugin = run(project_path, True, custom_solver_settings)
+    model, _solver, plugin = run(project_path, False, considered_counterexamples, custom_solver_settings, search_space_test=True)
     # all of our models are unsat, we want to check if we have really considered the whole search space
     assert model is None
 

@@ -11,7 +11,7 @@ import math
 
 from molehill.plugin import SearchMarkovChain
 
-def run(project_path, image, considered_counterexamples, custom_solver_settings=None, custom_constraint_lambda=None, postprocess_lambda=None):
+def run(project_path, image, considered_counterexamples, custom_solver_settings=None, custom_constraint_lambda=None, postprocess_lambda=None, search_space_test=False):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
@@ -23,9 +23,6 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
 
     print("Done")
     s = z3.Solver()
-
-    # set random phase selection
-    s.set("phase_selection", 5)
 
     if custom_solver_settings:
         custom_solver_settings(s)
@@ -66,7 +63,7 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
     # s.add(variables[0] == 0)
     # s.add(variables[1] == 0)
 
-    p = SearchMarkovChain(s, quotient, draw_image=image, considered_counterexamples=considered_counterexamples)
+    p = SearchMarkovChain(s, quotient, draw_image=(image or search_space_test), considered_counterexamples=considered_counterexamples)
     p.register_variables(variables)
     model = None
     if s.check() == z3.sat:

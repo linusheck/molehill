@@ -1,4 +1,4 @@
-R{"moves"}<=10 [F "goal"]
+R{"moves"}<=8 [F "goal"]
 
 //R{"steps"}min=? [F "goal"]
 

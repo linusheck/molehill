@@ -3,6 +3,7 @@
 	
     <!-- Define benchmarks -->
     <tasks>
+        <!-- Benchmarks from JAIR -->
         <withoutfile>resources/benchmark/jair/sat_dpm</withoutfile>
         <withoutfile>resources/benchmark/jair/sat_grid</withoutfile>
         <withoutfile>resources/benchmark/jair/sat_grid-10-sl-4fsc</withoutfile>
