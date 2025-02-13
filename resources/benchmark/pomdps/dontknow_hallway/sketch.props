@@ -1,1 +1,1 @@
-R{"reward"}>=0.05 [F "discount_sink"]
+R{"reward"}>=0.1 [F "discount_sink"]
