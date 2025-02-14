@@ -3,7 +3,7 @@
 import pytest
 from paynt.parser.sketch import Sketch
 from molehill.plugin import SearchMarkovChain
-from molehill.counterexamples import hole_order
+from fastmole import hole_order
 import z3
 import math
 from stormpy import check_model_sparse, parse_properties_without_context
@@ -77,7 +77,8 @@ def test_matrix_generator(project_path):
         ]
         plugin.matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
         bfs_order = plugin.matrix_generator.get_current_bfs_order()
-        abstracted_holes = hole_order(bfs_order, choice_to_assignment, fixed_holes)
+        abstracted_holes, extra_holes = hole_order(bfs_order, choice_to_assignment, set(fixed_holes))
+        abstracted_holes += extra_holes
 
         # Build MDP
         ex_time = time.time()

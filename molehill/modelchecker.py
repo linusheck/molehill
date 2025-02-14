@@ -4,12 +4,14 @@ from stormpy.core import parse_properties_without_context
 from stormpy import check_model_sparse
 from pycarl.gmp import Rational
 
-def check_model(mdp, prop, hint, precision=1e-4, method=stormpy.MinMaxMethod.optimistic_value_iteration):
+def check_model(mdp, prop, hint, precision=1e-4):
     exact_environment = stormpy.core.Environment()
     exact_environment.solver_environment.minmax_solver_environment.precision = Rational(
         precision
     )
-    exact_environment.solver_environment.minmax_solver_environment.method = method
+    exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.optimistic_value_iteration
+    if hint is not None:
+        exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.topological
     # exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.sound_value_iteration
 
     # TODO hack (i hate properties)

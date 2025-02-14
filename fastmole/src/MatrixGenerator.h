@@ -1,8 +1,8 @@
 #pragma once
-#include <optional>
-#include <vector>
 #include <map>
+#include <optional>
 #include <storm/modelchecker/CheckTask.h>
+#include <vector>
 #include "storm/adapters/RationalFunctionAdapter.h"
 #include "storm/models/sparse/Mdp.h"
 #include "storm/models/sparse/StateLabeling.h"
@@ -21,9 +21,9 @@ class MatrixGenerator {
      * be topologically sorted.
      * @param globalBounds
      */
-    MatrixGenerator(const storm::models::sparse::Mdp<ValueType> &quotient,
-                               const storm::modelchecker::CheckTask<storm::logic::Formula, ValueType> &checkTask, const storm::storage::BitVector &targetStates,
-                               const std::vector<ValueType> &globalBounds, const std::vector<std::vector<std::pair<int, int>>> &choiceToAssignment);
+    MatrixGenerator(const storm::models::sparse::Mdp<ValueType> &quotient, const storm::modelchecker::CheckTask<storm::logic::Formula, ValueType> &checkTask,
+                    const storm::storage::BitVector &targetStates, const std::vector<ValueType> &globalBounds,
+                    const std::vector<std::vector<std::pair<int, int>>> &choiceToAssignment);
 
     /**
      * @brief Builds a sub-model of the decision matrix, representing an MDP *

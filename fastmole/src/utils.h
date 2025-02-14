@@ -67,3 +67,21 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(co
     newHint.setNoEndComponentsInMaybeStates(true);
     return newHint;
 }
+
+std::pair<std::vector<uint64_t>, std::vector<uint64_t>> holeOrder(const std::vector<uint64_t> &bfsOrder,
+                                                          const std::vector<std::vector<std::pair<uint64_t, uint64_t>>> &choiceToAssignment,
+                                                          const std::set<uint64_t>& possibleHoles) {
+    std::vector<uint64_t> order;
+    std::set<uint64_t> holesNotInOrder(possibleHoles.begin(), possibleHoles.end());
+
+    for (uint64_t choice : bfsOrder) {
+        for (const auto &[hole, _] : choiceToAssignment[choice]) {
+            if (possibleHoles.find(hole) != possibleHoles.end() && holesNotInOrder.find(hole) != holesNotInOrder.end()) {
+                order.push_back(hole);
+                holesNotInOrder.erase(hole);
+            }
+        }
+    }
+
+    return {order, std::vector<uint64_t>(holesNotInOrder.begin(), holesNotInOrder.end())};
+}

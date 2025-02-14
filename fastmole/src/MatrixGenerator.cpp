@@ -38,7 +38,7 @@ storm::storage::SparseMatrix<ValueType> MatrixGenerator<ValueType>::buildDecisio
 
     std::optional<std::vector<ValueType>> stateActionRewardVector;
     if (checkRewards) {
-        auto const& rewardModel = quotient.getRewardModel(checkTask.getRewardModel());
+        auto const &rewardModel = quotient.getRewardModel(checkTask.getRewardModel());
         if (!rewardModel.hasStateActionRewards()) {
             throw std::runtime_error("Reward model must only have state actions rewards");
         }

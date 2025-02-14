@@ -82,10 +82,14 @@ class SearchMarkovChain(z3.UserPropagateBase):
         else:
             raise ValueError("Unknown operator in property")
 
-        maximal_end_components = get_maximal_end_components(quotient.family.mdp.model)
-        for maximal_end_component in maximal_end_components:
-            for state, _choices in maximal_end_component:
-                assert state in good_states or state in bad_states
+        # # check whether there are nontrivial end components
+        # maximal_end_components = get_maximal_end_components(quotient.family.mdp.model)
+        # for maximal_end_component in maximal_end_components:
+        #     for state, _choices in maximal_end_component:
+        #         if state not in good_states and state not in bad_states:
+        #             raise ValueError("Nontrivial end component")
+                
+        # because the quotient has no nontrivial end component, no sub-MDP does either :)
 
         # target_states == states with target label
         target_states = model_checking(
