@@ -57,5 +57,13 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(const std::
 
     storm::modelchecker::ExplicitModelCheckerHint<ValueType> hint;
     hint.setResultHint(hintValues);
+    hint.setNoEndComponentsInMaybeStates(true);
     return hint;
+}
+
+template<typename ValueType>
+storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<ValueType> &hint) {
+    storm::modelchecker::ExplicitModelCheckerHint<ValueType> newHint = hint;
+    newHint.setNoEndComponentsInMaybeStates(true);
+    return newHint;
 }

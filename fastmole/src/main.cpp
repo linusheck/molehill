@@ -52,4 +52,5 @@ PYBIND11_MODULE(fastmole, m) {
         .def("get_current_bfs_order", &MatrixGenerator<double>::getCurrentBFSOrder, "Get current BFS order");
 
     m.def("hint_convert", &hintConvert<double>, py::arg("result"), py::arg("old_reachable_states"), py::arg("new_reachable_states"), "Convert hint");
+    m.def("set_end_components_true", &setEndComponentsTrue<double>, py::arg("hint"), "Set end components true");
 }

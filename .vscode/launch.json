@@ -7,9 +7,27 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "test",
-            "program": "/Users/linusheck/Library/Caches/pypoetry/virtualenvs/molehill-7rA7yprQ-py3.13/bin/python",
+            "name": "run grid",
+            "program": "/users/linusheck/library/caches/pypoetry/virtualenvs/molehill-7ra7yprq-py3.13/bin/python",
             "args": ["-m", "molehill", "resources/grid/"], 
+            "cwd": "${workspaceFolder}",
+            "expressions": "native"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "test",
+            "program": "/users/linusheck/library/caches/pypoetry/virtualenvs/molehill-7ra7yprq-py3.13/bin/python",
+            "args": ["-m", "pytest", "tests/test_hinting_from_above.py"], 
+            "cwd": "${workspaceFolder}",
+            "expressions": "native"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "test small",
+            "program": "/users/linusheck/library/caches/pypoetry/virtualenvs/molehill-7ra7yprq-py3.13/bin/python",
+            "args": ["tests/small_script.py"], 
             "cwd": "${workspaceFolder}",
             "expressions": "native"
         },

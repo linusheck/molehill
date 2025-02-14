@@ -8,6 +8,7 @@ import paynt.verification.property
 import z3
 import paynt.parser.sketch
 import math
+from stormpy import get_maximal_end_components
 
 from molehill.plugin import SearchMarkovChain
 
@@ -19,7 +20,7 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
     # print all python properties of quotient
     family = quotient.family
 
-    quotient.build(family)
+    # quotient.build(family)
 
     print("Done")
     s = z3.Solver()

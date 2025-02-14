@@ -6,7 +6,7 @@ from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
 #from molehill.bandit import get_bandit
-from stormpy import model_checking, CheckTask
+from stormpy import model_checking, CheckTask, get_maximal_end_components, prob01max_states, prob01min_states, OptimizationDirection
 from stormpy.storage import BitVector
 
 class SearchMarkovChain(z3.UserPropagateBase):
@@ -46,6 +46,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
         quotient.build(quotient.family)
 
         prop = self.quotient.specification.all_properties()[0]
+
+        self.check_task = CheckTask(prop.formula)
+
         # does there exist a model that satisfies the property?
         print("Quotient size", self.quotient.family.mdp.model.nr_states)
         print("Checking quotient")
@@ -71,13 +74,24 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.counterexamples = []
 
         self.fixed_something = False
+        
+        if prop.formula.optimality_type == OptimizationDirection.Maximize:
+            bad_states, good_states = prob01max_states(self.quotient.family.mdp.model, prop.formula.subformula)
+        elif prop.formula.optimality_type == OptimizationDirection.Minimize:
+            bad_states, good_states = prob01min_states(self.quotient.family.mdp.model, prop.formula.subformula)
+        else:
+            raise ValueError("Unknown operator in property")
 
-        # TODO make this call general
+        maximal_end_components = get_maximal_end_components(quotient.family.mdp.model)
+        for maximal_end_component in maximal_end_components:
+            for state, _choices in maximal_end_component:
+                assert state in good_states or state in bad_states
+
+        # target_states == states with target label
         target_states = model_checking(
             self.quotient.family.mdp.model, prop.formula.subformula.subformula
         ).get_truth_values()
 
-        self.check_task = CheckTask(prop.formula)
         # get type of MatrixGenerator constructor
         self.matrix_generator = MatrixGenerator(
             self.quotient.family.mdp.model,
