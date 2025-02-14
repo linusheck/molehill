@@ -1,10 +1,4 @@
-#pragma once
-#include <algorithm>
-#include <cassert>
-#include <storm/modelchecker/hints/ExplicitModelCheckerHint.h>
-#include <storm/storage/BitVector.h>
-#include <storm/utility/constants.h>
-#include <vector>
+#include <unordered_set>
 
 /**
  * @brief Get possible choices for a given set of abstracted holes
@@ -41,6 +35,28 @@ storm::storage::BitVector getPossibleChoices(const std::vector<std::vector<std::
     return selectedChoices;
 }
 
+std::pair<std::vector<uint64_t>, std::vector<uint64_t>> holeOrder(const std::vector<uint64_t> &bfsOrder,
+                                                                  const std::vector<std::vector<std::pair<uint64_t, uint64_t>>> &choiceToAssignment,
+                                                                  const std::vector<uint64_t> &possibleHoles) {
+    std::vector<uint64_t> order;
+    std::unordered_set<uint64_t> seen;
+
+    for (uint64_t choice : bfsOrder) {
+        if (seen.insert(choice).second) {
+            order.push_back(choice);
+        }
+    }
+
+    std::vector<uint64_t> holesNotInOrder;
+    for (uint64_t hole : possibleHoles) {
+        if (!seen.contains(hole)) {
+            holesNotInOrder.push_back(hole);
+        }
+    }
+
+    return {order, holesNotInOrder};
+}
+
 template<typename ValueType>
 storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(const std::vector<ValueType> &result, const storm::storage::BitVector &oldReachableStates,
                                                                      const storm::storage::BitVector &newReachableStates) {
@@ -66,22 +82,4 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(co
     storm::modelchecker::ExplicitModelCheckerHint<ValueType> newHint = hint;
     newHint.setNoEndComponentsInMaybeStates(true);
     return newHint;
-}
-
-std::pair<std::vector<uint64_t>, std::vector<uint64_t>> holeOrder(const std::vector<uint64_t> &bfsOrder,
-                                                          const std::vector<std::vector<std::pair<uint64_t, uint64_t>>> &choiceToAssignment,
-                                                          const std::set<uint64_t>& possibleHoles) {
-    std::vector<uint64_t> order;
-    std::set<uint64_t> holesNotInOrder(possibleHoles.begin(), possibleHoles.end());
-
-    for (uint64_t choice : bfsOrder) {
-        for (const auto &[hole, _] : choiceToAssignment[choice]) {
-            if (possibleHoles.find(hole) != possibleHoles.end() && holesNotInOrder.find(hole) != holesNotInOrder.end()) {
-                order.push_back(hole);
-                holesNotInOrder.erase(hole);
-            }
-        }
-    }
-
-    return {order, std::vector<uint64_t>(holesNotInOrder.begin(), holesNotInOrder.end())};
 }

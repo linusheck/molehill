@@ -26,7 +26,7 @@ def check(matrix_generator, choice_to_assignment, family, prop, global_hint=None
     if all_schedulers_violate_full and compute_counterexample:
         bfs_order = matrix_generator.get_current_bfs_order()
         # we abstract in the order of which holes we saw first, which holes we saw second, etc
-        abstracted_holes, append_these = hole_order(bfs_order, choice_to_assignment, set(fixed_holes))
+        abstracted_holes, append_these = hole_order(bfs_order, choice_to_assignment, fixed_holes)
 
         def check_ce_candidate(ith_hole, abstracted_holes, hint=None):
             abstracted_holes_here = (abstracted_holes + append_these)[ith_hole:]
