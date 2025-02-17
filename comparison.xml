@@ -54,6 +54,14 @@
         <option>--deterministic</option>
     </rundefinition>
 
+    <rundefinition name="Molehill (Track Disequality)">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>-m</option>
+        <option>molehill</option>
+        <option>--diseq</option>
+    </rundefinition>
+
     <rundefinition name="Molehill (only MC-CE)">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
