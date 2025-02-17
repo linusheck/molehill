@@ -13,6 +13,8 @@ def check(matrix_generator, choice_to_assignment, family, prop, disequalities, g
     ]
     if disequalities:
         hole_options = [intersect_bitvectors(a, b) for a, b in zip(hole_options, disequalities)]
+        if any([len(list(x)) == 0 for x in hole_options]):
+            return True, fixed_holes, None
     matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
     mdp = matrix_generator.get_current_mdp()
 

@@ -11,7 +11,7 @@ from stormpy.storage import BitVector
 from copy import deepcopy
 
 class SearchMarkovChain(z3.UserPropagateBase):
-    def __init__(self, solver, quotient, var_ranges, draw_image=False, considered_counterexamples="all"):
+    def __init__(self, solver, quotient, diseq_info, draw_image=False, considered_counterexamples="all"):
         super().__init__(solver, None)
         # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
         self.quotient = quotient
@@ -37,8 +37,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.variable_names = []
         self.variable_indices = {}
 
-        self.var_ranges = var_ranges
-        self.disequalities = [] if var_ranges else None
+        self.var_ranges = diseq_info[0]
+        self.constant_explanations = diseq_info[1]
+        self.disequalities = []
 
         self.ast_map = {}
 
@@ -214,13 +215,14 @@ class SearchMarkovChain(z3.UserPropagateBase):
         return ast_str
 
     def _fixed(self, ast, value):
-        ast_str = self.get_name_from_ast_map(ast)
-        if "!=" in ast_str:
+        ast_hash = hash(ast)
+        if ast_hash in self.constant_explanations:
+            explanation = self.constant_explanations[ast_hash]
             # this is an inferred disequality
             if value:
-                s = ast_str.split("!=")
-                self.disequalities[-1][self.variable_indices[s[0]]].set(int(s[1]), False)
+                self.disequalities[-1][self.variable_indices[explanation[0]]].set(int(explanation[1]), False)
         else:
+            ast_str = self.get_name_from_ast_map(ast)
             self.fixed_values.append(ast_str)
             # this is a model variable
             self.partial_model[ast_str] = value
