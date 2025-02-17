@@ -11,7 +11,7 @@ import math
 
 from molehill.plugin import SearchMarkovChain
 
-def run(project_path, image, considered_counterexamples, custom_solver_settings=None, custom_constraint_lambda=None, postprocess_lambda=None, random_assignment=False, search_space_test=False):
+def run(project_path, image, considered_counterexamples, custom_solver_settings=None, custom_constraint_lambda=None, postprocess_lambda=None, random_assignment=False, search_space_test=False, track_disequalities=False):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
@@ -47,7 +47,7 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
     constants = []
     constant_expr = []
     ranges = []
-    var_ranges = []
+    var_ranges = [] if track_disequalities else None
     bit_nums = set()
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
@@ -63,14 +63,15 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
                 var <= z3.BitVecVal(max(options), num_bits),
             )
         )
-        var_ranges.append(max(options))
-        for i in range(0, 2**num_bits):
-            c = z3.Bool(f"{var}!={i}")
-            constants.append(c)
-            constant_expr.append(c == (var != z3.BitVecVal(i, num_bits)))
-    
+        if track_disequalities:
+            var_ranges.append(max(options))
+            for i in range(0, 2**num_bits):
+                c = z3.Bool(f"{var}!={i}")
+                constants.append(c)
+                constant_expr.append(c == (var != z3.BitVecVal(i, num_bits)))
     s.add(ranges)
-    s.add(constant_expr)
+    if track_disequalities:
+        s.add(constant_expr)
 
     if custom_constraint_lambda:
         s.add(custom_constraint_lambda(variables))

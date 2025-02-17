@@ -21,7 +21,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.add_eq(self._eq)
         # TODO decide is broken in Z3, do we need it?
         # self.add_decide(self._decide)
-        # self.add_diseq(self._diseq)
         self.add_final(self._final)
 
         # models we have already analyzed
@@ -39,7 +38,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.variable_indices = {}
 
         self.var_ranges = var_ranges
-        self.disequalities = []
+        self.disequalities = [] if var_ranges else None
 
         self.ast_map = {}
 
@@ -143,13 +142,15 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.model_counter.variables = variables
         self.variable_names = [str(var) for var in variables]
         self.variable_indices = {var: i for i, var in enumerate(self.variable_names)}
-        self.disequalities = [
-            [BitVector(self.var_ranges[i] + 1, True) for i in range(len(self.variables))]
-        ]
+        if self.var_ranges:
+            self.disequalities = [
+                [BitVector(self.var_ranges[i] + 1, True) for i in range(len(self.variables))]
+            ]
 
     def push(self):
         self.fixed_count.append(len(self.fixed_values))
-        self.disequalities.append([BitVector(x) for x in self.disequalities[-1]])
+        if self.disequalities:
+            self.disequalities.append([BitVector(x) for x in self.disequalities[-1]])
         if time.time() - self.time_last_print > 1:
             print("Considered", self.considered_models, "models so far")
             self.time_last_print = time.time()
@@ -198,7 +199,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
             # remove all variables from partial_model
             while len(self.fixed_values) > last_count:
                 self.partial_model.pop(self.fixed_values.pop())
-            self.disequalities.pop()
+            if self.disequalities:
+                self.disequalities.pop()
 
 
     def get_name_from_ast_map(self, ast):
@@ -245,7 +247,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
             compute_counterexample = False
 
         all_violated, counterexample, _result = check(
-            self.matrix_generator, self.choice_to_assignment, new_family, prop, self.disequalities[-1], self.global_hint, compute_counterexample
+            self.matrix_generator, self.choice_to_assignment, new_family, prop, self.disequalities[-1] if self.disequalities else None, self.global_hint, compute_counterexample
         )
 
         self.considered_models += 1
