@@ -26,14 +26,21 @@ class Tool(BaseTool):
         return None
 
     def _extract_iterations(self, output):
+        iterations = 0
+        found_line = False
         for line in output:
-            print(line)
             # molehill output
             match = re.search(r"^Considered (\d+) models$", line)
             if match:
-                return str(match.group(1))
+                # molehill only has one "iterations line"
+                found_line = True
+                iterations = int(match.group(1))
+                break
             # paynt output
             match = re.search(r"^.*, iterations: (\d+)$", line)
             if match:
-                return str(match.group(1))
+                # PAYNT may have MDP and DTMC iterations printed separately
+                iterations += int(match.group(1))
+        if found_line:
+            return str(iterations)
         return None
