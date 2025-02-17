@@ -1,4 +1,6 @@
+#include <_types/_uint64_t.h>
 #include <unordered_set>
+#include "utils.h"
 
 /**
  * @brief Get possible choices for a given set of abstracted holes
@@ -37,13 +39,15 @@ storm::storage::BitVector getPossibleChoices(const std::vector<std::vector<std::
 
 std::pair<std::vector<uint64_t>, std::vector<uint64_t>> holeOrder(const std::vector<uint64_t> &bfsOrder,
                                                                   const std::vector<std::vector<std::pair<uint64_t, uint64_t>>> &choiceToAssignment,
-                                                                  const std::vector<uint64_t> &possibleHoles) {
+                                                                  const std::set<uint64_t> &possibleHoles) {
     std::vector<uint64_t> order;
     std::unordered_set<uint64_t> seen;
 
-    for (uint64_t choice : bfsOrder) {
-        if (seen.insert(choice).second) {
-            order.push_back(choice);
+    for (uint64_t state : bfsOrder) {
+        for (auto const &[hole, _assignment] : choiceToAssignment[state]) {
+            if (possibleHoles.contains(hole) && seen.insert(hole).second) {
+                order.push_back(hole);
+            }
         }
     }
 
@@ -76,6 +80,7 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(const std::
     hint.setNoEndComponentsInMaybeStates(true);
     return hint;
 }
+template storm::modelchecker::ExplicitModelCheckerHint<double> hintConvert(const std::vector<double> &result, const storm::storage::BitVector &oldReachableStates, const storm::storage::BitVector &newReachableStates);
 
 template<typename ValueType>
 storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<ValueType> &hint) {
@@ -83,3 +88,4 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(co
     newHint.setNoEndComponentsInMaybeStates(true);
     return newHint;
 }
+template storm::modelchecker::ExplicitModelCheckerHint<double> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<double> &hint);

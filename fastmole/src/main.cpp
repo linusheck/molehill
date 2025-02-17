@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "MatrixGenerator.h"
-#include "utils.cpp"
+#include "utils.h"
 
 #include "storm/adapters/RationalFunctionAdapter.h"
 #include "storm/storage/BitVector.h"

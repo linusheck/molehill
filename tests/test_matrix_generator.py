@@ -77,7 +77,7 @@ def test_matrix_generator(project_path):
         ]
         plugin.matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
         bfs_order = plugin.matrix_generator.get_current_bfs_order()
-        abstracted_holes, extra_holes = hole_order(bfs_order, choice_to_assignment, fixed_holes)
+        abstracted_holes, extra_holes = hole_order(bfs_order, choice_to_assignment, set(fixed_holes))
         abstracted_holes += extra_holes
 
         # Build MDP
