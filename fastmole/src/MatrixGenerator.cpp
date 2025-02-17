@@ -285,5 +285,29 @@ const std::vector<uint64_t> &MatrixGenerator<ValueType>::getCurrentBFSOrder() co
     return *this->currentBFSOrder;
 }
 
+template<typename ValueType>
+std::pair<std::vector<uint64_t>, std::vector<uint64_t>> MatrixGenerator<ValueType>::holeOrder(const std::vector<uint64_t> &bfsOrder,
+                                                                                               const std::set<uint64_t> &possibleHoles) {
+    std::vector<uint64_t> order;
+    std::unordered_set<uint64_t> seen;
+
+    for (uint64_t state : bfsOrder) {
+        for (auto const &[hole, _assignment] : this->choiceToAssignment[state]) {
+            if (possibleHoles.contains(hole) && seen.insert(hole).second) {
+                order.push_back(hole);
+            }
+        }
+    }
+
+    std::vector<uint64_t> holesNotInOrder;
+    for (uint64_t hole : possibleHoles) {
+        if (!seen.contains(hole)) {
+            holesNotInOrder.push_back(hole);
+        }
+    }
+
+    return std::make_pair(order, holesNotInOrder);
+}
+
 template class MatrixGenerator<double>;
 template class MatrixGenerator<storm::RationalNumber>;

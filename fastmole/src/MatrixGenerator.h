@@ -58,6 +58,17 @@ class MatrixGenerator {
      */
     const std::vector<uint64_t> &getCurrentBFSOrder() const;
 
+    /**
+     * @brief Builds the order that the holes are visited in the BFS order.
+     * TODO: Somehow mark holes that always appear at the same time.
+     * 
+     * @param bfsOrder BFS order of the MDP
+     * @param possibleHoles Holes to look for
+     * @return std::pair<std::vector<uint64_t>, std::vector<uint64_t>> hole order, holes that are not reachable
+     */
+    std::pair<std::vector<uint64_t>, std::vector<uint64_t>> holeOrder(const std::vector<uint64_t> &bfsOrder,
+                                                                      const std::set<uint64_t> &possibleHoles);
+
    private:
     /**
      * @brief Builds the "decision matrix", which is an internal representation
@@ -67,6 +78,7 @@ class MatrixGenerator {
      * @return storm::storage::SparseMatrix<ValueType>
      */
     storm::storage::SparseMatrix<ValueType> buildDecisionMatrix();
+
 
     /**
      * @brief Checks if a choice is possible given the abstracted holes and hole

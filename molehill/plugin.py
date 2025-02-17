@@ -6,7 +6,7 @@ from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
 #from molehill.bandit import get_bandit
-from stormpy import model_checking, CheckTask, get_maximal_end_components, prob01max_states, prob01min_states, OptimizationDirection
+from stormpy import model_checking, CheckTask
 from stormpy.storage import BitVector
 from copy import deepcopy
 

@@ -37,30 +37,6 @@ storm::storage::BitVector getPossibleChoices(const std::vector<std::vector<std::
     return selectedChoices;
 }
 
-std::pair<std::vector<uint64_t>, std::vector<uint64_t>> holeOrder(const std::vector<uint64_t> &bfsOrder,
-                                                                  const std::vector<std::vector<std::pair<uint64_t, uint64_t>>> &choiceToAssignment,
-                                                                  const std::set<uint64_t> &possibleHoles) {
-    std::vector<uint64_t> order;
-    std::unordered_set<uint64_t> seen;
-
-    for (uint64_t state : bfsOrder) {
-        for (auto const &[hole, _assignment] : choiceToAssignment[state]) {
-            if (possibleHoles.contains(hole) && seen.insert(hole).second) {
-                order.push_back(hole);
-            }
-        }
-    }
-
-    std::vector<uint64_t> holesNotInOrder;
-    for (uint64_t hole : possibleHoles) {
-        if (!seen.contains(hole)) {
-            holesNotInOrder.push_back(hole);
-        }
-    }
-
-    return {order, holesNotInOrder};
-}
-
 template<typename ValueType>
 storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(const std::vector<ValueType> &result, const storm::storage::BitVector &oldReachableStates,
                                                                      const storm::storage::BitVector &newReachableStates) {

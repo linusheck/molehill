@@ -49,10 +49,10 @@ PYBIND11_MODULE(fastmole, m) {
              py::arg("reachable_states") = py::none(), "Build sub model")
         .def("get_current_mdp", &MatrixGenerator<double>::getCurrentMDP, "Get current MDP")
         .def("get_current_reachable_states", &MatrixGenerator<double>::getCurrentReachableStates, "Get current reachable states")
-        .def("get_current_bfs_order", &MatrixGenerator<double>::getCurrentBFSOrder, "Get current BFS order");
+        .def("get_current_bfs_order", &MatrixGenerator<double>::getCurrentBFSOrder, "Get current BFS order")
+        .def("hole_order", &MatrixGenerator<double>::holeOrder, py::arg("bfs_order"), py::arg("possible_holes"), "Get hole order");
 
     m.def("hint_convert", &hintConvert<double>, py::arg("result"), py::arg("old_reachable_states"), py::arg("new_reachable_states"), "Convert hint");
     m.def("set_end_components_true", &setEndComponentsTrue<double>, py::arg("hint"), "Set end components true");
-    m.def("hole_order", &holeOrder, py::arg("bfs_order"), py::arg("choice_to_assignment"), py::arg("possible_holes"), "Get hole order");
     m.def("intersect_bitvectors", &intersect, py::arg("a"), py::arg("b"), "Intersect bitvectors");
 }

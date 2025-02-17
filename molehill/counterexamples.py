@@ -1,21 +1,8 @@
 """Compute counterexamples."""
 
 from stormpy.storage import BitVector
-from fastmole import hint_convert, hole_order, intersect_bitvectors
+from fastmole import hint_convert, intersect_bitvectors
 from molehill.modelchecker import check_model
-
-def hole_order_old(bfs_order, choice_to_assignment, possible_holes):
-    order = []
-    for choice in bfs_order:
-        for hole, _ in choice_to_assignment[choice]:
-            if hole not in order and hole in possible_holes:
-                order.append(hole)
-    append_these = []
-    for hole in possible_holes:
-        if hole not in order:
-            append_these.append(hole)
-    return order, append_these
-
 
 def check(matrix_generator, choice_to_assignment, family, prop, disequalities, global_hint=None, compute_counterexample=True):
     hole_options = [
@@ -37,7 +24,7 @@ def check(matrix_generator, choice_to_assignment, family, prop, disequalities, g
     reachable_full = matrix_generator.get_current_reachable_states()
 
     bfs_order = matrix_generator.get_current_bfs_order()
-    reachable_hole_order, append_these = hole_order(bfs_order, choice_to_assignment, set(fixed_holes))
+    reachable_hole_order, append_these = matrix_generator.hole_order(bfs_order, set(fixed_holes))
 
     # Essentially, only holes that are reachable are interesting
     fixed_holes = reachable_hole_order
