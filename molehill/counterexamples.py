@@ -1,8 +1,7 @@
 """Compute counterexamples."""
 
 from stormpy.storage import BitVector
-from stormpy.core import ExplicitModelCheckerHintDouble
-from fastmole import hint_convert, hole_order
+from fastmole import hint_convert, hole_order, intersect_bitvectors
 from molehill.modelchecker import check_model
 
 def hole_order_old(bfs_order, choice_to_assignment, possible_holes):
@@ -18,16 +17,17 @@ def hole_order_old(bfs_order, choice_to_assignment, possible_holes):
     return order, append_these
 
 
-def check(matrix_generator, choice_to_assignment, family, prop, global_hint=None, compute_counterexample=True):
+def check(matrix_generator, choice_to_assignment, family, prop, disequalities, global_hint=None, compute_counterexample=True):
     hole_options = [
         family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
     ]
     fixed_holes = [
         hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1
     ]
+    hole_options = [intersect_bitvectors(a, b) for a, b in zip(hole_options, disequalities)]
     matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
     mdp = matrix_generator.get_current_mdp()
-    
+
     hint_full = None
     # TODO hints are broken!
     #if global_hint is not None:

@@ -54,4 +54,5 @@ PYBIND11_MODULE(fastmole, m) {
     m.def("hint_convert", &hintConvert<double>, py::arg("result"), py::arg("old_reachable_states"), py::arg("new_reachable_states"), "Convert hint");
     m.def("set_end_components_true", &setEndComponentsTrue<double>, py::arg("hint"), "Set end components true");
     m.def("hole_order", &holeOrder, py::arg("bfs_order"), py::arg("choice_to_assignment"), py::arg("possible_holes"), "Get hole order");
+    m.def("intersect_bitvectors", &intersect, py::arg("a"), py::arg("b"), "Intersect bitvectors");
 }

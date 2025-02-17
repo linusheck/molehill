@@ -8,7 +8,6 @@ import paynt.verification.property
 import z3
 import paynt.parser.sketch
 import math
-from stormpy import get_maximal_end_components
 
 from molehill.plugin import SearchMarkovChain
 
@@ -42,22 +41,36 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
         )
         + 1
     )
-    
+
+    # add variables that are constants so we can listen to diseq
+    # map from #bits to list of constants
+    constants = []
+    constant_expr = []
     ranges = []
+    var_ranges = []
+    bit_nums = set()
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
         options = family.hole_options(hole)
+        bit_nums.add(num_bits)
         var = z3.BitVec(name, num_bits)
         variables.append(var)
-        # TODO hole options of full family should be a sorted vector of indices that is continous
+        # it gets guaranteed by paynt that this is actually the range
+        # (these are just the indices, not the actual values in the final model :)
         ranges.append(
             z3.And(
                 var >= z3.BitVecVal(min(options), num_bits),
                 var <= z3.BitVecVal(max(options), num_bits),
             )
         )
-
+        var_ranges.append(max(options))
+        for i in range(0, 2**num_bits):
+            c = z3.Bool(f"{var}!={i}")
+            constants.append(c)
+            constant_expr.append(c == (var != z3.BitVecVal(i, num_bits)))
+    
     s.add(ranges)
+    s.add(constant_expr)
 
     if custom_constraint_lambda:
         s.add(custom_constraint_lambda(variables))
@@ -67,8 +80,8 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
     # s.add(variables[0] == 0)
     # s.add(variables[1] == 0)
 
-    p = SearchMarkovChain(s, quotient, draw_image=(image or search_space_test), considered_counterexamples=considered_counterexamples)
-    p.register_variables(variables)
+    p = SearchMarkovChain(s, quotient, var_ranges, draw_image=(image or search_space_test), considered_counterexamples=considered_counterexamples)
+    p.register_variables(variables, constants)
     model = None
     if s.check() == z3.sat:
         print("sat")

@@ -8,18 +8,20 @@ from molehill.counterexamples import check
 #from molehill.bandit import get_bandit
 from stormpy import model_checking, CheckTask, get_maximal_end_components, prob01max_states, prob01min_states, OptimizationDirection
 from stormpy.storage import BitVector
+from copy import deepcopy
 
 class SearchMarkovChain(z3.UserPropagateBase):
-    def __init__(self, solver, quotient, draw_image=False, considered_counterexamples="all"):
+    def __init__(self, solver, quotient, var_ranges, draw_image=False, considered_counterexamples="all"):
         super().__init__(solver, None)
         # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
         self.quotient = quotient
         self.vars_registered = False
         self.add_fixed(self._fixed)
         # self.add_created(self._created)
-        # self.add_eq(self._eq)
+        self.add_eq(self._eq)
         # TODO decide is broken in Z3, do we need it?
-        self.decide = None
+        # self.add_decide(self._decide)
+        # self.add_diseq(self._diseq)
         self.add_final(self._final)
 
         # models we have already analyzed
@@ -34,6 +36,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # list of Z3 variables, indexed by PAYNT hole
         self.variables = []
         self.variable_names = []
+        self.variable_indices = {}
+
+        self.var_ranges = var_ranges
+        self.disequalities = []
+
+        self.ast_map = {}
 
         self.considered_models = 0
         # self.ruled_out_models = 0
@@ -75,12 +83,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         self.fixed_something = False
         
-        if prop.formula.optimality_type == OptimizationDirection.Maximize:
-            bad_states, good_states = prob01max_states(self.quotient.family.mdp.model, prop.formula.subformula)
-        elif prop.formula.optimality_type == OptimizationDirection.Minimize:
-            bad_states, good_states = prob01min_states(self.quotient.family.mdp.model, prop.formula.subformula)
-        else:
-            raise ValueError("Unknown operator in property")
+        # if prop.formula.optimality_type == OptimizationDirection.Maximize:
+        #     bad_states, good_states = prob01max_states(self.quotient.family.mdp.model, prop.formula.subformula)
+        # elif prop.formula.optimality_type == OptimizationDirection.Minimize:
+        #     bad_states, good_states = prob01min_states(self.quotient.family.mdp.model, prop.formula.subformula)
+        # else:
+        #     raise ValueError("Unknown operator in property")
 
         # # check whether there are nontrivial end components
         # maximal_end_components = get_maximal_end_components(quotient.family.mdp.model)
@@ -123,21 +131,28 @@ class SearchMarkovChain(z3.UserPropagateBase):
         
         # self.bandit = get_bandit()
 
-    def register_variables(self, variables):
+    def register_variables(self, variables, diseq_constants):
+        # print("register", variables)
         assert not self.vars_registered
         self.vars_registered = True
         for var in variables:
             self.add(var)
             self.variables.append(var)
+        for var in diseq_constants:
+            self.add(var)
         self.model_counter.variables = variables
         self.variable_names = [str(var) for var in variables]
+        self.variable_indices = {var: i for i, var in enumerate(self.variable_names)}
+        self.disequalities = [
+            [BitVector(self.var_ranges[i] + 1, True) for i in range(len(self.variables))]
+        ]
 
     def push(self):
         self.fixed_count.append(len(self.fixed_values))
+        self.disequalities.append([BitVector(x) for x in self.disequalities[-1]])
         if time.time() - self.time_last_print > 1:
             print("Considered", self.considered_models, "models so far")
             self.time_last_print = time.time()
-        
         frozen_partial_model = frozenset(self.partial_model.items())
 
         if not (
@@ -180,12 +195,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
         for _scope in range(num_scopes):
             # print("pop")
             last_count = self.fixed_count.pop()
+            # remove all variables from partial_model
             while len(self.fixed_values) > last_count:
                 self.partial_model.pop(self.fixed_values.pop())
+            self.disequalities.pop()
 
-    ast_map = {}
-    def _fixed(self, ast, value):
-        # print methods of ast
+
+    def get_name_from_ast_map(self, ast):
         ast_str = None
         ast_hash = hash(ast)
         if ast_hash in self.ast_map:
@@ -193,8 +209,19 @@ class SearchMarkovChain(z3.UserPropagateBase):
         else:
             ast_str = ast.decl().name()
             self.ast_map[ast_hash] = ast_str
-        self.fixed_values.append(ast_str)
-        self.partial_model[ast_str] = value
+        return ast_str
+
+    def _fixed(self, ast, value):
+        ast_str = self.get_name_from_ast_map(ast)
+        if "!=" in ast_str:
+            # this is an inferred disequality
+            if value:
+                s = ast_str.split("!=")
+                self.disequalities[-1][self.variable_indices[s[0]]].set(int(s[1]), False)
+        else:
+            self.fixed_values.append(ast_str)
+            # this is a model variable
+            self.partial_model[ast_str] = value
         # otherwise: this is just a propagation, no need to check anything here
 
     def analyse_current_model(self):
@@ -218,7 +245,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
             compute_counterexample = False
 
         all_violated, counterexample, _result = check(
-            self.matrix_generator, self.choice_to_assignment, new_family, prop, self.global_hint, compute_counterexample
+            self.matrix_generator, self.choice_to_assignment, new_family, prop, self.disequalities[-1], self.global_hint, compute_counterexample
         )
 
         self.considered_models += 1
@@ -258,14 +285,21 @@ class SearchMarkovChain(z3.UserPropagateBase):
     def fresh(self, new_ctx):
         return self
 
-    def _created(self, e):
-        pass
+    # def _created(self, e):
+    #     print("Created", e)
+    #     pass
 
     def _eq(self, e, ids):
+        # print("eq", e, ids)
         pass
 
     # def _decide(self, a, b, c):
-    #     self.last_decision_variable = a
+    #     print("decide", a, b, c)
+
+    # def _diseq(self, a, b):
+    #     a_str = self.get_name_from_ast_map(a)
+    #     b_str = self.get_name_from_ast_map(b)
+    #     self.diseqs[-1].append((a_str, b_str))
 
     def _final(self):
         # print("final -> analyse current model", self.partial_model)

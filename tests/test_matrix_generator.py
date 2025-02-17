@@ -46,6 +46,7 @@ def test_matrix_generator(project_path):
     s = z3.Solver()
 
     variables = []
+    var_ranges = []
     # create variables
     num_bits = max([math.ceil(math.log2(max(family.hole_options(hole)) + 1)) for hole in range(family.num_holes)]) + 1
     for hole in range(family.num_holes):
@@ -54,12 +55,13 @@ def test_matrix_generator(project_path):
         var = z3.BitVec(name, num_bits)
         variables.append(var)
         s.add(z3.And(var >= z3.BitVecVal(min(options), num_bits), var <= z3.BitVecVal(max(options), num_bits)))
+        var_ranges.append(max(options))
 
     new_family = family
 
     choice_to_assignment = quotient.coloring.getChoiceToAssignment()
 
-    plugin = SearchMarkovChain(s, quotient)
+    plugin = SearchMarkovChain(s, quotient, var_ranges)
     quotient_mdp = quotient.family.mdp.model
 
     # time to build the MDP

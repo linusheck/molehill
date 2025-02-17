@@ -1,6 +1,6 @@
-#include <_types/_uint64_t.h>
-#include <unordered_set>
 #include "utils.h"
+#include <storm/storage/BitVector.h>
+#include <unordered_set>
 
 /**
  * @brief Get possible choices for a given set of abstracted holes
@@ -80,7 +80,9 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(const std::
     hint.setNoEndComponentsInMaybeStates(true);
     return hint;
 }
-template storm::modelchecker::ExplicitModelCheckerHint<double> hintConvert(const std::vector<double> &result, const storm::storage::BitVector &oldReachableStates, const storm::storage::BitVector &newReachableStates);
+template storm::modelchecker::ExplicitModelCheckerHint<double> hintConvert(const std::vector<double> &result,
+                                                                           const storm::storage::BitVector &oldReachableStates,
+                                                                           const storm::storage::BitVector &newReachableStates);
 
 template<typename ValueType>
 storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<ValueType> &hint) {
@@ -89,3 +91,14 @@ storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(co
     return newHint;
 }
 template storm::modelchecker::ExplicitModelCheckerHint<double> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<double> &hint);
+
+storm::storage::BitVector intersect(const storm::storage::BitVector &a, const storm::storage::BitVector &b) {
+    if (a.size() != b.size()) {
+        throw std::runtime_error("BitVectors must have the same size");
+    }
+    storm::storage::BitVector result(a.size(), false);
+    for (uint64_t i = 0; i < a.size(); ++i) {
+        result.set(i, a.get(i) && b.get(i));
+    }
+    return result;
+}
