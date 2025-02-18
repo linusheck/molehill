@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="tools.synthesis" timelimit="600s" hardtimelimit="600s" memlimit="10GB">
-	
+<benchmark tool="tools.synthesis" timelimit="600s" hardtimelimit="600s" memlimit="1GB">
+
+  <tasks name="SAT Benchmarks">
+    <include>benchmarks/files/sat*.yml</include>
+    <propertyfile>benchmarks/sat.txt</propertyfile>
+  </tasks>
+
+  <tasks name="UNSAT Benchmarks">
+    <include>benchmarks/files/unsat*.yml</include>
+    <propertyfile>benchmarks/unsat.txt</propertyfile>
+  </tasks>
+
+	<!-- <tasks name="sat_dpm">
+		<withoutfile>resources/benchmark/jair/sat_dpm</withoutfile>
+        <propertyfile>${taskdef_path}/true.yml</propertyfile>
+    </tasks> -->
     <!-- Define benchmarks -->
-    <tasks>
         <!-- Benchmarks from JAIR -->
-        <withoutfile>resources/benchmark/jair/sat_dpm</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_grid</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_grid-10-sl-4fsc</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_grid-meet-sl-2fsc</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_herman</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_maze</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_maze-sl-5</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_pole</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_pole-res</withoutfile>
-        <withoutfile>resources/benchmark/jair/sat_refuel-06-res</withoutfile>
+	<!--
         <withoutfile>resources/benchmark/jair/unsat_dpm</withoutfile>
         <withoutfile>resources/benchmark/jair/unsat_grid</withoutfile>
         <withoutfile>resources/benchmark/jair/unsat_grid-10-sl-4fsc</withoutfile>
@@ -24,8 +28,9 @@
         <withoutfile>resources/benchmark/jair/unsat_pole</withoutfile>
         <withoutfile>resources/benchmark/jair/unsat_pole-res</withoutfile>
         <withoutfile>resources/benchmark/jair/unsat_refuel-06-res</withoutfile>
+	-->
 
-        <!-- Benchmarks from POMDPs -->
+        <!-- Benchmarks from POMDPs
         <withoutfile>resources/benchmark/pomdps/dontknow_crypt</withoutfile>
         <withoutfile>resources/benchmark/pomdps/dontknow_drone</withoutfile>
         <withoutfile>resources/benchmark/pomdps/dontknow_network-priorities</withoutfile>
@@ -36,8 +41,7 @@
         <withoutfile>resources/benchmark/pomdps/unsat_samplerocks</withoutfile>
         <withoutfile>resources/benchmark/pomdps/dontknow_hallway</withoutfile>
         <withoutfile>resources/benchmark/pomdps/sat_hallway</withoutfile>
-    </tasks>
-
+	-->
     <!-- Define executors -->
     <rundefinition name="Molehill">
         <column title="Iterations" value="iterations"/>
@@ -46,7 +50,7 @@
         <option>molehill</option>
     </rundefinition>
 
-    <rundefinition name="Molehill (Deterministic)">
+    <rundefinition name="Molehill-Det">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>-m</option>
@@ -54,7 +58,7 @@
         <option>--deterministic</option>
     </rundefinition>
 
-    <rundefinition name="Molehill (Track Disequality)">
+    <rundefinition name="Molehill-Diseq">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>-m</option>
@@ -62,7 +66,7 @@
         <option>--diseq</option>
     </rundefinition>
 
-    <rundefinition name="Molehill (only MC-CE)">
+    <rundefinition name="Molehill-MC-CE">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>-m</option>
@@ -71,7 +75,7 @@
         <option>mc</option>
     </rundefinition>
 
-    <rundefinition name="Molehill (No CE)">
+    <rundefinition name="Molehill-No-CE">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>-m</option>

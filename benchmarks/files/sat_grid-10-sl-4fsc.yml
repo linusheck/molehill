@@ -1,0 +1,9 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../resources/benchmark/jair/sat_grid-10-sl-4fsc
+
+properties:
+  - property_file: ../sat.txt
+    expected_verdict: true
