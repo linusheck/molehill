@@ -1,0 +1,9 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../resources/benchmark/jair/sat_pole
+
+properties:
+  - property_file: ../sat.txt
+    expected_verdict: true

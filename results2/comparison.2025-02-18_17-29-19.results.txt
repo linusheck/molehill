@@ -1,0 +1,41 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison.xml
+name:                    comparison
+run sets:                Molehill, Molehill-Det, Molehill-Diseq, Molehill-MC-CE, Molehill-No-CE, Paynt-AR, Paynt-CEGIS, Paynt-Hybrid
+date:                    Tue, 2025-02-18 17:29:19 CET
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python3
+options:
+parallel runs:           32
+resource limits:
+- memory:                10000.0 MB
+- time:                  3000 s
+hardware requirements:
+- memory:                10000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    ernie
+os:                      Linux-6.1.0-25-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   True
+ram:                     540666.585088 MB
+------------------------------------------------------------
+
+
+
+Molehill
+Run set 1 of 8 with options '-m molehill' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_grid.yml                   true                             0.69        2.10        None
+sat_maze.yml                   true                             0.79        2.12        None
+unsat_refuel-06-res.yml        false                            0.90        1.96        None
+unsat_maze.yml                 false                            1.04        2.15        None
+sat_network.yml                true                             1.47        2.77        None
+sat_pole-res.yml               true                             1.50        2.85        None
+unsat_pole-res.yml             false                            1.39        2.51        None
+unsat_grid.yml                 false                            1.46        2.60        None

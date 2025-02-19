@@ -1,0 +1,17 @@
+format_version: "2.0"
+
+input_files:
+- ../resources/benchmark/jair/unsat_dpm
+- ../resources/benchmark/jair/unsat_grid
+- ../resources/benchmark/jair/unsat_grid-10-sl-4fsc
+- ../resources/benchmark/jair/unsat_grid-meet-sl-2fsc
+- ../resources/benchmark/jair/unsat_herman
+- ../resources/benchmark/jair/unsat_maze
+- ../resources/benchmark/jair/unsat_maze-sl-5
+- ../resources/benchmark/jair/unsat_pole
+- ../resources/benchmark/jair/unsat_pole-res
+- ../resources/benchmark/jair/unsat_refuel-06-res
+
+properties:
+  - property_file: unsat.yml
+    expected_verdict: false
