@@ -41,6 +41,7 @@ class CMakeBuild(build_ext):
         self.update_git_repo("https://github.com/linusheck/synthesis.git", paynt_build, "private")
         subprocess.check_call([sys.executable, "setup.py", "develop"], cwd=os.path.join(paynt_build))
         subprocess.check_call([sys.executable, "setup.py", "develop"], cwd=os.path.join(paynt_build, "payntbind"))
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "."], cwd=os.path.join(paynt_build, "payntbind"))
 
         build_temp = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/fastmole"))
         os.makedirs(build_temp, exist_ok=True)
