@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="tools.synthesis" timelimit="600s" hardtimelimit="600s" memlimit="1GB">
+<benchmark tool="tools.synthesis" timelimit="300s" hardtimelimit="300s" memlimit="10GB">
 
   <tasks name="SAT Benchmarks">
     <include>benchmarks/files/sat*.yml</include>
@@ -11,37 +11,6 @@
     <propertyfile>benchmarks/unsat.txt</propertyfile>
   </tasks>
 
-	<!-- <tasks name="sat_dpm">
-		<withoutfile>resources/benchmark/jair/sat_dpm</withoutfile>
-        <propertyfile>${taskdef_path}/true.yml</propertyfile>
-    </tasks> -->
-    <!-- Define benchmarks -->
-        <!-- Benchmarks from JAIR -->
-	<!--
-        <withoutfile>resources/benchmark/jair/unsat_dpm</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_grid</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_grid-10-sl-4fsc</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_grid-meet-sl-2fsc</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_herman</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_maze</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_maze-sl-5</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_pole</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_pole-res</withoutfile>
-        <withoutfile>resources/benchmark/jair/unsat_refuel-06-res</withoutfile>
-	-->
-
-        <!-- Benchmarks from POMDPs
-        <withoutfile>resources/benchmark/pomdps/dontknow_crypt</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/dontknow_drone</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/dontknow_network-priorities</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/sat_network</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/sat_network-priorities</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/sat_samplerocks</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/unsat_network</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/unsat_samplerocks</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/dontknow_hallway</withoutfile>
-        <withoutfile>resources/benchmark/pomdps/sat_hallway</withoutfile>
-	-->
     <!-- Define executors -->
     <rundefinition name="Molehill">
         <column title="Iterations" value="iterations"/>

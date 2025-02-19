@@ -1,0 +1,137 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison.xml
+name:                    comparison
+run sets:                Molehill, Molehill-Det, Molehill-Diseq, Molehill-MC-CE, Molehill-No-CE, Paynt-AR, Paynt-CEGIS, Paynt-Hybrid
+date:                    Wed, 2025-02-19 13:00:06 CET
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python3
+options:
+parallel runs:           32
+resource limits:
+- memory:                10000.0 MB
+- time:                  300 s
+hardware requirements:
+- memory:                10000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    ernie
+os:                      Linux-6.1.0-25-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   True
+ram:                     540666.585088 MB
+------------------------------------------------------------
+
+
+
+Molehill
+Run set 1 of 8 with options '-m molehill' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    unknown                          0.27        1.53        None
+sat_grid-10-sl-4fsc.yml        unknown                          0.27        1.54        None
+sat_grid-meet-sl-2fsc.yml      unknown                          0.29        1.55        None
+sat_grid.yml                   unknown                          0.26        1.51        None
+sat_herman.yml                 unknown                          0.27        1.52        None
+sat_maze-sl-5.yml              unknown                          0.29        1.51        None
+sat_maze.yml                   unknown                          0.30        1.48        None
+sat_network-priorities.yml     unknown                          0.30        1.48        None
+sat_network.yml                unknown                          0.28        1.42        None
+sat_pole-res.yml               unknown                          0.31        1.43        None
+sat_pole.yml                   unknown                          0.29        1.45        None
+sat_refuel-06-res.yml          unknown                          0.30        1.41        None
+sat_samplerocks.yml            unknown                          0.28        1.37        None
+unsat_dpm.yml                  unknown                          0.28        1.37        None
+unsat_grid-10-sl-4fsc.yml      unknown                          0.29        1.31        None
+unsat_grid-meet-sl-2fsc.yml    unknown                          0.30        1.32        None
+unsat_grid.yml                 unknown                          0.28        1.30        None
+unsat_herman.yml               unknown                          0.28        1.32        None
+unsat_maze-sl-5.yml            unknown                          0.29        1.27        None
+unsat_maze.yml                 unknown                          0.30        1.30        None
+unsat_network.yml              unknown                          0.27        1.26        None
+unsat_pole-res.yml             unknown                          0.28        1.28        None
+unsat_pole.yml                 unknown                          0.29        1.26        None
+unsat_refuel-06-res.yml        unknown                          0.30        1.27        None
+unsat_samplerocks.yml          unknown                          0.28        1.27        None
+--------------------------------------------------------------------------------------------
+Run set 1                      done                             8.02        2.52           -
+
+
+Molehill-Det
+Run set 2 of 8 with options '-m molehill --deterministic' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    unknown                          0.28        1.49        None
+sat_grid-10-sl-4fsc.yml        unknown                          0.28        1.50        None
+sat_grid-meet-sl-2fsc.yml      unknown                          0.27        1.49        None
+sat_grid.yml                   unknown                          0.33        1.49        None
+sat_herman.yml                 unknown                          0.28        1.46        None
+sat_maze-sl-5.yml              unknown                          0.28        1.46        None
+sat_maze.yml                   unknown                          0.28        1.46        None
+sat_network-priorities.yml     unknown                          0.28        1.46        None
+sat_network.yml                unknown                          0.29        1.46        None
+sat_pole-res.yml               unknown                          0.33        1.50        None
+sat_pole.yml                   unknown                          0.29        1.45        None
+sat_refuel-06-res.yml          unknown                          0.27        1.42        None
+sat_samplerocks.yml            unknown                          0.30        1.42        None
+unsat_dpm.yml                  unknown                          0.28        1.40        None
+unsat_grid-10-sl-4fsc.yml      unknown                          0.30        1.41        None
+unsat_grid-meet-sl-2fsc.yml    unknown                          0.29        1.35        None
+unsat_grid.yml                 unknown                          0.30        1.36        None
+unsat_herman.yml               unknown                          0.28        1.31        None
+unsat_maze-sl-5.yml            unknown                          0.27        1.29        None
+unsat_maze.yml                 unknown                          0.28        1.32        None
+unsat_network.yml              unknown                          0.29        1.28        None
+unsat_pole-res.yml             unknown                          0.28        1.27        None
+unsat_pole.yml                 unknown                          0.29        1.30        None
+unsat_refuel-06-res.yml        unknown                          0.28        1.27        None
+unsat_samplerocks.yml          unknown                          0.27        1.25        None
+--------------------------------------------------------------------------------------------
+Run set 2                      done                             8.09        2.50           -
+
+
+Molehill-Diseq
+Run set 3 of 8 with options '-m molehill --diseq' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    
+sat_grid-10-sl-4fsc.yml        
+sat_grid-meet-sl-2fsc.yml      
+sat_grid.yml                   
+sat_herman.yml                 
+sat_maze-sl-5.yml              
+sat_maze.yml                   
+sat_network-priorities.yml     
+sat_network.yml                
+sat_pole-res.yml               
+sat_pole.yml                   
+sat_refuel-06-res.yml          
+sat_samplerocks.yml            
+unsat_dpm.yml                  
+unsat_grid-10-sl-4fsc.yml      
+unsat_grid-meet-sl-2fsc.yml    
+unsat_grid.yml                 
+unsat_herman.yml               
+unsat_maze-sl-5.yml            
+unsat_maze.yml                 
+unsat_network.yml              
+unsat_pole-res.yml             
+unsat_pole.yml                 
+unsat_refuel-06-res.yml        
+unsat_samplerocks.yml          
+--------------------------------------------------------------------------------------------
+Run set 3                      done                             1.50        1.76           -
+
+Statistics:             50 Files
+  correct:               0
+    correct true:        0
+    correct false:       0
+  incorrect:             0
+    incorrect true:      0
+    incorrect false:     0
+  unknown:              50

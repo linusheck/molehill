@@ -38,7 +38,7 @@ class CMakeBuild(build_ext):
 
         # Build paynt
         paynt_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/paynt"))
-        self.update_git_repo("https://github.com/linusheck/synthesis.git", paynt_build, "master")
+        self.update_git_repo("https://github.com/linusheck/synthesis.git", paynt_build, "private")
         subprocess.check_call([sys.executable, "setup.py", "develop"], cwd=os.path.join(paynt_build))
         subprocess.check_call([sys.executable, "setup.py", "develop"], cwd=os.path.join(paynt_build, "payntbind"))
 

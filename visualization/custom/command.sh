@@ -1,0 +1,1 @@
+../../../storm/build_release/bin/storm --prism safety.prism -prop sketch.props -const "P1=1,P2=1,P3=1,P4=1" --exportbuild sketch.dot
