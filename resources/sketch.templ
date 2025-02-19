@@ -4,8 +4,10 @@ dtmc
 const double p=0.4;
 const double q=0.8;
 
-hole int x1 in {4};
-hole int x2 in {4};
+//hole int x1 in {3,4};
+const int x1 = 3;
+hole int x2 in {3,4};
+//const int x2 = 3;
 
 module die
 	// local state
@@ -13,7 +15,7 @@ module die
 
 	[] s=0 -> q : (s'=x1) + 1-q : (s'=1);
 	[] s=1 -> p : (s'=x2) + 1-p : (s'=3);
-	[] s=3 -> 0.1 : (s'=x1) + 0.9 : (s'=x2);
+	[] s=3 -> 0.1 : (s'=x1) + 0.9 : (s'=3);
 	[] s=4 -> 0.25 : (s'=5) + 0.75 : (s'=6);
 	[] s=5 -> 1: (s'=7);
 	[] s=6 -> 1: (s'=7);

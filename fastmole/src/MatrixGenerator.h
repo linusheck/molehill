@@ -2,6 +2,7 @@
 #include <map>
 #include <optional>
 #include <storm/modelchecker/CheckTask.h>
+#include <storm/storage/Scheduler.h>
 #include <vector>
 #include "storm/adapters/RationalFunctionAdapter.h"
 #include "storm/models/sparse/Mdp.h"
@@ -68,6 +69,16 @@ class MatrixGenerator {
      */
     std::pair<std::vector<uint64_t>, std::vector<uint64_t>> holeOrder(const std::vector<uint64_t> &bfsOrder,
                                                                       const std::set<uint64_t> &possibleHoles);
+
+    /**
+     * @brief Is the scheduler consistent with the hole order?
+     * Uses current reachable states.
+     * 
+     * @param scheduler The MDP scheduler.
+     * @return true The scheduler is consistent.
+     * @return false The scheduler is inconsistent.
+     */
+    bool isSchedulerConsistent(const storm::storage::Scheduler<ValueType> &scheduler);
 
    private:
     /**

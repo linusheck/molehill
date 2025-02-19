@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "run grid",
             "program": "/users/linusheck/library/caches/pypoetry/virtualenvs/molehill-7ra7yprq-py3.13/bin/python",
-            "args": ["-m", "molehill", "resources/grid/"], 
+            "args": ["-m", "molehill", "resources/"], 
             "cwd": "${workspaceFolder}",
             "expressions": "native"
         },
