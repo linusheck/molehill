@@ -13,8 +13,10 @@ def check(matrix_generator, choice_to_assignment, family, prop, disequalities, g
     ]
     if disequalities:
         hole_options = [intersect_bitvectors(a, b) for a, b in zip(hole_options, disequalities)]
-        if any([len(list(x)) == 0 for x in hole_options]):
-            return True, fixed_holes, None
+        # TODO I currently just assume this never happens, but I'm not sure
+        # if any([len(list(x)) == 0 for x in hole_options]):
+        #     print("does this happen?")
+        #     return True, fixed_holes, None
     matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
     mdp = matrix_generator.get_current_mdp()
 
@@ -23,7 +25,11 @@ def check(matrix_generator, choice_to_assignment, family, prop, disequalities, g
     #if global_hint is not None:
         #hint_full = hint_convert(global_hint[0], global_hint[1], old_reachable_states)
     all_schedulers_violate_full, result = check_model(mdp, prop, hint_full)
-    reachable_full = matrix_generator.get_current_reachable_states()
+    if not all_schedulers_violate_full:
+        if matrix_generator.is_scheduler_consistent(result.scheduler):
+            # TODO we should return the scheduler here
+            print("Found consistent scheduler")
+        return False, None, result
 
     bfs_order = matrix_generator.get_current_bfs_order()
     reachable_hole_order, append_these = matrix_generator.hole_order(bfs_order, set(fixed_holes))
@@ -68,7 +74,6 @@ def check(matrix_generator, choice_to_assignment, family, prop, disequalities, g
 
         # first, check the weakest counterexample candidate
         weakest_ce_result = check_ce_candidate(len(reachable_hole_order) - 1, reachable_hole_order)
-        reachable = reachable_full
         if weakest_ce_result[0]:
             # do a binary search to find the smallest counterexample
             # TODO we don't need to search on the holes that we know are not reachable
@@ -91,4 +96,4 @@ def check(matrix_generator, choice_to_assignment, family, prop, disequalities, g
     # Even if we do not compute a counterexample, we can use the knowledge that
     # some holes are unreachable. The statement is only about the reachable holes,
     # so we get a "core" without any further work.
-    return all_schedulers_violate_full, fixed_holes, result
+    return True, fixed_holes, result

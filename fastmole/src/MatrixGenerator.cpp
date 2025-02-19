@@ -1,5 +1,6 @@
 
 #include "MatrixGenerator.h"
+#include <_types/_uint64_t.h>
 #include <optional>
 #include <queue>
 #include <stdexcept>
@@ -178,7 +179,7 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
     } else {
         // WARNING: I'm not using this code path right now, it might be broken.
         // I still think it's a good idea to keep it around for now.
-        std::runtime_error("Using fixed reachable states is not supported right now");
+        throw std::runtime_error("Using fixed reachable states is not supported right now");
         if (reachableStatesFixed->size() != decisionMatrix.getColumnCount()) {
             throw std::runtime_error("Invalid size of reachable states");
         }
@@ -307,6 +308,51 @@ std::pair<std::vector<uint64_t>, std::vector<uint64_t>> MatrixGenerator<ValueTyp
     }
 
     return std::make_pair(order, holesNotInOrder);
+}
+
+template<typename ValueType>
+bool MatrixGenerator<ValueType>::isSchedulerConsistent(const storm::storage::Scheduler<ValueType> &scheduler) {
+    std::unordered_map<uint64_t, uint64_t> holeAssignments;
+    uint64_t counter = 0;
+    if (!this->currentReachableStates) {
+        throw std::runtime_error("No reachable states");
+    }
+    for (auto const& state : *this->currentReachableStates) {
+        if (state >= this->quotient.getTransitionMatrix().getColumnCount()) {
+            if (state >= this->decisionMatrix.getColumnCount()) {
+                throw std::runtime_error("Invalid state in reachable states");
+            }
+            // This is the last two columns
+            continue;
+        }
+        uint64_t row = this->quotient.getTransitionMatrix().getRowGroupIndices()[state];
+        uint64_t rowEnd = this->quotient.getTransitionMatrix().getRowGroupIndices()[state + 1];
+
+        auto const& choice = scheduler.getChoice(counter);
+        if (!choice.isDeterministic()) {
+            throw std::runtime_error("Scheduler must be deterministic");
+        }
+        uint64_t deterministicChoice = choice.getDeterministicChoice();
+        
+        if (row + deterministicChoice >= rowEnd) {
+            throw std::runtime_error("Choice index " + std::to_string(deterministicChoice) + " out of bounds (size: " + std::to_string(rowEnd - row) + ")");
+        }
+
+        auto const& assignment = choiceToAssignment[row + deterministicChoice];
+
+        for (auto const& [hole, assignment] : assignment) {
+            if (holeAssignments.contains(hole)) {
+                if (holeAssignments[hole] != assignment) {
+                    return false;
+                }
+            } else {
+                holeAssignments[hole] = assignment;
+            }
+        }
+
+        counter++;
+    }
+    return true;
 }
 
 template class MatrixGenerator<double>;

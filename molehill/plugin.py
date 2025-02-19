@@ -252,6 +252,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
             self.matrix_generator, self.choice_to_assignment, new_family, prop, self.disequalities[-1] if self.disequalities else None, self.global_hint, compute_counterexample
         )
 
+
         self.considered_models += 1
 
         if model == "MDP":
@@ -261,6 +262,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.mdp_fails_and_wins[0] += 1
 
         if all_violated:
+            print([self.variable_names[c] + " -> " + str(self.partial_model[self.variable_names[c]]) for c in counterexample])
             #print(len(self.fixed_values), "->", len(counterexample))
             self.conflict([self.variables[c] for c in counterexample])
             if self.draw_image:
