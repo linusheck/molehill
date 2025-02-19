@@ -32,3 +32,15 @@ For help, execute
 ```
 python -m molehill --help
 ```
+
+### Benchmarking
+
+Only seems to work on Linux. You need to install BenchExec:
+```
+pip install BenchExec
+```
+
+Then execute:
+```
+./benchmark.sh
+```
