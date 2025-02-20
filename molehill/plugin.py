@@ -5,20 +5,29 @@ import z3
 from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
-#from molehill.bandit import get_bandit
+
+# from molehill.bandit import get_bandit
 from stormpy import model_checking, CheckTask
 from stormpy.storage import BitVector
 from copy import deepcopy
 
+
 class SearchMarkovChain(z3.UserPropagateBase):
-    def __init__(self, solver, quotient, diseq_info, draw_image=False, considered_counterexamples="all"):
+    def __init__(
+        self,
+        solver,
+        quotient,
+        diseq_info,
+        draw_image=False,
+        considered_counterexamples="all",
+    ):
         super().__init__(solver, None)
         # TODO for some reason the PAYNT quotient MDP has a lot of duplicate rows
         self.quotient = quotient
         self.vars_registered = False
         self.add_fixed(self._fixed)
         # self.add_created(self._created)
-        self.add_eq(self._eq)
+        # self.add_eq(self._eq)
         # TODO decide is broken in Z3, do we need it?
         # self.add_decide(self._decide)
         self.add_final(self._final)
@@ -60,9 +69,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # does there exist a model that satisfies the property?
         print("Quotient size", self.quotient.family.mdp.model.nr_states)
         print("Checking quotient")
-        result = model_checking(
-            self.quotient.family.mdp.model, prop.formula
-        )
+        result = model_checking(self.quotient.family.mdp.model, prop.formula)
         print("Done")
         self.global_bounds = result.get_values()
 
@@ -71,18 +78,15 @@ class SearchMarkovChain(z3.UserPropagateBase):
         )
         assert len(self.quotient.family.mdp.model.initial_states) == 1
 
-        # run this model counter alongside and feed it all new assertions
-        self.model_counter = ModelCounter()
-        for a in solver.assertions():
-            self.model_counter.solver.add(a)
-
         # reasons for new assertion
         self.reasons = []
 
         self.counterexamples = []
 
         self.fixed_something = False
-        
+
+        # TODO: We should definitely check that there are no nontrivial end components
+
         # if prop.formula.optimality_type == OptimizationDirection.Maximize:
         #     bad_states, good_states = prob01max_states(self.quotient.family.mdp.model, prop.formula.subformula)
         # elif prop.formula.optimality_type == OptimizationDirection.Minimize:
@@ -96,7 +100,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         #     for state, _choices in maximal_end_component:
         #         if state not in good_states and state not in bad_states:
         #             raise ValueError("Nontrivial end component")
-                
+
         # because the quotient has no nontrivial end component, no sub-MDP does either :)
 
         # target_states == states with target label
@@ -104,7 +108,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
             self.quotient.family.mdp.model, prop.formula.subformula.subformula
         ).get_truth_values()
 
-        # get type of MatrixGenerator constructor
         self.matrix_generator = MatrixGenerator(
             self.quotient.family.mdp.model,
             self.check_task,
@@ -128,40 +131,50 @@ class SearchMarkovChain(z3.UserPropagateBase):
         if self.draw_image:
             self.image_assertions = []
         self.considered_counterexamples = considered_counterexamples
-        
-        # self.bandit = get_bandit()
 
-    def register_variables(self, variables, diseq_constants):
-        # print("register", variables)
+    def register_variables(self, variables, diseq_statements):
+        """This method is called once by the user to regigster the variables we
+        are going to watch. The diseq_constants are the statements that
+        represent all disequalities, e.g., X!=2."""
         assert not self.vars_registered
         self.vars_registered = True
         for var in variables:
             self.add(var)
             self.variables.append(var)
-        for var in diseq_constants:
+        for var in diseq_statements:
             self.add(var)
-        self.model_counter.variables = variables
         self.variable_names = [str(var) for var in variables]
         self.variable_indices = {var: i for i, var in enumerate(self.variable_names)}
         if self.var_ranges:
             self.disequalities = [
-                [BitVector(self.var_ranges[i] + 1, True) for i in range(len(self.variables))]
+                [
+                    BitVector(self.var_ranges[i] + 1, True)
+                    for i in range(len(self.variables))
+                ]
             ]
 
     def push(self):
+        """This method is called if Z3 pushes a new context. This is where we check the sub-MDP."""
+
+        # Keep track of the new context
         self.fixed_count.append(len(self.fixed_values))
         if self.disequalities:
             self.disequalities.append([BitVector(x) for x in self.disequalities[-1]])
+
+        # Print statement taht shows we are working
         if time.time() - self.time_last_print > 1:
             print("Considered", self.considered_models, "models so far")
             self.time_last_print = time.time()
-        frozen_partial_model = frozenset(self.partial_model.items())
 
+        # Frozen partial model is hashable :)
+        frozen_partial_model = frozenset(self.partial_model.items())
+        # If we fixed exactly as many constants as last context, skip this one
         if not (
             len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]
         ):
             return
 
+        # Check if we already know this model (Z3 sometimes asks twice)
         if frozen_partial_model in self.rejecting_models:
             # we already know this model rejects
             # we also know this if any model above rejects, which we could check with subsets
@@ -171,40 +184,54 @@ class SearchMarkovChain(z3.UserPropagateBase):
             # we already know this model accepts
             return
 
-        # models_below = len(self.variables) - len(self.fixed_values)
-
-        # action = self.bandit.pull()
-        # if action[0] == 1:
-        #     self.bandit.update([0])
-        #     return
-
         measured_time = time.time()
-        # counterexample is already propagated to the solver inside of this
-        # function, we don't need it
+        # Analyze current model and propagate theory lemma
         all_violated, counterexample = self.analyse_current_model()
         measured_time = time.time() - measured_time
 
         if all_violated:
             self.rejecting_models.add(frozen_partial_model)
+            # If we want to draw a nice image, we need this statement
             if self.draw_image:
-                self.counterexamples.append([(self.variable_names[i], self.partial_model[self.variable_names[i]]) for i in counterexample])
-            # self.bandit.update([models_below])
+                self.counterexamples.append(
+                    [
+                        (
+                            self.variable_names[i],
+                            self.partial_model[self.variable_names[i]],
+                        )
+                        for i in counterexample
+                    ]
+                )
         else:
             self.accepting_models.add(frozen_partial_model)
-            # self.bandit.update([-models_below])
 
     def pop(self, num_scopes):
+        # This function is called if Z3 pops a context. We keep track of that.
         for _scope in range(num_scopes):
-            # print("pop")
             last_count = self.fixed_count.pop()
-            # remove all variables from partial_model
             while len(self.fixed_values) > last_count:
                 self.partial_model.pop(self.fixed_values.pop())
             if self.disequalities:
                 self.disequalities.pop()
 
+    def _final(self):
+        # This is what is called if Z3 creates a FULL assignment.
+        # We basically do the same thing as in push.
+        _result, counterexample = self.analyse_current_model()
+
+        # Again, this is for the nice image :)
+        if counterexample is not None and self.draw_image:
+            self.counterexamples.append(
+                [
+                    (self.variable_names[i], self.partial_model[self.variable_names[i]])
+                    for i in counterexample
+                ]
+            )
 
     def get_name_from_ast_map(self, ast):
+        """Get name of the AST from the map."""
+        # I had to make this function because the Z3 APIs to do the same thing
+        # are super slow.
         ast_str = None
         ast_hash = hash(ast)
         if ast_hash in self.ast_map:
@@ -215,22 +242,26 @@ class SearchMarkovChain(z3.UserPropagateBase):
         return ast_str
 
     def _fixed(self, ast, value):
+        # This is called when Z3 fixes a variable. We need to keep track of that.
         ast_hash = hash(ast)
         if ast_hash in self.constant_explanations:
             explanation = self.constant_explanations[ast_hash]
-            # this is an inferred disequality
+            # This is a disequality => rule it out in the disequalities bit-vector.
             if value:
-                self.disequalities[-1][self.variable_indices[explanation[0]]].set(int(explanation[1]), False)
+                self.disequalities[-1][self.variable_indices[explanation[0]]].set(
+                    int(explanation[1]), False
+                )
         else:
             ast_str = self.get_name_from_ast_map(ast)
             self.fixed_values.append(ast_str)
-            # this is a model variable
+            # This is a model constant => add it to the partial model.
             self.partial_model[ast_str] = value
-        # otherwise: this is just a propagation, no need to check anything here
 
     def analyse_current_model(self):
+        """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
         model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
 
+        # Make a PAYNT family from the current partial model.
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
         for hole in range(new_family.num_holes):
@@ -238,23 +269,29 @@ class SearchMarkovChain(z3.UserPropagateBase):
             if var in self.partial_model:
                 new_family.hole_set_options(hole, [self.partial_model[var].as_long()])
 
+        # Prop is always rechability, even if our input was until (thanks paynt :)).
         prop = self.quotient.specification.all_properties()[0]
-        # prop is always rechability, even if our input was until (thanks paynt :))
 
-        model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
+        # Decide whether we want to compute a counterexample.
         compute_counterexample = True
         if self.considered_counterexamples == "none":
             compute_counterexample = False
         elif self.considered_counterexamples == "mc" and model == "MDP":
             compute_counterexample = False
 
+        # Check the sub-MDP (see counterexample.py).
         all_violated, counterexample, _result = check(
-            self.matrix_generator, self.choice_to_assignment, new_family, prop, self.disequalities[-1] if self.disequalities else None, self.global_hint, compute_counterexample
+            self.matrix_generator,
+            new_family,
+            prop,
+            self.disequalities[-1] if self.disequalities else None,
+            self.global_hint,
+            compute_counterexample,
         )
-
 
         self.considered_models += 1
 
+        # Keep track of MDP fails and wins.
         if model == "MDP":
             if all_violated:
                 self.mdp_fails_and_wins[1] += 1
@@ -262,8 +299,18 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.mdp_fails_and_wins[0] += 1
 
         if all_violated:
-            #print(len(self.fixed_values), "->", len(counterexample))
+            # We found a counterexample, so we need to push a theory lemma.
             self.conflict([self.variables[c] for c in counterexample])
+
+            # Push a reason (explain).
+            if len(counterexample) < len(self.fixed_values):
+                self.reasons.append(
+                    f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}"
+                )
+            else:
+                self.reasons.append(f"{model} reject {len(self.fixed_values)}")
+
+            # If we want to draw a nice image, we need this statement.
             if self.draw_image:
                 term = z3.Not(
                     z3.And(
@@ -275,39 +322,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
                     )
                 )
                 self.image_assertions.append(term)
-            # self.model_counter.solver.add(term)
 
-            if len(counterexample) < len(self.fixed_values):
-                self.reasons.append(
-                    f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}"
-                )
-            else:
-                self.reasons.append(f"{model} reject {len(self.fixed_values)}")
             return True, counterexample
         else:
+            # We can't do anything with this model, so we just return False.
             return False, None
 
     def fresh(self, new_ctx):
+        # TODO handle fresh contexts from FORALL quantifiers.
         return self
-
-    # def _created(self, e):
-    #     print("Created", e)
-    #     pass
-
-    def _eq(self, e, ids):
-        # print("eq", e, ids)
-        pass
-
-    # def _decide(self, a, b, c):
-    #     print("decide", a, b, c)
-
-    # def _diseq(self, a, b):
-    #     a_str = self.get_name_from_ast_map(a)
-    #     b_str = self.get_name_from_ast_map(b)
-    #     self.diseqs[-1].append((a_str, b_str))
-
-    def _final(self):
-        # print("final -> analyse current model", self.partial_model)
-        _result, counterexample = self.analyse_current_model()
-        if counterexample is not None and self.draw_image:
-            self.counterexamples.append([(self.variable_names[i], self.partial_model[self.variable_names[i]]) for i in counterexample])

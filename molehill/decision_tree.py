@@ -2,9 +2,11 @@
 
 import z3
 
+
 def piecewise_select(array, z3_int):
     """Select an element of an array based on a z3 integer."""
     return z3.Sum([z3.If(z3_int == i, array[i], 0) for i in range(len(array))])
+
 
 def get_property_names(variable_name):
     return [
@@ -14,6 +16,7 @@ def get_property_names(variable_name):
         ].split("&")
     ]
 
+
 def get_property_values(variable_name):
     return [
         int(x.strip().split("=")[1]) if "=" in x else (0 if x.strip()[0] == "!" else 1)
@@ -21,6 +24,7 @@ def get_property_values(variable_name):
             variable_name.find("[") + 1 : variable_name.find("]")
         ].split("&")
     ]
+
 
 def build_decision_tree(variables, tree_depth, num_enabled_nodes):
     # variables have names of the form
@@ -40,18 +44,22 @@ def build_decision_tree(variables, tree_depth, num_enabled_nodes):
 
     # create a function
     max_action_size = max([x.size() for x in variables])
-    decision_func = z3.Function("decision", *[z3.IntSort()] * num_properties, z3.BitVecSort(max_action_size))
+    decision_func = z3.Function(
+        "decision", *[z3.IntSort()] * num_properties, z3.BitVecSort(max_action_size)
+    )
 
     constraints = []
 
     # tree is structured as follows
-    # 0 
+    # 0
     # 1 2
     # 3 4 5 6
     # 7 8 9 10 11 12 13 14
 
-    num_nodes = 2 ** tree_depth - 1
-    leaf_values = [z3.BitVec(f"leaf_{i}", max_action_size) for i in range(num_nodes + 1)]
+    num_nodes = 2**tree_depth - 1
+    leaf_values = [
+        z3.BitVec(f"leaf_{i}", max_action_size) for i in range(num_nodes + 1)
+    ]
 
     # make weight nodes for constraints
     node_property = []
@@ -73,20 +81,29 @@ def build_decision_tree(variables, tree_depth, num_enabled_nodes):
         # this breaks symmetry for disabled nodes
         if i > 0:
             constraints.append(
-                z3.Implies(
-                    node_constants[i] > 0,
-                    node_constants[(i - 1) // 2] > 0
-                )
+                z3.Implies(node_constants[i] > 0, node_constants[(i - 1) // 2] > 0)
             )
         # if the constant is 0, the property must be 0
         constraints.append(z3.Implies(node_constants[i] == 0, node_property[i] == 0))
 
     # only num_enabled_nodes nodes can have constant > 0
     if num_enabled_nodes is not None:
-        constraints.append(z3.Sum([z3.If(node_constants[i] > 0, 1, 0) for i in range(num_nodes)]) == num_enabled_nodes)
+        constraints.append(
+            z3.Sum([z3.If(node_constants[i] > 0, 1, 0) for i in range(num_nodes)])
+            == num_enabled_nodes
+        )
 
     def decision_at_node(node: int, properties):
-        return z3.Or(node_constants[node] == 0, z3.Sum([z3.If(node_property[node] == i, properties[i], 0) for i in range(num_properties)]) >= node_constants[node])
+        return z3.Or(
+            node_constants[node] == 0,
+            z3.Sum(
+                [
+                    z3.If(node_property[node] == i, properties[i], 0)
+                    for i in range(num_properties)
+                ]
+            )
+            >= node_constants[node],
+        )
 
     def traverse_tree(node: int, properties: list[z3.Int]):
         if node >= num_nodes:
@@ -97,35 +114,51 @@ def build_decision_tree(variables, tree_depth, num_enabled_nodes):
             return z3.If(decision_at_node(node, properties), left, right)
 
     decision_variables = [z3.Int(f"decision_{i}") for i in range(num_properties)]
-    constraints.append(z3.ForAll(decision_variables, traverse_tree(0, decision_variables) == decision_func(*decision_variables)))
+    constraints.append(
+        z3.ForAll(
+            decision_variables,
+            traverse_tree(0, decision_variables) == decision_func(*decision_variables),
+        )
+    )
 
     for variable in variables:
         property_values = get_property_values(str(variable))
         constraints.append(variable == decision_func(*property_values))
     return constraints
 
+
 def draw_tree(model, tree_depth, variables):
     from anytree import Node
     from anytree.exporter import UniqueDotExporter
+
     first_variable_name = str(variables[0])
     property_names = get_property_names(first_variable_name)
     num_properties = len(property_names)
 
-    num_nodes = 2 ** tree_depth - 1
+    num_nodes = 2**tree_depth - 1
     max_action_size = max([x.size() for x in variables])
-    leaf_values = [z3.BitVec(f"leaf_{i}", max_action_size) for i in range(num_nodes + 1)]
+    leaf_values = [
+        z3.BitVec(f"leaf_{i}", max_action_size) for i in range(num_nodes + 1)
+    ]
+
     # a bit of code duplication, sorry
     def build_anytree(node_index, depth):
-        if node_index >= 2 ** tree_depth - 1:
+        if node_index >= 2**tree_depth - 1:
             return Node(model[leaf_values[node_index - num_nodes]])
         else:
             i = node_index
             node_prop = z3.Int(f"node_{i}")
             node_constant = z3.Int(f"const_{i}")
-            calc = property_names[model[node_prop].as_long()] + f" >= {model[node_constant]}?"
+            calc = (
+                property_names[model[node_prop].as_long()]
+                + f" >= {model[node_constant]}?"
+            )
             node = Node(calc)
             if model[node_constant].as_long() > 0:
-                node.children = [build_anytree(2 * node_index + 1, depth + 1), build_anytree(2 * node_index + 2, depth + 1)]
+                node.children = [
+                    build_anytree(2 * node_index + 1, depth + 1),
+                    build_anytree(2 * node_index + 2, depth + 1),
+                ]
             else:
                 return build_anytree(2 * node_index + 1, depth + 1)
             return node

@@ -18,9 +18,11 @@ class MatrixGenerator {
     /**
      * @brief Construct a new Matrix Generator object
      *
-     * @param completeTransitionMatrix The quotient MDP's transition matrix. Must
-     * be topologically sorted.
-     * @param globalBounds
+     * @param quotient The quotient MDP.
+     * @param checkTask The check task.
+    * @param targetStates The target states.
+    * @param globalBounds An initial model checking result on the quotient MDP.
+    * @param choiceToAssignment The mapping from choices (in quotient MDP) to assignments (of PAYNT variables).
      */
     MatrixGenerator(const storm::models::sparse::Mdp<ValueType> &quotient, const storm::modelchecker::CheckTask<storm::logic::Formula, ValueType> &checkTask,
                     const storm::storage::BitVector &targetStates, const std::vector<ValueType> &globalBounds,
@@ -28,11 +30,11 @@ class MatrixGenerator {
 
     /**
      * @brief Builds a sub-model of the decision matrix, representing an MDP *
-     * with holes.
+     * with holes. Call the get-functions to retrieve the results of the call.
      *
-     * @param choiceToAssignment
-     * @param abstractedHoles
-     * @param holeOptions
+     * @param abstractedHoles abstracedHoles[i] is true if the hole i is deleted (as in a counterexample candidate), false if it is not deleted.
+     * @param holeOptions holeOptions[i] is a bit vector representing the possible choices for hole i.
+     * @param reachableStatesFixed If given, the reachable states are fixed to this value. Currently not supported.
      * @return void
      */
     void buildSubModel(const storm::storage::BitVector &abstractedHoles, const std::vector<storm::storage::BitVector> &holeOptions,
@@ -63,8 +65,8 @@ class MatrixGenerator {
      * @brief Builds the order that the holes are visited in the BFS order.
      * TODO: Somehow mark holes that always appear at the same time.
      * 
-     * @param bfsOrder BFS order of the MDP
-     * @param possibleHoles Holes to look for
+     * @param bfsOrder BFS order of the MDP.
+     * @param possibleHoles Holes to look for.
      * @return std::pair<std::vector<uint64_t>, std::vector<uint64_t>> hole order, holes that are not reachable
      */
     std::pair<std::vector<uint64_t>, std::vector<uint64_t>> holeOrder(const std::vector<uint64_t> &bfsOrder,

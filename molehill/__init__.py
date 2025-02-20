@@ -11,7 +11,18 @@ import math
 
 from molehill.plugin import SearchMarkovChain
 
-def run(project_path, image, considered_counterexamples, custom_solver_settings=None, custom_constraint_lambda=None, postprocess_lambda=None, random_assignment=False, search_space_test=False, track_disequalities=False):
+
+def run(
+    project_path,
+    image,
+    considered_counterexamples,
+    custom_solver_settings=None,
+    custom_constraint_lambda=None,
+    postprocess_lambda=None,
+    random_assignment=False,
+    search_space_test=False,
+    track_disequalities=False,
+):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
@@ -59,9 +70,22 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
             for i in range(0, max(options) + 1):
                 # convert i to bits
                 i_as_bits = list(reversed([int(x) for x in bin(i)[2:].zfill(num_bits)]))
+
                 def bit2bool(var, i):
                     return z3.BoolRef(z3.Z3_mk_bit2bool(var.ctx.ref(), i, var.as_ast()))
-                c = z3.Not(z3.And([bit2bool(var, j) if i_as_bits[j] == 1 else z3.Not(bit2bool(var, j)) for j in range(num_bits)]))
+
+                c = z3.Not(
+                    z3.And(
+                        [
+                            (
+                                bit2bool(var, j)
+                                if i_as_bits[j] == 1
+                                else z3.Not(bit2bool(var, j))
+                            )
+                            for j in range(num_bits)
+                        ]
+                    )
+                )
                 constants.append(c)
                 constant_explanations[c.hash()] = (name, i)
     s.add(ranges)
@@ -74,7 +98,13 @@ def run(project_path, image, considered_counterexamples, custom_solver_settings=
     # s.add(variables[0] == 0)
     # s.add(variables[1] == 0)
 
-    p = SearchMarkovChain(s, quotient, (var_ranges, constant_explanations), draw_image=(image or search_space_test), considered_counterexamples=considered_counterexamples)
+    p = SearchMarkovChain(
+        s,
+        quotient,
+        (var_ranges, constant_explanations),
+        draw_image=(image or search_space_test),
+        considered_counterexamples=considered_counterexamples,
+    )
     p.register_variables(variables, constants)
     model = None
     if s.check() == z3.sat:

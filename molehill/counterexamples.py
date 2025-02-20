@@ -4,79 +4,95 @@ from stormpy.storage import BitVector
 from fastmole import hint_convert, intersect_bitvectors
 from molehill.modelchecker import check_model
 
-def check(matrix_generator, choice_to_assignment, family, prop, disequalities, global_hint=None, compute_counterexample=True):
+
+def check(
+    matrix_generator,
+    family,
+    prop,
+    disequalities,
+    global_hint=None,
+    compute_counterexample=True,
+):
+    # These are the options for each hole.
     hole_options = [
         family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
     ]
-    fixed_holes = [
-        hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1
-    ]
     if disequalities:
-        hole_options = [intersect_bitvectors(a, b) for a, b in zip(hole_options, disequalities)]
-        # TODO I currently just assume this never happens, but I'm not sure
+        # If we keep track of disequalities, we need to intersect the options.
+        hole_options = [
+            intersect_bitvectors(a, b) for a, b in zip(hole_options, disequalities)
+        ]
+        # TODO Should we make sure that there are still options left?
+        # There should always be options left, idk, but Z3 might give us an empty set??
         # if any([len(list(x)) == 0 for x in hole_options]):
         #     print("does this happen?")
         #     return True, fixed_holes, None
+    # These are the holes that are fixed to a single value.
+    fixed_holes = [
+        hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1
+    ]
     matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
     mdp = matrix_generator.get_current_mdp()
 
-    hint_full = None
-    # TODO hints are broken!
-    #if global_hint is not None:
-        #hint_full = hint_convert(global_hint[0], global_hint[1], old_reachable_states)
-    all_schedulers_violate_full, result = check_model(mdp, prop, hint_full)
+    all_schedulers_violate_full, result = check_model(mdp, prop, None)
     if not all_schedulers_violate_full:
         if matrix_generator.is_scheduler_consistent(result.scheduler):
-            # TODO we should return the scheduler here
+            # TODO we should return the scheduler here (currently just printing it)
             print("Found consistent scheduler")
         return False, None, result
 
+    # The CEs currently get abstracted in BFS order.
     bfs_order = matrix_generator.get_current_bfs_order()
-    reachable_hole_order, append_these = matrix_generator.hole_order(bfs_order, set(fixed_holes))
+    reachable_hole_order, append_these = matrix_generator.hole_order(
+        bfs_order, set(fixed_holes)
+    )
 
-    # Essentially, only holes that are reachable are interesting
+    # Only holes that are reachable are interesting for the CE core. We can
+    # immediately "delete" the other ones.
     fixed_holes = reachable_hole_order
 
     if all_schedulers_violate_full and compute_counterexample:
-        # we abstract in the order of which holes we saw first, which holes we saw second, etc
-        # print(abstracted_holes, append_these)
+        # We abstract in the order of which holes we saw first, which holes we saw second, etc...
+
 
         def check_ce_candidate(ith_hole, abstracted_holes, hint=None):
             abstracted_holes_here = (abstracted_holes + append_these)[ith_hole:]
 
-            # try to get an unsat core!!
-            # let's start with abstracting all of the nondeterminism into holes
             matrix_generator.build_submodel(
                 BitVector(family.num_holes, abstracted_holes_here), hole_options
             )
             mdp_holes = matrix_generator.get_current_mdp()
 
-            hint_obj = None
-            if hint is not None:
-                hint_values = hint[0]
-                old_reachable_states = hint[1]
-                reachable_states = matrix_generator.get_current_reachable_states()
-                hint_obj = hint_convert(hint_values, old_reachable_states, reachable_states)
+            # TODO hints are broken
+            # hint_obj = None
+            # if hint is not None:
+            #     hint_values = hint[0]
+            #     old_reachable_states = hint[1]
+            #     reachable_states = matrix_generator.get_current_reachable_states()
+            #     hint_obj = hint_convert(
+            #         hint_values, old_reachable_states, reachable_states
+            #     )
 
-            all_schedulers_violate, result = check_model(mdp_holes, prop, hint_obj)
+            all_schedulers_violate, result = check_model(mdp_holes, prop, None)
             # print(result.get_values()[mdp_holes.initial_states[0]])
             # hint = result.get_values()
 
             if all_schedulers_violate:
-                # yaay we have a counterexample!!
+                # Counterexample found
                 counterexample_holes = [
                     hole for hole in fixed_holes if hole not in abstracted_holes_here
                 ]
                 return all_schedulers_violate, counterexample_holes, result
-            # abstract fewer holes
-            # old_reachable_states = matrix_generator.get_current_reachable_states()
-            return False, None, result
+            else:
+                # Not a counterexample
+                return False, None, result
 
         # first, check the weakest counterexample candidate
-        weakest_ce_result = check_ce_candidate(len(reachable_hole_order) - 1, reachable_hole_order)
+        weakest_ce_result = check_ce_candidate(
+            len(reachable_hole_order) - 1, reachable_hole_order
+        )
         if weakest_ce_result[0]:
-            # do a binary search to find the smallest counterexample
-            # TODO we don't need to search on the holes that we know are not reachable
+            # Do a binary search to find the smallest counterexample
             left = 1
             right = len(reachable_hole_order) - 2
             num_steps = 0
