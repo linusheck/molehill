@@ -1,0 +1,307 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison.xml
+name:                    comparison
+run sets:                Molehill, Molehill-Det, Molehill-Diseq, Molehill-MC-CE, Molehill-No-CE, Paynt-AR, Paynt-CEGIS, Paynt-Hybrid
+date:                    Wed, 2025-02-19 15:15:36 CET
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/mdpcegis-hF3SegUM/bin/python3
+options:
+parallel runs:           32
+resource limits:
+- memory:                10000.0 MB
+- time:                  300 s
+hardware requirements:
+- memory:                10000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    ernie
+os:                      Linux-6.1.0-25-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   True
+ram:                     540666.585088 MB
+------------------------------------------------------------
+
+
+
+Molehill
+Run set 1 of 8 with options '-m molehill' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    true                             3.69        5.14        None
+sat_grid-10-sl-4fsc.yml        TIMEOUT                        300.74      302.16        None
+sat_grid-meet-sl-2fsc.yml      TIMEOUT                        300.81      302.27        None
+sat_grid.yml                   true                             0.72        2.09        None
+sat_herman.yml                 true                            72.76       74.14        None
+sat_maze-sl-5.yml              TIMEOUT                        300.75      302.07        None
+sat_maze.yml                   true                             0.75        2.07        None
+sat_network-priorities.yml     true                            40.49       41.81        None
+sat_network.yml                true                             1.53        2.82        None
+sat_pole-res.yml               true                             1.42        2.74        None
+sat_pole.yml                   true                            11.60       12.84        None
+sat_refuel-06-res.yml          true                             2.78        4.06        None
+sat_samplerocks.yml            TIMEOUT                        300.84      302.08        None
+unsat_dpm.yml                  false                            2.73        4.01        None
+unsat_grid-10-sl-4fsc.yml      false                            7.16        8.30        None
+unsat_grid-meet-sl-2fsc.yml    false                          247.51      248.69        None
+unsat_grid.yml                 false                            1.61        2.75        None
+unsat_herman.yml               false                           91.14       92.26        None
+unsat_maze-sl-5.yml            TIMEOUT                        300.78      301.90        None
+unsat_maze.yml                 false                            0.99        2.08        None
+unsat_network.yml              false                          220.64      221.75        None
+unsat_pole-res.yml             false                            1.43        2.58        None
+unsat_pole.yml                 false                           10.72       11.83        None
+unsat_refuel-06-res.yml        false                            1.00        2.08        None
+unsat_samplerocks.yml          TIMEOUT                        300.83      301.88        None
+--------------------------------------------------------------------------------------------
+Run set 1                      done                          2526.30      303.19           -
+
+
+Molehill-Det
+Run set 2 of 8 with options '-m molehill --deterministic' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    true                             3.14        4.59        None
+sat_grid-10-sl-4fsc.yml        TIMEOUT                        300.74      302.16        None
+sat_grid-meet-sl-2fsc.yml      true                            42.45       43.85        None
+sat_grid.yml                   true                             1.65        3.00        None
+sat_herman.yml                 true                            72.65       74.01        None
+sat_maze-sl-5.yml              TIMEOUT                        300.75      302.10        None
+sat_maze.yml                   true                             1.34        2.68        None
+sat_network-priorities.yml     TIMEOUT                        300.78      302.11        None
+sat_network.yml                true                             1.04        2.32        None
+sat_pole-res.yml               true                             2.01        3.28        None
+sat_pole.yml                   true                             4.17        5.43        None
+sat_refuel-06-res.yml          true                             1.71        2.95        None
+sat_samplerocks.yml            TIMEOUT                        300.80      302.08        None
+unsat_dpm.yml                  false                            2.78        4.04        None
+unsat_grid-10-sl-4fsc.yml      false                            9.45       10.65        None
+unsat_grid-meet-sl-2fsc.yml    TIMEOUT                        300.85      302.04        None
+unsat_grid.yml                 false                            1.97        3.17        None
+unsat_herman.yml               false                           94.67       95.88        None
+unsat_maze-sl-5.yml            TIMEOUT                        300.78      301.91        None
+unsat_maze.yml                 false                            2.00        3.15        None
+unsat_network.yml              false                          189.58      190.73        None
+unsat_pole-res.yml             false                            1.55        2.66        None
+unsat_pole.yml                 false                            5.93        7.08        None
+unsat_refuel-06-res.yml        false                            0.96        2.07        None
+unsat_samplerocks.yml          TIMEOUT                        300.81      301.93        None
+--------------------------------------------------------------------------------------------
+Run set 2                      done                          2545.45      303.18           -
+
+
+Molehill-Diseq
+Run set 3 of 8 with options '-m molehill --diseq' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    true                             5.26        6.72        None
+sat_grid-10-sl-4fsc.yml        TIMEOUT                        300.74      302.16        None
+sat_grid-meet-sl-2fsc.yml      true                            10.79       12.27        None
+sat_grid.yml                   true                             2.13        3.54        None
+sat_herman.yml                 true                            72.69       74.12        None
+sat_maze-sl-5.yml              TIMEOUT                        300.75      302.08        None
+sat_maze.yml                   true                             0.98        2.30        None
+sat_network-priorities.yml     TIMEOUT                        300.81      302.12        None
+sat_network.yml                true                             0.75        2.08        None
+sat_pole-res.yml               true                             1.22        2.48        None
+sat_pole.yml                   true                             7.58        8.79        None
+sat_refuel-06-res.yml          true                             3.14        4.38        None
+sat_samplerocks.yml            TIMEOUT                        300.83      302.07        None
+unsat_dpm.yml                  false                            2.75        3.99        None
+unsat_grid-10-sl-4fsc.yml      false                            7.94        9.12        None
+unsat_grid-meet-sl-2fsc.yml    false                          125.97      127.17        None
+unsat_grid.yml                 false                            1.92        3.05        None
+unsat_herman.yml               false                           89.89       91.07        None
+unsat_maze-sl-5.yml            TIMEOUT                        300.79      301.89        None
+unsat_maze.yml                 false                            1.48        2.65        None
+unsat_network.yml              false                          221.90      223.08        None
+unsat_pole-res.yml             false                            1.19        2.29        None
+unsat_pole.yml                 false                            2.90        3.99        None
+unsat_refuel-06-res.yml        false                            0.96        2.06        None
+unsat_samplerocks.yml          TIMEOUT                        300.85      301.94        None
+--------------------------------------------------------------------------------------------
+Run set 3                      done                          2367.17      303.21           -
+
+
+Molehill-MC-CE
+Run set 4 of 8 with options '-m molehill --ce mc' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    true                             3.20        4.61        None
+sat_grid-10-sl-4fsc.yml        TIMEOUT                        300.73      302.18        None
+sat_grid-meet-sl-2fsc.yml      TIMEOUT                        300.81      302.25        None
+sat_grid.yml                   true                             0.69        2.10        None
+sat_herman.yml                 true                            71.95       73.30        None
+sat_maze-sl-5.yml              TIMEOUT                        300.74      302.13        None
+sat_maze.yml                   true                             0.74        2.13        None
+sat_network-priorities.yml     true                            39.87       41.16        None
+sat_network.yml                true                             1.30        2.57        None
+sat_pole-res.yml               true                             1.16        2.48        None
+sat_pole.yml                   true                             6.43        7.64        None
+sat_refuel-06-res.yml          true                             1.59        2.86        None
+sat_samplerocks.yml            true                             9.09       10.35        None
+unsat_dpm.yml                  false                            2.74        3.96        None
+unsat_grid-10-sl-4fsc.yml      false                            6.31        7.55        None
+unsat_grid-meet-sl-2fsc.yml    false                           94.75       95.94        None
+unsat_grid.yml                 false                            1.16        2.33        None
+unsat_herman.yml               false                           83.76       84.96        None
+unsat_maze-sl-5.yml            TIMEOUT                        300.76      301.97        None
+unsat_maze.yml                 false                            1.19        2.34        None
+unsat_network.yml              false                          171.18      172.32        None
+unsat_pole-res.yml             false                            1.39        2.46        None
+unsat_pole.yml                 false                            7.43        8.51        None
+unsat_refuel-06-res.yml        false                            1.02        2.09        None
+unsat_samplerocks.yml          TIMEOUT                        300.91      302.01        None
+--------------------------------------------------------------------------------------------
+Run set 4                      done                          2011.89      303.27           -
+
+
+Molehill-No-CE
+Run set 5 of 8 with options '-m molehill --ce none' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    true                             3.17        4.65        None
+sat_grid-10-sl-4fsc.yml        TIMEOUT                        300.73      302.19        None
+sat_grid-meet-sl-2fsc.yml      TIMEOUT                        300.81      302.28        None
+sat_grid.yml                   true                             0.70        2.11        None
+sat_herman.yml                 true                            73.10       74.51        None
+sat_maze-sl-5.yml              TIMEOUT                        300.74      302.09        None
+sat_maze.yml                   true                             0.74        2.11        None
+sat_network-priorities.yml     true                            39.86       41.16        None
+sat_network.yml                true                             1.22        2.51        None
+sat_pole-res.yml               true                             1.14        2.44        None
+sat_pole.yml                   true                             6.48        7.70        None
+sat_refuel-06-res.yml          true                             1.33        2.55        None
+sat_samplerocks.yml            true                             8.89       10.10        None
+unsat_dpm.yml                  false                            2.69        3.96        None
+unsat_grid-10-sl-4fsc.yml      false                            6.35        7.54        None
+unsat_grid-meet-sl-2fsc.yml    false                           79.65       80.84        None
+unsat_grid.yml                 false                            1.14        2.29        None
+unsat_herman.yml               false                           83.14       84.26        None
+unsat_maze-sl-5.yml            TIMEOUT                        300.77      301.96        None
+unsat_maze.yml                 false                            1.20        2.35        None
+unsat_network.yml              false                          167.59      168.72        None
+unsat_pole-res.yml             false                            1.38        2.48        None
+unsat_pole.yml                 false                            7.38        8.45        None
+unsat_refuel-06-res.yml        false                            0.90        1.95        None
+unsat_samplerocks.yml          TIMEOUT                        300.91      301.97        None
+--------------------------------------------------------------------------------------------
+Run set 5                      done                          1992.98      303.30           -
+
+
+Paynt-AR
+Run set 6 of 8 with options 'build/paynt/paynt.py --method ar' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    true                             2.67        3.95        None
+sat_grid-10-sl-4fsc.yml        TIMEOUT                        300.76      302.04        None
+sat_grid-meet-sl-2fsc.yml      TIMEOUT                        300.88      302.18        None
+sat_grid.yml                   true                             2.71        3.97        None
+sat_herman.yml                 true                            71.63       72.87        None
+sat_maze-sl-5.yml              TIMEOUT                        300.76      301.99        None
+sat_maze.yml                   TIMEOUT                        300.76      301.97        None
+sat_network-priorities.yml     true                             3.17        4.36        None
+sat_network.yml                true                             0.85        2.03        None
+sat_pole-res.yml               true                             1.33        2.47        None
+sat_pole.yml                   true                             1.50        2.63        None
+sat_refuel-06-res.yml          true                             0.87        2.01        None
+sat_samplerocks.yml            true                            34.50       35.58        None
+unsat_dpm.yml                  false                            1.41        2.47        None
+unsat_grid-10-sl-4fsc.yml      TIMEOUT                        300.79      301.85        None
+unsat_grid-meet-sl-2fsc.yml    false                          183.79      184.86        None
+unsat_grid.yml                 false                            4.40        5.45        None
+unsat_herman.yml               false                          149.74      150.77        None
+unsat_maze-sl-5.yml            TIMEOUT                        300.79      301.80        None
+unsat_maze.yml                 TIMEOUT                        300.79      301.82        None
+unsat_network.yml              false                          141.95      142.97        None
+unsat_pole-res.yml             false                            0.90        1.88        None
+unsat_pole.yml                 false                            2.05        3.05        None
+unsat_refuel-06-res.yml        false                            0.95        1.96        None
+unsat_samplerocks.yml          TIMEOUT                        300.80      301.76        None
+--------------------------------------------------------------------------------------------
+Run set 6                      done                          3011.76      303.05           -
+
+
+Paynt-CEGIS
+Run set 7 of 8 with options 'build/paynt/paynt.py --method cegis' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    true                             1.80        3.06        None
+sat_grid-10-sl-4fsc.yml        false                           43.01       44.28        None
+sat_grid-meet-sl-2fsc.yml      true                            55.70       56.98        None
+sat_grid.yml                   true                             1.16        2.42        None
+sat_herman.yml                 true                            71.06       72.26        None
+sat_maze-sl-5.yml              TIMEOUT                        300.77      301.96        None
+sat_maze.yml                   TIMEOUT                        300.77      301.98        None
+sat_network-priorities.yml     unknown                          1.24        2.41        None
+sat_network.yml                true                             2.61        3.78        None
+sat_pole-res.yml               unknown                          0.72        1.89        None
+sat_pole.yml                   unknown                          0.87        2.03        None
+sat_refuel-06-res.yml          TIMEOUT                        300.78      301.92        None
+sat_samplerocks.yml            true                           152.87      154.02        None
+unsat_dpm.yml                  TIMEOUT                        300.78      301.95        None
+unsat_grid-10-sl-4fsc.yml      false                           42.94       44.02        None
+unsat_grid-meet-sl-2fsc.yml    TIMEOUT                        300.82      301.92        None
+unsat_grid.yml                 false                            0.97        2.01        None
+unsat_herman.yml               TIMEOUT                        300.86      301.95        None
+unsat_maze-sl-5.yml            TIMEOUT                        300.78      301.85        None
+unsat_maze.yml                 TIMEOUT                        300.79      301.85        None
+unsat_network.yml              TIMEOUT                        300.79      301.84        None
+unsat_pole-res.yml             unknown                          0.74        1.77        None
+unsat_pole.yml                 unknown                          0.83        1.80        None
+unsat_refuel-06-res.yml        TIMEOUT                        300.80      301.77        None
+unsat_samplerocks.yml          TIMEOUT                        300.80      301.78        None
+--------------------------------------------------------------------------------------------
+Run set 7                      done                          3686.30      303.07           -
+
+
+Paynt-Hybrid
+Run set 8 of 8 with options 'build/paynt/paynt.py --method hybrid' and propertyfile 'None'
+
+inputfile                      status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------
+sat_dpm.yml                    true                             4.04        5.30        None
+sat_grid-10-sl-4fsc.yml        TIMEOUT                        300.76      302.06        None
+sat_grid-meet-sl-2fsc.yml      TIMEOUT                        300.87      302.17        None
+sat_grid.yml                   true                             6.90        8.16        None
+sat_herman.yml                 TIMEOUT                        300.95      302.21        None
+sat_maze-sl-5.yml              TIMEOUT                        300.76      301.98        None
+sat_maze.yml                   TIMEOUT                        300.76      301.95        None
+sat_network-priorities.yml     unknown                          1.24        2.41        None
+sat_network.yml                TIMEOUT                        300.77      301.96        None
+sat_pole-res.yml               unknown                          0.72        1.87        None
+sat_pole.yml                   unknown                          0.88        2.01        None
+sat_refuel-06-res.yml          true                             1.19        2.32        None
+sat_samplerocks.yml            TIMEOUT                        300.79      301.89        None
+unsat_dpm.yml                  false                            1.71        2.81        None
+unsat_grid-10-sl-4fsc.yml      TIMEOUT                        300.79      301.87        None
+unsat_grid-meet-sl-2fsc.yml    false                          221.45      222.49        None
+unsat_grid.yml                 false                            2.19        3.25        None
+unsat_herman.yml               false                          111.43      112.46        None
+unsat_maze-sl-5.yml            TIMEOUT                        300.79      301.81        None
+unsat_maze.yml                 TIMEOUT                        300.79      301.80        None
+unsat_network.yml              false                          143.40      144.37        None
+unsat_pole-res.yml             unknown                          0.82        1.81        None
+unsat_pole.yml                 unknown                          0.81        1.77        None
+unsat_refuel-06-res.yml        false                            0.88        1.81        None
+unsat_samplerocks.yml          TIMEOUT                        300.80      301.80        None
+--------------------------------------------------------------------------------------------
+Run set 8                      done                          3807.51      303.06           -
+
+Statistics:            200 Files
+  correct:             130
+    correct true:       65
+    correct false:      65
+  incorrect:             1
+    incorrect true:      0
+    incorrect false:     1
+  unknown:              69
