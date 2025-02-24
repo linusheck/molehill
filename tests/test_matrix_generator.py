@@ -120,4 +120,5 @@ def test_matrix_generator(project_path):
             new_family.hole_set_options(hole, [new_family.hole_options(hole)[-1]])
             new_family.add_parent_info(family)
 
-    # assert fastmole_time < paynt_time / 2
+    # TODO make this factor lower :)
+    assert fastmole_time < 10 * paynt_time
