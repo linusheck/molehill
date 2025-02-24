@@ -1,6 +1,13 @@
 from molehill import run
 import argparse
-from molehill.decision_tree import build_decision_tree, draw_tree
+from molehill.constraints.mtbdd import MTBDD
+from molehill.constraints.tree import DecisionTree
+
+def load_constraint_class(path):
+    """
+    Load the constraint class from the given path.
+    """
+    raise RuntimeError("Not implemented yet.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -12,15 +19,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--image", action="store_true", help="Generate an image of the curve."
     )
-    parser.add_argument("--tree", action="store_true", help="Build a tree.")
     parser.add_argument(
         "--diseq", action="store_true", help="Track disequalities as well."
     )
     # number of tree nodes
-    parser.add_argument("--depth", type=int, help="Depth of the tree.", default=4)
-    parser.add_argument(
-        "--nodes", type=int, help="Number of enabled nodes in the tree.", default=None
-    )
     parser.add_argument(
         "--ce",
         type=str,
@@ -34,17 +36,27 @@ if __name__ == "__main__":
         help="Deterministic Z3 assignment.",
         default=None,
     )
-    args = parser.parse_args()
+    parser.add_argument("--constraint", type=str, choices=["none", "tree", "mtbdd", "custom"], default="none", help="Constraint to use. Built-in constraints are: tree, mtbdd. By setting this to custom, you can implement a custom constraint in project_path/constraint.py. See the README for more information.")
+    args, unknown = parser.parse_known_args()
+
 
     constraint_lambda = None
     postprocess_lambda = None
-    if args.tree:
-        constraint_lambda = lambda variables: build_decision_tree(
-            variables, args.depth, args.nodes
-        )
-        postprocess_lambda = lambda model, variables: draw_tree(
-            model, args.depth, variables
-        )
+    if args.constraint != "none":
+        # get class of new constraint
+        if args.constraint == "tree":
+            new_constraint = DecisionTree()
+        elif args.constraint == "mtbdd":
+            new_constraint = MTBDD()
+        else:
+            new_constraint = load_constraint_class(f"{args.project_path}/constraint.py")
+        new_parser = argparse.ArgumentParser()
+        new_constraint.register_arguments(new_parser)
+        new_args = new_parser.parse_args(unknown)
+        constraint_lambda = lambda variables: new_constraint.build_constraint(variables, new_args)
+        postprocess_lambda = lambda model, variables: new_constraint.show_result(model, variables)
+    else:
+        assert unknown == [], "Superflous arguments: " + str(unknown)
 
     run(
         args.project_path,

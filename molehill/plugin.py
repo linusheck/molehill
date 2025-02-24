@@ -9,8 +9,6 @@ from molehill.counterexamples import check
 # from molehill.bandit import get_bandit
 from stormpy import model_checking, CheckTask
 from stormpy.storage import BitVector
-from copy import deepcopy
-
 
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(
@@ -50,6 +48,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.constant_explanations = diseq_info[1]
         self.disequalities = []
 
+        self.disequality_assignments = None
+
         self.ast_map = {}
 
         self.considered_models = 0
@@ -82,6 +82,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.reasons = []
 
         self.counterexamples = []
+        self.diseq_assumptions = []
 
         self.fixed_something = False
 
@@ -152,14 +153,15 @@ class SearchMarkovChain(z3.UserPropagateBase):
                     for i in range(len(self.variables))
                 ]
             ]
+            self.disequality_assignments = [[]]
 
     def push(self):
         """This method is called if Z3 pushes a new context. This is where we check the sub-MDP."""
-
         # Keep track of the new context
         self.fixed_count.append(len(self.fixed_values))
         if self.disequalities:
             self.disequalities.append([BitVector(x) for x in self.disequalities[-1]])
+            self.disequality_assignments.append(self.disequality_assignments[-1].copy())
 
         # Print statement taht shows we are working
         if time.time() - self.time_last_print > 1:
@@ -202,6 +204,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                         for i in counterexample
                     ]
                 )
+                self.diseq_assumptions.append([BitVector(x) for x in self.disequalities[-1]])
         else:
             self.accepting_models.add(frozen_partial_model)
 
@@ -213,6 +216,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.partial_model.pop(self.fixed_values.pop())
             if self.disequalities:
                 self.disequalities.pop()
+                self.disequality_assignments.pop()
 
     def _final(self):
         # This is what is called if Z3 creates a FULL assignment.
@@ -227,6 +231,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                     for i in counterexample
                 ]
             )
+            self.diseq_assumptions.append([BitVector(x) for x in self.disequalities[-1]])
 
     def get_name_from_ast_map(self, ast):
         """Get name of the AST from the map."""
@@ -247,6 +252,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
         if ast_hash in self.constant_explanations:
             explanation = self.constant_explanations[ast_hash]
             # This is a disequality => rule it out in the disequalities bit-vector.
+            # print(self.partial_model)
+            # print("Disequality", explanation, value)
+            # print(explanation[0] in self.partial_model)
+            self.disequality_assignments[-1].append(ast)
             if value:
                 self.disequalities[-1][self.variable_indices[explanation[0]]].set(
                     int(explanation[1]), False
@@ -300,7 +309,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         if all_violated:
             # We found a counterexample, so we need to push a theory lemma.
-            self.conflict([self.variables[c] for c in counterexample])
+            conflict = [self.variables[c] for c in counterexample]
+            if self.var_ranges:
+                for diseq in self.disequality_assignments[-1]:
+                    conflict.append(diseq)
+            # print(conflict)
+            self.conflict(conflict)
 
             # Push a reason (explain).
             if len(counterexample) < len(self.fixed_values):
@@ -318,10 +332,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
                             self.variables[c]
                             == self.partial_model[str(self.variables[c])]
                             for c in counterexample
-                        ]
-                    )
+                        ] + self.disequality_assignments[-1]
+                    ),
                 )
                 self.image_assertions.append(term)
+                # print(term)
+                # print([str(x) for x in self.disequalities[-1]])
 
             return True, counterexample
         else:

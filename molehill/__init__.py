@@ -50,10 +50,24 @@ def run(
     constants = []
     constant_explanations = {}
 
+    num_bits = None
+    # TODO kinda hacky
+    if custom_constraint_lambda is not None:
+        num_bits = (
+            max(
+                [
+                    math.ceil(math.log2(max(family.hole_options(hole)) + 1))
+                    for hole in range(family.num_holes)
+                ]
+            )
+            + 1
+        )
+
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
         options = family.hole_options(hole)
-        num_bits = math.ceil(math.log2(max(options) + 1)) + 1
+        if custom_constraint_lambda is None:
+            num_bits = math.ceil(math.log2(max(options) + 1))
         if len(options) == 1:
             assert options == [0]
             num_bits = 1
@@ -63,8 +77,8 @@ def run(
         # it gets guaranteed by paynt that this is actually the range
         # (these are just the indices, not the actual values in the final model :)
         assert min(options) == 0
-        ranges.append(var >= z3.BitVecVal(min(options), num_bits))
-        ranges.append(var <= z3.BitVecVal(max(options), num_bits))
+        ranges.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
+        ranges.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
         if track_disequalities:
             var_ranges.append(max(options))
             for i in range(0, max(options) + 1):
@@ -122,7 +136,7 @@ def run(
         result = mdp.model_check_property(prop)
         print(f"Found {new_family} with value {result}")
         if postprocess_lambda:
-            postprocess_lambda(model, variables)
+            postprocess_lambda(model, s)
     else:
         print("unsat")
     print(f"Considered {p.considered_models} models")

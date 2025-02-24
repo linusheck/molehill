@@ -36,9 +36,9 @@ def check(
 
     all_schedulers_violate_full, result = check_model(mdp, prop, None)
     if not all_schedulers_violate_full:
-        if matrix_generator.is_scheduler_consistent(result.scheduler):
-            # TODO we should return the scheduler here (currently just printing it)
-            print("Found consistent scheduler")
+        # if matrix_generator.is_scheduler_consistent(result.scheduler):
+        #     # TODO we should return the scheduler here (currently just printing it)
+        #     # print("Found consistent scheduler")
         return False, None, result
 
     # The CEs currently get abstracted in BFS order.
@@ -53,7 +53,6 @@ def check(
 
     if all_schedulers_violate_full and compute_counterexample:
         # We abstract in the order of which holes we saw first, which holes we saw second, etc...
-
 
         def check_ce_candidate(ith_hole, abstracted_holes, hint=None):
             abstracted_holes_here = (abstracted_holes + append_these)[ith_hole:]

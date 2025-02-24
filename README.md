@@ -44,3 +44,22 @@ Then execute:
 ```
 ./benchmark.sh
 ```
+
+## Writing your own constraints
+
+Because molehill is based on a simple Z3 call, you can impose arbitary constraints on the search space. This can be done as follows:
+
+1.  Create a class that extends `molehill/constraints/constraint.py`. Implement the API:
+```
+class Constraint:
+    def register_arguments(self, argument_parser):
+        """Register arguments for the constraint."""
+
+    def build_constraint(self, variables, args):
+        """Implement your constraint here. Arguments are passed by args."""
+
+    def show_result(self, model, solver):
+        """Called after SAT. Print and/or show your result here."""
+```
+2. Place the file as `constraint.py` in your project.
+3. Call molehill with `--constraint custom`.
