@@ -166,8 +166,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
             print("Considered", self.considered_models, "models so far")
             self.time_last_print = time.time()
 
-        # Frozen partial model is hashable :)
-        frozen_partial_model = frozenset(self.partial_model.items())
+        def make_frozen_partial_model():
+            # Frozen partial model is hashable :)
+            return frozenset(self.partial_model.items())
+        frozen_partial_model = make_frozen_partial_model()
         # If we fixed exactly as many constants as last context, skip this one
         if not (
             len(self.fixed_count) < 2 or self.fixed_count[-1] > self.fixed_count[-2]
@@ -262,7 +264,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
             ast_str = self.get_name_from_ast_map(ast)
             self.fixed_values.append(ast_str)
             # This is a model constant => add it to the partial model.
-            self.partial_model[ast_str] = value
+            self.partial_model[ast_str] = value.as_long()
 
     def analyse_current_model(self):
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
@@ -274,7 +276,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         for hole in range(new_family.num_holes):
             var = self.variable_names[hole]
             if var in self.partial_model:
-                new_family.hole_set_options(hole, [self.partial_model[var].as_long()])
+                new_family.hole_set_options(hole, [self.partial_model[var]])
 
         # Prop is always rechability, even if our input was until (thanks paynt :)).
         prop = self.quotient.specification.all_properties()[0]
