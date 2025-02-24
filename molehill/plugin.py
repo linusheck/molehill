@@ -68,9 +68,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         # does there exist a model that satisfies the property?
         print("Quotient size", self.quotient.family.mdp.model.nr_states)
-        print("Checking quotient")
         result = model_checking(self.quotient.family.mdp.model, prop.formula)
-        print("Done")
         self.global_bounds = result.get_values()
 
         self.complete_transition_matrix = (
