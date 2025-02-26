@@ -1,6 +1,7 @@
 """Molehill is a Markov chain searcher."""
 
 import paynt.quotient
+import paynt.quotient.pomdp
 import paynt.synthesizer
 import paynt.synthesizer.conflict_generator
 import paynt.verification
@@ -22,9 +23,11 @@ def run(
     random_assignment=False,
     search_space_test=False,
     track_disequalities=False,
+    fsc_memory_size=1,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
+    paynt.quotient.pomdp.PomdpQuotient.initial_memory_size = fsc_memory_size
     quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
 
     # print all python properties of quotient

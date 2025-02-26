@@ -37,6 +37,7 @@ if __name__ == "__main__":
         default=None,
     )
     parser.add_argument("--constraint", type=str, choices=["none", "tree", "mtbdd", "custom"], default="none", help="Constraint to use. Built-in constraints are: tree, mtbdd. By setting this to custom, you can implement a custom constraint in project_path/constraint.py. See the README for more information.")
+    parser.add_argument("--fsc-memory-size", type=int, default=1, help="Memory size for the considered FSCs")
     args, unknown = parser.parse_known_args()
 
 
@@ -67,4 +68,5 @@ if __name__ == "__main__":
         postprocess_lambda,
         not args.deterministic,
         track_disequalities=args.diseq,
+        fsc_memory_size=args.fsc_memory_size
     )
