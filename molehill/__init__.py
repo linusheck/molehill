@@ -35,7 +35,6 @@ def run(
 
     # quotient.build(family)
 
-    print("Done")
     s = z3.Solver()
 
     if random_assignment:

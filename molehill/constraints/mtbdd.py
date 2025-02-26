@@ -32,7 +32,7 @@ class MTBDD(Constraint):
     
     def register_arguments(self, argument_parser):
         argument_parser.add_argument(
-            "--num_nodes", type=int, default=3, help="Number of nodes in the decision tree"
+            "--num-nodes", type=int, help="Number of nodes in the decision tree", required=True
         )
 
     def build_constraint(self, variables, args):

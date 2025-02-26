@@ -25,7 +25,7 @@ def test_search_space(project_path, considered_counterexamples, diseq):
         for hole in range(family.num_holes):
             var = plugin.variable_names[hole]
             if var in model:
-                family.hole_set_options(hole, [model[var].as_long()])
+                family.hole_set_options(hole, [model[var]])
 
         hole_options = [
             family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
@@ -63,7 +63,7 @@ def test_search_space(project_path, considered_counterexamples, diseq):
             )
         )
     for i, model in enumerate(plugin.counterexamples):
-        model = {x[0]: x[1].as_long() for x in model}
+        model = {x[0]: x[1] for x in model}
         assumption = []
         diseq_assumptions = plugin.diseq_assumptions[i]
         for hole in range(family.num_holes):
