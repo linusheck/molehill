@@ -1,9 +1,16 @@
 """Compute counterexamples."""
 
 from stormpy.storage import BitVector
-from fastmole import hint_convert, intersect_bitvectors
+from fastmole import intersect_bitvectors
 from molehill.modelchecker import check_model
+from dataclasses import dataclass
 
+@dataclass
+class CECheckResult:
+    all_schedulers_violate: bool
+    fixed_holes: list
+    nondet_holes: list
+    result: any
 
 def check(
     matrix_generator,
@@ -24,9 +31,9 @@ def check(
         ]
         # TODO Should we make sure that there are still options left?
         # There should always be options left, idk, but Z3 might give us an empty set??
-        # if any([len(list(x)) == 0 for x in hole_options]):
-        #     print("does this happen?")
-        #     return True, fixed_holes, None
+        if any([len(list(x)) == 0 for x in hole_options]):
+            print("does this happen?")
+            assert False, "No options left: " + str([i for i, x in enumerate(hole_options) if len(list(x)) == 0])
     # These are the holes that are fixed to a single value.
     fixed_holes = [
         hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1
@@ -39,17 +46,23 @@ def check(
         # if matrix_generator.is_scheduler_consistent(result.scheduler):
         #     # TODO we should return the scheduler here (currently just printing it)
         #     # print("Found consistent scheduler")
-        return False, None, result
+        return CECheckResult(False, None, None, result)
 
     # The CEs currently get abstracted in BFS order.
     bfs_order = matrix_generator.get_current_bfs_order()
+    # reachable_hole_order, append_these = matrix_generator.hole_order(
+    #     bfs_order, set(fixed_holes)
+    # )
     reachable_hole_order, append_these = matrix_generator.hole_order(
-        bfs_order, set(fixed_holes)
+        bfs_order, set(range(family.num_holes))
     )
 
     # Only holes that are reachable are interesting for the CE core. We can
     # immediately "delete" the other ones.
-    fixed_holes = reachable_hole_order
+    fixed_holes = [hole for hole in fixed_holes if hole in reachable_hole_order]
+    append_these = [hole for hole in append_these if hole in reachable_hole_order]
+    # Every hole that is not fixed is currently abstracted by MDP.
+    holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
 
     if all_schedulers_violate_full and compute_counterexample:
         # We abstract in the order of which holes we saw first, which holes we saw second, etc...
@@ -62,35 +75,24 @@ def check(
             )
             mdp_holes = matrix_generator.get_current_mdp()
 
-            # TODO hints are broken
-            # hint_obj = None
-            # if hint is not None:
-            #     hint_values = hint[0]
-            #     old_reachable_states = hint[1]
-            #     reachable_states = matrix_generator.get_current_reachable_states()
-            #     hint_obj = hint_convert(
-            #         hint_values, old_reachable_states, reachable_states
-            #     )
 
             all_schedulers_violate, result = check_model(mdp_holes, prop, None)
-            # print(result.get_values()[mdp_holes.initial_states[0]])
-            # hint = result.get_values()
 
             if all_schedulers_violate:
                 # Counterexample found
                 counterexample_holes = [
                     hole for hole in fixed_holes if hole not in abstracted_holes_here
                 ]
-                return all_schedulers_violate, counterexample_holes, result
+                return CECheckResult(all_schedulers_violate, counterexample_holes, None, result)
             else:
                 # Not a counterexample
-                return False, None, result
+                return CECheckResult(all_schedulers_violate, None, None, result)
 
         # first, check the weakest counterexample candidate
         weakest_ce_result = check_ce_candidate(
             len(reachable_hole_order) - 1, reachable_hole_order
         )
-        if weakest_ce_result[0]:
+        if weakest_ce_result.all_schedulers_violate:
             # Do a binary search to find the smallest counterexample
             left = 1
             right = len(reachable_hole_order) - 2
@@ -99,16 +101,15 @@ def check(
                 num_steps += 1
                 mid = (left + right) // 2
                 check_result = check_ce_candidate(mid, reachable_hole_order, None)
-                # check_result = check_ce_candidate(mid, abstracted_holes, (result.get_values(), matrix_generator.get_current_reachable_states()))
-                if not check_result[0]:
-                    _, _, result = check_result
+                if not check_result.all_schedulers_violate:
+                    result = check_result.result
                     left = mid + 1
                 else:
-                    _all_schedulers_violate, fixed_holes, result = check_result
+                    fixed_holes = check_result.fixed_holes
+                    result = check_result.result
                     right = mid
-            # print(f"Found counterexample with {len(fixed_holes)} holes, originally {len(reachable_hole_order)} with {len(append_these)} additional, in {num_steps} steps")
 
     # Even if we do not compute a counterexample, we can use the knowledge that
     # some holes are unreachable. The statement is only about the reachable holes,
     # so we get a "core" without any further work.
-    return True, fixed_holes, result
+    return CECheckResult(all_schedulers_violate_full, fixed_holes, holes_as_mdp, result)

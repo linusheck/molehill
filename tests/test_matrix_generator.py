@@ -60,7 +60,7 @@ def test_matrix_generator(project_path):
 
     choice_to_assignment = quotient.coloring.getChoiceToAssignment()
 
-    plugin = SearchMarkovChain(s, quotient, var_ranges)
+    plugin = SearchMarkovChain(s, quotient, var_ranges, True)
     quotient_mdp = quotient.family.mdp.model
 
     # time to build the MDP
@@ -121,4 +121,4 @@ def test_matrix_generator(project_path):
             new_family.add_parent_info(family)
 
     # TODO make this factor lower :)
-    assert fastmole_time < 10 * paynt_time
+    assert fastmole_time < 4 * paynt_time

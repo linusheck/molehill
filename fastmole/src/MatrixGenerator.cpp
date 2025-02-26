@@ -119,7 +119,7 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
     // If we are given a fixed set of reachable states, we can skip the BFS
     // Otherwise, perform a BFS to find the reachable states
     if (!reachableStatesFixed) {
-        std::vector<uint64_t> bfsOrder;
+        std::vector<uint64_t> bfsOrder(decisionMatrix.getRowCount());
         std::queue<uint64_t> statesToProcess;
         for (auto const &initialState : this->quotient.getInitialStates()) {
             reachableStates.set(initialState, true);
@@ -264,10 +264,10 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
         rewardModels[checkTask.getRewardModel()] = rewardModel;
     }
 
-    storm::storage::sparse::ModelComponents<ValueType> modelComponents(submatrix, stateLabeling, rewardModels);
+    storm::storage::sparse::ModelComponents<ValueType> modelComponents(std::move(submatrix), std::move(stateLabeling), std::move(rewardModels));
 
-    currentMDP = storm::models::sparse::Mdp<ValueType>(modelComponents);
-    currentReachableStates = reachableStates;
+    currentMDP = std::move(storm::models::sparse::Mdp<ValueType>(modelComponents));
+    currentReachableStates = std::move(reachableStates);
 }
 
 template<typename ValueType>

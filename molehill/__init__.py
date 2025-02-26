@@ -43,11 +43,7 @@ def run(
     variables = []
 
     ranges = []
-    var_ranges = [] if track_disequalities else None
     bit_nums = set()
-
-    constants = []
-    constant_explanations = {}
 
     num_bits = None
     # TODO kinda hacky
@@ -62,6 +58,7 @@ def run(
             + 1
         )
 
+    var_ranges = []
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
         options = family.hole_options(hole)
@@ -78,29 +75,8 @@ def run(
         assert min(options) == 0
         ranges.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
         ranges.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
-        if track_disequalities:
-            var_ranges.append(max(options))
-            for i in range(0, max(options) + 1):
-                # convert i to bits
-                i_as_bits = list(reversed([int(x) for x in bin(i)[2:].zfill(num_bits)]))
+        var_ranges.append(max(options))
 
-                def bit2bool(var, i):
-                    return z3.BoolRef(z3.Z3_mk_bit2bool(var.ctx.ref(), i, var.as_ast()))
-
-                c = z3.Not(
-                    z3.And(
-                        [
-                            (
-                                bit2bool(var, j)
-                                if i_as_bits[j] == 1
-                                else z3.Not(bit2bool(var, j))
-                            )
-                            for j in range(num_bits)
-                        ]
-                    )
-                )
-                constants.append(c)
-                constant_explanations[c.hash()] = (name, i)
     s.add(ranges)
 
     if custom_constraint_lambda:
@@ -114,11 +90,12 @@ def run(
     p = SearchMarkovChain(
         s,
         quotient,
-        (var_ranges, constant_explanations),
+        var_ranges,
+        track_disequalities,
         draw_image=(image or search_space_test),
         considered_counterexamples=considered_counterexamples,
     )
-    p.register_variables(variables, constants)
+    p.register_variables(variables)
     model = None
     if s.check() == z3.sat:
         print("sat")
