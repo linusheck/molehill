@@ -27,14 +27,6 @@
         <option>--deterministic</option>
     </rundefinition>
 
-    <rundefinition name="Molehill-Diseq">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>-m</option>
-        <option>molehill</option>
-        <option>--diseq</option>
-    </rundefinition>
-
     <rundefinition name="Molehill-MC-CE">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>

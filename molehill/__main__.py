@@ -19,9 +19,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--image", action="store_true", help="Generate an image of the curve."
     )
-    parser.add_argument(
-        "--diseq", action="store_true", help="Track disequalities as well."
-    )
     # number of tree nodes
     parser.add_argument(
         "--ce",
@@ -67,6 +64,5 @@ if __name__ == "__main__":
         constraint_lambda,
         postprocess_lambda,
         not args.deterministic,
-        track_disequalities=args.diseq,
         fsc_memory_size=args.fsc_memory_size
     )

@@ -16,7 +16,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         solver,
         quotient,
         var_ranges,
-        track_disequalities,
         draw_image=False,
         considered_counterexamples="all",
     ):
@@ -26,7 +25,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.vars_registered = False
 
         self.var_ranges = var_ranges
-        self.track_disequalities = track_disequalities
 
         self.add_fixed(self._fixed)
         self.add_final(self._final)
@@ -49,11 +47,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.variables = []
         self.variable_names = []
         self.variable_indices = {}
-
-        self.disequalities = []
-        self.disequality_assignments = None
-        self.disequality_variables = None
-        self.disequality_explanations = None
 
         self.ast_map = {}
 
@@ -149,25 +142,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
             self.ast_map[ast_hash] = ast_str
         return ast_str
 
-
-    def update_disequalities_from_assignments(self):
-        # disequality assignments are a list of decisions about the bitvectors:
-        # [ // hole 1: [(0, False), (1, True), (2, False), ...]
-        #   // hole 2: [(0, False), (1, True), (2, False), ...]
-        # ]
-        # we need to update the bitvectors, that reference the numbers accordingly
-        for assignment in self.disequality_assignments[-1]:
-            var_index, bit, value, _i = assignment
-            # print("Update", var_index, bit, value)
-            for i in range(self.disequalities[-1][var_index].size()):
-                if (i & (1 << bit)) >> bit != int(value):
-                    self.disequalities[-1][var_index].set(i, False)
-                    # print("We know", self.variable_names[var_index], "is not", i)
-
     def register_variables(self, variables):
         """This method is called once by the user to regigster the variables we
-        are going to watch. The diseq_constants are the statements that
-        represent all disequalities, e.g., X!=2."""
+        are going to watch."""
         assert not self.vars_registered
         self.vars_registered = True
         for var in variables:
@@ -177,37 +154,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.variable_names = [self.get_name_from_ast_map(var) for var in variables]
         self.variable_indices = {var: i for i, var in enumerate(self.variable_names)}
 
-        if self.track_disequalities:
-            self.disequalities = [
-                [
-                    BitVector(self.var_ranges[i] + 1, True)
-                    for i in range(len(self.variables))
-                ]
-            ]
-            self.disequality_assignments = [[]]
-            self.disequality_variables = [[]]
-            self.disequality_explanations = {}
-            for hole, var in enumerate(self.variables):
-                num_bits = var.size()
-                def bit2bool(var, i):
-                    return z3.BoolRef(z3.Z3_mk_bit2bool(var.ctx.ref(), i, var.as_ast()))
-
-                for i in range(num_bits):
-                    bit2bool_var = bit2bool(var, i)
-                    self.add(bit2bool_var)
-                    # explain this bit
-                    self.disequality_explanations[hash(bit2bool_var)] = (hole, i)
-                    # print("Explain", bit2bool_var, self.disequality_explanations[hash(bit2bool_var)])
-
     def push(self):
         """This method is called if Z3 pushes a new context. This is where we check the sub-MDP."""
         # Keep track of the new context
         self.fixed_count.append(len(self.fixed_values))
-        if self.disequalities:
-            self.disequalities.append([BitVector(x) for x in self.disequalities[-1]])
-            self.disequality_assignments.append(self.disequality_assignments[-1].copy())
-            self.disequality_variables.append(self.disequality_variables[-1].copy())
-
         # Print statement taht shows we are working
         if time.time() - self.time_last_print > 1:
             print("Considered", self.considered_models, "models so far")
@@ -251,8 +201,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
                         for i in counterexample
                     ]
                 )
-                if self.track_disequalities:
-                    self.diseq_assumptions.append([BitVector(x) for x in self.disequalities[-1]])
         else:
             self.accepting_models.add(frozen_partial_model)
 
@@ -262,10 +210,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
             last_count = self.fixed_count.pop()
             while len(self.fixed_values) > last_count:
                 self.partial_model.pop(self.fixed_values.pop())
-            if self.disequalities:
-                self.disequalities.pop()
-                self.disequality_variables.pop()
-                self.disequality_assignments.pop()
 
     def _final(self):
         # This is what is called if Z3 creates a FULL assignment.
@@ -280,31 +224,16 @@ class SearchMarkovChain(z3.UserPropagateBase):
                     for i in counterexample
                 ]
             )
-            if self.track_disequalities:
-                self.diseq_assumptions.append([BitVector(x) for x in self.disequalities[-1]])
 
 
     def _fixed(self, ast, value):
         # print("Fixed", ast, value)
         # This is called when Z3 fixes a variable. We need to keep track of that.
         ast_hash = hash(ast)
-        if self.track_disequalities and ast_hash in self.disequality_explanations:
-            explanation = self.disequality_explanations[ast_hash]
-            # This is a disequality => rule it out in the disequalities bit-vector.
-            # print(self.partial_model)
-            # print("Disequality", explanation, value)
-            # print(explanation[0] in self.partial_model)
-            index_of_diseq_variable = len(self.disequality_variables[-1])
-            self.disequality_variables[-1].append(ast)
-            self.disequality_assignments[-1].append((explanation[0], explanation[1], bool(value), index_of_diseq_variable))
-            # print(self.disequality_variables)
-            # print(self.disequality_assignments)
-            self.update_disequalities_from_assignments()   
-        else:
-            ast_str = self.get_name_from_ast_map(ast)
-            self.fixed_values.append(ast_str)
-            # This is a model constant => add it to the partial model.
-            self.partial_model[ast_str] = value.as_long()
+        ast_str = self.get_name_from_ast_map(ast)
+        self.fixed_values.append(ast_str)
+        # This is a model constant => add it to the partial model.
+        self.partial_model[ast_str] = value.as_long()
 
     def analyse_current_model(self):
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
@@ -333,7 +262,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
             self.matrix_generator,
             new_family,
             prop,
-            self.disequalities[-1] if self.disequalities else None,
             self.global_hint,
             compute_counterexample,
         )
@@ -353,8 +281,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
             # We found a counterexample, so we need to push a theory lemma.
             conflict = [self.variables[c] for c in counterexample]
             # print(self.partial_model)
-            if self.track_disequalities:
-                conflict.extend([self.disequality_variables[-1][diseq[3]] for diseq in self.disequality_assignments[-1] if diseq[0] in nondet_holes])
             self.conflict(conflict)
 
             # Push a reason (explain).
@@ -367,17 +293,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
             # If we want to draw a nice image, we need this statement.
             if self.draw_image:
-                if self.track_disequalities:
-                    diseqs = [self.disequality_variables[-1][diseq[3]] for diseq in self.disequality_assignments[-1] if diseq[0] in nondet_holes]
-                else:
-                    diseqs = []
                 term = z3.Not(
                     z3.And(
                         [
                             self.variables[c]
                             == self.partial_model[str(self.variables[c])]
                             for c in counterexample
-                        ] + diseqs
+                        ]
                     ),
                 )
                 self.image_assertions.append(term)

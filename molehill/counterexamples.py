@@ -16,7 +16,6 @@ def check(
     matrix_generator,
     family,
     prop,
-    disequalities,
     global_hint=None,
     compute_counterexample=True,
 ):
@@ -24,16 +23,6 @@ def check(
     hole_options = [
         family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
     ]
-    if disequalities:
-        # If we keep track of disequalities, we need to intersect the options.
-        hole_options = [
-            intersect_bitvectors(a, b) for a, b in zip(hole_options, disequalities)
-        ]
-        # TODO Should we make sure that there are still options left?
-        # There should always be options left, idk, but Z3 might give us an empty set??
-        if any([len(list(x)) == 0 for x in hole_options]):
-            print("does this happen?")
-            assert False, "No options left: " + str([i for i, x in enumerate(hole_options) if len(list(x)) == 0])
     # These are the holes that are fixed to a single value.
     fixed_holes = [
         hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1

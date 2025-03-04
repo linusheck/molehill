@@ -5,16 +5,13 @@ import z3
 from stormpy import check_model_sparse, parse_properties_without_context
 from stormpy.storage import BitVector
 from molehill import run
-from fastmole import intersect_bitvectors
 
 @pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
 @pytest.mark.parametrize("considered_counterexamples", ["all", "mc", "none"])
-# @pytest.mark.parametrize("diseq", [False, True])
-@pytest.mark.parametrize("diseq", [False])
-def test_search_space(project_path, considered_counterexamples, diseq):
+def test_search_space(project_path, considered_counterexamples):
     def custom_solver_settings(s):
         s.set(unsat_core=True)
-    model, _solver, plugin = run(project_path, False, considered_counterexamples, custom_solver_settings, search_space_test=True, track_disequalities=diseq)
+    model, _solver, plugin = run(project_path, False, considered_counterexamples, custom_solver_settings, search_space_test=True)
     # all of our models are unsat, we want to check if we have really considered the whole search space
     assert model is None
 
@@ -31,11 +28,6 @@ def test_search_space(project_path, considered_counterexamples, diseq):
         hole_options = [
             family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
         ]
-        if diseq:
-            hole_options = [
-                intersect_bitvectors(a, b) for a, b in zip(hole_options, plugin.diseq_assumptions[i])
-            ]
-        # print(plugin.diseq_assumptions[i])
         plugin.matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
 
         # Build MDP
@@ -67,14 +59,6 @@ def test_search_space(project_path, considered_counterexamples, diseq):
     for i, model in enumerate(plugin.counterexamples):
         model = {x[0]: x[1] for x in model}
         assumption = []
-        if diseq:
-            diseq_assumptions = plugin.diseq_assumptions[i]
-            for hole in range(family.num_holes):
-                assumptions = diseq_assumptions[hole]
-                var = variables[hole]
-                for x in range(len(assumptions)):
-                    if not assumptions[x]:
-                        assumption.append(var != x)
         statement = []
         for hole in range(family.num_holes):
             var = variables[hole]

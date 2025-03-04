@@ -22,7 +22,6 @@ def run(
     postprocess_lambda=None,
     random_assignment=False,
     search_space_test=False,
-    track_disequalities=False,
     fsc_memory_size=1,
 ):
     sketch_path = f"{project_path}/sketch.templ"
@@ -94,7 +93,6 @@ def run(
         s,
         quotient,
         var_ranges,
-        track_disequalities,
         draw_image=(image or search_space_test),
         considered_counterexamples=considered_counterexamples,
     )
