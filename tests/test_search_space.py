@@ -16,7 +16,7 @@ class DummyConstraint(Constraint):
 def test_search_space(project_path, considered_counterexamples):
     model, _solver, plugin = run(project_path, False, considered_counterexamples, DummyConstraint(), search_space_test=True)
     # all of our models are unsat, we want to check if we have really considered the whole search space
-    assert model is None
+    assert model is None, "Actual model is SAT: " + str(model)
 
     print(plugin.counterexamples)
 

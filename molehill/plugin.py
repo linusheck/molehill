@@ -189,11 +189,14 @@ class Mole:
                         ]
                     ),
                 )
+                print("add", term)
                 self.image_assertions.append(term)
+                self.counterexamples.append(
+                    (self.model_variable_names[c], partial_model[str(self.variables[c])]) for c in counterexample
+                )
             
             counterexample = [self.model_variable_names[i] for i in counterexample]
             self.all_violated_models[invert].insert(frozen_partial_model, str(counterexample))
-            # print(f"We know that {frozen_partial_model} leads to conflict {counterexample}")
             return True, counterexample
         else:
             # We can't do anything with this model, so we just return False.
@@ -272,17 +275,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 conflicting_vars = [self.names_to_vars[name]] +  [self.names_to_vars[backwards_variables[x]] for x in counterexample if backwards_variables[x] in self.names_to_vars]
                 # print("Conflicting vars", conflicting_vars)
                 self.conflict(conflicting_vars)
-
-                if self.data.draw_image:
-                    self.data.counterexamples.append(
-                        [
-                            (
-                                backwards_variables[i],
-                                self.partial_model[backwards_variables[i]],
-                            )
-                            for i in counterexample
-                        ]
-                    )
             # else:
                 # print("No conflict in", name, "=", value)
 
