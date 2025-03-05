@@ -38,7 +38,7 @@ def run(
     num_bits = (
         max(
             [
-                math.ceil(math.log2(max(family.hole_options(hole)) + 1))
+                math.ceil(math.log2(len(family.hole_options(hole)) + 1))
                 for hole in range(family.num_holes)
             ]
         )
@@ -52,9 +52,6 @@ def run(
         options = family.hole_options(hole)
         # if custom_constraint_lambda is None:
         #     num_bits = math.ceil(math.log2(max(options) + 1))
-        if len(options) == 1:
-            assert options == [0]
-            num_bits = 1
         bit_nums.add(num_bits)
         var = z3.BitVec(name, num_bits)
         variables.append(var)
