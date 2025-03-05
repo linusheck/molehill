@@ -112,7 +112,7 @@ class Mole:
 
         if time.time() - self.time_last_print > 1:
             print(
-                f"Considered {self.considered_models} models"
+                f"Considered {self.considered_models} models so far"
             )
             self.time_last_print = time.time()
 
