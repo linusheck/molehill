@@ -5,15 +5,20 @@ import z3
 from stormpy import check_model_sparse, parse_properties_without_context
 from stormpy.storage import BitVector
 from molehill import run
+from molehill.constraints import Constraint
+
+class DummyConstraint(Constraint):
+    def build_constraint(self, function, variables):
+        return function(*variables)
 
 @pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
 @pytest.mark.parametrize("considered_counterexamples", ["all", "mc", "none"])
 def test_search_space(project_path, considered_counterexamples):
-    def custom_solver_settings(s):
-        s.set(unsat_core=True)
-    model, _solver, plugin = run(project_path, False, considered_counterexamples, custom_solver_settings, search_space_test=True)
+    model, _solver, plugin = run(project_path, False, considered_counterexamples, DummyConstraint(), search_space_test=True)
     # all of our models are unsat, we want to check if we have really considered the whole search space
     assert model is None
+
+    print(plugin.counterexamples)
 
     # check that all rejecting models actually reject
     for i, model in enumerate(plugin.counterexamples):
@@ -28,11 +33,11 @@ def test_search_space(project_path, considered_counterexamples):
         hole_options = [
             family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
         ]
-        plugin.matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
+        plugin.get_matrix_generator().build_submodel(BitVector(family.num_holes, False), hole_options)
 
         # Build MDP
-        plugin.matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
-        mdp_nondet = plugin.matrix_generator.get_current_mdp()
+        plugin.get_matrix_generator().build_submodel(BitVector(family.num_holes, False), hole_options)
+        mdp_nondet = plugin.get_matrix_generator().get_current_mdp()
         prop = plugin.quotient.specification.all_properties()[0]
         new_property = parse_properties_without_context(str(prop.formula).split()[0] + " [ F \"counterexample_target\" ]")[0]
         result_storm_nondet = check_model_sparse(mdp_nondet, new_property)

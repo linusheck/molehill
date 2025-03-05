@@ -8,7 +8,6 @@ from molehill.counterexamples import check
 
 # from molehill.bandit import get_bandit
 from stormpy import model_checking, CheckTask
-from stormpy.storage import BitVector
 
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(
@@ -62,19 +61,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         quotient.build(quotient.family)
 
-        prop = self.quotient.specification.all_properties()[0]
-
-        self.check_task = CheckTask(prop.formula)
-
-        # does there exist a model that satisfies the property?
-        print("Quotient size", self.quotient.family.mdp.model.nr_states)
-        result = model_checking(self.quotient.family.mdp.model, prop.formula)
-        self.global_bounds = result.get_values()
-
-        self.complete_transition_matrix = (
-            self.quotient.family.mdp.model.transition_matrix
-        )
-        assert len(self.quotient.family.mdp.model.initial_states) == 1
 
         # reasons for new assertion
         self.reasons = []
@@ -99,27 +85,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         # because the quotient has no nontrivial end component, no sub-MDP does either :)
 
-        # target_states == states with target label
-        target_states = model_checking(
-            self.quotient.family.mdp.model, prop.formula.subformula.subformula
-        ).get_truth_values()
-
-        self.matrix_generator = MatrixGenerator(
-            self.quotient.family.mdp.model,
-            self.check_task,
-            target_states,
-            self.global_bounds,
-            self.choice_to_assignment,
+        self.complete_transition_matrix = (
+            self.quotient.family.mdp.model.transition_matrix
         )
+        assert len(self.quotient.family.mdp.model.initial_states) == 1
 
-        global_hint_vec = self.global_bounds.copy()
-        # extend global hint by two zeros for the two new states in decision matrix
-        global_hint_vec.extend([0.0, 0.0])
-        self.global_hint = (global_hint_vec, BitVector(len(global_hint_vec), True))
-
-        self.last_decision_variable = None
-
-        self.best_value = 0.0
+        # target_states == states with target label
+        self.matrix_generators = {}
 
         self.mdp_fails_and_wins = [0, 0]
 
@@ -127,7 +99,37 @@ class SearchMarkovChain(z3.UserPropagateBase):
         if self.draw_image:
             self.image_assertions = []
         self.considered_counterexamples = considered_counterexamples
-    
+        self.counterexamples = []
+
+    def get_matrix_generator(self, invert=False):
+        if invert in self.matrix_generators:
+            return self.matrix_generators[invert]
+        spec = self.quotient.specification
+        if invert:
+            spec = spec.negate()
+        prop = spec.all_properties()[0]
+        check_task = CheckTask(prop.formula)
+
+        # does there exist a model that satisfies the property?
+        print("Quotient size", self.quotient.family.mdp.model.nr_states)
+        result = model_checking(self.quotient.family.mdp.model, prop.formula)
+        global_bounds = result.get_values()
+
+        target_states = model_checking(
+            self.quotient.family.mdp.model, prop.formula.subformula.subformula
+        ).get_truth_values()
+
+        generator = MatrixGenerator(
+            self.quotient.family.mdp.model,
+            check_task,
+            target_states,
+            global_bounds,
+            self.choice_to_assignment,
+        )
+        print(generator)
+        self.matrix_generators[invert] = generator
+        return generator
+
     def get_name_from_ast_map(self, ast):
         """Get name of the AST from the map."""
         # I had to make this function because the Z3 APIs to do the same thing
@@ -189,16 +191,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         if all_violated:
             self.rejecting_models.add(frozen_partial_model)
             # If we want to draw a nice image, we need this statement
-            if self.draw_image:
-                self.counterexamples.append(
-                    [
-                        (
-                            self.variable_names[i],
-                            self.partial_model[self.variable_names[i]],
-                        )
-                        for i in counterexample
-                    ]
-                )
         else:
             self.accepting_models.add(frozen_partial_model)
 
@@ -234,39 +226,47 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.fixed_values.append(ast_str)
     
     def analyse_current_model(self):
-        # find all valid calls in the partial model
-        # print(self.partial_model)
         valid_calls = [(x, y) for x, y in self.partial_model.items() if isinstance(y, bool)]
-        # valid(x!1, y!0, 0)
-        # involved variables: [x!1, y!0]
 
         overall_model_consistent = True
-        overall_counterexample = []
 
         backwards_variables = {}
 
         for name, value in valid_calls:
+            print(name, value)
             partial_model_here = {}
             involved_variables = self.function_arguments[name]
             for i, var in enumerate(involved_variables):
                 var_original = self.variable_names[i]
                 if var in self.partial_model:
                     partial_model_here[var_original] = self.partial_model[var]
-                    backwards_variables[var] = var_original
                 elif var.isdigit():
+                    # Suppose the function assignment is something like valid(0)
+                    # Then the conflict is just "valid(0)", not "valid(0) and 0=0"
                     partial_model_here[var_original] = int(var)
+                backwards_variables[var_original] = var
 
-            all_violated, counterexample = self.partial_model_consistent(partial_model_here)
+            all_violated, counterexample = self.partial_model_consistent(partial_model_here, invert=not value)
+            print(all_violated)
+            print(self.variable_names, involved_variables)
+            print(backwards_variables)
 
             if all_violated:
-                self.conflict([self.names_to_vars[name]] + [self.names_to_vars[backwards_variables[x]] for x in counterexample])
+                conflicting_vars = [self.names_to_vars[backwards_variables[x]] for x in counterexample if backwards_variables[x] in self.names_to_vars]
+                self.conflict([self.names_to_vars[name]] + conflicting_vars)
+
+                if self.draw_image:
+                    self.counterexamples.append(
+                        [
+                            (
+                                backwards_variables[i],
+                                self.partial_model[backwards_variables[i]],
+                            )
+                            for i in counterexample
+                        ]
+                    )
 
             overall_model_consistent = overall_model_consistent and not all_violated
-            # if counterexample is not None:
-            #     overall_counterexample += counterexample
-
-        # if not overall_model_consistent:
-        #     self.conflict([self.names_to_vars[x] for x in overall_counterexample])
 
         return overall_model_consistent, None
 
@@ -286,6 +286,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         # Prop is always rechability, even if our input was until (thanks paynt :)).
         prop = self.quotient.specification.all_properties()[0]
+        if invert:
+            print("Inverting property", prop)
+            prop = self.quotient.specification.negate().all_properties()[0]
+            print("Inverted property", prop)
 
         # Decide whether we want to compute a counterexample.
         compute_counterexample = True
@@ -293,13 +297,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
             compute_counterexample = False
         elif self.considered_counterexamples == "mc" and model == "MDP":
             compute_counterexample = False
-
+        
         # Check the sub-MDP (see counterexample.py).
         check_result = check(
-            self.matrix_generator,
+            self.get_matrix_generator(invert),
             new_family,
             prop,
-            self.global_hint,
             compute_counterexample,
         )
         all_violated = check_result.all_schedulers_violate
@@ -352,7 +355,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.add(argument)
                 name = self.get_name_from_ast_map(argument)
                 self.names_to_vars[name] = argument
+                # TODO fix this for more complicated expressions than just variables
                 self.function_arguments[strx].append(name)
+            else:
+                self.function_arguments[strx].append(str(argument.as_long()))
     
     def fresh(self, new_ctx):
         print("Fresh")
