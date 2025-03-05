@@ -12,15 +12,11 @@ import math
 
 from molehill.plugin import SearchMarkovChain
 
-
 def run(
     project_path,
     image,
     considered_counterexamples,
-    custom_solver_settings=None,
-    custom_constraint_lambda=None,
-    postprocess_lambda=None,
-    random_assignment=False,
+    constraint,
     search_space_test=False,
     fsc_memory_size=1,
 ):
@@ -32,40 +28,30 @@ def run(
     # print all python properties of quotient
     family = quotient.family
 
-    # quotient.build(family)
-
     s = z3.Solver()
 
-    if random_assignment:
-        s.set("phase_selection", 5)
-
-    if custom_solver_settings:
-        custom_solver_settings(s)
-
-    variables = []
+    constraint.solver_settings(s)
 
     ranges = []
     bit_nums = set()
 
-    num_bits = None
-    # TODO kinda hacky
-    if custom_constraint_lambda is not None:
-        num_bits = (
-            max(
-                [
-                    math.ceil(math.log2(max(family.hole_options(hole)) + 1))
-                    for hole in range(family.num_holes)
-                ]
-            )
-            + 1
+    num_bits = (
+        max(
+            [
+                math.ceil(math.log2(max(family.hole_options(hole)) + 1))
+                for hole in range(family.num_holes)
+            ]
         )
+        + 1
+    )
 
+    variables = []
     var_ranges = []
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
         options = family.hole_options(hole)
-        if custom_constraint_lambda is None:
-            num_bits = math.ceil(math.log2(max(options) + 1))
+        # if custom_constraint_lambda is None:
+        #     num_bits = math.ceil(math.log2(max(options) + 1))
         if len(options) == 1:
             assert options == [0]
             num_bits = 1
@@ -81,8 +67,10 @@ def run(
 
     s.add(ranges)
 
-    if custom_constraint_lambda:
-        s.add(custom_constraint_lambda(variables))
+    # Create the valid(...) function
+    f = z3.PropagateFunction("valid", *[x.sort() for x in variables], z3.BoolSort())
+
+    s.add(constraint.build_constraint(f, variables))
 
     # add test z3 constraints
     # s.add(variables[0] + variables[1] == variables[2])
@@ -112,8 +100,7 @@ def run(
         prop = quotient.specification.all_properties()[0]
         result = mdp.model_check_property(prop)
         print(f"Found {new_family} with value {result}")
-        if postprocess_lambda:
-            postprocess_lambda(model, s)
+        constraint.show_result(model, s)
     else:
         print("unsat")
     print(f"Considered {p.considered_models} models")

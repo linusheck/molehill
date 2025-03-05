@@ -35,8 +35,8 @@ class MTBDD(Constraint):
             "--num-nodes", type=int, help="Number of nodes in the decision tree", required=True
         )
 
-    def build_constraint(self, variables, args):
-        num_nodes = args.num_nodes
+    def build_constraint(self, variables):
+        num_nodes = self.args.num_nodes
         num_bits = variables[0].size()
         assert all(
             [x.size() == num_bits for x in variables]

@@ -28,8 +28,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         self.add_fixed(self._fixed)
         self.add_final(self._final)
-
-        # self.add_created(self._created)
+        self.add_created(self._created)
 
         # models we have already analyzed
         self.accepting_models = set()
@@ -46,7 +45,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # list of Z3 variables, indexed by PAYNT hole
         self.variables = []
         self.variable_names = []
-        self.variable_indices = {}
+        
+        self.names_to_vars = {}
+
+        self.function_arguments = {}
 
         self.ast_map = {}
 
@@ -76,9 +78,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         # reasons for new assertion
         self.reasons = []
-
-        self.counterexamples = []
-        self.diseq_assumptions = []
 
         self.fixed_something = False
 
@@ -150,9 +149,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         for var in variables:
             self.add(var)
             self.variables.append(var)
-
+            self.names_to_vars[self.get_name_from_ast_map(var)] = var
         self.variable_names = [self.get_name_from_ast_map(var) for var in variables]
-        self.variable_indices = {var: i for i, var in enumerate(self.variable_names)}
 
     def push(self):
         """This method is called if Z3 pushes a new context. This is where we check the sub-MDP."""
@@ -225,27 +223,66 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 ]
             )
 
-
     def _fixed(self, ast, value):
-        # print("Fixed", ast, value)
         # This is called when Z3 fixes a variable. We need to keep track of that.
-        ast_hash = hash(ast)
-        ast_str = self.get_name_from_ast_map(ast)
+        if value.sort() == z3.BoolSort():
+            ast_str = str(ast)
+            self.partial_model[ast_str] = bool(value)
+        else:
+            ast_str = self.get_name_from_ast_map(ast)
+            self.partial_model[ast_str] = value.as_long()
         self.fixed_values.append(ast_str)
-        # This is a model constant => add it to the partial model.
-        self.partial_model[ast_str] = value.as_long()
-
+    
     def analyse_current_model(self):
+        # find all valid calls in the partial model
+        # print(self.partial_model)
+        valid_calls = [(x, y) for x, y in self.partial_model.items() if isinstance(y, bool)]
+        # valid(x!1, y!0, 0)
+        # involved variables: [x!1, y!0]
+
+        overall_model_consistent = True
+        overall_counterexample = []
+
+        backwards_variables = {}
+
+        for name, value in valid_calls:
+            partial_model_here = {}
+            involved_variables = self.function_arguments[name]
+            for i, var in enumerate(involved_variables):
+                var_original = self.variable_names[i]
+                if var in self.partial_model:
+                    partial_model_here[var_original] = self.partial_model[var]
+                    backwards_variables[var] = var_original
+                elif var.isdigit():
+                    partial_model_here[var_original] = int(var)
+
+            all_violated, counterexample = self.partial_model_consistent(partial_model_here)
+
+            if all_violated:
+                self.conflict([self.names_to_vars[name]] + [self.names_to_vars[backwards_variables[x]] for x in counterexample])
+
+            overall_model_consistent = overall_model_consistent and not all_violated
+            # if counterexample is not None:
+            #     overall_counterexample += counterexample
+
+        # if not overall_model_consistent:
+        #     self.conflict([self.names_to_vars[x] for x in overall_counterexample])
+
+        return overall_model_consistent, None
+
+    def partial_model_consistent(self, partial_model, invert=False):
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
-        model = "DTMC" if len(self.fixed_values) == len(self.variables) else "MDP"
+
+        num_fixed = len(partial_model.keys())
+        model = "DTMC" if num_fixed == len(self.variables) else "MDP"
 
         # Make a PAYNT family from the current partial model.
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
         for hole in range(new_family.num_holes):
             var = self.variable_names[hole]
-            if var in self.partial_model:
-                new_family.hole_set_options(hole, [self.partial_model[var]])
+            if var in partial_model:
+                new_family.hole_set_options(hole, [partial_model[var]])
 
         # Prop is always rechability, even if our input was until (thanks paynt :)).
         prop = self.quotient.specification.all_properties()[0]
@@ -267,7 +304,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         )
         all_violated = check_result.all_schedulers_violate
         counterexample = check_result.fixed_holes
-        nondet_holes = check_result.nondet_holes
 
         self.considered_models += 1
 
@@ -278,18 +314,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
             else:
                 self.mdp_fails_and_wins[0] += 1
         if all_violated:
-            # We found a counterexample, so we need to push a theory lemma.
-            conflict = [self.variables[c] for c in counterexample]
-            # print(self.partial_model)
-            self.conflict(conflict)
-
             # Push a reason (explain).
-            if len(counterexample) < len(self.fixed_values):
+            if len(counterexample) < num_fixed:
                 self.reasons.append(
-                    f"{model} counterexample {len(self.fixed_values)}->{len(counterexample)}"
+                    f"{model} counterexample {num_fixed}->{len(counterexample)}"
                 )
             else:
-                self.reasons.append(f"{model} reject {len(self.fixed_values)}")
+                self.reasons.append(f"{model} reject {num_fixed}")
 
             # If we want to draw a nice image, we need this statement.
             if self.draw_image:
@@ -297,19 +328,34 @@ class SearchMarkovChain(z3.UserPropagateBase):
                     z3.And(
                         [
                             self.variables[c]
-                            == self.partial_model[str(self.variables[c])]
+                            == partial_model[str(self.variables[c])]
                             for c in counterexample
                         ]
                     ),
                 )
                 self.image_assertions.append(term)
-            return True, counterexample
+            return True, [self.variable_names[i] for i in counterexample]
         else:
             # We can't do anything with this model, so we just return False.
             return False, None
 
+    def _created(self, x):
+        print("Created", x)
+        print(dir(x))
+        print(x.sort())
+        strx = str(x)
+        self.function_arguments[strx] = []
+        self.names_to_vars[strx] = x
+        for i in range(x.num_args()):
+            argument = x.arg(i)
+            if not z3.Z3_is_numeral_ast(x.ctx_ref(), argument.as_ast()):
+                self.add(argument)
+                name = self.get_name_from_ast_map(argument)
+                self.names_to_vars[name] = argument
+                self.function_arguments[strx].append(name)
+    
     def fresh(self, new_ctx):
-        # TODO handle fresh contexts from FORALL quantifiers.
+        print("Fresh")
         return self
     
     # def _decide(self, x, y, z):

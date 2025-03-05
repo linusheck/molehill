@@ -38,11 +38,11 @@ class DecisionTree(Constraint):
             "--nodes", type=int, help="Number of enabled nodes in the tree.", default=None
         )
 
-    def build_constraint(self, variables, args):
-        tree_depth = args.tree_depth
+    def build_constraint(self, variables):
+        tree_depth = self.args.tree_depth
         self.tree_depth = tree_depth
         self.variables = variables
-        num_enabled_nodes = args.nodes
+        num_enabled_nodes = self.args.nodes
 
         # variables have names of the form
         # A([picked0=1       & picked1=0     & picked2=1     & picked3=1     & picked4=0     & picked5=1     & picked6=1     & x=3   & y=2],0
