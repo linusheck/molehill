@@ -87,7 +87,6 @@ def run(
     )
     # p.register_variables(variables)
     model = None
-    print(s.assertions())
     if s.check() == z3.sat:
         print("sat")
         model = s.model()

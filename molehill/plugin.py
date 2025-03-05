@@ -76,6 +76,7 @@ class Mole:
         self.variables = variables
         self.model_variable_names = [str(x) for x in variables]
 
+
     def get_matrix_generator(self, invert=False):
         if invert in self.matrix_generators:
             return self.matrix_generators[invert]
@@ -108,7 +109,13 @@ class Mole:
 
     def partial_model_consistent(self, partial_model, invert=False):
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
-        # print(partial_model, "consistent", invert)
+
+        if time.time() - self.time_last_print > 1:
+            print(
+                f"Considered {self.considered_models} models"
+            )
+            self.time_last_print = time.time()
+
         num_fixed = len(partial_model.keys())
         model = "DTMC" if num_fixed == len(self.model_variable_names) else "MDP"
 
@@ -286,10 +293,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.fixed_count.append(len(self.fixed_values))
         if len(self.fixed_count) > 1 and self.fixed_count[-1] == self.fixed_count[-2]:
             return
-        measured_time = time.time()
         # Analyze current model and propagate theory lemma
         self.analyse_current_model()
-        measured_time = time.time() - measured_time
 
     def pop(self, num_scopes):
         # This function is called if Z3 pops a context. We keep track of that.
