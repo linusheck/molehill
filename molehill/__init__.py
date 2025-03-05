@@ -10,7 +10,7 @@ import z3
 import paynt.parser.sketch
 import math
 
-from molehill.plugin import ProblemSolver
+from molehill.plugin import Mole
 
 def run(
     project_path,
@@ -77,7 +77,7 @@ def run(
     # s.add(variables[0] == 0)
     # s.add(variables[1] == 0)
 
-    p = ProblemSolver(
+    p = Mole(
         s,
         variables,
         quotient,

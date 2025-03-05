@@ -2,7 +2,7 @@
 
 import pytest
 from paynt.parser.sketch import Sketch
-from molehill.plugin import SearchMarkovChain
+from molehill.plugin import Mole
 import z3
 import math
 from stormpy import check_model_sparse, parse_properties_without_context
@@ -58,9 +58,7 @@ def test_matrix_generator(project_path):
 
     new_family = family
 
-    choice_to_assignment = quotient.coloring.getChoiceToAssignment()
-
-    plugin = SearchMarkovChain(s, quotient, var_ranges, True)
+    mole = Mole(s, variables, quotient, var_ranges, True)
     quotient_mdp = quotient.family.mdp.model
 
     # time to build the MDP
@@ -76,22 +74,22 @@ def test_matrix_generator(project_path):
         fixed_holes = [
             hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1
         ]
-        plugin.get_matrix_generator().build_submodel(BitVector(family.num_holes, False), hole_options)
-        bfs_order = plugin.get_matrix_generator().get_current_bfs_order()
-        abstracted_holes, extra_holes = plugin.get_matrix_generator().hole_order(bfs_order, set(fixed_holes))
+        mole.get_matrix_generator().build_submodel(BitVector(family.num_holes, False), hole_options)
+        bfs_order = mole.get_matrix_generator().get_current_bfs_order()
+        abstracted_holes, extra_holes = mole.get_matrix_generator().hole_order(bfs_order, set(fixed_holes))
         abstracted_holes += extra_holes
 
         # Build MDP
         ex_time = time.time()
-        plugin.get_matrix_generator().build_submodel(BitVector(family.num_holes, False), hole_options)
+        mole.get_matrix_generator().build_submodel(BitVector(family.num_holes, False), hole_options)
         fastmole_time += time.time() - ex_time
-        mdp_nondet = plugin.get_matrix_generator().get_current_mdp()
-        nondet_bitvec = plugin.get_matrix_generator().get_current_reachable_states()
+        mdp_nondet = mole.get_matrix_generator().get_current_mdp()
+        nondet_bitvec = mole.get_matrix_generator().get_current_reachable_states()
 
         # Build MDP with holes
-        plugin.get_matrix_generator().build_submodel(BitVector(family.num_holes, abstracted_holes), hole_options)
-        mdp_holes = plugin.get_matrix_generator().get_current_mdp()
-        holes_bitvec = plugin.get_matrix_generator().get_current_reachable_states()
+        mole.get_matrix_generator().build_submodel(BitVector(family.num_holes, abstracted_holes), hole_options)
+        mdp_holes = mole.get_matrix_generator().get_current_mdp()
+        holes_bitvec = mole.get_matrix_generator().get_current_reachable_states()
 
         new_property = parse_properties_without_context(str(prop.formula).split()[0] + " [ F \"counterexample_target\" ]")[0]
         assert "max" in str(new_property)

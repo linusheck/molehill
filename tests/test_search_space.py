@@ -26,7 +26,7 @@ def test_search_space(project_path, considered_counterexamples):
         family = plugin.quotient.family.copy()
         family.add_parent_info(plugin.quotient.family)
         for hole in range(family.num_holes):
-            var = plugin.variable_names[hole]
+            var = plugin.model_variable_names[hole]
             if var in model:
                 family.hole_set_options(hole, [model[var]])
 

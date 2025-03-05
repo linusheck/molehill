@@ -9,7 +9,7 @@ from settrie import SetTrie
 
 from stormpy import model_checking, CheckTask
 
-class ProblemSolver:
+class Mole:
     def __init__(self, solver, variables, quotient, var_ranges, draw_image=False, considered_counterexamples="all"):
         self.var_ranges = var_ranges
         self.quotient = quotient
@@ -73,6 +73,7 @@ class ProblemSolver:
         self.counterexamples = []
 
         self.plugin = SearchMarkovChain(solver, None, self)
+        self.variables = variables
         self.model_variable_names = [str(x) for x in variables]
 
     def get_matrix_generator(self, invert=False):
