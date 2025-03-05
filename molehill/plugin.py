@@ -5,6 +5,7 @@ import z3
 from fastmole import MatrixGenerator
 from molehill.model_counters import ModelCounter
 from molehill.counterexamples import check
+from settrie import SetTrie
 
 from stormpy import model_checking, CheckTask
 
@@ -13,8 +14,14 @@ class ProblemSolver:
         self.var_ranges = var_ranges
         self.quotient = quotient
         # models we have already analyzed
-        self.accepting_models = set()
-        self.rejecting_models = set()
+        self.all_violated_models = {
+            False: SetTrie(),
+            True: SetTrie()
+        }
+        self.inconclusive_models = {
+            False: SetTrie(),
+            True: SetTrie()
+        }
 
         self.considered_models = 0
         # self.ruled_out_models = 0
@@ -71,6 +78,7 @@ class ProblemSolver:
     def get_matrix_generator(self, invert=False):
         if invert in self.matrix_generators:
             return self.matrix_generators[invert]
+
         spec = self.quotient.specification
         if invert:
             spec = spec.negate()
@@ -102,6 +110,15 @@ class ProblemSolver:
         # print(partial_model, "consistent", invert)
         num_fixed = len(partial_model.keys())
         model = "DTMC" if num_fixed == len(self.model_variable_names) else "MDP"
+
+        frozen_partial_model = set(map(hash, partial_model.items()))
+        conflicts_violated = self.all_violated_models[invert].subsets(frozen_partial_model)
+        if len(conflicts_violated) > 0:
+            conflict = min([eval(x) for x in conflicts_violated], key=len)
+            return True, conflict
+        conflicts_inconclusive = self.inconclusive_models[invert].supersets(frozen_partial_model)
+        if len(conflicts_inconclusive) > 0:
+            return False, None
 
         # Make a PAYNT family from the current partial model.
         new_family = self.quotient.family.copy()
@@ -165,9 +182,14 @@ class ProblemSolver:
                     ),
                 )
                 self.image_assertions.append(term)
-            return True, [self.model_variable_names[i] for i in counterexample]
+            
+            counterexample = [self.model_variable_names[i] for i in counterexample]
+            self.all_violated_models[invert].insert(frozen_partial_model, str(counterexample))
+            # print(f"We know that {frozen_partial_model} leads to conflict {counterexample}")
+            return True, counterexample
         else:
             # We can't do anything with this model, so we just return False.
+            self.inconclusive_models[invert].insert(frozen_partial_model, "")
             return False, None
 
 
@@ -257,10 +279,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 # print("No conflict in", name, "=", value)
 
     def push(self):
-        print(self.partial_model)
+        # print(self.partial_model)
         """This method is called if Z3 pushes a new context. This is where we check the sub-MDP."""
         # Keep track of the new context
         self.fixed_count.append(len(self.fixed_values))
+        if len(self.fixed_count) > 1 and self.fixed_count[-1] == self.fixed_count[-2]:
+            return
         measured_time = time.time()
         # Analyze current model and propagate theory lemma
         self.analyse_current_model()
@@ -279,7 +303,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.analyse_current_model()
 
     def _fixed(self, ast, value):
-        print("Fixed", ast, value)
+        # print("Fixed", ast, value)
         # This is called when Z3 fixes a variable. We need to keep track of that.
         if value.sort() == z3.BoolSort():
             ast_str = str(ast)
@@ -291,7 +315,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
     
 
     def _created(self, x):
-        print("Created", x)
+        # print("Created", x)
 
         strx = str(x)
         self.function_arguments[strx] = []

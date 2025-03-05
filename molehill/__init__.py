@@ -95,7 +95,9 @@ def run(
         new_family.add_parent_info(quotient.family)
         for hole in range(new_family.num_holes):
             var = variables[hole]
-            new_family.hole_set_options(hole, [model.eval(var).as_long()])
+            # if var has as_long attribute
+            if hasattr(model.eval(var), "as_long"):
+                new_family.hole_set_options(hole, [model.eval(var).as_long()])
         # re-check DTMC
         quotient.build(new_family)
         mdp = new_family.mdp

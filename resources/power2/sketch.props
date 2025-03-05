@@ -1,1 +1,1 @@
-R{"lost"} < 69 [ F "finished" ]
+R{"lost"} >=10 [ F "finished" ]
