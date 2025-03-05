@@ -80,7 +80,7 @@ class ForallPropagator(z3.UserPropagateBase):
                 self.partial_model.pop(self.fixed_values.pop())
 
     def _fixed(self, ast, value):
-        print("Fixed")
+        print("Fixed", ast, value)
         self.fixed_values.append(str(ast))
         # This is a model constant => add it to the partial model.
         self.partial_model[str(ast)] = value
@@ -96,6 +96,8 @@ class ForallPropagator(z3.UserPropagateBase):
         print(x.sort())
         for i in range(x.num_args()):
             argument = x.arg(i)
+            print("Watch", argument)
+            self.add(argument)
             if not z3.Z3_is_numeral_ast(x.ctx_ref(), argument.as_ast()):
                 self.add(argument)
                 self.names_to_vars[str(argument)] = argument
@@ -114,7 +116,7 @@ def test_forall():
     y = z3.BitVec("y", 1)
     z = z3.BitVec("z", 1)
     f = z3.PropagateFunction("valid", z3.BitVecSort(1), z3.BitVecSort(1), z3.BitVecSort(1), z3.BoolSort())
-    s.add(z3.Exists([x,y], z3.ForAll([z], f(x, y, z))))
+    s.add(z3.ForAll([y,z], f(x, y, z)))
     # s.add(f(x,y,z))
     s.add(x == 1)
     s.add(y == 2)

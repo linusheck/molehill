@@ -18,7 +18,6 @@ def check(
     prop,
     compute_counterexample=True,
 ):
-    print("Check", prop)
     # These are the options for each hole.
     hole_options = [
         family.family.holeOptionsMask(hole) for hole in range(family.num_holes)

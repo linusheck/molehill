@@ -10,7 +10,7 @@ import z3
 import paynt.parser.sketch
 import math
 
-from molehill.plugin import SearchMarkovChain
+from molehill.plugin import ProblemSolver
 
 def run(
     project_path,
@@ -77,15 +77,17 @@ def run(
     # s.add(variables[0] == 0)
     # s.add(variables[1] == 0)
 
-    p = SearchMarkovChain(
+    p = ProblemSolver(
         s,
+        variables,
         quotient,
         var_ranges,
         draw_image=(image or search_space_test),
         considered_counterexamples=considered_counterexamples,
     )
-    p.register_variables(variables)
+    # p.register_variables(variables)
     model = None
+    print(s.assertions())
     if s.check() == z3.sat:
         print("sat")
         model = s.model()

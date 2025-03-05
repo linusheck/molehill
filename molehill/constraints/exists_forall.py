@@ -9,7 +9,7 @@ class ExistsForallConstraint(Constraint):
         argument_parser.add_argument(
             "--forall",
             type=str,
-            help="Infix of the forall variables.",
+            help="Infix of the forall variables E.g: 'P1 P3' means all variables that contain either P1 or P3.",
             required=True,
         )
         argument_parser.add_argument(
@@ -25,7 +25,7 @@ class ExistsForallConstraint(Constraint):
 
     def build_constraint(self, function: z3.Function, variables: list[z3.Var]) -> z3.ExprRef:
         """Implement your constraint here. Arguments are passed by args."""
-        forall_variables = [var for var in variables if self.args.forall in str(var)]
+        forall_variables = [var for var in variables if any([x in str(var) for x in self.args.forall.split(" ")])]
         if len(forall_variables) == 0:
-            raise ValueError("No variables found with the given prefix.")
+            raise ValueError("No variables found with the given pattern.")
         return z3.ForAll(*[forall_variables], function(*variables))
