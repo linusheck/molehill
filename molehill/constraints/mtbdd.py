@@ -35,7 +35,7 @@ class MTBDD(Constraint):
             "--num-nodes", type=int, help="Number of nodes in the decision tree", required=True
         )
 
-    def build_constraint(self, variables):
+    def build_constraint(self, function, variables):
         num_nodes = self.args.num_nodes
         num_bits = variables[0].size()
         assert all(
@@ -65,7 +65,7 @@ class MTBDD(Constraint):
         )
         self.decision_func = decision_func
 
-        constraints = []
+        constraints = [function(*variables)]
 
         # make weight nodes for constraints
         node_property = []

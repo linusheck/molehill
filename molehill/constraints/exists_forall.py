@@ -4,7 +4,7 @@ import argparse
 from molehill.constraints.constraint import Constraint
 
 class ExistsForallConstraint(Constraint):
-    """Standard exists-constraint."""
+    """Exists-forall-constraint."""
     def register_arguments(self, argument_parser: argparse.ArgumentParser) -> None:
         argument_parser.add_argument(
             "--forall",
@@ -24,7 +24,6 @@ class ExistsForallConstraint(Constraint):
             solver.set("phase_selection", 5)
 
     def build_constraint(self, function: z3.Function, variables: list[z3.Var]) -> z3.ExprRef:
-        """Implement your constraint here. Arguments are passed by args."""
         forall_variables = [var for var in variables if any([x in str(var) for x in self.args.forall.split(" ")])]
         if len(forall_variables) == 0:
             raise ValueError("No variables found with the given pattern.")

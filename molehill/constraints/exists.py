@@ -20,4 +20,4 @@ class ExistsConstraint(Constraint):
 
     def build_constraint(self, function: z3.Function, variables: list[z3.Var]) -> z3.ExprRef:
         """Implement your constraint here. Arguments are passed by args."""
-        return function(*variables)
+        return [function(*variables)]

@@ -35,10 +35,13 @@ class DecisionTree(Constraint):
             "--tree-depth", type=int, help="Depth of the tree.", required=True
         )
         argument_parser.add_argument(
+            "--picture-path", type=str, help="Path to write tree picture to.", default="tree.png"
+        )
+        argument_parser.add_argument(
             "--nodes", type=int, help="Number of enabled nodes in the tree.", default=None
         )
 
-    def build_constraint(self, variables):
+    def build_constraint(self, function, variables):
         tree_depth = self.args.tree_depth
         self.tree_depth = tree_depth
         self.variables = variables
@@ -67,7 +70,7 @@ class DecisionTree(Constraint):
             "decision", *[z3.IntSort()] * num_properties, z3.BitVecSort(max_action_size)
         )
 
-        constraints = []
+        constraints = [function(*variables)]
 
         # tree is structured as follows
         # 0
@@ -182,4 +185,5 @@ class DecisionTree(Constraint):
                 return node
 
         root = build_anytree(0, 0)
-        UniqueDotExporter(root).to_picture("tree.png")
+        UniqueDotExporter(root).to_picture(self.args.picture_path)
+        print("Tree written to", self.args.picture_path)

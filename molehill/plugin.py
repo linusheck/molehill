@@ -9,22 +9,17 @@ from settrie import SetTrie
 
 from stormpy import model_checking, CheckTask
 
+from decimal import Decimal
+
 class Mole:
     def __init__(self, solver, variables, quotient, var_ranges, draw_image=False, considered_counterexamples="all"):
         self.var_ranges = var_ranges
         self.quotient = quotient
         # models we have already analyzed
-        self.all_violated_models = {
-            False: SetTrie(),
-            True: SetTrie()
-        }
-        self.inconclusive_models = {
-            False: SetTrie(),
-            True: SetTrie()
-        }
+        self.all_violated_models = [SetTrie(), SetTrie()]
+        self.inconclusive_models = [SetTrie(), SetTrie()]
 
         self.considered_models = 0
-        # self.ruled_out_models = 0
         self.total_models = self.quotient.family.size
 
         self.time_last_print = time.time()
@@ -32,6 +27,9 @@ class Mole:
         self.choice_to_assignment = self.quotient.coloring.getChoiceToAssignment()
 
         quotient.build(quotient.family)
+
+        print("Family size", "{:.2e}".format(Decimal(self.quotient.family.size)))
+        print("Quotient size", self.quotient.family.mdp.model.nr_states)
 
         # reasons for new assertion
         self.reasons = []
@@ -76,6 +74,8 @@ class Mole:
         self.variables = variables
         self.model_variable_names = [str(x) for x in variables]
 
+        self.first_dtmc_checked = False
+
 
     def get_matrix_generator(self, invert=False):
         if invert in self.matrix_generators:
@@ -119,13 +119,26 @@ class Mole:
         num_fixed = len(partial_model.keys())
         model = "DTMC" if num_fixed == len(self.model_variable_names) else "MDP"
 
+        # This is a magic trick to make sure we first check a DTMC after the
+        # quotient. I believe that it's really helpful, e.g., in MDPs, where we
+        # can just check a Markov chain first if the quotient is not violated.
+        if model == "DTMC":
+            self.first_dtmc_checked = True
+        if model == "MDP" and not self.first_dtmc_checked and len(partial_model) > 0:
+            return False, None
+
         frozen_partial_model = set(map(hash, partial_model.items()))
-        conflicts_violated = self.all_violated_models[invert].subsets(frozen_partial_model)
+        conflicts_violated = self.all_violated_models[int(invert)].subsets(frozen_partial_model)
         if len(conflicts_violated) > 0:
             conflict = min([eval(x) for x in conflicts_violated], key=len)
             return True, conflict
-        conflicts_inconclusive = self.inconclusive_models[invert].supersets(frozen_partial_model)
+        conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(frozen_partial_model)
         if len(conflicts_inconclusive) > 0:
+            return False, None
+        # if the inverse is violated, this will not be violated
+        conflicts_inverse_violated = self.inconclusive_models[int(invert)].supersets(frozen_partial_model)
+        if len(conflicts_inverse_violated) > 0:
+            print("inverse violated")
             return False, None
 
         # Make a PAYNT family from the current partial model.
@@ -196,13 +209,12 @@ class Mole:
                 )
             
             counterexample = [self.model_variable_names[i] for i in counterexample]
-            self.all_violated_models[invert].insert(frozen_partial_model, str(counterexample))
+            self.all_violated_models[int(invert)].insert(frozen_partial_model, str(counterexample))
             return True, counterexample
         else:
             # We can't do anything with this model, so we just return False.
-            self.inconclusive_models[invert].insert(frozen_partial_model, "")
+            self.inconclusive_models[int(invert)].insert(frozen_partial_model, str(frozen_partial_model))
             return False, None
-
 
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(
@@ -235,6 +247,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
         self.names_to_vars = {}
 
         self.function_arguments = {}
+
+        self.child_plugin = None
 
     def get_name_from_ast_map(self, ast):
         """Get name of the AST from the map."""
@@ -313,8 +327,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
     
 
     def _created(self, x):
-        # print("Created", x)
-
         strx = str(x)
         self.function_arguments[strx] = []
         self.names_to_vars[strx] = x
@@ -330,4 +342,5 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.function_arguments[strx].append(str(argument.as_long()))
     
     def fresh(self, new_ctx):
-        return SearchMarkovChain(None, new_ctx, self.data)
+        self.child_plugin = SearchMarkovChain(None, new_ctx, self.data)
+        return self.child_plugin
