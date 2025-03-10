@@ -1,6 +1,7 @@
 """Base class for constraints."""
 import z3
 import argparse
+from typing import Callable
 
 class Constraint:
     """Base class for constraints."""
@@ -17,8 +18,10 @@ class Constraint:
         """Set the arguments for the constraint."""
         self.args = args
 
-    def build_constraint(self, function: z3.Function, variables: list[z3.Var]) -> z3.ExprRef:
-        """Implement your constraint here. Arguments are passed by args."""
+    def build_constraint(self, function: z3.Function, variables: list[z3.Var], variables_in_ranges: Callable[[list[z3.Var]], z3.ExprRef]) -> z3.ExprRef:
+        """Implement your constraint here. Arguments are passed by args. Call
+        variables_in_ranges on variables to get a Z3 expression that represents
+        that the variables are in-range."""
         raise NotImplementedError("Constraint does not implement build_constraint")
 
     def show_result(self, model: z3.Model, solver: z3.Solver) -> None:

@@ -2,6 +2,7 @@
 import z3
 import argparse
 from molehill.constraints.constraint import Constraint
+from typing import Callable
 
 class ExistsForallConstraint(Constraint):
     """Exists-forall-constraint."""
@@ -23,8 +24,10 @@ class ExistsForallConstraint(Constraint):
         if self.args.random:
             solver.set("phase_selection", 5)
 
-    def build_constraint(self, function: z3.Function, variables: list[z3.Var]) -> z3.ExprRef:
+    def build_constraint(self, function: z3.Function, variables: list[z3.Var], variables_in_ranges: Callable[[list[z3.Var]], z3.ExprRef]) -> z3.ExprRef:
         forall_variables = [var for var in variables if any([x in str(var) for x in self.args.forall.split(" ")])]
         if len(forall_variables) == 0:
             raise ValueError("No variables found with the given pattern.")
-        return z3.ForAll(*[forall_variables], function(*variables))
+        var_in_range_statement = variables_in_ranges(variables)
+        constraint = z3.And(var_in_range_statement, z3.ForAll(*[forall_variables], z3.Implies(var_in_range_statement, function(*variables))))
+        return constraint

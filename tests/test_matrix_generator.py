@@ -2,7 +2,7 @@
 
 import pytest
 from paynt.parser.sketch import Sketch
-from molehill.plugin import Mole
+from molehill.mole import Mole
 import z3
 import math
 from stormpy import check_model_sparse, parse_properties_without_context

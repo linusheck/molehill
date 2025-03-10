@@ -10,7 +10,7 @@ import z3
 import paynt.parser.sketch
 import math
 
-from molehill.plugin import Mole
+from molehill.mole import Mole
 
 def run(
     project_path,
@@ -19,6 +19,7 @@ def run(
     constraint,
     search_space_test=False,
     fsc_memory_size=1,
+    print_reasons=False,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -27,6 +28,9 @@ def run(
 
     # print all python properties of quotient
     family = quotient.family
+
+    if isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
+        print(quotient.observation_to_actions)
 
     s = z3.Solver()
 
@@ -46,28 +50,29 @@ def run(
     )
 
     variables = []
-    var_ranges = []
+
     for hole in range(family.num_holes):
         name = family.hole_name(hole)
-        options = family.hole_options(hole)
-        # if custom_constraint_lambda is None:
-        #     num_bits = math.ceil(math.log2(max(options) + 1))
         bit_nums.add(num_bits)
         var = z3.BitVec(name, num_bits)
         variables.append(var)
-        # it gets guaranteed by paynt that this is actually the range
-        # (these are just the indices, not the actual values in the final model :)
-        assert min(options) == 0
-        ranges.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
-        ranges.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
-        var_ranges.append(max(options))
 
-    s.add(ranges)
+    def variables_in_ranges(variables):
+        statement = []
+        for hole in range(family.num_holes):
+            options = family.hole_options(hole)
+            # it gets guaranteed by paynt that this is actually the range
+            # (these are just the indices, not the actual values in the final model :)
+            assert min(options) == 0
+            var = variables[hole]
+            statement.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
+            statement.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
+        return z3.And(*statement)
 
     # Create the valid(...) function
     f = z3.PropagateFunction("valid", *[x.sort() for x in variables], z3.BoolSort())
 
-    s.add(constraint.build_constraint(f, variables))
+    s.add(constraint.build_constraint(f, variables, variables_in_ranges))
 
     # add test z3 constraints
     # s.add(variables[0] + variables[1] == variables[2])
@@ -78,7 +83,6 @@ def run(
         s,
         variables,
         quotient,
-        var_ranges,
         draw_image=(image or search_space_test),
         considered_counterexamples=considered_counterexamples,
     )
@@ -104,6 +108,10 @@ def run(
     else:
         print("unsat")
     print(f"Considered {p.considered_models} models")
+    if print_reasons:
+        print(f"Reasons:")
+        for r in p.reasons:
+            print(f"  {r}")
     if sum(p.mdp_fails_and_wins) > 0:
         print(
             f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)"

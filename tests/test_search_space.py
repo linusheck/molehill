@@ -8,8 +8,8 @@ from molehill import run
 from molehill.constraints import Constraint
 
 class DummyConstraint(Constraint):
-    def build_constraint(self, function, variables):
-        return function(*variables)
+    def build_constraint(self, function, variables, variables_in_ranges):
+        return z3.And(function(*variables), variables_in_ranges(variables))
 
 @pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
 @pytest.mark.parametrize("considered_counterexamples", ["all", "mc", "none"])

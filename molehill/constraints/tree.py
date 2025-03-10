@@ -41,7 +41,7 @@ class DecisionTree(Constraint):
             "--nodes", type=int, help="Number of enabled nodes in the tree.", default=None
         )
 
-    def build_constraint(self, function, variables):
+    def build_constraint(self, function, variables, variables_in_ranges):
         tree_depth = self.args.tree_depth
         self.tree_depth = tree_depth
         self.variables = variables
@@ -146,7 +146,7 @@ class DecisionTree(Constraint):
         for variable in variables:
             property_values = get_property_values(str(variable))
             constraints.append(variable == decision_func(*property_values))
-        return constraints
+        return z3.And(*constraints, variables_in_ranges(variables))
 
 
     def show_result(self, model, _solver):

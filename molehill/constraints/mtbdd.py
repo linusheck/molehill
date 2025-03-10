@@ -35,7 +35,7 @@ class MTBDD(Constraint):
             "--num-nodes", type=int, help="Number of nodes in the decision tree", required=True
         )
 
-    def build_constraint(self, function, variables):
+    def build_constraint(self, function, variables, variables_in_ranges):
         num_nodes = self.args.num_nodes
         num_bits = variables[0].size()
         assert all(
@@ -117,11 +117,8 @@ class MTBDD(Constraint):
 
         for variable in variables:
             property_values = get_property_values(str(variable))
-            # print("Property values are", property_values, "for variable", variable)
             decisions = [decision_at_node(i, property_values) for i in range(num_nodes)]
-            # decisions = [z3.Bool(f"decision_{variable}_{i}") for i in range(num_nodes)]
 
-            # print("Decisions are", decisions)
             decision_bits = [
                 z3.If(dec, z3.BitVecVal(1, num_nodes), z3.BitVecVal(0, num_nodes))
                 for dec in decisions
@@ -130,7 +127,7 @@ class MTBDD(Constraint):
             for i in range(1, num_nodes):
                 decision_sequence = (decision_sequence << 1) | decision_bits[i]
             constraints.append(variable == decision_func(decision_sequence))
-        return constraints
+        return z3.And(*constraints, variables_in_ranges(variables))
 
     def generate_mtbdd(self, function, decision):
         def build(sub_function):
