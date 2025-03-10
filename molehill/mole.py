@@ -7,6 +7,7 @@ from fastmole import MatrixGenerator
 from molehill.counterexamples import check
 from molehill.plugin import SearchMarkovChain
 import time
+import z3
 
 class Mole:
     def __init__(self, solver, variables, quotient, draw_image=False, considered_counterexamples="all"):

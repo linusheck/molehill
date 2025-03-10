@@ -6,7 +6,13 @@ def load_constraint_class(path):
     """
     Load the constraint class from the given path.
     """
-    raise RuntimeError("Not implemented yet.")
+    with open(path, "r", encoding="utf-8") as f:
+        code = f.read()
+    # arbitary code execution >:)
+    exec(code, globals())
+    if "CustomConstraint" not in globals():
+        raise ValueError("No class named CustomConstraint found in constraint.py")
+    return globals()["CustomConstraint"]()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -43,6 +49,7 @@ if __name__ == "__main__":
     else:
         new_constraint = load_constraint_class(f"{args.project_path}/constraint.py")
     new_parser = argparse.ArgumentParser()
+    print(f"Using constraint: {new_constraint.__class__.__name__}")
     new_constraint.register_arguments(new_parser)
     new_args = new_parser.parse_args(unknown)
     new_constraint.set_args(new_args)

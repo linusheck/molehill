@@ -36,7 +36,6 @@ def run(
 
     constraint.solver_settings(s)
 
-    ranges = []
     bit_nums = set()
 
     num_bits = (

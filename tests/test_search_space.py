@@ -5,16 +5,18 @@ import z3
 from stormpy import check_model_sparse, parse_properties_without_context
 from stormpy.storage import BitVector
 from molehill import run
-from molehill.constraints import Constraint
+from molehill.constraints import ExistsConstraint
+from argparse import Namespace
 
-class DummyConstraint(Constraint):
-    def build_constraint(self, function, variables, variables_in_ranges):
-        return z3.And(function(*variables), variables_in_ranges(variables))
+class DummyConstraint(ExistsConstraint):
+    def __init__(self):
+        super().__init__()
+        self.set_args(Namespace(deterministic=False))
 
 @pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
 @pytest.mark.parametrize("considered_counterexamples", ["all", "mc", "none"])
 def test_search_space(project_path, considered_counterexamples):
-    model, _solver, plugin = run(project_path, False, considered_counterexamples, DummyConstraint(), search_space_test=True)
+    model, _solver, plugin = run(project_path, False, considered_counterexamples, DummyConstraint(), search_space_test=True, print_reasons=True)
     # all of our models are unsat, we want to check if we have really considered the whole search space
     assert model is None, "Actual model is SAT: " + str(model)
 
