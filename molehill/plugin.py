@@ -2,13 +2,9 @@
 
 import z3
 
+
 class SearchMarkovChain(z3.UserPropagateBase):
-    def __init__(
-        self,
-        solver,
-        ctx,
-        data
-    ):
+    def __init__(self, solver, ctx, data):
         super().__init__(solver, ctx)
         self.vars_registered = False
 
@@ -29,7 +25,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
         # list of Z3 variables, indexed by PAYNT hole
         self.variables = []
         self.variable_names = []
-        
+
         self.names_to_vars = {}
 
         self.function_arguments = {}
@@ -50,8 +46,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
         return ast_str
 
     def analyse_current_model(self):
-        valid_calls = [(x, y) for x, y in self.partial_model.items() if isinstance(y, bool)]
-
+        valid_calls = [
+            (x, y) for x, y in self.partial_model.items() if isinstance(y, bool)
+        ]
 
         for name, value in valid_calls:
             backwards_variables = {}
@@ -67,16 +64,22 @@ class SearchMarkovChain(z3.UserPropagateBase):
                     # Then the conflict is just "valid(0)", not "valid(0) and 0=0"
                     model_for_checker[var_original] = int(var)
                 backwards_variables[var_original] = var
-            
+
             # print("Model for checker", model_for_checker)
 
-            all_violated, counterexample = self.data.partial_model_consistent(model_for_checker, invert=not value)
+            all_violated, counterexample = self.data.partial_model_consistent(
+                model_for_checker, invert=not value
+            )
             if all_violated:
-                conflicting_vars = [self.names_to_vars[name]] +  [self.names_to_vars[backwards_variables[x]] for x in counterexample if backwards_variables[x] in self.names_to_vars]
+                conflicting_vars = [self.names_to_vars[name]] + [
+                    self.names_to_vars[backwards_variables[x]]
+                    for x in counterexample
+                    if backwards_variables[x] in self.names_to_vars
+                ]
                 # print("Conflicting vars", conflicting_vars)
                 self.conflict(conflicting_vars)
             # else:
-                # print("No conflict in", name, "=", value)
+            # print("No conflict in", name, "=", value)
 
     def push(self):
         # print(self.partial_model)
@@ -110,7 +113,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
             ast_str = self.get_name_from_ast_map(ast)
             self.partial_model[ast_str] = value.as_long()
         self.fixed_values.append(ast_str)
-    
 
     def _created(self, x):
         strx = str(x)
@@ -126,7 +128,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 self.function_arguments[strx].append(name)
             else:
                 self.function_arguments[strx].append(str(argument.as_long()))
-    
+
     def fresh(self, new_ctx):
         self.child_plugin = SearchMarkovChain(None, new_ctx, self.data)
         return self.child_plugin

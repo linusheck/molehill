@@ -9,8 +9,16 @@ from molehill.plugin import SearchMarkovChain
 import time
 import z3
 
+
 class Mole:
-    def __init__(self, solver, variables, quotient, draw_image=False, considered_counterexamples="all"):
+    def __init__(
+        self,
+        solver,
+        variables,
+        quotient,
+        draw_image=False,
+        considered_counterexamples="all",
+    ):
         self.quotient = quotient
         # models we have already analyzed
         self.all_violated_models = [SetTrie(), SetTrie()]
@@ -73,7 +81,6 @@ class Mole:
 
         self.first_dtmc_checked = False
 
-
     def get_matrix_generator(self, invert=False):
         if invert in self.matrix_generators:
             return self.matrix_generators[invert]
@@ -103,14 +110,11 @@ class Mole:
         self.matrix_generators[invert] = generator
         return generator
 
-
     def partial_model_consistent(self, partial_model, invert=False):
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
 
         if time.time() - self.time_last_print > 1:
-            print(
-                f"Considered {self.considered_models} models so far"
-            )
+            print(f"Considered {self.considered_models} models so far")
             self.time_last_print = time.time()
 
         num_fixed = len(partial_model.keys())
@@ -125,17 +129,23 @@ class Mole:
             return False, None
 
         frozen_partial_model = set(map(hash, partial_model.items()))
-        conflicts_violated = self.all_violated_models[int(invert)].subsets(frozen_partial_model)
+        conflicts_violated = self.all_violated_models[int(invert)].subsets(
+            frozen_partial_model
+        )
         if len(conflicts_violated) > 0:
             conflict = min([eval(x) for x in conflicts_violated], key=len)
             return True, conflict
-        conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(frozen_partial_model)
+        conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(
+            frozen_partial_model
+        )
         if len(conflicts_inconclusive) > 0:
             return False, None
         # if the inverse is violated, this will not be violated
-        conflicts_inverse_violated = self.inconclusive_models[int(invert)].supersets(frozen_partial_model)
+        conflicts_inverse_violated = self.inconclusive_models[int(invert)].supersets(
+            frozen_partial_model
+        )
         if len(conflicts_inverse_violated) > 0:
-            print("Inverse violated") # I want to test if this ever happens
+            print("Inverse violated")  # I want to test if this ever happens
             return False, None
 
         # Make a PAYNT family from the current partial model.
@@ -157,7 +167,7 @@ class Mole:
             compute_counterexample = False
         elif self.considered_counterexamples == "mc" and model == "MDP":
             compute_counterexample = False
-        
+
         # Check the sub-MDP (see counterexample.py).
         check_result = check(
             self.get_matrix_generator(invert),
@@ -190,23 +200,30 @@ class Mole:
                 term = z3.Not(
                     z3.And(
                         [
-                            self.variables[c]
-                            == partial_model[str(self.variables[c])]
+                            self.variables[c] == partial_model[str(self.variables[c])]
                             for c in counterexample
                         ]
                     ),
                 )
                 self.image_assertions.append(term)
                 self.counterexamples.append(
-                    (self.model_variable_names[c], partial_model[str(self.variables[c])]) for c in counterexample
+                    (
+                        self.model_variable_names[c],
+                        partial_model[str(self.variables[c])],
+                    )
+                    for c in counterexample
                 )
-            
+
             counterexample = [self.model_variable_names[i] for i in counterexample]
-            self.all_violated_models[int(invert)].insert(frozen_partial_model, str(counterexample))
+            self.all_violated_models[int(invert)].insert(
+                frozen_partial_model, str(counterexample)
+            )
             return True, counterexample
         else:
             # We can't do anything with this model, so we just return False.
-            self.inconclusive_models[int(invert)].insert(frozen_partial_model, str(frozen_partial_model))
+            self.inconclusive_models[int(invert)].insert(
+                frozen_partial_model, str(frozen_partial_model)
+            )
             if model == "DTMC":
                 self.reasons.append(f"{partial_model} |= {prop}")
             return False, None

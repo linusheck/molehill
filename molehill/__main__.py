@@ -1,6 +1,13 @@
 from molehill import run
 import argparse
-from molehill.constraints import MTBDD, DecisionTree, ExistsConstraint, ExistsForallConstraint
+from molehill.constraints import (
+    MTBDD,
+    DecisionTree,
+    ExistsConstraint,
+    ExistsForallConstraint,
+    ForallExistsConstraint,
+)
+
 
 def load_constraint_class(path):
     """
@@ -13,6 +20,7 @@ def load_constraint_class(path):
     if "CustomConstraint" not in globals():
         raise ValueError("No class named CustomConstraint found in constraint.py")
     return globals()["CustomConstraint"]()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -32,8 +40,20 @@ if __name__ == "__main__":
         help="types of counterexamples to consider",
         choices=["all", "mc", "none"],
     )
-    parser.add_argument("--constraint", type=str, choices=["none", "tree", "mtbdd", "existsforall", "custom"], default="none", help="Constraint to use. Built-in constraints are: tree, mtbdd. By setting this to custom, you can implement a custom constraint in project_path/constraint.py. See the README for more information.")
-    parser.add_argument("--fsc-memory-size", type=int, default=1, help="Memory size for the considered FSCs")
+    parser.add_argument("--exact", action="store_true", help="Exact mode")
+    parser.add_argument(
+        "--constraint",
+        type=str,
+        choices=["none", "tree", "mtbdd", "existsforall", "forallexists", "custom"],
+        default="none",
+        help="Constraint to use. Built-in constraints are: tree, mtbdd. By setting this to custom, you can implement a custom constraint in project_path/constraint.py. See the README for more information.",
+    )
+    parser.add_argument(
+        "--fsc-memory-size",
+        type=int,
+        default=1,
+        help="Memory size for the considered FSCs",
+    )
     parser.add_argument("--reasons", action="store_true", help="Print reasons")
     args, unknown = parser.parse_known_args()
 
@@ -46,6 +66,8 @@ if __name__ == "__main__":
         new_constraint = MTBDD()
     elif args.constraint == "existsforall":
         new_constraint = ExistsForallConstraint()
+    elif args.constraint == "forallexists":
+        new_constraint = ForallExistsConstraint()
     else:
         new_constraint = load_constraint_class(f"{args.project_path}/constraint.py")
     new_parser = argparse.ArgumentParser()
@@ -60,5 +82,6 @@ if __name__ == "__main__":
         args.ce,
         new_constraint,
         fsc_memory_size=args.fsc_memory_size,
+        exact=args.exact,
         print_reasons=args.reasons,
     )

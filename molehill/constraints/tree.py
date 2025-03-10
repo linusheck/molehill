@@ -3,9 +3,11 @@
 import z3
 from molehill.constraints import Constraint
 
+
 def piecewise_select(array, z3_int):
     """Select an element of an array based on a z3 integer."""
     return z3.Sum([z3.If(z3_int == i, array[i], 0) for i in range(len(array))])
+
 
 def get_property_names(variable_name):
     return [
@@ -24,6 +26,7 @@ def get_property_values(variable_name):
         ].split("&")
     ]
 
+
 class DecisionTree(Constraint):
     def __init__(self):
         super().__init__()
@@ -35,10 +38,16 @@ class DecisionTree(Constraint):
             "--tree-depth", type=int, help="Depth of the tree.", required=True
         )
         argument_parser.add_argument(
-            "--picture-path", type=str, help="Path to write tree picture to.", default="tree.png"
+            "--picture-path",
+            type=str,
+            help="Path to write tree picture to.",
+            default="tree.png",
         )
         argument_parser.add_argument(
-            "--nodes", type=int, help="Number of enabled nodes in the tree.", default=None
+            "--nodes",
+            type=int,
+            help="Number of enabled nodes in the tree.",
+            default=None,
         )
 
     def build_constraint(self, function, variables, variables_in_ranges):
@@ -51,7 +60,9 @@ class DecisionTree(Constraint):
         # A([picked0=1       & picked1=0     & picked2=1     & picked3=1     & picked4=0     & picked5=1     & picked6=1     & x=3   & y=2],0
         first_variable_name = str(variables[0])
         if "A([" not in first_variable_name:
-            raise ValueError("Variables must have properties (e.g., generated from POMDPs.).")
+            raise ValueError(
+                "Variables must have properties (e.g., generated from POMDPs.)."
+            )
         property_names = get_property_names(first_variable_name)
         num_properties = len(property_names)
 
@@ -106,7 +117,9 @@ class DecisionTree(Constraint):
                     z3.Implies(node_constants[i] > 0, node_constants[(i - 1) // 2] > 0)
                 )
             # if the constant is 0, the property must be 0
-            constraints.append(z3.Implies(node_constants[i] == 0, node_property[i] == 0))
+            constraints.append(
+                z3.Implies(node_constants[i] == 0, node_property[i] == 0)
+            )
 
         # only num_enabled_nodes nodes can have constant > 0
         if num_enabled_nodes is not None:
@@ -139,7 +152,8 @@ class DecisionTree(Constraint):
         constraints.append(
             z3.ForAll(
                 decision_variables,
-                traverse_tree(0, decision_variables) == decision_func(*decision_variables),
+                traverse_tree(0, decision_variables)
+                == decision_func(*decision_variables),
             )
         )
 
@@ -147,7 +161,6 @@ class DecisionTree(Constraint):
             property_values = get_property_values(str(variable))
             constraints.append(variable == decision_func(*property_values))
         return z3.And(*constraints, variables_in_ranges(variables))
-
 
     def show_result(self, model, _solver):
         from anytree import Node

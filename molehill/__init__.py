@@ -9,8 +9,10 @@ import paynt.verification.property
 import z3
 import paynt.parser.sketch
 import math
+import payntbind.synthesis
 
 from molehill.mole import Mole
+
 
 def run(
     project_path,
@@ -19,12 +21,15 @@ def run(
     constraint,
     search_space_test=False,
     fsc_memory_size=1,
+    exact=False,
     print_reasons=False,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     paynt.quotient.pomdp.PomdpQuotient.initial_memory_size = fsc_memory_size
-    quotient = paynt.parser.sketch.Sketch.load_sketch(sketch_path, properties_path)
+    quotient = paynt.parser.sketch.Sketch.load_sketch(
+        sketch_path, properties_path, use_exact=exact
+    )
 
     # print all python properties of quotient
     family = quotient.family

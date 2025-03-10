@@ -4,8 +4,10 @@ import z3
 import math
 from molehill.constraints import Constraint
 
+
 def bit2bool(var, i):
     return z3.BoolRef(z3.Z3_mk_bit2bool(var.ctx.ref(), i, var.as_ast()))
+
 
 def get_property_names(variable_name):
     return [
@@ -15,6 +17,7 @@ def get_property_names(variable_name):
         ].split("&")
     ]
 
+
 def get_property_values(variable_name):
     return [
         int(x.strip().split("=")[1]) if "=" in x else (0 if x.strip()[0] == "!" else 1)
@@ -23,16 +26,20 @@ def get_property_values(variable_name):
         ].split("&")
     ]
 
+
 class MTBDD(Constraint):
     def __init__(self):
         self.decision_func = None
         self.property_names = None
         self.node_property = None
         self.node_constants = None
-    
+
     def register_arguments(self, argument_parser):
         argument_parser.add_argument(
-            "--num-nodes", type=int, help="Number of nodes in the decision tree", required=True
+            "--num-nodes",
+            type=int,
+            help="Number of nodes in the decision tree",
+            required=True,
         )
 
     def build_constraint(self, function, variables, variables_in_ranges):
@@ -45,7 +52,9 @@ class MTBDD(Constraint):
         # A([picked0=1       & picked1=0     & picked2=1     & picked3=1     & picked4=0     & picked5=1     & picked6=1     & x=3   & y=2],0
         first_variable_name = str(variables[0])
         if "A([" not in first_variable_name:
-            raise ValueError("Variables must have properties (e.g., generated from POMDPs.).")
+            raise ValueError(
+                "Variables must have properties (e.g., generated from POMDPs.)."
+            )
         property_names = get_property_names(first_variable_name)
         self.property_names = property_names
         num_properties = len(property_names)
@@ -207,7 +216,7 @@ class MTBDD(Constraint):
 #         # variables are strictly ordered
 #         if i > 0:
 #             constraints.append(z3.UGT(variable, variables[i - 1]))
-    
+
 #     def make_sum(to):
 #         return z3.Sum(
 #                 [
@@ -219,7 +228,7 @@ class MTBDD(Constraint):
 #                     for x in variables
 #                 ]
 #             )
-    
+
 #     def table(x):
 #         return z3.Or(
 #             [x == z3.BitVecVal(i, indicator_bits) for i in range(num_nodes * 2)]

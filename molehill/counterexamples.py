@@ -5,12 +5,14 @@ from fastmole import intersect_bitvectors
 from molehill.modelchecker import check_model
 from dataclasses import dataclass
 
+
 @dataclass
 class CECheckResult:
     all_schedulers_violate: bool
     fixed_holes: list
     nondet_holes: list
     result: any
+
 
 def check(
     matrix_generator,
@@ -63,7 +65,6 @@ def check(
             )
             mdp_holes = matrix_generator.get_current_mdp()
 
-
             all_schedulers_violate, result = check_model(mdp_holes, prop, None)
 
             if all_schedulers_violate:
@@ -71,7 +72,9 @@ def check(
                 counterexample_holes = [
                     hole for hole in fixed_holes if hole not in abstracted_holes_here
                 ]
-                return CECheckResult(all_schedulers_violate, counterexample_holes, None, result)
+                return CECheckResult(
+                    all_schedulers_violate, counterexample_holes, None, result
+                )
             else:
                 # Not a counterexample
                 return CECheckResult(all_schedulers_violate, None, None, result)
