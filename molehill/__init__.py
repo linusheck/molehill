@@ -1,6 +1,7 @@
 """Molehill is a Markov chain searcher."""
 
 import paynt.quotient
+import paynt.quotient.mdp_family
 import paynt.quotient.pomdp
 import paynt.synthesizer
 import paynt.synthesizer.conflict_generator
@@ -34,8 +35,50 @@ def run(
     # print all python properties of quotient
     family = quotient.family
 
-    if isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
-        print(quotient.observation_to_actions)
+    # WIP version, currently only supports memoryless schdedulers for PomdpFamilyQuotient
+    if isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient) or isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient):
+        quotient.family.hole_to_name = ["sketch_hole_" + x for x in quotient.family.hole_to_name] # feel free to change the prefix, this should just make it easier to creat exists forall queries
+
+        choice_to_hole_options = quotient.coloring.getChoiceToAssignment()
+
+        if isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
+            obs_to_hole = []
+            for obs in range(quotient.num_observations):
+                if len(quotient.observation_to_actions[obs]) > 1: # if there's only one choice in an observation there's no point in adding a hole
+                    # here would come potential memory size
+                    option_labels = [quotient.action_labels[i] for i in quotient.observation_to_actions[obs]]
+                    hole_name = f"A(obs_{obs},0)" # getting the observation expressions is a bit more complicated, and I don't think it's important for now
+                    obs_to_hole.append(quotient.family.num_holes)
+                    quotient.family.add_hole(hole_name, option_labels)
+                else:
+                    obs_to_hole.append(None)
+
+            nci = quotient.quotient_mdp.nondeterministic_choice_indices.copy()
+
+            for state in range(quotient.quotient_mdp.nr_states):
+                obs = quotient.obs_evaluator.state_to_obs_class[state]
+                obs_hole = obs_to_hole[obs]
+                if obs_hole is not None:
+                    for choice in range(nci[state], nci[state+1]):
+                        action_hole_index = quotient.observation_to_actions[obs].index(quotient.choice_to_action[choice])
+                        choice_to_hole_options[choice].append((obs_hole, action_hole_index))
+
+            quotient.coloring = payntbind.synthesis.Coloring(family.family, quotient.quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
+        else: # meaning it is a MdpFamilyQuotient
+            nci = quotient.quotient_mdp.nondeterministic_choice_indices.copy()
+            for state in range(quotient.quotient_mdp.nr_states):
+                if len(quotient.state_to_actions[state]) > 1: # again if there's only one action in a state there's no point in adding a hole
+                    option_labels = [quotient.action_labels[i] for i in quotient.state_to_actions[state]]
+                    hole_name = f"A(state_{state})"
+                    hole_index = quotient.family.num_holes
+                    quotient.family.add_hole(hole_name, option_labels)
+                    for choice in range(nci[state], nci[state+1]):
+                        action_hole_index = quotient.state_to_actions[state].index(quotient.choice_to_action[choice])
+                        choice_to_hole_options[choice].append((hole_index, action_hole_index))
+
+            quotient.coloring = payntbind.synthesis.Coloring(family.family, quotient.quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
+
+        family = quotient.family
 
     s = z3.Solver()
 
