@@ -14,10 +14,57 @@ class CECheckResult:
     result: any
 
 
+def analyze_scheduler(
+        result,
+        matrix_generator,
+        family,
+        mole,
+        fixed_holes,
+        prop
+):
+    scheduler = result.scheduler
+    values = result.get_values()
+    # print("Analyzing scheduler", scheduler)
+    reachable_states = matrix_generator.get_current_reachable_states()
+    holes_optimal = BitVector(family.num_holes, True)
+    prop_str = str(prop)
+    matrix = mole.complete_transition_matrix
+    for sub_state, global_state in enumerate(reachable_states):
+        row_group_start = matrix.get_row_group_start(global_state)
+        row_group_end = matrix.get_row_group_end(global_state)
+        if row_group_end == row_group_start + 1:
+            continue
+        for row in range(row_group_start, row_group_end):
+            print(mole.choice_to_assignment[global_state], row_group_start - row_group_end)
+            hole, value = mole.choice_to_assignment[global_state][row - row_group_start]
+            # TODO this is wrong because the scheduler MIGHT be on a row that is not fully there
+            if (row - row_group_start) == scheduler.get_choice(sub_state):
+                continue
+            value_here = 0.0
+            for entry in matrix.get_row(row):
+                value_here += entry.value() * mole.global_bounds[False][entry.column]
+            # print(value_here, resulting_prob, prop_str)
+            assert "<=" in prop_str or ">=" in prop_str
+            if "<=" in prop_str and value_here <= resulting_prob:
+                holes_optimal.set(hole, False)
+                break
+            if ">=" in prop_str and value_here >= resulting_prob:
+                holes_optimal.set(hole, False)
+                break
+
+
+            if hole not in fixed_holes or not holes_optimal.get(hole):
+                continue
+            chosen_value = scheduler.get_choice(sub_state)
+            resulting_prob = values[sub_state]
+
+    print(fixed_holes, holes_optimal)
+
 def check(
     matrix_generator,
     family,
     prop,
+    mole,
     compute_counterexample=True,
 ):
     # These are the options for each hole.
@@ -53,6 +100,8 @@ def check(
     append_these = [hole for hole in append_these if hole in reachable_hole_order]
     # Every hole that is not fixed is currently abstracted by MDP.
     holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
+
+    analyze_scheduler(result, matrix_generator, family, mole, fixed_holes, prop)
 
     if all_schedulers_violate_full and compute_counterexample:
         # We abstract in the order of which holes we saw first, which holes we saw second, etc...

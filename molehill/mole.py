@@ -24,6 +24,8 @@ class Mole:
         self.all_violated_models = [SetTrie(), SetTrie()]
         self.inconclusive_models = [SetTrie(), SetTrie()]
 
+        self.global_bounds = {}
+
         self.considered_models = 0
         self.total_models = self.quotient.family.size
 
@@ -95,6 +97,7 @@ class Mole:
         # print("Quotient size", self.quotient.family.mdp.model.nr_states)
         result = model_checking(self.quotient.family.mdp.model, prop.formula)
         global_bounds = result.get_values()
+        self.global_bounds[invert] = global_bounds
 
         target_states = model_checking(
             self.quotient.family.mdp.model, prop.formula.subformula.subformula
@@ -173,6 +176,7 @@ class Mole:
             self.get_matrix_generator(invert),
             new_family,
             prop,
+            self, #TODO for prototype
             compute_counterexample,
         )
         all_violated = check_result.all_schedulers_violate
