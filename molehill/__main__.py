@@ -36,7 +36,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--ce",
         type=str,
-        default="sched",
+        default="none",
         help="Types of counterexamples to consider. None: no counterexamples, Sched: Additionally analyze schedulers, MC: Additionally analyze Markov chains, All: Analyze all counterexamples",
         choices=["all", "mc", "sched", "none"],
     )
