@@ -1,7 +1,6 @@
 """Compute counterexamples."""
 
 from stormpy.storage import BitVector
-from fastmole import intersect_bitvectors
 from molehill.modelchecker import check_model
 from dataclasses import dataclass
 
@@ -19,6 +18,7 @@ def check(
     family,
     prop,
     compute_counterexample=True,
+    remove_optimal_holes=True,
 ):
     # These are the options for each hole.
     hole_options = [
@@ -40,9 +40,6 @@ def check(
 
     # The CEs currently get abstracted in BFS order.
     bfs_order = matrix_generator.get_current_bfs_order()
-    # reachable_hole_order, append_these = matrix_generator.hole_order(
-    #     bfs_order, set(fixed_holes)
-    # )
     reachable_hole_order, append_these = matrix_generator.hole_order(
         bfs_order, set(range(family.num_holes))
     )
@@ -53,6 +50,13 @@ def check(
     append_these = [hole for hole in append_these if hole in reachable_hole_order]
     # Every hole that is not fixed is currently abstracted by MDP.
     holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
+
+    if remove_optimal_holes:
+        optimization_direction = prop.formula.optimality_type
+        optimal_holes = matrix_generator.optimal_assignments(result.scheduler, result.get_values(), optimization_direction)
+        for h in optimal_holes:
+            if h in fixed_holes:
+                fixed_holes.remove(h)
 
     if all_schedulers_violate_full and compute_counterexample:
         # We abstract in the order of which holes we saw first, which holes we saw second, etc...

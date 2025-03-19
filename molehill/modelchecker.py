@@ -27,7 +27,7 @@ def check_model(mdp, prop, hint, precision=1e-4):
     )[0]
 
     result = check_model_sparse(
-        mdp, new_prop, extract_scheduler=False, hint=hint, environment=exact_environment
+        mdp, new_prop, extract_scheduler=True, hint=hint, environment=exact_environment
     )
     all_schedulers_violate = not prop.satisfies_threshold(
         result.at(mdp.initial_states[0])

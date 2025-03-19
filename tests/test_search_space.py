@@ -14,7 +14,7 @@ class DummyConstraint(ExistsConstraint):
         self.set_args(Namespace(deterministic=False))
 
 @pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
-@pytest.mark.parametrize("considered_counterexamples", ["all", "mc", "none"])
+@pytest.mark.parametrize("considered_counterexamples", ["all", "mc", "sched", "none"])
 def test_search_space(project_path, considered_counterexamples):
     model, _solver, plugin = run(project_path, False, considered_counterexamples, DummyConstraint(), search_space_test=True, print_reasons=True)
     # all of our models are unsat, we want to check if we have really considered the whole search space
@@ -46,7 +46,7 @@ def test_search_space(project_path, considered_counterexamples):
         all_schedulers_violate = not prop.satisfies_threshold(
             result_storm_nondet.at(mdp_nondet.initial_states[0])
         )
-        assert all_schedulers_violate
+        assert all_schedulers_violate, "Model " + str(i) + " is SAT: " + str(model)
     # check that plugin.rejecting_models covers the whole search space
     variables = []
     new_solver = z3.Solver()

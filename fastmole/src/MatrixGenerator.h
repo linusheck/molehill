@@ -82,6 +82,14 @@ class MatrixGenerator {
      */
     bool isSchedulerConsistent(const storm::storage::Scheduler<ValueType> &scheduler);
 
+    /**
+     * @brief Are some holes in this scheduler already optimal?
+     * 
+     * @param scheduler The MDP scheduler.
+     * @return BitVector the holes in this scheduler that are already optimal.
+     */
+    storm::storage::BitVector optimalAssignments(const storm::storage::Scheduler<ValueType> &scheduler, const std::vector<ValueType> &values, storm::OptimizationDirection optimizationDirection);
+
    private:
     /**
      * @brief Builds the "decision matrix", which is an internal representation
@@ -107,6 +115,9 @@ class MatrixGenerator {
     std::optional<storm::models::sparse::Mdp<ValueType>> currentMDP;
     std::optional<storm::storage::BitVector> currentReachableStates;
     std::optional<std::vector<uint64_t>> currentBFSOrder;
+
+    std::optional<storm::storage::BitVector> currentAbstractedHoles;
+    std::optional<std::vector<storm::storage::BitVector>> currentHoleOptions;
 
     std::vector<std::vector<std::pair<int, int>>> choiceToAssignment;
     storm::models::sparse::Mdp<ValueType> quotient;

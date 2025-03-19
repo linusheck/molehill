@@ -1,10 +1,13 @@
 
 #include "MatrixGenerator.h"
+#include <_types/_uint64_t.h>
 #include <optional>
 #include <queue>
 #include <stdexcept>
+#include <storm/adapters/RationalFunctionAdapter_Private.h>
 #include <storm/adapters/RationalNumberForward.h>
 #include <storm/models/sparse/StandardRewardModel.h>
+#include <storm/solver/OptimizationDirection.h>
 #include <storm/storage/BitVector.h>
 #include <storm/storage/sparse/ModelComponents.h>
 #include <storm/utility/constants.h>
@@ -112,6 +115,9 @@ template<typename ValueType>
 void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &abstractedHoles, const std::vector<storm::storage::BitVector> &holeOptions,
                                                const std::optional<storm::storage::BitVector> &reachableStatesFixed) {
     auto const &completeTransitionMatrix = quotient.getTransitionMatrix();
+
+    this->currentAbstractedHoles = abstractedHoles;
+    this->currentHoleOptions = holeOptions;
 
     storm::storage::BitVector includeRowBitVector(decisionMatrix.getRowCount(), false);
     storm::storage::BitVector reachableStates(decisionMatrix.getColumnCount(), false);
@@ -352,6 +358,108 @@ bool MatrixGenerator<ValueType>::isSchedulerConsistent(const storm::storage::Sch
         counter++;
     }
     return true;
+}
+
+template<typename ValueType>
+storm::storage::BitVector MatrixGenerator<ValueType>::optimalAssignments(const storm::storage::Scheduler<ValueType> &scheduler, const std::vector<ValueType> &values, storm::OptimizationDirection optimizationDirection) {
+    if (!this->currentReachableStates) {
+        throw std::runtime_error("No reachable states");
+    }
+
+    // Optimal assignments start at the abstracted holes
+    storm::storage::BitVector optimalAssignments(this->currentHoleOptions->size(), true);
+    // std::cout << "Optimal assignments: " << optimalAssignments << std::endl;
+    uint64_t counter = -1;
+
+    for (auto const& state : *this->currentReachableStates) {
+        counter++;
+        if (this->quotient.getTransitionMatrix().getRowGroupSize(state) <= 1) {
+            // This state has only one choice, so there is no need to check
+            continue;
+        }
+
+        if (state >= this->quotient.getTransitionMatrix().getColumnCount()) {
+            if (state >= this->decisionMatrix.getColumnCount()) {
+                throw std::runtime_error("Invalid state in reachable states");
+            }
+            // This is the last two columns
+            continue;
+        }
+
+        uint64_t row = this->quotient.getTransitionMatrix().getRowGroupIndices()[state];
+        uint64_t rowEnd = this->quotient.getTransitionMatrix().getRowGroupIndices()[state + 1];
+
+        auto const& choice = scheduler.getChoice(counter);
+        if (!choice.isDeterministic()) {
+            throw std::runtime_error("Scheduler must be deterministic");
+        }
+        uint64_t deterministicChoice = choice.getDeterministicChoice();
+        
+        if (row + deterministicChoice >= rowEnd) {
+            throw std::runtime_error("Row " + std::to_string(row) + " of " + std::to_string(this->quotient.getTransitionMatrix().getRowCount()) + " Choice index " + std::to_string(deterministicChoice) + " out of bounds (size: " + std::to_string(rowEnd - row) + ")");
+        }
+
+        // Check if there is still a hole here that is considered optimal
+        bool holeOptimal = false;
+        for (auto const& [hole, _assignment] : this->choiceToAssignment[row + deterministicChoice]) {
+            if (optimalAssignments.get(hole)) {
+                // This hole is still considered optimal
+                holeOptimal = true;
+                continue;
+            }
+        }
+        if (!holeOptimal) {
+            // No hole is considered optimal here
+            continue;
+        }
+
+        // std::cout << "Optimal assignments " << optimalAssignments << std::endl;
+        // Print involved holes
+        // std::cout << "Involved holes: ";
+        // for (auto const& [hole, assignment] : choiceToAssignment[row + deterministicChoice]) {
+        //     std::cout << hole << " ";
+        // }
+        // std::cout << std::endl;
+
+        // The result in the sub-MDP. This must be "better"
+        const ValueType resultHere = values[counter];
+
+        // std::cout << resultHere << " vs ";
+        
+        for (uint64_t otherRow = row; otherRow < rowEnd; otherRow++) {
+            if (otherRow == row + deterministicChoice) {
+                // This is the choice that was taken
+                continue;
+            }
+            if (isChoicePossible(*this->currentAbstractedHoles, *this->currentHoleOptions, otherRow)) {
+                continue;
+            }
+            ValueType otherResult = storm::utility::zero<ValueType>();
+            for (auto const& entry : this->quotient.getTransitionMatrix().getRow(otherRow)) {
+                otherResult += entry.getValue() * globalBounds[entry.getColumn()];
+            }
+            // std::cout << otherResult << " ";
+            if (optimizationDirection == storm::OptimizationDirection::Maximize) {
+                if (otherResult > resultHere) {
+                    // Are there conflicting assignments here?
+                    // TODO Possible generalization: Can we still keep the hole if the assignment is the same?
+                    for (auto const& [conflictingHole, _assignment] : choiceToAssignment[row + deterministicChoice]) {
+                        optimalAssignments.set(conflictingHole, false);
+                    }
+                }
+            } else {
+                if (otherResult < resultHere) {
+                    // Are there conflicting assignments here?
+                    // TODO Possible generalization: Can we still keep the hole if the assignment is the same?
+                    for (auto const& [conflictingHole, _assignment] : choiceToAssignment[row + deterministicChoice]) {
+                        optimalAssignments.set(conflictingHole, false);
+                    }
+                }
+            }
+        }
+        // std::cout << std::endl;
+    }
+    return optimalAssignments;
 }
 
 template class MatrixGenerator<double>;

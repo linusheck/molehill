@@ -163,7 +163,11 @@ class Mole:
 
         # Decide whether we want to compute a counterexample.
         compute_counterexample = True
+        remove_optimal_holes = True
         if self.considered_counterexamples == "none":
+            compute_counterexample = False
+            remove_optimal_holes = False
+        elif self.considered_counterexamples == "sched":
             compute_counterexample = False
         elif self.considered_counterexamples == "mc" and model == "MDP":
             compute_counterexample = False
@@ -174,6 +178,7 @@ class Mole:
             new_family,
             prop,
             compute_counterexample,
+            remove_optimal_holes,
         )
         all_violated = check_result.all_schedulers_violate
         counterexample = check_result.fixed_holes

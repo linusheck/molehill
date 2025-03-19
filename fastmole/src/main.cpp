@@ -51,7 +51,8 @@ PYBIND11_MODULE(fastmole, m) {
         .def("get_current_reachable_states", &MatrixGenerator<double>::getCurrentReachableStates, "Get current reachable states")
         .def("get_current_bfs_order", &MatrixGenerator<double>::getCurrentBFSOrder, "Get current BFS order")
         .def("hole_order", &MatrixGenerator<double>::holeOrder, py::arg("bfs_order"), py::arg("possible_holes"), "Get hole order")
-        .def("is_scheduler_consistent", &MatrixGenerator<double>::isSchedulerConsistent, py::arg("scheduler"), "Is this scheduler consistent?");
+        .def("is_scheduler_consistent", &MatrixGenerator<double>::isSchedulerConsistent, py::arg("scheduler"), "Is this scheduler consistent?")
+        .def("optimal_assignments", &MatrixGenerator<double>::optimalAssignments, py::arg("scheduler"), py::arg("values"), py::arg("optimization_direction"), "Which holes are already optimal");
 
     m.def("hint_convert", &hintConvert<double>, py::arg("result"), py::arg("old_reachable_states"), py::arg("new_reachable_states"), "Convert hint");
     m.def("set_end_components_true", &setEndComponentsTrue<double>, py::arg("hint"), "Set end components true");

@@ -32,6 +32,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         self.child_plugin = None
 
+    def is_in_ast_map(self, ast):
+        return hash(ast) in self.ast_map
+
     def get_name_from_ast_map(self, ast):
         """Get name of the AST from the map."""
         # I had to make this function because the Z3 APIs to do the same thing
@@ -106,12 +109,12 @@ class SearchMarkovChain(z3.UserPropagateBase):
     def _fixed(self, ast, value):
         # print("Fixed", ast, value)
         # This is called when Z3 fixes a variable. We need to keep track of that.
-        if value.sort() == z3.BoolSort():
-            ast_str = str(ast)
-            self.partial_model[ast_str] = bool(value)
-        else:
+        if self.is_in_ast_map(ast) or value.sort() != z3.BoolSort():
             ast_str = self.get_name_from_ast_map(ast)
             self.partial_model[ast_str] = value.as_long()
+        else:
+            ast_str = str(ast)
+            self.partial_model[ast_str] = bool(value)
         self.fixed_values.append(ast_str)
 
     def _created(self, x):

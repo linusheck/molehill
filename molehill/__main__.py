@@ -36,9 +36,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--ce",
         type=str,
-        default="all",
-        help="types of counterexamples to consider",
-        choices=["all", "mc", "none"],
+        default="sched",
+        help="Types of counterexamples to consider. None: no counterexamples, Sched: Additionally analyze schedulers, MC: Additionally analyze Markov chains, All: Analyze all counterexamples",
+        choices=["all", "mc", "sched", "none"],
     )
     parser.add_argument("--exact", action="store_true", help="Exact mode")
     parser.add_argument(
