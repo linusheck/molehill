@@ -27,8 +27,8 @@ class ForallPropagator(z3.UserPropagateBase):
         for var in variables:
             self.add(var)
             self.variables.append(var)
-            self.variable_names.append(str(var))
-            self.names_to_vars[str(var)] = var
+            self.variable_names.append(str(var.decl()))
+            self.names_to_vars[str(var.decl())] = var
 
     def analyse_current_model(self):
         # find all valid calls in the partial model
@@ -84,7 +84,7 @@ class ForallPropagator(z3.UserPropagateBase):
         self.fixed_values.append(str(ast))
         # This is a model constant => add it to the partial model.
         self.partial_model[str(ast)] = value
-        print(self.partial_model)
+        # print(self.partial_model)
 
     def fresh(self, new_ctx):
         print("Fresh")

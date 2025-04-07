@@ -133,23 +133,23 @@ class Mole:
             frozen_partial_model
         )
         if len(conflicts_violated) > 0:
-            print("Cache hit violated")
+            # print("Cache hit violated")
             conflict = min([eval(x) for x in conflicts_violated], key=len)
             return True, conflict
 
-        conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(
-            frozen_partial_model
-        )
-        if len(conflicts_inconclusive) > 0:
-            print("Cache hit inconclusive")
-            return False, None
+        # TODO I commented this out because it was bugged
+        # conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(
+        #     frozen_partial_model
+        # )
+        # if len(conflicts_inconclusive) > 0:
+        #     # print("Cache hit inconclusive")
+        #     return False, None
 
         # if the inverse is violated, this will not be violated
-        conflicts_inverse_violated = self.inconclusive_models[int(invert)].supersets(
+        conflicts_inverse_violated = self.all_violated_models[1 - int(invert)].supersets(
             frozen_partial_model
         )
         if len(conflicts_inverse_violated) > 0:
-            print("Inverse violated")  # I want to test if this ever happens
             return False, None
 
         # Make a PAYNT family from the current partial model.

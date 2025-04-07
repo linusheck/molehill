@@ -356,7 +356,8 @@ std::optional<std::vector<uint64_t>> MatrixGenerator<ValueType>::isSchedulerCons
         // Get the choice taken by the scheduler
         auto const& choice = scheduler.getChoice(localState);
         if (!choice.isDeterministic()) {
-            throw std::runtime_error("Scheduler must be deterministic");
+            std::cout << "Scheduler must be deterministic" << std::endl;
+            return std::nullopt;
         }
         uint64_t deterministicChoice = choice.getDeterministicChoice();
         

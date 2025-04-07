@@ -85,6 +85,10 @@ class SearchMarkovChain(z3.UserPropagateBase):
             else:
                 if counterexample is None:
                     return
+
+                # TODO it seems like this doesn't help much right now
+                return
+
                 minus_one = 18446744073709551615
                 
                 new_vars = []
@@ -94,6 +98,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
                         # print(i, self.valid_function.arg(i).sort().size())
                         new_vars.append(z3.BitVecVal(int(v), self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
                     else:
+
+                        # new_vars.append(z3.BitVecVal(0, self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
                         if involved_variables[i] not in self.names_to_vars:
                             new_vars.append(z3.BitVecVal(int(involved_variables[i]), self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
                         else:
@@ -104,8 +110,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                     declaration = z3.ForAll(quantified_vars, self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars)))
                 else:
                     declaration = self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars))
-                # print(self.solver, self.child_plugin)
-                self.propagate(declaration, [])
+                self.propagate(declaration, [self.names_to_vars[x] for x in self.fixed_values])
 
     def push(self):
         # print(self.partial_model)
@@ -136,12 +141,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
             ast_str = self.get_name_from_ast_map(ast)
             self.partial_model[ast_str] = value.as_long()
         else:
-            ast_str = str(ast)
+            ast_str = ast.sexpr()
             self.partial_model[ast_str] = bool(value)
         self.fixed_values.append(ast_str)
 
     def _created(self, x):
-        strx = str(x)
+        # print("Created", x.sexpr().replace("\n", "").replace(" ", ""))
+        strx = x.sexpr()
         self.valid_function = x
         self.function_arguments[strx] = []
         self.names_to_vars[strx] = x
