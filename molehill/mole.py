@@ -133,13 +133,17 @@ class Mole:
             frozen_partial_model
         )
         if len(conflicts_violated) > 0:
+            print("Cache hit violated")
             conflict = min([eval(x) for x in conflicts_violated], key=len)
             return True, conflict
+
         conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(
             frozen_partial_model
         )
         if len(conflicts_inconclusive) > 0:
+            print("Cache hit inconclusive")
             return False, None
+
         # if the inverse is violated, this will not be violated
         conflicts_inverse_violated = self.inconclusive_models[int(invert)].supersets(
             frozen_partial_model
@@ -220,9 +224,13 @@ class Mole:
                 )
 
             counterexample = [self.model_variable_names[i] for i in counterexample]
+            filtered_partial_model = {name: partial_model[name] for name in counterexample}
+            filtered_frozen_partial_model = set(map(hash, filtered_partial_model.items()))
             self.all_violated_models[int(invert)].insert(
-                frozen_partial_model, str(counterexample)
+                filtered_frozen_partial_model, str(counterexample)
             )
+            # if len(filtered_frozen_partial_model) != len(frozen_partial_model):
+            #     print("Filtered", filtered_partial_model, partial_model)
             return True, counterexample
         else:
             # We can't do anything with this model, so we just return False.
@@ -231,4 +239,14 @@ class Mole:
             )
             if model == "DTMC":
                 self.reasons.append(f"{partial_model} |= {prop}")
+
+            minus_one = 18446744073709551615
+            if check_result.consistent_scheduler is not None:
+                filtered_partial_model = {self.model_variable_names[i]: x for i, x in enumerate(check_result.consistent_scheduler) if x != minus_one}
+                self.all_violated_models[int(not invert)].insert(
+                    set(map(hash, filtered_partial_model.items())),
+                    str(filtered_partial_model),
+                )
+
+                return False, check_result.consistent_scheduler
             return False, None

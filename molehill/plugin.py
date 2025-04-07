@@ -32,6 +32,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
         self.child_plugin = None
 
+        self.valid_function = None
+
     def is_in_ast_map(self, ast):
         return hash(ast) in self.ast_map
 
@@ -69,7 +71,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 backwards_variables[var_original] = var
 
             # print("Model for checker", model_for_checker)
-
             all_violated, counterexample = self.data.partial_model_consistent(
                 model_for_checker, invert=not value
             )
@@ -81,8 +82,30 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 ]
                 # print("Conflicting vars", conflicting_vars)
                 self.conflict(conflicting_vars)
-            # else:
-            # print("No conflict in", name, "=", value)
+            else:
+                if counterexample is None:
+                    return
+                minus_one = 18446744073709551615
+                
+                new_vars = []
+                quantified_vars = []
+                for i, v in enumerate(counterexample):
+                    if v != minus_one:
+                        # print(i, self.valid_function.arg(i).sort().size())
+                        new_vars.append(z3.BitVecVal(int(v), self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
+                    else:
+                        if involved_variables[i] not in self.names_to_vars:
+                            new_vars.append(z3.BitVecVal(int(involved_variables[i]), self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
+                        else:
+                            new_vars.append(self.names_to_vars[involved_variables[i]])
+                            quantified_vars.append(self.names_to_vars[involved_variables[i]])
+
+                if len(quantified_vars) > 0:
+                    declaration = z3.ForAll(quantified_vars, self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars)))
+                else:
+                    declaration = self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars))
+                # print(self.solver, self.child_plugin)
+                self.propagate(declaration, [])
 
     def push(self):
         # print(self.partial_model)
@@ -119,6 +142,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
     def _created(self, x):
         strx = str(x)
+        self.valid_function = x
         self.function_arguments[strx] = []
         self.names_to_vars[strx] = x
         for i in range(x.num_args()):

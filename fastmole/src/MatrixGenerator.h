@@ -80,7 +80,7 @@ class MatrixGenerator {
      * @return true The scheduler is consistent.
      * @return false The scheduler is inconsistent.
      */
-    bool isSchedulerConsistent(const storm::storage::Scheduler<ValueType> &scheduler);
+    std::optional<std::vector<uint64_t>> isSchedulerConsistent(const storm::storage::Scheduler<ValueType> &scheduler);
 
     /**
      * @brief Are some holes in this scheduler already optimal?
