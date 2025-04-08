@@ -1,4 +1,5 @@
 #include "MatrixGenerator.h"
+#include <_types/_uint64_t.h>
 #include <optional>
 #include <queue>
 #include <stdexcept>
@@ -9,7 +10,9 @@
 #include <storm/storage/BitVector.h>
 #include <storm/storage/sparse/ModelComponents.h>
 #include <storm/utility/constants.h>
+#include <storm/utility/graph.h>
 #include <storm/utility/macros.h>
+#include <string>
 #include <vector>
 
 template<typename ValueType>
@@ -314,48 +317,115 @@ std::pair<std::vector<uint64_t>, std::vector<uint64_t>> MatrixGenerator<ValueTyp
 }
 
 template<typename ValueType>
-bool MatrixGenerator<ValueType>::isSchedulerConsistent(const storm::storage::Scheduler<ValueType> &scheduler) {
-    std::unordered_map<uint64_t, uint64_t> holeAssignments;
-    uint64_t counter = 0;
+std::optional<std::vector<uint64_t>> MatrixGenerator<ValueType>::isSchedulerConsistent(const storm::storage::Scheduler<ValueType> &scheduler) {
+    // std::cout << "Checking consistency of scheduler" << std::endl;
     if (!this->currentReachableStates) {
-        throw std::runtime_error("No reachable states");
+        throw std::runtime_error("Call this after buildSubModel");
     }
-    for (auto const& state : *this->currentReachableStates) {
-        if (state >= this->quotient.getTransitionMatrix().getColumnCount()) {
-            if (state >= this->decisionMatrix.getColumnCount()) {
-                throw std::runtime_error("Invalid state in reachable states");
-            }
-            // This is the last two columns
+    std::vector<uint64_t> holeAssignments(this->currentHoleOptions->size(), -1);
+
+    // The states that are not reachable under the scheduler are irrelevant for
+    // the consistency check, so we keep track of the reachable states
+    storm::storage::BitVector visitedStates(this->currentMDP->getTransitionMatrix().getColumnCount(), false);
+    // Set the two last columns to visited, as these are the last two columns which we ignore
+    visitedStates.set(visitedStates.size() - 1, true);
+    visitedStates.set(visitedStates.size() - 2, true);
+
+    std::queue<uint64_t> statesToProcess;
+    for (auto const& initialState : this->currentMDP->getInitialStates()) {
+        statesToProcess.push(initialState);
+    }
+
+    while (!statesToProcess.empty()) {
+        uint64_t localState = statesToProcess.front();
+        statesToProcess.pop();
+        uint64_t state = *std::next(this->currentReachableStates->begin(), localState);
+
+        // Because this is BFS order, we can be sure that all predecessors are
+        // already reachable
+        if (visitedStates.get(localState)) {
             continue;
         }
-        uint64_t row = this->quotient.getTransitionMatrix().getRowGroupIndices()[state];
-        uint64_t rowEnd = this->quotient.getTransitionMatrix().getRowGroupIndices()[state + 1];
+        visitedStates.set(localState, true);
+        if (state >= this->quotient.getTransitionMatrix().getColumnCount()) {
+            throw std::runtime_error("Invalid state in reachable states: " + std::to_string(state) + " (size: " + std::to_string(this->decisionMatrix.getColumnCount()) + ")");
+        }
 
-        auto const& choice = scheduler.getChoice(counter);
+        // std::cout << "Reachable: "<< state << " (local) " << localState << std::endl;
+
+        // Get the choice taken by the scheduler
+        auto const& choice = scheduler.getChoice(localState);
         if (!choice.isDeterministic()) {
-            throw std::runtime_error("Scheduler must be deterministic");
+            std::cout << "Scheduler must be deterministic" << std::endl;
+            return std::nullopt;
         }
         uint64_t deterministicChoice = choice.getDeterministicChoice();
         
-        if (row + deterministicChoice >= rowEnd) {
-            throw std::runtime_error("Choice index " + std::to_string(deterministicChoice) + " out of bounds (size: " + std::to_string(rowEnd - row) + ")");
+        uint64_t localRow = this->currentMDP->getTransitionMatrix().getRowGroupIndices()[localState];
+        uint64_t localRowEnd = this->currentMDP->getTransitionMatrix().getRowGroupIndices()[localState + 1];
+
+        if (localRow + deterministicChoice >= localRowEnd) {
+            throw std::runtime_error("Local choice index " + std::to_string(deterministicChoice) + " out of bounds (size: " + std::to_string(localRowEnd - localRow) + ")");
         }
 
-        auto const& assignment = choiceToAssignment[row + deterministicChoice];
-
-        for (auto const& [hole, assignment] : assignment) {
-            if (holeAssignments.contains(hole)) {
-                if (holeAssignments[hole] != assignment) {
-                    return false;
-                }
-            } else {
-                holeAssignments[hole] = assignment;
+        // Visit states reachable under the scheduler
+        for (auto const& entry : this->currentMDP->getTransitionMatrix().getRow(localRow + deterministicChoice)) {
+            if (!visitedStates.get(entry.getColumn()) && entry.getValue() != storm::utility::zero<ValueType>()) {
+                statesToProcess.push(entry.getColumn());
             }
         }
 
-        counter++;
+        uint64_t row = this->quotient.getTransitionMatrix().getRowGroupIndices()[state];
+        uint64_t rowEnd = this->quotient.getTransitionMatrix().getRowGroupIndices()[state + 1];
+
+        // We need to get the global choice
+        // E.g. My hole options are 1101101 and my deterministic choice is 3
+        // Then the global choice is actually 4 (the fourth set bit)
+        uint64_t globalChoice = -1;
+        uint64_t localChoiceTmp = deterministicChoice + 1;
+        while (localChoiceTmp > 0) {
+            globalChoice++;
+            if (row + globalChoice >= rowEnd) {
+                throw std::runtime_error("Global choice index out of bounds");
+            }
+            if (isChoicePossible(*this->currentAbstractedHoles, *this->currentHoleOptions, row + globalChoice)) {
+                // std::cout << "Possible choice " << globalChoice << std::endl;
+                localChoiceTmp--;
+            } else {
+                // std::cout << "Impossible choice " << globalChoice << std::endl;
+            }
+        }
+
+        if (row + globalChoice >= rowEnd) {
+            // std::cout << "Local state " << localState  << " global state " << state << " global choice " << globalChoice << std::endl;
+            throw std::runtime_error("Choice index " + std::to_string(globalChoice) + " out of bounds (size: " + std::to_string(rowEnd - row) + ")");
+        }
+
+        auto const& assignment = choiceToAssignment[row + globalChoice];
+
+        for (auto const& [hole, assignment] : assignment) {
+            if (holeAssignments[hole] != -1) {
+                if (holeAssignments[hole] != assignment) {
+                    // The scheduler is inconsistent
+                    // std::cout << "Inconsistent hole " << hole << " assignment " << assignment << std::endl;
+                    return std::nullopt;
+                }
+            } else {
+                // std::cout << "Hole " << hole << " assignment " << assignment << std::endl;
+                // std::cout << "Local choice " << deterministicChoice << " global choice " << globalChoice << std::endl;
+                holeAssignments[hole] = assignment;
+            }
+        }
     }
-    return true;
+    // std::cout << "Consistent" << std::endl;
+    // std::ofstream outFile("out.dot");
+    // if (!outFile.is_open()) {
+    //     throw std::runtime_error("Failed to open file out.dot for writing");
+    // }
+    // this->currentMDP->writeDotToStream(outFile);
+    // outFile.close();
+    // scheduler.printToStream(std::cout);
+    return holeAssignments;
 }
 
 template<typename ValueType>
@@ -387,12 +457,14 @@ storm::storage::BitVector MatrixGenerator<ValueType>::optimalAssignments(const s
         uint64_t row = this->quotient.getTransitionMatrix().getRowGroupIndices()[state];
         uint64_t rowEnd = this->quotient.getTransitionMatrix().getRowGroupIndices()[state + 1];
 
+        // TODO I think this is bugged, what has the scheduler got to do with this?
         auto const& choice = scheduler.getChoice(counter);
         if (!choice.isDeterministic()) {
             throw std::runtime_error("Scheduler must be deterministic");
         }
         uint64_t deterministicChoice = choice.getDeterministicChoice();
         
+        // Why should this be correct? E.g. if I filter a couple rows??
         if (row + deterministicChoice >= rowEnd) {
             throw std::runtime_error("Row " + std::to_string(row) + " of " + std::to_string(this->quotient.getTransitionMatrix().getRowCount()) + " Choice index " + std::to_string(deterministicChoice) + " out of bounds (size: " + std::to_string(rowEnd - row) + ")");
         }
