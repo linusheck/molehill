@@ -11,7 +11,7 @@ class CECheckResult:
     fixed_holes: list
     nondet_holes: list
     result: any
-
+    consistent_scheduler: any = None
 
 def check(
     matrix_generator,
@@ -33,9 +33,9 @@ def check(
 
     all_schedulers_violate_full, result = check_model(mdp, prop, None)
     if not all_schedulers_violate_full:
-        # if matrix_generator.is_scheduler_consistent(result.scheduler):
-        #     # TODO we should return the scheduler here (currently just printing it)
-        #     # print("Found consistent scheduler")
+        sched_consistent_result = matrix_generator.is_scheduler_consistent(result.scheduler)
+        if sched_consistent_result is not None:
+            return CECheckResult(False, None, None, result, sched_consistent_result)
         return CECheckResult(False, None, None, result)
 
     # The CEs currently get abstracted in BFS order.

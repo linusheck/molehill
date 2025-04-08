@@ -127,7 +127,7 @@ class Mole:
             self.first_dtmc_checked = True
         if model == "MDP" and not self.first_dtmc_checked and len(partial_model) > 0:
             return False, None
-
+        
         frozen_partial_model = set(map(hash, partial_model.items()))
         conflicts_violated = self.all_violated_models[int(invert)].subsets(
             frozen_partial_model
@@ -135,13 +135,19 @@ class Mole:
         if len(conflicts_violated) > 0:
             conflict = min([eval(x) for x in conflicts_violated], key=len)
             return True, conflict
+
+        conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(
+            frozen_partial_model
+        )
+        if len(conflicts_inconclusive) > 0:
+            return False, None
+
         # if the inverse is violated, this will not be violated
-        conflicts_inverse_violated = self.all_violated_models[1-int(invert)].supersets(
+        conflicts_inverse_violated = self.all_violated_models[1 - int(invert)].supersets(
             frozen_partial_model
         )
         if len(conflicts_inverse_violated) > 0:
             return False, None
-
         # Make a PAYNT family from the current partial model.
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
@@ -149,11 +155,14 @@ class Mole:
             var = self.model_variable_names[hole]
             if var in partial_model:
                 new_family.hole_set_options(hole, [partial_model[var]])
+        
 
         # Prop is always rechability, even if our input was until (thanks paynt :)).
         prop = self.quotient.specification.all_properties()[0]
         if invert:
             prop = self.quotient.specification.negate().all_properties()[0]
+
+        # print("Check", new_family, prop)
 
         # Decide whether we want to compute a counterexample.
         compute_counterexample = True
@@ -175,6 +184,7 @@ class Mole:
             remove_optimal_holes,
         )
         all_violated = check_result.all_schedulers_violate
+        # print("All violated", all_violated, check_result.result.at(0))
         counterexample = check_result.fixed_holes
 
         self.considered_models += 1
@@ -214,9 +224,13 @@ class Mole:
                 )
 
             counterexample = [self.model_variable_names[i] for i in counterexample]
+            filtered_partial_model = {name: partial_model[name] for name in counterexample}
+            filtered_frozen_partial_model = set(map(hash, filtered_partial_model.items()))
             self.all_violated_models[int(invert)].insert(
-                frozen_partial_model, str(counterexample)
+                filtered_frozen_partial_model, str(counterexample)
             )
+            # if len(filtered_frozen_partial_model) != len(frozen_partial_model):
+            #     print("Filtered", filtered_partial_model, partial_model)
             return True, counterexample
         else:
             # We can't do anything with this model, so we just return False.
@@ -225,4 +239,14 @@ class Mole:
             )
             if model == "DTMC":
                 self.reasons.append(f"{partial_model} |= {prop}")
+
+            minus_one = 18446744073709551615
+            if check_result.consistent_scheduler is not None:
+                filtered_partial_model = {self.model_variable_names[i]: x for i, x in enumerate(check_result.consistent_scheduler) if x != minus_one}
+                self.all_violated_models[int(not invert)].insert(
+                    set(map(hash, filtered_partial_model.items())),
+                    str(filtered_partial_model),
+                )
+
+                return False, check_result.consistent_scheduler
             return False, None
