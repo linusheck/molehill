@@ -33,9 +33,9 @@ def check(
 
     all_schedulers_violate_full, result = check_model(mdp, prop, None)
     if not all_schedulers_violate_full:
-        sched_consistent_result = matrix_generator.is_scheduler_consistent(result.scheduler)
-        if sched_consistent_result is not None:
-            return CECheckResult(False, None, None, result, sched_consistent_result)
+        # sched_consistent_result = matrix_generator.is_scheduler_consistent(result.scheduler)
+        # if sched_consistent_result is not None:
+        #     return CECheckResult(False, None, None, result, sched_consistent_result)
         return CECheckResult(False, None, None, result)
 
     # The CEs currently get abstracted in BFS order.
