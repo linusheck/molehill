@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3606dfe72c335af683417bfcf190e167d440063b786bc3da634814466312f2c8"
+            "sha256": "72598dfd46016ce07a4b4c80847ba35ca47836abc17d05967d298025fbbdfa29"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,21 +18,21 @@
     "default": {
         "anytree": {
             "hashes": [
-                "sha256:244def434ccf31b668ed282954e5d315b4e066c4940b94aff4a7962d85947830",
-                "sha256:5ea9e61caf96db1e5b3d0a914378d2cd83c269dfce1fb8242ce96589fa3382f0"
+                "sha256:4cbcf10df36b1f1cba131b7e487ff3edafc9d6e932a3c70071b5b768bab901ff",
+                "sha256:c9d3aa6825fdd06af7ebb05b4ef291d2db63e62bb1f9b7d9b71354be9d362714"
             ],
             "index": "pypi",
-            "markers": "python_version < '4' and python_full_version >= '3.7.2'",
-            "version": "==2.12.1"
+            "markers": "python_version < '4.0' and python_full_version >= '3.9.2'",
+            "version": "==2.13.0"
         },
         "benchexec": {
             "hashes": [
-                "sha256:15cb61a45d06d9f301625091e4c4b613341563d22df574fd72300e1a7626fe12",
-                "sha256:51b538def2a95e5e441753186064461ab9163eaa9d23a0d5e32c46314cc2733f"
+                "sha256:5bc1db67bfd188778022a4d9aa3364af682a6c1ed396db56c6f34b39eb389544",
+                "sha256:edbc1f13e3f50994c8025e71e64bb9265883967dbf90d91e54e20d9261bdcbfa"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==3.28"
+            "version": "==3.29"
         },
         "docopt": {
             "hashes": [
@@ -50,11 +50,11 @@
         },
         "mercury-settrie": {
             "hashes": [
-                "sha256:0d5b111db28bde4808714e46210f9872d016fdc7fade272ccdeedca241602f21"
+                "sha256:9f7d796d331ab01dba57f2e1b4a5daa71a37ad9fb3ef48a548aa57fde9264c99"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==1.4.7"
+            "version": "==1.4.8"
         },
         "psutil": {
             "hashes": [
@@ -176,6 +176,15 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.17.0"
+        },
+        "svgwrite": {
+            "hashes": [
+                "sha256:a8fbdfd4443302a6619a7f76bc937fc683daf2628d9b737c891ec08b8ce524c3",
+                "sha256:bb6b2b5450f1edbfa597d924f9ac2dd099e625562e492021d7dd614f65f8a22d"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.6'",
+            "version": "==1.4.3"
         }
     },
     "develop": {}

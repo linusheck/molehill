@@ -8,6 +8,7 @@ anytree = "*"
 rebench = "*"
 benchexec = "*"
 mercury-settrie = "*"
+svgwrite = "*"
 
 [dev-packages]
 

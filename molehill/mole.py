@@ -25,6 +25,7 @@ class Mole:
         self.inconclusive_models = [SetTrie(), SetTrie()]
 
         self.considered_models = 0
+        self.mc_calls = 0
         self.total_models = self.quotient.family.size
 
         self.time_last_print = time.time()
@@ -81,6 +82,8 @@ class Mole:
 
         self.first_dtmc_checked = False
 
+        self.function_argument_tracker = []
+
     def get_matrix_generator(self, invert=False):
         if invert in self.matrix_generators:
             return self.matrix_generators[invert]
@@ -114,7 +117,7 @@ class Mole:
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
 
         if time.time() - self.time_last_print > 1:
-            print(f"Considered {self.considered_models} models so far")
+            print(f"Considered {self.mc_calls} models so far (cache hits: {self.considered_models - self.mc_calls})")
             self.time_last_print = time.time()
 
         num_fixed = len(partial_model.keys())
@@ -127,8 +130,10 @@ class Mole:
             self.first_dtmc_checked = True
         if model == "MDP" and not self.first_dtmc_checked and len(partial_model) > 0:
             return False, None
-        
-        frozen_partial_model = set(map(hash, partial_model.items()))
+
+        self.considered_models += 1
+
+        frozen_partial_model = set(map(lambda x: f"{x[0]}={x[1]}", partial_model.items()))
         conflicts_violated = self.all_violated_models[int(invert)].subsets(
             frozen_partial_model
         )
@@ -139,15 +144,24 @@ class Mole:
         conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(
             frozen_partial_model
         )
-        if len(conflicts_inconclusive) > 0:
+        if next(conflicts_inconclusive, None) is not None:
             return False, None
 
-        # if the inverse is violated, this will not be violated
-        conflicts_inverse_violated = self.all_violated_models[1 - int(invert)].supersets(
+        # If the set intersects with a set where we have proven the opposite, 
+        # we can just return False.
+        # This holds for subsets:
+        conflicts_inverse_violated_sub = self.all_violated_models[1 - int(invert)].subsets(
             frozen_partial_model
         )
-        if len(conflicts_inverse_violated) > 0:
+        if next(conflicts_inverse_violated_sub, None) is not None:
             return False, None
+        # And supersets:
+        conflicts_inverse_violated_super = self.all_violated_models[1 - int(invert)].supersets(
+            frozen_partial_model
+        )
+        if next(conflicts_inverse_violated_super, None) is not None:
+            return False, None
+
         # Make a PAYNT family from the current partial model.
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
@@ -183,11 +197,10 @@ class Mole:
             compute_counterexample,
             remove_optimal_holes,
         )
+        self.mc_calls += 1
         all_violated = check_result.all_schedulers_violate
         # print("All violated", all_violated, check_result.result.at(0))
         counterexample = check_result.fixed_holes
-
-        self.considered_models += 1
 
         # Keep track of MDP fails and wins.
         if model == "MDP":
@@ -225,7 +238,10 @@ class Mole:
 
             counterexample = [self.model_variable_names[i] for i in counterexample]
             filtered_partial_model = {name: partial_model[name] for name in counterexample}
-            filtered_frozen_partial_model = set(map(hash, filtered_partial_model.items()))
+            filtered_frozen_partial_model = set(map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items()))
+            supersets = self.all_violated_models[int(invert)].supersets(filtered_frozen_partial_model)
+            for superset in supersets:
+                self.all_violated_models[int(invert)].remove(superset)
             self.all_violated_models[int(invert)].insert(
                 filtered_frozen_partial_model, str(counterexample)
             )
@@ -234,6 +250,9 @@ class Mole:
             return True, counterexample
         else:
             # We can't do anything with this model, so we just return False.
+            # subsets = self.inconclusive_models[int(invert)].subsets(frozen_partial_model)
+            # for subset in subsets:
+            #     self.inconclusive_models[int(invert)].remove(subset)
             self.inconclusive_models[int(invert)].insert(
                 frozen_partial_model, str(frozen_partial_model)
             )
@@ -244,7 +263,7 @@ class Mole:
             if check_result.consistent_scheduler is not None:
                 filtered_partial_model = {self.model_variable_names[i]: x for i, x in enumerate(check_result.consistent_scheduler) if x != minus_one}
                 self.all_violated_models[int(not invert)].insert(
-                    set(map(hash, filtered_partial_model.items())),
+                    set(map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items())),
                     str(filtered_partial_model),
                 )
 

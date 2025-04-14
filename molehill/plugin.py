@@ -81,34 +81,63 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 ]
                 self.conflict(conflicting_vars)
             else:
-                # TODO Future Research :)
-                continue
-            
                 if counterexample is None:
                     continue
 
                 minus_one = 18446744073709551615
-                
-                new_vars = []
-                quantified_vars = []
+
+                do_these_splits = []
+                split_numbers = {}
+
                 for i, v in enumerate(counterexample):
                     if v != minus_one:
-                        # print(i, self.valid_function.arg(i).sort().size())
-                        new_vars.append(z3.BitVecVal(int(v), self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
-                    else:
-
-                        # new_vars.append(z3.BitVecVal(0, self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
                         if involved_variables[i] not in self.names_to_vars:
-                            new_vars.append(z3.BitVecVal(int(involved_variables[i]), self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
+                            # if involved_variables[i] is a constant, but v is not the same
+                            if involved_variables[i] != str(v):
+                                do_these_splits = []
+                                break
                         else:
-                            new_vars.append(self.names_to_vars[involved_variables[i]])
-                            quantified_vars.append(self.names_to_vars[involved_variables[i]])
+                            num_bits = self.valid_function.arg(i).sort().size()
+                            val_in_bits = [(v >> bit_i) & 1 for bit_i in range(num_bits)]
+                            # print(v, val_in_bits)
+                            if involved_variables[i] in split_numbers:
+                                # inconsistent variable?
+                                if split_numbers[involved_variables[i]] != v:
+                                    do_these_splits = []
+                                    break
+                            split_numbers[involved_variables[i]] = v
+                            for j in range(num_bits):
+                                do_these_splits.append(
+                                    (involved_variables[i], j, val_in_bits[j])
+                                )
 
-                if len(quantified_vars) > 0:
-                    declaration = z3.ForAll(quantified_vars, self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars)))
-                else:
-                    declaration = self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars))
-                self.propagate(declaration, [self.names_to_vars[x] for x in self.fixed_values])
+                for split in do_these_splits:
+                    self.next_split(
+                        self.names_to_vars[split[0]], split[1], split[2]
+                    )
+
+                
+                # new_vars = []
+                # quantified_vars = []
+                # for i, v in enumerate(counterexample):
+                #     if v != minus_one:
+                #         # print(i, self.valid_function.arg(i).sort().size())
+                #         new_vars.append(z3.BitVecVal(int(v), self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
+                #     else:
+
+                #         # new_vars.append(z3.BitVecVal(0, self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
+                #         if involved_variables[i] not in self.names_to_vars:
+                #             new_vars.append(z3.BitVecVal(int(involved_variables[i]), self.valid_function.arg(i).sort().size(), ctx=self.ctx()))
+                #         else:
+                #             new_vars.append(self.names_to_vars[involved_variables[i]])
+                #             quantified_vars.append(self.names_to_vars[involved_variables[i]])
+
+                # if len(quantified_vars) > 0:
+                #     declaration = z3.ForAll(quantified_vars, self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars)))
+                # else:
+                #     declaration = self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars))
+                
+                # self.propagate(declaration, [self.names_to_vars[x] for x in self.fixed_values])
 
     def push(self):
         # print(self.partial_model)
@@ -138,13 +167,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
             ast_str = self.get_name_from_ast_map(ast)
             self.partial_model[ast_str] = value.as_long()
         else:
-            # ast_str = ast.sexpr()
-            ast_str = str(ast)
+            ast_str = ast.sexpr()
             self.partial_model[ast_str] = bool(value)
+            self.data.function_argument_tracker.append([value] + self.function_arguments[ast_str])
         self.fixed_values.append(ast_str)
 
     def _created(self, x):
-        strx = str(x)
+        strx = x.sexpr()
         self.valid_function = x
         self.function_arguments[strx] = []
         self.names_to_vars[strx] = x

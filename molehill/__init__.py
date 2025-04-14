@@ -17,13 +17,14 @@ from molehill.mole import Mole
 
 def run(
     project_path,
-    image,
     considered_counterexamples,
     constraint,
     search_space_test=False,
     fsc_memory_size=1,
     exact=False,
     print_reasons=False,
+    image=False,
+    plot_function_args=False,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -154,7 +155,7 @@ def run(
         constraint.show_result(model, s)
     else:
         print("unsat")
-    print(f"Considered {p.considered_models} models")
+    print(f"Considered {p.mc_calls} models")
     if print_reasons:
         print(f"Reasons:")
         for r in p.reasons:
@@ -166,9 +167,14 @@ def run(
 
     if image:
         print("Drawing image")
-        from molehill.curve_drawer import draw_curve
+        from molehill.plotters.curve_drawer import draw_curve
 
         draw_curve(num_bits, variables, s, p, model)
+    
+    if plot_function_args:
+        print("Drawing function arguments")
+        from molehill.plotters.function_args_drawer import draw_function_args
+        draw_function_args(p)
 
     # return is for testing purposes
     return model, s, p

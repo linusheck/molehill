@@ -32,6 +32,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--image", action="store_true", help="Generate an image of the curve."
     )
+    parser.add_argument(
+        "--plot-args", action="store_true", help="Plot function arguments."
+    )
     # number of tree nodes
     parser.add_argument(
         "--ce",
@@ -78,10 +81,11 @@ if __name__ == "__main__":
 
     run(
         args.project_path,
-        args.image,
         args.ce,
         new_constraint,
         fsc_memory_size=args.fsc_memory_size,
         exact=args.exact,
         print_reasons=args.reasons,
+        image=args.image,
+        plot_function_args=args.plot_args,
     )
