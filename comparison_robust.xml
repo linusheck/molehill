@@ -2,12 +2,12 @@
 <benchmark tool="tools.synthesis" timelimit="300s" hardtimelimit="300s" memlimit="10GB">
 
   <tasks name="SAT Benchmarks">
-    <include>benchmarks/files/sat*.yml</include>
+    <include>benchmarks/files/robust/sat*.yml</include>
     <propertyfile>benchmarks/sat.txt</propertyfile>
   </tasks>
 
   <tasks name="UNSAT Benchmarks">
-    <include>benchmarks/files/unsat*.yml</include>
+    <include>benchmarks/files/robust/unsat*.yml</include>
     <propertyfile>benchmarks/unsat.txt</propertyfile>
   </tasks>
 
@@ -19,6 +19,10 @@
         <option>molehill</option>
         <option>--ce</option>
         <option>sched</option>
+        <option>--constraint</option>
+        <option>existsforall</option>
+        <option>--forall</option>
+        <option>sketch_hole</option>
     </rundefinition>
 
     <rundefinition name="Molehill-Det">
@@ -27,6 +31,10 @@
         <option>-m</option>
         <option>molehill</option>
         <option>--deterministic</option>
+        <option>--constraint</option>
+        <option>existsforall</option>
+        <option>--forall</option>
+        <option>sketch_hole</option>
     </rundefinition>
 
     <rundefinition name="Molehill-All-CE">
@@ -36,6 +44,10 @@
         <option>molehill</option>
         <option>--ce</option>
         <option>all</option>
+        <option>--constraint</option>
+        <option>existsforall</option>
+        <option>--forall</option>
+        <option>sketch_hole</option>
     </rundefinition>
 
     <rundefinition name="Molehill-MC-CE">
@@ -45,6 +57,10 @@
         <option>molehill</option>
         <option>--ce</option>
         <option>mc</option>
+        <option>--constraint</option>
+        <option>existsforall</option>
+        <option>--forall</option>
+        <option>sketch_hole</option>
     </rundefinition>
 
     <rundefinition name="Molehill-No-CE">
@@ -54,29 +70,9 @@
         <option>molehill</option>
         <option>--ce</option>
         <option>none</option>
-    </rundefinition>
-
-    <rundefinition name="Paynt-AR">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>build/paynt/paynt.py</option>
-        <option>--method</option>
-        <option>ar</option>
-    </rundefinition>
-
-    <rundefinition name="Paynt-CEGIS">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>build/paynt/paynt.py</option>
-        <option>--method</option>
-        <option>cegis</option>
-    </rundefinition>
-
-    <rundefinition name="Paynt-Hybrid">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>build/paynt/paynt.py</option>
-        <option>--method</option>
-        <option>hybrid</option>
+        <option>--constraint</option>
+        <option>existsforall</option>
+        <option>--forall</option>
+        <option>sketch_hole</option>
     </rundefinition>
 </benchmark>

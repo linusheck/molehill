@@ -13,7 +13,18 @@ def draw_function_args(mole):
     # Create a new SVG drawing
     dwg = svgwrite.Drawing("function_args.svg", profile="tiny")
     # Set the size of the SVG
-    dwg.viewbox(width=size_x * 100, height=size_y * 100)
+    # Set a maximum size for the SVG
+    max_size = 10000  # Maximum width or height in pixels
+    width = size_x * 100
+    height = size_y * 100
+    if width > max_size or height > max_size:
+        scale_factor = min(max_size / width, max_size / height)
+        width = int(width * scale_factor)
+        height = int(height * scale_factor)
+    else:
+        scale_factor = 1
+    scale_mult = 100 * scale_factor
+    dwg.viewbox(width=width, height=height)
     # Add the matrix to the SVG
     for i in range(size_y):
         for j in range(size_x):
@@ -38,9 +49,9 @@ def draw_function_args(mole):
                 # If it's not a number, use a shade of yellow based on the string hash
                 hash_value = hash(matrix[i][j])
                 fill_color = f"rgb(255, {220 + (hash_value % 36)}, {100 + (hash_value % 56)})"
-            dwg.add(dwg.rect((j * 100, i * 100), (100, 100), fill=fill_color))
+            dwg.add(dwg.rect((j * scale_mult, i * scale_mult), (scale_mult, scale_mult), fill=fill_color))
             # Add text to each cell
-            font_size = "50px" if len(matrix[i][j]) < 4 else "20px"
-            dwg.add(dwg.text(matrix[i][j], insert=((j * 100) + 50, (i * 100) + 50), text_anchor="middle", font_size=font_size))
+            font_size = f"{scale_mult / 2}px" if len(matrix[i][j]) < 4 else f"{scale_mult / 5}px"
+            dwg.add(dwg.text(matrix[i][j], insert=((j * scale_mult) + (scale_mult/2), (i * scale_mult) + (scale_mult/2)), text_anchor="middle", font_size=font_size))
     # Save the SVG to a file
     dwg.save()
