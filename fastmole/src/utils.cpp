@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <storm/adapters/RationalNumberForward.h>
 #include <storm/storage/BitVector.h>
 #include <unordered_set>
 
@@ -37,36 +38,39 @@ storm::storage::BitVector getPossibleChoices(const std::vector<std::vector<std::
     return selectedChoices;
 }
 
-template<typename ValueType>
-storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(const std::vector<ValueType> &result, const storm::storage::BitVector &oldReachableStates,
-                                                                     const storm::storage::BitVector &newReachableStates) {
-    assert(oldReachableStates.getNumberOfSetBits() == result.size());
+// template<typename ValueType>
+// storm::modelchecker::ExplicitModelCheckerHint<ValueType> hintConvert(const std::vector<ValueType> &result, const storm::storage::BitVector &oldReachableStates,
+//                                                                      const storm::storage::BitVector &newReachableStates) {
+//     assert(oldReachableStates.getNumberOfSetBits() == result.size());
 
-    std::vector<double> hintValues(newReachableStates.getNumberOfSetBits());
-    for (uint64_t state : newReachableStates) {
-        if (oldReachableStates[state]) {
-            hintValues.push_back(result.at(oldReachableStates.getNumberOfSetBitsBeforeIndex(state)));
-        } else {
-            hintValues.push_back(storm::utility::zero<ValueType>());
-        }
-    }
+//     std::vector<ValueType> hintValues(newReachableStates.getNumberOfSetBits());
+//     for (uint64_t state : newReachableStates) {
+//         if (oldReachableStates[state]) {
+//             hintValues.push_back(result.at(oldReachableStates.getNumberOfSetBitsBeforeIndex(state)));
+//         } else {
+//             hintValues.push_back(storm::utility::zero<ValueType>());
+//         }
+//     }
 
-    storm::modelchecker::ExplicitModelCheckerHint<ValueType> hint;
-    hint.setResultHint(hintValues);
-    hint.setNoEndComponentsInMaybeStates(true);
-    return hint;
-}
-template storm::modelchecker::ExplicitModelCheckerHint<double> hintConvert(const std::vector<double> &result,
-                                                                           const storm::storage::BitVector &oldReachableStates,
-                                                                           const storm::storage::BitVector &newReachableStates);
+//     storm::modelchecker::ExplicitModelCheckerHint<ValueType> hint;
+//     hint.setResultHint(hintValues);
+//     hint.setNoEndComponentsInMaybeStates(true);
+//     return hint;
+// }
+// template storm::modelchecker::ExplicitModelCheckerHint<double> hintConvert(const std::vector<double> &result,
+//                                                                            const storm::storage::BitVector &oldReachableStates,
+//                                                                            const storm::storage::BitVector &newReachableStates);
+// template storm::modelchecker::ExplicitModelCheckerHint<storm::RationalNumber> hintConvert(const std::vector<storm::RationalNumber> &result,
+//                                                                               const storm::storage::BitVector &oldReachableStates,
+//                                                                               const storm::storage::BitVector &newReachableStates);
 
-template<typename ValueType>
-storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<ValueType> &hint) {
-    storm::modelchecker::ExplicitModelCheckerHint<ValueType> newHint = hint;
-    newHint.setNoEndComponentsInMaybeStates(true);
-    return newHint;
-}
-template storm::modelchecker::ExplicitModelCheckerHint<double> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<double> &hint);
+// template<typename ValueType>
+// storm::modelchecker::ExplicitModelCheckerHint<ValueType> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<ValueType> &hint) {
+//     storm::modelchecker::ExplicitModelCheckerHint<ValueType> newHint = hint;
+//     newHint.setNoEndComponentsInMaybeStates(true);
+//     return newHint;
+// }
+// template storm::modelchecker::ExplicitModelCheckerHint<double> setEndComponentsTrue(const storm::modelchecker::ExplicitModelCheckerHint<double> &hint);
 
 storm::storage::BitVector intersect(const storm::storage::BitVector &a, const storm::storage::BitVector &b) {
     if (a.size() != b.size()) {

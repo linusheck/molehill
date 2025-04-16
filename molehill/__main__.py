@@ -30,6 +30,9 @@ if __name__ == "__main__":
         "project_path", type=str, help="The path to the project directory."
     )
     parser.add_argument(
+        "--exact", action="store_true", help="Exact mode."
+    )
+    parser.add_argument(
         "--image", action="store_true", help="Generate an image of the curve."
     )
     parser.add_argument(
@@ -43,7 +46,6 @@ if __name__ == "__main__":
         help="Types of counterexamples to consider. None: no counterexamples, Sched: Additionally analyze schedulers, MC: Additionally analyze Markov chains, All: Analyze all counterexamples",
         choices=["all", "mc", "sched", "none"],
     )
-    parser.add_argument("--exact", action="store_true", help="Exact mode")
     parser.add_argument(
         "--constraint",
         type=str,
@@ -83,8 +85,8 @@ if __name__ == "__main__":
         args.project_path,
         args.ce,
         new_constraint,
-        fsc_memory_size=args.fsc_memory_size,
         exact=args.exact,
+        fsc_memory_size=args.fsc_memory_size,
         print_reasons=args.reasons,
         image=args.image,
         plot_function_args=args.plot_args,

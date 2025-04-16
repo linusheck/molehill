@@ -4,7 +4,6 @@ import stormpy.storage
 from stormpy.core import parse_properties_without_context
 from stormpy import check_model_sparse
 from stormpy.pycarl.gmp import Rational
-from stormpy import OptimizationDirection
 
 
 def check_model(mdp, prop, hint, precision=1e-4):

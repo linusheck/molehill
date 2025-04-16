@@ -19,9 +19,9 @@ def run(
     project_path,
     considered_counterexamples,
     constraint,
+    exact=False,
     search_space_test=False,
     fsc_memory_size=1,
-    exact=False,
     print_reasons=False,
     image=False,
     plot_function_args=False,
@@ -29,6 +29,7 @@ def run(
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     paynt.quotient.pomdp.PomdpQuotient.initial_memory_size = fsc_memory_size
+    # TODO Exact mode: why does this not give me an exact MDP
     quotient = paynt.parser.sketch.Sketch.load_sketch(
         sketch_path, properties_path, use_exact=exact
     )
@@ -136,6 +137,7 @@ def run(
         s,
         variables,
         quotient,
+        exact=exact,
         draw_image=(image or search_space_test),
         considered_counterexamples=considered_counterexamples,
     )

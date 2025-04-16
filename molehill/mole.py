@@ -3,7 +3,7 @@
 from settrie import SetTrie
 from stormpy import model_checking, CheckTask
 from decimal import Decimal
-from fastmole import MatrixGenerator
+from fastmole import MatrixGeneratorDouble, MatrixGeneratorRationalNumber
 from molehill.counterexamples import check
 from molehill.plugin import SearchMarkovChain
 import time
@@ -16,10 +16,12 @@ class Mole:
         solver,
         variables,
         quotient,
+        exact=False,
         draw_image=False,
         considered_counterexamples="all",
     ):
         self.quotient = quotient
+        self.exact = exact
         # models we have already analyzed
         self.all_violated_models = [SetTrie(), SetTrie()]
         self.inconclusive_models = [SetTrie(), SetTrie()]
@@ -102,14 +104,23 @@ class Mole:
         target_states = model_checking(
             self.quotient.family.mdp.model, prop.formula.subformula.subformula
         ).get_truth_values()
-
-        generator = MatrixGenerator(
-            self.quotient.family.mdp.model,
-            check_task,
-            target_states,
-            global_bounds,
-            self.choice_to_assignment,
-        )
+        if self.exact:
+            # We need to use rational numbers for exactness
+            generator = MatrixGeneratorRationalNumber(
+                self.quotient.family.mdp.model,
+                check_task,
+                target_states,
+                global_bounds,
+                self.choice_to_assignment,
+            )
+        else:
+            generator = MatrixGeneratorDouble(
+                self.quotient.family.mdp.model,
+                check_task,
+                target_states,
+                global_bounds,
+                self.choice_to_assignment,
+            )
         self.matrix_generators[invert] = generator
         return generator
 
@@ -239,9 +250,9 @@ class Mole:
             counterexample = [self.model_variable_names[i] for i in counterexample]
             filtered_partial_model = {name: partial_model[name] for name in counterexample}
             filtered_frozen_partial_model = set(map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items()))
-            supersets = self.all_violated_models[int(invert)].supersets(filtered_frozen_partial_model)
-            for superset in supersets:
-                self.all_violated_models[int(invert)].remove(superset)
+            # supersets = self.all_violated_models[int(invert)].supersets(filtered_frozen_partial_model)
+            # for superset in supersets:
+            #     self.all_violated_models[int(invert)].remove(superset)
             self.all_violated_models[int(invert)].insert(
                 filtered_frozen_partial_model, str(counterexample)
             )
