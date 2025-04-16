@@ -1,4 +1,4 @@
-"""Test matrix generator"""
+"""Test search space"""
 
 import pytest
 import z3

@@ -4,6 +4,7 @@ import stormpy.storage
 from stormpy.core import parse_properties_without_context
 from stormpy import check_model_sparse
 from stormpy.pycarl.gmp import Rational
+from stormpy import OptimizationDirection
 
 
 def check_model(mdp, prop, hint, precision=1e-4):
@@ -32,5 +33,4 @@ def check_model(mdp, prop, hint, precision=1e-4):
     all_schedulers_violate = not prop.satisfies_threshold(
         result.at(mdp.initial_states[0])
     )
-
     return all_schedulers_violate, result

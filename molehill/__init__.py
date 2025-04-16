@@ -127,12 +127,10 @@ def run(
     # s.add(variables[0] == 0)
     # s.add(variables[1] == 0)
 
-    # add literal bitvectors
+    # add literal bitvectors (somehow, this makes the search much faster)
     for value in range(2 ** num_bits):
-        # print(value)
         bitvector = z3.BitVecVal(value, num_bits)
-        print(z3.BitVec(f"const_{value}", num_bits) == bitvector)
-        s.add(z3.BitVec(f"const_{value}", num_bits) == bitvector)
+        s.add(z3.BitVec(f"useless_const_{value}", num_bits) == bitvector)
 
     p = Mole(
         s,
