@@ -5,5 +5,5 @@ input_files:
 - ../../../resources/benchmark/jair/sat_maze-sl-5
 
 properties:
-  - property_file: ../sat.txt
+  - property_file: ../../sat.txt
     expected_verdict: true

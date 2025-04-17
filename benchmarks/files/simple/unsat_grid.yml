@@ -5,5 +5,5 @@ input_files:
 - ../../../resources/benchmark/jair/unsat_grid
 
 properties:
-  - property_file: ../unsat.txt
+  - property_file: ../../unsat.txt
     expected_verdict: false

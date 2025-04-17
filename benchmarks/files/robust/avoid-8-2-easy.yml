@@ -5,5 +5,5 @@ input_files:
 - ../../../resources/mdp-sketches/atva-sat/avoid-8-2-easy
 
 properties:
-  - property_file: ../sat.txt
+  - property_file: ../../sat.txt
     expected_verdict: true
