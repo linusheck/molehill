@@ -12,7 +12,6 @@ class CMakeExtension(Extension):
 
 
 class CMakeBuild(build_ext):
-
     def update_git_repo(self, remote, folder, branch):
         if not os.path.exists(folder):
             subprocess.check_call(["git", "clone", remote, folder, "--branch", branch])
@@ -24,17 +23,12 @@ class CMakeBuild(build_ext):
         print("sys executable", sys.executable)
         subprocess.check_call([sys.executable, "-m", "ensurepip"])
 
-        # Build pycarl
-        pycarl_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/pycarl"))
-        self.update_git_repo("https://github.com/moves-rwth/pycarl.git", pycarl_build, "master")
-        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=pycarl_build)
-
-        pycarl_pybind_version = subprocess.check_output([sys.executable, "-c", "from pycarl._config import PYBIND_VERSION; print(PYBIND_VERSION)"]).decode().strip()
-
         # Build stormpy
         stormpy_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/stormpy"))
         self.update_git_repo("https://github.com/moves-rwth/stormpy.git", stormpy_build, "master")
         subprocess.check_call([sys.executable, "setup.py", "install"], cwd=stormpy_build)
+
+        pybind_version = subprocess.check_output([sys.executable, "-c", "from stormpy.info._config import stormpy_pybind_version; print(stormpy_pybind_version)"]).decode().strip()
 
         # Build paynt
         paynt_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/paynt"))
@@ -49,7 +43,7 @@ class CMakeBuild(build_ext):
         extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
         cmake_args = [
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={extdir}",
-            f"-DPYBIND_VERSION={pycarl_pybind_version}",
+            f"-DPYBIND_VERSION={pybind_version}",
             "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
             # set mode to release with debug info
             "-DCMAKE_BUILD_TYPE={}".format("Debug" if debug else "Release"),
