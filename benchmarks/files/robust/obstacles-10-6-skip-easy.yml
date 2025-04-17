@@ -2,7 +2,7 @@
 format_version: "2.0"
 
 input_files:
-- ../../resources/mdp-sketches/atva-sat/obstacles-10-6-skip-easy
+- ../../../resources/mdp-sketches/atva-sat/obstacles-10-6-skip-easy
 
 properties:
   - property_file: ../sat.txt

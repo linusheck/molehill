@@ -2,7 +2,7 @@
 format_version: "2.0"
 
 input_files:
-- ../../resources/benchmark/pomdps/sat_samplerocks
+- ../../../resources/benchmark/pomdps/sat_samplerocks
 
 properties:
   - property_file: ../sat.txt

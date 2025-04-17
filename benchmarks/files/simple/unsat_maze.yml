@@ -2,7 +2,7 @@
 format_version: "2.0"
 
 input_files:
-- ../../resources/benchmark/jair/unsat_maze
+- ../../../resources/benchmark/jair/unsat_maze
 
 properties:
   - property_file: ../unsat.txt
