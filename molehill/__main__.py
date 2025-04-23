@@ -38,6 +38,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--plot-args", action="store_true", help="Plot function arguments."
     )
+    parser.add_argument(
+        "--verbose", action="store_true", help="Verbose mode."
+    )
     # number of tree nodes
     parser.add_argument(
         "--ce",
@@ -90,4 +93,5 @@ if __name__ == "__main__":
         print_reasons=args.reasons,
         image=args.image,
         plot_function_args=args.plot_args,
+        verbose=args.verbose,
     )

@@ -58,7 +58,7 @@ def test_matrix_generator(project_path):
 
     new_family = family
 
-    mole = Mole(s, variables, quotient, var_ranges, True)
+    mole = Mole(s, variables, quotient, exact=False, draw_image=True)
     quotient_mdp = quotient.family.mdp.model
 
     # time to build the MDP

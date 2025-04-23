@@ -25,6 +25,7 @@ def run(
     print_reasons=False,
     image=False,
     plot_function_args=False,
+    verbose=False,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -81,6 +82,15 @@ def run(
             quotient.coloring = payntbind.synthesis.Coloring(family.family, quotient.quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
 
         family = quotient.family
+
+    if verbose:
+        z3.set_param("smt.mbqi", True)
+        z3.set_param("smt.mbqi.trace", True)
+        z3.set_param("trace", True)
+        z3.set_param("trace_file_name", "mbqi.log")
+
+        # set verbose to 20
+        z3.set_param("verbose", 20)
 
     s = z3.Solver()
 
@@ -141,6 +151,7 @@ def run(
         draw_image=(image or search_space_test),
         considered_counterexamples=considered_counterexamples,
     )
+
     # p.register_variables(variables)
     model = None
     if s.check() == z3.sat:

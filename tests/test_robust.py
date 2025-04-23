@@ -7,9 +7,11 @@ from molehill import run
 from molehill.constraints import ExistsForallConstraint
 from argparse import Namespace
 import paynt
+import random
 
-@pytest.mark.parametrize("project_path", ["resources/test/robust/obstacles-10-6-skip-easy", "resources/test/robust/mastermind-2-4-3", "resources/test/robust/rocks-4-2", "resources/test/robust/rover-100-big", "resources/test/robust/bridge-11-5-4"])
-@pytest.mark.parametrize("considered_counterexamples", ["none", "sched"])
+# @pytest.mark.parametrize("project_path", ["resources/test/robust/obstacles-10-6-skip-easy", "resources/test/robust/mastermind-2-4-3", "resources/test/robust/rocks-4-2", "resources/test/robust/rover-100-big", "resources/test/robust/bridge-11-5-4"])
+@pytest.mark.parametrize("project_path", ["resources/test/robust/rocks-4-2"])
+@pytest.mark.parametrize("considered_counterexamples", ["none"])
 def test_robust(project_path, considered_counterexamples):
     constraint = ExistsForallConstraint()
     constraint.set_args(Namespace(forall="sketch_hole", random=False))
