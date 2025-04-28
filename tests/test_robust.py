@@ -4,17 +4,21 @@ import paynt.synthesizer
 import paynt.synthesizer.synthesizer_ar
 import pytest
 from molehill import run
-from molehill.constraints import ExistsForallConstraint
+from molehill.constraints import ExistsForallConstraint, DecisionTree
 from argparse import Namespace
 import paynt
 import random
 
-# @pytest.mark.parametrize("project_path", ["resources/test/robust/obstacles-10-6-skip-easy", "resources/test/robust/mastermind-2-4-3", "resources/test/robust/rocks-4-2", "resources/test/robust/rover-100-big", "resources/test/robust/bridge-11-5-4"])
 @pytest.mark.parametrize("project_path", ["resources/test/robust/rocks-4-2"])
 @pytest.mark.parametrize("considered_counterexamples", ["none"])
-def test_robust(project_path, considered_counterexamples):
-    constraint = ExistsForallConstraint()
-    constraint.set_args(Namespace(forall="sketch_hole", random=False))
+@pytest.mark.parametrize("tree", [0, 5])
+def test_robust(project_path, considered_counterexamples, tree):
+    if tree > 0:
+        constraint = DecisionTree(robust=True)
+        constraint.set_args(Namespace(forall="sketch_hole", random=False, nodes=tree, picture_path=None))
+    else:
+        constraint = ExistsForallConstraint()
+        constraint.set_args(Namespace(forall="sketch_hole", random=False))
     model, _solver, plugin = run(project_path, considered_counterexamples, constraint, search_space_test=False, print_reasons=False, image=False)
 
     assert model is not None, "solver says unsat even though we have a model"
