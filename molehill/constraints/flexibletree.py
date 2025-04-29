@@ -51,7 +51,7 @@ class DecisionTree(Constraint):
                 "--forall",
                 type=str,
                 help="Infix of the forall variables E.g: 'P1 P3' means all variables that contain either P1 or P3.",
-                required=True,
+                default="sketch_hole",
             )
 
 

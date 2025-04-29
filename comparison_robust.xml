@@ -21,8 +21,6 @@
         <option>none</option>
         <option>--constraint</option>
         <option>existsforall</option>
-        <option>--forall</option>
-        <option>sketch_hole</option>
     </rundefinition>
 
     <rundefinition name="PAYNT 1-by-1">
