@@ -179,7 +179,7 @@ class MTBDD(Constraint):
         with open("mtbdd.dot", "w", encoding="utf-8") as f:
             f.write(generate_dot(mtbdd))
 
-    def show_result(self, model, _solver):
+    def show_result(self, model, _solver, **args):
         decisions = []
         for i in range(len(self.node_constants)):
             property_name = self.property_names[model[self.node_property[i]].as_long()]

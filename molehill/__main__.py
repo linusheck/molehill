@@ -52,7 +52,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--constraint",
         type=str,
-        choices=["none", "tree", "mtbdd", "existsforall", "forallexists", "custom"],
+        choices=["none", "tree", "mtbdd", "existsforall", "forallexists", "existsforalltree", "custom"],
         default="none",
         help="Constraint to use. Built-in constraints are: tree, mtbdd. By setting this to custom, you can implement a custom constraint in project_path/constraint.py. See the README for more information.",
     )
@@ -70,6 +70,8 @@ if __name__ == "__main__":
     # get class of new constraint
     elif args.constraint == "tree":
         new_constraint = DecisionTree()
+    elif args.constraint == "existsforalltree":
+        new_constraint = DecisionTree(robust=True)
     elif args.constraint == "mtbdd":
         new_constraint = MTBDD()
     elif args.constraint == "existsforall":

@@ -32,5 +32,5 @@ class Constraint:
         that the variables are in-range."""
         raise NotImplementedError("Constraint does not implement build_constraint")
 
-    def show_result(self, model: z3.Model, solver: z3.Solver) -> None:
+    def show_result(self, model: z3.Model, solver: z3.Solver, **args) -> None:
         """Called after SAT. Print and/or show your result here."""

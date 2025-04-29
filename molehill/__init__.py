@@ -3,14 +3,11 @@
 import paynt.quotient
 import paynt.quotient.mdp_family
 import paynt.quotient.pomdp
-import paynt.synthesizer
-import paynt.synthesizer.conflict_generator
-import paynt.verification
-import paynt.verification.property
 import z3
 import paynt.parser.sketch
 import math
 import payntbind.synthesis
+import json
 
 from molehill.mole import Mole
 
@@ -68,11 +65,27 @@ def run(
 
             quotient.coloring = payntbind.synthesis.Coloring(family.family, quotient.quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
         else: # meaning it is a MdpFamilyQuotient
+            def _get_state_valuations(model):
+                ''' Identify variable names and extract state valuation in the same order. '''
+                assert model.has_state_valuations(), "model has no state valuations"
+                # get name
+                sv = model.state_valuations
+                variable_name = None
+                state_valuations = []
+                for state in range(model.nr_states):
+                    valuation = json.loads(str(sv.get_json(state)))
+                    if variable_name is None:
+                        variable_name = list(valuation.keys())
+                    valuation = [valuation[var_name] for var_name in variable_name]
+                    state_valuations.append(valuation)
+                return variable_name, state_valuations
+            var_names, state_valuations = _get_state_valuations(quotient.quotient_mdp)
             nci = quotient.quotient_mdp.nondeterministic_choice_indices.copy()
             for state in range(quotient.quotient_mdp.nr_states):
                 if len(quotient.state_to_actions[state]) > 1: # again if there's only one action in a state there's no point in adding a hole
                     option_labels = [quotient.action_labels[i] for i in quotient.state_to_actions[state]]
-                    hole_name = f"A(state_{state})"
+                    vals_here = "&".join([f"{var_name}={int(state_valuations[state][i])}" for i,var_name in enumerate(var_names) if not var_name.startswith("_loc_prism2jani")])
+                    hole_name = f"A([{vals_here}])"
                     hole_index = quotient.family.num_holes
                     quotient.family.add_hole(hole_name, option_labels)
                     for choice in range(nci[state], nci[state+1]):
@@ -82,7 +95,7 @@ def run(
             quotient.coloring = payntbind.synthesis.Coloring(family.family, quotient.quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
 
         family = quotient.family
-
+    
     if verbose:
         z3.set_param("smt.mbqi", True)
         z3.set_param("smt.mbqi.trace", True)
@@ -142,6 +155,15 @@ def run(
     for value in range(2 ** num_bits):
         bitvector = z3.BitVecVal(value, num_bits)
         s.add(z3.BitVec(f"useless_const_{value}", num_bits) == bitvector)
+    
+
+    # valid(0,0,...,0)
+    # not valid(1,1,...1,)
+    # s.add(z3.Not(z3.Bool("leaf_0")))
+    # s.add(z3.Not(f(*[z3.BitVecVal(0, num_bits)] + [z3.BitVecVal(0, num_bits) for _ in range(family.num_holes - 1)])))
+    # s.add(z3.Not(f(*[z3.BitVecVal(0, num_bits)] + [z3.BitVecVal(1, num_bits) for _ in range(family.num_holes - 1)])))
+    # s.add(z3.Not(f(*[z3.BitVecVal(0, num_bits)] + [z3.BitVecVal(2, num_bits) for _ in range(family.num_holes - 1)])))
+    # s.add(z3.Not(f(*[z3.BitVecVal(0, num_bits)] + [z3.BitVecVal(3, num_bits) for _ in range(family.num_holes - 1)])))
 
     p = Mole(
         s,
@@ -152,11 +174,11 @@ def run(
         considered_counterexamples=considered_counterexamples,
     )
 
-    # p.register_variables(variables)
     model = None
     if s.check() == z3.sat:
         print("sat")
         model = s.model()
+        print(model)
         new_family = quotient.family.copy()
         new_family.add_parent_info(quotient.family)
         for hole in range(new_family.num_holes):
@@ -170,7 +192,8 @@ def run(
         prop = quotient.specification.all_properties()[0]
         result = mdp.model_check_property(prop)
         print(f"Found {new_family} with value {result}")
-        constraint.show_result(model, s)
+        print(quotient.choice_to_action)
+        constraint.show_result(model, s, family=family)
     else:
         print("unsat")
     print(f"Considered {p.mc_calls} models")

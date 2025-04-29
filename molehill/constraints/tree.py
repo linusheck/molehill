@@ -162,7 +162,7 @@ class DecisionTree(Constraint):
             constraints.append(variable == decision_func(*property_values))
         return z3.And(*constraints, variables_in_ranges(variables))
 
-    def show_result(self, model, _solver):
+    def show_result(self, model, _solver, **args):
         from anytree import Node
         from anytree.exporter import UniqueDotExporter
 

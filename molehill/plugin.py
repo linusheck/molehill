@@ -163,13 +163,19 @@ class SearchMarkovChain(z3.UserPropagateBase):
 
     def _fixed(self, ast, value):
         # This is called when Z3 fixes a variable. We need to keep track of that.
-        if self.is_in_ast_map(ast) or value.sort() != z3.BoolSort():
-            ast_str = self.get_name_from_ast_map(ast)
-            self.partial_model[ast_str] = value.as_long()
-        else:
+        # if self.is_in_ast_map(ast) or value.sort() != z3.BoolSort():
+        ast_str = None
+        if ast.sexpr().startswith("("):
             ast_str = ast.sexpr()
+        else:
+            ast_str = self.get_name_from_ast_map(ast)
+        
+        if value.sort() == z3.BoolSort():
             self.partial_model[ast_str] = bool(value)
-            self.data.function_argument_tracker.append([value] + self.function_arguments[ast_str])
+            if ast_str.startswith("(valid"):
+                self.data.function_argument_tracker.append([value] + self.function_arguments[ast_str])
+        else:
+            self.partial_model[ast_str] = value.as_long()
         self.fixed_values.append(ast_str)
 
     def _created(self, x):

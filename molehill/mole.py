@@ -18,7 +18,7 @@ class Mole:
         quotient,
         exact=False,
         draw_image=False,
-        considered_counterexamples="all",
+        considered_counterexamples="all"
     ):
         self.quotient = quotient
         self.exact = exact
@@ -145,9 +145,9 @@ class Mole:
         self.considered_models += 1
 
         frozen_partial_model = set(map(lambda x: f"{x[0]}={x[1]}", partial_model.items()))
-        conflicts_violated = self.all_violated_models[int(invert)].subsets(
+        conflicts_violated = list(self.all_violated_models[int(invert)].subsets(
             frozen_partial_model
-        )
+        ))
         if len(conflicts_violated) > 0:
             conflict = min([eval(x) for x in conflicts_violated], key=len)
             return True, conflict
@@ -155,7 +155,7 @@ class Mole:
         conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(
             frozen_partial_model
         )
-        if next(conflicts_inconclusive, None) is not None:
+        if len(conflicts_inconclusive) > 0:
             return False, None
 
         # If the set intersects with a set where we have proven the opposite, 
@@ -164,13 +164,13 @@ class Mole:
         conflicts_inverse_violated_sub = self.all_violated_models[1 - int(invert)].subsets(
             frozen_partial_model
         )
-        if next(conflicts_inverse_violated_sub, None) is not None:
+        if len(conflicts_inverse_violated_sub) > 0:
             return False, None
         # And supersets:
         conflicts_inverse_violated_super = self.all_violated_models[1 - int(invert)].supersets(
             frozen_partial_model
         )
-        if next(conflicts_inverse_violated_super, None) is not None:
+        if len(conflicts_inverse_violated_super) > 0:
             return False, None
 
         # Make a PAYNT family from the current partial model.
