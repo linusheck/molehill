@@ -178,7 +178,6 @@ def run(
     if s.check() == z3.sat:
         print("sat")
         model = s.model()
-        print(model)
         new_family = quotient.family.copy()
         new_family.add_parent_info(quotient.family)
         for hole in range(new_family.num_holes):
@@ -192,7 +191,6 @@ def run(
         prop = quotient.specification.all_properties()[0]
         result = mdp.model_check_property(prop)
         print(f"Found {new_family} with value {result}")
-        print(quotient.choice_to_action)
         constraint.show_result(model, s, family=family)
     else:
         print("unsat")

@@ -9,6 +9,7 @@ rebench = "*"
 benchexec = "*"
 mercury-settrie = "*"
 svgwrite = "*"
+click = "*"
 
 [dev-packages]
 
