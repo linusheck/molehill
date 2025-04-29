@@ -24,4 +24,24 @@
         <option>--forall</option>
         <option>sketch_hole</option>
     </rundefinition>
+
+    <rundefinition name="PAYNT 1-by-1">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>robust_policy.py</option>
+        <option>--synthesizer</option>
+        <option>ar-1by1</option>
+        <option>--timeout</option>
+        <option>1000000000</option>
+    </rundefinition>
+
+    <rundefinition name="PAYNT AR-MDP-Eval">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>robust_policy.py</option>
+        <option>--synthesizer</option>
+        <option>ar-mdp-eval</option>
+        <option>--timeout</option>
+        <option>1000000000</option>
+    </rundefinition>
 </benchmark>

@@ -44,10 +44,17 @@ class Tool(BaseTool2):
     def determine_result(self, run):
         if run.exit_code.signal is None:
             last_10_lines = run.output[-10:-1]
+            # molehill
             if "sat" in last_10_lines:
                 return "true"
             elif "unsat" in last_10_lines:
                 return "false"
+            # robust paynt
+            elif "True, " in last_10_lines:
+                return "true"
+            elif "False, " in last_10_lines:
+                return "false"
+            # paynt
             elif "feasible: yes" in last_10_lines:
                 return "true"
             elif "feasible: no" in last_10_lines:
@@ -58,4 +65,3 @@ class Tool(BaseTool2):
         elif run.termination_reason == "memout":
             return "MEMOUT"
         return result.RESULT_UNKNOWN
-
