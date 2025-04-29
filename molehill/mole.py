@@ -149,7 +149,8 @@ class Mole:
             frozen_partial_model
         ))
         if len(conflicts_violated) > 0:
-            conflict = min([eval(x) for x in conflicts_violated], key=len)
+            conflict_indices = min([eval(x) for x in conflicts_violated], key=len)
+            conflict = [self.model_variable_names[i] for i in conflict_indices]
             return True, conflict
 
         conflicts_inconclusive = self.inconclusive_models[int(invert)].supersets(
@@ -247,18 +248,18 @@ class Mole:
                     for c in counterexample
                 )
 
-            counterexample = [self.model_variable_names[i] for i in counterexample]
-            filtered_partial_model = {name: partial_model[name] for name in counterexample}
+            counterexample_names = [self.model_variable_names[i] for i in counterexample]
+            filtered_partial_model = {name: partial_model[name] for name in counterexample_names}
             filtered_frozen_partial_model = set(map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items()))
-            # supersets = self.all_violated_models[int(invert)].supersets(filtered_frozen_partial_model)
-            # for superset in supersets:
-            #     self.all_violated_models[int(invert)].remove(superset)
+
+            supersets = self.all_violated_models[int(invert)].supersets(filtered_frozen_partial_model)
+            for superset in supersets:
+                self.all_violated_models[int(invert)].remove(superset)
+
             self.all_violated_models[int(invert)].insert(
                 filtered_frozen_partial_model, str(counterexample)
             )
-            # if len(filtered_frozen_partial_model) != len(frozen_partial_model):
-            #     print("Filtered", filtered_partial_model, partial_model)
-            return True, counterexample
+            return True, counterexample_names
         else:
             # We can't do anything with this model, so we just return False.
             # subsets = self.inconclusive_models[int(invert)].subsets(frozen_partial_model)
