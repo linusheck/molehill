@@ -32,6 +32,7 @@ class ForallExistsConstraint(Constraint):
         function: z3.Function,
         variables: list[z3.Var],
         variables_in_ranges: Callable[[list[z3.Var]], z3.ExprRef],
+        **args
     ) -> z3.ExprRef:
         forall_variables = [
             var
