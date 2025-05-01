@@ -18,7 +18,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12'
+        python-version: '3.13'
 
     - name: Ensure pip
       run: python -m ensurepip
@@ -28,9 +28,6 @@ jobs:
 
     - name: Update pip
       run: pipenv run python -m ensurepip --upgrade
-
-    - name: Install modern setuptools that works without ImpImporter
-      run: pipenv run python -m pip install 'setuptools>=70.0.0'
 
     - name: Install dependencies from requirements.txt
       run: pipenv run pip install -r requirements.txt
