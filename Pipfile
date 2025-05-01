@@ -10,6 +10,7 @@ benchexec = "*"
 mercury-settrie = "*"
 svgwrite = "*"
 click = "*"
+black = "*"
 
 [dev-packages]
 

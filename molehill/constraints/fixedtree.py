@@ -50,7 +50,7 @@ class FixedDecisionTree(Constraint):
             default=None,
         )
 
-    def build_constraint(self, function, variables, variables_in_ranges):
+    def build_constraint(self, function, variables, variables_in_ranges, **args):
         tree_depth = self.args.tree_depth
         self.tree_depth = tree_depth
         self.variables = variables

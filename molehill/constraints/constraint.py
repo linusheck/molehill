@@ -26,6 +26,7 @@ class Constraint:
         function: z3.Function,
         variables: list[z3.Var],
         variables_in_ranges: Callable[[list[z3.Var]], z3.ExprRef],
+        **args,
     ) -> z3.ExprRef:
         """Implement your constraint here. Arguments are passed by args. Call
         variables_in_ranges on variables to get a Z3 expression that represents

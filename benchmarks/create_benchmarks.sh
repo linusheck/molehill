@@ -18,6 +18,6 @@ for i in avoid-8-2 avoid-8-2-easy dpm-switch-q10 dpm-switch-q10-big obstacles-10
     python create_benchmark.py robust ../../../resources/mdp-sketches/atva-sat/$i ../../sat.txt true
 done
 
-for i in bridge-11-5-4 bridge-21-7-9 bridge-5-3-1 masterextra-2-4-3 mastermind-2-4-3 pacman-6 rocks-3-2 rocks-4-1 rocks-4-2 rocks-8-1; do
+for i in bridge-11-5-4 bridge-21-7-9 bridge-5-3-1 mastermind-2-4-3 pacman-6 rocks-3-2 rocks-4-1 rocks-4-2 rocks-8-1; do
     python create_benchmark.py robust ../../../resources/mdp-sketches/atva-sat/$i ../../sat.txt true
 done

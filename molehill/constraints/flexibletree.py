@@ -55,26 +55,43 @@ class DecisionTree(Constraint):
             )
 
 
-    def build_constraint(self, function, variables, variables_in_ranges):
+    def build_constraint(self, function, variables, variables_in_ranges, **args):
         self.variables = variables
         num_nodes = self.args.nodes
 
+
         forall_variables = []
+        forall_indices = []
         if self.robust:
             # build forall constraint
-            forall_variables = [
-                var
-                for var in variables
+            forall_indices = [
+                i
+                for i, var in enumerate(variables)
                 if any([x in str(var) for x in self.args.forall.split(" ")])
             ]
+            forall_variables = [variables[i] for i in forall_indices]
             if len(forall_variables) == 0:
                 raise ValueError("No variables found with the given pattern.")
         
         num_bits = max([x.size() for x in variables])
 
-
-        policy_vars = [x for x in variables if x not in forall_variables]
+        policy_indices = list(range(len(variables)))
+        if self.robust:
+            # remove the forall variables from the policy indices
+            for i in forall_indices:
+                policy_indices.remove(i)
+        policy_vars = [variables[i] for i in policy_indices]
         self.policy_vars = policy_vars
+
+        # Check that the available action labels of policy vars are consistent
+        if "family" in args:
+            labels = args["family"].hole_to_option_labels[policy_indices[0]]
+            for i in policy_indices:
+                print(args["family"].hole_to_option_labels[i], labels)
+                if args["family"].hole_to_option_labels[i] != labels:
+                    raise ValueError(
+                        f"The available action labels of the policy variables are inconsistent ({labels} vs {args['family'].hole_to_action_labels[i]})."
+                    )
 
         # variables have names of the form
         # A([picked0=1       & picked1=0     & picked2=1     & picked3=1     & picked4=0     & picked5=1     & picked6=1     & x=3   & y=2],0
@@ -175,6 +192,7 @@ class DecisionTree(Constraint):
                         )
                     )
             else:
+                print(f"Too many values ({num_values}) for explicit tree constraints, using forall quantification.")
                 # Symbolically forall-quantify over the values (too many to enumerate)
                 property_vars = [z3.BitVec(f"prop_{i}", num_bits) for i in range(num_properties)]
                 forall_statements.append(
