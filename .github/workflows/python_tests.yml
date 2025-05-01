@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     container:
-      image: movesrwth/storm:ci-debug
+      image: movesrwth/stormpy:ci-debug
 
     steps:
     - uses: actions/checkout@v3
