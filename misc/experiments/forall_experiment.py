@@ -1,5 +1,6 @@
 import z3
 
+
 class ForallPropagator(z3.UserPropagateBase):
     def __init__(self, solver):
         super().__init__(solver, None)
@@ -32,7 +33,9 @@ class ForallPropagator(z3.UserPropagateBase):
 
     def analyse_current_model(self):
         # find all valid calls in the partial model
-        valid_calls = [(x, bool(y)) for x, y in self.partial_model.items() if x.startswith("valid")]
+        valid_calls = [
+            (x, bool(y)) for x, y in self.partial_model.items() if x.startswith("valid")
+        ]
         # valid(x!1, y!0, 0)
         # involved variables: [x!1, y!0]
 
@@ -54,12 +57,14 @@ class ForallPropagator(z3.UserPropagateBase):
             print("partial model here", partial_model_here)
             print("expecting result", value)
 
-            model_consistent, counterexample = self.partial_model_consistent(partial_model_here)
+            model_consistent, counterexample = self.partial_model_consistent(
+                partial_model_here
+            )
 
             if model_consistent != value:
                 print("Conflict", [self.names_to_vars[str(x)] for x in counterexample])
                 self.conflict([self.names_to_vars[str(x)] for x in counterexample])
-    
+
     def partial_model_consistent(self, partial_model):
         print(partial_model)
         if "z" in partial_model and partial_model["z"] == 0:
@@ -102,7 +107,6 @@ class ForallPropagator(z3.UserPropagateBase):
                 self.add(argument)
                 self.names_to_vars[str(argument)] = argument
                 print("Add", argument)
-    
 
     def _final(self):
         print("Final")
@@ -115,8 +119,10 @@ def test_forall():
     x = z3.BitVec("x", 1)
     y = z3.BitVec("y", 1)
     z = z3.BitVec("z", 1)
-    f = z3.PropagateFunction("valid", z3.BitVecSort(1), z3.BitVecSort(1), z3.BitVecSort(1), z3.BoolSort())
-    s.add(z3.ForAll([y,z], f(x, y, z)))
+    f = z3.PropagateFunction(
+        "valid", z3.BitVecSort(1), z3.BitVecSort(1), z3.BitVecSort(1), z3.BoolSort()
+    )
+    s.add(z3.ForAll([y, z], f(x, y, z)))
     # s.add(f(x,y,z))
     s.add(x == 1)
     s.add(y == 2)
@@ -125,6 +131,7 @@ def test_forall():
     propagator.register_variables([x, y, z])
     print(s.check())
     print(s.model())
+
 
 if __name__ == "__main__":
     test_forall()

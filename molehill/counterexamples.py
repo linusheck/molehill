@@ -13,6 +13,7 @@ class CECheckResult:
     result: any
     consistent_scheduler: any = None
 
+
 def check(
     matrix_generator,
     family,
@@ -54,11 +55,12 @@ def check(
 
     if remove_optimal_holes:
         optimization_direction = prop.formula.optimality_type
-        optimal_holes = matrix_generator.optimal_assignments(result.scheduler, result.get_values(), optimization_direction)
+        optimal_holes = matrix_generator.optimal_assignments(
+            result.scheduler, result.get_values(), optimization_direction
+        )
         for h in optimal_holes:
             if h in fixed_holes:
                 fixed_holes.remove(h)
-        
 
     if all_schedulers_violate_full and compute_counterexample:
         # We abstract in the order of which holes we saw first, which holes we saw second, etc...
@@ -70,7 +72,7 @@ def check(
                 BitVector(family.num_holes, abstracted_holes_here), hole_options
             )
             mdp_holes = matrix_generator.get_current_mdp()
-            
+
             all_schedulers_violate, result = check_model(mdp_holes, prop, None)
 
             if all_schedulers_violate:

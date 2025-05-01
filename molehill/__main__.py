@@ -29,18 +29,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "project_path", type=str, help="The path to the project directory."
     )
-    parser.add_argument(
-        "--exact", action="store_true", help="Exact mode."
-    )
+    parser.add_argument("--exact", action="store_true", help="Exact mode.")
     parser.add_argument(
         "--image", action="store_true", help="Generate an image of the curve."
     )
     parser.add_argument(
         "--plot-args", action="store_true", help="Plot function arguments."
     )
-    parser.add_argument(
-        "--verbose", action="store_true", help="Verbose mode."
-    )
+    parser.add_argument("--verbose", action="store_true", help="Verbose mode.")
     # number of tree nodes
     parser.add_argument(
         "--ce",
@@ -52,7 +48,15 @@ if __name__ == "__main__":
     parser.add_argument(
         "--constraint",
         type=str,
-        choices=["none", "tree", "mtbdd", "existsforall", "forallexists", "existsforalltree", "custom"],
+        choices=[
+            "none",
+            "tree",
+            "mtbdd",
+            "existsforall",
+            "forallexists",
+            "existsforalltree",
+            "custom",
+        ],
         default="none",
         help="Constraint to use. Built-in constraints are: tree, mtbdd. By setting this to custom, you can implement a custom constraint in project_path/constraint.py. See the README for more information.",
     )

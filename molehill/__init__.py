@@ -36,18 +36,27 @@ def run(
     family = quotient.family
 
     # WIP version, currently only supports memoryless schdedulers for PomdpFamilyQuotient
-    if isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient) or isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient):
-        quotient.family.hole_to_name = ["sketch_hole_" + x for x in quotient.family.hole_to_name] # feel free to change the prefix, this should just make it easier to creat exists forall queries
+    if isinstance(
+        quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient
+    ) or isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient):
+        quotient.family.hole_to_name = [
+            "sketch_hole_" + x for x in quotient.family.hole_to_name
+        ]  # feel free to change the prefix, this should just make it easier to creat exists forall queries
 
         choice_to_hole_options = quotient.coloring.getChoiceToAssignment()
 
         if isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
             obs_to_hole = []
             for obs in range(quotient.num_observations):
-                if len(quotient.observation_to_actions[obs]) > 1: # if there's only one choice in an observation there's no point in adding a hole
+                if (
+                    len(quotient.observation_to_actions[obs]) > 1
+                ):  # if there's only one choice in an observation there's no point in adding a hole
                     # here would come potential memory size
-                    option_labels = [quotient.action_labels[i] for i in quotient.observation_to_actions[obs]]
-                    hole_name = f"A(obs_{obs},0)" # getting the observation expressions is a bit more complicated, and I don't think it's important for now
+                    option_labels = [
+                        quotient.action_labels[i]
+                        for i in quotient.observation_to_actions[obs]
+                    ]
+                    hole_name = f"A(obs_{obs},0)"  # getting the observation expressions is a bit more complicated, and I don't think it's important for now
                     obs_to_hole.append(quotient.family.num_holes)
                     quotient.family.add_hole(hole_name, option_labels)
                 else:
@@ -59,14 +68,23 @@ def run(
                 obs = quotient.obs_evaluator.state_to_obs_class[state]
                 obs_hole = obs_to_hole[obs]
                 if obs_hole is not None:
-                    for choice in range(nci[state], nci[state+1]):
-                        action_hole_index = quotient.observation_to_actions[obs].index(quotient.choice_to_action[choice])
-                        choice_to_hole_options[choice].append((obs_hole, action_hole_index))
+                    for choice in range(nci[state], nci[state + 1]):
+                        action_hole_index = quotient.observation_to_actions[obs].index(
+                            quotient.choice_to_action[choice]
+                        )
+                        choice_to_hole_options[choice].append(
+                            (obs_hole, action_hole_index)
+                        )
 
-            quotient.coloring = payntbind.synthesis.Coloring(family.family, quotient.quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
-        else: # meaning it is a MdpFamilyQuotient
+            quotient.coloring = payntbind.synthesis.Coloring(
+                family.family,
+                quotient.quotient_mdp.nondeterministic_choice_indices,
+                choice_to_hole_options,
+            )
+        else:  # meaning it is a MdpFamilyQuotient
+
             def _get_state_valuations(model):
-                ''' Identify variable names and extract state valuation in the same order. '''
+                """Identify variable names and extract state valuation in the same order."""
                 assert model.has_state_valuations(), "model has no state valuations"
                 # get name
                 sv = model.state_valuations
@@ -79,23 +97,43 @@ def run(
                     valuation = [valuation[var_name] for var_name in variable_name]
                     state_valuations.append(valuation)
                 return variable_name, state_valuations
+
             var_names, state_valuations = _get_state_valuations(quotient.quotient_mdp)
             nci = quotient.quotient_mdp.nondeterministic_choice_indices.copy()
             for state in range(quotient.quotient_mdp.nr_states):
-                if len(quotient.state_to_actions[state]) > 1: # again if there's only one action in a state there's no point in adding a hole
-                    option_labels = [quotient.action_labels[i] for i in quotient.state_to_actions[state]]
-                    vals_here = "&".join([f"{var_name}={int(state_valuations[state][i])}" for i,var_name in enumerate(var_names) if not var_name.startswith("_loc_prism2jani")])
+                if (
+                    len(quotient.state_to_actions[state]) > 1
+                ):  # again if there's only one action in a state there's no point in adding a hole
+                    option_labels = [
+                        quotient.action_labels[i]
+                        for i in quotient.state_to_actions[state]
+                    ]
+                    vals_here = "&".join(
+                        [
+                            f"{var_name}={int(state_valuations[state][i])}"
+                            for i, var_name in enumerate(var_names)
+                            if not var_name.startswith("_loc_prism2jani")
+                        ]
+                    )
                     hole_name = f"A([{vals_here}])"
                     hole_index = quotient.family.num_holes
                     quotient.family.add_hole(hole_name, option_labels)
-                    for choice in range(nci[state], nci[state+1]):
-                        action_hole_index = quotient.state_to_actions[state].index(quotient.choice_to_action[choice])
-                        choice_to_hole_options[choice].append((hole_index, action_hole_index))
+                    for choice in range(nci[state], nci[state + 1]):
+                        action_hole_index = quotient.state_to_actions[state].index(
+                            quotient.choice_to_action[choice]
+                        )
+                        choice_to_hole_options[choice].append(
+                            (hole_index, action_hole_index)
+                        )
 
-            quotient.coloring = payntbind.synthesis.Coloring(family.family, quotient.quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
+            quotient.coloring = payntbind.synthesis.Coloring(
+                family.family,
+                quotient.quotient_mdp.nondeterministic_choice_indices,
+                choice_to_hole_options,
+            )
 
         family = quotient.family
-    
+
     if verbose:
         z3.set_param("smt.mbqi", True)
         z3.set_param("smt.mbqi.trace", True)
@@ -152,10 +190,9 @@ def run(
     # s.add(variables[1] == 0)
 
     # add literal bitvectors (somehow, this makes the search much faster)
-    for value in range(2 ** num_bits):
+    for value in range(2**num_bits):
         bitvector = z3.BitVecVal(value, num_bits)
         s.add(z3.BitVec(f"useless_const_{value}", num_bits) == bitvector)
-    
 
     # valid(0,0,...,0)
     # not valid(1,1,...1,)
@@ -209,10 +246,11 @@ def run(
         from molehill.plotters.curve_drawer import draw_curve
 
         draw_curve(num_bits, variables, s, p, model)
-    
+
     if plot_function_args:
         print("Drawing function arguments")
         from molehill.plotters.function_args_drawer import draw_function_args
+
         draw_function_args(p)
 
     # return is for testing purposes

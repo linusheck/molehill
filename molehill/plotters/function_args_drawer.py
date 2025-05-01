@@ -1,5 +1,6 @@
 import svgwrite
 
+
 def draw_function_args(mole):
     function_args = mole.function_argument_tracker
 
@@ -48,10 +49,32 @@ def draw_function_args(mole):
             except ValueError:
                 # If it's not a number, use a shade of yellow based on the string hash
                 hash_value = hash(matrix[i][j])
-                fill_color = f"rgb(255, {220 + (hash_value % 36)}, {100 + (hash_value % 56)})"
-            dwg.add(dwg.rect((j * scale_mult, i * scale_mult), (scale_mult, scale_mult), fill=fill_color))
+                fill_color = (
+                    f"rgb(255, {220 + (hash_value % 36)}, {100 + (hash_value % 56)})"
+                )
+            dwg.add(
+                dwg.rect(
+                    (j * scale_mult, i * scale_mult),
+                    (scale_mult, scale_mult),
+                    fill=fill_color,
+                )
+            )
             # Add text to each cell
-            font_size = f"{scale_mult / 2}px" if len(matrix[i][j]) < 4 else f"{scale_mult / 5}px"
-            dwg.add(dwg.text(matrix[i][j], insert=((j * scale_mult) + (scale_mult/2), (i * scale_mult) + (scale_mult/2)), text_anchor="middle", font_size=font_size))
+            font_size = (
+                f"{scale_mult / 2}px"
+                if len(matrix[i][j]) < 4
+                else f"{scale_mult / 5}px"
+            )
+            dwg.add(
+                dwg.text(
+                    matrix[i][j],
+                    insert=(
+                        (j * scale_mult) + (scale_mult / 2),
+                        (i * scale_mult) + (scale_mult / 2),
+                    ),
+                    text_anchor="middle",
+                    font_size=font_size,
+                )
+            )
     # Save the SVG to a file
     dwg.save()

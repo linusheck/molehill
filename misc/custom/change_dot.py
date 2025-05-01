@@ -12,9 +12,9 @@ for l in lines:
         continue
     beginning = l.split("[")
     if "->" in beginning:
-        output_lines.append(beginning[0] + "[arrowhead=none,label=\"\"];")
+        output_lines.append(beginning[0] + '[arrowhead=none,label=""];')
     else:
-        output_lines.append(beginning[0] + "[shape=point,label=\"\"];")
-    
+        output_lines.append(beginning[0] + '[shape=point,label=""];')
+
 
 print("\n".join(output_lines))

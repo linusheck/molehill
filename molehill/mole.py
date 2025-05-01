@@ -18,7 +18,7 @@ class Mole:
         quotient,
         exact=False,
         draw_image=False,
-        considered_counterexamples="all"
+        considered_counterexamples="all",
     ):
         self.quotient = quotient
         self.exact = exact
@@ -128,7 +128,9 @@ class Mole:
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
 
         if time.time() - self.time_last_print > 1:
-            print(f"Considered {self.mc_calls} models so far (cache hits: {self.considered_models - self.mc_calls})")
+            print(
+                f"Considered {self.mc_calls} models so far (cache hits: {self.considered_models - self.mc_calls})"
+            )
             self.time_last_print = time.time()
 
         num_fixed = len(partial_model.keys())
@@ -144,10 +146,12 @@ class Mole:
 
         self.considered_models += 1
 
-        frozen_partial_model = set(map(lambda x: f"{x[0]}={x[1]}", partial_model.items()))
-        conflicts_violated = list(self.all_violated_models[int(invert)].subsets(
-            frozen_partial_model
-        ))
+        frozen_partial_model = set(
+            map(lambda x: f"{x[0]}={x[1]}", partial_model.items())
+        )
+        conflicts_violated = list(
+            self.all_violated_models[int(invert)].subsets(frozen_partial_model)
+        )
         if len(conflicts_violated) > 0:
             conflict_indices = min([eval(x) for x in conflicts_violated], key=len)
             conflict = [self.model_variable_names[i] for i in conflict_indices]
@@ -159,18 +163,18 @@ class Mole:
         if len(conflicts_inconclusive) > 0:
             return False, None
 
-        # If the set intersects with a set where we have proven the opposite, 
+        # If the set intersects with a set where we have proven the opposite,
         # we can just return False.
         # This holds for subsets:
-        conflicts_inverse_violated_sub = self.all_violated_models[1 - int(invert)].subsets(
-            frozen_partial_model
-        )
+        conflicts_inverse_violated_sub = self.all_violated_models[
+            1 - int(invert)
+        ].subsets(frozen_partial_model)
         if len(conflicts_inverse_violated_sub) > 0:
             return False, None
         # And supersets:
-        conflicts_inverse_violated_super = self.all_violated_models[1 - int(invert)].supersets(
-            frozen_partial_model
-        )
+        conflicts_inverse_violated_super = self.all_violated_models[
+            1 - int(invert)
+        ].supersets(frozen_partial_model)
         if len(conflicts_inverse_violated_super) > 0:
             return False, None
 
@@ -181,7 +185,6 @@ class Mole:
             var = self.model_variable_names[hole]
             if var in partial_model:
                 new_family.hole_set_options(hole, [partial_model[var]])
-        
 
         # Prop is always rechability, even if our input was until (thanks paynt :)).
         prop = self.quotient.specification.all_properties()[0]
@@ -248,11 +251,19 @@ class Mole:
                     for c in counterexample
                 )
 
-            counterexample_names = [self.model_variable_names[i] for i in counterexample]
-            filtered_partial_model = {name: partial_model[name] for name in counterexample_names}
-            filtered_frozen_partial_model = set(map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items()))
+            counterexample_names = [
+                self.model_variable_names[i] for i in counterexample
+            ]
+            filtered_partial_model = {
+                name: partial_model[name] for name in counterexample_names
+            }
+            filtered_frozen_partial_model = set(
+                map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items())
+            )
 
-            supersets = self.all_violated_models[int(invert)].supersets(filtered_frozen_partial_model)
+            supersets = self.all_violated_models[int(invert)].supersets(
+                filtered_frozen_partial_model
+            )
             for superset in supersets:
                 self.all_violated_models[int(invert)].remove(superset)
 
@@ -273,9 +284,15 @@ class Mole:
 
             minus_one = 18446744073709551615
             if check_result.consistent_scheduler is not None:
-                filtered_partial_model = {self.model_variable_names[i]: x for i, x in enumerate(check_result.consistent_scheduler) if x != minus_one}
+                filtered_partial_model = {
+                    self.model_variable_names[i]: x
+                    for i, x in enumerate(check_result.consistent_scheduler)
+                    if x != minus_one
+                }
                 self.all_violated_models[int(not invert)].insert(
-                    set(map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items())),
+                    set(
+                        map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items())
+                    ),
                     str(filtered_partial_model),
                 )
 

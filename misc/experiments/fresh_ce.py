@@ -1,5 +1,6 @@
 import z3
 
+
 class ForallPropagator(z3.UserPropagateBase):
     def __init__(self, solver, ctx=None):
         super().__init__(solver, ctx)
@@ -19,7 +20,7 @@ class ForallPropagator(z3.UserPropagateBase):
     #         self.add(var)
     #         self.variables.append(var)
     #         self.variable_names.append(str(var))
-    
+
     def push(self):
         pass
 
@@ -46,7 +47,7 @@ class ForallPropagator(z3.UserPropagateBase):
             if not z3.Z3_is_numeral_ast(x.ctx_ref(), argument.as_ast()):
                 self.add(argument)
                 print("Add", argument)
-    
+
     def _final(self):
         pass
 
@@ -56,8 +57,10 @@ def test_forall():
     x = z3.BitVec("x", 1)
     y = z3.BitVec("y", 1)
     z = z3.BitVec("z", 1)
-    f = z3.PropagateFunction("valid", z3.BitVecSort(1), z3.BitVecSort(1), z3.BitVecSort(1), z3.BoolSort())
-    s.add(z3.ForAll([y,z], f(x, y, z)))
+    f = z3.PropagateFunction(
+        "valid", z3.BitVecSort(1), z3.BitVecSort(1), z3.BitVecSort(1), z3.BoolSort()
+    )
+    s.add(z3.ForAll([y, z], f(x, y, z)))
     # s.add(f(x,y,z))
     s.add(x == 1)
     s.add(y == 2)
@@ -68,6 +71,7 @@ def test_forall():
     print("Check")
     print(s.check())
     print(s.model())
+
 
 if __name__ == "__main__":
     test_forall()

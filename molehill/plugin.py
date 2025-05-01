@@ -98,7 +98,9 @@ class SearchMarkovChain(z3.UserPropagateBase):
                                 break
                         else:
                             num_bits = self.valid_function.arg(i).sort().size()
-                            val_in_bits = [(v >> bit_i) & 1 for bit_i in range(num_bits)]
+                            val_in_bits = [
+                                (v >> bit_i) & 1 for bit_i in range(num_bits)
+                            ]
                             # print(v, val_in_bits)
                             if involved_variables[i] in split_numbers:
                                 # inconsistent variable?
@@ -112,11 +114,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
                                 )
 
                 for split in do_these_splits:
-                    self.next_split(
-                        self.names_to_vars[split[0]], split[1], split[2]
-                    )
+                    self.next_split(self.names_to_vars[split[0]], split[1], split[2])
 
-                
                 # new_vars = []
                 # quantified_vars = []
                 # for i, v in enumerate(counterexample):
@@ -136,7 +135,7 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 #     declaration = z3.ForAll(quantified_vars, self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars)))
                 # else:
                 #     declaration = self.valid_function.decl()(*new_vars) if value else z3.Not(self.valid_function.decl()(*new_vars))
-                
+
                 # self.propagate(declaration, [self.names_to_vars[x] for x in self.fixed_values])
 
     def push(self):
@@ -169,11 +168,13 @@ class SearchMarkovChain(z3.UserPropagateBase):
             ast_str = ast.sexpr()
         else:
             ast_str = self.get_name_from_ast_map(ast)
-        
+
         if value.sort() == z3.BoolSort():
             self.partial_model[ast_str] = bool(value)
             if ast_str.startswith("(valid"):
-                self.data.function_argument_tracker.append([value] + self.function_arguments[ast_str])
+                self.data.function_argument_tracker.append(
+                    [value] + self.function_arguments[ast_str]
+                )
         else:
             self.partial_model[ast_str] = value.as_long()
         self.fixed_values.append(ast_str)

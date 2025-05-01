@@ -1,6 +1,7 @@
 import subprocess
 import sys
 
+
 def main():
     if len(sys.argv) != 2:
         print("Usage: python run_until_sat.py <arg1>")
@@ -12,7 +13,16 @@ def main():
     while True:
         print(f"Running with --nodes {x}")
         process = subprocess.Popen(
-            ["python", "-m", "molehill", arg1, "--constraint", "existsforalltree", "--nodes", str(x)],
+            [
+                "python",
+                "-m",
+                "molehill",
+                arg1,
+                "--constraint",
+                "existsforalltree",
+                "--nodes",
+                str(x),
+            ],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
@@ -21,7 +31,7 @@ def main():
 
         found_sat = False
         for line in process.stdout:
-            print(line, end='')  # Already includes newline
+            print(line, end="")  # Already includes newline
             if line.strip() == "sat":
                 found_sat = True
 
@@ -31,6 +41,7 @@ def main():
             break
 
         x += 2
+
 
 if __name__ == "__main__":
     main()

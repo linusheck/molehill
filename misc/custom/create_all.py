@@ -16,15 +16,19 @@ import os
 
 # create a new svg
 svg = open("dots_svgs/sketch.svg", "w")
-svg.write("""<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-""")
+svg.write(
+    """<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+"""
+)
 for P1 in range(4):
     for P2 in range(4):
         for P3 in range(4):
             for P4 in range(4):
-                svg.write(f"""<g>
+                svg.write(
+                    f"""<g>
                 {open(f"dots_svgs/sketch{P1}{P2}{P3}{P4}.svg").read()}
 </g>
-""")
+"""
+                )
 svg.write("</svg>")
 svg.close()
