@@ -20,11 +20,17 @@ jobs:
       with:
         python-version: '3.13'
 
+    - name: Install pipenv
+      run: pip install pipenv
+
+    - name: Pipenv shell
+      run: pipenv shell
+
     - name: Install dependencies from requirements.txt
-      run: pip install -r requirements.txt
+      run: pipenv run pip install -r requirements.txt
 
     - name: Install stormpy and paynt
-      run: python setup.py install
+      run: pipenv run python setup.py install
 
     - name: Run tests
-      run: python -m pytest
+      run: pipenv run python -m pytest
