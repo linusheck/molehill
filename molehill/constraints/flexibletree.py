@@ -86,10 +86,9 @@ class DecisionTree(Constraint):
         if "family" in args:
             labels = args["family"].hole_to_option_labels[policy_indices[0]]
             for i in policy_indices:
-                print(args["family"].hole_to_option_labels[i], labels)
                 if args["family"].hole_to_option_labels[i] != labels:
                     raise ValueError(
-                        f"The available action labels of the policy variables are inconsistent ({labels} vs {args['family'].hole_to_action_labels[i]})."
+                        f"The available action labels of the policy variables are inconsistent ({labels} vs {args['family'].hole_to_option_labels[i]})."
                     )
 
         # variables have names of the form
