@@ -11,6 +11,7 @@ mercury-settrie = "*"
 svgwrite = "*"
 click = "*"
 black = "*"
+pytest = "*"
 
 [dev-packages]
 
