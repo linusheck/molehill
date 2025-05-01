@@ -8,11 +8,11 @@ from molehill.constraints import ExistsForallConstraint, DecisionTree
 from argparse import Namespace
 import paynt
 
-# @pytest.mark.parametrize("project_path", ["resources/test/robust/rocks-4-2", "resources/test/robust/rover-1000", "resources/test/robust/obstacles-10-6-skip-easy"])
-@pytest.mark.parametrize("project_path", ["resources/mdp-sketches/atva-sat/rocks-6-4"])
+@pytest.mark.parametrize("project_path", ["resources/test/robust/rocks-4-2", "resources/test/robust/rover-1000", "resources/test/robust/obstacles-10-6-skip-easy"])
+# @pytest.mark.parametrize("project_path", ["resources/mdp-sketches/atva-sat/rocks-6-4"])
 @pytest.mark.parametrize("considered_counterexamples", ["none"])
-# @pytest.mark.parametrize("tree", [0, 5])
-@pytest.mark.parametrize("tree", [5])
+@pytest.mark.parametrize("tree", [0, 5])
+# @pytest.mark.parametrize("tree", [5])
 def test_robust(project_path, considered_counterexamples, tree):
     if tree > 0:
         constraint = DecisionTree(robust=True)
