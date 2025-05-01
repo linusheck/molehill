@@ -21,8 +21,8 @@ jobs:
     - name: Install Pipenv
       run: pip install pipenv
 
-    - name: Install dependencies
-      run: pipenv install --dev
+    - name: Install dependencies from requirements.txt
+      run: pip install -r requirements.txt
 
     - name: Run tests
       run: pipenv run python -m pytest

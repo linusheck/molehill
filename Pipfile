@@ -4,14 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-anytree = "*"
-rebench = "*"
-benchexec = "*"
-mercury-settrie = "*"
-svgwrite = "*"
-click = "*"
-black = "*"
-pytest = "*"
 
 [dev-packages]
 
