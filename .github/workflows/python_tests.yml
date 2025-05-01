@@ -10,10 +10,15 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     container:
-      image: movesrwth/stormpy:ci-debug
+      image: movesrwth/storm:ci-debug
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Set up Python 1.13
+      uses: actions/setup-python@v4
+      with:
+      python-version: 1.13
 
     - name: Install pipenv
       run: pip install pipenv
