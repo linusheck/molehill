@@ -21,5 +21,8 @@ jobs:
     - name: Install dependencies from requirements.txt
       run: pip install -r requirements.txt
 
+    - name: Install stormpy and paynt
+      run: python setup.py install
+
     - name: Run tests
       run: python -m pytest
