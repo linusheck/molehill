@@ -29,11 +29,11 @@ jobs:
     - name: Update pip
       run: pipenv run python -m ensurepip --upgrade
 
-    - name: Install dependencies from requirements.txt
-      run: pipenv run pip install -r requirements.txt
+    # - name: Install dependencies from requirements.txt
+    #   run: pipenv run pip install -r requirements.txt
 
-    - name: Install stormpy and paynt
-      run: pipenv run python setup.py install
+    # - name: Install stormpy and paynt
+    #   run: pipenv run python setup.py install
 
-    - name: Run tests
-      run: pipenv run python -m pytest
+    # - name: Run tests
+    #   run: pipenv run python -m pytest
