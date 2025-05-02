@@ -2,7 +2,7 @@
 
 import z3
 from molehill.constraints import Constraint
-from itertools import product
+from itertools import product, chain
 
 
 def piecewise_select(array, z3_int):
@@ -34,6 +34,10 @@ class DecisionTree(Constraint):
         self.variables = None
         self.policy_vars = None
         self.robust = robust
+        self.labels = None
+        self.label_to_index = None
+        self.left_child_ranges = None
+        self.right_child_ranges = None
 
     def register_arguments(self, argument_parser):
         argument_parser.add_argument(
@@ -82,14 +86,24 @@ class DecisionTree(Constraint):
         policy_vars = [variables[i] for i in policy_indices]
         self.policy_vars = policy_vars
 
+        assert "family" in args, "Family must be provided to DecisionTree."
+
+        # Collect all action labels and put them into an order
+        labels = list(dict.fromkeys(chain(*[args["family"].hole_to_option_labels[i] for i in policy_indices])))
+        label_to_index = {label: i for i, label in enumerate(labels)}
+        self.labels = labels
+        self.label_to_index = label_to_index
+        hole_to_label_indices = []
+        assert 2**num_bits > len(labels)
+
         # Check that the available action labels of policy vars are consistent
-        if "family" in args:
-            labels = args["family"].hole_to_option_labels[policy_indices[0]]
-            for i in policy_indices:
-                if args["family"].hole_to_option_labels[i] != labels:
-                    raise ValueError(
-                        f"The available action labels of the policy variables are inconsistent ({labels} vs {args['family'].hole_to_option_labels[i]})."
-                    )
+        for i in policy_indices:
+            hole_to_label_indices.append(
+                [
+                    label_to_index[label]
+                    for label in args["family"].hole_to_option_labels[i]
+                ]
+            )
 
         # variables have names of the form
         # A([picked0=1       & picked1=0     & picked2=1     & picked3=1     & picked4=0     & picked5=1     & picked6=1     & x=3   & y=2],0
@@ -144,14 +158,13 @@ class DecisionTree(Constraint):
         forall_statements = []
 
         for i in range(num_nodes):
+            # Is this node a leaf?
+            is_leaf = z3.Bool(f"leaf_{i}")
+            node_is_leaf.append(is_leaf)
+
             # The constant of a node
             constant_var = z3.BitVec(f"const_{i}", num_bits)
             node_constants.append(constant_var)
-
-            constraints.append(z3.UGE(constant_var, 0))
-            constraints.append(
-                z3.ULE(constant_var, max([x[1] for x in property_ranges]))
-            )
 
             # The property index of a node
             prop_index = z3.Int(f"prop_index_{i}")
@@ -160,9 +173,20 @@ class DecisionTree(Constraint):
             # print(num_properties)
             constraints.append(prop_index < num_properties)
             property_indices.append(prop_index)
-            # Is this node a leaf?
-            is_leaf = z3.Bool(f"leaf_{i}")
-            node_is_leaf.append(is_leaf)
+
+            constraints.append(z3.UGE(constant_var, 0))
+            constraints.append(
+                z3.If(is_leaf,
+                    z3.ULT(constant_var, len(labels)),
+                    z3.ULE(
+                        constant_var,
+                        piecewise_select(
+                            [z3.BitVecVal(x[1], num_bits) for x in property_ranges],
+                            prop_index,
+                        ),
+                    ),
+                )
+            )
 
             left_child = z3.Int(f"left_{i}")
             left_children.append(left_child)
@@ -313,9 +337,19 @@ class DecisionTree(Constraint):
             )
             constraints.append(parent_constraint)
 
-        for variable in policy_vars:
-            property_values = get_property_values(str(variable))
-            constraints.append(variable == decision_functions[0](*property_values))
+        for i, variable in enumerate(policy_vars):
+            label_range = args["family"].hole_to_option_labels[policy_indices[i]]
+            if label_range == labels:
+                # The semantics of the variable is the same as the decision tree's
+                property_values = get_property_values(str(variable))
+                constraints.append(variable == decision_functions[0](*property_values))
+            else:
+                # We need to map the decision tree's value to the label index
+                label_indices = [label_to_index[label] for label in label_range]
+                property_values = get_property_values(str(variable))
+                x = decision_functions[0](*property_values)
+                for index, label_index in enumerate(label_indices):
+                    constraints.append((variable == index) == (x == label_index))
 
         arguments = variables
 
@@ -356,15 +390,18 @@ class DecisionTree(Constraint):
             if is_leaf[node_index]:
                 if "family" in args:
                     # get action names from family
-                    return Node(
-                        args["family"].hole_to_option_labels[
-                            self.variables.index(self.policy_vars[0])
-                        ][node_constants[node_index].as_long()]
-                    )
+                    if node_constants[node_index].as_long() >= len(self.labels):
+                        # This can happen if this node is never visited
+                        return Node(
+                            "noop"
+                        )
+                    else:
+                        return Node(
+                            self.labels[node_constants[node_index].as_long()],
+                        )
                 return Node(node_constants[node_index])
             else:
                 i = node_index
-                print(node_properties)
                 calc = (
                     property_names[node_properties[i].as_long()]
                     + f" >= {node_constants[i]}?"
