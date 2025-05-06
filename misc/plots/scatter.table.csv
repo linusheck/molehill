@@ -1,0 +1,1464 @@
+tool		symbiotic 9.0.0-dev-b34dd3a1	symbiotic 9.0.0-dev-b34dd3a1	symbiotic 9.0.0-dev-b34dd3a1	symbiotic 9.0.0-dev-b34dd3a1	VeriFuzz 1.2.11	VeriFuzz 1.2.11	VeriFuzz 1.2.11	VeriFuzz 1.2.11
+run set		symbiotic.SV-COMP23_termination.Termination-Other	symbiotic.SV-COMP23_termination.Termination-Other	symbiotic.SV-COMP23_termination.Termination-Other	symbiotic.SV-COMP23_termination.Termination-Other	verifuzz.SV-COMP23_termination.Termination-Other	verifuzz.SV-COMP23_termination.Termination-Other	verifuzz.SV-COMP23_termination.Termination-Other	verifuzz.SV-COMP23_termination.Termination-Other
+https://sv-comp.sosy-lab.org/2023/results/sv-benchmarks/c/		status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+array-examples/standard_sentinel-2.yml	true	TIMEOUT (verification)				ERROR			
+array-examples/standard_vararg_ground.yml	true	TIMEOUT (verification)				ERROR			
+array-industry-pattern/array_mul_init.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+array-industry-pattern/array_shadowinit.yml	true	TIMEOUT (verification)				true	1.922160771	1.1090918080881238	
+bitvector/byte_add-1.yml	true	true	5.509595817	5.499531549983658		true	1.935228138	1.027608860982582	
+bitvector/byte_add_1-1.yml	true	true	1.021941042	1.0131756770424545		true	1.963463533	1.0554289610590786	
+bitvector/byte_add_2-2.yml	true	true	1.029586259	1.0208891540532932		true	1.965224226	1.0355464478489012	
+bitvector/gcd_4.yml	true	true	0.40029085	0.4225746509619057		true	1.640871609	0.8335974370129406	
+bitvector/jain_1-1.yml	false	false(termination)	0.795148415	0.7837680979864672		ERROR			
+bitvector/jain_2-1.yml	false	false(termination)	1.120532361	1.1096176019636914		ERROR			
+bitvector/jain_4-2.yml	false	false(termination)	1.506205473	1.4934760889736935		ERROR			
+bitvector/jain_6-1.yml	false	false(termination)	1.483234047	1.471536751021631		ERROR			
+bitvector/jain_7-2.yml	false	false(termination)	1.564068684	1.5533415749669075		ERROR			
+bitvector/s3_srvr_2a.BV.c.cil.yml	false	false(termination)	12.467628021	12.461875810986385		true			
+bitvector/s3_srvr_2a_alt.BV.c.cil.yml	false	false(termination)	12.654382831	12.643197117955424		true			
+bitvector/soft_float_1-2a.c.cil.yml	true	TIMEOUT (verification)				true	2.897268561	1.8604164640419185	
+bitvector/soft_float_1-3a.c.cil.yml	true	TIMEOUT (verification)				true	2.74199284	1.7342293590772897	
+bitvector/soft_float_2a.c.cil.yml	true	true	688.514787827	688.5445970209548		true	2.528332963	1.4657060431782156	
+bitvector/soft_float_3a.c.cil.yml	true	TIMEOUT (verification)				true	2.597538907	1.5628377611283213	
+bitvector/soft_float_4-2a.c.cil.yml	true	TIMEOUT (verification)				true	2.698647703	1.6419806680642068	
+bitvector/soft_float_4-3a.c.cil.yml	true	TIMEOUT (verification)				true	2.726121503	1.7722665208857507	
+bitvector/soft_float_5a.c.cil.yml	true	true	667.521312408	667.5358951500384		true	2.670274141	1.636252717114985	
+bitvector-regression/implicitfloatconversion.yml	true	true	0.329656773	0.3218979079974815		true	1.539751083	0.7337507479824126	
+bitvector-regression/implicitunsignedconversion-1.yml	true	true	0.334132328	0.3260404380271211		true	1.531205825	0.8140511440578848	
+bitvector-regression/implicitunsignedconversion-2.yml	true	true	0.326675698	0.3193911589914933		true	1.624027255	0.7759615059476346	
+bitvector-regression/integerpromotion-2.yml	true	true	0.317098056	0.3096728529781103		true	1.620203267	0.7761316730175167	
+bitvector-regression/integerpromotion-3.yml	true	true	0.330847918	0.3228409889852628		true	1.60685871	0.7972580241039395	
+bitvector-regression/recHanoi03-1.yml	true	TIMEOUT (verification)				true	1.799329827	0.9283704829867929	
+bitvector-regression/signextension-1.yml	true	true	0.332761132	0.32479228009469807		true	1.45781182	0.7556492330040783	
+bitvector-regression/signextension-2.yml	true	true	0.334898102	0.3270687999902293		true	1.453011054	0.7615575620438904	
+bitvector-regression/signextension2-1.yml	true	true	0.343634181	0.3362449549604207		true	1.448497656	0.75446867197752	
+bitvector-regression/signextension2-2.yml	true	true	0.328953508	0.321276907925494		true	1.634485465	0.7823689049109817	
+bitvector-loops/verisec_sendmail_tTflag_arr_one_loop.yml	true	true	0.918172824	0.9104784749215469		true	1.821514838	1.0019160620868206	
+openssl-simplified/s3_srvr_1b.cil.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_10.yml	false	TIMEOUT (verification)				false(termination)	251.264707443	251.12616068217903	
+locks/test_locks_11.yml	false	TIMEOUT (verification)				false(termination)	253.530386273	253.181051683845	
+locks/test_locks_12.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_13.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_14-1.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_14-2.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_15-1.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_15-2.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_5.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_6.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_7.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_8.yml	false	TIMEOUT (verification)				ERROR			
+locks/test_locks_9.yml	false	TIMEOUT (verification)				false(termination)	249.201085692	248.8068524270784	
+eca-rers2012/Problem01_label00.yml	false	false(termination)	2.973025654	2.959932297002524		false(termination)	294.196242879	293.3419073380064	
+eca-rers2012/Problem01_label01.yml	false	false(termination)	2.947263898	2.9344102459726855		false(termination)	293.747203325	293.0347687799949	
+eca-rers2012/Problem01_label02.yml	false	false(termination)	3.094308102	3.081462863017805		false(termination)	295.129271273	294.08922395296395	
+eca-rers2012/Problem01_label03.yml	false	false(termination)	2.947590118	2.935838919947855		false(termination)	294.56937702	293.72929533198476	
+eca-rers2012/Problem01_label04.yml	false	false(termination)	2.948044756	2.935353738022968		false(termination)	295.294969583	294.4058349658735	
+eca-rers2012/Problem01_label05.yml	false	false(termination)	2.910112335	2.8962586390553042		false(termination)	297.098607827	296.23281170101836	
+eca-rers2012/Problem01_label06.yml	false	false(termination)	2.954073425	2.942367024021223		false(termination)	295.075357116	294.25311836902983	
+eca-rers2012/Problem01_label07.yml	false	false(termination)	2.942286584	2.9289374300278723		false(termination)	295.683324631	294.94859752990305	
+eca-rers2012/Problem01_label08.yml	false	false(termination)	2.909835591	2.896624060929753		false(termination)	295.52931274	294.813184594037	
+eca-rers2012/Problem01_label09.yml	false	false(termination)	2.969544385	2.9970259609399363		false(termination)	270.28919286	269.6707867071964	
+eca-rers2012/Problem01_label10.yml	false	false(termination)	2.985082478	3.427284889970906		false(termination)	293.752127859	293.0919516568538	
+eca-rers2012/Problem01_label11.yml	false	false(termination)	2.983062288	2.9696021339623258		false(termination)	295.380896128	294.6434426391497	
+eca-rers2012/Problem01_label12.yml	false	false(termination)	3.214316393	3.201736942050047		false(termination)	296.200201112	295.19816300901584	
+eca-rers2012/Problem01_label13.yml	false	false(termination)	3.03424195	3.0209613050101325		false(termination)	295.076434022	294.25810168497264	
+eca-rers2012/Problem01_label14.yml	false	false(termination)	2.926373877	2.913152946974151		false(termination)	296.671449293	296.0778750258032	
+eca-rers2012/Problem01_label15.yml	false	false(termination)	2.920721077	2.907950193970464		false(termination)	293.870996657	293.0424624758307	
+eca-rers2012/Problem01_label16.yml	false	false(termination)	2.95817538	2.9472055450314656		false(termination)	295.810656462	294.7900793978479	
+eca-rers2012/Problem01_label17.yml	false	false(termination)	2.942248812	2.9288320390041918		false(termination)	296.194453917	295.15002351393923	
+eca-rers2012/Problem01_label18.yml	false	false(termination)	2.943151115	2.929556080023758		false(termination)	295.532183578	294.5071882021148	
+eca-rers2012/Problem01_label19.yml	false	false(termination)	3.027819452	3.0146844158880413		false(termination)	294.588209428	293.61533522303216	
+eca-rers2012/Problem01_label20.yml	false	false(termination)	2.990651878	2.9774886990198866		false(termination)	294.495260167	293.72346630110405	
+eca-rers2012/Problem01_label21.yml	false	false(termination)	2.922601833	2.9104865819681436		false(termination)	297.403059353	296.66034477506764	
+eca-rers2012/Problem01_label22.yml	false	false(termination)	2.919721243	2.937142019974999		false(termination)	270.196217684	269.2421735539101	
+eca-rers2012/Problem01_label23.yml	false	false(termination)	3.011720817	3.0313059360487387		false(termination)	294.88134601	294.19490370200947	
+eca-rers2012/Problem01_label24.yml	false	false(termination)	2.971387782	2.958428123034537		false(termination)	295.007110472	294.10676941880956	
+eca-rers2012/Problem01_label25.yml	false	false(termination)	2.902669524	2.8901348300278187		false(termination)	269.81457786	268.83849160699174	
+eca-rers2012/Problem01_label26.yml	false	false(termination)	3.151290305	3.138577401987277		false(termination)	297.496029383	296.7138251068536	
+eca-rers2012/Problem01_label27.yml	false	false(termination)	2.933510094	2.9195802889298648		false(termination)	297.12840767	296.4911587010138	
+eca-rers2012/Problem01_label28.yml	false	false(termination)	2.92690687	2.9129849820164964		false(termination)	294.170675874	293.1792936529964	
+eca-rers2012/Problem01_label29.yml	false	false(termination)	2.931786582	2.919245228986256		false(termination)	297.615023802	296.9453696748242	
+eca-rers2012/Problem01_label30.yml	false	false(termination)	2.962054399	2.9501884729834273		false(termination)	269.515036509	268.810545562068	
+eca-rers2012/Problem01_label31.yml	false	false(termination)	2.904420873	2.8906451910734177		false(termination)	295.694775703	294.91232101782225	
+eca-rers2012/Problem01_label32.yml	false	false(termination)	2.945187438	2.9648847529897466		false(termination)	269.056066923	268.379269705154	
+eca-rers2012/Problem01_label33.yml	false	false(termination)	2.911601745	2.898268013028428		false(termination)	294.032853753	293.0525234939996	
+eca-rers2012/Problem01_label34.yml	false	false(termination)	2.93258624	2.9194506050553173		false(termination)	295.23494573	294.3765757079236	
+eca-rers2012/Problem01_label35.yml	false	false(termination)	2.933509935	2.921243531978689		false(termination)	271.239798011	270.3576295240782	
+eca-rers2012/Problem01_label36.yml	false	false(termination)	2.972474617	2.999344125040807		false(termination)	295.677364746	294.95249969302677	
+eca-rers2012/Problem01_label37.yml	false	false(termination)	2.965772695	2.9524488269817084		false(termination)	296.008716899	295.11016998207197	
+eca-rers2012/Problem01_label38.yml	false	false(termination)	2.912451636	2.899895734968595		false(termination)	295.182924224	294.25150799704716	
+eca-rers2012/Problem01_label39.yml	false	false(termination)	2.907809442	2.8945940469857305		false(termination)	295.898792172	295.11872747098096	
+eca-rers2012/Problem01_label40.yml	false	false(termination)	3.202466287	3.1890813899226487		false(termination)	295.86423704	295.2524381838739	
+eca-rers2012/Problem01_label41.yml	false	false(termination)	2.943144596	2.92960735806264		false(termination)	295.834620755	295.1254433039576	
+eca-rers2012/Problem01_label42.yml	false	false(termination)	2.968437216	2.955650402000174		false(termination)	269.690531444	268.7736728019081	
+eca-rers2012/Problem01_label43.yml	false	false(termination)	3.001128119	2.987908105016686		false(termination)	294.817042998	294.1596985680517	
+eca-rers2012/Problem01_label44.yml	false	false(termination)	2.920089558	2.906924207927659		false(termination)	295.741195131	294.96083024400286	
+eca-rers2012/Problem01_label45.yml	false	false(termination)	2.948522956	2.9349649439100176		false(termination)	269.533563103	268.8205736100208	
+eca-rers2012/Problem01_label46.yml	false	false(termination)	2.9475751	2.934888423071243		false(termination)	298.013844065	297.29169459012337	
+eca-rers2012/Problem01_label47.yml	false	false(termination)	2.953665001	2.941416371962987		false(termination)	269.637634554	268.74416054598987	
+eca-rers2012/Problem01_label48.yml	false	false(termination)	2.898357405	2.8855694490484893		false(termination)	297.536124249	296.83239170280285	
+eca-rers2012/Problem01_label49.yml	false	false(termination)	2.953559516	2.9400465870276093		false(termination)	268.144842556	267.3044142338913	
+eca-rers2012/Problem01_label50.yml	false	false(termination)	3.230967807	3.21953314403072		false(termination)	270.081117955	269.05640954198316	
+eca-rers2012/Problem01_label51.yml	false	false(termination)	2.919205155	2.940390784991905		false(termination)	269.534469071	268.73728572484106	
+eca-rers2012/Problem01_label52.yml	false	false(termination)	2.923304089	2.912750598974526		false(termination)	295.454186105	294.71479139407165	
+eca-rers2012/Problem01_label53.yml	false	false(termination)	2.952756129	2.9398283710470423		false(termination)	295.249703471	294.2757808449678	
+eca-rers2012/Problem01_label54.yml	false	false(termination)	2.899140408	2.886932263034396		false(termination)	295.081023906	294.374553008005	
+eca-rers2012/Problem01_label55.yml	false	false(termination)	2.920878688	2.9095769530395046		false(termination)	270.901865429	270.2511561908759	
+eca-rers2012/Problem01_label56.yml	false	false(termination)	2.96738034	2.9567226979415864		false(termination)	294.557597488	293.7034412929788	
+eca-rers2012/Problem01_label57.yml	false	false(termination)	2.952285732	2.939378960058093		false(termination)	269.723356685	268.9151067228522	
+eca-rers2012/Problem01_label58.yml	false	false(termination)	2.918673528	2.9054154630284756		false(termination)	268.973336578	268.18374797003344	
+eca-rers2012/Problem01_label59.yml	false	false(termination)	2.95730621	2.9454427930759266		false(termination)	295.707505819	295.0366952267941	
+eca-rers2012/Problem02_label00.yml	false	false(termination)	2.440589019	2.428103876998648		false(termination)	262.636766738	261.991381268017	
+eca-rers2012/Problem02_label01.yml	false	false(termination)	2.45795037	2.4462705679470673		false(termination)	263.811962016	263.00700237508863	
+eca-rers2012/Problem02_label02.yml	false	false(termination)	2.486242156	2.4738893000176176		false(termination)	263.895294798	262.9946772651747	
+eca-rers2012/Problem02_label03.yml	false	false(termination)	2.499322968	2.487513534957543		false(termination)	262.6226059	261.78183008986525	
+eca-rers2012/Problem02_label04.yml	false	false(termination)	2.406753038	2.3942316150059924		false(termination)	262.610335405	262.0535467281006	
+eca-rers2012/Problem02_label05.yml	false	false(termination)	2.535265436	2.526340260053985		false(termination)	264.546689664	263.67566563701257	
+eca-rers2012/Problem02_label06.yml	false	false(termination)	2.433850393	2.421829564962536		false(termination)	262.499220869	261.820247357944	
+eca-rers2012/Problem02_label07.yml	false	false(termination)	2.431432717	2.4182486720383167		false(termination)	282.853508556	282.05443891882896	
+eca-rers2012/Problem02_label08.yml	false	false(termination)	2.445489122	2.4327340830350295		false(termination)	265.35169962	264.4024175219238	
+eca-rers2012/Problem02_label09.yml	false	false(termination)	2.412805444	2.399667029036209		false(termination)	262.763834711	262.0360976238735	
+eca-rers2012/Problem02_label10.yml	false	false(termination)	2.39027182	2.3796024509938434		false(termination)	282.960792713	282.3751621870324	
+eca-rers2012/Problem02_label11.yml	false	false(termination)	2.445418655	2.4323267469881102		false(termination)	262.733718789	261.92976328684017	
+eca-rers2012/Problem02_label12.yml	false	false(termination)	2.506979674	2.495411445037462		false(termination)	262.82997444	261.80785053782165	
+eca-rers2012/Problem02_label13.yml	false	false(termination)	2.428954844	2.415981560945511		false(termination)	262.662576398	261.89863022603095	
+eca-rers2012/Problem02_label14.yml	false	false(termination)	2.446145964	2.433467559982091		false(termination)	264.307524411	263.6640703410376	
+eca-rers2012/Problem02_label15.yml	false	false(termination)	2.56865648	2.5571390200639144		false(termination)	263.09690854	262.133112001	
+eca-rers2012/Problem02_label16.yml	false	false(termination)	2.457059798	2.444810532964766		false(termination)	262.911070475	261.9700450748205	
+eca-rers2012/Problem02_label17.yml	false	false(termination)	3.092268366	3.0806314990622923		false(termination)	263.03292905	262.03453325107694	
+eca-rers2012/Problem02_label18.yml	false	false(termination)	2.441228711	2.4324269959470257		false(termination)	262.819463741	262.14872726402245	
+eca-rers2012/Problem02_label19.yml	false	false(termination)	2.454879707	2.4416156650986522		false(termination)	262.572869105	261.83515825797804	
+eca-rers2012/Problem02_label20.yml	false	false(termination)	2.481059621	2.4685468919342384		false(termination)	262.579139487	261.888537900988	
+eca-rers2012/Problem02_label21.yml	false	false(termination)	2.432721421	2.4204902769997716		false(termination)	262.850159026	262.29038169793785	
+eca-rers2012/Problem02_label22.yml	false	false(termination)	2.433094001	2.4214726539794356		false(termination)	262.709048298	262.09538452816196	
+eca-rers2012/Problem02_label23.yml	false	false(termination)	2.451164846	2.4386929279426113		false(termination)	262.968991717	262.27472708094865	
+eca-rers2012/Problem02_label24.yml	false	false(termination)	2.409321288	2.3963416990591213		false(termination)	283.277034573	282.41676325397566	
+eca-rers2012/Problem02_label25.yml	false	false(termination)	2.441761304	2.4303046020213515		false(termination)	262.387856177	261.8081943998113	
+eca-rers2012/Problem02_label26.yml	false	false(termination)	2.456517118	2.4482652259757742		false(termination)	263.399860383	262.48069519596174	
+eca-rers2012/Problem02_label27.yml	false	false(termination)	2.41866477	2.4068264960078523		false(termination)	263.545448138	262.84240674902685	
+eca-rers2012/Problem02_label28.yml	false	false(termination)	2.42369136	2.4117826860165223		false(termination)	262.342869697	261.7477003519889	
+eca-rers2012/Problem02_label29.yml	false	false(termination)	2.444839489	2.4320971079869196		false(termination)	262.665911211	261.9554688851349	
+eca-rers2012/Problem02_label30.yml	false	false(termination)	2.368369063	2.3575334070483223		false(termination)	262.769128499	261.8934921089094	
+eca-rers2012/Problem02_label31.yml	false	false(termination)	2.43926456	2.425815445021726		false(termination)	262.410655505	261.72659829701297	
+eca-rers2012/Problem02_label32.yml	false	false(termination)	2.43049175	2.418960743001662		false(termination)	282.41861095	281.7804511701688	
+eca-rers2012/Problem02_label33.yml	false	false(termination)	2.438607351	2.4589209109544754		false(termination)	262.767477527	261.97425895999186	
+eca-rers2012/Problem02_label34.yml	false	false(termination)	2.412128426	2.3992378970142454		false(termination)	262.928196063	261.89531441917643	
+eca-rers2012/Problem02_label35.yml	false	false(termination)	2.423552802	2.411047238041647		false(termination)	262.566222401	261.8089459440671	
+eca-rers2012/Problem02_label36.yml	false	false(termination)	2.449922133	2.4396418719552457		false(termination)	283.222384118	282.4736299100332	
+eca-rers2012/Problem02_label37.yml	false	false(termination)	2.448110659	2.436087229056284		false(termination)	282.540027722	281.735012202058	
+eca-rers2012/Problem02_label38.yml	false	false(termination)	2.413317493	2.3992244050605223		false(termination)	263.032645811	261.9859384361189	
+eca-rers2012/Problem02_label39.yml	false	false(termination)	2.438594667	2.4261760539375246		false(termination)	263.364778545	262.3354987448547	
+eca-rers2012/Problem02_label40.yml	false	false(termination)	2.419663517	2.406056561972946		false(termination)	263.198677856	262.5241065870505	
+eca-rers2012/Problem02_label41.yml	false	false(termination)	2.46925444	2.456500858068466		false(termination)	263.008600062	262.04316545603797	
+eca-rers2012/Problem02_label42.yml	false	false(termination)	2.414295676	2.401733997045085		false(termination)	263.310942059	262.5730915181339	
+eca-rers2012/Problem02_label43.yml	false	false(termination)	2.420395959	2.4081941819749773		false(termination)	262.48728307	261.62020770506933	
+eca-rers2012/Problem02_label44.yml	false	false(termination)	2.453749763	2.443113900022581		false(termination)	265.029226669	264.32192007801495	
+eca-rers2012/Problem02_label45.yml	false	false(termination)	2.456742227	2.4453074630582705		false(termination)	263.098766429	262.2801563660614	
+eca-rers2012/Problem02_label46.yml	false	false(termination)	2.522834882	2.5096241880673915		false(termination)	264.173511283	263.3413837610278	
+eca-rers2012/Problem02_label47.yml	false	false(termination)	2.44911613	2.4368960440624505		false(termination)	263.335798478	262.39776596892625	
+eca-rers2012/Problem02_label48.yml	false	false(termination)	2.426981508	2.414227231987752		false(termination)	262.488552678	261.7854156100657	
+eca-rers2012/Problem02_label49.yml	false	false(termination)	2.435010076	2.423139457940124		false(termination)	262.84710932	262.0167797750328	
+eca-rers2012/Problem02_label50.yml	false	false(termination)	2.541771979	2.5290586460614577		false(termination)	262.392182246	261.7563866500277	
+eca-rers2012/Problem02_label51.yml	false	false(termination)	2.427812349	2.416683168965392		false(termination)	262.622993609	261.866579401074	
+eca-rers2012/Problem02_label52.yml	false	false(termination)	2.859278129	2.8476208290085196		false(termination)	262.611476757	261.72331476188265	
+eca-rers2012/Problem02_label53.yml	false	false(termination)	2.4360109	2.4245599888963625		false(termination)	264.426058431	263.7133638539817	
+eca-rers2012/Problem02_label54.yml	false	false(termination)	2.440155531	2.4286093650152907		false(termination)	262.525751019	261.88847073400393	
+eca-rers2012/Problem02_label55.yml	false	false(termination)	2.427642049	2.415755189023912		false(termination)	282.866060017	281.97942615509965	
+eca-rers2012/Problem02_label56.yml	false	false(termination)	2.438611319	2.4273045260924846		false(termination)	262.3378838	261.6260933110025	
+eca-rers2012/Problem02_label57.yml	false	false(termination)	2.418181332	2.408506598090753		false(termination)	263.047486695	262.1638274129946	
+eca-rers2012/Problem02_label58.yml	false	false(termination)	2.404922521	2.39236263895873		false(termination)	282.65250243	281.9190097670071	
+eca-rers2012/Problem02_label59.yml	false	false(termination)	2.422269465	2.4102227850817144		false(termination)	293.991160059	293.2417881891597	
+eca-rers2012/Problem04_label11.yml	false	false(termination)	46.155452197	46.1453894819133		ERROR			
+eca-rers2012/Problem04_label12.yml	false	false(termination)	46.383642175	46.393061027047224		ERROR			
+eca-rers2012/Problem04_label14.yml	false	false(termination)	45.188738342	45.19318272406235		ERROR			
+eca-rers2012/Problem04_label17.yml	false	false(termination)	45.809705745	45.798605147050694		ERROR			
+eca-rers2012/Problem04_label20.yml	false	false(termination)	48.734370317	48.74351480905898		ERROR			
+eca-rers2012/Problem04_label23.yml	false	false(termination)	46.286195677	46.28454208909534		ERROR			
+eca-rers2012/Problem04_label24.yml	false	false(termination)	45.110980126	45.101679085055366		ERROR			
+eca-rers2012/Problem04_label27.yml	false	false(termination)	44.977432562	44.96936927398201		ERROR			
+eca-rers2012/Problem04_label29.yml	false	false(termination)	46.240372869	46.23661635501776		ERROR			
+eca-rers2012/Problem04_label36.yml	false	false(termination)	48.157459445	48.49799560196698		ERROR			
+eca-rers2012/Problem04_label37.yml	false	false(termination)	47.255088245	47.26187552907504		ERROR			
+eca-rers2012/Problem04_label40.yml	false	false(termination)	44.973248373	44.97024885599967		ERROR			
+eca-rers2012/Problem04_label42.yml	false	false(termination)	45.601695787	45.61283119302243		ERROR			
+eca-rers2012/Problem04_label43.yml	false	false(termination)	43.921192923	43.91159629402682		ERROR			
+eca-rers2012/Problem04_label44.yml	false	false(termination)	46.169644719	46.15779120998923		ERROR			
+eca-rers2012/Problem04_label46.yml	false	false(termination)	45.915236801	45.9094996569911		ERROR			
+eca-rers2012/Problem04_label49.yml	false	false(termination)	45.591802386	45.58175971696619		ERROR			
+eca-rers2012/Problem04_label57.yml	false	false(termination)	45.472313668	45.463144639041275		ERROR			
+eca-rers2012/Problem04_label58.yml	false	false(termination)	46.46887888	46.4610993770184		ERROR			
+eca-rers2012/Problem14_label00.yml	false	false(termination)	5.541435396	5.53267427009996		ERROR			
+eca-rers2012/Problem14_label01.yml	false	false(termination)	5.343686654	5.332064640009776		ERROR			
+eca-rers2012/Problem14_label02.yml	false	false(termination)	5.234568579	5.2225417860317975		ERROR			
+eca-rers2012/Problem14_label03.yml	false	false(termination)	5.248004528	5.238025535014458		ERROR			
+eca-rers2012/Problem14_label04.yml	false	false(termination)	5.361434748	5.349240096053109		ERROR			
+eca-rers2012/Problem14_label05.yml	false	false(termination)	5.307771079	5.297690581995994		ERROR			
+eca-rers2012/Problem14_label06.yml	false	false(termination)	5.265611882	5.255256342003122		ERROR			
+eca-rers2012/Problem14_label07.yml	false	false(termination)	5.440779708	5.432959087891504		ERROR			
+eca-rers2012/Problem14_label08.yml	false	false(termination)	5.311405186	5.299127195030451		ERROR			
+eca-rers2012/Problem14_label09.yml	false	false(termination)	5.267298209	5.256023147027008		ERROR			
+eca-rers2012/Problem14_label10.yml	false	false(termination)	5.266781534	5.257017371011898		ERROR			
+eca-rers2012/Problem14_label11.yml	false	false(termination)	5.214540941	5.20476349897217		ERROR			
+eca-rers2012/Problem14_label12.yml	false	false(termination)	5.306581917	5.347416541073471		ERROR			
+eca-rers2012/Problem14_label13.yml	false	false(termination)	5.272933644	5.262953195953742		ERROR			
+eca-rers2012/Problem14_label14.yml	false	false(termination)	5.273173251	5.263796070939861		ERROR			
+eca-rers2012/Problem14_label15.yml	false	false(termination)	5.279639397	5.267929207999259		ERROR			
+eca-rers2012/Problem14_label16.yml	false	false(termination)	5.28212413	5.270430034026504		ERROR			
+eca-rers2012/Problem14_label17.yml	false	false(termination)	5.325776238	5.315229543950409		ERROR			
+eca-rers2012/Problem14_label18.yml	false	false(termination)	5.523104929	5.511188284959644		ERROR			
+eca-rers2012/Problem14_label19.yml	false	false(termination)	5.283982966	5.272472743061371		ERROR			
+eca-rers2012/Problem14_label20.yml	false	false(termination)	5.812297398	5.802055567968637		ERROR			
+eca-rers2012/Problem14_label21.yml	false	false(termination)	5.271046232	5.260036870953627		ERROR			
+eca-rers2012/Problem14_label22.yml	false	false(termination)	5.315315687	5.304100656998344		ERROR			
+eca-rers2012/Problem14_label23.yml	false	false(termination)	5.330524105	5.3193360370351		ERROR			
+eca-rers2012/Problem14_label24.yml	false	false(termination)	5.273175824	5.265365200932138		ERROR			
+eca-rers2012/Problem14_label25.yml	false	false(termination)	7.419945372	7.410229242988862		ERROR			
+eca-rers2012/Problem14_label26.yml	false	false(termination)	5.341057488	5.330819698981941		ERROR			
+eca-rers2012/Problem14_label27.yml	false	false(termination)	5.482124421	5.4736011789646		ERROR			
+eca-rers2012/Problem14_label28.yml	false	false(termination)	5.294615208	5.282576001016423		ERROR			
+eca-rers2012/Problem14_label29.yml	false	false(termination)	5.32922487	5.318342149024829		ERROR			
+eca-rers2012/Problem14_label30.yml	false	false(termination)	5.261575703	5.251196610974148		ERROR			
+eca-rers2012/Problem14_label31.yml	false	false(termination)	5.300533827	5.2886691089952365		ERROR			
+eca-rers2012/Problem14_label32.yml	false	false(termination)	5.241503119	5.230903021991253		ERROR			
+eca-rers2012/Problem14_label33.yml	false	false(termination)	5.293868555	5.283274197019637		ERROR			
+eca-rers2012/Problem14_label34.yml	false	false(termination)	5.476847144	6.020408671931364		ERROR			
+eca-rers2012/Problem14_label35.yml	false	false(termination)	5.334697371	5.324048673035577		ERROR			
+eca-rers2012/Problem14_label36.yml	false	false(termination)	5.288671487	5.27729228802491		ERROR			
+eca-rers2012/Problem14_label37.yml	false	false(termination)	5.370462564	5.358306359034032		ERROR			
+eca-rers2012/Problem14_label38.yml	false	false(termination)	5.293917817	5.2822943680221215		ERROR			
+eca-rers2012/Problem14_label39.yml	false	false(termination)	5.762736245	5.75119659898337		ERROR			
+eca-rers2012/Problem14_label40.yml	false	false(termination)	5.278501079	5.266440880019218		ERROR			
+eca-rers2012/Problem14_label41.yml	false	false(termination)	5.289382782	5.278646444086917		ERROR			
+eca-rers2012/Problem14_label42.yml	false	false(termination)	5.26775281	5.257535937009379		ERROR			
+eca-rers2012/Problem14_label43.yml	false	false(termination)	5.215814712	5.204269748064689		ERROR			
+eca-rers2012/Problem14_label44.yml	false	false(termination)	5.352559931	5.917570076067932		ERROR			
+eca-rers2012/Problem14_label45.yml	false	false(termination)	5.275968099	5.263834692072123		ERROR			
+eca-rers2012/Problem14_label46.yml	false	false(termination)	5.303583062	5.291755393962376		ERROR			
+eca-rers2012/Problem14_label47.yml	false	false(termination)	5.314085144	5.303029809030704		ERROR			
+eca-rers2012/Problem14_label48.yml	false	false(termination)	5.261378201	5.249671728000976		ERROR			
+eca-rers2012/Problem14_label49.yml	false	false(termination)	5.288563499	5.278272581053898		ERROR			
+eca-rers2012/Problem14_label50.yml	false	false(termination)	5.21981181	5.208515880978666		ERROR			
+eca-rers2012/Problem14_label51.yml	false	false(termination)	5.269053405	5.258638971950859		ERROR			
+eca-rers2012/Problem14_label52.yml	false	false(termination)	5.289271805	5.277399886050262		ERROR			
+eca-rers2012/Problem14_label53.yml	false	false(termination)	5.302035416	5.289782288949937		ERROR			
+eca-rers2012/Problem14_label54.yml	false	false(termination)	5.382406538	5.370683351997286		ERROR			
+eca-rers2012/Problem14_label55.yml	false	false(termination)	5.309070377	5.298330084071495		ERROR			
+eca-rers2012/Problem14_label56.yml	false	false(termination)	5.259598051	5.248115808004513		ERROR			
+eca-rers2012/Problem14_label57.yml	false	false(termination)	5.331261852	5.319332888931967		ERROR			
+eca-rers2012/Problem14_label58.yml	false	false(termination)	5.26267858	5.254669363959692		ERROR			
+eca-rers2012/Problem14_label59.yml	false	false(termination)	5.259133202	5.248826346010901		ERROR			
+eca-rers2012/Problem15_label18.yml	false	false(termination)	11.634707893	11.62392598495353		ERROR			
+psyco/psyco_abp_1-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	249.034421012	248.77472374006175	
+psyco/psyco_abp_1-3.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	248.5796038	247.96490409900434	
+psyco/psyco_io_1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+psyco/psyco_net_1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+psyco/psyco_security.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+floats-cdfpl/newton_1_1.yml	true	ERROR(unknown, verification-finished)				true	1.707686446	0.811448005028069	
+floats-cdfpl/newton_1_2.yml	true	ERROR(unknown, verification-finished)				true	1.444138742	0.7338441731408238	
+floats-cdfpl/newton_1_3.yml	true	ERROR(unknown, verification-finished)				true	1.776185659	0.961982810171321	
+floats-cdfpl/newton_1_4.yml	true	ERROR(unknown, verification-finished)				true	1.72041194	0.81046919291839	
+floats-cdfpl/newton_1_5.yml	true	ERROR(unknown, verification-finished)				true	1.616843981	0.7711994280107319	
+floats-cdfpl/newton_1_6.yml	true	ERROR(unknown, verification-finished)				true	1.645004576	0.8531382898800075	
+floats-cdfpl/newton_1_7.yml	true	ERROR(unknown, verification-finished)				true	1.698033594	0.8016811469569802	
+floats-cdfpl/newton_1_8.yml	true	ERROR(unknown, verification-finished)				true	1.562454935	0.7886598031036556	
+floats-cdfpl/newton_2_1.yml	true	ERROR(unknown, verification-finished)				true	1.424125096	0.7311342861503363	
+floats-cdfpl/newton_2_2.yml	true	ERROR(unknown, verification-finished)				true	1.601325966	0.7779210568405688	
+floats-cdfpl/newton_2_3.yml	true	ERROR(unknown, verification-finished)				true	1.840490342	0.8375642378814518	
+floats-cdfpl/newton_2_4.yml	true	ERROR(unknown, verification-finished)				true	1.607966683	0.7967300110030919	
+floats-cdfpl/newton_2_5.yml	true	ERROR(unknown, verification-finished)				true	1.651663645	0.7490385598503053	
+floats-cdfpl/newton_2_6.yml	true	ERROR(unknown, verification-finished)				true	1.661890193	0.7643756000325084	
+floats-cdfpl/newton_2_7.yml	true	ERROR(unknown, verification-finished)				true	1.515829356	0.7710274069104344	
+floats-cdfpl/newton_2_8.yml	true	ERROR(unknown, verification-finished)				true	1.440457061	0.7574096831958741	
+floats-cdfpl/newton_3_1.yml	true	ERROR(unknown, verification-finished)				true	1.564638082	0.7978756329976022	
+floats-cdfpl/newton_3_2.yml	true	ERROR(unknown, verification-finished)				true	1.774223227	0.845198682975024	
+floats-cdfpl/newton_3_3.yml	true	ERROR(unknown, verification-finished)				true	1.686432729	0.8047464420087636	
+floats-cdfpl/newton_3_4.yml	true	ERROR(unknown, verification-finished)				true	1.724562919	0.7863580239936709	
+floats-cdfpl/newton_3_5.yml	true	ERROR(unknown, verification-finished)				true	1.689622202	0.8034774060361087	
+floats-cdfpl/newton_3_6.yml	true	ERROR(unknown, verification-finished)				true	1.749135589	0.8944450640119612	
+floats-cdfpl/newton_3_7.yml	true	ERROR(unknown, verification-finished)				true	1.721434864	0.7734063840471208	
+floats-cdfpl/newton_3_8.yml	true	ERROR(unknown, verification-finished)				true	1.70482078	0.7657322420272976	
+floats-cdfpl/sine_1.yml	true	ERROR(unknown, verification-finished)				true	1.573129932	0.7512063840404153	
+floats-cdfpl/sine_2.yml	true	ERROR(unknown, verification-finished)				true	1.709330356	0.7780810629483312	
+floats-cdfpl/sine_3.yml	true	ERROR(unknown, verification-finished)				true	1.567911678	0.8074959679506719	
+floats-cdfpl/sine_4.yml	true	ERROR(unknown, verification-finished)				true	1.551810135	0.7675488370005041	
+floats-cdfpl/sine_5.yml	true	ERROR(unknown, verification-finished)				true	1.607802849	0.7695147639606148	
+floats-cdfpl/sine_6.yml	true	ERROR(unknown, verification-finished)				true	1.632621961	0.7729078808333725	
+floats-cdfpl/sine_7.yml	true	ERROR(unknown, verification-finished)				true	1.580971812	0.7727869900409132	
+floats-cdfpl/sine_8.yml	true	ERROR(unknown, verification-finished)				true	1.79052399	0.8830027088988572	
+floats-cdfpl/square_1.yml	true	ERROR(unknown, verification-finished)				true	1.689878594	0.8030578009784222	
+floats-cdfpl/square_2.yml	true	ERROR(unknown, verification-finished)				true	1.694998779	0.8870078169275075	
+floats-cdfpl/square_3.yml	true	ERROR(unknown, verification-finished)				true	1.565370528	0.7805788298137486	
+floats-cdfpl/square_4.yml	true	ERROR(unknown, verification-finished)				true	1.663557085	0.8475972539745271	
+floats-cdfpl/square_5.yml	true	ERROR(unknown, verification-finished)				true	1.404765209	0.7233258560299873	
+floats-cdfpl/square_6.yml	true	ERROR(unknown, verification-finished)				true	1.678799264	0.8121008758898824	
+floats-cdfpl/square_7.yml	true	ERROR(unknown, verification-finished)				true	1.634743031	0.7671268989797682	
+floats-cdfpl/square_8.yml	true	ERROR(unknown, verification-finished)				true	1.597047819	0.7829649529885501	
+floats-cbmc-regression/float-no-simp1.yml	true	true	0.356230616	0.3474902509478852		true	1.48860915	0.7359700507950038	
+floats-cbmc-regression/float-no-simp3.yml	true	true	0.323486175	0.31614852196071297		true	1.662801735	0.8347000009380281	
+floats-cbmc-regression/float-no-simp6.yml	true	true	0.331429895	0.3236107509583235		true	1.719172219	0.8110600840300322	
+floats-cbmc-regression/float-no-simp7.yml	true	true	0.344032572	0.3363175130216405		true	1.674381049	0.7889092569239438	
+floats-cbmc-regression/float-to-double2.yml	true	true	0.327207468	0.3195455640088767		true	1.586431532	0.7318914979696274	
+floats-cbmc-regression/float-zero-sum1.yml	true	true	0.317193876	0.30919445992913097		true	1.760910513	0.7899560879450291	
+floats-cbmc-regression/float1.yml	true	true	0.330906775	0.32396151300054044		true	1.682749567	0.8166998769156635	
+floats-cbmc-regression/float11.yml	true	true	0.368278466	0.35899038100615144		true	1.641467669	0.8056203539017588	
+floats-cbmc-regression/float12.yml	true	ERROR(unknown, verification-finished)				true	1.530282049	0.7540961089543998	
+floats-cbmc-regression/float13.yml	true	true	0.346493937	0.33846790494862944		true	1.595148115	0.7514906770084053	
+floats-cbmc-regression/float2.yml	true	true	0.337533202	0.3295116589870304		true	1.65615511	0.8334106171969324	
+floats-cbmc-regression/float20.yml	true	ERROR(unknown, verification-finished)				true	1.634437313	0.8076874651014805	
+floats-cbmc-regression/float22.yml	true	true	0.323776363	0.3161481509450823		true	1.725924208	0.7911245210561901	
+floats-cbmc-regression/float3.yml	true	true	0.388328283	0.37999057304114103		true	1.632953631	0.7387747769244015	
+floats-cbmc-regression/float5.yml	true	ERROR(unknown, verification-finished)				true	1.642691405	0.8783688431140035	
+floats-cbmc-regression/float6.yml	true	ERROR(unknown, verification-finished)				true	1.745617265	0.8234489739406854	
+ldv-regression/1_3.yml	true	true	0.333555896	0.3256295289611444		true	1.633629518	0.79519357602112	
+ldv-regression/alt_test.yml	true	true	0.331090274	0.3234265890205279		true	2.219352084	1.016612598206848	
+ldv-regression/callfpointer.yml	true	true	0.321580361	0.3131945829372853		true	1.452679318	0.7512510819360614	
+ldv-regression/ex3_forlist.yml	true	true	0.356102993	0.3486084509640932		true	1.751764508	0.9533438920043409	
+ldv-regression/fo_test.yml	true	true	0.428626012	0.4211757959565148		ERROR			
+ldv-regression/just_assert.yml	true	true	0.348316724	0.33861426007933915		true	1.61719823	0.8309802340809256	
+ldv-regression/mutex_lock_int.yml	true	true	0.3537313	0.34628393803723156		true	1.483812277	0.7611870169639587	
+ldv-regression/mutex_lock_struct.yml	true	true	0.354883136	0.34709631104487926		true	1.708982125	0.8108001840300858	
+ldv-regression/recursive_list.yml	true	true	0.331399523	0.3238107149954885		true	1.669257233	0.7839939119294286	
+ldv-regression/rule57_ebda_blast.c_1.yml	true	true	0.376108219	0.3682401820551604		true	1.708319523	0.8111763529013842	
+ldv-regression/rule57_ebda_blast.yml	true	true	0.374588914	0.3664767830632627		true	1.595478328	0.8177743069827557	
+ldv-regression/rule57_ebda_blast_2.yml	true	true	0.36562285	0.35771393799223006		true	1.799568029	0.8076513190753758	
+ldv-regression/rule60_list.yml	true	true	0.346394091	0.3380720830755308		true	2.137225692	0.9463788731954992	
+ldv-regression/rule60_list2.c_1.yml	true	true	0.41275663	0.4379243910079822		true	2.100037372	0.9239523110445589	
+ldv-regression/rule60_list2.yml	true	true	0.394568828	0.3865852819290012		true	1.839191686	0.8390954111237079	
+ldv-regression/sizeofparameters_test.yml	true	true	0.365515933	0.35636421490926296		true	1.888454836	0.9438615620601922	
+ldv-regression/test01.yml	true	true	0.32197081	0.31395918398629874		true	1.604520874	0.7666864190250635	
+ldv-regression/test02.yml	true	true	0.3231042	0.34304105199407786		true	1.570152437	0.7883379471022636	
+ldv-regression/test12.yml	true	true	0.316827247	0.30907340405974537		true	1.697957792	0.8075703140348196	
+ldv-regression/test13.yml	true	true	0.327680703	0.3200532969785854		true	1.48285538	0.7593751940876245	
+ldv-regression/test17.yml	true	true	0.328259698	0.3207648880779743		true	1.570285375	0.764439205871895	
+ldv-regression/test20.yml	true	true	0.317237796	0.30943427002057433		true	1.571565726	0.7714134948328137	
+ldv-regression/test21-2.yml	true	true	0.55603275	0.5470775549765676		true	1.685745931	0.8580977721139789	
+ldv-regression/test25-1.yml	true	true	0.661573512	0.6542301309527829		true	1.858028831	1.0507297399453819	
+ldv-regression/test26-2.yml	true	true	0.35694034	0.34897880093194544		true	1.602778444	0.7925736911129206	
+ldv-regression/test28-1.yml	true	true	0.359543177	0.3518316620029509		true	1.397668622	0.7623561199288815	
+ldv-regression/test29-1.yml	true	true	0.390494376	0.38226621702779084		true	1.491863711	0.8135372118558735	
+ldv-regression/test30-2.yml	true	true	0.369437397	0.36087697895709425		true	1.589614585	0.8251742420252413	
+ldv-regression/test_address.yml	true	true	0.329811387	0.3215073769679293		true	1.570205601	0.7739573309663683	
+ldv-regression/test_cut_trace.yml	true	true	0.34377936	0.33723647496663034		true	1.65705784	0.7877486601937562	
+ldv-regression/test_malloc-1.yml	true	true	0.339128751	0.33005441608838737		true	1.341261439	0.7382390110287815	
+ldv-regression/test_malloc-2.yml	true	true	0.33961258	0.3328099310165271		true	1.487095906	0.728537759045139	
+ldv-regression/test_overflow.yml	true	true	0.333013572	0.35807688802015036		true	2.189885798	0.9616630109958351	
+list-ext-properties/test-0019_1-1.yml	true	true	0.344104192	0.3366258629830554		true	2.063164481	0.9287091291043907	
+list-ext-properties/test-0019_1-2.yml	true	true	0.332947747	0.3259184861090034		true	2.140157249	0.9187836220953614	
+list-ext-properties/test-0158_1-1.yml	true	true	0.326917234	0.318971868022345		true	1.922706176	0.9182853901293129	
+list-ext-properties/test-0158_1-2.yml	true	true	0.318698497	0.3112258940236643		true	2.352446061	1.0191456289030612	
+list-ext2-properties/list_and_tree_cnstr-1.yml	false	TIMEOUT (verification)				ERROR			
+list-ext2-properties/list_and_tree_cnstr-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+ldv-sets/test_add-1.yml	true	true	0.356483369	0.3490919070318341		true	2.211335767	0.945592847187072	
+ldv-sets/test_add-2.yml	true	true	0.341847439	0.3343986610416323		true	2.105880832	0.9858843281399459	
+ldv-sets/test_mutex_double_lock.yml	true	true	0.373605274	0.3655534900026396		true	2.559639968	1.095573227154091	
+loops/array-2.yml	true	true	0.380877355	0.3726827309001237		true	1.611831085	0.7679481550585479	
+loops/count_up_down-1.yml	true	TIMEOUT (verification)				true	1.595382187	0.8872994801495224	
+loops/count_up_down-2.yml	true	TIMEOUT (verification)				true	1.792204119	1.0493559059686959	
+loops/for_infinite_loop_1.yml	false	TIMEOUT (verification)				ERROR			
+loops/for_infinite_loop_2.yml	false	TIMEOUT (verification)				ERROR			
+loops/insertion_sort-1-2.yml	true	TIMEOUT (verification)				true	1.799910802	0.9769601840525866	
+loops/insertion_sort-2-2.yml	true	TIMEOUT (verification)				true	1.960955836	0.999495130032301	
+loops/invert_string-1.yml	true	TIMEOUT (verification)				true	1.919320058	0.9962680051103234	
+loops/invert_string-3.yml	true	true	0.351737262	0.3443483919836581		true	1.776216913	0.9054025949444622	
+loops/matrix-1.yml	true	true	0.374226447	0.3662298899143934		true	1.61091525	0.7795297461561859	
+loops/matrix-2-2.yml	true	TIMEOUT (verification)				true	2.05314914	1.2370064549613744	
+loops/n.c11.yml	false	TIMEOUT (verification)				ERROR			
+loops/nec20.yml	true	true	0.480448672	0.4711964570451528		true	20.110100347	19.263594560092315	
+loops/string-2.yml	true	true	1.341865848	1.3355862299213186		true	2.178376235	1.3136596439871937	
+loops/sum01-2.yml	true	true	374.75083277	374.9435927600134		true	1.721153945	0.9421931109391153	
+loops/sum01_bug02.yml	true	TIMEOUT (verification)				true	1.665637835	0.9164267419837415	
+loops/sum03-2.yml	false	TIMEOUT (verification)				ERROR			
+loops/terminator_02-2.yml	true	TIMEOUT (verification)				true	1.664430657	0.9055342508945614	
+loops/trex01-1.yml	true	TIMEOUT (verification)				ERROR			
+loops/trex01-2.yml	true	TIMEOUT (verification)				ERROR			
+loops/trex03-1.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	13.385323888	12.714752096915618	
+loops/trex03-2.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	13.799286862	12.894015138968825	
+loops/trex04.yml	false	false(termination)	0.93421939	0.9228901190217584		ERROR			
+loops/verisec_NetBSD-libc_loop.yml	true	true	0.366249999	0.356715697911568		true	1.793062137	1.009188765892759	
+loops/verisec_OpenSER_cases1_stripFullBoth_arr.yml	true	true	0.832729774	0.8245425040367991		true	3.454398137	2.4444888280704618	
+loops/while_infinite_loop_1.yml	false	false(termination)	0.401832315	0.391923179035075		ERROR			
+loops/while_infinite_loop_2.yml	false	false(termination)	0.419855039	0.4081773560028523		ERROR			
+loops/while_infinite_loop_3.yml	false	false(termination)	0.43028911	0.4470404469175264		OUT OF MEMORY			
+loops/while_infinite_loop_4.yml	true	true	0.352674232	0.3435120190260932		true	1.604457358	0.7480329188983887	
+loop-acceleration/array_4.yml	true	true	15.590032327	15.584453108953312		true	16.662690013	15.869655024958774	
+loop-acceleration/diamond_1-1.yml	true	true	0.448370346	0.43915330502204597		true	2.517861964	1.7647809030022472	
+loop-acceleration/functions_1-1.yml	true	TIMEOUT (verification)				ERROR			
+loop-acceleration/functions_1-2.yml	true	TIMEOUT (verification)				ERROR			
+loop-acceleration/multivar_1-1.yml	true	TIMEOUT (verification)				true	19.169602853	18.386260477826	
+loop-acceleration/multivar_1-2.yml	true	TIMEOUT (verification)				true	19.181676599	18.4342560749501	
+loop-acceleration/phases_2-1.yml	false	false(termination)	1.033181454	1.0216798890614882		OUT OF MEMORY			
+loop-acceleration/phases_2-2.yml	false	false(termination)	1.027996728	1.017044153995812		OUT OF MEMORY			
+loop-acceleration/simple_2-1.yml	true	TIMEOUT (verification)				ERROR			
+loop-acceleration/simple_2-2.yml	true	TIMEOUT (verification)				ERROR			
+loop-acceleration/simple_3-1.yml	true	TIMEOUT (verification)				true	1.649269404	0.8714070688001812	
+loop-acceleration/simple_3-2.yml	true	TIMEOUT (verification)				true	1.697756564	0.8863294271286577	
+loop-acceleration/underapprox_1-1.yml	true	true	0.399650604	0.3885766809107736		true	1.656544288	0.8944334289990366	
+loop-acceleration/underapprox_1-2.yml	true	true	0.353992829	0.34438549308106303		true	1.838789604	0.9697517470922321	
+loop-acceleration/underapprox_2-1.yml	true	true	0.381853044	0.37238937290385365		true	1.6803963	0.8497219858691096	
+loop-acceleration/underapprox_2-2.yml	true	true	0.356158504	0.3464991069631651		true	1.742002568	0.9395483299158514	
+loop-invgen/SpamAssassin-loop.yml	false	TIMEOUT (verification)				ERROR			
+loop-invgen/apache-get-tag.yml	true	TIMEOUT (verification)				true	2.219322742	1.431548397988081	
+loop-invgen/down.yml	true	TIMEOUT (verification)				true	1.661776635	0.9142156939487904	
+loop-invgen/fragtest_simple.yml	true	TIMEOUT (verification)				ERROR			
+loop-invgen/heapsort.yml	true	TIMEOUT (verification)				true	4.988522572	4.170020485064015	
+loop-invgen/nest-if3.yml	true	TIMEOUT (verification)				true	2.083206553	1.2071091618854553	
+loop-invgen/seq-3.yml	true	TIMEOUT (verification)				true	1.871881827	1.0562049690634012	
+loop-invgen/string_concat-noarr.yml	false	false(termination)	64.823624674	64.81366576207802		ERROR			
+loop-invgen/up.yml	true	TIMEOUT (verification)				true	1.827848911	1.0113547479268163	
+loop-lit/afnp2014.yml	true	true	17.703205006	17.69614991103299		true	14.268737666	13.466012199874967	
+loop-lit/bhmr2007.yml	true	TIMEOUT (verification)				true	1.70418872	0.8740784509573132	
+loop-lit/cggmp2005_variant.yml	true	TIMEOUT (verification)				true	1.854618251	0.9757920950651169	
+loop-lit/css2003.yml	true	true	45.234915088	45.22615005495027		ERROR			
+loop-lit/gcnr2008.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+loop-lit/gr2006.yml	true	true	0.398709517	0.3897983949864283		true	1.784941149	1.0541767480317503	
+loop-lit/gsv2008.yml	true	TIMEOUT (verification)				true	1.884180546	1.1117314980365336	
+loop-lit/hhk2008.yml	true	TIMEOUT (verification)				true	1.674866363	0.8543371460400522	
+loop-lit/jm2006.yml	true	TIMEOUT (verification)				true	1.796750054	0.9209726061671972	
+loop-lit/jm2006_variant.yml	true	TIMEOUT (verification)				true	1.822717686	0.9511562830302864	
+loop-new/count_by_nondet.yml	true	TIMEOUT (verification)				ERROR			
+loop-new/gauss_sum.yml	true	true	347.374651231	347.37997945502866		true	1.636660677	0.9402907290495932	
+loop-new/half.yml	true	TIMEOUT (verification)				true	1.710659193	0.9857799420133233	
+loop-new/nested-1.yml	true	TIMEOUT (verification)				true	2.011424123	1.0801935398485512	
+product-lines/elevator_spec13_product21.cil.yml	false	false(termination)	0.863933725	0.8529987640213221		false(termination)	144.520330622	143.01883424492553	
+product-lines/elevator_spec13_product22.cil.yml	false	false(termination)	0.85756387	0.8452877301024273		false(termination)	145.483034027	143.64173866203055	
+product-lines/elevator_spec13_product23.cil.yml	false	false(termination)	0.878672816	0.8663767349207774		false(termination)	143.984231602	142.1476925020106	
+product-lines/elevator_spec13_product24.cil.yml	false	false(termination)	0.889511028	0.8767276599537581		false(termination)	143.958443866	142.54383393307216	
+product-lines/elevator_spec13_product29.cil.yml	false	false(termination)	0.854616834	0.8423825560603291		false(termination)	144.734688365	142.9487711461261	
+product-lines/elevator_spec13_product30.cil.yml	false	false(termination)	0.853222091	0.8405152959749103		false(termination)	144.849643379	143.3871212650556	
+product-lines/elevator_spec13_product31.cil.yml	false	false(termination)	0.862784695	0.8508175320457667		false(termination)	143.105391991	141.389785715146	
+product-lines/elevator_spec13_product32.cil.yml	false	false(termination)	0.87202045	0.8591207989957184		false(termination)	143.435342635	141.95381338102743	
+product-lines/elevator_spec13_productSimulator.cil.yml	false	false(termination)	2.634466994	2.6218294899445027		false(termination)	144.144633891	142.22649796912447	
+product-lines/elevator_spec14_product03.cil.yml	true	true	0.678819546	0.670912400004454		true	3.235778333	1.501581072807312	
+product-lines/elevator_spec14_product11.cil.yml	true	true	0.669231925	0.6592888650484383		true	3.38752706	1.6291840251069516	
+product-lines/elevator_spec14_product19.cil.yml	true	true	0.68515714	0.6753265600418672		true	2.981780699	1.4167256539221853	
+product-lines/elevator_spec14_product20.cil.yml	true	true	0.677488704	0.6685801640851423		true	2.976851779	1.2245713130105287	
+product-lines/elevator_spec14_product23.cil.yml	true	true	0.683600464	0.67357997095678		true	3.516530633	1.7439484489150345	
+product-lines/elevator_spec14_product24.cil.yml	true	true	0.677741882	0.6676845379406586		true	2.866864452	1.1883412299212068	
+product-lines/elevator_spec14_product27.cil.yml	true	true	0.678957022	0.6687975870445371		true	3.327942507	1.4391428320668638	
+product-lines/elevator_spec14_product28.cil.yml	true	true	0.700557295	0.6895314779831097		true	2.76132361	1.1709731498267502	
+product-lines/elevator_spec14_product31.cil.yml	true	true	0.697495593	0.6873350029345602		true	3.422770636	1.7496496010571718	
+product-lines/elevator_spec14_product32.cil.yml	true	true	0.67593591	0.6654622220667079		true	3.140615065	1.3665373029652983	
+product-lines/elevator_spec14_productSimulator.cil.yml	true	true	0.816547766	0.8063396399375051		true	41.707477475	39.7530161680188	
+product-lines/elevator_spec1_product01.cil.yml	true	true	0.681961241	0.6715342920506373		true	3.100673168	1.3488999621476978	
+product-lines/elevator_spec1_product03.cil.yml	true	true	0.683606568	0.6757448710268363		true	3.110177117	1.3881422709673643	
+product-lines/elevator_spec1_product09.cil.yml	true	true	0.672664233	0.662743755034171		true	3.238268357	1.4583784309215844	
+product-lines/elevator_spec1_product11.cil.yml	true	true	0.668665889	0.6596550799440593		true	3.193283614	1.5564605291001499	
+product-lines/elevator_spec1_product17.cil.yml	true	true	0.700237793	0.6916621829150245		true	3.14013137	1.3746144438628107	
+product-lines/elevator_spec1_product18.cil.yml	true	true	0.70257685	0.6933010650100186		true	3.119299204	1.3946029159706086	
+product-lines/elevator_spec1_product19.cil.yml	true	true	0.691280113	0.681097027962096		true	3.20457902	1.4353188949171454	
+product-lines/elevator_spec1_product20.cil.yml	true	true	0.768204917	1.2725466600386426		true	3.413493679	1.4986330969259143	
+product-lines/elevator_spec1_product21.cil.yml	true	true	0.681758558	0.6721811420284212		true	3.139971322	1.398178590927273	
+product-lines/elevator_spec1_product22.cil.yml	true	true	0.673994266	0.6633155999006703		true	3.23724422	1.4534744799602777	
+product-lines/elevator_spec1_product23.cil.yml	true	true	0.709291628	0.7007719200337306		true	3.216707254	1.4553886821959168	
+product-lines/elevator_spec1_product24.cil.yml	true	true	0.696772941	0.6865218720631674		true	3.199630566	1.394119889009744	
+product-lines/elevator_spec1_product25.cil.yml	true	true	0.686738985	0.6760656520491466		true	3.094922358	1.387683172011748	
+product-lines/elevator_spec1_product26.cil.yml	true	true	0.712102111	0.7031330260215327		true	3.06612389	1.3428026121109724	
+product-lines/elevator_spec1_product27.cil.yml	true	true	0.691694461	0.681439605075866		true	3.28024573	1.4817630681209266	
+product-lines/elevator_spec1_product28.cil.yml	true	true	0.689296859	0.6804101300658658		true	3.341763736	1.5153014999814332	
+product-lines/elevator_spec1_product29.cil.yml	true	true	0.746765003	1.04026784398593		true	3.080875683	1.3616899438202381	
+product-lines/elevator_spec1_product30.cil.yml	true	true	0.679681668	0.6693731100531295		true	3.083306892	1.430890972027555	
+product-lines/elevator_spec1_product31.cil.yml	true	true	0.699988784	0.6894548379350454		true	3.581742695	1.5712540750391781	
+product-lines/elevator_spec1_product32.cil.yml	true	true	0.722339857	0.7123255670303479		true	3.338004753	1.46447937306948	
+product-lines/elevator_spec1_productSimulator.cil.yml	true	true	0.905435301	0.8948898679809645		true	30.912565219	28.937496301950887	
+product-lines/elevator_spec2_product01.cil.yml	true	true	0.659969399	0.6500187120400369		true	3.083484116	1.361014512134716	
+product-lines/elevator_spec2_product03.cil.yml	true	true	0.663538145	0.6542748539941385		true	3.005405323	1.331681789131835	
+product-lines/elevator_spec2_product09.cil.yml	true	true	0.691868304	0.6816409080056474		true	3.177532108	1.4009776189923286	
+product-lines/elevator_spec2_product11.cil.yml	true	true	0.67220968	0.6637026070384309		true	2.95867753	1.350410524988547	
+product-lines/elevator_spec2_product17.cil.yml	true	true	0.65729285	0.6466074789641425		true	3.51960607	1.452725088922307	
+product-lines/elevator_spec2_product18.cil.yml	true	true	0.663158409	0.6529598860070109		true	3.065213381	1.3412949030753225	
+product-lines/elevator_spec2_product19.cil.yml	true	true	0.659899956	0.6495165609521791		true	3.114253442	1.418125008000061	
+product-lines/elevator_spec2_product20.cil.yml	true	true	0.689127518	0.6789599480107427		true	3.240690132	1.398437828058377	
+product-lines/elevator_spec2_product21.cil.yml	true	true	0.672813405	0.6626988439820707		true	2.94350289	1.3460851369891316	
+product-lines/elevator_spec2_product22.cil.yml	true	true	0.675517333	0.6650571239879355		true	3.10136197	1.3380653138738126	
+product-lines/elevator_spec2_product23.cil.yml	true	true	0.673379528	0.6634496640181169		true	3.660721984	1.5657246839255095	
+product-lines/elevator_spec2_product24.cil.yml	true	true	0.687904925	0.6777919880114496		true	3.342304116	1.4515712221618742	
+product-lines/elevator_spec2_product25.cil.yml	true	true	0.670756358	0.6602408620528877		true	3.011239402	1.3105249551590532	
+product-lines/elevator_spec2_product26.cil.yml	true	true	0.678828345	0.6684557410189882		true	3.329620921	1.5371986269019544	
+product-lines/elevator_spec2_product27.cil.yml	true	true	0.685441365	0.6752030570060015		true	3.138843258	1.3861008980311453	
+product-lines/elevator_spec2_product28.cil.yml	true	true	0.67597451	0.6658193939365447		true	3.167905451	1.3498413919005543	
+product-lines/elevator_spec2_product29.cil.yml	true	true	0.701788119	0.7237948559923097		true	3.589860738	1.534583848901093	
+product-lines/elevator_spec2_product30.cil.yml	true	true	0.668662104	0.658313556923531		true	3.154177549	1.3845041051972657	
+product-lines/elevator_spec2_product31.cil.yml	true	true	0.718254787	0.7080349649768323		true	3.329621001	1.4231687728315592	
+product-lines/elevator_spec2_product32.cil.yml	true	true	0.678348581	0.6681860280223191		true	3.495388927	1.5138724429998547	
+product-lines/elevator_spec2_productSimulator.cil.yml	true	true	0.824676343	0.8138773670652881		true	21.504905501	19.659798241918907	
+product-lines/elevator_spec3_product01.cil.yml	true	true	0.654889781	0.6441715259570628		true	3.253909819	1.6427800089586526	
+product-lines/elevator_spec3_product03.cil.yml	true	true	0.724179304	0.7136802130844444		true	2.877131104	1.2127176888752729	
+product-lines/elevator_spec3_product09.cil.yml	true	true	0.678689683	0.668684862088412		true	3.375644112	1.691901802783832	
+product-lines/elevator_spec3_product11.cil.yml	true	true	0.698413489	0.6878608809784055		true	2.855913469	1.189809886040166	
+product-lines/elevator_spec3_product17.cil.yml	true	true	0.686030012	0.6775932899909094		true	3.485476052	1.6998733980581164	
+product-lines/elevator_spec3_product18.cil.yml	true	true	0.699704508	0.6892036619829014		true	3.561256219	1.7719177280087024	
+product-lines/elevator_spec3_product19.cil.yml	true	true	0.663516571	0.6540730230044574		true	2.847291711	1.1899315500631928	
+product-lines/elevator_spec3_product20.cil.yml	true	true	0.677949407	0.6680304009933025		true	3.267094243	1.3697827849537134	
+product-lines/elevator_spec3_product21.cil.yml	true	true	0.694501886	0.68407074699644		true	3.83460812	1.8778794719837606	
+product-lines/elevator_spec3_product22.cil.yml	true	true	0.692521481	0.6828061529668048		true	3.713933231	1.889627407072112	
+product-lines/elevator_spec3_product23.cil.yml	true	true	0.70625579	0.6958914709975943		true	3.222915718	1.256147933891043	
+product-lines/elevator_spec3_product24.cil.yml	true	true	0.698009462	0.6882273219525814		true	2.965952124	1.2444228508975357	
+product-lines/elevator_spec3_product25.cil.yml	true	true	0.731208323	0.720502270036377		true	3.587763089	1.6821123550180346	
+product-lines/elevator_spec3_product26.cil.yml	true	true	0.685742891	0.6750557830091566		true	4.015769915	1.9783657249063253	
+product-lines/elevator_spec3_product27.cil.yml	true	true	0.676096245	0.6660097549902275		true	3.168137201	1.2902579980436713	
+product-lines/elevator_spec3_product28.cil.yml	true	true	0.698699021	0.6894016069127247		true	3.219039276	1.2932202310767025	
+product-lines/elevator_spec3_product29.cil.yml	true	true	0.695756374	0.6856664140941575		true	3.463116868	1.742142393020913	
+product-lines/elevator_spec3_product30.cil.yml	true	true	0.725010055	0.7146946779685095		true	3.857142201	2.0116526051424444	
+product-lines/elevator_spec3_product31.cil.yml	true	true	0.679492824	0.669526387937367		true	2.986728388	1.2603906369768083	
+product-lines/elevator_spec3_product32.cil.yml	true	true	0.701771007	0.6915455609560013		true	3.139139246	1.2778045730665326	
+product-lines/elevator_spec3_productSimulator.cil.yml	true	true	0.954757189	0.9446504979860038		true	75.948306332	74.22378466487862	
+product-lines/elevator_spec9_product09.cil.yml	true	true	0.653492822	0.6428075509611517		true	3.096281174	1.3442485178820789	
+product-lines/elevator_spec9_product11.cil.yml	true	true	0.725948876	0.7172451890073717		true	3.613056401	1.5398415280506015	
+product-lines/elevator_spec9_product25.cil.yml	true	true	0.650750349	0.6415907819755375		true	3.121745797	1.4516177650075406	
+product-lines/elevator_spec9_product26.cil.yml	true	true	0.691154909	0.6821202490245923		true	3.054710204	1.3432477060705423	
+product-lines/elevator_spec9_product27.cil.yml	true	true	0.658845296	0.6486700139939785		true	3.630458199	1.5801720230374485	
+product-lines/elevator_spec9_product28.cil.yml	true	true	0.690705374	0.6803522070404142		true	3.585353759	1.454809509916231	
+product-lines/elevator_spec9_product29.cil.yml	true	true	0.675169694	0.6647074590437114		true	3.070705809	1.4086023401468992	
+product-lines/elevator_spec9_product30.cil.yml	true	true	0.673694305	0.6636062239995226		true	3.023425241	1.3335378030315042	
+product-lines/elevator_spec9_product31.cil.yml	true	true	0.696663711	0.6863126250682399		true	3.266384182	1.4335669020656496	
+product-lines/elevator_spec9_product32.cil.yml	true	true	0.705679862	0.695222208974883		true	3.047639436	1.334154485957697	
+product-lines/elevator_spec9_productSimulator.cil.yml	true	true	0.825864619	0.8150204030098394		true	21.978212331	20.073576433118433	
+product-lines/email_spec0_product05.cil.yml	true	true	14.329855129	14.322169358027168		true	3.217191038	1.5754672619514167	
+product-lines/email_spec0_product09.cil.yml	true	true	20.350978254	20.35686218191404		true	3.789457861	1.9816154350992292	
+product-lines/email_spec0_product10.cil.yml	true	true	19.092465344	19.083626886014827		true	3.37884086	1.6690231210086495	
+product-lines/email_spec0_product11.cil.yml	true	true	13.579159133	13.570209035999142		true	3.304565251	1.7185949198901653	
+product-lines/email_spec0_product16.cil.yml	true	true	26.066368205	26.058931195060723		true	3.770809977	1.9134326621424407	
+product-lines/email_spec0_product19.cil.yml	true	true	14.750888542	14.74190947599709		true	3.616540521	1.849468451924622	
+product-lines/email_spec0_product21.cil.yml	true	true	36.634484651	36.62802210706286		true	4.247559356	2.471609131200239	
+product-lines/email_spec0_product22.cil.yml	true	true	35.808238108	35.81514948105905		true	3.616082074	1.8893371711019427	
+product-lines/email_spec0_product24.cil.yml	true	true	27.059191534	27.37510576506611		true	3.536714285	1.9563245070166886	
+product-lines/email_spec0_product25.cil.yml	true	true	24.1258698	24.121111189946532		true	4.176681429	2.4338070140220225	
+product-lines/email_spec0_product26.cil.yml	true	true	41.83956381	41.832304332987405		true	4.28306164	2.6382391210645437	
+product-lines/email_spec0_product27.cil.yml	true	true	39.553161	39.563594785984606		true	4.270191993	2.5376783919055015	
+product-lines/email_spec0_product31.cil.yml	true	true	37.7774265	37.78557741700206		true	4.084280776	2.117635848931968	
+product-lines/email_spec0_product33.cil.yml	true	true	50.372646436	50.36688284995034		true	3.640094161	2.0580085089895874	
+product-lines/email_spec0_product34.cil.yml	true	true	49.876302431	49.86770461197011		true	4.9928248	3.1465485871303827	
+product-lines/email_spec0_product35.cil.yml	true	true	62.527194711	62.51943186100107		true	4.816966032	2.954167414922267	
+product-lines/email_spec0_product36.cil.yml	true	true	28.041936388	28.034507567994297		true	3.807251665	1.9994644480757415	
+product-lines/email_spec0_product37.cil.yml	true	true	19.602902198	19.595083762076683		true	4.008541945	1.9895741911605	
+product-lines/email_spec0_product38.cil.yml	true	true	19.494893456	19.486780541948974		true	4.074569256	2.1718027661554515	
+product-lines/email_spec0_product40.cil.yml	true	true	27.504486823	27.496180347981863		true	4.111925525	2.228607011027634	
+product-lines/email_spec0_productSimulator.cil.yml	true	TIMEOUT (verification)				true	38.802965238	36.938750428846106	
+product-lines/email_spec11_product03.cil.yml	true	true	14.600478424	14.591472133994102		true	3.094832985	1.5132236778736115	
+product-lines/email_spec11_product07.cil.yml	true	true	22.657267833	22.658252628985792		true	3.416953664	1.7823405228555202	
+product-lines/email_spec11_product08.cil.yml	true	true	14.547727006	14.539385356940329		true	3.418557727	1.682937289820984	
+product-lines/email_spec11_product10.cil.yml	true	true	19.375504723	19.36760927096475		true	3.316792941	1.5558871389366686	
+product-lines/email_spec11_product15.cil.yml	true	true	27.774373495	27.784282284090295		true	3.750265493	1.8262367339339107	
+product-lines/email_spec11_product18.cil.yml	true	true	23.120604208	23.11595121701248		true	3.754088748	1.9489475898444653	
+product-lines/email_spec11_product20.cil.yml	true	true	36.636735154	36.62905139103532		true	3.932603471	2.2068400192074478	
+product-lines/email_spec11_product22.cil.yml	true	true	34.309408416	34.30092011298984		true	4.058252072	2.152527883183211	
+product-lines/email_spec11_product23.cil.yml	true	true	30.968175628	30.9785016879905		true	4.034266911	2.2151386530604213	
+product-lines/email_spec11_product24.cil.yml	true	true	29.85086535	29.84302887704689		true	3.996410203	2.0083792039658874	
+product-lines/email_spec11_product26.cil.yml	true	true	45.936902326	45.94236704101786		true	4.518908348	2.6652610320597887	
+product-lines/email_spec11_product27.cil.yml	true	true	40.816298052	40.825384594034404		true	4.217527788	2.4899158808402717	
+product-lines/email_spec11_product30.cil.yml	true	true	42.776364524	42.77478447195608		true	3.796313371	1.9197947208303958	
+product-lines/email_spec11_product32.cil.yml	true	true	51.92922282	51.933313560904935		true	3.983260826	2.4344325030688196	
+product-lines/email_spec11_product33.cil.yml	true	true	49.986153121	50.0116013539955		true	4.006063036	2.1571422750130296	
+product-lines/email_spec11_product35.cil.yml	true	true	60.74144959	60.74896092689596		true	4.673752135	2.9662505290471017	
+product-lines/email_spec11_product36.cil.yml	true	true	28.150079689	28.153419047943316		true	3.991783567	2.086442206054926	
+product-lines/email_spec11_product37.cil.yml	true	true	19.639734674	19.641985389986075		true	3.840414656	1.9629320688545704	
+product-lines/email_spec11_product39.cil.yml	true	true	21.051742349	21.044213399058208		true	3.662943686	1.878940958995372	
+product-lines/email_spec11_product40.cil.yml	true	true	27.962881849	27.96786351094488		true	3.891760663	2.1832844209857285	
+product-lines/email_spec11_productSimulator.cil.yml	true	TIMEOUT (verification)				true	43.176504266	41.36715944786556	
+product-lines/email_spec1_product12.cil.yml	true	true	18.98022508	18.98715410893783		true	3.828908515	1.8395310940686613	
+product-lines/email_spec1_product14.cil.yml	true	true	28.757910709	28.765772985992953		true	3.478428035	1.7794295370113105	
+product-lines/email_spec1_product15.cil.yml	true	true	29.151899402	29.144538511987776		true	3.752035652	1.8739182909484953	
+product-lines/email_spec1_product16.cil.yml	true	true	25.974477946	25.965376979089342		true	3.775980898	1.972542149014771	
+product-lines/email_spec1_product20.cil.yml	true	true	35.14613537	35.15597927500494		true	4.094603434	2.3772774320095778	
+product-lines/email_spec1_product21.cil.yml	true	true	34.176736282	34.2120129870018		true	3.918525635	2.4231588810216635	
+product-lines/email_spec1_product22.cil.yml	true	true	36.88759832	36.89974916295614		true	3.582668093	1.8762485629413277	
+product-lines/email_spec1_product26.cil.yml	true	true	46.547248463	46.55227502307389		true	4.643952444	2.6243069178890437	
+product-lines/email_spec1_product28.cil.yml	true	true	29.609180268	29.601587144075893		true	3.343639227	1.7546797208487988	
+product-lines/email_spec1_product29.cil.yml	true	true	42.363547312	42.35604238603264		true	3.801871325	2.0513520820531994	
+product-lines/email_spec1_product30.cil.yml	true	true	37.547555097	37.539311136933975		true	3.62937279	1.9252477861009538	
+product-lines/email_spec1_product31.cil.yml	true	true	42.030795756	42.02236341906246		true	3.947024376	2.0268858768977225	
+product-lines/email_spec1_product32.cil.yml	true	true	46.430408778	46.42358315398451		true	4.115987407	2.415178010938689	
+product-lines/email_spec1_product33.cil.yml	true	true	50.286667718	50.309155329014175		true	3.757166656	2.0209798659197986	
+product-lines/email_spec1_product34.cil.yml	true	true	52.291039583	52.29999965999741		true	5.118445813	3.031434629112482	
+product-lines/email_spec1_product35.cil.yml	true	true	64.496796929	64.48872464697342		true	4.820427047	2.9892459558323026	
+product-lines/email_spec1_productSimulator.cil.yml	true	TIMEOUT (verification)				true	19.64660788	17.995618972927332	
+product-lines/email_spec27_product13.cil.yml	true	true	26.575601554	26.58357064204756		true	3.804615934	1.888807506999001	
+product-lines/email_spec27_product17.cil.yml	true	true	35.052835489	35.06631003902294		true	3.661034703	1.8426999629009515	
+product-lines/email_spec27_product18.cil.yml	true	true	33.49225516	33.484403645968996		true	3.587315502	1.8156253229826689	
+product-lines/email_spec27_product19.cil.yml	true	true	33.964764961	33.977761877002195		true	3.518594755	1.8442628008779138	
+product-lines/email_spec27_product23.cil.yml	true	true	44.966702799	44.97420683898963		true	3.982827607	2.2672506507951766	
+product-lines/email_spec27_product24.cil.yml	true	true	43.227978625	43.24550919700414		true	3.774792493	2.014359697001055	
+product-lines/email_spec27_product25.cil.yml	true	true	44.120128904	44.13606260402594		true	4.073574346	2.456102427095175	
+product-lines/email_spec27_product27.cil.yml	true	true	52.460821748	52.483472866006196		true	4.271511845	2.610205771867186	
+product-lines/email_spec27_product28.cil.yml	true	true	30.971730724	30.98874895996414		true	3.512536477	1.74956627888605	
+product-lines/email_spec27_product29.cil.yml	true	true	46.652381131	46.67019352293573		true	3.747119471	1.9642101461067796	
+product-lines/email_spec27_product30.cil.yml	true	true	42.159001003	42.15092823293526		true	3.647504305	1.8910835220012814	
+product-lines/email_spec27_product31.cil.yml	true	true	43.031635465	43.024824511026964		true	3.744764201	2.127101748017594	
+product-lines/email_spec27_product32.cil.yml	true	true	57.149292121	57.17261443194002		true	4.316610013	2.545851611997932	
+product-lines/email_spec27_product33.cil.yml	true	true	54.469416111	54.47332195809577		true	3.85928591	2.1097347310278565	
+product-lines/email_spec27_product34.cil.yml	true	true	59.505805168	59.52594530605711		true	4.813240844	2.9998040520586073	
+product-lines/email_spec27_product35.cil.yml	true	true	68.455591143	68.44896991900168		true	4.651507495	2.930493174120784	
+product-lines/email_spec27_productSimulator.cil.yml	true	TIMEOUT (verification)				true	24.515445519	22.752217290923	
+product-lines/email_spec3_product13.cil.yml	true	true	24.112138872	24.104195998981595		true	3.572966366	1.8132838641759008	
+product-lines/email_spec3_product17.cil.yml	true	true	29.646094608	29.637774530099705		true	3.687494011	1.9710412179119885	
+product-lines/email_spec3_product18.cil.yml	true	true	27.414198737	27.41563760396093		true	3.547746448	1.9021008650306612	
+product-lines/email_spec3_product19.cil.yml	true	true	28.538511007	28.52996010798961		true	3.701306979	1.9552889729384333	
+product-lines/email_spec3_product23.cil.yml	true	true	34.618870329	34.61096010101028		true	4.182398384	2.391065792180598	
+product-lines/email_spec3_product24.cil.yml	true	true	28.495951855	28.500801438931376		true	4.155849612	2.1890461170114577	
+product-lines/email_spec3_product25.cil.yml	true	true	34.190343877	34.182237675995566		true	4.160454599	2.583362672943622	
+product-lines/email_spec3_product27.cil.yml	true	true	35.231118212	35.25817630300298		true	4.835331076	3.1532983309589326	
+product-lines/email_spec3_product28.cil.yml	true	true	29.550110849	29.54275562998373		true	4.104487447	2.0071364839095622	
+product-lines/email_spec3_product29.cil.yml	true	true	38.987399736	38.97856617800426		true	3.993636922	2.1093361179810017	
+product-lines/email_spec3_product30.cil.yml	true	true	33.863234008	33.86128645890858		true	3.562939923	1.9594510670285672	
+product-lines/email_spec3_product31.cil.yml	true	true	34.07265668	34.07912369002588		true	3.981635817	2.2064498071558774	
+product-lines/email_spec3_product32.cil.yml	true	true	39.677440162	39.670718220062554		true	4.565659428	2.650182319106534	
+product-lines/email_spec3_product33.cil.yml	true	true	37.611000138	37.60220667603426		true	3.841756173	2.114491875981912	
+product-lines/email_spec3_product34.cil.yml	true	true	39.867148134	39.8587204440264		true	4.68217998	2.9857354280538857	
+product-lines/email_spec3_product35.cil.yml	true	true	42.05109943	42.0610073270509		true	5.000632877	3.1694657169282436	
+product-lines/email_spec3_productSimulator.cil.yml	true	true	510.058013294	510.12063424801454		true	19.829696866	18.018413305981085	
+product-lines/email_spec4_product13.cil.yml	true	true	15.163040785	15.154672192060389		true	3.550047326	1.6827180699910969	
+product-lines/email_spec4_product17.cil.yml	true	true	22.878174294	22.87584377604071		true	3.847405769	1.9269886519759893	
+product-lines/email_spec4_product18.cil.yml	true	true	23.407325157	23.400670725037344		true	3.585765924	1.8356413231231272	
+product-lines/email_spec4_product19.cil.yml	true	true	21.241325503	21.233020898071118		true	3.712415608	1.9049970130436122	
+product-lines/email_spec4_product23.cil.yml	true	true	33.584806487	33.5939203890739		true	4.156323776	2.2158211779315025	
+product-lines/email_spec4_product24.cil.yml	true	true	31.178951504	31.187438425025903		true	3.715083098	1.9629096009302884	
+product-lines/email_spec4_product25.cil.yml	true	true	29.568806965	29.574946772074327		true	3.985474238	2.436940843006596	
+product-lines/email_spec4_product27.cil.yml	true	true	40.921391035	40.93081159691792		true	4.22452083	2.5738947589416057	
+product-lines/email_spec4_product28.cil.yml	true	true	30.786187136	30.778409963008016		true	3.375484084	1.6699991810601205	
+product-lines/email_spec4_product29.cil.yml	true	true	44.299195501	44.29195732192602		true	3.726726942	1.9310410080943257	
+product-lines/email_spec4_product30.cil.yml	true	true	41.901599024	41.89671078103129		true	3.920368978	1.9875308258924633	
+product-lines/email_spec4_product31.cil.yml	true	true	45.035950683	45.054185919929296		true	3.829344935	2.0105334729887545	
+product-lines/email_spec4_product32.cil.yml	true	true	55.652702403	55.644195577013306		true	4.739298968	2.584433587966487	
+product-lines/email_spec4_product33.cil.yml	true	true	54.527684783	54.53218502900563		true	3.908530427	2.0396528688725084	
+product-lines/email_spec4_product34.cil.yml	true	true	56.355441284	56.3498353830073		true	4.760159994	2.939948986051604	
+product-lines/email_spec4_product35.cil.yml	true	true	65.428314029	65.46109596604947		true	4.72843032	2.918833289993927	
+product-lines/email_spec4_productSimulator.cil.yml	true	TIMEOUT (verification)				true	18.578304259	16.71817941311747	
+product-lines/email_spec6_product12.cil.yml	true	true	20.624877775	20.62742484593764		true	3.234846499	1.693778129061684	
+product-lines/email_spec6_product14.cil.yml	true	true	28.51589372	28.57572496100329		true	3.763094842	1.9313910859636962	
+product-lines/email_spec6_product15.cil.yml	true	true	29.190263151	29.185444244067185		true	3.593787151	1.90850291098468	
+product-lines/email_spec6_product16.cil.yml	true	true	27.106200111	27.09796807798557		true	3.557994207	1.968982974998653	
+product-lines/email_spec6_product20.cil.yml	true	true	40.197627983	40.18896970397327		true	4.152287335	2.3429964501410723	
+product-lines/email_spec6_product21.cil.yml	true	true	38.152508667	38.20066541596316		true	4.111332374	2.556649249047041	
+product-lines/email_spec6_product22.cil.yml	true	true	35.316589621	35.328402335057035		true	3.916647219	2.0028680998366326	
+product-lines/email_spec6_product26.cil.yml	true	true	48.657684004	48.65040525794029		true	4.544800009	2.6517816421110183	
+product-lines/email_spec6_product28.cil.yml	true	true	30.981511461	30.981356970965862		true	3.546093822	1.7750442568212748	
+product-lines/email_spec6_product29.cil.yml	true	true	40.69146123	40.69151734595653		true	4.077254939	2.2367342540528625	
+product-lines/email_spec6_product30.cil.yml	true	true	40.625875584	40.63993240299169		true	3.84162842	2.041049082065001	
+product-lines/email_spec6_product31.cil.yml	true	true	39.602043013	39.593779013026506		true	3.88394954	2.095950373215601	
+product-lines/email_spec6_product32.cil.yml	true	true	53.69276868	53.714248748961836		true	4.341877682	2.5885235900059342	
+product-lines/email_spec6_product33.cil.yml	true	true	49.657733374	49.68095963203814		true	4.156830869	2.157127037178725	
+product-lines/email_spec6_product34.cil.yml	true	true	56.228260863	56.237548445002176		true	4.874078413	3.0940198418684304	
+product-lines/email_spec6_product35.cil.yml	true	true	62.27160882	62.26415170007385		true	4.808513806	3.0566791449673474	
+product-lines/email_spec6_productSimulator.cil.yml	true	TIMEOUT (verification)				true	21.269122826	19.172011316055432	
+product-lines/email_spec7_product13.cil.yml	true	true	11.384911341	11.376372528960928		true	3.872848772	1.8446953759994358	
+product-lines/email_spec7_product17.cil.yml	true	true	17.674945561	17.666289360960945		true	3.540049425	1.816993473796174	
+product-lines/email_spec7_product18.cil.yml	true	true	21.950394856	21.95518354093656		true	3.614935316	1.8062329411040992	
+product-lines/email_spec7_product19.cil.yml	true	true	16.072912951	16.064189515076578		true	3.575194825	1.8497773569542915	
+product-lines/email_spec7_product23.cil.yml	true	true	31.786764603	31.77882924093865		true	3.680167927	2.0550754969008267	
+product-lines/email_spec7_product24.cil.yml	true	true	29.880437384	29.873635987984017		true	3.814901661	2.003865582169965	
+product-lines/email_spec7_product25.cil.yml	true	true	22.915529889	23.26821211609058		true	4.119648006	2.3470986771862954	
+product-lines/email_spec7_product27.cil.yml	true	true	38.213573678	38.21467577898875		true	4.152337763	2.428992494009435	
+product-lines/email_spec7_product28.cil.yml	true	true	29.808982968	29.81326204200741		true	3.543045589	1.7673170701600611	
+product-lines/email_spec7_product29.cil.yml	true	true	43.08166496	43.07356092997361		true	3.734083736	1.9510777469258755	
+product-lines/email_spec7_product30.cil.yml	true	true	36.971946718	36.96473348198924		true	3.666662142	1.915993425063789	
+product-lines/email_spec7_product31.cil.yml	true	true	41.151772991	41.17194124497473		true	3.847603556	2.0314310458488762	
+product-lines/email_spec7_product32.cil.yml	true	true	53.573273813	53.566020519007		true	4.425016505	2.6095130669418722	
+product-lines/email_spec7_product33.cil.yml	true	true	47.644274001	47.64186718792189		true	3.79504735	2.057584485039115	
+product-lines/email_spec7_product34.cil.yml	true	true	55.985515554	56.01559471001383		true	4.547874465	2.847318704938516	
+product-lines/email_spec7_product35.cil.yml	true	true	61.924136651	61.918231050949544		true	4.706404952	2.8456725960131735	
+product-lines/email_spec7_productSimulator.cil.yml	true	TIMEOUT (verification)				true	19.68093665	17.918035194976255	
+product-lines/email_spec8_product12.cil.yml	true	true	19.45596342	19.456246885005385		true	3.58110604	1.7344159120693803	
+product-lines/email_spec8_product14.cil.yml	true	true	27.416758268	27.407879192964174		true	3.524995238	1.8287480419967324	
+product-lines/email_spec8_product15.cil.yml	true	true	29.580239815	29.57771754998248		true	3.728402365	1.8499612340237945	
+product-lines/email_spec8_product16.cil.yml	true	true	25.899568963	25.901562573970295		true	3.948063295	1.9698288610670716	
+product-lines/email_spec8_product20.cil.yml	true	true	41.440783605	41.444161609048024		true	4.160766099	2.3621999558527023	
+product-lines/email_spec8_product21.cil.yml	true	true	34.143846941	34.13639456196688		true	4.190094776	2.4785595450084656	
+product-lines/email_spec8_product22.cil.yml	true	true	39.203971866	39.201575155952014		true	3.66623639	1.9153354410082102	
+product-lines/email_spec8_product26.cil.yml	true	true	44.44009085	44.455817119101994		true	4.279221401	2.6086092579644173	
+product-lines/email_spec8_product28.cil.yml	true	true	29.541684525	29.543347266037017		true	3.501426729	1.703987477114424	
+product-lines/email_spec8_product29.cil.yml	true	true	43.616091137	43.60827158205211		true	3.7790185	2.099768068175763	
+product-lines/email_spec8_product30.cil.yml	true	true	40.786055458	40.77988039108459		true	3.825726716	1.9624828349333256	
+product-lines/email_spec8_product31.cil.yml	true	true	42.150921383	42.14380299602635		true	4.024850988	2.206091231899336	
+product-lines/email_spec8_product32.cil.yml	true	true	52.781837481	52.77509471506346		true	4.355022269	2.5173064041882753	
+product-lines/email_spec8_product33.cil.yml	true	true	47.882973419	47.87539603805635		true	4.129076785	2.212543298024684	
+product-lines/email_spec8_product34.cil.yml	true	true	53.926429822	53.91895486309659		true	4.570345661	2.886712589999661	
+product-lines/email_spec8_product35.cil.yml	true	true	64.035200145	64.03785313095432		true	4.732422903	2.9534140590112656	
+product-lines/email_spec8_productSimulator.cil.yml	true	TIMEOUT (verification)				true	20.545942488	18.740859457990155	
+product-lines/email_spec9_product12.cil.yml	true	true	20.103599285	20.428269593976438		true	3.417071485	1.7175207419786602	
+product-lines/email_spec9_product14.cil.yml	true	true	27.556803366	27.55498230003286		true	4.27543406	2.126972232013941	
+product-lines/email_spec9_product15.cil.yml	true	true	30.799966199	30.798731168964878		true	3.588518422	1.8343735251110047	
+product-lines/email_spec9_product16.cil.yml	true	true	27.130386505	27.123550691991113		true	3.709287762	1.9968444199766964	
+product-lines/email_spec9_product20.cil.yml	true	true	40.527045826	40.51974819996394		true	4.372574264	2.510092444019392	
+product-lines/email_spec9_product21.cil.yml	true	true	36.19222556	36.20344173209742		true	4.205189461	2.531676256097853	
+product-lines/email_spec9_product22.cil.yml	true	true	37.165936246	37.157802359899506		true	4.001704316	2.0874174050986767	
+product-lines/email_spec9_product26.cil.yml	true	true	50.642212613	50.65700448793359		true	4.727617898	2.6648306159768254	
+product-lines/email_spec9_product28.cil.yml	true	true	29.234509845	29.80301973200403		true	3.447057869	1.7716563700232655	
+product-lines/email_spec9_product29.cil.yml	true	true	43.518110522	43.52780371403787		true	3.975755329	2.018196990946308	
+product-lines/email_spec9_product30.cil.yml	true	true	41.009471886	41.00279828091152		true	3.75587672	1.9815731970593333	
+product-lines/email_spec9_product31.cil.yml	true	true	39.637582226	39.63230423198547		true	4.035546458	2.194169041933492	
+product-lines/email_spec9_product32.cil.yml	true	true	53.545310066	53.570882291998714		true	4.427184305	2.618842450901866	
+product-lines/email_spec9_product33.cil.yml	true	true	53.526412047	53.51868370594457		true	4.178367932	2.211615664185956	
+product-lines/email_spec9_product34.cil.yml	true	true	56.042733031	56.06694301299285		true	4.73116774	2.9228311160113662	
+product-lines/email_spec9_product35.cil.yml	true	true	64.591305074	64.61500532901846		true	4.762940403	2.9560215421952307	
+product-lines/email_spec9_productSimulator.cil.yml	true	TIMEOUT (verification)				true	20.110761554	18.323657881934196	
+product-lines/minepump_spec1_product01.cil.yml	false	false(termination)	0.619621119	0.6086082889232785		false(termination)	153.682798066	152.2590564219281	
+product-lines/minepump_spec1_product02.cil.yml	false	false(termination)	0.625350178	0.613935541943647		false(termination)	154.750067161	153.62778723496012	
+product-lines/minepump_spec1_product03.cil.yml	false	false(termination)	1.389756858	1.3782928340369835		false(termination)	153.43945698	152.25045325304382	
+product-lines/minepump_spec1_product04.cil.yml	false	false(termination)	1.323573233	1.3139198659919202		false(termination)	154.426293525	153.2205473720096	
+product-lines/minepump_spec1_product05.cil.yml	false	false(termination)	0.640529731	0.6294743170728907		false(termination)	155.786270528	154.4228898510337	
+product-lines/minepump_spec1_product06.cil.yml	false	false(termination)	0.780125366	0.7689698069589213		false(termination)	155.982800318	154.81470366986468	
+product-lines/minepump_spec1_product07.cil.yml	false	false(termination)	1.358361419	1.4097788310609758		false(termination)	155.218468904	154.0401170870755	
+product-lines/minepump_spec1_product08.cil.yml	false	false(termination)	1.349373638	1.3378678590524942		false(termination)	156.32003058	155.16218127217144	
+product-lines/minepump_spec1_product09.cil.yml	false	false(termination)	0.625933579	0.616040425025858		false(termination)	153.622178209	152.42266376107	
+product-lines/minepump_spec1_product10.cil.yml	false	false(termination)	0.683877558	0.6711740780156106		false(termination)	154.527822975	153.33277051104233	
+product-lines/minepump_spec1_product11.cil.yml	false	false(termination)	1.344945841	1.333464732975699		false(termination)	153.191210501	152.04158076713793	
+product-lines/minepump_spec1_product12.cil.yml	false	false(termination)	1.343264447	1.3314860290847719		false(termination)	154.42975395	153.3020846680738	
+product-lines/minepump_spec1_product13.cil.yml	false	false(termination)	0.637515124	0.6251791160320863		false(termination)	155.244434511	154.00277430494316	
+product-lines/minepump_spec1_product14.cil.yml	false	false(termination)	0.750203701	0.7388502969406545		false(termination)	156.326567878	155.26051933784038	
+product-lines/minepump_spec1_product15.cil.yml	false	false(termination)	1.347341947	1.3372010560706258		false(termination)	155.298194094	154.13848825683817	
+product-lines/minepump_spec1_product16.cil.yml	false	false(termination)	1.367610247	1.3565809540450573		false(termination)	156.642915834	155.73285638703965	
+product-lines/minepump_spec1_product17.cil.yml	false	false(termination)	0.761158471	0.7495342720067129		false(termination)	155.038928231	153.82249816088006	
+product-lines/minepump_spec1_product18.cil.yml	false	false(termination)	0.92889998	0.9239012890029699		false(termination)	155.922682257	154.8460551428143	
+product-lines/minepump_spec1_product19.cil.yml	false	false(termination)	1.540222089	1.5297180919442326		false(termination)	155.199616735	153.94202600605786	
+product-lines/minepump_spec1_product20.cil.yml	false	false(termination)	1.492175241	1.4809687050292268		false(termination)	156.710361676	155.35510124498978	
+product-lines/minepump_spec1_product21.cil.yml	false	false(termination)	0.762550967	0.7510215459624305		false(termination)	156.887423051	155.78558932780288	
+product-lines/minepump_spec1_product22.cil.yml	false	false(termination)	0.971315966	0.9669921580934897		false(termination)	157.916323772	156.66334488405846	
+product-lines/minepump_spec1_product23.cil.yml	false	false(termination)	1.497001098	1.4855668939417228		false(termination)	157.304831807	156.0573851650115	
+product-lines/minepump_spec1_product24.cil.yml	false	false(termination)	1.477075587	1.4676233740756288		false(termination)	158.813958969	157.40768353594467	
+product-lines/minepump_spec1_product25.cil.yml	false	false(termination)	0.775816807	0.7641680630622432		false(termination)	155.401711089	154.21684662206098	
+product-lines/minepump_spec1_product26.cil.yml	false	false(termination)	0.89901083	0.8872857970418409		false(termination)	155.980832018	154.840618429007	
+product-lines/minepump_spec1_product27.cil.yml	false	false(termination)	1.513286647	1.5021467229817063		false(termination)	156.045325817	154.82212219806388	
+product-lines/minepump_spec1_product28.cil.yml	false	false(termination)	1.504865528	1.4937258519930765		false(termination)	156.74497175	155.514558496885	
+product-lines/minepump_spec1_product29.cil.yml	false	false(termination)	0.772490452	0.7608917050529271		false(termination)	157.958429965	156.71153108403087	
+product-lines/minepump_spec1_product30.cil.yml	false	false(termination)	1.475581066	1.465984083013609		false(termination)	158.217883636	156.81042053108104	
+product-lines/minepump_spec1_product31.cil.yml	false	false(termination)	1.50366125	1.4929875079542398		false(termination)	158.042030978	156.98136740806513	
+product-lines/minepump_spec1_product32.cil.yml	false	false(termination)	1.525210957	1.5734994909726083		false(termination)	158.860471436	157.75086935190484	
+product-lines/minepump_spec1_product33.cil.yml	false	false(termination)	0.778926826	0.772040153038688		false(termination)	257.684950164	256.9920980669558	
+product-lines/minepump_spec1_product34.cil.yml	false	false(termination)	1.51093569	1.4989719160366803		false(termination)	255.202478338	254.31709554092959	
+product-lines/minepump_spec1_product35.cil.yml	false	false(termination)	1.557869713	1.5463366189505905		false(termination)	257.050370557	256.0708384090103	
+product-lines/minepump_spec1_product36.cil.yml	false	false(termination)	1.550278244	1.5392722670221701		false(termination)	246.851420121	246.0770500979852	
+product-lines/minepump_spec1_product37.cil.yml	false	false(termination)	0.786805175	0.7755493879085407		false(termination)	253.692207174	253.04004457197152	
+product-lines/minepump_spec1_product38.cil.yml	false	false(termination)	0.973742922	0.962146796984598		false(termination)	255.086255947	254.48548846691847	
+product-lines/minepump_spec1_product39.cil.yml	false	false(termination)	1.515157078	1.5039142930181697		false(termination)	257.319763106	256.2860854680184	
+product-lines/minepump_spec1_product40.cil.yml	false	false(termination)	1.552817221	1.5415337070589885		false(termination)	255.808046299	255.22088152798824	
+product-lines/minepump_spec1_product41.cil.yml	false	false(termination)	0.785750733	0.77570842707064		false(termination)	246.46301475	245.74370491993614	
+product-lines/minepump_spec1_product42.cil.yml	false	false(termination)	0.917666537	0.9079631669446826		false(termination)	255.195501466	254.3530088099651	
+product-lines/minepump_spec1_product43.cil.yml	false	false(termination)	1.509170065	1.497782964957878		false(termination)	267.347474451	266.18323413515463	
+product-lines/minepump_spec1_product44.cil.yml	false	false(termination)	1.51534674	1.5042557920096442		false(termination)	254.930720202	254.21420808392577	
+product-lines/minepump_spec1_product45.cil.yml	false	false(termination)	0.748620678	0.737147462903522		false(termination)	167.537394237	166.0978854659479	
+product-lines/minepump_spec1_product46.cil.yml	false	false(termination)	0.936315954	0.9255229190457612		false(termination)	169.228296413	168.1613978780806	
+product-lines/minepump_spec1_product47.cil.yml	false	false(termination)	1.605439531	1.5944287439342588		false(termination)	168.399919941	167.10594992293045	
+product-lines/minepump_spec1_product48.cil.yml	false	false(termination)	1.552497254	1.5712640339042991		false(termination)	168.630007077	167.38336364505813	
+product-lines/minepump_spec1_product49.cil.yml	false	false(termination)	0.792667794	0.7813185340492055		false(termination)	255.859482674	255.06216947501525	
+product-lines/minepump_spec1_product50.cil.yml	false	false(termination)	0.915186121	0.906591669889167		false(termination)	256.84909678	255.98754242504947	
+product-lines/minepump_spec1_product51.cil.yml	false	false(termination)	1.552334032	1.5417570780264214		false(termination)	257.637637468	256.5058687091805	
+product-lines/minepump_spec1_product52.cil.yml	false	false(termination)	1.527727164	1.5165414549410343		false(termination)	256.926426783	256.08247708296403	
+product-lines/minepump_spec1_product53.cil.yml	false	false(termination)	0.832721159	0.8212610780028626		false(termination)	258.4830841	257.76284314505756	
+product-lines/minepump_spec1_product54.cil.yml	false	false(termination)	0.937593575	0.9266137590166181		false(termination)	259.066061868	258.4082508389838	
+product-lines/minepump_spec1_product55.cil.yml	false	false(termination)	1.56551622	1.5560405540745705		false(termination)	258.823375499	257.4877818929963	
+product-lines/minepump_spec1_product56.cil.yml	false	false(termination)	1.676187992	1.6648077629506588		false(termination)	244.47000728	243.81772458693013	
+product-lines/minepump_spec1_product57.cil.yml	false	false(termination)	0.761952875	0.7501048949779943		false(termination)	170.328907787	169.2605693321675	
+product-lines/minepump_spec1_product58.cil.yml	false	false(termination)	0.924908469	0.9136319119716063		false(termination)	170.92849606	169.88044161489233	
+product-lines/minepump_spec1_product59.cil.yml	false	false(termination)	1.517572799	1.50567211501766		false(termination)	170.988436783	169.7387350630015	
+product-lines/minepump_spec1_product60.cil.yml	false	false(termination)	1.496203333	1.4854566849535331		false(termination)	171.161046877	169.99066522112116	
+product-lines/minepump_spec1_product61.cil.yml	false	false(termination)	0.787427776	0.7767791480291635		false(termination)	169.150978223	168.04022446088493	
+product-lines/minepump_spec1_product62.cil.yml	false	false(termination)	0.914301863	0.9035336789675057		false(termination)	171.005316664	169.91159307491034	
+product-lines/minepump_spec1_product63.cil.yml	false	false(termination)	1.520325256	1.5086253250483423		false(termination)	170.160929627	168.72491061198525	
+product-lines/minepump_spec1_product64.cil.yml	false	false(termination)	1.646943021	1.635012341896072		false(termination)	170.963743512	169.6857974899467	
+product-lines/minepump_spec1_productSimulator.cil.yml	false	false(termination)	4.405273872	4.397280141944066		false(termination)	171.82423718	170.9811359909363	
+product-lines/minepump_spec2_product01.cil.yml	false	false(termination)	0.610483069	0.5986920560244471		false(termination)	154.197459248	153.00210994505323	
+product-lines/minepump_spec2_product02.cil.yml	false	false(termination)	0.618117833	0.6085070519475266		false(termination)	154.841780823	153.73018299019895	
+product-lines/minepump_spec2_product03.cil.yml	false	false(termination)	1.337851423	1.3266080040484667		false(termination)	154.846604736	153.54859721986577	
+product-lines/minepump_spec2_product04.cil.yml	false	false(termination)	1.3461771	1.3346605870174244		false(termination)	155.727310559	154.61691288510337	
+product-lines/minepump_spec2_product05.cil.yml	false	false(termination)	0.651604654	0.6398075190372765		false(termination)	155.919282435	154.652174819028	
+product-lines/minepump_spec2_product06.cil.yml	false	false(termination)	0.752664162	0.7410823599202558		false(termination)	156.880008008	155.60846584197134	
+product-lines/minepump_spec2_product07.cil.yml	false	false(termination)	1.426734443	1.4146288209594786		false(termination)	156.488460621	155.32993512204848	
+product-lines/minepump_spec2_product08.cil.yml	false	false(termination)	1.346325708	1.3352632339810953		false(termination)	157.382480404	156.32663097488694	
+product-lines/minepump_spec2_product09.cil.yml	false	false(termination)	0.785983321	0.7745682749664411		false(termination)	154.422018553	153.22410693694837	
+product-lines/minepump_spec2_product10.cil.yml	false	false(termination)	0.612002598	0.6003178949467838		false(termination)	157.147241242	155.8596590370871	
+product-lines/minepump_spec2_product11.cil.yml	false	false(termination)	1.322033718	1.3106729020364583		false(termination)	154.133700432	153.11218968709	
+product-lines/minepump_spec2_product12.cil.yml	false	false(termination)	1.360835178	1.349625670001842		false(termination)	155.621533285	154.60327438102104	
+product-lines/minepump_spec2_product13.cil.yml	false	false(termination)	0.618912736	0.6076316249091178		false(termination)	155.869131277	154.57604554202408	
+product-lines/minepump_spec2_product14.cil.yml	false	false(termination)	0.769201286	0.7577759970445186		false(termination)	157.307871837	156.0072541970294	
+product-lines/minepump_spec2_product15.cil.yml	false	false(termination)	1.345732426	1.3341948380693793		false(termination)	156.698547678	155.72562783118337	
+product-lines/minepump_spec2_product16.cil.yml	false	false(termination)	1.344786332	1.3340646220603958		false(termination)	157.673514374	156.4604730901774	
+product-lines/minepump_spec2_product17.cil.yml	false	false(termination)	0.752532355	0.7407356019830331		false(termination)	155.340500679	154.05272241379134	
+product-lines/minepump_spec2_product18.cil.yml	false	false(termination)	1.478647179	1.4683991830097511		false(termination)	157.486998112	156.14212069800124	
+product-lines/minepump_spec2_product19.cil.yml	false	false(termination)	1.521847299	1.5104804680449888		false(termination)	155.744045779	154.6589245290961	
+product-lines/minepump_spec2_product20.cil.yml	false	false(termination)	1.499396786	1.4879029620205984		false(termination)	157.805381046	156.68498818879016	
+product-lines/minepump_spec2_product21.cil.yml	false	false(termination)	0.764487895	0.7530338590731844		false(termination)	157.852155099	156.59511046507396	
+product-lines/minepump_spec2_product22.cil.yml	false	false(termination)	1.666597515	1.655972893931903		false(termination)	158.525721073	157.29907715204172	
+product-lines/minepump_spec2_product23.cil.yml	false	false(termination)	1.526941251	1.5162842989666387		false(termination)	158.155191857	156.91502501512878	
+product-lines/minepump_spec2_product24.cil.yml	false	false(termination)	1.484426705	1.4736864030128345		false(termination)	158.581394335	157.65233829896897	
+product-lines/minepump_spec2_product25.cil.yml	false	false(termination)	0.79552859	0.783982977969572		false(termination)	156.264834182	154.9298831669148	
+product-lines/minepump_spec2_product26.cil.yml	false	false(termination)	1.475554324	1.4644806520082057		false(termination)	157.668253671	156.50862931017764	
+product-lines/minepump_spec2_product27.cil.yml	false	false(termination)	1.486978409	1.4764945600181818		false(termination)	156.244834539	155.2953967570793	
+product-lines/minepump_spec2_product28.cil.yml	false	false(termination)	1.503809189	1.492898258031346		false(termination)	157.340982441	156.25536611001007	
+product-lines/minepump_spec2_product29.cil.yml	false	false(termination)	0.763254387	0.7514256379799917		false(termination)	157.541958301	156.22528289700858	
+product-lines/minepump_spec2_product30.cil.yml	false	false(termination)	1.476050183	1.464274471043609		false(termination)	159.133480884	157.61700881295837	
+product-lines/minepump_spec2_product31.cil.yml	false	false(termination)	1.480554609	1.469582841033116		false(termination)	157.703696698	156.70688113803044	
+product-lines/minepump_spec2_product32.cil.yml	false	false(termination)	1.510248034	1.4992640770506114		false(termination)	159.793195482	158.6537034669891	
+product-lines/minepump_spec2_product33.cil.yml	false	false(termination)	0.761511441	0.7875670050270855		false(termination)	249.9527265	249.1302563920617	
+product-lines/minepump_spec2_product34.cil.yml	false	false(termination)	1.605775633	1.6243466479936615		false(termination)	255.073303934	254.20850535901263	
+product-lines/minepump_spec2_product35.cil.yml	false	false(termination)	1.507224169	1.4987755750771612		false(termination)	155.487562052	154.25741453887895	
+product-lines/minepump_spec2_product36.cil.yml	false	false(termination)	1.490044987	1.4794230110710487		false(termination)	250.798429549	250.23628299008124	
+product-lines/minepump_spec2_product37.cil.yml	false	false(termination)	0.76967983	0.7580075890291482		false(termination)	163.817614702	162.74769235309213	
+product-lines/minepump_spec2_product38.cil.yml	false	false(termination)	0.890204621	0.8790580339264125		false(termination)	164.51668047	163.42476544785313	
+product-lines/minepump_spec2_product39.cil.yml	false	false(termination)	1.507176415	1.495613849023357		false(termination)	165.327146136	164.24568270589225	
+product-lines/minepump_spec2_product40.cil.yml	false	false(termination)	1.541035802	1.5295906519750133		false(termination)	165.018779314	163.65381312882528	
+product-lines/minepump_spec2_product41.cil.yml	false	false(termination)	0.76540527	0.7540135919116437		false(termination)	250.318307014	249.51965921395458	
+product-lines/minepump_spec2_product42.cil.yml	false	false(termination)	0.89989111	0.8883899869397283		false(termination)	255.042144621	254.225479304092	
+product-lines/minepump_spec2_product43.cil.yml	false	false(termination)	1.494305923	1.4826467919629067		false(termination)	157.106205937	155.86966059496626	
+product-lines/minepump_spec2_product44.cil.yml	false	false(termination)	1.508289199	1.4978316790657118		false(termination)	256.409772805	255.81219678511843	
+product-lines/minepump_spec2_product45.cil.yml	false	false(termination)	0.764081731	0.753488690010272		false(termination)	169.051128608	167.9283618980553	
+product-lines/minepump_spec2_product46.cil.yml	false	false(termination)	0.921720449	0.9100687509635463		false(termination)	169.406503397	168.361364552984	
+product-lines/minepump_spec2_product47.cil.yml	false	false(termination)	1.544914746	1.5338947020936757		false(termination)	169.525439536	168.37974807503633	
+product-lines/minepump_spec2_product48.cil.yml	false	false(termination)	1.487346754	1.4766603780444711		false(termination)	169.597629632	168.54499887605198	
+product-lines/minepump_spec2_product49.cil.yml	false	false(termination)	0.764724088	0.7536420949036255		false(termination)	166.863830793	165.6811761080753	
+product-lines/minepump_spec2_product50.cil.yml	false	false(termination)	1.470510132	1.4597813659347594		false(termination)	168.305554582	167.03232914488763	
+product-lines/minepump_spec2_product51.cil.yml	false	false(termination)	1.517235812	1.5055954409763217		false(termination)	167.226221387	166.0274226339534	
+product-lines/minepump_spec2_product52.cil.yml	false	false(termination)	1.606728379	1.595882483990863		false(termination)	167.047039726	165.73312996490858	
+product-lines/minepump_spec2_product53.cil.yml	false	false(termination)	0.776706714	0.766220671008341		false(termination)	172.183083848	171.02947592898272	
+product-lines/minepump_spec2_product54.cil.yml	false	false(termination)	0.8990315	0.8876906700897962		false(termination)	172.522835467	171.474749305984	
+product-lines/minepump_spec2_product55.cil.yml	false	false(termination)	1.553969253	1.5424862030195072		false(termination)	171.796979624	170.59582992480136	
+product-lines/minepump_spec2_product56.cil.yml	false	false(termination)	1.515430305	1.5038878750056028		false(termination)	172.987511955	171.9536616911646	
+product-lines/minepump_spec2_product57.cil.yml	false	false(termination)	0.777183426	0.7656242180382833		false(termination)	170.527944682	169.5332494538743	
+product-lines/minepump_spec2_product58.cil.yml	false	false(termination)	0.916764483	0.9054652899503708		false(termination)	171.28613359	169.8286042220425	
+product-lines/minepump_spec2_product59.cil.yml	false	false(termination)	1.641986005	1.6305610979907215		false(termination)	170.724994798	169.61565693095326	
+product-lines/minepump_spec2_product60.cil.yml	false	false(termination)	1.548099808	1.563670684932731		false(termination)	172.137092291	170.67904299194925	
+product-lines/minepump_spec2_product61.cil.yml	false	false(termination)	0.761197214	0.7497599660418928		false(termination)	169.715164233	168.3684986550361	
+product-lines/minepump_spec2_product62.cil.yml	false	false(termination)	0.91803014	0.9083456079242751		false(termination)	170.722323915	169.4225161089562	
+product-lines/minepump_spec2_product63.cil.yml	false	false(termination)	1.519676949	1.5079464729642496		false(termination)	169.907085447	168.92572194710374	
+product-lines/minepump_spec2_product64.cil.yml	false	false(termination)	1.552162667	1.5405092029832304		false(termination)	171.385392131	170.02738059381954	
+product-lines/minepump_spec2_productSimulator.cil.yml	false	false(termination)	5.092151762	5.081931027933024		false(termination)	172.999433311	171.85333742713556	
+product-lines/minepump_spec3_product01.cil.yml	false	false(termination)	0.761735219	0.750629253918305		false(termination)	246.485364337	245.90201466018334	
+product-lines/minepump_spec3_product02.cil.yml	false	false(termination)	0.789381537	0.7793966579483822		false(termination)	247.156901145	246.59719452587888	
+product-lines/minepump_spec3_product03.cil.yml	false	false(termination)	1.46768752	1.4562374170636758		false(termination)	247.082265479	246.48520067497157	
+product-lines/minepump_spec3_product04.cil.yml	false	false(termination)	1.490451285	1.4787032159511		false(termination)	247.553519388	247.01860244199634	
+product-lines/minepump_spec3_product05.cil.yml	false	false(termination)	0.785178323	0.7744946120074019		false(termination)	247.578557258	246.98024840001017	
+product-lines/minepump_spec3_product06.cil.yml	false	false(termination)	1.487984458	1.4764269230654463		false(termination)	248.623032368	247.9839290541131	
+product-lines/minepump_spec3_product07.cil.yml	false	false(termination)	1.561068322	1.6082483519567177		false(termination)	247.797550195	247.33621761295944	
+product-lines/minepump_spec3_product08.cil.yml	false	false(termination)	1.476347753	1.4650091920047998		false(termination)	248.457231576	248.16929448605515	
+product-lines/minepump_spec3_product09.cil.yml	false	false(termination)	0.786162259	0.7746642979327589		false(termination)	246.677329167	245.98734800308011	
+product-lines/minepump_spec3_product10.cil.yml	false	false(termination)	0.781424541	0.7703956619370729		false(termination)	247.398490437	246.72805097186938	
+product-lines/minepump_spec3_product11.cil.yml	false	false(termination)	1.558263213	1.5460774790262803		false(termination)	247.837326571	246.96908248402178	
+product-lines/minepump_spec3_product12.cil.yml	false	false(termination)	1.480181105	1.4691888879751787		false(termination)	247.632192169	247.10676496615633	
+product-lines/minepump_spec3_product13.cil.yml	false	false(termination)	0.785062862	0.7732930040219799		false(termination)	248.177024178	247.63667285908014	
+product-lines/minepump_spec3_product14.cil.yml	false	false(termination)	1.499366454	1.4881389999063686		false(termination)	248.840260869	248.30741538014263	
+product-lines/minepump_spec3_product15.cil.yml	false	false(termination)	1.529386325	1.5176305120112374		false(termination)	248.124654998	247.64247946394607	
+product-lines/minepump_spec3_product16.cil.yml	false	false(termination)	1.502719541	1.4915094670141116		false(termination)	249.011169807	248.3840810910333	
+product-lines/minepump_spec3_product17.cil.yml	false	false(termination)	0.790313761	0.7789339219452813		false(termination)	247.789105334	247.42350352997892	
+product-lines/minepump_spec3_product18.cil.yml	false	false(termination)	0.94301597	0.932100111967884		false(termination)	248.523889527	248.1368911860045	
+product-lines/minepump_spec3_product19.cil.yml	false	false(termination)	1.493471207	1.4822155750589445		false(termination)	247.586126347	247.12635115603916	
+product-lines/minepump_spec3_product20.cil.yml	false	false(termination)	1.471098117	1.4595018309773877		false(termination)	248.964170466	248.41305159800686	
+product-lines/minepump_spec3_product21.cil.yml	false	false(termination)	0.766061744	0.7560708660166711		false(termination)	248.988817487	248.63107765186578	
+product-lines/minepump_spec3_product22.cil.yml	false	false(termination)	0.907723294	0.8967379239620641		false(termination)	250.961827958	250.28987239603885	
+product-lines/minepump_spec3_product23.cil.yml	false	false(termination)	1.533176038	1.5222385539673269		false(termination)	249.872105616	249.3706697029993	
+product-lines/minepump_spec3_product24.cil.yml	false	false(termination)	1.557002969	1.5447676380863413		false(termination)	250.362461822	249.79293806501664	
+product-lines/minepump_spec3_product25.cil.yml	false	false(termination)	0.769255758	0.7574309629853815		false(termination)	247.658216588	247.10065990593284	
+product-lines/minepump_spec3_product26.cil.yml	false	false(termination)	1.042091847	1.5685647650389		false(termination)	248.775628561	248.18096850905567	
+product-lines/minepump_spec3_product27.cil.yml	false	false(termination)	1.517150362	1.50589140097145		false(termination)	247.539432014	247.09738106513396	
+product-lines/minepump_spec3_product28.cil.yml	false	false(termination)	1.502085611	1.492364723002538		false(termination)	248.563578976	248.02205783082172	
+product-lines/minepump_spec3_product29.cil.yml	false	false(termination)	0.803662358	0.8157483889954165		false(termination)	250.443948258	249.9268020549789	
+product-lines/minepump_spec3_product30.cil.yml	false	false(termination)	1.534948463	1.5240636320086196		false(termination)	250.264168833	249.67117651412264	
+product-lines/minepump_spec3_product31.cil.yml	false	false(termination)	1.507730454	1.4961883010109887		false(termination)	249.328405618	248.7363667220343	
+product-lines/minepump_spec3_product32.cil.yml	false	false(termination)	1.514413496	1.5028789070202038		false(termination)	250.569004516	249.81052471813746	
+product-lines/minepump_spec3_product33.cil.yml	false	false(termination)	0.772915123	0.7608878900064155		false(termination)	155.790007724	154.57000264991075	
+product-lines/minepump_spec3_product34.cil.yml	false	false(termination)	0.897426337	0.8858457879396155		false(termination)	156.612165824	155.2491415888071	
+product-lines/minepump_spec3_product35.cil.yml	false	false(termination)	1.484208175	1.4730158200254664		false(termination)	250.823551123	250.10125428205356	
+product-lines/minepump_spec3_product36.cil.yml	false	false(termination)	2.049471833	2.038159213028848		false(termination)	250.868770047	250.1060130461119	
+product-lines/minepump_spec3_product37.cil.yml	false	false(termination)	0.755996597	0.7449893669690937		false(termination)	167.958968343	166.73858076892793	
+product-lines/minepump_spec3_product38.cil.yml	false	false(termination)	1.511259299	1.499598194961436		false(termination)	167.487281148	166.42152512911707	
+product-lines/minepump_spec3_product39.cil.yml	false	false(termination)	1.504768276	1.4937362970085815		false(termination)	261.837611933	261.0918745100498	
+product-lines/minepump_spec3_product40.cil.yml	false	false(termination)	1.538240509	1.5275014729704708		false(termination)	262.36796382	261.7144779120572	
+product-lines/minepump_spec3_product41.cil.yml	false	false(termination)	0.772952509	0.7617373099783435		false(termination)	156.259655085	155.0143482571002	
+product-lines/minepump_spec3_product42.cil.yml	false	false(termination)	0.898854308	0.887539871968329		false(termination)	157.07017299	155.92175075714476	
+product-lines/minepump_spec3_product43.cil.yml	false	false(termination)	1.509467729	1.49855158792343		false(termination)	249.509167192	248.92147440998815	
+product-lines/minepump_spec3_product44.cil.yml	false	false(termination)	1.49862411	1.487724995939061		false(termination)	259.975991025	259.37236504419707	
+product-lines/minepump_spec3_product45.cil.yml	false	false(termination)	0.837145836	0.8258595590014011		false(termination)	173.361127813	172.15582946618088	
+product-lines/minepump_spec3_product46.cil.yml	false	false(termination)	0.904461273	0.8931791939539835		false(termination)	172.16073449	170.80956360301934	
+product-lines/minepump_spec3_product47.cil.yml	false	false(termination)	1.513510039	1.5021193769061938		false(termination)	266.879248759	266.14270462002605	
+product-lines/minepump_spec3_product48.cil.yml	false	false(termination)	1.722548358	1.7107886399608105		false(termination)	267.180568504	266.3206045378465	
+product-lines/minepump_spec3_product49.cil.yml	false	false(termination)	0.771593041	0.7603250520769507		false(termination)	169.262358343	168.04576078918763	
+product-lines/minepump_spec3_product50.cil.yml	false	false(termination)	1.017599958	1.0057501579867676		false(termination)	168.680779453	167.57914789998904	
+product-lines/minepump_spec3_product51.cil.yml	false	false(termination)	1.524146211	1.5125553229590878		false(termination)	261.797728369	261.1927285040729	
+product-lines/minepump_spec3_product52.cil.yml	false	false(termination)	1.512042328	1.5007051120046526		false(termination)	262.428296586	261.7152968198061	
+product-lines/minepump_spec3_product53.cil.yml	false	false(termination)	0.786269757	0.7745501269819215		false(termination)	172.284219523	170.95620896900073	
+product-lines/minepump_spec3_product54.cil.yml	false	false(termination)	0.936637399	0.9253457980230451		false(termination)	173.853756645	172.4016299759969	
+product-lines/minepump_spec3_product55.cil.yml	false	false(termination)	1.586385631	1.5751166919944808		false(termination)	267.640860988	266.8680845159106	
+product-lines/minepump_spec3_product56.cil.yml	false	false(termination)	1.541919134	1.5324434869689867		false(termination)	268.350022063	267.60789293795824	
+product-lines/minepump_spec3_product57.cil.yml	false	false(termination)	0.798612781	0.7870886500459164		false(termination)	172.794916788	171.44528284016997	
+product-lines/minepump_spec3_product58.cil.yml	false	false(termination)	0.909764633	0.8981732440879568		false(termination)	174.02633194	172.8732042980846	
+product-lines/minepump_spec3_product59.cil.yml	false	false(termination)	1.504030369	1.4933334089582786		false(termination)	268.814025781	267.7633731770329	
+product-lines/minepump_spec3_product60.cil.yml	false	false(termination)	1.518708334	1.5075459399959072		false(termination)	267.879576331	267.2723394779023	
+product-lines/minepump_spec3_product61.cil.yml	false	false(termination)	0.762809462	0.7513652230845764		false(termination)	172.456502016	171.23996150610037	
+product-lines/minepump_spec3_product62.cil.yml	false	false(termination)	1.509059114	1.4969528450164944		false(termination)	174.422028007	173.34759642300196	
+product-lines/minepump_spec3_product63.cil.yml	false	false(termination)	1.531162527	1.5208435270469636		false(termination)	266.668314386	266.0300733319018	
+product-lines/minepump_spec3_product64.cil.yml	false	false(termination)	1.516324366	1.5051633489783853		false(termination)	268.827643523	267.9711365199182	
+product-lines/minepump_spec3_productSimulator.cil.yml	false	false(termination)	4.279215631	4.268996792961843		false(termination)	301.990593782	301.0145015530288	
+product-lines/minepump_spec4_product01.cil.yml	false	false(termination)	0.654531713	0.6432118730153888		false(termination)	151.429380162	150.1814123620279	
+product-lines/minepump_spec4_product02.cil.yml	false	false(termination)	0.646408389	0.635009762016125		false(termination)	152.227453219	151.2836807849817	
+product-lines/minepump_spec4_product03.cil.yml	false	false(termination)	1.342630959	1.3317476219963282		false(termination)	150.235352984	149.15956026082858	
+product-lines/minepump_spec4_product04.cil.yml	false	false(termination)	1.355990715	1.344557216973044		false(termination)	151.403478478	150.36040600785054	
+product-lines/minepump_spec4_product05.cil.yml	false	false(termination)	0.748619926	0.7369455610169098		false(termination)	152.966406881	151.63846029993147	
+product-lines/minepump_spec4_product06.cil.yml	false	false(termination)	1.441129752	1.4297752799466252		false(termination)	153.992344817	152.8248793350067	
+product-lines/minepump_spec4_product07.cil.yml	false	false(termination)	1.478498057	1.467054344015196		false(termination)	152.011587327	150.93798298202455	
+product-lines/minepump_spec4_product08.cil.yml	false	false(termination)	1.602189074	2.147673266939819		false(termination)	152.868074586	151.69036890100688	
+product-lines/minepump_spec4_product09.cil.yml	false	false(termination)	0.649002366	0.6376095620216802		false(termination)	151.407104525	150.24656779807992	
+product-lines/minepump_spec4_product10.cil.yml	false	false(termination)	0.634854751	0.6245054790051654		false(termination)	153.388003094	152.13951212610118	
+product-lines/minepump_spec4_product11.cil.yml	false	false(termination)	1.391811871	1.382599976961501		false(termination)	150.132967781	149.28498295508325	
+product-lines/minepump_spec4_product12.cil.yml	false	false(termination)	1.342554539	1.3308608430670574		false(termination)	151.461441923	150.64537773584016	
+product-lines/minepump_spec4_product13.cil.yml	false	false(termination)	1.324885623	1.3133238380542025		false(termination)	153.516968659	152.20457309298217	
+product-lines/minepump_spec4_product14.cil.yml	false	false(termination)	1.460436746	1.4489256229717284		false(termination)	154.090520633	152.8607547241263	
+product-lines/minepump_spec4_product15.cil.yml	false	false(termination)	1.457343931	1.4468415720621124		false(termination)	152.090601387	151.0915305488743	
+product-lines/minepump_spec4_product16.cil.yml	false	false(termination)	1.495289452	1.4842494659824297		false(termination)	153.696460902	152.6083466699347	
+product-lines/minepump_spec4_product17.cil.yml	false	false(termination)	0.655056115	0.6439447400625795		false(termination)	153.503724309	152.27694870904088	
+product-lines/minepump_spec4_product18.cil.yml	false	false(termination)	0.786569915	0.7753088149474934		false(termination)	153.460071503	152.21029873378575	
+product-lines/minepump_spec4_product19.cil.yml	false	false(termination)	1.333397049	1.3218327859649435		false(termination)	151.729785071	150.6484541730024	
+product-lines/minepump_spec4_product20.cil.yml	false	false(termination)	1.324428101	1.3127211399842054		false(termination)	152.81948825	151.9266727110371	
+product-lines/minepump_spec4_product21.cil.yml	false	false(termination)	1.407633601	1.398842973052524		false(termination)	154.756916498	153.4849689588882	
+product-lines/minepump_spec4_product22.cil.yml	false	false(termination)	0.893804577	0.8817811460467055		false(termination)	155.925439919	154.58258192101493	
+product-lines/minepump_spec4_product23.cil.yml	false	false(termination)	1.491506526	1.4809701120248064		false(termination)	153.592473048	152.50468726293184	
+product-lines/minepump_spec4_product24.cil.yml	false	false(termination)	1.545441801	1.5327536039985716		false(termination)	154.50645129	153.345233628992	
+product-lines/minepump_spec4_product25.cil.yml	false	false(termination)	0.644998537	0.6339547740062699		false(termination)	152.657564026	151.51831924705766	
+product-lines/minepump_spec4_product26.cil.yml	false	false(termination)	0.778420996	0.7670424500247464		false(termination)	153.995737561	152.9466374721378	
+product-lines/minepump_spec4_product27.cil.yml	false	false(termination)	1.356916581	1.3456083349883556		false(termination)	152.183619284	151.15092753898352	
+product-lines/minepump_spec4_product28.cil.yml	false	false(termination)	1.452059972	1.4410647449549288		false(termination)	152.860059441	151.8011739391368	
+product-lines/minepump_spec4_product29.cil.yml	false	false(termination)	0.758229752	0.7474083460401744		false(termination)	154.634650698	153.43958020000719	
+product-lines/minepump_spec4_product30.cil.yml	false	false(termination)	0.901008816	0.8898489080602303		false(termination)	156.342338858	155.13662637397647	
+product-lines/minepump_spec4_product31.cil.yml	false	false(termination)	1.533619389	1.5220293089514598		false(termination)	154.014267048	152.85320160910487	
+product-lines/minepump_spec4_product32.cil.yml	false	false(termination)	1.500853265	1.4890535840531811		false(termination)	155.627177907	154.4070081950631	
+product-lines/minepump_spec4_product33.cil.yml	false	false(termination)	0.638013569	0.626276227994822		false(termination)	254.538592551	253.80702707800083	
+product-lines/minepump_spec4_product34.cil.yml	false	false(termination)	0.791044347	0.7792685070307925		false(termination)	255.19079916	254.3293436600361	
+product-lines/minepump_spec4_product35.cil.yml	false	false(termination)	1.428327703	1.4188763960264623		false(termination)	152.511339712	151.23556987103075	
+product-lines/minepump_spec4_product36.cil.yml	false	false(termination)	2.062630371	2.0512943729991093		false(termination)	153.651801114	152.7085585021414	
+product-lines/minepump_spec4_product37.cil.yml	false	false(termination)	0.773073211	0.761455656029284		false(termination)	162.354583376	161.21009794203565	
+product-lines/minepump_spec4_product38.cil.yml	false	false(termination)	0.913765004	0.9025911580538377		false(termination)	163.312238268	162.09076265385374	
+product-lines/minepump_spec4_product39.cil.yml	false	false(termination)	1.524087234	1.51473877299577		false(termination)	162.051210392	160.72913814894855	
+product-lines/minepump_spec4_product40.cil.yml	false	false(termination)	1.508962549	1.498061693040654		false(termination)	162.877318189	161.81422218400985	
+product-lines/minepump_spec4_product41.cil.yml	false	false(termination)	0.772577647	0.7622302109375596		false(termination)	254.438002272	253.58769579883665	
+product-lines/minepump_spec4_product42.cil.yml	false	false(termination)	0.875340129	0.8658342181006446		false(termination)	255.289802937	254.43150613899343	
+product-lines/minepump_spec4_product43.cil.yml	false	false(termination)	1.523764511	1.5123299189144745		false(termination)	152.601882971	151.51914759515785	
+product-lines/minepump_spec4_product44.cil.yml	false	false(termination)	1.506609559	1.4946519169025123		false(termination)	154.039032359	152.8977742898278	
+product-lines/minepump_spec4_product45.cil.yml	false	false(termination)	0.770882764	0.7609842659439892		false(termination)	166.282301096	165.17103802389465	
+product-lines/minepump_spec4_product46.cil.yml	false	false(termination)	1.471492938	1.4599966340465471		false(termination)	167.134451757	165.8385095440317	
+product-lines/minepump_spec4_product47.cil.yml	false	false(termination)	1.528749573	1.51700423611328		false(termination)	165.977929844	164.8293275409378	
+product-lines/minepump_spec4_product48.cil.yml	false	false(termination)	1.485614332	1.474195709102787		false(termination)	167.325276616	166.20053975912742	
+product-lines/minepump_spec4_product49.cil.yml	false	false(termination)	0.663121802	0.6515128560131416		false(termination)	164.602234125	163.39527115691453	
+product-lines/minepump_spec4_product50.cil.yml	false	false(termination)	0.778734665	0.7680178650189191		false(termination)	164.630231938	163.19250581599772	
+product-lines/minepump_spec4_product51.cil.yml	false	false(termination)	1.377148521	1.3660831640008837		false(termination)	164.227435656	163.11988450796343	
+product-lines/minepump_spec4_product52.cil.yml	false	false(termination)	1.36165414	1.35162567300722		false(termination)	164.739681449	163.539648439968	
+product-lines/minepump_spec4_product53.cil.yml	false	false(termination)	0.810275101	0.7991201030090451		false(termination)	169.844747468	168.6326165671926	
+product-lines/minepump_spec4_product54.cil.yml	false	false(termination)	0.902283924	0.8922478929162025		false(termination)	170.578580205	169.4126297510229	
+product-lines/minepump_spec4_product55.cil.yml	false	false(termination)	1.52469778	1.5133637299295515		false(termination)	169.981679227	168.78049611789174	
+product-lines/minepump_spec4_product56.cil.yml	false	false(termination)	1.506324106	1.4947195809800178		false(termination)	171.033876187	169.93116167304106	
+product-lines/minepump_spec4_product57.cil.yml	false	false(termination)	0.787262267	0.7755719099659473		false(termination)	168.573950894	167.35153522202745	
+product-lines/minepump_spec4_product58.cil.yml	false	false(termination)	0.925409582	0.9149223450804129		false(termination)	169.513344115	168.57707785791717	
+product-lines/minepump_spec4_product59.cil.yml	false	false(termination)	1.510728193	1.5015277169877663		false(termination)	168.191515584	166.79315378912725	
+product-lines/minepump_spec4_product60.cil.yml	false	false(termination)	1.543499325	1.5326915660407394		false(termination)	169.824761949	168.5975694230292	
+product-lines/minepump_spec4_product61.cil.yml	false	false(termination)	0.782261592	0.7711158029269427		false(termination)	167.868051536	166.7527875918895	
+product-lines/minepump_spec4_product62.cil.yml	false	false(termination)	0.919849795	0.9094646939774975		false(termination)	169.538063476	168.16019463306293	
+product-lines/minepump_spec4_product63.cil.yml	false	false(termination)	1.512106984	1.5019259479595348		false(termination)	166.82316954	165.75491751194932	
+product-lines/minepump_spec4_product64.cil.yml	false	false(termination)	1.620737782	1.608897280995734		false(termination)	168.573816366	167.45988322002813	
+product-lines/minepump_spec4_productSimulator.cil.yml	false	false(termination)	4.318870679	4.307614787016064		false(termination)	170.452637126	169.28786599310115	
+product-lines/minepump_spec5_product01.cil.yml	false	false(termination)	1.212553821	1.200982420006767		false(termination)	153.887436741	152.89980131713673	
+product-lines/minepump_spec5_product02.cil.yml	false	false(termination)	0.64246431	0.6308715010527521		false(termination)	154.64066664	153.57910424517468	
+product-lines/minepump_spec5_product03.cil.yml	false	false(termination)	1.357970703	1.3470342489890754		false(termination)	153.699965079	152.79393370100297	
+product-lines/minepump_spec5_product04.cil.yml	false	false(termination)	1.332617155	1.3222544660093263		false(termination)	154.447571992	153.314742682036	
+product-lines/minepump_spec5_product05.cil.yml	false	false(termination)	0.766365978	0.7545595560222864		false(termination)	155.505165066	154.4863080671057	
+product-lines/minepump_spec5_product06.cil.yml	false	false(termination)	1.465885505	1.456024477025494		false(termination)	156.770658063	155.8757749630604	
+product-lines/minepump_spec5_product07.cil.yml	false	false(termination)	1.460284517	1.4489193169865757		false(termination)	156.107335704	155.0233747730963	
+product-lines/minepump_spec5_product08.cil.yml	false	false(termination)	1.500084852	1.4888954180059955		false(termination)	156.169879471	155.1812461959198	
+product-lines/minepump_spec5_product09.cil.yml	false	false(termination)	1.185788593	1.1742117760004476		false(termination)	154.202294368	153.2679435228929	
+product-lines/minepump_spec5_product10.cil.yml	false	false(termination)	0.668589911	0.657063775928691		false(termination)	155.236227936	154.20010716002434	
+product-lines/minepump_spec5_product11.cil.yml	false	false(termination)	1.368385531	1.3572952590184286		false(termination)	153.507884826	152.36773374886252	
+product-lines/minepump_spec5_product12.cil.yml	false	false(termination)	1.331802482	1.320403972058557		false(termination)	154.360331766	153.24067525402643	
+product-lines/minepump_spec5_product13.cil.yml	false	false(termination)	1.325423236	1.3142104360740632		false(termination)	155.181762313	154.08980520092882	
+product-lines/minepump_spec5_product14.cil.yml	false	false(termination)	1.453825736	1.4420116828987375		false(termination)	156.404128589	155.2888342558872	
+product-lines/minepump_spec5_product15.cil.yml	false	false(termination)	2.215390639	2.205220160074532		false(termination)	155.493786185	154.34621018380858	
+product-lines/minepump_spec5_product16.cil.yml	false	false(termination)	1.470882752	1.4593553500017151		false(termination)	156.026963139	155.0282943409402	
+product-lines/minepump_spec5_product17.cil.yml	false	false(termination)	1.221914302	1.2129780169343576		false(termination)	155.78367851	154.69175764289685	
+product-lines/minepump_spec5_product18.cil.yml	false	false(termination)	0.773200708	0.7637115829857066		false(termination)	156.823249076	155.70509362011217	
+product-lines/minepump_spec5_product19.cil.yml	false	false(termination)	1.370148983	1.3585157290799543		false(termination)	155.691684916	154.83414505398832	
+product-lines/minepump_spec5_product20.cil.yml	false	false(termination)	1.36288114	1.352278470993042		false(termination)	155.443349543	154.3369288770482	
+product-lines/minepump_spec5_product21.cil.yml	false	false(termination)	1.326623179	1.3148484260309488		false(termination)	157.090366838	155.99405770096928	
+product-lines/minepump_spec5_product22.cil.yml	false	false(termination)	2.168414931	2.156915258965455		false(termination)	158.321719841	157.27932962891646	
+product-lines/minepump_spec5_product23.cil.yml	false	false(termination)	1.499664322	1.4881479709874839		false(termination)	157.778965491	156.77681028703228	
+product-lines/minepump_spec5_product24.cil.yml	false	false(termination)	1.525571715	1.5151213170029223		false(termination)	158.405260861	157.60810736892745	
+product-lines/minepump_spec5_product25.cil.yml	false	false(termination)	1.215687583	1.2045457180356607		false(termination)	155.843330784	154.7715771989897	
+product-lines/minepump_spec5_product26.cil.yml	false	false(termination)	0.749066227	0.7379474340705201		false(termination)	157.929872197	156.83255885494873	
+product-lines/minepump_spec5_product27.cil.yml	false	false(termination)	1.407280376	1.3960056110518053		false(termination)	155.155363198	154.00562424701639	
+product-lines/minepump_spec5_product28.cil.yml	false	false(termination)	1.344146408	1.3321043989853933		false(termination)	156.378031255	155.1563972181175	
+product-lines/minepump_spec5_product29.cil.yml	false	false(termination)	1.424849114	1.413708636071533		false(termination)	157.263183087	156.03267254703678	
+product-lines/minepump_spec5_product30.cil.yml	false	false(termination)	1.484138675	1.4727263960521668		false(termination)	157.525665717	156.5871946150437	
+product-lines/minepump_spec5_product31.cil.yml	false	false(termination)	2.230468193	2.2188225249992684		false(termination)	156.807572217	155.79423198616132	
+product-lines/minepump_spec5_product32.cil.yml	false	false(termination)	2.255708401	2.244540340034291		false(termination)	158.032732639	156.57520184386522	
+product-lines/minepump_spec5_product33.cil.yml	false	false(termination)	0.642186568	0.6306888080434874		false(termination)	160.667058779	159.39045865507796	
+product-lines/minepump_spec5_product34.cil.yml	false	false(termination)	0.859167929	0.8477191339479759		false(termination)	161.798011766	160.55853918381035	
+product-lines/minepump_spec5_product35.cil.yml	false	false(termination)	1.398766946	1.3881990700028837		false(termination)	159.483597792	158.2830530940555	
+product-lines/minepump_spec5_product36.cil.yml	false	false(termination)	1.357697111	1.3463535939808935		false(termination)	160.870697655	159.74320506188087	
+product-lines/minepump_spec5_product37.cil.yml	false	false(termination)	0.803481375	0.791665747994557		false(termination)	167.532755784	166.2687618038617	
+product-lines/minepump_spec5_product38.cil.yml	false	false(termination)	0.938911471	0.9273391410242766		false(termination)	167.614392633	166.59771162597463	
+product-lines/minepump_spec5_product39.cil.yml	false	false(termination)	1.521242383	1.5096202809363604		false(termination)	167.156221973	166.20292237307876	
+product-lines/minepump_spec5_product40.cil.yml	false	false(termination)	1.493321315	1.482321346993558		false(termination)	168.596719608	167.39435699698515	
+product-lines/minepump_spec5_product41.cil.yml	false	false(termination)	0.78767325	0.7764618900837377		false(termination)	161.606045032	160.25519704609178	
+product-lines/minepump_spec5_product42.cil.yml	false	false(termination)	0.891679612	0.8802602289943025		false(termination)	161.593662467	160.5023364480585	
+product-lines/minepump_spec5_product43.cil.yml	false	false(termination)	1.521352724	1.5105567630380392		false(termination)	160.585362113	159.49195089307614	
+product-lines/minepump_spec5_product44.cil.yml	false	false(termination)	1.5016821	1.4907010908937082		false(termination)	160.755124372	159.6964398669079	
+product-lines/minepump_spec5_product45.cil.yml	false	false(termination)	0.756355847	0.7450229210080579		false(termination)	172.015634116	170.92641468695365	
+product-lines/minepump_spec5_product46.cil.yml	false	false(termination)	0.92744979	0.9162683340255171		false(termination)	172.690727442	171.4988646369893	
+product-lines/minepump_spec5_product47.cil.yml	false	false(termination)	1.519889602	1.5084013600135222		false(termination)	173.386052303	172.18467384111136	
+product-lines/minepump_spec5_product48.cil.yml	false	false(termination)	1.535425909	1.5259999929694459		false(termination)	172.766058051	171.5197868249379	
+product-lines/minepump_spec5_product49.cil.yml	false	false(termination)	0.637906678	0.6267354770097882		false(termination)	169.396017325	168.35314655513503	
+product-lines/minepump_spec5_product50.cil.yml	false	false(termination)	0.827265363	0.815412905998528		false(termination)	169.865492173	168.6695634110365	
+product-lines/minepump_spec5_product51.cil.yml	false	false(termination)	1.37311039	1.3609837020048872		false(termination)	169.45697293	168.29629564099014	
+product-lines/minepump_spec5_product52.cil.yml	false	false(termination)	1.339017836	1.3275301220128313		false(termination)	170.586222581	169.4700822411105	
+product-lines/minepump_spec5_product53.cil.yml	false	false(termination)	0.773266409	0.7616768869338557		false(termination)	174.7316804	173.61949056200683	
+product-lines/minepump_spec5_product54.cil.yml	false	false(termination)	0.961372818	0.950174250989221		false(termination)	177.145294403	175.84482813393697	
+product-lines/minepump_spec5_product55.cil.yml	false	false(termination)	1.519914277	1.508342634071596		false(termination)	174.816137079	173.60411303001456	
+product-lines/minepump_spec5_product56.cil.yml	false	false(termination)	1.521835369	1.5170110911130905		false(termination)	176.284378834	175.17467253399082	
+product-lines/minepump_spec5_product57.cil.yml	false	false(termination)	0.761574776	0.7499210130190477		false(termination)	175.522902586	174.3253222440835	
+product-lines/minepump_spec5_product58.cil.yml	false	false(termination)	0.905685471	0.8950804501073435		false(termination)	174.465388183	173.0723570738919	
+product-lines/minepump_spec5_product59.cil.yml	false	false(termination)	1.528467041	1.5171688999980688		false(termination)	173.780920873	172.45419889409095	
+product-lines/minepump_spec5_product60.cil.yml	false	false(termination)	1.500985451	1.489586464012973		false(termination)	174.793027509	173.69645345001481	
+product-lines/minepump_spec5_product61.cil.yml	false	false(termination)	0.777511392	0.7659984990023077		false(termination)	172.95266561	171.99608407216147	
+product-lines/minepump_spec5_product62.cil.yml	false	false(termination)	0.959733525	0.9482055649859831		false(termination)	173.685280991	172.45576753094792	
+product-lines/minepump_spec5_product63.cil.yml	false	false(termination)	1.465879173	1.4542625300819054		false(termination)	172.895064305	171.9459803251084	
+product-lines/minepump_spec5_product64.cil.yml	false	false(termination)	1.52944294	1.5180698579642922		false(termination)	174.226100868	173.07627221220173	
+product-lines/minepump_spec5_productSimulator.cil.yml	false	false(termination)	5.041865553	5.031228380976245		false(termination)	176.747270331	175.50621484289877	
+recursive/Ackermann02.yml	true	TIMEOUT (verification)				ERROR			
+recursive/Addition01-2.yml	true	TIMEOUT (verification)				true	9.1895873	8.344229235081002	
+recursive/Addition02.yml	true	TIMEOUT (verification)				true	8.968341061	8.272535403026268	
+recursive/Addition03-1.yml	true	TIMEOUT (verification)				true	9.388416463	8.5754715569783	
+recursive/BallRajamani-SPIN2000-Fig1.yml	true	true	0.350349861	0.3426340559963137		true	1.527037714	0.7519357460550964	
+recursive/EvenOdd01-1.yml	true	TIMEOUT (verification)				true	1.887142004	1.0095281288959086	
+recursive/EvenOdd03.yml	true	TIMEOUT (verification)				true	1.906944607	1.1182523160241544	
+recursive/Fibonacci02.yml	true	true	0.340843797	0.3333365770522505		true	1.697966975	0.9328787510748953	
+recursive/Fibonacci03.yml	true	TIMEOUT (verification)				true	6.959415736	6.316630349960178	
+recursive/Fibonacci04.yml	true	TIMEOUT (verification)				true	7.19205369	6.3889120179228485	
+recursive/Fibonacci05.yml	true	TIMEOUT (verification)				true	7.121090307	6.354511758079752	
+recursive/McCarthy91-1.yml	true	TIMEOUT (verification)				ERROR			
+recursive/McCarthy91-2.yml	true	TIMEOUT (verification)				ERROR			
+recursive/MultCommutative-2.yml	true	TIMEOUT (verification)				true	47.698544381	46.7916065310128	
+recursive/Primes.yml	false	TIMEOUT (verification)				ERROR			
+recursive/gcd01-1.yml	true	TIMEOUT (verification)				true	13.14750162	12.371443032985553	
+recursive/gcd02.yml	true	TIMEOUT (verification)				true	58.402606286	57.52394229103811	
+recursive/recHanoi01.yml	true	TIMEOUT (verification)				true	6.099976616	5.233354703057557	
+recursive/recHanoi02-2.yml	true	true	0.701015467	0.6931524000829086		true	1.621993417	0.8392767568584532	
+recursive/recHanoi03-2.yml	true	true	0.671090836	0.6637831979896873		true	1.772646219	0.932834018021822	
+recursive-simple/id2_b2_o3.yml	true	TIMEOUT (verification)				true	1.820475002	0.9550767748150975	
+recursive-simple/id2_b3_o2.yml	true	TIMEOUT (verification)				true	1.670224967	0.8653667201288044	
+recursive-simple/id2_b3_o5.yml	true	TIMEOUT (verification)				true	1.794492235	0.9678670740686357	
+recursive-simple/id2_b5_o10.yml	true	TIMEOUT (verification)				true	1.870914561	1.006825814023614	
+recursive-simple/id_b2_o3.yml	true	TIMEOUT (verification)				true	1.715147751	0.9263589170295745	
+recursive-simple/id_b3_o2-2.yml	true	TIMEOUT (verification)				ERROR			
+recursive-simple/id_b3_o5-2.yml	true	TIMEOUT (verification)				ERROR			
+recursive-simple/id_b5_o10-2.yml	true	TIMEOUT (verification)				ERROR			
+recursive-simple/id_o10.yml	true	TIMEOUT (verification)				true	1.72210983	0.9182699338998646	
+recursive-simple/id_o100.yml	true	TIMEOUT (verification)				true	1.620756397	0.8639704289380461	
+recursive-simple/id_o1000.yml	true	TIMEOUT (verification)				true	1.743444096	0.9154034389648587	
+recursive-simple/id_o20.yml	true	TIMEOUT (verification)				true	1.784002826	0.9265568170230836	
+recursive-simple/id_o200.yml	true	TIMEOUT (verification)				true	1.751666586	0.9410365868825465	
+recursive-simple/id_o3.yml	true	TIMEOUT (verification)				true	1.65818074	0.8699892088770866	
+recursive-simple/sum_non_eq-2.yml	true	TIMEOUT (verification)				true	1.709696823	0.9000096200034022	
+recursive-simple/sum_non_eq-3.yml	true	TIMEOUT (verification)				true	1.694991194	0.9178969010245055	
+systemc/bist_cell.cil.yml	false	TIMEOUT (verification)				false(termination)	236.947290855	236.70942114293575	
+systemc/kundu.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/kundu2.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/mem_slave_tlm.2.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	234.138352102	233.36032430501655	
+systemc/mem_slave_tlm.3.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	233.848123792	233.28564555593766	
+systemc/mem_slave_tlm.4.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	233.935305791	233.19370180205442	
+systemc/mem_slave_tlm.5.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	234.090375972	233.15847779414617	
+systemc/pc_sfifo_1.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/pc_sfifo_1.cil-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/pc_sfifo_2.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/pc_sfifo_2.cil-2.yml	false	TIMEOUT (verification)				ERROR			
+systemc/pipeline.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	351.126950319	350.4899762510322	
+systemc/pipeline.cil-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				OUT OF MEMORY			
+systemc/token_ring.03.cil-1.yml	false	TIMEOUT (verification)				false(termination)	248.198551858	247.47965798596852	
+systemc/token_ring.03.cil-2.yml	false	TIMEOUT (verification)				false(termination)	249.109100654	248.28721946594305	
+systemc/token_ring.04.cil-1.yml	false	TIMEOUT (verification)				false(termination)	249.148490883	248.3122555790469	
+systemc/token_ring.04.cil-2.yml	false	TIMEOUT (verification)				false(termination)	250.038938146	248.984091212973	
+systemc/token_ring.05.cil-1.yml	false	TIMEOUT (verification)				false(termination)	251.479271923	250.48057390702888	
+systemc/token_ring.05.cil-2.yml	false	TIMEOUT (verification)				false(termination)	250.931424657	250.1191103211604	
+systemc/token_ring.06.cil-1.yml	false	TIMEOUT (verification)				false(termination)	252.209459492	250.8508113550488	
+systemc/token_ring.06.cil-2.yml	false	TIMEOUT (verification)				false(termination)	255.154517956	254.41311418195255	
+systemc/token_ring.07.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	251.970817928	251.07173843611963	
+systemc/token_ring.07.cil-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	239.733464522	239.15761129488237	
+systemc/token_ring.08.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	252.699321107	251.84672510414384	
+systemc/token_ring.08.cil-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	250.705972718	249.7280894748401	
+systemc/token_ring.09.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	249.989930659	248.9089463551063	
+systemc/token_ring.09.cil-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	250.225585665	249.2021987249609	
+systemc/token_ring.10.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	241.895508722	241.03310324880295	
+systemc/token_ring.10.cil-2.yml	false	TIMEOUT (verification)				false(termination)	253.394059722	252.34418205101974	
+systemc/token_ring.11.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	251.727652113	250.78783537680283	
+systemc/token_ring.11.cil-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	254.825699396	253.69590452197008	
+systemc/token_ring.12.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	242.711625389	241.54763392009772	
+systemc/token_ring.12.cil-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	254.507223148	253.53791179298423	
+systemc/token_ring.13.cil-1.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	254.959241059	253.6632873180788	
+systemc/token_ring.13.cil-2.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	254.371266949	253.41847742791288	
+systemc/token_ring.14.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	244.641609365	243.74184559797868	
+systemc/token_ring.15.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	252.29434187	251.45629215589724	
+systemc/toy.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	193.760854814	192.75637704506516	
+systemc/toy1.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				false(termination)	234.43700889	233.8298699068837	
+systemc/toy2.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.01.cil.yml	false	TIMEOUT (verification)				ERROR			
+systemc/transmitter.02.cil.yml	false	TIMEOUT (verification)				ERROR			
+systemc/transmitter.03.cil.yml	false	TIMEOUT (verification)				ERROR			
+systemc/transmitter.04.cil.yml	false	TIMEOUT (verification)				false(termination)	226.894295339	226.00272702192888	
+systemc/transmitter.05.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.06.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.07.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.08.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.09.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.10.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.11.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.12.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.13.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.15.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+systemc/transmitter.16.cil.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_STARTPALS_ActiveStandby.1.ufo.UNBOUNDED.pals.yml	false	false(termination)	4.979550098	4.96750924794469		ERROR			
+seq-mthreaded/pals_STARTPALS_ActiveStandby.4_1.ufo.UNBOUNDED.pals.yml	false	false(termination)	9.309203676	9.301096707000397		ERROR			
+seq-mthreaded/pals_STARTPALS_ActiveStandby.4_2.ufo.UNBOUNDED.pals.yml	false	false(termination)	110.889735932	110.94800709898118		ERROR			
+seq-mthreaded/pals_STARTPALS_ActiveStandby.5.ufo.UNBOUNDED.pals.yml	false	false(termination)	5.709291902	5.698705008951947		ERROR			
+seq-mthreaded/pals_STARTPALS_ActiveStandby.ufo.UNBOUNDED.pals.yml	false	false(termination)	6.656765822	6.644405387924053		ERROR			
+seq-mthreaded/pals_STARTPALS_Triplicated.1.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	2.783750244	1.640374385053292	
+seq-mthreaded/pals_STARTPALS_Triplicated.2.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	2.656460282	1.5927886408753693	
+seq-mthreaded/pals_STARTPALS_Triplicated.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	2.659479255	1.5887692358810455	
+seq-mthreaded/pals_floodmax.3.1.ufo.BOUNDED-6.pals.yml	true	true	5.941888705	5.935773644945584		true	2.480684373	1.2245282100047916	
+seq-mthreaded/pals_floodmax.3.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_floodmax.3.2.ufo.BOUNDED-6.pals.yml	true	true	1.916268952	1.906940431916155		true	2.434654329	1.1676527068484575	
+seq-mthreaded/pals_floodmax.3.2.ufo.UNBOUNDED.pals.yml	true	true	1.957914706	2.2384017480071634		true	2.143611743	1.0031740758568048	
+seq-mthreaded/pals_floodmax.3.3.ufo.BOUNDED-6.pals.yml	true	true	4.320811877	4.311031229910441		true	2.325913843	1.1382308639585972	
+seq-mthreaded/pals_floodmax.3.3.ufo.UNBOUNDED.pals.yml	true	true	4.169946671	4.160307248006575		true	3.187272397	1.9890904619824141	
+seq-mthreaded/pals_floodmax.3.4.ufo.BOUNDED-6.pals.yml	true	true	4.927618634	4.917972106020898		true	2.328494067	1.100714914035052	
+seq-mthreaded/pals_floodmax.3.4.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_floodmax.3.ufo.BOUNDED-6.pals.yml	true	true	5.661884783	5.6558601160068065		true	2.25920533	1.1115685449913144	
+seq-mthreaded/pals_floodmax.3.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_floodmax.3_overflow.ufo.UNBOUNDED.pals.yml	true	true	51.73763801	51.728849803097546		ERROR			
+seq-mthreaded/pals_floodmax.4.1.ufo.BOUNDED-8.pals.yml	true	TIMEOUT (verification)				true	2.766383109	1.507801029132679	
+seq-mthreaded/pals_floodmax.4.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_floodmax.4.2.ufo.BOUNDED-8.pals.yml	true	true	804.873545229	804.889933014987		true	2.893090635	1.618115880060941	
+seq-mthreaded/pals_floodmax.4.2.ufo.UNBOUNDED.pals.yml	true	true	798.854844404	798.8698667100398		true	3.934895337	2.595750235952437	
+seq-mthreaded/pals_floodmax.4.3.ufo.BOUNDED-8.pals.yml	true	TIMEOUT (verification)				true	2.886129498	1.5866182779427618	
+seq-mthreaded/pals_floodmax.4.3.ufo.UNBOUNDED.pals.yml	true	TIMEOUT (verification)				true	44.662240421	43.28668750100769	
+seq-mthreaded/pals_floodmax.4.4.ufo.BOUNDED-8.pals.yml	true	TIMEOUT (verification)				true	2.962745433	1.594452097080648	
+seq-mthreaded/pals_floodmax.4.4.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_floodmax.4.ufo.BOUNDED-8.pals.yml	true	TIMEOUT (verification)				true	3.124210427	1.6058205938898027	
+seq-mthreaded/pals_floodmax.4.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_floodmax.4_overflow.ufo.UNBOUNDED.pals.yml	true	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_floodmax.5.1.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	9.986363621	8.259741253918037	
+seq-mthreaded/pals_floodmax.5.1.ufo.UNBOUNDED.pals.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_floodmax.5.2.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	9.438678273	7.558864411897957	
+seq-mthreaded/pals_floodmax.5.2.ufo.UNBOUNDED.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	10.304794973	8.233016673941165	
+seq-mthreaded/pals_floodmax.5.3.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_floodmax.5.3.ufo.UNBOUNDED.pals.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_floodmax.5.4.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	10.396167309	8.697401028126478	
+seq-mthreaded/pals_floodmax.5.4.ufo.UNBOUNDED.pals.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_floodmax.5.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	10.309114076	8.48738711909391	
+seq-mthreaded/pals_floodmax.5.ufo.UNBOUNDED.pals.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_floodmax.5_overflow.ufo.UNBOUNDED.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.3.1.ufo.BOUNDED-6.pals.yml	true	true	1.147561477	1.1380902110831812		true	1.987825697	1.0693206400610507	
+seq-mthreaded/pals_lcr-var-start-time.3.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.3.2.ufo.BOUNDED-6.pals.yml	true	true	1.105975764	1.0967153180390596		true	2.081568527	1.1384420830290765	
+seq-mthreaded/pals_lcr-var-start-time.3.2.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.3.ufo.BOUNDED-6.pals.yml	true	true	1.093028567	1.0835384100209922		true	2.02023829	0.9742200078908354	
+seq-mthreaded/pals_lcr-var-start-time.3.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.4.1.ufo.BOUNDED-8.pals.yml	true	true	2.334418004	2.3262011649785563		true	1.932816228	0.9745570640079677	
+seq-mthreaded/pals_lcr-var-start-time.4.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.4.2.ufo.BOUNDED-8.pals.yml	true	true	2.360757016	2.3512713719392195		true	2.152749443	1.029401337960735	
+seq-mthreaded/pals_lcr-var-start-time.4.2.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.4.ufo.BOUNDED-8.pals.yml	true	true	2.235535351	2.225629932945594		true	1.880177485	1.013757263077423	
+seq-mthreaded/pals_lcr-var-start-time.4.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.5.1.ufo.BOUNDED-10.pals.yml	true	true	8.109233716	8.099887005984783		true	2.739942898	1.6173862968571484	
+seq-mthreaded/pals_lcr-var-start-time.5.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.5.2.ufo.BOUNDED-10.pals.yml	true	true	8.623668	8.614238317939453		true	2.832709831	1.6790550891309977	
+seq-mthreaded/pals_lcr-var-start-time.5.2.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.5.ufo.BOUNDED-10.pals.yml	true	true	7.506559103	7.497706023044884		true	2.755365882	1.6832194689195603	
+seq-mthreaded/pals_lcr-var-start-time.5.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.6.1.ufo.BOUNDED-12.pals.yml	true	true	49.017766383	49.01209542900324		true	2.998561279	1.901657760841772	
+seq-mthreaded/pals_lcr-var-start-time.6.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.6.2.ufo.BOUNDED-12.pals.yml	true	true	40.314186952	40.30498986097518		true	2.826527225	1.7914670559111983	
+seq-mthreaded/pals_lcr-var-start-time.6.2.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr-var-start-time.6.ufo.BOUNDED-12.pals.yml	true	true	40.649975857	40.66068125795573		true	3.000255602	1.8431753569748253	
+seq-mthreaded/pals_lcr-var-start-time.6.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.3.1.ufo.BOUNDED-6.pals.yml	true	true	1.299822132	1.2900450460147113		true	1.905855357	0.9499751329421997	
+seq-mthreaded/pals_lcr.3.ufo.BOUNDED-6.pals.yml	true	true	1.181520748	1.1726523010293022		true	1.992172976	0.946488233981654	
+seq-mthreaded/pals_lcr.4.1.ufo.BOUNDED-8.pals.yml	true	true	4.041271665	4.03407804609742		true	2.028097008	0.9856049621012062	
+seq-mthreaded/pals_lcr.4.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.4.ufo.BOUNDED-8.pals.yml	true	true	3.435518168	3.4294104060390964		true	2.185303576	1.0487954549025744	
+seq-mthreaded/pals_lcr.4.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.4_overflow.ufo.UNBOUNDED.pals.yml	true	true	10.65964121	10.653040905948728		ERROR			
+seq-mthreaded/pals_lcr.5.1.ufo.BOUNDED-10.pals.yml	true	true	17.170311299	17.19561588508077		true	2.424028012	1.5179835099261254	
+seq-mthreaded/pals_lcr.5.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.5.ufo.BOUNDED-10.pals.yml	true	true	12.121119062	12.115949664032087		true	2.784503988	1.6474270541220903	
+seq-mthreaded/pals_lcr.5.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.5_overflow.ufo.UNBOUNDED.pals.yml	true	true	56.8445758	56.835886445012875		ERROR			
+seq-mthreaded/pals_lcr.6.1.ufo.BOUNDED-12.pals.yml	true	true	80.74278679	80.77123588195536		true	2.605822321	1.5930070381145924	
+seq-mthreaded/pals_lcr.6.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.6.ufo.BOUNDED-12.pals.yml	true	true	53.967654842	53.960480667999946		true	2.826725181	1.6858620778657496	
+seq-mthreaded/pals_lcr.6.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.6_overflow.ufo.UNBOUNDED.pals.yml	true	true	285.795134699	285.79109592502937		ERROR			
+seq-mthreaded/pals_lcr.7.1.ufo.BOUNDED-14.pals.yml	true	true	387.652722613	387.83809459395707		true	2.955456825	1.8319137010257691	
+seq-mthreaded/pals_lcr.7.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.7.ufo.BOUNDED-14.pals.yml	true	true	242.344540371	242.3522538790712		true	3.237187471	2.0362399469595402	
+seq-mthreaded/pals_lcr.7.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.7_overflow.ufo.UNBOUNDED.pals.yml	true	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.8.1.ufo.BOUNDED-16.pals.yml	true	TIMEOUT (verification)				true	3.237013801	1.9683023719117045	
+seq-mthreaded/pals_lcr.8.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.8.ufo.BOUNDED-16.pals.yml	true	TIMEOUT (verification)				true	3.173674483	1.9488959140144289	
+seq-mthreaded/pals_lcr.8.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_lcr.8_overflow.ufo.UNBOUNDED.pals.yml	true	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_opt-floodmax.3.1.ufo.BOUNDED-6.pals.yml	true	true	5.408896488	5.399531790986657		true	2.271034656	1.1680635530501604	
+seq-mthreaded/pals_opt-floodmax.3.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_opt-floodmax.3.2.ufo.BOUNDED-6.pals.yml	true	true	1.855337215	1.8468553529819474		true	2.18967157	1.0216895861085504	
+seq-mthreaded/pals_opt-floodmax.3.2.ufo.UNBOUNDED.pals.yml	true	true	1.820665103	1.8112145439954475		true	2.06744167	1.0953364870510995	
+seq-mthreaded/pals_opt-floodmax.3.3.ufo.BOUNDED-6.pals.yml	true	true	4.511449306	4.502158498973586		true	2.525057762	1.1851527648977935	
+seq-mthreaded/pals_opt-floodmax.3.3.ufo.UNBOUNDED.pals.yml	true	true	4.415138949	4.4085256370017305		true	3.225273118	2.1445913549978286	
+seq-mthreaded/pals_opt-floodmax.3.4.ufo.BOUNDED-6.pals.yml	true	true	4.764604666	4.754875682061538		true	2.231820463	1.0955613618716598	
+seq-mthreaded/pals_opt-floodmax.3.4.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_opt-floodmax.3.ufo.BOUNDED-6.pals.yml	true	true	5.163130041	5.153588967048563		true	2.247322383	1.1197362469974905	
+seq-mthreaded/pals_opt-floodmax.3.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_opt-floodmax.3_overflow.ufo.UNBOUNDED.pals.yml	true	true	57.686393936	57.7113882380072		ERROR			
+seq-mthreaded/pals_opt-floodmax.4.1.ufo.BOUNDED-8.pals.yml	true	TIMEOUT (verification)				true	2.982082815	1.6096335977781564	
+seq-mthreaded/pals_opt-floodmax.4.1.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_opt-floodmax.4.2.ufo.BOUNDED-8.pals.yml	true	true	846.953550439	847.3058127369732		true	3.447686758	1.724492551991716	
+seq-mthreaded/pals_opt-floodmax.4.2.ufo.UNBOUNDED.pals.yml	true	true	878.376170443	878.4879123549908		true	4.509566792	2.9813693549949676	
+seq-mthreaded/pals_opt-floodmax.4.3.ufo.BOUNDED-8.pals.yml	true	TIMEOUT (verification)				true	2.967385472	1.6354520879685879	
+seq-mthreaded/pals_opt-floodmax.4.3.ufo.UNBOUNDED.pals.yml	true	TIMEOUT (verification)				true	20.807315269	19.493410338182002	
+seq-mthreaded/pals_opt-floodmax.4.4.ufo.BOUNDED-8.pals.yml	true	TIMEOUT (verification)				true	3.013361563	1.698416484054178	
+seq-mthreaded/pals_opt-floodmax.4.4.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_opt-floodmax.4.ufo.BOUNDED-8.pals.yml	true	TIMEOUT (verification)				true	3.116789677	1.7221654318273067	
+seq-mthreaded/pals_opt-floodmax.4.ufo.UNBOUNDED.pals.yml	false	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_opt-floodmax.4_overflow.ufo.UNBOUNDED.pals.yml	true	TIMEOUT (verification)				ERROR			
+seq-mthreaded/pals_opt-floodmax.5.1.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	10.611087527	8.722236168105155	
+seq-mthreaded/pals_opt-floodmax.5.1.ufo.UNBOUNDED.pals.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_opt-floodmax.5.2.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	10.164153424	8.379836328094825	
+seq-mthreaded/pals_opt-floodmax.5.2.ufo.UNBOUNDED.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	9.867607907	8.037013344001025	
+seq-mthreaded/pals_opt-floodmax.5.3.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_opt-floodmax.5.3.ufo.UNBOUNDED.pals.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_opt-floodmax.5.4.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	11.125321749	9.25622570910491	
+seq-mthreaded/pals_opt-floodmax.5.4.ufo.UNBOUNDED.pals.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_opt-floodmax.5.ufo.BOUNDED-10.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				true	10.896315001	9.16629196703434	
+seq-mthreaded/pals_opt-floodmax.5.ufo.UNBOUNDED.pals.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/pals_opt-floodmax.5_overflow.ufo.UNBOUNDED.pals.yml	true	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+seq-mthreaded/rekcba_ctm.1.yml	true	TIMEOUT (verification)				true	8.253312816	5.410522382007912	
+seq-mthreaded/rekcba_ctm.2-1.yml	true	TIMEOUT (verification)				true	8.299894458	5.403691676910967	
+seq-mthreaded/rekcba_ctm.2-2.yml	true	TIMEOUT (verification)				true	8.447499312	5.516998343868181	
+seq-mthreaded/rekcba_ctm.3-1.yml	true	TIMEOUT (verification)				true	13.695373476	9.988452955149114	
+seq-mthreaded/rekcba_ctm.3-2.yml	true	TIMEOUT (verification)				true	13.129438313	9.710125538986176	
+seq-mthreaded/rekcba_ctm.4.yml	true	TIMEOUT (verification)				true	19.816723311	15.86292346403934	
+seq-mthreaded/rekh_ctm.1.yml	true	TIMEOUT (verification)				true	5.990417023	3.713317535817623	
+seq-mthreaded/rekh_ctm.2-1.yml	true	TIMEOUT (verification)				true	6.35269135	3.9098057891242206	
+seq-mthreaded/rekh_ctm.2-2.yml	true	TIMEOUT (verification)				true	5.93448604	3.6463048490695655	
+seq-mthreaded/rekh_ctm.3-1.yml	true	TIMEOUT (verification)				true	7.130629298	4.83467596094124	
+seq-mthreaded/rekh_ctm.3-2.yml	true	TIMEOUT (verification)				true	7.11399242	4.7721941221971065	
+seq-mthreaded/rekh_ctm.4.yml	true	TIMEOUT (verification)				true	8.258805135	5.955141792073846	
+seq-pthread/cs_stateful-1.yml	true	TIMEOUT (verification)				ERROR			
+reducercommutativity/avg05-1.yml	true	true	0.372575481	0.36421919509302825		true	1.768428055	0.8172358719166368	
+reducercommutativity/avg10-2.yml	true	true	0.364347799	0.35693326697219163		true	1.782146714	0.9764763070270419	
+reducercommutativity/rangesum.yml	true	TIMEOUT (verification)				true	1.88655402	0.9935695419553667	
+reducercommutativity/rangesum05.yml	true	true	0.793461421	0.7848332159919664		true	1.660691275	0.8481657260563225	
+reducercommutativity/rangesum10.yml	true	true	0.787751346	0.7792482149088755		true	1.902752458	0.9475398620124906	
+reducercommutativity/sep.yml	true	TIMEOUT (verification)				true	1.928257908	1.008817367022857	
+reducercommutativity/sum05-2.yml	true	true	0.394992359	0.38642542192246765		true	1.798822015	0.8750557850580662	
+reducercommutativity/sum10-1.yml	true	true	0.380400264	0.3725565819768235		true	1.757007538	0.9390698918141425	
+array-memsafety/array01-alloca-2.yml	true	TIMEOUT (verification)				true	48.338659089	47.32032243395224	
+array-memsafety/array02-alloca-2.yml	true	TIMEOUT (verification)				true	3.211916759	1.9225082751363516	
+array-memsafety/count_down-alloca-1.yml	true	TIMEOUT (verification)				true	29.480950668	28.456269243033603	
+array-memsafety/cstrncat-alloca-2.yml	true	TIMEOUT (verification)				true	2.312783458	1.127218132140115	
+array-memsafety/cstrncpy-alloca-2.yml	true	TIMEOUT (verification)				true	2.542103177	1.3682476170361042	
+array-memsafety/diff-alloca-2.yml	true	TIMEOUT (verification)				true	2.594030545	1.372796120122075	
+array-memsafety/lis-alloca-1.yml	true	TIMEOUT (verification)				true	2.545592976	1.2486563688144088	
+array-memsafety/openbsd_cbzero-alloca-2.yml	true	TIMEOUT (verification)				true	2.384038284	1.1885124640539289	
+array-memsafety/openbsd_cmemset-alloca-1.yml	true	TIMEOUT (verification)				true	2.379271445	1.1818905661348253	
+array-memsafety/openbsd_cstrlcpy-alloca-1.yml	true	TIMEOUT (verification)				true	2.252327035	1.124833881855011	
+array-memsafety/rec_strlen-alloca-1.yml	true	TIMEOUT (verification)				true	2.410836899	1.1808442240580916	
+array-memsafety/strreplace-alloca-2.yml	true	TIMEOUT (verification)				true	2.314713122	1.0579336169175804	
+memsafety/test-0019-1.yml	true	true	0.339822774	0.3317158140707761		true	2.013922736	0.9409077218733728	
+memsafety/test-0019-2.yml	true	true	0.31880445	0.3111654910026118		true	2.093130587	0.8753085660282522	
+memsafety/test-0158-1.yml	true	true	0.324922695	0.31786387192551047		true	2.119245957	0.9102905399631709	
+memsafety/test-0158-2.yml	true	true	0.349477612	0.3405732330866158		true	2.113780865	0.9082094100303948	
+memsafety/test-0214.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+memsafety/test-0217.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+memsafety/test-0218.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+memsafety/test-memleak_nexttime.yml	true	true	0.317878934	0.31009166897274554		true	2.243426002	0.982238908065483	
+memsafety-ext/tree_cnstr.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+memsafety-ext/tree_dsw.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+memsafety-ext/tree_parent_ptr.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+memsafety-ext/tree_stack.yml	false	OUT OF MEMORY (KILLED (signal 9, verification))				ERROR			
+ldv-memsafety/StructInitialization.yml	true	true	0.311066391	0.3038842149544507		true	1.719084907	0.7761094139423221	
+ldv-memsafety/memleaks_test1-1.yml	true	true	0.345971004	0.3394124909536913		true	2.350247589	1.0042925879824907	
+ldv-memsafety/memleaks_test1-3.yml	true	true	0.350416977	0.34370922204107046		true	2.552404406	1.097432108828798	
+ldv-memsafety/memleaks_test10-1.yml	true	true	0.3848711	0.37728735199198127		true	2.391530965	1.046076803933829	
+ldv-memsafety/memleaks_test10-2.yml	true	true	0.337243101	0.33063940692227334		true	2.187090474	0.9811138617806137	
+ldv-memsafety/memleaks_test11.yml	true	true	0.321682821	0.3159515479346737		true	2.701248004	1.1269243829883635	
+ldv-memsafety/memleaks_test11_2.yml	true	true	0.341174263	0.33454939897637814		true	2.567650555	1.0794488231185824	
+ldv-memsafety/memleaks_test13_1.yml	true	true	0.406711404	0.399199347011745		true	2.082804647	0.9269555888604373	
+ldv-memsafety/memleaks_test14_1.yml	true	true	0.335109854	0.32814689504448324		true	2.387905632	1.0251149309333414	
+ldv-memsafety/memleaks_test15-2.yml	true	true	0.340094332	0.33379220694769174		true	2.415416575	1.029324292903766	
+ldv-memsafety/memleaks_test16.yml	true	true	0.31902356	0.31384471897035837		true	2.085292677	0.9586626710370183	
+ldv-memsafety/memleaks_test16_1.yml	true	true	0.324823677	0.31830564397387207		true	2.541297055	1.0913259370718151	
+ldv-memsafety/memleaks_test16_2.yml	true	true	0.347414738	0.34059294196777046		true	2.363548774	1.080749258166179	
+ldv-memsafety/memleaks_test17_1-2.yml	true	true	0.500684832	0.4925858349306509		true	3.056571879	1.5720928891096264	
+ldv-memsafety/memleaks_test19-1.yml	true	true	0.334515557	0.32784088398329914		true	2.394204242	1.054850489133969	
+ldv-memsafety/memleaks_test20-1.yml	true	true	0.340621618	0.3336844240548089		true	2.488062458	1.1148847369477153	
+ldv-memsafety/memleaks_test20-2.yml	true	true	0.344561911	0.33802936400752515		true	2.183996309	1.0116251318249851	
+ldv-memsafety/memleaks_test21-1.yml	true	true	0.337157824	0.3304248770000413		true	2.214791409	0.9423759810160846	
+ldv-memsafety/memleaks_test21-2.yml	true	true	0.318631404	0.3117719079600647		true	2.318133731	0.9759650460910052	
+ldv-memsafety/memleaks_test22_2-1.yml	true	true	0.427587797	0.926546101924032		true	2.45898884	1.0626290829386562	
+ldv-memsafety/memleaks_test3-2.yml	true	true	0.315318424	0.30879393592476845		true	2.201808857	0.9764556291047484	
+ldv-memsafety/memleaks_test4-1.yml	true	true	0.324638378	0.3178624730790034		true	2.371360582	1.0269694670569152	
+ldv-memsafety/memleaks_test4-2.yml	true	true	0.388329799	0.3813903039554134		true	2.364757793	1.0123187331482768	
+ldv-memsafety/memleaks_test5.yml	true	true	0.316021442	0.30940082005690783		true	2.269546562	1.0377720149699599	
+ldv-memsafety/memleaks_test5_1.yml	true	true	0.313159617	0.30610618798527867		true	2.207899378	0.9658117478247732	
+ldv-memsafety/memleaks_test5_2.yml	true	true	0.327603158	0.320858787978068		true	2.487466459	1.042465867009014	
+ldv-memsafety/memleaks_test6.yml	true	true	0.350154709	0.3434782460099086		true	2.323221764	0.9902092830743641	
+ldv-memsafety/memleaks_test6_1.yml	true	true	0.363422149	0.35687192203477025		true	2.399755966	0.9860750751104206	
+ldv-memsafety/memleaks_test6_3.yml	true	true	0.353227955	0.3481566810514778		true	2.67083375	1.1230271491222084	
+ldv-memsafety/memleaks_test7-1.yml	true	true	0.328195429	0.32190489303320646		true	2.215152241	0.9649835659656674	
+ldv-memsafety/memleaks_test7-2.yml	true	true	0.35318066	0.34621536801569164		true	2.235156772	0.9638312940951437	
+ldv-memsafety/memleaks_test8.yml	true	true	0.348518127	0.34187649306841195		true	2.226829516	0.9601451640482992	
+ldv-memsafety/memleaks_test8_1.yml	true	true	0.338503648	0.3319683619774878		true	2.311572083	1.008709064917639	
+ldv-memsafety/memleaks_test9.yml	true	true	0.354995643	0.3478635400533676		true	2.287358109	1.0077141320798546	
+ldv-memsafety/memleaks_test9_1.yml	true	true	0.331640536	0.3247683719964698		true	2.312024314	0.9654309800826013	
+ldv-memsafety/memleaks_test9_2.yml	true	true	0.333035361	0.3262898300308734		true	2.357986921	1.0589399971067905	
+ldv-memsafety/memset.yml	true	true	0.302480789	0.29602208093274385		true	1.596296155	0.8531799018383026	
+ldv-memsafety/memset2.yml	true	true	0.33467683	0.32743560802191496		true	1.600336416	0.7793982231523842	
+ldv-memsafety/memset3.yml	true	true	0.284688409	0.2779913720441982		true	1.569748424	0.7773506878875196	
+ldv-memsafety/memsetNonZero.yml	true	true	0.310361621	0.3039062460884452		true	1.526297438	0.7312471149489284	
+ldv-memsafety/memsetNonZero2.yml	true	true	0.307354792	0.30046975205186754		true	1.599149906	0.7697597390506417	
+ldv-memsafety/memsetNonZero3.yml	true	true	0.369395536	0.36241732200141996		true	1.666646033	0.7792747498024255	
+ldv-memsafety-bitfields/test-bitfields-1-1.yml	true	true	0.307442895	0.2997484359657392		true	1.594093353	0.8360236580483615	
+ldv-memsafety-bitfields/test-bitfields-2-2.yml	true	true	0.321621978	0.3148542810231447		true	1.584383453	0.8097790530882776	
+ldv-memsafety-bitfields/test-bitfields-2.1-1.yml	true	true	0.312158933	0.3055223539704457		true	1.627274234	0.8364813290536404	
+ldv-memsafety-bitfields/test-bitfields-3-1.yml	true	true	0.35459771	0.34693445393349975		true	1.827723601	1.0360460351221263	
+ldv-memsafety-bitfields/test-bitfields-3.1-1.yml	true	true	0.308317094	0.30077645694836974		true	1.67224432	0.8231168328784406	
+uthash-2.0.2/uthash_BER_test1-1.yml	true	true	0.448942746	0.4412852938985452		true	1.967841546	1.2336079268716276	
+uthash-2.0.2/uthash_BER_test1-2.yml	true	true	0.473034157	0.46513195405714214		ERROR			
+uthash-2.0.2/uthash_BER_test10-1.yml	true	true	1.196360184	1.1888539529172704		ERROR			
+uthash-2.0.2/uthash_BER_test10-2.yml	true	true	1.461440361	1.4532401720061898		ERROR			
+uthash-2.0.2/uthash_BER_test10-3.yml	true	true	1.656575123	1.6491828789003193		ERROR			
+uthash-2.0.2/uthash_BER_test2-1.yml	true	true	0.510468937	0.5026730160461739		true	15.093367303	14.37608408392407	
+uthash-2.0.2/uthash_BER_test2-2.yml	true	true	0.522790168	0.5151739079738036		ERROR			
+uthash-2.0.2/uthash_BER_test3-1.yml	true	true	0.526507327	0.5184829270001501		ERROR			
+uthash-2.0.2/uthash_BER_test3-2.yml	true	true	0.572956903	0.5651182580040768		ERROR			
+uthash-2.0.2/uthash_BER_test4-1.yml	true	true	0.674484152	0.6666671340353787		true	2.559555742	1.845423277001828	
+uthash-2.0.2/uthash_BER_test4-2.yml	true	true	0.740046994	0.7326429709792137		ERROR			
+uthash-2.0.2/uthash_BER_test4-3.yml	true	true	0.807206935	0.7993215140886605		ERROR			
+uthash-2.0.2/uthash_BER_test5-1.yml	true	true	0.630264674	0.6226285309530795		true	56.167091771	55.395234221825376	
+uthash-2.0.2/uthash_BER_test5-2.yml	true	true	0.831779758	0.8231319929473102		ERROR			
+uthash-2.0.2/uthash_BER_test5-3.yml	true	true	0.914899669	0.90713785297703		ERROR			
+uthash-2.0.2/uthash_BER_test6-1.yml	true	true	0.588431326	0.5808024660218507		ERROR			
+uthash-2.0.2/uthash_BER_test6-2.yml	true	true	0.610887414	0.6053462029667571		ERROR			
+uthash-2.0.2/uthash_BER_test7-1.yml	true	true	1.141196286	1.1338497420074418		ERROR			
+uthash-2.0.2/uthash_BER_test7-2.yml	true	true	1.181392948	1.1732488540001214		ERROR			
+uthash-2.0.2/uthash_BER_test8-1.yml	true	true	0.519493914	0.5115536050871015		ERROR			
+uthash-2.0.2/uthash_BER_test8-2.yml	true	true	0.58998865	0.582006260054186		ERROR			
+uthash-2.0.2/uthash_BER_test9-1.yml	true	true	2.523738873	2.516426950925961		ERROR			
+uthash-2.0.2/uthash_BER_test9-2.yml	true	true	2.684071027	2.6770207119407132		ERROR			
+uthash-2.0.2/uthash_FNV_test1-1.yml	true	true	0.438663615	0.4310500279534608		true	2.011238434	1.287279972108081	
+uthash-2.0.2/uthash_FNV_test1-2.yml	true	true	0.481595401	0.4751235489966348		ERROR			
+uthash-2.0.2/uthash_FNV_test10-1.yml	true	true	1.189940367	1.1837053350172937		ERROR			
+uthash-2.0.2/uthash_FNV_test10-2.yml	true	true	1.452249011	1.4453919830266386		ERROR			
+uthash-2.0.2/uthash_FNV_test10-3.yml	true	true	1.59835695	1.5903032020432875		ERROR			
+uthash-2.0.2/uthash_FNV_test2-1.yml	true	true	0.455698819	0.4482213360024616		true	15.356114471	14.577112592058256	
+uthash-2.0.2/uthash_FNV_test2-2.yml	true	true	0.556022137	0.5483083199942484		ERROR			
+uthash-2.0.2/uthash_FNV_test3-1.yml	true	true	0.546247072	0.5384422319475561		ERROR			
+uthash-2.0.2/uthash_FNV_test3-2.yml	true	true	0.612182507	0.6045979920309037		ERROR			
+uthash-2.0.2/uthash_FNV_test4-1.yml	true	true	0.645873905	0.6382202110253274		true	2.258711883	1.4866956658661366	
+uthash-2.0.2/uthash_FNV_test4-2.yml	true	true	0.741870953	0.7345079820370302		ERROR			
+uthash-2.0.2/uthash_FNV_test4-3.yml	true	true	0.787144824	0.7795721120201051		ERROR			
+uthash-2.0.2/uthash_FNV_test5-1.yml	true	true	0.629057704	0.6215760629856959		true	56.955929852	56.197870475938544	
+uthash-2.0.2/uthash_FNV_test5-2.yml	true	true	0.843228771	0.8362840500194579		ERROR			
+uthash-2.0.2/uthash_FNV_test5-3.yml	true	true	0.912025882	0.9040359720820561		ERROR			
+uthash-2.0.2/uthash_FNV_test6-1.yml	true	true	0.572971679	0.565481259021908		ERROR			
+uthash-2.0.2/uthash_FNV_test6-2.yml	true	true	0.616811123	0.6091286559822038		ERROR			
+uthash-2.0.2/uthash_FNV_test7-1.yml	true	true	1.140259558	1.1341596780112013		ERROR			
+uthash-2.0.2/uthash_FNV_test7-2.yml	true	true	1.203564554	1.1954725299729034		ERROR			
+uthash-2.0.2/uthash_FNV_test8-1.yml	true	true	0.502941076	0.4945929429959506		ERROR			
+uthash-2.0.2/uthash_FNV_test8-2.yml	true	true	0.586570149	0.5789189450442791		ERROR			
+uthash-2.0.2/uthash_FNV_test9-1.yml	true	true	2.601839034	2.595140482066199		ERROR			
+uthash-2.0.2/uthash_FNV_test9-2.yml	true	true	2.712585344	2.7045343860518187		ERROR			
+uthash-2.0.2/uthash_JEN_test1-1.yml	true	true	0.426860532	0.41910214303061366		true	2.082533467	1.3649890800006688	
+uthash-2.0.2/uthash_JEN_test1-2.yml	true	true	0.470811862	0.46315682400017977		ERROR			
+uthash-2.0.2/uthash_JEN_test10-1.yml	true	true	1.177215828	1.1690347540425137		ERROR			
+uthash-2.0.2/uthash_JEN_test10-2.yml	true	true	1.414732922	1.4074661179911345		ERROR			
+uthash-2.0.2/uthash_JEN_test10-3.yml	true	true	2.000968729	1.9933295929804444		ERROR			
+uthash-2.0.2/uthash_JEN_test2-1.yml	true	true	0.452533735	0.4445715829497203		true	15.143320656	14.354210407007486	
+uthash-2.0.2/uthash_JEN_test2-2.yml	true	true	0.520406113	0.512472053989768		ERROR			
+uthash-2.0.2/uthash_JEN_test3-1.yml	true	true	0.5815839	0.5735882419394329		ERROR			
+uthash-2.0.2/uthash_JEN_test3-2.yml	true	true	0.622171803	0.6150504770921543		ERROR			
+uthash-2.0.2/uthash_JEN_test4-1.yml	true	true	0.683549919	0.7109000420896336		true	2.229026691	1.524151667021215	
+uthash-2.0.2/uthash_JEN_test4-2.yml	true	true	0.737646049	0.7295567690161988		ERROR			
+uthash-2.0.2/uthash_JEN_test4-3.yml	true	true	0.82770729	0.8200805629603565		ERROR			
+uthash-2.0.2/uthash_JEN_test5-1.yml	true	true	0.6150897	0.6072998100426048		true	57.024462706	56.34179995395243	
+uthash-2.0.2/uthash_JEN_test5-2.yml	true	true	0.834867417	0.8265731410356238		ERROR			
+uthash-2.0.2/uthash_JEN_test5-3.yml	true	true	0.92926439	0.9212441749405116		ERROR			
+uthash-2.0.2/uthash_JEN_test6-1.yml	true	true	0.546571163	0.5386760119581595		ERROR			
+uthash-2.0.2/uthash_JEN_test6-2.yml	true	true	0.604133975	0.5965692920144647		ERROR			
+uthash-2.0.2/uthash_JEN_test7-1.yml	true	true	1.244889705	1.7921262319432572		ERROR			
+uthash-2.0.2/uthash_JEN_test7-2.yml	true	true	1.195305829	1.1871052499627694		ERROR			
+uthash-2.0.2/uthash_JEN_test8-1.yml	true	true	0.505061921	0.49734554905444384		ERROR			
+uthash-2.0.2/uthash_JEN_test8-2.yml	true	true	0.596621372	0.5892999150091782		ERROR			
+uthash-2.0.2/uthash_JEN_test9-1.yml	true	true	2.513914145	2.505648248945363		ERROR			
+uthash-2.0.2/uthash_JEN_test9-2.yml	true	true	2.695377353	2.6875336739467457		ERROR			
+uthash-2.0.2/uthash_OAT_test1-1.yml	true	true	0.451917115	0.4442037540720776		true	1.997867165	1.2808662629686296	
+uthash-2.0.2/uthash_OAT_test1-2.yml	true	true	0.46173981	0.4541902970522642		ERROR			
+uthash-2.0.2/uthash_OAT_test10-1.yml	true	true	1.205277051	1.1975245180074126		ERROR			
+uthash-2.0.2/uthash_OAT_test10-2.yml	true	true	1.445524244	1.4381372360512614		ERROR			
+uthash-2.0.2/uthash_OAT_test10-3.yml	true	true	1.643063927	1.634700975031592		ERROR			
+uthash-2.0.2/uthash_OAT_test2-1.yml	true	true	0.458462047	0.4509544010506943		true	15.064948602	14.425582024035975	
+uthash-2.0.2/uthash_OAT_test2-2.yml	true	true	0.521933391	0.5141274209599942		ERROR			
+uthash-2.0.2/uthash_OAT_test3-1.yml	true	true	0.531365777	0.5233388569904491		ERROR			
+uthash-2.0.2/uthash_OAT_test3-2.yml	true	true	0.612901184	0.6050963710295036		ERROR			
+uthash-2.0.2/uthash_OAT_test4-1.yml	true	true	0.70198465	0.6944072509650141		true	2.233073969	1.5075343188364059	
+uthash-2.0.2/uthash_OAT_test4-2.yml	true	true	0.719841199	0.7399371640058234		ERROR			
+uthash-2.0.2/uthash_OAT_test4-3.yml	true	true	0.80018841	0.7941236069891602		ERROR			
+uthash-2.0.2/uthash_OAT_test5-1.yml	true	true	0.599373107	0.5920077390037477		true	55.726395453	55.16644145688042	
+uthash-2.0.2/uthash_OAT_test5-2.yml	true	true	0.837538199	0.8298087189905345		ERROR			
+uthash-2.0.2/uthash_OAT_test5-3.yml	true	true	0.941835661	0.9343203000025824		ERROR			
+uthash-2.0.2/uthash_OAT_test6-1.yml	true	true	0.57554562	0.5679258450400084		ERROR			
+uthash-2.0.2/uthash_OAT_test6-2.yml	true	true	0.625090324	0.6168925240635872		ERROR			
+uthash-2.0.2/uthash_OAT_test7-1.yml	true	true	1.121549006	1.1142828569281846		ERROR			
+uthash-2.0.2/uthash_OAT_test7-2.yml	true	true	1.225078031	1.2178004289744422		ERROR			
+uthash-2.0.2/uthash_OAT_test8-1.yml	true	true	0.526004318	0.5181199830258265		ERROR			
+uthash-2.0.2/uthash_OAT_test8-2.yml	true	true	0.5990897	0.5919282350223511		ERROR			
+uthash-2.0.2/uthash_OAT_test9-1.yml	true	true	2.554767854	2.5771023670677096		ERROR			
+uthash-2.0.2/uthash_OAT_test9-2.yml	true	true	2.710253563	2.7026896929601207		ERROR			
+uthash-2.0.2/uthash_SAX_test1-1.yml	true	true	0.437446186	0.42944829910993576		true	2.024836573	1.283920498099178	
+uthash-2.0.2/uthash_SAX_test1-2.yml	true	true	0.49772173	0.49023922602646053		ERROR			
+uthash-2.0.2/uthash_SAX_test10-1.yml	true	true	1.153743058	1.1456410869723186		ERROR			
+uthash-2.0.2/uthash_SAX_test10-2.yml	true	true	1.709631989	1.701311554061249		ERROR			
+uthash-2.0.2/uthash_SAX_test10-3.yml	true	true	1.63625575	1.630458758911118		ERROR			
+uthash-2.0.2/uthash_SAX_test2-1.yml	true	true	0.468757958	0.4602020459715277		true	15.166681425	14.462858957936987	
+uthash-2.0.2/uthash_SAX_test2-2.yml	true	true	0.516876538	0.5089608780108392		ERROR			
+uthash-2.0.2/uthash_SAX_test3-1.yml	true	true	0.533750627	0.526356047950685		ERROR			
+uthash-2.0.2/uthash_SAX_test3-2.yml	true	true	0.587537755	0.5795745950890705		ERROR			
+uthash-2.0.2/uthash_SAX_test4-1.yml	true	true	0.64306881	0.6349669969640672		true	2.224322775	1.5163483440410346	
+uthash-2.0.2/uthash_SAX_test4-2.yml	true	true	0.730684385	0.7517570600612089		ERROR			
+uthash-2.0.2/uthash_SAX_test4-3.yml	true	true	0.78342624	0.7757595749571919		ERROR			
+uthash-2.0.2/uthash_SAX_test5-1.yml	true	true	0.610202074	0.6026362240081653		true	55.858637386	55.28933344595134	
+uthash-2.0.2/uthash_SAX_test5-2.yml	true	true	0.796477519	0.7903922729892656		ERROR			
+uthash-2.0.2/uthash_SAX_test5-3.yml	true	true	0.916506537	0.9095399290090427		ERROR			
+uthash-2.0.2/uthash_SAX_test6-1.yml	true	true	0.558296321	0.5505799519596621		ERROR			
+uthash-2.0.2/uthash_SAX_test6-2.yml	true	true	0.613957858	0.6059481760021299		ERROR			
+uthash-2.0.2/uthash_SAX_test7-1.yml	true	true	1.126098801	1.119215211016126		ERROR			
+uthash-2.0.2/uthash_SAX_test7-2.yml	true	true	1.203586986	1.1957077899714932		ERROR			
+uthash-2.0.2/uthash_SAX_test8-1.yml	true	true	0.538321882	0.5310312639921904		ERROR			
+uthash-2.0.2/uthash_SAX_test8-2.yml	true	true	0.588059508	0.5804483270039782		ERROR			
+uthash-2.0.2/uthash_SAX_test9-1.yml	true	true	2.633606662	2.627658343059011		ERROR			
+uthash-2.0.2/uthash_SAX_test9-2.yml	true	true	2.68309467	2.675243138917722		ERROR			
+uthash-2.0.2/uthash_SFH_test1-1.yml	true	true	0.44302301	0.4352172710932791		true	2.006586196	1.2721401129383594	
+uthash-2.0.2/uthash_SFH_test1-2.yml	true	true	0.474286912	0.4662310059648007		ERROR			
+uthash-2.0.2/uthash_SFH_test10-1.yml	true	true	1.169146602	1.1606279260013252		ERROR			
+uthash-2.0.2/uthash_SFH_test10-2.yml	true	true	1.413617483	1.405579482903704		ERROR			
+uthash-2.0.2/uthash_SFH_test10-3.yml	true	true	1.603457937	1.5975397349102423		ERROR			
+uthash-2.0.2/uthash_SFH_test2-1.yml	true	true	0.460916276	0.454481141990982		true	15.158253368	14.44164609303698	
+uthash-2.0.2/uthash_SFH_test2-2.yml	true	true	0.51931505	0.5114489429397509		ERROR			
+uthash-2.0.2/uthash_SFH_test3-1.yml	true	true	0.562421998	0.5544701969483867		ERROR			
+uthash-2.0.2/uthash_SFH_test3-2.yml	true	true	0.598915953	0.5910429080249742		ERROR			
+uthash-2.0.2/uthash_SFH_test4-1.yml	true	true	0.705726764	0.697625050903298		true	2.224125836	1.5776758010033518	
+uthash-2.0.2/uthash_SFH_test4-2.yml	true	true	0.737228796	0.7296115360222757		ERROR			
+uthash-2.0.2/uthash_SFH_test4-3.yml	true	true	0.798123023	0.7897848410066217		ERROR			
+uthash-2.0.2/uthash_SFH_test5-1.yml	true	true	0.621921431	0.6140750430058688		true	55.888805033	55.27082317811437	
+uthash-2.0.2/uthash_SFH_test5-2.yml	true	true	0.805125483	0.7979403880890459		ERROR			
+uthash-2.0.2/uthash_SFH_test5-3.yml	true	true	1.11943528	1.111699532950297		ERROR			
+uthash-2.0.2/uthash_SFH_test6-1.yml	true	true	0.579591454	0.5727100960211828		ERROR			
+uthash-2.0.2/uthash_SFH_test6-2.yml	true	true	0.645674973	0.6389767499640584		ERROR			
+uthash-2.0.2/uthash_SFH_test7-1.yml	true	true	1.118428333	1.1106313299387693		ERROR			
+uthash-2.0.2/uthash_SFH_test7-2.yml	true	true	1.172194082	1.166236757999286		ERROR			
+uthash-2.0.2/uthash_SFH_test8-1.yml	true	true	0.533196618	0.5257148970849812		ERROR			
+uthash-2.0.2/uthash_SFH_test8-2.yml	true	true	0.61900674	0.6129953750642017		ERROR			
+uthash-2.0.2/uthash_SFH_test9-1.yml	true	true	2.506000086	2.4988188929855824		ERROR			
+uthash-2.0.2/uthash_SFH_test9-2.yml	true	true	2.680756421	2.6730050819460303		ERROR			

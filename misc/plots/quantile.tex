@@ -1,0 +1,40 @@
+\documentclass{standalone}
+\usepackage[
+    group-digits=integer, group-minimum-digits=4, % group digits by thousands
+    free-standing-units, unit-optional-argument, % easier input of numbers with units
+    ]{siunitx}[=v2]
+\usepackage{pgfplots}
+\pgfplotsset{
+    compat=1.18,
+    log ticks with fixed point, % no scientific notation in plots
+    table/col sep=tab, % only tabs are column separators
+    unbounded coords=jump, % better have skips in a plot than appear to be interpolating
+    filter discard warning=false, % Don't complain about empty cells
+    }
+\SendSettingsToPgf % use siunitx formatting settings in PGF, too
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{semilogyaxis}[
+    % Which column to be taken from each file
+        /pgfplots/table/header=false,
+        % axis labels
+        xlabel=n-th fastest result,
+        ylabel=CPU time (\second),
+        % axis ranges
+        xmin=0,
+        ymin=1,
+        ymax=1000,
+        mark repeat=500,
+        % legend
+        legend entries={NAMES},
+        every axis legend/.append style={at={(0,1)}, anchor=north west, outer xsep=5pt, outer ysep=5pt,},
+        ]
+        \foreach \tool in {FILES} {
+            \addplot+ [line width=1.5pt] table[y index=5] {\tool};
+        }
+\end{semilogyaxis}
+\end{tikzpicture}
+
+\end{document}
