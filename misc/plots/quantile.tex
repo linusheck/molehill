@@ -1,4 +1,20 @@
-\documentclass{standalone}
+\documentclass[tikz]{standalone}
+\usepackage[
+    group-digits=integer, group-minimum-digits=4, % group digits by thousands
+    free-standing-units, unit-optional-argument, % easier input of numbers with units
+    ]{siunitx}[=v2]
+\usepackage{pgfplots}
+\pgfplotsset{
+    compat=1.18,
+    log ticks with fixed point, % no scientific notation in plots
+    table/col sep=tab, % only tabs are column separators
+    unbounded coords=jump, % better have skips in a plot than appear to be interpolating
+    filter discard warning=false, % Don't complain about empty cells
+    width=15cm,
+    height=10cm
+    }
+\SendSettingsToPgf % use siunitx formatting settings in PGF, too
+
 \usepackage[
     group-digits=integer, group-minimum-digits=4, % group digits by thousands
     free-standing-units, unit-optional-argument, % easier input of numbers with units
@@ -20,7 +36,7 @@
     % Which column to be taken from each file
         /pgfplots/table/header=false,
         % axis labels
-        xlabel=solved instances
+        xlabel=solved instances,
         ylabel=CPU time (\second),
         % axis ranges
         xmin=0,

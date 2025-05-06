@@ -1,6 +1,6 @@
 tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
-run set			Molehill	30000	30000	Molehill	Paynt-CEGIS	30000	30000	Paynt-CEGIS
-../../benchmarks/files/simple/			status	30000	30000	memUsage	status	30000	30000	memUsage
+run set			Molehill	Molehill	Molehill	Molehill	Paynt-CEGIS	Paynt-CEGIS	Paynt-CEGIS	Paynt-CEGIS
+../../benchmarks/files/simple/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
 sat_dpm.yml	sat	true	true	1.871179	2.0361325569974724		true	0.638289	0.7662347320001572	
 sat_grid-10-sl-4fsc.yml	sat	true	TIMEOUT	30000	30000		false	30000	30000	
 sat_grid-meet-sl-2fsc.yml	sat	true	true	34.871776	35.05457324600138		true	23.110277	23.241390686001978	
