@@ -211,95 +211,42 @@ class DecisionTree(Constraint):
             )
             constraints.append(z3.Implies(is_leaf, prop_index == 0))
 
-            value_domains = [range(lo, hi + 1) for lo, hi in property_ranges]
-            # number of values in the product iterator:
-            num_values = 1
-            for lo, hi in property_ranges:
-                num_values *= hi - lo + 1
-            if num_values < 10000:
-                for values in product(*value_domains):
-                    prop_vals = [z3.BitVecVal(v, num_bits) for v in values]
-                    constraints.append(
+            all_property_values = [get_property_values(str(variable)) for variable in enumerate(policy_vars)]
+
+            for values in all_property_values:
+                prop_vals = [z3.BitVecVal(v, num_bits) for v in values]
+                constraints.append(
+                    z3.If(
+                        is_leaf,
+                        decision_functions[i](*prop_vals) == constant_var,
                         z3.If(
-                            is_leaf,
-                            decision_functions[i](*prop_vals) == constant_var,
-                            z3.If(
-                                z3.UGE(
-                                    piecewise_select(prop_vals, prop_index),
-                                    constant_var,
-                                ),
-                                z3.Or(
-                                    *[
-                                        z3.And(
-                                            left_child == j,
-                                            decision_functions[i](*prop_vals)
-                                            == decision_functions[
-                                                self.left_child_ranges[i][j]
-                                            ](*prop_vals),
-                                        )
-                                        for j in range(len(self.left_child_ranges[i]))
-                                    ]
-                                ),
-                                z3.Or(
-                                    *[
-                                        z3.And(
-                                            right_child == j,
-                                            decision_functions[i](*prop_vals)
-                                            == decision_functions[
-                                                self.right_child_ranges[i][j]
-                                            ](*prop_vals),
-                                        )
-                                        for j in range(len(self.right_child_ranges[i]))
-                                    ]
-                                ),
+                            z3.UGE(
+                                piecewise_select(prop_vals, prop_index),
+                                constant_var,
                             ),
-                        )
-                    )
-            else:
-                print(
-                    f"Too many values ({num_values}) for explicit tree constraints, using forall quantification."
-                )
-                # Symbolically forall-quantify over the values (too many to enumerate)
-                property_vars = [
-                    z3.BitVec(f"prop_{i}", num_bits) for i in range(num_properties)
-                ]
-                forall_statements.append(
-                    z3.ForAll(
-                        property_vars,
-                        z3.If(
-                            is_leaf,
-                            decision_functions[i](*property_vars) == constant_var,
-                            z3.If(
-                                z3.UGE(
-                                    piecewise_select(property_vars, prop_index),
-                                    constant_var,
-                                ),
-                                z3.And(
-                                    [
-                                        z3.If(
-                                            left_child == j,
-                                            decision_functions[i](*property_vars)
-                                            == decision_functions[
-                                                self.left_child_ranges[i][j]
-                                            ](*property_vars),
-                                            True,
-                                        )
-                                        for j in range(len(self.left_child_ranges[i]))
-                                    ]
-                                ),
-                                z3.And(
-                                    [
-                                        z3.If(
-                                            right_child == j,
-                                            decision_functions[i](*property_vars)
-                                            == decision_functions[
-                                                self.right_child_ranges[i][j]
-                                            ](*property_vars),
-                                            True,
-                                        )
-                                        for j in range(len(self.right_child_ranges[i]))
-                                    ]
-                                ),
+                            z3.Or(
+                                *[
+                                    z3.And(
+                                        left_child == j,
+                                        decision_functions[i](*prop_vals)
+                                        == decision_functions[
+                                            self.left_child_ranges[i][j]
+                                        ](*prop_vals),
+                                    )
+                                    for j in range(len(self.left_child_ranges[i]))
+                                ]
+                            ),
+                            z3.Or(
+                                *[
+                                    z3.And(
+                                        right_child == j,
+                                        decision_functions[i](*prop_vals)
+                                        == decision_functions[
+                                            self.right_child_ranges[i][j]
+                                        ](*prop_vals),
+                                    )
+                                    for j in range(len(self.right_child_ranges[i]))
+                                ]
                             ),
                         ),
                     )

@@ -19,9 +19,11 @@ def check_model(mdp, prop, hint, precision=1e-4):
             stormpy.MinMaxMethod.topological
         )
     # exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.sound_value_iteration
+    
+    # assert that prop.formula is a reachability property
+    assert prop.formula.is_probability_operator
 
-    # TODO hack (i hate properties)
-    # this is okay because we always have reachability properties
+    # this is okay because we always have reachability properties because PAYNT gives us them
     new_prop = parse_properties_without_context(
         str(prop.formula).split()[0] + ' [ F "counterexample_target" ]'
     )[0]

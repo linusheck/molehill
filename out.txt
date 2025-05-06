@@ -1,0 +1,2 @@
+Running with --nodes 1
+WARNING: choice labeling for the quotient is not canonic
