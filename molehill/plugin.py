@@ -84,8 +84,8 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 if counterexample is None:
                     continue
 
+                assert False # in the current code, this should never happen
                 minus_one = 18446744073709551615
-
                 do_these_splits = []
                 split_numbers = {}
 

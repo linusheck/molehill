@@ -90,6 +90,7 @@ class DecisionTree(Constraint):
 
         # Collect all action labels and put them into an order
         labels = list(dict.fromkeys(chain(*[args["family"].hole_to_option_labels[i] for i in policy_indices])))
+        print(labels)
         label_to_index = {label: i for i, label in enumerate(labels)}
         self.labels = labels
         self.label_to_index = label_to_index
