@@ -44,41 +44,4 @@
         <option>--method</option>
         <option>hybrid</option>
     </rundefinition>
-
-    <!--
-    <rundefinition name="Molehill-Sched-CE">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>-m</option>
-        <option>molehill</option>
-        <option>--ce</option>
-        <option>sched</option>
-    </rundefinition>
-
-    <rundefinition name="Molehill-Det">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>-m</option>
-        <option>molehill</option>
-        <option>--deterministic</option>
-    </rundefinition>
-
-    <rundefinition name="Molehill-All-CE">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>-m</option>
-        <option>molehill</option>
-        <option>--ce</option>
-        <option>all</option>
-    </rundefinition>
-
-    <rundefinition name="Molehill-MC-CE">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>-m</option>
-        <option>molehill</option>
-        <option>--ce</option>
-        <option>mc</option>
-    </rundefinition>
-    -->
 </benchmark>
