@@ -21,7 +21,7 @@ def check_model(mdp, prop, hint, precision=1e-4):
     # exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.sound_value_iteration
     
     # assert that prop.formula is a reachability property
-    assert prop.formula.is_probability_operator
+    assert prop.formula.subformula.is_eventually_formula
 
     # this is okay because we always have reachability properties because PAYNT gives us them
     new_prop = parse_properties_without_context(
