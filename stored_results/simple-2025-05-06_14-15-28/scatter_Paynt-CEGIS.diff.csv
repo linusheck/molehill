@@ -1,0 +1,17 @@
+tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set			Molehill	Molehill	Molehill	Molehill	Paynt-CEGIS	Paynt-CEGIS	Paynt-CEGIS	Paynt-CEGIS
+../../benchmarks/files/simple/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+sat_grid-10-sl-4fsc.yml	sat	true	TIMEOUT	300.9008	301.0646555099993		false	16.492753	16.628583920999517	
+sat_maze.yml	sat	true	true	2.611753	2.762534808000055		TIMEOUT	300.909449	301.02471965400036	
+sat_network-priorities.yml	sat	true	true	0.798831	0.9338884899989353		unknown	0.449351	0.5557925440007239	
+sat_pole-res.yml	sat	true	true	0.395214	0.5226190390021657		unknown	0.251082	0.3464861300017219	
+sat_refuel-06-res.yml	sat	true	true	0.517981	0.6544455049988755		TIMEOUT	300.909717	301.02030872600153	
+sat_samplerocks.yml	sat	true	TIMEOUT	300.935295	301.07583113099827		true	57.032565	57.134817753998504	
+unsat_dpm.yml	unsat	false	false	1.063474	1.2079094580003584		TIMEOUT	300.912288	301.0260443549996	
+unsat_grid-meet-sl-2fsc.yml	unsat	false	false	73.33836	73.47638977899987		TIMEOUT	300.924897	301.0348982579999	
+unsat_herman.yml	unsat	false	false	46.569985	46.70893091100152		TIMEOUT	300.939895	301.0438679660001	
+unsat_maze.yml	unsat	false	false	2.997355	3.1291221149986086		TIMEOUT	300.908421	301.0150904229995	
+unsat_network.yml	unsat	false	false	83.052962	83.20921025999996		TIMEOUT	300.911253	301.0210429559993	
+unsat_pole-res.yml	unsat	false	false	0.453211	0.5967277550007566		unknown	0.25214	0.35051431200190564	
+unsat_pole.yml	unsat	false	false	1.878282	2.0158000189985614		unknown	0.280761	0.37651385700155515	
+unsat_refuel-06-res.yml	unsat	false	false	0.372146	0.5092899770024815		TIMEOUT	300.908224	301.0308572549984	

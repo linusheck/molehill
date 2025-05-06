@@ -11,8 +11,8 @@ SPDX-License-Identifier: Apache-2.0
 
 <!DOCTYPE table PUBLIC "+//IDN sosy-lab.org//DTD BenchExec table 1.10//EN" "http://www.sosy-lab.org/benchexec/table-1.10.dtd">
 <table>
-  <result filename="FILE1"/>
-  <result filename="FILE2"/>
+  <result filename="comparison_simple.2025-05-06_14-15-28.results.Molehill.xml.bz2"/>
+  <result filename="comparison_simple.2025-05-06_14-15-28.results.Paynt-CEGIS.xml.bz2"/>
 
   <column title="status"/>
   <column title="cputime"/>

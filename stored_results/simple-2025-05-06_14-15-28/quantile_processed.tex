@@ -28,10 +28,10 @@
         ymax=1000,
         mark repeat=500,
         % legend
-        legend entries={NAMES},
+        legend entries={Molehill,Paynt-AR,Paynt-CEGIS,Paynt-Hybrid,},
         every axis legend/.append style={at={(0,1)}, anchor=north west, outer xsep=5pt, outer ysep=5pt,},
         ]
-        \foreach \tool in {FILES} {
+        \foreach \tool in {comparison_simple.2025-05-06_14-15-28.results.Molehill.xml.bz2.quantile.csv,comparison_simple.2025-05-06_14-15-28.results.Paynt-AR.xml.bz2.quantile.csv,comparison_simple.2025-05-06_14-15-28.results.Paynt-CEGIS.xml.bz2.quantile.csv,comparison_simple.2025-05-06_14-15-28.results.Paynt-Hybrid.xml.bz2.quantile.csv} {
             \addplot+ [line width=1.5pt] table[y index=5] {\tool};
         }
 \end{semilogyaxis}

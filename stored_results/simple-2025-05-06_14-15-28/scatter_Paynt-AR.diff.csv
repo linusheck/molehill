@@ -1,0 +1,8 @@
+tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set			Molehill	Molehill	Molehill	Molehill	Paynt-AR	Paynt-AR	Paynt-AR	Paynt-AR
+../../benchmarks/files/simple/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+sat_grid-meet-sl-2fsc.yml	sat	true	true	34.871776	35.05457324600138		TIMEOUT	300.966971	301.12776196699997	
+sat_maze.yml	sat	true	true	2.611753	2.762534808000055		TIMEOUT	300.905204	301.01077873100076	
+sat_samplerocks.yml	sat	true	TIMEOUT	300.935295	301.07583113099827		true	13.511613	13.61459387600189	
+unsat_grid-10-sl-4fsc.yml	unsat	false	false	2.929744	3.0564934159992845		TIMEOUT	300.905423	301.0143794639989	
+unsat_maze.yml	unsat	false	false	2.997355	3.1291221149986086		TIMEOUT	300.906268	301.0106533750004	
