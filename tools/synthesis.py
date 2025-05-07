@@ -22,7 +22,7 @@ class Tool(BaseTool2):
         return None
     
     def cmdline(self, executable, options, task, rlimits):
-        if "memory" in task.options:
+        if task.options is not None and "memory" in task.options:
             options += ["--fsc-memory-size", str(task.options["memory"])]
         return [executable, *options, *task.input_files_or_identifier]
 
