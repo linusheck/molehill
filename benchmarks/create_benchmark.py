@@ -32,28 +32,26 @@ properties:
     expected_verdict: {{expected_verdict}}
 """
 
-if args.iterate_memory:
-    template += """
-runs:
-  - name: "mem1"
-    options: ["--fsc-memory-size", "1"]
-  - name: "mem2"
-    options: ["--fsc-memory-size", "2"]
-  - name: "mem3"
-    options: ["--fsc-memory-size", "3"]
-  - name: "mem4"
-    options: ["--fsc-memory-size", "4"]
-"""
 
-name = input_file.split("/")[-1].split(".")[0]
-category = args.category
-if not os.path.exists(f"files/{category}"):
-    os.makedirs(f"files/{category}")
-with open(f"files/{category}/{name}.yml", "w") as f:
-    f.write(
-        template.format(
-            input_file=input_file,
-            property_file=property_file,
-            expected_verdict=expected_verdict,
+def write(name, template):
+    category = args.category
+    if not os.path.exists(f"files/{category}"):
+        os.makedirs(f"files/{category}")
+    with open(f"files/{category}/{name}.yml", "w") as f:
+        f.write(
+            template.format(
+                input_file=input_file,
+                property_file=property_file,
+                expected_verdict=expected_verdict,
+            )
         )
-    )
+
+if not args.iterate_memory:
+    write(input_file.split("/")[-1].split(".")[0], template)
+else:
+    for i in range(1, 5):
+        new_template = template + f"""
+options:
+    memory: {i}
+"""
+        write(f"{input_file.split('/')[-1].split('.')[0]}_{i}", new_template)

@@ -19,6 +19,11 @@ class Tool(BaseTool2):
         if identifier == "iterations":
             return self._extract_iterations(lines)
         return None
+    
+    def cmdline(self, executable, options, task, rlimits):
+        print("Command line arguments:", executable, options, task, rlimits)
+        super().cmdline(executable, options, task, rlimits)
+
 
     def _extract_iterations(self, output):
         iterations = 0

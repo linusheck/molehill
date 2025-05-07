@@ -1,0 +1,12 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/benchmark/jair/unsat_dpm
+
+properties:
+  - property_file: ../../unsat.txt
+    expected_verdict: false
+
+options:
+    memory: 3
