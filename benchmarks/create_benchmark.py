@@ -10,6 +10,11 @@ argument_parser.add_argument(
 argument_parser.add_argument(
     "expected_verdict", type=str, help="Expected verdict of the property"
 )
+argument_parser.add_argument(
+    "--iterate-memory",
+    action="store_true",
+    help="Flag to indicate whether to iterate memory",
+)
 
 args = argument_parser.parse_args()
 input_file = args.input_file
@@ -25,6 +30,19 @@ input_files:
 properties:
   - property_file: {{property_file}}
     expected_verdict: {{expected_verdict}}
+"""
+
+if args.iterate_memory:
+    template += """
+runs:
+  - name: "mem1"
+    options: ["--fsc-memory-size", "1"]
+  - name: "mem2"
+    options: ["--fsc-memory-size", "2"]
+  - name: "mem3"
+    options: ["--fsc-memory-size", "3"]
+  - name: "mem4"
+    options: ["--fsc-memory-size", "4"]
 """
 
 name = input_file.split("/")[-1].split(".")[0]

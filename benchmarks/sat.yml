@@ -1,17 +1,5 @@
 format_version: "2.0"
 
-input_files:
-- ../resources/benchmark/jair/sat_dpm
-- ../resources/benchmark/jair/sat_grid
-- ../resources/benchmark/jair/sat_grid-10-sl-4fsc
-- ../resources/benchmark/jair/sat_grid-meet-sl-2fsc
-- ../resources/benchmark/jair/sat_herman
-- ../resources/benchmark/jair/sat_maze
-- ../resources/benchmark/jair/sat_maze-sl-5
-- ../resources/benchmark/jair/sat_pole
-- ../resources/benchmark/jair/sat_pole-res
-- ../resources/benchmark/jair/sat_refuel-06-res
-
 properties:
   - property_file: sat.yml
     expected_verdict: true
