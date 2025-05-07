@@ -5,6 +5,7 @@ import re
 
 class Tool(BaseTool2):
     def executable(self, tool_locator):
+        print("hi")
         # Specify the path to the Python executable or any executable
         return sys.executable
 
@@ -21,8 +22,9 @@ class Tool(BaseTool2):
         return None
     
     def cmdline(self, executable, options, task, rlimits):
-        print("Command line arguments:", executable, options, task, rlimits)
-        super().cmdline(executable, options, task, rlimits)
+        if "memory" in task.options:
+            options += ["--fsc-memory-size", str(task.options["memory"])]
+        return [executable, *options, *task.input_files_or_identifier]
 
 
     def _extract_iterations(self, output):
