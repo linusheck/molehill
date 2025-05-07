@@ -24,7 +24,6 @@ class Tool(BaseTool2):
         print("Command line arguments:", executable, options, task, rlimits)
         super().cmdline(executable, options, task, rlimits)
 
-
     def _extract_iterations(self, output):
         iterations = 0
         found_line = False

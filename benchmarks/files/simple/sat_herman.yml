@@ -7,6 +7,3 @@ input_files:
 properties:
   - property_file: ../../sat.txt
     expected_verdict: true
-
-options:
-    memory: 3

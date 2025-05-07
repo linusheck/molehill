@@ -2,11 +2,8 @@
 format_version: "2.0"
 
 input_files:
-- ../../../resources/benchmark/pomdps/unsat_network
+- ../../../resources/benchmark/pomdps/unsat_samplerocks
 
 properties:
   - property_file: ../../unsat.txt
     expected_verdict: false
-
-options:
-    memory: 4

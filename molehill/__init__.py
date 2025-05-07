@@ -32,6 +32,7 @@ def run(
         sketch_path, properties_path, use_exact=exact
     )
 
+    print(quotient.family)
     # print all python properties of quotient
     family = quotient.family
 
