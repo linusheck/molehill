@@ -11,9 +11,10 @@ argument_parser.add_argument(
     "expected_verdict", type=str, help="Expected verdict of the property"
 )
 argument_parser.add_argument(
-    "--iterate-memory",
-    action="store_true",
-    help="Flag to indicate whether to iterate memory",
+    "--memory",
+    type=int,
+    default=None,
+    help="Memory bound for the benchmark (default: None)",
 )
 
 args = argument_parser.parse_args()
@@ -46,12 +47,11 @@ def write(name, template):
             )
         )
 
-if not args.iterate_memory:
+if args.memory is None:
     write(input_file.split("/")[-1].split(".")[0], template)
 else:
-    for i in range(1, 5):
-        new_template = template + f"""
+    new_template = template + f"""
 options:
-    memory: {i}
+memory: {args.memory}
 """
-        write(f"{input_file.split('/')[-1].split('.')[0]}_{i}", new_template)
+    write(f"{input_file.split('/')[-1].split('.')[0]}_{args.memory}", new_template)
