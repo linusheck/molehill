@@ -9,15 +9,15 @@ done
 
 # find all unsat benchmarks without memory
 for i in $(find ../resources/benchmark -type d -name 'unsat_*' ! -name 'unsat_mem_*'); do
-    python create_benchmark.py simple ../../$i ../../unsat.txt true
+    python create_benchmark.py simple ../../$i ../../unsat.txt false
 done
 
 for mem in 1 2 3 4; do
-    for i in $(find ../resources/benchmark -type d -name "sat_mem_$mem"); do
+    for i in $(find ../resources/benchmark -type d -name "sat_mem_$mem*"); do
         python create_benchmark.py simple ../../$i ../../sat.txt true --memory $mem
     done
-    for i in $(find ../resources/benchmark -type d -name "unsat_mem_$mem"); do
-        python create_benchmark.py simple ../../$i ../../unsat.txt true --memory $mem
+    for i in $(find ../resources/benchmark -type d -name "unsat_mem_$mem*"); do
+        python create_benchmark.py simple ../../$i ../../unsat.txt false --memory $mem
     done
 done
 
