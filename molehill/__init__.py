@@ -185,24 +185,6 @@ def run(
 
     s.add(constraint.build_constraint(f, variables, variables_in_ranges, family=family))
 
-    # add test z3 constraints
-    # s.add(variables[0] + variables[1] == variables[2])
-    # s.add(variables[0] == 0)
-    # s.add(variables[1] == 0)
-
-    # add literal bitvectors (somehow, this makes the search much faster)
-    for value in range(2**num_bits):
-        bitvector = z3.BitVecVal(value, num_bits)
-        s.add(z3.BitVec(f"useless_const_{value}", num_bits) == bitvector)
-
-    # valid(0,0,...,0)
-    # not valid(1,1,...1,)
-    # s.add(z3.Not(z3.Bool("leaf_0")))
-    # s.add(z3.Not(f(*[z3.BitVecVal(0, num_bits)] + [z3.BitVecVal(0, num_bits) for _ in range(family.num_holes - 1)])))
-    # s.add(z3.Not(f(*[z3.BitVecVal(0, num_bits)] + [z3.BitVecVal(1, num_bits) for _ in range(family.num_holes - 1)])))
-    # s.add(z3.Not(f(*[z3.BitVecVal(0, num_bits)] + [z3.BitVecVal(2, num_bits) for _ in range(family.num_holes - 1)])))
-    # s.add(z3.Not(f(*[z3.BitVecVal(0, num_bits)] + [z3.BitVecVal(3, num_bits) for _ in range(family.num_holes - 1)])))
-
     p = Mole(
         s,
         variables,

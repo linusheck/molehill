@@ -2,8 +2,11 @@
 format_version: "2.0"
 
 input_files:
-- ../../../resources/benchmark/pomdps-old/unsat_samplerocks
+- ../../../resources/benchmark/pomdps/unsat_mem_1_4x5x2-95
 
 properties:
   - property_file: ../../unsat.txt
     expected_verdict: false
+
+options:
+    memory: 1

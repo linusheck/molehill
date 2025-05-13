@@ -42,11 +42,20 @@ class ExistsForallConstraint(Constraint):
         if len(forall_variables) == 0:
             raise ValueError("No variables found with the given pattern.")
         var_in_range_statement = variables_in_ranges(variables)
-        constraint = z3.And(
+        constraints = [
             var_in_range_statement,
             z3.ForAll(
                 *[forall_variables],
                 z3.Implies(var_in_range_statement, function(*variables))
-            ),
-        )
-        return constraint
+            )
+        ]
+        num_bits = max([x.size() for x in variables])
+
+        # add literal bitvectors (MBQI only takes values from the other
+        # constraints. we need to put them into scope here as there are no other
+        # constraints)
+        for value in range(2**num_bits):
+            bitvector = z3.BitVecVal(value, num_bits)
+            constraints.append(z3.BitVec(f"useless_const_{value}", num_bits) == bitvector)
+
+        return z3.And(*constraints)
