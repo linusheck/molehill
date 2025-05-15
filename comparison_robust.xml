@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="tools.synthesis" timelimit="1s" hardtimelimit="1s" memlimit="16GB">
+<benchmark tool="tools.synthesis" timelimit="3000s" hardtimelimit="3000s" memlimit="16GB">
 
   <tasks name="SAT Benchmarks">
     <include>benchmarks/files/robust/*.yml</include>
@@ -23,7 +23,7 @@
         <option>existsforall</option>
     </rundefinition>
 
-    <rundefinition name="PAYNT 1-by-1">
+    <rundefinition name="PAYNT-1-by-1">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>robust_policy.py</option>
@@ -33,7 +33,7 @@
         <option>1000000000</option>
     </rundefinition>
 
-    <rundefinition name="PAYNT AR-MDP-Eval">
+    <rundefinition name="PAYNT-AR-MDP-Eval">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>robust_policy.py</option>
