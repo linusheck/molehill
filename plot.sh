@@ -21,6 +21,7 @@ QUANTILE_FILES=$(ls *.quantile.csv | tr '\n' ', ' | sed 's/,$//')
 
 echo "QUANTILE_NAMES: $QUANTILE_NAMES"
 echo "QUANTILE_FILES: $QUANTILE_FILES"
+echo sed -e "s|FILES|$QUANTILE_FILES|" -e "s|NAMES|$QUANTILE_NAMES|" ../../misc/plots/quantile.tex > quantile_processed.tex
 sed -e "s|FILES|$QUANTILE_FILES|" -e "s|NAMES|$QUANTILE_NAMES|" ../../misc/plots/quantile.tex > quantile_processed.tex
 pdflatex quantile_processed.tex
 

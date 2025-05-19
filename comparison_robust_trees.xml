@@ -11,7 +11,7 @@
     </tasks>
 
     <!-- Define executors -->
-    <rundefinition name="Smallest Tree">
+    <rundefinition name="Smallest-Tree">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>misc/find_smallest_tree.py</option>

@@ -52,6 +52,6 @@ if args.memory is None:
 else:
     new_template = template + f"""
 options:
-memory: {args.memory}
+    memory: {args.memory}
 """
     write(f"{input_file.split('/')[-1].split('.')[0]}_{args.memory}", new_template)
