@@ -1,0 +1,9 @@
+digraph model {
+	0 [ label = "0: {init}" ];
+	1 [ label = "1: {}" ];
+	2 [ label = "2: {}" ];
+	0 -> 1 [ label= "0.5" ];
+	0 -> 2 [ label= "0.5" ];
+	1 -> 0 [ label= "1" ];
+	2 -> 2 [ label= "1" ];
+}

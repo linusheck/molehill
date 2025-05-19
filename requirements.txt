@@ -21,3 +21,4 @@ z3-solver==4.13.3.0
 setuptools==70.0.0
 mercury-settrie==1.4.8
 pytest==8.3.4
+dot2tex==2.11.3

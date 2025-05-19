@@ -1,0 +1,782 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 4000 4000" preserveAspectRatio="xMidYMid meet">
+<g transform="translate(263.5,432.0)">
+     viewBox="0.00 0.00 527.16 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(15.1736 15.1736) rotate(0) translate(4 52.94)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-52.94 30.74,-52.94 30.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-41.4" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;0 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.25,-43.14C15.14,-51.26 26.74,-50.68 26.74,-41.4 26.74,-36.03 22.86,-33.58 18.26,-34.03"/>
+<polygon fill="black" stroke="black" points="16.57,-30.96 9.57,-38.92 20,-37.06 16.57,-30.96"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-1.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-39.98C0.76,-37.41 -0.77,-23.63 0.77,-13.59"/>
+<polygon fill="black" stroke="black" points="3.92,-15.11 4.83,-4.55 -2.46,-12.24 3.92,-15.11"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-3.17C13.12,-5.62 14.68,-19.65 13.09,-29.76"/>
+<polygon fill="black" stroke="black" points="10.03,-28.04 9.14,-38.6 16.42,-30.9 10.03,-28.04"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(1239.0,432.0)">
+     viewBox="0.00 0.00 478.45 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(13.7713 13.7713) rotate(0) translate(4 58.74)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-58.74 30.74,-58.74 30.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;0 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.25,-48.94C15.14,-57.06 26.74,-56.48 26.74,-47.2 26.74,-41.83 22.86,-39.37 18.26,-39.83"/>
+<polygon fill="black" stroke="black" points="16.57,-36.76 9.57,-44.72 20,-42.86 16.57,-36.76"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-45.78C0.76,-43.2 -0.77,-29.43 0.77,-19.39"/>
+<polygon fill="black" stroke="black" points="3.92,-20.91 4.83,-10.35 -2.46,-18.04 3.92,-20.91"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-8.97C13.12,-11.42 14.68,-25.44 13.09,-35.56"/>
+<polygon fill="black" stroke="black" points="10.03,-33.84 9.14,-44.39 16.42,-36.69 10.03,-33.84"/>
+</g>
+<!-- 1&#45;&gt;1 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M8.25,-9.34C15.14,-17.46 26.74,-16.88 26.74,-7.6 26.74,-2.23 22.86,0.23 18.26,-0.23"/>
+<polygon fill="black" stroke="black" points="16.57,2.84 9.57,-5.12 20,-3.26 16.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(2210.0,432.0)">
+     viewBox="0.00 0.00 419.95 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(8.44253 8.44253) rotate(0) translate(4 98.34)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-98.34 45.74,-98.34 45.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-86.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;0 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.25,-88.54C15.14,-96.66 26.74,-96.08 26.74,-86.8 26.74,-81.43 22.86,-78.97 18.26,-79.43"/>
+<polygon fill="black" stroke="black" points="16.57,-76.36 9.57,-84.32 20,-82.46 16.57,-76.36"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-85.38C0.76,-82.8 -0.77,-69.03 0.77,-58.99"/>
+<polygon fill="black" stroke="black" points="3.92,-60.51 4.83,-49.95 -2.46,-57.64 3.92,-60.51"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-48.57C13.12,-51.02 14.68,-65.04 13.09,-75.16"/>
+<polygon fill="black" stroke="black" points="10.03,-73.44 9.14,-83.99 16.42,-76.29 10.03,-73.44"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="21.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1&#45;&gt;2 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.31,-45.27C8.7,-41.78 13.72,-29.21 17.49,-19.75"/>
+<polygon fill="black" stroke="black" points="20.62,-21.36 21.07,-10.77 14.12,-18.76 20.62,-21.36"/>
+</g>
+<!-- 2&#45;&gt;0 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M21.91,-9.87C21.74,-14.88 20.94,-33.78 17.94,-49 16.28,-57.43 13.5,-66.7 11.15,-73.83"/>
+<polygon fill="black" stroke="black" points="7.86,-72.65 7.86,-83.24 14.47,-74.96 7.86,-72.65"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge6" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M23.25,-9.34C30.14,-17.46 41.74,-16.88 41.74,-7.6 41.74,-2.23 37.86,0.23 33.26,-0.23"/>
+<polygon fill="black" stroke="black" points="31.57,2.84 24.57,-5.12 35,-3.26 31.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(3146.5,432.0)">
+     viewBox="0.00 0.00 293.31 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(8.44253 8.44253) rotate(0) translate(4 98.34)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-98.34 30.74,-98.34 30.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-86.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;0 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.25,-88.54C15.14,-96.66 26.74,-96.08 26.74,-86.8 26.74,-81.43 22.86,-78.97 18.26,-79.43"/>
+<polygon fill="black" stroke="black" points="16.57,-76.36 9.57,-84.32 20,-82.46 16.57,-76.36"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-85.38C0.76,-82.8 -0.77,-69.03 0.77,-58.99"/>
+<polygon fill="black" stroke="black" points="3.92,-60.51 4.83,-49.95 -2.46,-57.64 3.92,-60.51"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-48.57C13.12,-51.02 14.68,-65.04 13.09,-75.16"/>
+<polygon fill="black" stroke="black" points="10.03,-73.44 9.14,-83.99 16.42,-76.29 10.03,-73.44"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1&#45;&gt;2 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M6.94,-44.95C6.94,-41.29 6.94,-30.31 6.94,-21.37"/>
+<polygon fill="black" stroke="black" points="10.44,-21.41 6.94,-11.41 3.44,-21.41 10.44,-21.41"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M8.25,-9.34C15.14,-17.46 26.74,-16.88 26.74,-7.6 26.74,-2.23 22.86,0.23 18.26,-0.23"/>
+<polygon fill="black" stroke="black" points="16.57,2.84 9.57,-5.12 20,-3.26 16.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(184.5,1432.0)">
+     viewBox="0.00 0.00 369.43 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(16.875 16.875) rotate(0) translate(4 47.2)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-47.2 17.89,-47.2 17.89,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-41.4" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-1.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-39.98C0.76,-37.41 -0.77,-23.63 0.77,-13.59"/>
+<polygon fill="black" stroke="black" points="3.92,-15.11 4.83,-4.55 -2.46,-12.24 3.92,-15.11"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge2" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-3.17C13.12,-5.62 14.68,-19.65 13.09,-29.76"/>
+<polygon fill="black" stroke="black" points="10.03,-28.04 9.14,-38.6 16.42,-30.9 10.03,-28.04"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(1263.5,1432.0)">
+     viewBox="0.00 0.00 526.64 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(15.1584 15.1584) rotate(0) translate(4 53)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-53 30.74,-53 30.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-45.78C0.76,-43.2 -0.77,-29.43 0.77,-19.39"/>
+<polygon fill="black" stroke="black" points="3.92,-20.91 4.83,-10.35 -2.46,-18.04 3.92,-20.91"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge2" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-8.97C13.12,-11.42 14.68,-25.44 13.09,-35.56"/>
+<polygon fill="black" stroke="black" points="10.03,-33.84 9.14,-44.39 16.42,-36.69 10.03,-33.84"/>
+</g>
+<!-- 1&#45;&gt;1 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M8.25,-9.34C15.14,-17.46 26.74,-16.88 26.74,-7.6 26.74,-2.23 22.86,0.23 18.26,-0.23"/>
+<polygon fill="black" stroke="black" points="16.57,2.84 9.57,-5.12 20,-3.26 16.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(2155.5,1432.0)">
+     viewBox="0.00 0.00 310.74 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(8.94429 8.94429) rotate(0) translate(4 92.6)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-92.6 30.74,-92.6 30.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-86.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-85.38C0.76,-82.8 -0.77,-69.03 0.77,-58.99"/>
+<polygon fill="black" stroke="black" points="3.92,-60.51 4.83,-49.95 -2.46,-57.64 3.92,-60.51"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge2" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-48.57C13.12,-51.02 14.68,-65.04 13.09,-75.16"/>
+<polygon fill="black" stroke="black" points="10.03,-73.44 9.14,-83.99 16.42,-76.29 10.03,-73.44"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1&#45;&gt;2 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M5.36,-45.78C0.76,-43.2 -0.77,-29.43 0.77,-19.39"/>
+<polygon fill="black" stroke="black" points="3.92,-20.91 4.83,-10.35 -2.46,-18.04 3.92,-20.91"/>
+</g>
+<!-- 2&#45;&gt;1 -->
+<g id="edge4" class="edge">
+<title>2&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M8.43,-8.97C13.12,-11.42 14.68,-25.44 13.09,-35.56"/>
+<polygon fill="black" stroke="black" points="10.03,-33.84 9.14,-44.39 16.42,-36.69 10.03,-33.84"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M8.25,-9.34C15.14,-17.46 26.74,-16.88 26.74,-7.6 26.74,-2.23 22.86,0.23 18.26,-0.23"/>
+<polygon fill="black" stroke="black" points="16.57,2.84 9.57,-5.12 20,-3.26 16.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(3155.5,1432.0)">
+     viewBox="0.00 0.00 310.74 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(8.94429 8.94429) rotate(0) translate(4 92.6)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-92.6 30.74,-92.6 30.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-86.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-85.38C0.76,-82.8 -0.77,-69.03 0.77,-58.99"/>
+<polygon fill="black" stroke="black" points="3.92,-60.51 4.83,-49.95 -2.46,-57.64 3.92,-60.51"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge2" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-48.57C13.12,-51.02 14.68,-65.04 13.09,-75.16"/>
+<polygon fill="black" stroke="black" points="10.03,-73.44 9.14,-83.99 16.42,-76.29 10.03,-73.44"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1&#45;&gt;2 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M6.94,-44.95C6.94,-41.29 6.94,-30.31 6.94,-21.37"/>
+<polygon fill="black" stroke="black" points="10.44,-21.41 6.94,-11.41 3.44,-21.41 10.44,-21.41"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge4" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M8.25,-9.34C15.14,-17.46 26.74,-16.88 26.74,-7.6 26.74,-2.23 22.86,0.23 18.26,-0.23"/>
+<polygon fill="black" stroke="black" points="16.57,2.84 9.57,-5.12 20,-3.26 16.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(430.0,2432.0)">
+     viewBox="0.00 0.00 860.12 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(15.1584 15.1584) rotate(0) translate(4 53)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-53 52.74,-53 52.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-45.78C0.76,-43.2 -0.77,-29.43 0.77,-19.39"/>
+<polygon fill="black" stroke="black" points="3.92,-20.91 4.83,-10.35 -2.46,-18.04 3.92,-20.91"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="28.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.49,-45.27C9.57,-41.7 17.23,-28.62 22.8,-19.09"/>
+<polygon fill="black" stroke="black" points="25.7,-21.07 27.73,-10.67 19.66,-17.54 25.7,-21.07"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-8.97C13.12,-11.42 14.68,-25.44 13.09,-35.56"/>
+<polygon fill="black" stroke="black" points="10.03,-33.84 9.14,-44.39 16.42,-36.69 10.03,-33.84"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge4" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M30.25,-9.34C37.14,-17.46 48.74,-16.88 48.74,-7.6 48.74,-2.23 44.86,0.23 40.26,-0.23"/>
+<polygon fill="black" stroke="black" points="38.57,2.84 31.57,-5.12 42,-3.26 38.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(1432.0,2329.5)">
+     viewBox="0.00 0.00 864.00 658.88" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(11.5597 11.5597) rotate(0) translate(4 53)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-53 70.74,-53 70.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-45.78C0.76,-43.2 -0.77,-29.43 0.77,-19.39"/>
+<polygon fill="black" stroke="black" points="3.92,-20.91 4.83,-10.35 -2.46,-18.04 3.92,-20.91"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="46.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.93,-45.27C11.99,-41.46 27.61,-26.77 37.82,-17.18"/>
+<polygon fill="black" stroke="black" points="40.13,-19.8 45.02,-10.4 35.34,-14.7 40.13,-19.8"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-8.97C13.12,-11.42 14.68,-25.44 13.09,-35.56"/>
+<polygon fill="black" stroke="black" points="10.03,-33.84 9.14,-44.39 16.42,-36.69 10.03,-33.84"/>
+</g>
+<!-- 1&#45;&gt;1 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M8.25,-9.34C15.14,-17.46 26.74,-16.88 26.74,-7.6 26.74,-2.23 22.86,0.23 18.26,-0.23"/>
+<polygon fill="black" stroke="black" points="16.57,2.84 9.57,-5.12 20,-3.26 16.57,2.84"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M48.25,-9.34C55.14,-17.46 66.74,-16.88 66.74,-7.6 66.74,-2.23 62.86,0.23 58.26,-0.23"/>
+<polygon fill="black" stroke="black" points="56.57,2.84 49.57,-5.12 60,-3.26 56.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(2222.5,2432.0)">
+     viewBox="0.00 0.00 444.91 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(8.94429 8.94429) rotate(0) translate(4 92.6)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-92.6 45.74,-92.6 45.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-86.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-85.38C0.76,-82.8 -0.77,-69.03 0.77,-58.99"/>
+<polygon fill="black" stroke="black" points="3.92,-60.51 4.83,-49.95 -2.46,-57.64 3.92,-60.51"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="21.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.37,-84.67C9.02,-80.22 15.11,-63.39 17.94,-49 19.75,-39.85 20.75,-29.36 21.31,-21.36"/>
+<polygon fill="black" stroke="black" points="24.8,-21.55 21.83,-11.38 17.81,-21.18 24.8,-21.55"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-48.57C13.12,-51.02 14.68,-65.04 13.09,-75.16"/>
+<polygon fill="black" stroke="black" points="10.03,-73.44 9.14,-83.99 16.42,-76.29 10.03,-73.44"/>
+</g>
+<!-- 1&#45;&gt;2 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.31,-45.27C8.7,-41.78 13.72,-29.21 17.49,-19.75"/>
+<polygon fill="black" stroke="black" points="20.62,-21.36 21.07,-10.77 14.12,-18.76 20.62,-21.36"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M23.25,-9.34C30.14,-17.46 41.74,-16.88 41.74,-7.6 41.74,-2.23 37.86,0.23 33.26,-0.23"/>
+<polygon fill="black" stroke="black" points="31.57,2.84 24.57,-5.12 35,-3.26 31.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(3254.0,2432.0)">
+     viewBox="0.00 0.00 507.52 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(8.94429 8.94429) rotate(0) translate(4 92.6)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-92.6 52.74,-92.6 52.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-86.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-85.38C0.76,-82.8 -0.77,-69.03 0.77,-58.99"/>
+<polygon fill="black" stroke="black" points="3.92,-60.51 4.83,-49.95 -2.46,-57.64 3.92,-60.51"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="28.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.49,-84.87C9.57,-81.3 17.23,-68.22 22.8,-58.69"/>
+<polygon fill="black" stroke="black" points="25.7,-60.67 27.73,-50.27 19.66,-57.14 25.7,-60.67"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-48.57C13.12,-51.02 14.68,-65.04 13.09,-75.16"/>
+<polygon fill="black" stroke="black" points="10.03,-73.44 9.14,-83.99 16.42,-76.29 10.03,-73.44"/>
+</g>
+<!-- 3 -->
+<g id="node4" class="node">
+<title>3</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1&#45;&gt;3 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;3</title>
+<path fill="none" stroke="black" d="M6.94,-44.95C6.94,-41.29 6.94,-30.31 6.94,-21.37"/>
+<polygon fill="black" stroke="black" points="10.44,-21.41 6.94,-11.41 3.44,-21.41 10.44,-21.41"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M30.25,-48.94C37.14,-57.06 48.74,-56.48 48.74,-47.2 48.74,-41.83 44.86,-39.37 40.26,-39.83"/>
+<polygon fill="black" stroke="black" points="38.57,-36.76 31.57,-44.72 42,-42.86 38.57,-36.76"/>
+</g>
+<!-- 3&#45;&gt;3 -->
+<g id="edge6" class="edge">
+<title>3&#45;&gt;3</title>
+<path fill="none" stroke="black" d="M8.25,-9.34C15.14,-17.46 26.74,-16.88 26.74,-7.6 26.74,-2.23 22.86,0.23 18.26,-0.23"/>
+<polygon fill="black" stroke="black" points="16.57,2.84 9.57,-5.12 20,-3.26 16.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(430.0,3432.0)">
+     viewBox="0.00 0.00 860.12 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(15.1584 15.1584) rotate(0) translate(4 53)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-53 52.74,-53 52.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-45.78C0.76,-43.2 -0.77,-29.43 0.77,-19.39"/>
+<polygon fill="black" stroke="black" points="3.92,-20.91 4.83,-10.35 -2.46,-18.04 3.92,-20.91"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="28.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.49,-45.27C9.57,-41.7 17.23,-28.62 22.8,-19.09"/>
+<polygon fill="black" stroke="black" points="25.7,-21.07 27.73,-10.67 19.66,-17.54 25.7,-21.07"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-8.97C13.12,-11.42 14.68,-25.44 13.09,-35.56"/>
+<polygon fill="black" stroke="black" points="10.03,-33.84 9.14,-44.39 16.42,-36.69 10.03,-33.84"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge4" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M30.25,-9.34C37.14,-17.46 48.74,-16.88 48.74,-7.6 48.74,-2.23 44.86,0.23 40.26,-0.23"/>
+<polygon fill="black" stroke="black" points="38.57,2.84 31.57,-5.12 42,-3.26 38.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(1432.0,3329.5)">
+     viewBox="0.00 0.00 864.00 658.88" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(11.5597 11.5597) rotate(0) translate(4 53)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-53 70.74,-53 70.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-45.78C0.76,-43.2 -0.77,-29.43 0.77,-19.39"/>
+<polygon fill="black" stroke="black" points="3.92,-20.91 4.83,-10.35 -2.46,-18.04 3.92,-20.91"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="46.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.93,-45.27C11.99,-41.46 27.61,-26.77 37.82,-17.18"/>
+<polygon fill="black" stroke="black" points="40.13,-19.8 45.02,-10.4 35.34,-14.7 40.13,-19.8"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-8.97C13.12,-11.42 14.68,-25.44 13.09,-35.56"/>
+<polygon fill="black" stroke="black" points="10.03,-33.84 9.14,-44.39 16.42,-36.69 10.03,-33.84"/>
+</g>
+<!-- 1&#45;&gt;1 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M8.25,-9.34C15.14,-17.46 26.74,-16.88 26.74,-7.6 26.74,-2.23 22.86,0.23 18.26,-0.23"/>
+<polygon fill="black" stroke="black" points="16.57,2.84 9.57,-5.12 20,-3.26 16.57,2.84"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M48.25,-9.34C55.14,-17.46 66.74,-16.88 66.74,-7.6 66.74,-2.23 62.86,0.23 58.26,-0.23"/>
+<polygon fill="black" stroke="black" points="56.57,2.84 49.57,-5.12 60,-3.26 56.57,2.84"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(2170.0,3432.0)">
+     viewBox="0.00 0.00 340.02 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(6.34371 6.34371) rotate(0) translate(4 132.2)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-132.2 49.6,-132.2 49.6,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="10.8" cy="-126.4" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="10.8" cy="-86.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M9.22,-124.98C4.62,-122.4 3.09,-108.63 4.63,-98.59"/>
+<polygon fill="black" stroke="black" points="7.78,-100.11 8.69,-89.55 1.4,-97.24 7.78,-100.11"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="25.8" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M11.35,-124.29C14.79,-117.31 33.04,-78.54 30.8,-45.4 30.25,-37.22 29.01,-28.08 27.9,-20.96"/>
+<polygon fill="black" stroke="black" points="31.38,-20.51 26.26,-11.23 24.47,-21.67 31.38,-20.51"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M12.29,-88.17C16.98,-90.62 18.53,-104.64 16.95,-114.76"/>
+<polygon fill="black" stroke="black" points="13.89,-113.04 13,-123.59 20.28,-115.89 13.89,-113.04"/>
+</g>
+<!-- 3 -->
+<g id="node4" class="node">
+<title>3</title>
+<ellipse fill="black" stroke="black" cx="1.8" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1&#45;&gt;3 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;3</title>
+<path fill="none" stroke="black" d="M10.5,-84.55C9.59,-80.76 6.81,-69.12 4.63,-60.02"/>
+<polygon fill="black" stroke="black" points="8.06,-59.32 2.33,-50.41 1.25,-60.95 8.06,-59.32"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M27.11,-9.34C34,-17.46 45.6,-16.88 45.6,-7.6 45.6,-2.23 41.72,0.23 37.12,-0.23"/>
+<polygon fill="black" stroke="black" points="35.43,2.84 28.43,-5.12 38.86,-3.26 35.43,2.84"/>
+</g>
+<!-- 3&#45;&gt;2 -->
+<g id="edge6" class="edge">
+<title>3&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M2.39,-45.27C4.7,-41.66 13.22,-28.31 19.31,-18.76"/>
+<polygon fill="black" stroke="black" points="22.07,-20.95 24.5,-10.64 16.16,-17.19 22.07,-20.95"/>
+</g>
+<!-- 3&#45;&gt;3 -->
+<g id="edge7" class="edge">
+<title>3&#45;&gt;3</title>
+<path fill="none" stroke="black" d="M3.11,-48.94C10,-57.06 21.6,-56.48 21.6,-47.2 21.6,-41.83 17.72,-39.37 13.12,-39.83"/>
+<polygon fill="black" stroke="black" points="11.43,-36.76 4.43,-44.72 14.86,-42.86 11.43,-36.76"/>
+</g>
+</g>
+    </g>
+    <g transform="translate(3222.5,3432.0)">
+     viewBox="0.00 0.00 444.91 864.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(8.94429 8.94429) rotate(0) translate(4 92.6)">
+<title>model</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-92.6 45.74,-92.6 45.74,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-86.8" rx="1.8" ry="1.8"/>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<ellipse fill="black" stroke="black" cx="6.94" cy="-47.2" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M5.36,-85.38C0.76,-82.8 -0.77,-69.03 0.77,-58.99"/>
+<polygon fill="black" stroke="black" points="3.92,-60.51 4.83,-49.95 -2.46,-57.64 3.92,-60.51"/>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<ellipse fill="black" stroke="black" cx="21.94" cy="-7.6" rx="1.8" ry="1.8"/>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>0&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.37,-84.67C9.02,-80.22 15.11,-63.39 17.94,-49 19.75,-39.85 20.75,-29.36 21.31,-21.36"/>
+<polygon fill="black" stroke="black" points="24.8,-21.55 21.83,-11.38 17.81,-21.18 24.8,-21.55"/>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>1&#45;&gt;0</title>
+<path fill="none" stroke="black" d="M8.43,-48.57C13.12,-51.02 14.68,-65.04 13.09,-75.16"/>
+<polygon fill="black" stroke="black" points="10.03,-73.44 9.14,-83.99 16.42,-76.29 10.03,-73.44"/>
+</g>
+<!-- 1&#45;&gt;2 -->
+<g id="edge4" class="edge">
+<title>1&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M7.31,-45.27C8.7,-41.78 13.72,-29.21 17.49,-19.75"/>
+<polygon fill="black" stroke="black" points="20.62,-21.36 21.07,-10.77 14.12,-18.76 20.62,-21.36"/>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="edge5" class="edge">
+<title>2&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M23.25,-9.34C30.14,-17.46 41.74,-16.88 41.74,-7.6 41.74,-2.23 37.86,0.23 33.26,-0.23"/>
+<polygon fill="black" stroke="black" points="31.57,2.84 24.57,-5.12 35,-3.26 31.57,2.84"/>
+</g>
+</g>
+    </g>
+    </svg>

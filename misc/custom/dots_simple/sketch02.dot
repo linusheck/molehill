@@ -1,0 +1,12 @@
+digraph model {
+	0 [shape=point,label=""];
+	1 [shape=point,label=""];
+	2 [shape=point,label=""];
+	0 -> 0 [shape=point,label=""];
+	0 -> 1 [shape=point,label=""];
+	1 -> 0 [shape=point,label=""];
+	1 -> 2 [shape=point,label=""];
+	2 -> 0 [shape=point,label=""];
+	2 -> 2 [shape=point,label=""];
+}
+
