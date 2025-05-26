@@ -1093,7 +1093,8 @@ def family_selection(quotient):
 @click.option("--timeout", default=300, show_default=True, help="timeout for the synthesis process")
 @click.option("--game-abstraction", is_flag=True, default=False, help="show game abstraction heuristic result")
 @click.option("--profiling", is_flag=True, default=False, help="run profiling")
-def main(project, sketch, props, synthesizer, timeout, game_abstraction, profiling):
+@click.option("--fsc-memory-size", default=1, type=int, show_default=True, help="memory size for FSC")
+def main(project, sketch, props, synthesizer, timeout, game_abstraction, profiling, fsc_memory_size):
 
     if profiling:
         profiler = cProfile.Profile()
@@ -1101,6 +1102,7 @@ def main(project, sketch, props, synthesizer, timeout, game_abstraction, profili
 
     model_file = os.path.join(project, sketch)
     props_file = os.path.join(project, props)
+    paynt.quotient.mdp_family.MdpFamilyQuotient.initial_memory_size = fsc_memory_size
     quotient = paynt.parser.sketch.Sketch.load_sketch(model_file, props_file)
     assert isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient)
 

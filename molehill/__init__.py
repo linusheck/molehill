@@ -27,6 +27,7 @@ def run(
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     paynt.quotient.pomdp.PomdpQuotient.initial_memory_size = fsc_memory_size
+    paynt.quotient.mdp_family.MdpFamilyQuotient.initial_memory_size = fsc_memory_size
     # TODO Exact mode: why does this not give me an exact MDP
     quotient = paynt.parser.sketch.Sketch.load_sketch(
         sketch_path, properties_path, use_exact=exact
