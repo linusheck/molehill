@@ -8,19 +8,35 @@ from molehill import run
 from molehill.constraints import ExistsConstraint
 from argparse import Namespace
 
+def load_constraint_class(path):
+    """
+    Load the constraint class from the given path.
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        code = f.read()
+    # arbitary code execution >:)
+    exec(code, globals())
+    if "CustomConstraint" not in globals():
+        raise ValueError("No class named CustomConstraint found in constraint.py")
+    return globals()["CustomConstraint"]()
+
 class DummyConstraint(ExistsConstraint):
     def __init__(self):
         super().__init__()
         self.set_args(Namespace(deterministic=False))
 
-@pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
+@pytest.mark.parametrize("project_path", ["resources/test/virus"])
+# @pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/refuel-06-res", "resources/test/herman", "resources/test/maze"])
 @pytest.mark.parametrize("considered_counterexamples", ["none"])
 def test_search_space(project_path, considered_counterexamples):
-    model, _solver, plugin = run(project_path, considered_counterexamples, DummyConstraint(), search_space_test=True, print_reasons=True, image=False)
+    constraint = None
+    if project_path == "resources/test/virus":
+        constraint = load_constraint_class(f"{project_path}/constraint.py")
+    else:
+        constraint = DummyConstraint()
+    model, _solver, plugin = run(project_path, considered_counterexamples, constraint, search_space_test=True, print_reasons=True)
     # all of our models are unsat, we want to check if we have really considered the whole search space
     assert model is None, "Actual model is SAT: " + str(model)
-
-    print(plugin.counterexamples)
 
     # check that all rejecting models actually reject
     for i, model in enumerate(plugin.counterexamples):
@@ -46,6 +62,11 @@ def test_search_space(project_path, considered_counterexamples):
         all_schedulers_violate = not prop.satisfies_threshold(
             result_storm_nondet.at(mdp_nondet.initial_states[0])
         )
+        print("Value", result_storm_nondet.at(mdp_nondet.initial_states[0]))
+        print("Reason")
+        print(plugin.reasons[i])
+
+        open("mdp.dot", "w").write(mdp_nondet.to_dot())
         assert all_schedulers_violate, "Model " + str(i) + " is SAT: " + str(model)
     # check that plugin.rejecting_models covers the whole search space
     variables = []

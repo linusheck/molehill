@@ -6,7 +6,7 @@ from stormpy import check_model_sparse
 from stormpy.pycarl.gmp import Rational
 
 
-def check_model(mdp, prop, hint, precision=1e-4):
+def check_model(mdp, prop, hint, precision=1e-6):
     exact_environment = stormpy.core.Environment()
     exact_environment.solver_environment.minmax_solver_environment.precision = Rational(
         precision

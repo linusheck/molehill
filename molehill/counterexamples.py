@@ -49,11 +49,11 @@ def check(
     # Only holes that are reachable are interesting for the CE core. We can
     # immediately "delete" the other ones.
     fixed_holes = [hole for hole in fixed_holes if hole in reachable_hole_order]
-    append_these = [hole for hole in append_these if hole in reachable_hole_order]
     # Every hole that is not fixed is currently abstracted by MDP.
     holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
 
     if remove_optimal_holes:
+        append_these = [hole for hole in append_these if hole in reachable_hole_order]
         optimization_direction = prop.formula.optimality_type
         optimal_holes = matrix_generator.optimal_assignments(
             result.scheduler, result.get_values(), optimization_direction

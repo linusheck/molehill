@@ -1,0 +1,1 @@
+This is the virus benchmark from https://github.com/moves-rwth/dynasty/tree/master/examples/virus.

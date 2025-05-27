@@ -224,10 +224,20 @@ class Mole:
             else:
                 self.mdp_fails_and_wins[0] += 1
         if all_violated:
+            counterexample_names = [
+                self.model_variable_names[i] for i in counterexample
+            ]
+            filtered_partial_model = {
+                name: partial_model[name] for name in counterexample_names
+            }
+            filtered_frozen_partial_model = set(
+                map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items())
+            )
+
             # Push a reason (explain).
             if len(counterexample) < num_fixed:
                 self.reasons.append(
-                    f"{model} counterexample {num_fixed}->{len(counterexample)} ({partial_model})"
+                    f"{model} counterexample {num_fixed}->{len(counterexample)} ({partial_model}->{filtered_partial_model})"
                 )
             else:
                 self.reasons.append(f"{model} reject {num_fixed}")
@@ -251,15 +261,7 @@ class Mole:
                     for c in counterexample
                 )
 
-            counterexample_names = [
-                self.model_variable_names[i] for i in counterexample
-            ]
-            filtered_partial_model = {
-                name: partial_model[name] for name in counterexample_names
-            }
-            filtered_frozen_partial_model = set(
-                map(lambda x: f"{x[0]}={x[1]}", filtered_partial_model.items())
-            )
+            
 
             supersets = self.all_violated_models[int(invert)].supersets(
                 filtered_frozen_partial_model

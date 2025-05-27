@@ -54,7 +54,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
         valid_calls = [
             (x, y) for x, y in self.partial_model.items() if isinstance(y, bool)
         ]
-
         for name, value in valid_calls:
             backwards_variables = {}
             model_for_checker = {}

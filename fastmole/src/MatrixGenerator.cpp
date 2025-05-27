@@ -125,7 +125,7 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
     // If we are given a fixed set of reachable states, we can skip the BFS
     // Otherwise, perform a BFS to find the reachable states
     if (!reachableStatesFixed) {
-        std::vector<uint64_t> bfsOrder(decisionMatrix.getRowCount());
+        std::vector<uint64_t> bfsOrder;
         std::queue<uint64_t> statesToProcess;
         for (auto const &initialState : this->quotient.getInitialStates()) {
             reachableStates.set(initialState, true);

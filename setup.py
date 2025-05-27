@@ -26,16 +26,18 @@ class CMakeBuild(build_ext):
         # Build stormpy
         stormpy_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/stormpy"))
         self.update_git_repo("https://github.com/moves-rwth/stormpy.git", stormpy_build, "master")
-        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=stormpy_build)
+        env = os.environ.copy()
+        # Newer CMAKE versions (>4.0) are incompatible with pybind11
+        env["CMAKE_POLICY_VERSION_MINIMUM"] = "3.5"
+        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=stormpy_build, env=env)
 
         pybind_version = subprocess.check_output([sys.executable, "-c", "from stormpy.info._config import stormpy_pybind_version; print(stormpy_pybind_version)"]).decode().strip()
 
         # Build paynt
         paynt_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/paynt"))
-        self.update_git_repo("https://github.com/linusheck/synthesis.git", paynt_build, "private")
-        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=os.path.join(paynt_build))
-        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=os.path.join(paynt_build, "payntbind"))
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "."], cwd=os.path.join(paynt_build, "payntbind"))
+        self.update_git_repo("https://github.com/linusheck/synthesis.git", paynt_build, "fix-pycarl")
+        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=os.path.join(paynt_build), env=env)
+        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=os.path.join(paynt_build, "payntbind"), env=env)
 
         build_temp = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/fastmole"))
         os.makedirs(build_temp, exist_ok=True)
@@ -46,11 +48,11 @@ class CMakeBuild(build_ext):
             f"-DPYBIND_VERSION={pybind_version}",
             "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
             # set mode to release with debug info
-            "-DCMAKE_BUILD_TYPE={}".format("Debug" if debug else "Release"),
+            "-DCMAKE_BUILD_TYPE={}".format("Debug" if debug else "Release")
         ]
 
-        subprocess.check_call(["cmake", ext.sourcedir] + cmake_args, cwd=build_temp)
-        subprocess.check_call(["cmake", "--build", "."], cwd=build_temp)
+        subprocess.check_call(["cmake", ext.sourcedir] + cmake_args, cwd=build_temp, env=env)
+        subprocess.check_call(["cmake", "--build", "."], cwd=build_temp, env=env)
 
 setup(
     name="molehill",
