@@ -147,6 +147,8 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
 
             bool someChoiceIncluded = false;
             for (uint64_t row = rowGroupStartQuotient; row < rowGroupEndQuotient; ++row) {
+                // BFS order is over the rows of the original matrix. We include all choices, also the disabled ones
+                bfsOrder.push_back(row);
                 if (isChoicePossible(abstractedHoles, holeOptions, row)) {
                     someChoiceIncluded = true;
 
@@ -155,8 +157,6 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
                         throw std::runtime_error("Row group start decision out of bounds");
                     }
                     includeRowBitVector.set(rowGroupStartDecision + (row - rowGroupStartQuotient), true);
-                    // BFS order is over the rows of the original matrix
-                    bfsOrder.push_back(row);
 
                     // Successors of this choice are reachable
                     for (auto const &entry : completeTransitionMatrix.getRow(row)) {
@@ -293,7 +293,7 @@ const std::vector<uint64_t> &MatrixGenerator<ValueType>::getCurrentBFSOrder() co
 
 template<typename ValueType>
 std::pair<std::vector<uint64_t>, std::vector<uint64_t>> MatrixGenerator<ValueType>::holeOrder(const std::vector<uint64_t> &bfsOrder,
-                                                                                               const std::set<uint64_t> &possibleHoles) {
+                                                                                              const std::set<uint64_t> &possibleHoles) {
     std::vector<uint64_t> order;
     std::unordered_set<uint64_t> seen;
 

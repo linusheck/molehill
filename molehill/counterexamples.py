@@ -34,7 +34,7 @@ def check(
 
     all_schedulers_violate_full, result = check_model(mdp, prop, None)
     if not all_schedulers_violate_full:
-        # TODO fix
+        # Optionally, we can check if the scheduler is consistent (not implemented).
         # sched_consistent_result = matrix_generator.is_scheduler_consistent(result.scheduler)
         # if sched_consistent_result is not None:
         #     return CECheckResult(False, None, None, result, sched_consistent_result)
@@ -53,6 +53,7 @@ def check(
     holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
 
     if remove_optimal_holes:
+        assert False, "Not tested."
         append_these = [hole for hole in append_these if hole in reachable_hole_order]
         optimization_direction = prop.formula.optimality_type
         optimal_holes = matrix_generator.optimal_assignments(
@@ -63,6 +64,7 @@ def check(
                 fixed_holes.remove(h)
 
     if all_schedulers_violate_full and compute_counterexample:
+        assert False, "Not tested."
         # We abstract in the order of which holes we saw first, which holes we saw second, etc...
 
         def check_ce_candidate(ith_hole, abstracted_holes, hint=None):
