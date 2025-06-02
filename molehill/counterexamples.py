@@ -17,10 +17,11 @@ class CECheckResult:
 def check(
     matrix_generator,
     family,
-    prop,
+    spec,
     compute_counterexample=True,
     remove_optimal_holes=True,
 ):
+    prop = spec.negate().all_properties()[0]
     # These are the options for each hole.
     hole_options = [
         family.family.holeOptionsMask(hole) for hole in range(family.num_holes)

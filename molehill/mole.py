@@ -187,9 +187,9 @@ class Mole:
                 new_family.hole_set_options(hole, [partial_model[var]])
 
         # Prop is always rechability, even if our input was until (thanks paynt :)).
-        prop = self.quotient.specification.all_properties()[0]
+        prop = self.quotient.specification
         if invert:
-            prop = self.quotient.specification.negate().all_properties()[0]
+            prop = self.quotient.specification.negate()
 
         # print("Check", new_family, prop)
 

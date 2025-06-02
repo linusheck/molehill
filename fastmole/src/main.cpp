@@ -66,6 +66,8 @@ PYBIND11_MODULE(fastmole, m) {
         .def("hole_order", &MatrixGenerator<storm::RationalNumber>::holeOrder, py::arg("bfs_order"), py::arg("possible_holes"), "Get hole order")
         .def("is_scheduler_consistent", &MatrixGenerator<storm::RationalNumber>::isSchedulerConsistent, py::arg("scheduler"), "Is this scheduler consistent?")
         .def("optimal_assignments", &MatrixGenerator<storm::RationalNumber>::optimalAssignments, py::arg("scheduler"), py::arg("values"), py::arg("optimization_direction"), "Which holes are already optimal");
+    
+    
 
     // m.def("hint_convert", &hintConvert<double>, py::arg("result"), py::arg("old_reachable_states"), py::arg("new_reachable_states"), "Convert hint for double");
     // m.def("hint_convert", &hintConvert<storm::RationalNumber>, py::arg("result"), py::arg("old_reachable_states"), py::arg("new_reachable_states"), "Convert hint for RationalNumber");
@@ -74,4 +76,6 @@ PYBIND11_MODULE(fastmole, m) {
     // m.def("set_end_components_true", &setEndComponentsTrue<storm::RationalNumber>, py::arg("hint"), "Set end components true for RationalNumber");
 
     m.def("intersect_bitvectors", &intersect, py::arg("a"), py::arg("b"), "Intersect bitvectors");
+
+    m.def("set_max_iterations", &setMaxIterations, py::arg("env"), py::arg("value"), "Set maximal number of iterations");
 }
