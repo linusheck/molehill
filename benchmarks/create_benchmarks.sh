@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -rf files/*
+
 # Simple Benchmarks
 
 # find all sat benchmarks without memory

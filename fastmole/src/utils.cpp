@@ -82,3 +82,7 @@ storm::storage::BitVector intersect(const storm::storage::BitVector &a, const st
     }
     return result;
 }
+
+void setMaxIterations(storm::MinMaxSolverEnvironment &env, uint64_t maxIterations) {
+    env.setMaximalNumberOfIterations(maxIterations);
+}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <storm/environment/solver/MinMaxSolverEnvironment.h>
 #include <unordered_set>
 #include <vector>
 #include "storm/storage/BitVector.h"
@@ -36,3 +37,11 @@ storm::storage::BitVector getPossibleChoices(const std::vector<std::vector<std::
  * @return storm::storage::BitVector Their intersection.
  */
 storm::storage::BitVector intersect(const storm::storage::BitVector &a, const storm::storage::BitVector &b);
+
+/**
+ * @brief Set max iterations of a minmaxsolverenvironment
+ * 
+ * @param nsenv 
+ * @param maxIterations 
+ */
+void setMaxIterations(storm::MinMaxSolverEnvironment &env, uint64_t maxIterations);
