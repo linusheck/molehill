@@ -12,12 +12,14 @@ class CMakeExtension(Extension):
 
 
 class CMakeBuild(build_ext):
-    def update_git_repo(self, remote, folder, branch):
+    def update_git_repo(self, remote, folder, branch, commit=None):
         if not os.path.exists(folder):
             subprocess.check_call(["git", "clone", remote, folder, "--branch", branch])
         else:
             subprocess.check_call(["git", "fetch"], cwd=folder)
             subprocess.check_call(["git", "reset", "--hard", f"origin/{branch}"], cwd=folder)
+        if commit:
+            subprocess.check_call(["git", "checkout", commit], cwd=folder)
 
     def build_extension(self, ext, debug=False):
         print("sys executable", sys.executable)
@@ -25,7 +27,7 @@ class CMakeBuild(build_ext):
 
         # Build stormpy
         stormpy_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/stormpy"))
-        self.update_git_repo("https://github.com/moves-rwth/stormpy.git", stormpy_build, "master")
+        self.update_git_repo("https://github.com/moves-rwth/stormpy.git", stormpy_build, "master", commit="3632118")
         env = os.environ.copy()
         # Newer CMAKE versions (>4.0) are incompatible with pybind11
         env["CMAKE_POLICY_VERSION_MINIMUM"] = "3.5"

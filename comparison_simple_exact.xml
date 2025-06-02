@@ -2,16 +2,16 @@
 <benchmark tool="tools.synthesis" timelimit="3000s" hardtimelimit="3000s" memlimit="16GB">
 
   <tasks name="SAT Benchmarks">
-    <include>benchmarks/files/robust/*.yml</include>
+    <include>benchmarks/files/simple/sat*.yml</include>
     <propertyfile>benchmarks/sat.txt</propertyfile>
   </tasks>
 
   <tasks name="UNSAT Benchmarks">
-    <include>benchmarks/files/robust/*.yml</include>
+    <include>benchmarks/files/simple/unsat*.yml</include>
     <propertyfile>benchmarks/unsat.txt</propertyfile>
   </tasks>
 
-    <!-- Define executors -->
+
     <rundefinition name="SMPMC">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
@@ -19,27 +19,33 @@
         <option>molehill</option>
         <option>--ce</option>
         <option>none</option>
-        <option>--constraint</option>
-        <option>existsforall</option>
+        <option>--exact</option>
     </rundefinition>
 
-    <rundefinition name="PAYNT-1-by-1">
+    <rundefinition name="Paynt-AR">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
-        <option>robust_policy.py</option>
-        <option>--synthesizer</option>
-        <option>ar-1by1</option>
-        <option>--timeout</option>
-        <option>1000000000</option>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>ar</option>
+        <option>--exact</option>
     </rundefinition>
 
-    <rundefinition name="PAYNT-AR-MDP-Eval">
+    <rundefinition name="Paynt-CEGIS">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
-        <option>robust_policy.py</option>
-        <option>--synthesizer</option>
-        <option>ar-mdp-eval</option>
-        <option>--timeout</option>
-        <option>1000000000</option>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>cegis</option>
+        <option>--exact</option>
+    </rundefinition>
+
+    <rundefinition name="Paynt-Hybrid">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>hybrid</option>
+        <option>--exact</option>
     </rundefinition>
 </benchmark>

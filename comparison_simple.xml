@@ -12,7 +12,7 @@
   </tasks>
 
 
-    <rundefinition name="Molehill">
+    <rundefinition name="SMPMC">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>-m</option>
