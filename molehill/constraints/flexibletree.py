@@ -4,7 +4,6 @@ import z3
 from molehill.constraints import Constraint
 from itertools import product, chain
 import os
-import dot2tex
 
 def piecewise_select(array, z3_int):
     """Select an element of an array based on a z3 integer."""
@@ -375,11 +374,3 @@ class DecisionTree(Constraint):
 
         UniqueDotExporter(root).to_dotfile(picture_path + "/tree.dot")
         UniqueDotExporter(root).to_picture(picture_path + "/tree.png")
-        tex = dot2tex.dot2tex(open(picture_path + "/tree.dot", "r", encoding="utf-8").read(), format="tikz", crop=True,
-            figonly=True,
-            codeonly=False,
-            tikzedgelabels=False,
-            usepdflatex=True,
-            styleonly=True
-        )
-        open(picture_path + "/tree.tex", "w", encoding="utf-8").write(tex)
