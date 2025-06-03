@@ -6,6 +6,7 @@ from molehill.constraints import (
     ExistsConstraint,
     ExistsForallConstraint,
     ForallExistsConstraint,
+    ProbGoal,
 )
 
 
@@ -55,6 +56,8 @@ if __name__ == "__main__":
             "existsforall",
             "forallexists",
             "existsforalltree",
+            "prob0",
+            "prob1",
             "custom",
         ],
         default="none",
@@ -82,6 +85,10 @@ if __name__ == "__main__":
         new_constraint = ExistsForallConstraint()
     elif args.constraint == "forallexists":
         new_constraint = ForallExistsConstraint()
+    elif args.constraint == "prob0":
+        new_constraint = ProbGoal(prob=0)
+    elif args.constraint == "prob1":
+        new_constraint = ProbGoal(prob=1)
     else:
         new_constraint = load_constraint_class(f"{args.project_path}/constraint.py")
     new_parser = argparse.ArgumentParser()

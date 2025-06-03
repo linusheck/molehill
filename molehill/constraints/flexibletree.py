@@ -6,6 +6,7 @@ from itertools import product, chain
 import os
 import dot2tex
 
+
 def piecewise_select(array, z3_int):
     """Select an element of an array based on a z3 integer."""
     return z3.Sum([z3.If(z3_int == i, array[i], 0) for i in range(len(array))])
@@ -90,7 +91,13 @@ class DecisionTree(Constraint):
         assert "family" in args, "Family must be provided to DecisionTree."
 
         # Collect all action labels and put them into an order
-        labels = list(dict.fromkeys(chain(*[args["family"].hole_to_option_labels[i] for i in policy_indices])))
+        labels = list(
+            dict.fromkeys(
+                chain(
+                    *[args["family"].hole_to_option_labels[i] for i in policy_indices]
+                )
+            )
+        )
         print(labels)
         label_to_index = {label: i for i, label in enumerate(labels)}
         self.labels = labels
@@ -178,7 +185,8 @@ class DecisionTree(Constraint):
 
             constraints.append(z3.UGE(constant_var, 0))
             constraints.append(
-                z3.If(is_leaf,
+                z3.If(
+                    is_leaf,
                     z3.ULT(constant_var, len(labels)),
                     z3.ULE(
                         constant_var,
@@ -212,7 +220,10 @@ class DecisionTree(Constraint):
             )
             constraints.append(z3.Implies(is_leaf, prop_index == 0))
 
-            all_property_values = [get_property_values(str(variable)) for variable in enumerate(policy_vars)]
+            all_property_values = [
+                get_property_values(str(variable))
+                for variable in enumerate(policy_vars)
+            ]
 
             for values in all_property_values:
                 prop_vals = [z3.BitVecVal(v, num_bits) for v in values]
@@ -341,9 +352,7 @@ class DecisionTree(Constraint):
                     # get action names from family
                     if node_constants[node_index].as_long() >= len(self.labels):
                         # This can happen if this node is never visited
-                        return Node(
-                            "noop"
-                        )
+                        return Node("noop")
                     else:
                         return Node(
                             self.labels[node_constants[node_index].as_long()],
@@ -375,11 +384,14 @@ class DecisionTree(Constraint):
 
         UniqueDotExporter(root).to_dotfile(picture_path + "/tree.dot")
         UniqueDotExporter(root).to_picture(picture_path + "/tree.png")
-        tex = dot2tex.dot2tex(open(picture_path + "/tree.dot", "r", encoding="utf-8").read(), format="tikz", crop=True,
+        tex = dot2tex.dot2tex(
+            open(picture_path + "/tree.dot", "r", encoding="utf-8").read(),
+            format="tikz",
+            crop=True,
             figonly=True,
             codeonly=False,
             tikzedgelabels=False,
             usepdflatex=True,
-            styleonly=True
+            styleonly=True,
         )
         open(picture_path + "/tree.tex", "w", encoding="utf-8").write(tex)

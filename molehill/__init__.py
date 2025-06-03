@@ -184,7 +184,11 @@ def run(
     # Create the valid(...) function
     f = z3.PropagateFunction("valid", *[x.sort() for x in variables], z3.BoolSort())
 
-    s.add(constraint.build_constraint(f, variables, variables_in_ranges, family=family))
+    s.add(
+        constraint.build_constraint(
+            f, variables, variables_in_ranges, family=family, quotient=quotient
+        )
+    )
 
     p = Mole(
         s,

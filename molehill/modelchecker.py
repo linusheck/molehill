@@ -6,6 +6,7 @@ from stormpy import check_model_sparse
 from stormpy.pycarl.gmp import Rational
 from fastmole import set_max_iterations
 
+
 def check_model(mdp, prop, hint, precision=1e-6):
     exact_environment = stormpy.core.Environment()
     exact_environment.solver_environment.minmax_solver_environment.precision = Rational(
@@ -19,8 +20,10 @@ def check_model(mdp, prop, hint, precision=1e-6):
             stormpy.MinMaxMethod.topological
         )
     # exact_environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.sound_value_iteration
-    
-    set_max_iterations(exact_environment.solver_environment.minmax_solver_environment, 1_000_000)
+
+    set_max_iterations(
+        exact_environment.solver_environment.minmax_solver_environment, 1_000_000
+    )
 
     # assert that prop.formula is a reachability property
     assert prop.formula.subformula.is_eventually_formula
