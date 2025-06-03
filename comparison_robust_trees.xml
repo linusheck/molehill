@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="tools.synthesis" timelimit="300s" hardtimelimit="300s" memlimit="16GB">
+<benchmark tool="tools.synthesis" timelimit="3000s" hardtimelimit="3000s" memlimit="16GB">
     <tasks name="SAT Benchmarks">
       <include>benchmarks/files/robust/*.yml</include>
       <propertyfile>benchmarks/sat.txt</propertyfile>
