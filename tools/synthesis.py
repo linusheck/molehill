@@ -5,7 +5,6 @@ import re
 
 class Tool(BaseTool2):
     def executable(self, tool_locator):
-        print("hi")
         # Specify the path to the Python executable or any executable
         return sys.executable
 

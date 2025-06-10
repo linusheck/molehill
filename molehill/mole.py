@@ -104,7 +104,6 @@ class Mole:
         target_states = model_checking(
             self.quotient.family.mdp.model, prop.formula.subformula.subformula
         ).get_truth_values()
-        print(target_states)
         if self.exact:
             # We need to use rational numbers for exactness
             generator = MatrixGeneratorRationalNumber(
