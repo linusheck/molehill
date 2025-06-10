@@ -1,9 +1,0 @@
-
-format_version: "2.0"
-
-input_files:
-- ../../../resources/benchmark/pomdps-old/sat_network-priorities
-
-properties:
-  - property_file: ../../sat.txt
-    expected_verdict: true
