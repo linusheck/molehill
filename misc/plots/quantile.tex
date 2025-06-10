@@ -35,7 +35,7 @@
         % legend font size smaller
         legend style={nodes={scale=0.5, transform shape}},
         legend entries={NAMES},
-        every axis legend/.append style={at={(0,1)}, anchor=north west, outer xsep=5pt, outer ysep=5pt,},
+        every axis legend/.append style={at={(1,0)}, anchor=south east, outer xsep=5pt, outer ysep=5pt,},
         ]
         \foreach \tool in {FILES} {
             \addplot+ [line width=1.5pt] table[y index=5] {\pathtostuff\tool};
