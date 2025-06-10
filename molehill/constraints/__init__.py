@@ -7,3 +7,4 @@ from .forall_exists import ForallExistsConstraint
 from .mtbdd import MTBDD
 from .fixedtree import FixedDecisionTree
 from .flexibletree import DecisionTree
+from .prob_goal import ProbGoal

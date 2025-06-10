@@ -32,7 +32,7 @@ class ExistsForallConstraint(Constraint):
         function: z3.Function,
         variables: list[z3.Var],
         variables_in_ranges: Callable[[list[z3.Var]], z3.ExprRef],
-        **args
+        **args,
     ) -> z3.ExprRef:
         forall_variables = [
             var
@@ -46,8 +46,8 @@ class ExistsForallConstraint(Constraint):
             var_in_range_statement,
             z3.ForAll(
                 *[forall_variables],
-                z3.Implies(var_in_range_statement, function(*variables))
-            )
+                z3.Implies(var_in_range_statement, function(*variables)),
+            ),
         ]
         num_bits = max([x.size() for x in variables])
 
@@ -56,6 +56,8 @@ class ExistsForallConstraint(Constraint):
         # constraints)
         for value in range(2**num_bits):
             bitvector = z3.BitVecVal(value, num_bits)
-            constraints.append(z3.BitVec(f"useless_const_{value}", num_bits) == bitvector)
+            constraints.append(
+                z3.BitVec(f"useless_const_{value}", num_bits) == bitvector
+            )
 
         return z3.And(*constraints)

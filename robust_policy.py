@@ -20,6 +20,7 @@ import paynt.synthesizer.conflict_generator.dtmc
 import paynt.synthesizer.conflict_generator.mdp
 import paynt.parser.sketch
 import paynt.quotient.mdp_family
+import paynt.quotient.pomdp_family
 
 import os
 import sys
@@ -47,19 +48,58 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
         family = paynt.family.family.Family()
         choice_to_hole_options = [[] for choice in range(quotient_mdp.nr_choices)]
 
-        for state in range(quotient_mdp.nr_states):
-            state_actions = self.quotient.state_to_actions[state]
-            if len(state_actions) < 2:
-                continue
+        if isinstance(self.quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
+            obs_to_hole = []
+            for obs in range(self.quotient.num_observations):
+                obs_mem_holes = []
+                for mem in range(paynt.quotient.mdp_family.MdpFamilyQuotient.initial_memory_size):
+                    if (
+                        len(self.quotient.observation_to_actions[obs]) > 1
+                    ):  # if there's only one choice in an observation there's no point in adding a hole
+                        # here would come potential memory size
+                        option_labels = [
+                            self.quotient.action_labels[i]
+                            for i in self.quotient.observation_to_actions[obs]
+                        ]
+                        hole_name = f"(obs_{obs},{mem})"  # getting the observation expressions is a bit more complicated, and I don't think it's important for now
+                        obs_mem_holes.append(family.num_holes)
+                        family.add_hole(hole_name, option_labels)
+                obs_to_hole.append(obs_mem_holes)
 
-            hole = family.num_holes
-            name = f'state_{state}'
-            option_labels = [self.quotient.action_labels[action] for action in state_actions]
-            family.add_hole(name, option_labels)
+            nci = self.quotient.quotient_mdp.nondeterministic_choice_indices.copy()
 
-            for action_index, action in enumerate(state_actions):
-                for choice in self.quotient.state_action_choices[state][action]:
-                    choice_to_hole_options[choice].append((hole,action_index))
+            if paynt.quotient.mdp_family.MdpFamilyQuotient.initial_memory_size > 1:
+                state_memories = list(self.quotient.memory_unfolder.state_memory)
+            else:
+                state_memories = [0 for _ in range(self.quotient.quotient_mdp.nr_states)]
+            for state in range(self.quotient.quotient_mdp.nr_states):
+                obs = self.quotient.obs_evaluator.state_to_obs_class[state]
+                state_mem = state_memories[state]
+                obs_holes = obs_to_hole[obs]
+                if state_mem < len(obs_holes):
+                    obs_hole = obs_holes[state_mem]
+                    for choice in range(nci[state], nci[state + 1]):
+                        action_hole_index = self.quotient.observation_to_actions[obs].index(
+                            self.quotient.choice_to_action[choice]
+                        )
+                        choice_to_hole_options[choice].append(
+                            (obs_hole, action_hole_index)
+                        )
+
+        else:  # meaning it is a MdpFamilyQuotient
+            for state in range(quotient_mdp.nr_states):
+                state_actions = self.quotient.state_to_actions[state]
+                if len(state_actions) < 2:
+                    continue
+
+                hole = family.num_holes
+                name = f'state_{state}'
+                option_labels = [self.quotient.action_labels[action] for action in state_actions]
+                family.add_hole(name, option_labels)
+
+                for action_index, action in enumerate(state_actions):
+                    for choice in self.quotient.state_action_choices[state][action]:
+                        choice_to_hole_options[choice].append((hole,action_index))
 
         coloring = payntbind.synthesis.Coloring(family.family, quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
         self.policy_family = family
@@ -81,25 +121,58 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
 
     def create_policy(self, policy_family, hole_assignment=None):
         policy = self.quotient.empty_policy()
-        for hole in range(policy_family.num_holes):
-            if len(policy_family.hole_options(hole)) != 1:
-                assert hole_assignment is not None
-            hole_name = policy_family.hole_name(hole)
-            state = int(hole_name.split('_')[1])
-            hole_options = policy_family.hole_options(hole)
-            option_labels = policy_family.hole_to_option_labels[hole]
-            if len(hole_options) == 1:
-                option_index = hole_options[0]
-                label = option_labels[option_index]
-            else:
-                if len(hole_assignment[hole]) == 0:
-                    continue
+        if isinstance(self.quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
+            # POMDP family case
+            for hole in range(policy_family.num_holes):
+                if len(policy_family.hole_options(hole)) != 1:
+                    assert hole_assignment is not None
+                hole_name = policy_family.hole_name(hole)
+                obs, mem = hole_name[1:-1].split(',')
+                obs = int(obs.split('_')[1])
+                mem = int(mem)
+                hole_options = policy_family.hole_options(hole)
+                option_labels = policy_family.hole_to_option_labels[hole]
+                if len(hole_options) == 1:
+                    option_index = hole_options[0]
+                    label = option_labels[option_index]
                 else:
-                    assert len(hole_assignment[hole]) == 1
-                    option = hole_assignment[hole][0]
-                    label = option_labels[option]
-            action = self.quotient.action_labels.index(label)
-            policy[state] = action
+                    if len(hole_assignment[hole]) == 0:
+                        continue
+                    else:
+                        assert len(hole_assignment[hole]) == 1
+                        option = hole_assignment[hole][0]
+                        label = option_labels[option]
+                action = self.quotient.action_labels.index(label)
+
+                state_to_obs_class = list(self.quotient.obs_evaluator.state_to_obs_class)
+                if self.quotient.memory_unfolder is None:
+                    state_to_memory = [0 for _ in range(self.quotient.quotient_mdp.nr_states)]
+                else:
+                    state_to_memory = list(self.quotient.memory_unfolder.state_memory)
+                for state in range(self.quotient.quotient_mdp.nr_states):
+                    if state_to_obs_class[state] == obs and state_to_memory[state] == mem:
+                        policy[state] = action
+        else:
+            # MDP family case
+            for hole in range(policy_family.num_holes):
+                if len(policy_family.hole_options(hole)) != 1:
+                    assert hole_assignment is not None
+                hole_name = policy_family.hole_name(hole)
+                state = int(hole_name.split('_')[1])
+                hole_options = policy_family.hole_options(hole)
+                option_labels = policy_family.hole_to_option_labels[hole]
+                if len(hole_options) == 1:
+                    option_index = hole_options[0]
+                    label = option_labels[option_index]
+                else:
+                    if len(hole_assignment[hole]) == 0:
+                        continue
+                    else:
+                        assert len(hole_assignment[hole]) == 1
+                        option = hole_assignment[hole][0]
+                        label = option_labels[option]
+                action = self.quotient.action_labels.index(label)
+                policy[state] = action
 
         return policy
 
@@ -335,8 +408,13 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
 
             refined_policy_family = None
 
+            inconsistent_policy = False
+
             # 1by1 checking of MDPs
             for mdp_hole_assignment in mdp_hole_assignments:
+                if inconsistent_policy:
+                    break
+
                 mdp_singleton_family = mdp_family.assume_options_copy(mdp_hole_assignment)
 
                 if refined_policy_family is None:
@@ -356,7 +434,10 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
                         for choice in scheduler_selection[hole]:
                             if choice not in score:
                                 score.append(choice)
-                                assert len(score) == 1
+                                if len(score) > 1:
+                                    splitter = hole
+                                    inconsistent_policy = True
+                                    
 
                     for hole, options in enumerate(scheduler_selection):
                         if len(options) == 0:
@@ -380,7 +461,9 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
                             for choice in scheduler_selection[hole]:
                                 if choice not in score:
                                     score.append(choice)
-                                    assert len(score) == 1
+                                    if len(score) > 1:
+                                        splitter = hole
+                                        inconsistent_policy = True
                     
                         for hole, options in enumerate(scheduler_selection):
                             if len(options) == 0:
@@ -569,6 +652,8 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
             current_policy_family = policy_family_stack.pop(-1)
             unfixed_holes = []
 
+            inconsistent_policy = False
+
             refined_policy_family = None
 
             model = self.build_model_from_families(mdp_singleton_family, current_policy_family)
@@ -588,6 +673,12 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
                 if len(options) == 0:
                     scheduler_selection[hole] = current_policy_family.hole_options(hole)
                     continue
+                if len(options) > 1:
+                    splitter = hole
+                    used_options = options
+                    inconsistent_policy = True
+                    break
+                    
 
             refined_policy_family = current_policy_family.assume_options_copy(scheduler_selection)
             # print([hole for hole in range(refined_policy_family.num_holes) if len(refined_policy_family.hole_options(hole)) > 1])
@@ -597,7 +688,7 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
 
             exists_unsat_mdp = False
 
-            while True:
+            while not inconsistent_policy:
 
                 policy_model = self.build_model_from_families(mdp_family, refined_policy_family_fixed)
                 mdp_assignment = self.quotient.coloring.getChoiceToAssignment()
@@ -927,15 +1018,33 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
 
     def create_policy_family_from_policy(self, policy):
         policy_hole_options = [None for _ in range(self.policy_family.num_holes)]
-        for state, action in enumerate(policy):
-            try:
-                hole_index = self.policy_family.hole_to_name.index(f'state_{state}')
-            except:
-                continue
-            if action is None:
-                policy_hole_options[hole_index] = [0]
+
+        if isinstance(self.quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
+            if self.quotient.memory_unfolder is not None:
+                state_to_memory = list(self.quotient.memory_unfolder.state_memory)
             else:
-                policy_hole_options[hole_index] = [self.quotient.state_to_actions[state].index(action)]
+                state_to_memory = [0] * self.quotient.quotient_mdp.nr_states
+            for state, action in enumerate(policy):
+                obs = self.quotient.state_to_observation[state]
+                mem = state_to_memory[state]
+                try:
+                    hole_index = self.policy_family.hole_to_name.index(f'(obs_{obs},{mem})')
+                except:
+                    continue
+                if action is None:
+                    policy_hole_options[hole_index] = [0]
+                else:
+                    policy_hole_options[hole_index] = [self.quotient.state_to_actions[state].index(action)]
+        else:
+            for state, action in enumerate(policy):
+                try:
+                    hole_index = self.policy_family.hole_to_name.index(f'state_{state}')
+                except:
+                    continue
+                if action is None:
+                    policy_hole_options[hole_index] = [0]
+                else:
+                    policy_hole_options[hole_index] = [self.quotient.state_to_actions[state].index(action)]
 
         policy_family = self.policy_family.assume_options_copy(policy_hole_options)
         return policy_family
@@ -1104,7 +1213,7 @@ def main(project, sketch, props, synthesizer, timeout, game_abstraction, profili
     props_file = os.path.join(project, props)
     paynt.quotient.mdp_family.MdpFamilyQuotient.initial_memory_size = fsc_memory_size
     quotient = paynt.parser.sketch.Sketch.load_sketch(model_file, props_file)
-    assert isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient)
+    assert isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient) or isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient), "Expected MDP or POMDP family quotient"
 
     robust_policy_synthesizer = RobustPolicySynthesizer(quotient, game_abstraction)
 

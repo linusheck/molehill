@@ -50,26 +50,33 @@ def run(
         if isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
             obs_to_hole = []
             for obs in range(quotient.num_observations):
-                if (
-                    len(quotient.observation_to_actions[obs]) > 1
-                ):  # if there's only one choice in an observation there's no point in adding a hole
-                    # here would come potential memory size
-                    option_labels = [
-                        quotient.action_labels[i]
-                        for i in quotient.observation_to_actions[obs]
-                    ]
-                    hole_name = f"A(obs_{obs},0)"  # getting the observation expressions is a bit more complicated, and I don't think it's important for now
-                    obs_to_hole.append(quotient.family.num_holes)
-                    quotient.family.add_hole(hole_name, option_labels)
-                else:
-                    obs_to_hole.append(None)
+                obs_mem_holes = []
+                for mem in range(fsc_memory_size):
+                    if (
+                        len(quotient.observation_to_actions[obs]) > 1
+                    ):  # if there's only one choice in an observation there's no point in adding a hole
+                        # here would come potential memory size
+                        option_labels = [
+                            quotient.action_labels[i]
+                            for i in quotient.observation_to_actions[obs]
+                        ]
+                        hole_name = f"(obs_{obs},{mem})"  # getting the observation expressions is a bit more complicated, and I don't think it's important for now
+                        obs_mem_holes.append(quotient.family.num_holes)
+                        quotient.family.add_hole(hole_name, option_labels)
+                obs_to_hole.append(obs_mem_holes)
 
             nci = quotient.quotient_mdp.nondeterministic_choice_indices.copy()
 
+            if fsc_memory_size > 1:
+                state_memories = list(quotient.memory_unfolder.state_memory)
+            else:
+                state_memories = [0 for _ in range(quotient.quotient_mdp.nr_states)]
             for state in range(quotient.quotient_mdp.nr_states):
                 obs = quotient.obs_evaluator.state_to_obs_class[state]
-                obs_hole = obs_to_hole[obs]
-                if obs_hole is not None:
+                state_mem = state_memories[state]
+                obs_holes = obs_to_hole[obs]
+                if state_mem < len(obs_holes):
+                    obs_hole = obs_holes[state_mem]
                     for choice in range(nci[state], nci[state + 1]):
                         action_hole_index = quotient.observation_to_actions[obs].index(
                             quotient.choice_to_action[choice]
@@ -184,7 +191,11 @@ def run(
     # Create the valid(...) function
     f = z3.PropagateFunction("valid", *[x.sort() for x in variables], z3.BoolSort())
 
-    s.add(constraint.build_constraint(f, variables, variables_in_ranges, family=family))
+    s.add(
+        constraint.build_constraint(
+            f, variables, variables_in_ranges, family=family, quotient=quotient
+        )
+    )
 
     p = Mole(
         s,
