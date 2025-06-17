@@ -1,9 +1,0 @@
-
-format_version: "2.0"
-
-input_files:
-- ../../../resources/mdp-sketches/other/exponential-20
-
-properties:
-  - property_file: ../../unsat.txt
-    expected_verdict: false

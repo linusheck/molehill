@@ -1,0 +1,9 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/benchmark-q1/jair/unsat_maze
+
+properties:
+  - property_file: ../../unsat.txt
+    expected_verdict: false

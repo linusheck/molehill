@@ -1,0 +1,9 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/benchmark-q1/jair/sat_grid
+
+properties:
+  - property_file: ../../sat.txt
+    expected_verdict: true

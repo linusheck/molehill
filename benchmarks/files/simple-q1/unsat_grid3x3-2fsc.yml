@@ -1,0 +1,9 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/benchmark-q1/jair/unsat_grid3x3-2fsc
+
+properties:
+  - property_file: ../../unsat.txt
+    expected_verdict: false

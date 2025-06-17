@@ -1,0 +1,12 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/benchmark-q1/pomdps/sat_mem_2_grid-avoid-4-0.1
+
+properties:
+  - property_file: ../../sat.txt
+    expected_verdict: true
+
+options:
+    memory: 2
