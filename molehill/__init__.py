@@ -37,7 +37,6 @@ def run(
     # print all python properties of quotient
     family = quotient.family
 
-    # WIP version, currently only supports memoryless schdedulers for PomdpFamilyQuotient
     if isinstance(
         quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient
     ) or isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient):
@@ -107,7 +106,8 @@ def run(
                     state_valuations.append(valuation)
                 return variable_name, state_valuations
 
-            var_names, state_valuations = _get_state_valuations(quotient.quotient_mdp)
+            if fsc_memory_size == 1:
+                var_names, state_valuations = _get_state_valuations(quotient.quotient_mdp)
             nci = quotient.quotient_mdp.nondeterministic_choice_indices.copy()
             for state in range(quotient.quotient_mdp.nr_states):
                 if (
@@ -117,14 +117,17 @@ def run(
                         quotient.action_labels[i]
                         for i in quotient.state_to_actions[state]
                     ]
-                    vals_here = "&".join(
-                        [
-                            f"{var_name}={int(state_valuations[state][i])}"
-                            for i, var_name in enumerate(var_names)
-                            if not var_name.startswith("_loc_prism2jani")
-                        ]
-                    )
-                    hole_name = f"A([{vals_here}])"
+                    if fsc_memory_size == 1:
+                        vals_here = "&".join(
+                            [
+                                f"{var_name}={int(state_valuations[state][i])}"
+                                for i, var_name in enumerate(var_names)
+                                if not var_name.startswith("_loc_prism2jani")
+                            ]
+                        )
+                        hole_name = f"A([{vals_here}])"
+                    else:
+                        hole_name = f"A(S{state//2},M{state%2})"
                     hole_index = quotient.family.num_holes
                     quotient.family.add_hole(hole_name, option_labels)
                     for choice in range(nci[state], nci[state + 1]):
