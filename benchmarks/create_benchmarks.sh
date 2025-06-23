@@ -32,7 +32,14 @@ done
 
 
 # Q3 Benchmarks
-# TODO
+for mem in 1 2 3 4; do
+    for i in $(find ../resources/benchmark-q3 -type d -name "sat_mem_$mem*"); do
+        python create_benchmark.py robust-q3 ../../$i ../../sat.txt true --memory $mem
+    done
+    for i in $(find ../resources/benchmark-q3 -type d -name "unsat_mem_$mem*"); do
+        python create_benchmark.py robust-q3 ../../$i ../../unsat.txt false --memory $mem
+    done
+done
 
 
 
