@@ -679,12 +679,12 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
                     inconsistent_policy = True
                     break
                     
-
             refined_policy_family = current_policy_family.assume_options_copy(scheduler_selection)
             # print([hole for hole in range(refined_policy_family.num_holes) if len(refined_policy_family.hole_options(hole)) > 1])
             unfixed_holes = [hole for hole in range(refined_policy_family.num_holes) if len(refined_policy_family.hole_options(hole)) > 1]
             # TODO remember which holes were not fixed here
-            refined_policy_family_fixed = refined_policy_family.pick_any()
+            if not inconsistent_policy:
+                refined_policy_family_fixed = refined_policy_family.pick_any()
 
             exists_unsat_mdp = False
 
