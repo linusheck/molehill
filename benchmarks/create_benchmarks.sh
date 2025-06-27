@@ -32,7 +32,18 @@ done
 
 
 # Q3 Benchmarks
-for mem in 1 2 3 4; do
+
+# find all sat benchmarks without memory
+for i in $(find ../resources/benchmark-q3 -type d -name 'sat_*' ! -name 'sat_mem_*'); do
+    python create_benchmark.py robust-q3 ../../$i ../../sat.txt true
+done
+
+# find all unsat benchmarks without memory
+for i in $(find ../resources/benchmark-q3 -type d -name 'unsat_*' ! -name 'unsat_mem_*'); do
+    python create_benchmark.py robust-q3 ../../$i ../../unsat.txt false
+done
+
+for mem in 1 2 3; do
     for i in $(find ../resources/benchmark-q3 -type d -name "sat_mem_$mem*"); do
         python create_benchmark.py robust-q3 ../../$i ../../sat.txt true --memory $mem
     done

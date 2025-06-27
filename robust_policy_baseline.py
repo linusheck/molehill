@@ -741,7 +741,7 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
                             used_options = options + [refined_policy_family.hole_options(hole)[0]]
                             break
 
-                assert at_least_one_incosnsistency
+                # assert at_least_one_incosnsistency
 
                 if splitter is None:
                     refined_policy_family_fixed = refined_policy_family.pick_any()

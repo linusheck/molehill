@@ -2,11 +2,11 @@
 format_version: "2.0"
 
 input_files:
-- ../../copy
+- ../../../resources/benchmark-q3/mdp-families/unsat_mem_1_dpm-switch-q10-big-family
 
 properties:
   - property_file: ../../unsat.txt
     expected_verdict: false
 
 options:
-    memory: 2
+    memory: 1
