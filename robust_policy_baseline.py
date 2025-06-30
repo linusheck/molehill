@@ -36,12 +36,40 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
         self.quotient = quotient
         self.prop = self.quotient.specification.constraints[0]
         self.create_policy_coloring()
+        if isinstance(self.quotient, paynt.quotient.quotient.Quotient):
+            self.create_robustness_coloring()
         self.policy_quotient = paynt.quotient.quotient.Quotient(self.quotient.quotient_mdp, self.policy_family, self.policy_coloring, self.quotient.specification)
         self.optimality_prop = self.create_optimality_specification().optimality
         if print_game_abstraction_result:
             self.game_abs_val, self.game_abs_sat, self.game_abs_policy = self.run_game_abstraction_heuristic(quotient.family)
             print(f"Game abstraction value: {self.game_abs_val}, SAT: {self.game_abs_sat}")
         self.quotient.quotient_mdp = self.add_goal_label_to_model(self.quotient.quotient_mdp)
+
+    def create_robustness_coloring(self):
+        quotient_mdp = self.quotient.quotient_mdp
+        family = paynt.family.family.Family()
+        choice_to_hole_options = [[] for choice in range(quotient_mdp.nr_choices)]
+
+        quotient_family = self.quotient.family
+        hole_mapping = [-1 for _ in range(quotient_family.num_holes)]
+        for hole in range(quotient_family.num_holes):
+            name = quotient_family.hole_to_name[hole]
+            option_labels = quotient_family.hole_to_option_labels[hole]
+            if "sketch_hole" in name:  # TODO make this into a variable, for now we always assume sketch_hole prefix for for-all quantified holes
+                hole_mapping[hole] = family.num_holes
+                family.add_hole(name, option_labels)
+
+        original_choice_to_hole_options = self.quotient.coloring.getChoiceToAssignment()
+        for choice, hole_options in enumerate(original_choice_to_hole_options):
+            for hole_option in hole_options:
+                hole, action_index = hole_option
+                new_hole = hole_mapping[hole]
+                if new_hole == -1:
+                    continue
+                choice_to_hole_options[choice].append((new_hole, action_index))
+
+        coloring = payntbind.synthesis.Coloring(family.family, quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
+        self.quotient = paynt.quotient.quotient.Quotient(quotient_mdp, family, coloring, self.quotient.specification)
 
     def create_policy_coloring(self):
         quotient_mdp = self.quotient.quotient_mdp
@@ -86,7 +114,7 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
                             (obs_hole, action_hole_index)
                         )
 
-        else:  # meaning it is a MdpFamilyQuotient
+        elif isinstance(self.quotient, paynt.quotient.mdp_family.MdpFamilyQuotient):  # meaning it is a MdpFamilyQuotient
             for state in range(quotient_mdp.nr_states):
                 state_actions = self.quotient.state_to_actions[state]
                 if len(state_actions) < 2:
@@ -100,6 +128,25 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
                 for action_index, action in enumerate(state_actions):
                     for choice in self.quotient.state_action_choices[state][action]:
                         choice_to_hole_options[choice].append((hole,action_index))
+
+        else: # meaning it is a DTMC sketch quotient
+            quotient_family = self.quotient.family
+            hole_mapping = [-1 for _ in range(quotient_family.num_holes)]
+            for hole in range(quotient_family.num_holes):
+                name = quotient_family.hole_to_name[hole]
+                option_labels = quotient_family.hole_to_option_labels[hole]
+                if "sketch_hole" not in name:  # TODO make this into a variable, for now we always assume sketch_hole prefix for for-all quantified holes
+                    hole_mapping[hole] = family.num_holes
+                    family.add_hole(name, option_labels)
+
+            original_choice_to_hole_options = self.quotient.coloring.getChoiceToAssignment()
+            for choice, hole_options in enumerate(original_choice_to_hole_options):
+                for hole_option in hole_options:
+                    hole, action_index = hole_option
+                    new_hole = hole_mapping[hole]
+                    if new_hole == -1:
+                        continue
+                    choice_to_hole_options[choice].append((new_hole, action_index))
 
         coloring = payntbind.synthesis.Coloring(family.family, quotient_mdp.nondeterministic_choice_indices, choice_to_hole_options)
         self.policy_family = family
@@ -120,6 +167,8 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
     
 
     def create_policy(self, policy_family, hole_assignment=None):
+        if isinstance(self.quotient, paynt.quotient.quotient.Quotient):
+            return None
         policy = self.quotient.empty_policy()
         if isinstance(self.quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
             # POMDP family case
@@ -1051,6 +1100,8 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
 
 
     def double_check_policy(self, family, prop, policy):
+        if isinstance(self.quotient, paynt.quotient.quotient.Quotient):
+            return # double check not supported for DTMC sketch Quotient for now
         policy_family = self.create_policy_family_from_policy(policy)
         for mdp_hole_assignments in family.all_combinations():
             combination = list(mdp_hole_assignments)
@@ -1213,7 +1264,7 @@ def main(project, sketch, props, synthesizer, timeout, game_abstraction, profili
     props_file = os.path.join(project, props)
     paynt.quotient.mdp_family.MdpFamilyQuotient.initial_memory_size = fsc_memory_size
     quotient = paynt.parser.sketch.Sketch.load_sketch(model_file, props_file)
-    assert isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient) or isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient), "Expected MDP or POMDP family quotient"
+    assert isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient) or isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient) or isinstance(quotient, paynt.quotient.quotient.Quotient), "Expected MDP or POMDP family quotient"
 
     robust_policy_synthesizer = RobustPolicySynthesizer(quotient, game_abstraction)
 
