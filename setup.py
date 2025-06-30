@@ -27,19 +27,19 @@ class CMakeBuild(build_ext):
 
         # Build stormpy
         stormpy_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/stormpy"))
-        self.update_git_repo("https://github.com/moves-rwth/stormpy.git", stormpy_build, "master", commit="3632118")
+        # self.update_git_repo("https://github.com/moves-rwth/stormpy.git", stormpy_build, "master", commit="3632118")
         env = os.environ.copy()
         # Newer CMAKE versions (>4.0) are incompatible with pybind11
         env["CMAKE_POLICY_VERSION_MINIMUM"] = "3.5"
-        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=stormpy_build, env=env)
+        subprocess.check_call([sys.executable, "setup.py", "build_ext", "--storm-dir=\"/home/fpmk/synthesis-games/prerequisites/storm/build\"", "develop"], cwd=stormpy_build, env=env)
 
         pybind_version = subprocess.check_output([sys.executable, "-c", "from stormpy.info._config import stormpy_pybind_version; print(stormpy_pybind_version)"]).decode().strip()
 
         # Build paynt
         paynt_build = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/paynt"))
-        self.update_git_repo("https://github.com/randriu/synthesis.git", paynt_build, "master", commit="03c3cf0")
+        # self.update_git_repo("https://github.com/randriu/synthesis.git", paynt_build, "master", commit="03c3cf0")
         subprocess.check_call([sys.executable, "setup.py", "install"], cwd=os.path.join(paynt_build), env=env)
-        subprocess.check_call([sys.executable, "setup.py", "install"], cwd=os.path.join(paynt_build, "payntbind"), env=env)
+        subprocess.check_call([sys.executable, "setup.py", "build_ext", "--storm-dir=\"/home/fpmk/synthesis-games/prerequisites/storm/build\"", "develop"], cwd=os.path.join(paynt_build, "payntbind"), env=env)
 
         build_temp = os.path.abspath(os.path.join(os.path.dirname(__file__), "build/fastmole"))
         os.makedirs(build_temp, exist_ok=True)

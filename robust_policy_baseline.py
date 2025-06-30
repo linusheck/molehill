@@ -36,7 +36,7 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
         self.quotient = quotient
         self.prop = self.quotient.specification.constraints[0]
         self.create_policy_coloring()
-        if isinstance(self.quotient, paynt.quotient.quotient.Quotient):
+        if type(self.quotient) is paynt.quotient.quotient.Quotient:
             self.create_robustness_coloring()
         self.policy_quotient = paynt.quotient.quotient.Quotient(self.quotient.quotient_mdp, self.policy_family, self.policy_coloring, self.quotient.specification)
         self.optimality_prop = self.create_optimality_specification().optimality
@@ -167,7 +167,7 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
     
 
     def create_policy(self, policy_family, hole_assignment=None):
-        if isinstance(self.quotient, paynt.quotient.quotient.Quotient):
+        if type(self.quotient) is paynt.quotient.quotient.Quotient:
             return None
         policy = self.quotient.empty_policy()
         if isinstance(self.quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
@@ -1100,7 +1100,7 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
 
 
     def double_check_policy(self, family, prop, policy):
-        if isinstance(self.quotient, paynt.quotient.quotient.Quotient):
+        if type(self.quotient) is paynt.quotient.quotient.Quotient:
             return # double check not supported for DTMC sketch Quotient for now
         policy_family = self.create_policy_family_from_policy(policy)
         for mdp_hole_assignments in family.all_combinations():
@@ -1264,7 +1264,7 @@ def main(project, sketch, props, synthesizer, timeout, game_abstraction, profili
     props_file = os.path.join(project, props)
     paynt.quotient.mdp_family.MdpFamilyQuotient.initial_memory_size = fsc_memory_size
     quotient = paynt.parser.sketch.Sketch.load_sketch(model_file, props_file)
-    assert isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient) or isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient) or isinstance(quotient, paynt.quotient.quotient.Quotient), "Expected MDP or POMDP family quotient"
+    assert isinstance(quotient, paynt.quotient.mdp_family.MdpFamilyQuotient) or isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient) or type(quotient) is paynt.quotient.quotient.Quotient, "Expected MDP or POMDP family quotient"
 
     robust_policy_synthesizer = RobustPolicySynthesizer(quotient, game_abstraction)
 
