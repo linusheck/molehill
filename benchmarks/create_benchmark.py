@@ -54,4 +54,4 @@ else:
 options:
     memory: {args.memory}
 """
-    write(f"{input_file.split('/')[-1].split('.')[0]}_{args.memory}", new_template)
+    write("-".join(input_file.split('/')[-2:]) + f"_{args.memory}", new_template)

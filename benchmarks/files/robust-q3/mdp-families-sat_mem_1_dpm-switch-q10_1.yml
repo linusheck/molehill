@@ -2,7 +2,7 @@
 format_version: "2.0"
 
 input_files:
-- ../../../resources/benchmark-q3/mdp-families/sat_mem_1_virus-big-family
+- ../../../resources/benchmark-q3/mdp-families/sat_mem_1_dpm-switch-q10
 
 properties:
   - property_file: ../../sat.txt
