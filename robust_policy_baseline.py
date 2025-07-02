@@ -547,7 +547,13 @@ class RobustPolicySynthesizer(paynt.synthesizer.synthesizer.Synthesizer):
                 splitters = self.quotient.holes_with_max_score(scores)
                 splitter = splitters[0]
 
-                assert scores[splitter] > 1
+                # this can happen due to numerical instability, if it is the case just safely split into smaller subfamily arbitrarily
+                if scores[splitter] == 1:
+                    for hole in range(current_policy_family.num_holes):
+                        if current_policy_family.hole_num_options(hole) > 1:
+                            splitter = hole
+                            break
+
                 break
             else:
                 # all MDPs share the same satisfying policy (i.e. robust policy was found)
