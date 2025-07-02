@@ -48,7 +48,7 @@ def write(name, template):
         )
 
 if args.memory is None:
-    write(input_file.split("/")[-1].split(".")[0], template)
+    write("-".join(input_file.split('/')[-2:]), template)
 else:
     new_template = template + f"""
 options:

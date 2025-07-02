@@ -98,8 +98,10 @@ class Mole:
 
         # does there exist a model that satisfies the property?
         # print("Quotient size", self.quotient.family.mdp.model.nr_states)
-        result = model_checking(self.quotient.family.mdp.model, prop.formula)
-        global_bounds = result.get_values()
+        # result = model_checking(self.quotient.family.mdp.model, prop.formula)
+        # global_bounds = result.get_values()
+
+        global_bounds = [0.0 for i in range(self.quotient.family.mdp.model.transition_matrix.nr_columns)]
 
         target_states = model_checking(
             self.quotient.family.mdp.model, prop.formula.subformula.subformula

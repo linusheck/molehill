@@ -34,7 +34,7 @@ def is_smaller(list_a, list_b, tol=1e-6):
 def pad_vector_to_size(vector, size):
     return vector + [0.0] * (size - len(vector))
 
-@pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/pnueli-zuck-3"])
+@pytest.mark.parametrize("project_path", ["resources/test/grid", "resources/test/power", "resources/test/safety", "resources/test/pnueli-zuck-3", "resources/test/refuel"])
 def test_matrix_generator(project_path):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
