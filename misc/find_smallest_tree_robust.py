@@ -19,7 +19,7 @@ def main():
                 "molehill",
                 arg1,
                 "--constraint",
-                "tree",
+                "existsforalltree",
                 "--nodes",
                 str(x),
             ],

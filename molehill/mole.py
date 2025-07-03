@@ -32,9 +32,9 @@ class Mole:
 
         self.time_last_print = time.time()
 
+        self.quotient.build(quotient.family)
+        # TODO new choice to assignment?
         self.choice_to_assignment = self.quotient.coloring.getChoiceToAssignment()
-
-        quotient.build(quotient.family)
 
         print("Family size", "{:.2e}".format(Decimal(self.quotient.family.size)))
         print("Quotient size", self.quotient.family.mdp.model.nr_states)

@@ -364,7 +364,6 @@ class DecisionTree(Constraint):
                     + f" >= {node_constants[i]}?"
                 )
                 node = Node(calc)
-
                 left_child = self.left_child_ranges[i][
                     left_children[node_index].as_long()
                 ]
