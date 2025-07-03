@@ -36,6 +36,20 @@ class Mole:
 
         quotient.build(quotient.family)
 
+        # some states were removed as they were not reachable in the quotient MDP, we need to recompute the choice_to_assignment when this happens
+        if len(self.choice_to_assignment) != quotient.family.mdp.model.nr_choices:
+            updated_choice_to_assignment = [[] for _ in range(quotient.family.mdp.model.nr_choices)]
+
+            for choice, assignment in enumerate(self.choice_to_assignment):
+                if choice not in quotient.family.mdp.quotient_choice_map:
+                    continue
+                for hole_assignment in assignment:
+                    updated_choice_to_assignment[quotient.family.mdp.quotient_choice_map.index(choice)].append(
+                        hole_assignment
+                    )
+
+            self.choice_to_assignment = updated_choice_to_assignment
+
         print("Family size", "{:.2e}".format(Decimal(self.quotient.family.size)))
         print("Quotient size", self.quotient.family.mdp.model.nr_states)
 
