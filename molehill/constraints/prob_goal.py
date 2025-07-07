@@ -35,7 +35,7 @@ class ProbGoal(Constraint):
         for state in range(transition_matrix.nr_columns):
             reach_var = z3.Bool(f"reach_{state}")
             reachability_vars.append(reach_var)
-
+        print("Number of rows:", transition_matrix.nr_rows)
         if not self.prob0:
             min_step_vars = []
             for state in range(transition_matrix.nr_columns):

@@ -1,1 +1,1 @@
-R{"penalty"}<=10000 [ F goal ];
+R{"penalty"}<=100 [ F goal ];

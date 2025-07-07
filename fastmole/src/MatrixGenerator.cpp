@@ -168,6 +168,7 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
                 }
             }
             if (!someChoiceIncluded) {
+                throw std::runtime_error("You have to include a choice in this version of molehill.");
                 // No choice is included, so we need to include the last row of the row
                 // group
                 includeRowBitVector.set(rowGroupEndDecision - 1, true);
