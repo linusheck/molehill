@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<benchmark tool="atools.synthesis" timelimit="1800s" hardtimelimit="1800s" memlimit="16GB">
+  <tasks name="SAT Benchmarks">
+    <include>benchmarks/files/benchmark-q2-cost/*.yml</include>
+    <propertyfile>benchmarks/sat.txt</propertyfile>
+  </tasks>
+
+  <tasks name="UNSAT Benchmarks">
+    <include>benchmarks/files/benchmark-q2-cost/*.yml</include>
+    <propertyfile>benchmarks/unsat.txt</propertyfile>
+  </tasks>
+
+    <!-- Define executors -->
+    <rundefinition name="SMPMC">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>misc/constrained_benchmark.py</option>
+        <option>molehill</option>
+    </rundefinition>
+
+    <rundefinition name="PAYNT-CEGIS">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>misc/constrained_benchmark.py</option>
+        <option>paynt</option>
+    </rundefinition>
+</benchmark>
