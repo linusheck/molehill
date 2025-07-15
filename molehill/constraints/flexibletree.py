@@ -163,8 +163,6 @@ class DecisionTree(Constraint):
         left_children = []
         right_children = []
 
-        forall_statements = []
-
         for i in range(num_nodes):
             # Is this node a leaf?
             is_leaf = z3.Bool(f"leaf_{i}")

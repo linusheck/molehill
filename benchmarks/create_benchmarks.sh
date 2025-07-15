@@ -26,10 +26,12 @@ done
 
 
 # Q2 Benchmarks
-# TODO
-
-
-
+for i in $(find ../resources/benchmark-q2-cost -type d -name 'sat_*'); do
+    python create_benchmark.py benchmark-q2-cost ../../$i ../../sat.txt true
+done
+for i in $(find ../resources/benchmark-q2-cost -type d -name 'unsat_*'); do
+    python create_benchmark.py benchmark-q2-cost ../../$i ../../unsat.txt true
+done
 
 # Q3 Benchmarks
 
