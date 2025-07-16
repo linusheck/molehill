@@ -1,0 +1,12 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/benchmark-q2-prob0/unsat_mem_3_grid-avoid-4-0.1
+
+properties:
+  - property_file: ../../unsat.txt
+    expected_verdict: false
+
+options:
+    memory: 3

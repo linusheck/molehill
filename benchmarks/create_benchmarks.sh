@@ -41,6 +41,25 @@ for i in $(find ../resources/benchmark-q2-tree -type d -name 'unsat_*'); do
     python create_benchmark.py benchmark-q2-tree ../../$i ../../unsat.txt true
 done
 
+# Q2 Benchmarks: Prob>0 Benchmarks
+
+# find all sat benchmarks without memory
+for i in $(find ../resources/benchmark-q2-prob0 -type d -name 'sat_*' ! -name 'sat_mem_*'); do
+    python create_benchmark.py benchmark-q2-prob0 ../../$i ../../sat.txt true
+done
+# find all unsat benchmarks without memory
+for i in $(find ../resources/benchmark-q2-prob0 -type d -name 'unsat_*' ! -name 'unsat_mem_*'); do
+    python create_benchmark.py benchmark-q2-prob0 ../../$i ../../unsat.txt false
+done
+for mem in 1 2 3 4; do
+    for i in $(find ../resources/benchmark-q2-prob0 -type d -name "sat_mem_$mem*"); do
+        python create_benchmark.py benchmark-q2-prob0 ../../$i ../../sat.txt true --memory $mem
+    done
+    for i in $(find ../resources/benchmark-q2-prob0 -type d -name "unsat_mem_$mem*"); do
+        python create_benchmark.py benchmark-q2-prob0 ../../$i ../../unsat.txt false --memory $mem
+    done
+done
+
 # Q3 Benchmarks
 
 # find all sat benchmarks without memory
