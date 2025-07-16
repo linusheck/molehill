@@ -1,0 +1,9 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/benchmark-q2-cost/sat_maze
+
+properties:
+  - property_file: ../../sat.txt
+    expected_verdict: true
