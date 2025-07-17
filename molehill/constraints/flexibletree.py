@@ -2,7 +2,7 @@
 
 import z3
 from molehill.constraints import Constraint
-from itertools import product, chain
+from itertools import chain
 import os
 
 
