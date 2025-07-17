@@ -30,7 +30,7 @@ for i in $(find ../resources/benchmark-q2-cost -type d -name 'sat_*'); do
     python create_benchmark.py benchmark-q2-cost ../../$i ../../sat.txt true
 done
 for i in $(find ../resources/benchmark-q2-cost -type d -name 'unsat_*'); do
-    python create_benchmark.py benchmark-q2-cost ../../$i ../../unsat.txt true
+    python create_benchmark.py benchmark-q2-cost ../../$i ../../unsat.txt false
 done
 
 # Q2 Benchmarks: Tree Benchmarks
@@ -38,7 +38,7 @@ for i in $(find ../resources/benchmark-q2-tree -type d -name 'sat_*'); do
     python create_benchmark.py benchmark-q2-tree ../../$i ../../sat.txt true
 done
 for i in $(find ../resources/benchmark-q2-tree -type d -name 'unsat_*'); do
-    python create_benchmark.py benchmark-q2-tree ../../$i ../../unsat.txt true
+    python create_benchmark.py benchmark-q2-tree ../../$i ../../unsat.txt false
 done
 
 # Q3 Benchmarks

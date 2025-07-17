@@ -6,4 +6,4 @@ input_files:
 
 properties:
   - property_file: ../../unsat.txt
-    expected_verdict: true
+    expected_verdict: false
