@@ -23,6 +23,7 @@ def run(
     image=False,
     plot_function_args=False,
     verbose=False,
+    pure_smt=False,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -200,14 +201,26 @@ def run(
         )
     )
 
-    p = Mole(
-        s,
-        variables,
-        quotient,
-        exact=exact,
-        draw_image=(image or search_space_test),
-        considered_counterexamples=considered_counterexamples,
-    )
+    if pure_smt:
+        from molehill.pure_smt import get_constraints
+        constraints = get_constraints(
+            variables,
+            variables_in_ranges,
+            quotient,
+            f,
+        )
+        s.add(constraints)
+        p = None
+
+    else:
+        p = Mole(
+            s,
+            variables,
+            quotient,
+            exact=exact,
+            draw_image=(image or search_space_test),
+            considered_counterexamples=considered_counterexamples,
+        )
 
     model = None
     if s.check() == z3.sat:
@@ -229,15 +242,16 @@ def run(
         constraint.show_result(model, s, family=family)
     else:
         print("unsat")
-    print(f"Considered {p.mc_calls} models")
-    if print_reasons:
-        print(f"Reasons:")
-        for r in p.reasons:
-            print(f"  {r}")
-    if sum(p.mdp_fails_and_wins) > 0:
-        print(
-            f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)"
-        )
+    if not pure_smt:
+        print(f"Considered {p.mc_calls} models")
+        if print_reasons:
+            print(f"Reasons:")
+            for r in p.reasons:
+                print(f"  {r}")
+        if sum(p.mdp_fails_and_wins) > 0:
+            print(
+                f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)"
+            )
 
     if image:
         print("Drawing image")

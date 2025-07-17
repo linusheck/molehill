@@ -42,4 +42,16 @@
         <option>--timeout</option>
         <option>1000000000</option>
     </rundefinition>
+
+    <rundefinition name="SMT(LRA)">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>-m</option>
+        <option>molehill</option>
+        <option>--ce</option>
+        <option>none</option>
+        <option>--constraint</option>
+        <option>existsforall</option>
+        <option>--pure-smt</option>
+    </rundefinition>
 </benchmark>
