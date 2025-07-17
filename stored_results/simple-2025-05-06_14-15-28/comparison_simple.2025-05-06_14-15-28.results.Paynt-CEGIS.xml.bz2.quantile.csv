@@ -1,9 +1,0 @@
-1	benchmarks/files/simple/sat_pole.yml	sat	true	true	0.359391	0.45404196200252045	164102144
-2	benchmarks/files/simple/unsat_grid.yml	unsat	false	false	0.366326	0.4645712790006655	139583488
-3	benchmarks/files/simple/sat_grid.yml	sat	true	true	0.415241	0.5565519189985935	139960320
-4	benchmarks/files/simple/sat_dpm.yml	sat	true	true	0.638289	0.7662347320001572	219631616
-5	benchmarks/files/simple/sat_network.yml	sat	true	true	0.973594	1.0711208129978331	139079680
-6	benchmarks/files/simple/unsat_grid-10-sl-4fsc.yml	unsat	false	false	16.44289	16.544690956998238	152440832
-7	benchmarks/files/simple/sat_grid-meet-sl-2fsc.yml	sat	true	true	23.110277	23.241390686001978	636960768
-8	benchmarks/files/simple/sat_herman.yml	sat	true	true	29.719856	29.830654319997848	898973696
-9	benchmarks/files/simple/sat_samplerocks.yml	sat	true	true	57.032565	57.134817753998504	154726400
