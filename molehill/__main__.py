@@ -72,6 +72,7 @@ if __name__ == "__main__":
         help="Memory size for the considered FSCs",
     )
     parser.add_argument("--reasons", action="store_true", help="Print reasons")
+    parser.add_argument("--pure-smt", action="store_true", help="Use pure SMT solver")
     args, unknown = parser.parse_known_args()
 
     if args.constraint == "none":
@@ -111,4 +112,5 @@ if __name__ == "__main__":
         image=args.image,
         plot_function_args=args.plot_args,
         verbose=args.verbose,
+        pure_smt=args.pure_smt,
     )

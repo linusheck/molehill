@@ -4,7 +4,7 @@ dtmc
 const double p=0.4;
 const double q=0.8;
 
-hole int x1 in {1,2};
+hole int x1 in {3,4,5,6};
 hole int x2 in {3,4};
 hole int x3 in {8};
 //const int x2 = 3;
@@ -24,7 +24,7 @@ module die
 endmodule
 
 rewards "coin_flips"
-	s<7 : 1;
+	s<7 : 0.5;
 endrewards
 
 label "s0" = s=0;
@@ -34,4 +34,4 @@ label "s3" = s=3;
 label "s4" = s=4;
 label "s5" = s=5;
 label "good" = s!=5;
-label "done" = s=7;
+label "done" = s>=5;
