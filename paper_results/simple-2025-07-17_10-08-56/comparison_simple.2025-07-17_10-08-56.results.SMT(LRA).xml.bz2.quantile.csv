@@ -1,0 +1,6 @@
+1	benchmarks/files/simple-q1/pomdps-sat_mem_1_grid-avoid-4-0.1_1.yml	sat	true	true	0.442472	1.0186875201761723	151973888
+2	benchmarks/files/simple-q1/pomdps-sat_mem_1_network_1.yml	sat	true	true	1.142503	1.2756167277693748	138899456
+3	benchmarks/files/simple-q1/pomdps-sat_mem_2_grid-avoid-4-0.1_2.yml	sat	true	true	1.438036	1.7533328356221318	157491200
+4	benchmarks/files/simple-q1/pomdps-sat_mem_1_4x5x2-95_1.yml	sat	true	true	3.324535	3.857449653558433	223338496
+5	benchmarks/files/simple-q1/pomdps-sat_mem_1_query-s2_1.yml	sat	true	true	51.052405	51.2032951740548	171462656
+6	benchmarks/files/simple-q1/pomdps-sat_mem_3_grid-avoid-4-0.1_3.yml	sat	true	true	518.006639	518.7547719925642	4976259072

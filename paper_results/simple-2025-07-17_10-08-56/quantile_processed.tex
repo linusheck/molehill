@@ -46,10 +46,10 @@
         % legend
         % legend font size smaller
         legend style={nodes={scale=0.5, transform shape}},
-        legend entries={NAMES},
+        legend entries={Paynt-AR,Paynt-CEGIS,Paynt-Hybrid,SMPMC,SMT(LRA),},
         every axis legend/.append style={at={(1,0)}, anchor=south east, outer xsep=5pt, outer ysep=5pt,},
         ]
-        \foreach \tool in {FILES} {
+        \foreach \tool in {comparison_simple.2025-07-17_10-08-56.results.Paynt-AR.xml.bz2.quantile.csv,comparison_simple.2025-07-17_10-08-56.results.Paynt-CEGIS.xml.bz2.quantile.csv,comparison_simple.2025-07-17_10-08-56.results.Paynt-Hybrid.xml.bz2.quantile.csv,comparison_simple.2025-07-17_10-08-56.results.SMPMC.xml.bz2.quantile.csv,comparison_simple.2025-07-17_10-08-56.results.SMT(LRA).xml.bz2.quantile.csv} {
             \addplot+ [line width=1.5pt] table[y index=5] {\pathtostuff\tool};
         }
 \end{semilogyaxis}

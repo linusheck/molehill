@@ -16,7 +16,6 @@ from benchexec.tablegenerator import util
 
 sys.dont_write_bytecode = True  # prevent creation of .pyc files
 
-
 def get_extract_value_function(column_identifier):
     """
     returns a function that extracts the value for a column.
@@ -135,6 +134,10 @@ def main(args=None):
     for run_result in run_set_result.results:
         run_result.id = run_result.task_id
     relevant_id_columns = tablegenerator.select_relevant_id_columns(results)
+
+    # print(relevant_id_columns)
+
+    relevant_id_columns = [True, True, True, False, False]
 
     # write output
     index = start_index

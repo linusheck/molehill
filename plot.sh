@@ -6,6 +6,7 @@ PYTHONPATH=$(pwd) python3 $(which table-generator) $(find $RESULT_DIR -type f | 
 
 for x in $(find $RESULT_DIR -type f | grep ".*results\.[^.]*\.xml\.bz2$"); do
     echo "Processing $x"
+    echo "python3 misc/plots/quantile-generator.py --correct-only $x"
     PYTHONPATH=$(pwd) python3 misc/plots/quantile-generator.py --correct-only $x > $RESULT_DIR/$(basename $x).quantile.csv
 done
 

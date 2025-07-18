@@ -1,0 +1,71 @@
+\documentclass{standalone}
+\usepackage[
+    group-digits=integer, group-minimum-digits=4,
+    free-standing-units, unit-optional-argument,
+]{siunitx}[=v2]
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\definecolor{ruby}{HTML}{D81E5B}
+\definecolor{pastelgreen}{HTML}{58bc82}
+
+\pgfplotsset{
+    compat=1.18,
+    log ticks with fixed point,
+    table/col sep=tab,
+    unbounded coords=jump,
+    filter discard warning=false,
+}
+\SendSettingsToPgf
+
+\newcommand{\pathtostuff}{}
+
+\begin{document}
+\newcommand{\scatterfile}{scatter_Paynt-Hybrid.table.csv}
+\begin{tikzpicture}
+\begin{loglogaxis}[
+    xlabel=CPU time for SMPMC (\second),
+    ylabel=CPU time for Paynt-Hybrid (\second),
+    xmin=0.1, xmax=50000,
+    ymin=0.1, ymax=50000,
+    domain=0.1:10001,
+    clip mode=individual,
+    axis equal image,
+    axis lines=left, % only left and bottom axes
+    xtick={0.1,1,10,100,1000,10000,30000},
+    ytick={0.1,1,10,100,1000,10000,30000},
+    xticklabels={$0.1$,$1$,$10$,$100$,$1000$,$10000$,\textbf{NR}},
+    yticklabels={$0.1$,$1$,$10$,$100$,$1000$,$10000$,\textbf{NR}},
+    xticklabel style={rotate=45, anchor=north east},
+    minor tick num=0, % Disable minor ticks
+    legend style={at={(0.9, 0)},anchor=south east}
+    ]
+    \addlegendimage{only marks, mark=square*, draw=pastelgreen, fill=pastelgreen}
+    \addlegendimage{only marks, mark=*, draw=ruby, fill=ruby}
+    % Main scatter plot
+    \addplot+[only marks, scatter, scatter src=explicit symbolic, 
+              scatter/classes={sat={mark=square*, draw=pastelgreen, fill=pastelgreen}, unsat={mark=*, draw=ruby, fill=ruby}}] table[
+                 header=false,
+                 skip first n=3,
+                 x index=5,
+                 y index=8,
+                 meta index=1
+            ] {\pathtostuff\scatterfile};
+    \addlegendentry{sat}
+    \addlegendentry{unsat}
+
+
+    % Ensure scatter_Paynt-Hybrid.table.csv has 'sat' and 'unsat' in the meta column (index 2)
+
+    % Reference lines
+    \addplot[gray, domain=0.1:10000] {x};
+    \addplot[gray, domain=0.1:1000] {10*x};
+    \addplot[gray, domain=1:10000] {x/10};
+
+    % Dashed NR lines
+    \addplot[gray, thick, dashed, domain=0.1:30000] {30000}; % horizontal NR
+    \addplot[gray, thick, dashed] coordinates {(30000,0.1) (30000,30000)}; % vertical NR
+
+\end{loglogaxis}
+\end{tikzpicture}
+
+\end{document}

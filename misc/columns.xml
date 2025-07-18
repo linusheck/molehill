@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<columns>
+    <column title="expected" />
+    <column title="status" />
+    <column title="correct" />
+    <column title="cputime" />
+    <column title="walltime" />
+    <column title="memUsage" />
+</columns>
