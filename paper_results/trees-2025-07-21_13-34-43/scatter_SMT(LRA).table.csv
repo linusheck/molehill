@@ -1,0 +1,13 @@
+tool	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set	SMPMC	SMPMC	SMPMC	SMPMC	SMT(LRA)	SMT(LRA)	SMT(LRA)	SMT(LRA)
+../../benchmarks/files/benchmark-q2-tree/	status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+benchmark-q2-tree-sat_drone-4-1.yml	TIMEOUT	1800.612101	1801.6360799493268		TIMEOUT	1800.610533	1800.9667745418847	
+benchmark-q2-tree-sat_drone-4-2.yml	TIMEOUT	1800.228115	1808.3938047634438		TIMEOUT	1800.612287	1800.9770948523656	
+benchmark-q2-tree-sat_drone-8-2.yml	TIMEOUT	1800.624424	1800.9737461870536		TIMEOUT	1800.694181	1800.9453571503982	
+benchmark-q2-tree-sat_grid-avoid-4-0.1.yml	true	0.440566	0.853831771761179		true	0.475078	0.8459067502990365	
+benchmark-q2-tree-sat_hallway.yml	TIMEOUT	1758.552478	1830.0605630818754		TIMEOUT	1756.966234	1831.0021563824266	
+benchmark-q2-tree-sat_maze-alex.yml	true	1.735476	2.14842661190778		true	95.378996	95.77578610926867	
+benchmark-q2-tree-sat_nrp-8.yml	true	0.455054	0.8549980036914349		true	0.529083	0.8855214845389128	
+benchmark-q2-tree-sat_refuel-06.yml	true	46.390154	46.854222484864295		true	168.732532	169.17220702581108	
+benchmark-q2-tree-sat_refuel-20.yml	true	1016.143409	1018.065047760494		TIMEOUT	1800.74866	1801.0082935588434	
+benchmark-q2-tree-sat_rocks-12.yml	true	54.459281	54.902716658078134		true	407.997674	408.3565682480112	

@@ -1,0 +1,92 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison_trees.xml
+name:                    comparison_trees
+run sets:                SMPMC, PAYNT-CEGIS, SMT(LRA)
+date:                    Mon, 2025-07-21 13:34:43 UTC
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/molehill-U9ijTdgT/bin/python3
+options:
+parallel runs:           26
+resource limits:
+- memory:                16000.0 MB
+- time:                  1800 s
+hardware requirements:
+- memory:                16000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    localhost
+os:                      Linux-6.1.0-23-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   True
+ram:                     540660.658176 MB
+------------------------------------------------------------
+
+
+
+SMPMC
+Run set 1 of 3 with options 'misc/find_smallest_tree.py' and propertyfile 'None'
+
+inputfile                                     status                       cpu time   wall time        host
+-----------------------------------------------------------------------------------------------------------
+benchmark-q2-tree-sat_drone-4-1.yml           TIMEOUT                       1800.61     1801.64        None
+benchmark-q2-tree-sat_drone-4-2.yml           TIMEOUT                       1800.23     1808.39        None
+benchmark-q2-tree-sat_drone-8-2.yml           TIMEOUT                       1800.62     1800.97        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1.yml    true                             0.44        0.85        None
+benchmark-q2-tree-sat_hallway.yml             TIMEOUT                       1758.55     1830.06        None
+benchmark-q2-tree-sat_maze-alex.yml           true                             1.74        2.15        None
+benchmark-q2-tree-sat_nrp-8.yml               true                             0.46        0.85        None
+benchmark-q2-tree-sat_refuel-06.yml           true                            46.39       46.85        None
+benchmark-q2-tree-sat_refuel-20.yml           true                          1016.14     1018.07        None
+benchmark-q2-tree-sat_rocks-12.yml            true                            54.46       54.90        None
+-----------------------------------------------------------------------------------------------------------
+Run set 1                                     done                          8279.80     1831.02           -
+
+
+PAYNT-CEGIS
+Run set 2 of 3 with options 'misc/find_smallest_tree_paynt.py' and propertyfile 'None'
+
+inputfile                                     status                       cpu time   wall time        host
+-----------------------------------------------------------------------------------------------------------
+benchmark-q2-tree-sat_drone-4-1.yml           TIMEOUT                       1800.62     1800.90        None
+benchmark-q2-tree-sat_drone-4-2.yml           TIMEOUT                       1800.63     1800.90        None
+benchmark-q2-tree-sat_drone-8-2.yml           TIMEOUT                       1800.64     1800.93        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1.yml    true                             0.32        0.58        None
+benchmark-q2-tree-sat_hallway.yml             TIMEOUT                       1758.46     1830.12        None
+benchmark-q2-tree-sat_maze-alex.yml           true                             6.96        7.23        None
+benchmark-q2-tree-sat_nrp-8.yml               true                             0.34        0.59        None
+benchmark-q2-tree-sat_refuel-06.yml           true                           208.83      209.13        None
+benchmark-q2-tree-sat_refuel-20.yml           true                             3.40        3.67        None
+benchmark-q2-tree-sat_rocks-12.yml            true                            26.84       27.11        None
+-----------------------------------------------------------------------------------------------------------
+Run set 2                                     done                          7407.23     1831.12           -
+
+
+SMT(LRA)
+Run set 3 of 3 with options 'misc/find_smallest_tree_lra.py' and propertyfile 'None'
+
+inputfile                                     status                       cpu time   wall time        host
+-----------------------------------------------------------------------------------------------------------
+benchmark-q2-tree-sat_drone-4-1.yml           TIMEOUT                       1800.61     1800.97        None
+benchmark-q2-tree-sat_drone-4-2.yml           TIMEOUT                       1800.61     1800.98        None
+benchmark-q2-tree-sat_drone-8-2.yml           TIMEOUT                       1800.69     1800.95        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1.yml    true                             0.48        0.85        None
+benchmark-q2-tree-sat_hallway.yml             TIMEOUT                       1756.97     1831.00        None
+benchmark-q2-tree-sat_maze-alex.yml           true                            95.38       95.78        None
+benchmark-q2-tree-sat_nrp-8.yml               true                             0.53        0.89        None
+benchmark-q2-tree-sat_refuel-06.yml           true                           168.73      169.17        None
+benchmark-q2-tree-sat_refuel-20.yml           TIMEOUT                       1800.75     1801.01        None
+benchmark-q2-tree-sat_rocks-12.yml            true                           408.00      408.36        None
+-----------------------------------------------------------------------------------------------------------
+Run set 3                                     done                          9632.93     1831.87           -
+
+Statistics:             30 Files
+  correct:              17
+    correct true:       17
+    correct false:       0
+  incorrect:             0
+    incorrect true:      0
+    incorrect false:     0
+  unknown:              13

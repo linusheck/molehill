@@ -1,6 +1,7 @@
 tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
 run set			SMPMC	SMPMC	SMPMC	SMPMC	SMT(LRA)	SMT(LRA)	SMT(LRA)	SMT(LRA)
 ../../benchmarks/files/robust-q3/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+mdp-families-sat_mem_1_avoid-8-2-big-family_1.yml	sat	true	TIMEOUT	1801.158341	1803.1984208719805		TIMEOUT	1800.90627	1801.9568104660138	
 mdp-families-sat_mem_1_avoid-8-2-easy-big-family_1.yml	sat	true	TIMEOUT	30000	30000		TIMEOUT	30000	30000	
 mdp-families-sat_mem_1_avoid-8-2-easy_1.yml	sat	true	TIMEOUT	30000	30000		TIMEOUT	30000	30000	
 mdp-families-sat_mem_1_avoid-8-2_1.yml	sat	true	TIMEOUT	30000	30000		TIMEOUT	30000	30000	

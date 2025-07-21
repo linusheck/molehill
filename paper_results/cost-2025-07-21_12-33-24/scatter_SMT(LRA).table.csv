@@ -1,0 +1,11 @@
+tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set			SMPMC	SMPMC	SMPMC	SMPMC	SMT(LRA)	SMT(LRA)	SMT(LRA)	SMT(LRA)
+../../benchmarks/files/benchmark-q2-cost/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+benchmark-q2-cost-sat_dpm.yml	sat	true	true	9.21613	9.476713508367538		TIMEOUT	1800.682569	1800.8826559940353	
+benchmark-q2-cost-sat_grid-10-sl-4fsc.yml	sat	true	true	1.024544	1.2606463162228465		TIMEOUT	30000	30000	
+benchmark-q2-cost-sat_grid-meet-sl-2fsc.yml	sat	true	true	16.874688	17.10663729440421		TIMEOUT	30000	30000	
+benchmark-q2-cost-sat_maze.yml	sat	true	true	0.452604	0.6856898106634617		true	225.971414	226.2221663724631	
+benchmark-q2-cost-unsat_dpm.yml	unsat	false	false	7.083149	7.338448585011065		TIMEOUT	30000	30000	
+benchmark-q2-cost-unsat_grid-10-sl-4fsc.yml	unsat	false	false	1.241704	1.4682288048788905		TIMEOUT	30000	30000	
+benchmark-q2-cost-unsat_grid-meet-sl-2fsc.yml	unsat	false	false	72.214595	72.47833698056638		TIMEOUT	30000	30000	
+benchmark-q2-cost-unsat_maze.yml	unsat	false	false	1.298595	1.5418715849518776		TIMEOUT	30000	30000	

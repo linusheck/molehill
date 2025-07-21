@@ -1,0 +1,6 @@
+Tool                       Solved    Uniquely Solved
+--------------------------------------------------
+PAYNT-1-by-1                   43                  4
+PAYNT-AR-MDP-Eval              39                  1
+SMPMC                          40                  8
+SMT(LRA)                        0                  0
