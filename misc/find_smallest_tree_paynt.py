@@ -33,7 +33,7 @@ def main():
         found_sat = False
         for line in process.stdout:
             print(line, end="")  # Already includes newline
-            if line.strip() == "sat":
+            if line.strip() == "feasible: yes":
                 found_sat = True
 
         process.wait()

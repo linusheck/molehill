@@ -316,3 +316,24 @@ class Mole:
 
                 return False, check_result.consistent_scheduler
             return False, None
+
+    def load_cache(self, cache_file):
+        """Load a cache from a file."""
+        import pickle
+        with open(cache_file, "rb") as f:
+            cache = pickle.load(f)
+            self.all_violated_models = cache["all_violated_models"]
+            self.inconclusive_models = cache["inconclusive_models"]
+            print("Cache loaded successfully.")
+    
+    def dump_cache(self, cache_file):
+        """Dump the current cache to a file."""
+        import pickle
+        cache = {
+            "all_violated_models": self.all_violated_models,
+            "inconclusive_models": self.inconclusive_models,
+        }
+        with open(cache_file, "wb") as f:
+            pickle.dump(cache, f)
+        print("Cache dumped successfully.")
+

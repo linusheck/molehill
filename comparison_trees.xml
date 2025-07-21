@@ -22,4 +22,10 @@
         <require cpuCores="1"/>
         <option>misc/find_smallest_tree_paynt.py</option>
     </rundefinition>
+
+    <rundefinition name="SMT(LRA)">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>misc/find_smallest_tree_lra.py</option>
+    </rundefinition>
 </benchmark>

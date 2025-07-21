@@ -24,6 +24,8 @@ def run(
     plot_function_args=False,
     verbose=False,
     pure_smt=False,
+    dump_cache=None,
+    load_cache=None,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -222,6 +224,9 @@ def run(
             considered_counterexamples=considered_counterexamples,
         )
 
+        if load_cache is not None:
+            p.load_cache(load_cache)
+
     model = None
     if s.check() == z3.sat:
         print("sat")
@@ -252,6 +257,8 @@ def run(
             print(
                 f"MDP checking had {p.mdp_fails_and_wins[0]} fails and {p.mdp_fails_and_wins[1]} wins ({round(p.mdp_fails_and_wins[1] / sum(p.mdp_fails_and_wins) * 100, 1)}% wins)"
             )
+        if dump_cache is not None:
+            p.dump_cache(dump_cache)
 
     if image:
         print("Drawing image")

@@ -10,6 +10,7 @@ def main():
     arg1 = sys.argv[1]
     x = 1
 
+    cache_file = "cache.pkl"
     while True:
         print(f"Running with --nodes {x}")
         process = subprocess.Popen(
@@ -22,7 +23,9 @@ def main():
                 "tree",
                 "--nodes",
                 str(x),
-            ],
+                "--dump-cache",
+                cache_file,
+            ] + (["--load-cache", cache_file] if x > 1 else []),
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,

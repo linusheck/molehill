@@ -73,6 +73,9 @@ if __name__ == "__main__":
     )
     parser.add_argument("--reasons", action="store_true", help="Print reasons")
     parser.add_argument("--pure-smt", action="store_true", help="Use pure SMT solver")
+
+    parser.add_argument("--dump-cache", type=str, default=None, help="Dump the cache to a file")
+    parser.add_argument("--load-cache", type=str, default=None, help="Load the cache from a file")
     args, unknown = parser.parse_known_args()
 
     if args.constraint == "none":
@@ -113,4 +116,6 @@ if __name__ == "__main__":
         plot_function_args=args.plot_args,
         verbose=args.verbose,
         pure_smt=args.pure_smt,
+        dump_cache=args.dump_cache,
+        load_cache=args.load_cache,
     )
