@@ -169,7 +169,6 @@ def get_constraints(variables, variables_in_bounds, quotient):
     assertions.append(z3_compare(value_vars[initial_state], z3.RealVal(comparison_value)))
 
     print("Done with assertions")
-    print(assertions)
     def f(*args, **kwargs):
         return z3.And(*assertions)
     return f
