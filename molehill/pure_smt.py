@@ -1,6 +1,5 @@
 """A pure SMT approach. Bad performance, but good comparison."""
 
-
 import z3
 from molehill.constraints import Constraint
 from stormpy import model_checking
@@ -28,7 +27,6 @@ def get_constraints(variables_in_bounds, quotient):
         spec = quotient.specification
         print(spec)
         prop = spec.all_properties()[0]
-
 
         # assert that prop.formula is a reachability property
         assert prop.formula.subformula.is_eventually_formula
@@ -66,25 +64,21 @@ def get_constraints(variables_in_bounds, quotient):
         }
         z3_compare = z3_comparators[comparison_operator]
 
-        def qu(x):
-            return z3.ForAll(variables, z3.Implies(variables_in_bounds(variables), x))
-
-
         reachability_vars = []
         for state in range(transition_matrix.nr_columns):
-            reach_var = z3.Bool(f"reach_{state}")
+            reach_var = z3.Function(f"reach_{state}", *variable_types, z3.BoolSort())
             reachability_vars.append(reach_var)
 
         min_step_vars = []
         for state in range(transition_matrix.nr_columns):
-            min_step_var = z3.Int(f"min_step_{state}")
+            min_step_var = z3.Function(f"min_step_{state}", *variable_types, z3.IntSort())
             min_step_vars.append(min_step_var)
-            assertions.append(min_step_var >= 0)
+            assertions.append(min_step_var(*variables) >= 0)
 
         for state in range(transition_matrix.nr_columns):
             if target_states.get(state):
-                assertions.append(reachability_vars[state])
-                assertions.append(min_step_vars[state] == 0)
+                assertions.append(reachability_vars[state](*variables))
+                assertions.append(min_step_vars[state](*variables) == 0)
                 continue
             
             statement_for_state = []
@@ -108,39 +102,35 @@ def get_constraints(variables_in_bounds, quotient):
                     to_state = entry.column
                     if to_state == state:
                         continue
-                    reachability_vars_of_row.append(reachability_vars[to_state])
-                    min_step_vars_of_row.append(min_step_vars[to_state])
+                    reachability_vars_of_row.append(reachability_vars[to_state](*variables))
+                    min_step_vars_of_row.append(min_step_vars[to_state](*variables))
                 statement_for_state.append(z3.Implies(assignment_as_z3, z3.Or(reachability_vars_of_row)))
                 assertions.append(
                     z3.Implies(
-                        z3.And(reachability_vars[state], assignment_as_z3),
+                        z3.And(reachability_vars[state](*variables), assignment_as_z3),
                         z3.And(
-                            z3.Or([min_step_vars[state] == x + 1 for x in min_step_vars_of_row]),
-                            z3.And([min_step_vars[state] <= x + 1 for x in min_step_vars_of_row])
+                            z3.Or([min_step_vars[state](*variables) == x + 1 for x in min_step_vars_of_row]),
+                            z3.And([min_step_vars[state](*variables) <= x + 1 for x in min_step_vars_of_row])
                         )
                     )
                 )
-            assertions.append(z3.Implies(reachability_vars[state], z3.Or(statement_for_state)))
-
-
-        def is_approx(a, b, epsilon=1e-4):
-            return z3.And(a >= b - epsilon, a <= b + epsilon)
+            assertions.append(z3.Implies(reachability_vars[state](*variables), z3.Or(statement_for_state)))
 
         value_vars = []
         for state in range(transition_matrix.nr_columns):
-            value_var = z3.Real(f"v{state}")
+            value_var = z3.Function(f"value_{state}", *variable_types, z3.RealSort())
             value_vars.append(value_var)
-            assertions.append(value_var >= 0)
+            assertions.append(value_var(*variables) >= 0)
             if is_prob:
-                assertions.append(value_var <= 1)
+                assertions.append(value_var(*variables) <= 1)
 
         for state in range(transition_matrix.nr_columns):
             if target_states.get(state):
                 if is_prob:
-                    assertions.append(value_vars[state] == z3.RealVal(1))
+                    assertions.append(value_vars[state](*variables) == z3.RealVal(1))
                 else:
-                    assertions.append(value_vars[state] == z3.RealVal(0))
-                assertions.append(reachability_vars[state])
+                    assertions.append(value_vars[state](*variables) == z3.RealVal(0))
+                assertions.append(reachability_vars[state](*variables))
                 continue
 
             statement_for_state = []
@@ -163,11 +153,11 @@ def get_constraints(variables_in_bounds, quotient):
                         continue
                     assert value > 0, "Transition probabilities must be positive."
                     to_state = entry.column
-                    value_vars_of_row.append(z3.RealVal(value) * value_vars[to_state])
-                statement_for_state.append(z3.Implies(assignment_as_z3, value_vars[state] == z3.Sum(value_vars_of_row)))
+                    value_vars_of_row.append(z3.RealVal(value) * value_vars[to_state](*variables))
+                statement_for_state.append(z3.Implies(assignment_as_z3, value_vars[state](*variables) == z3.Sum(value_vars_of_row)))
             assertions.append(z3.And(statement_for_state))
-            assertions.append(z3.Implies(z3.Not(reachability_vars[state]), value_vars[state] == z3.RealVal(0)))
-        assertions.append(z3_compare(value_vars[initial_state], z3.RealVal(comparison_value)))
+            assertions.append(z3.Implies(z3.Not(reachability_vars[state](*variables)), value_vars[state](*variables) == z3.RealVal(0)))
+        assertions.append(z3_compare(value_vars[initial_state](*variables), z3.RealVal(comparison_value)))
 
         print("Done with assertions")
         return z3.And(*assertions)
