@@ -1,1 +1,1 @@
-P<=1 [ F "unfair" ]
+P>=0.06 [ F "unfair" ]

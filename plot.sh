@@ -10,6 +10,9 @@ for x in $(find $RESULT_DIR -type f | grep ".*results\.[^.]*\.xml\.bz2$"); do
     PYTHONPATH=$(pwd) python3 misc/plots/quantile-generator.py --correct-only $x > $RESULT_DIR/$(basename $x).quantile.csv
 done
 
+PYTHONPATH=$(pwd) python3 misc/plots/unique_table.py $RESULT_DIR/tablegenerator.table.csv > $RESULT_DIR/unique_table.txt
+PYTHONPATH=$(pwd) python3 misc/plots/latex_table.py $RESULT_DIR/tablegenerator.table.csv > $RESULT_DIR/latex_table.tex
+
 cd $RESULT_DIR
 
 QUANTILE_NAMES=""
