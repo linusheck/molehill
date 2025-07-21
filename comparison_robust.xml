@@ -23,7 +23,7 @@
         <option>existsforall</option>
     </rundefinition>
 
-    <rundefinition name="PAYNT-1-by-1">
+    <rundefinition name="PAYNT-AR-1-by-1">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>robust_policy_baseline.py</option>

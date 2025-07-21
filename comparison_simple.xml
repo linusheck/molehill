@@ -21,7 +21,7 @@
         <option>none</option>
     </rundefinition>
 
-    <rundefinition name="Paynt-AR">
+    <rundefinition name="PAYNT-AR">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>build/paynt/paynt.py</option>
@@ -29,7 +29,7 @@
         <option>ar</option>
     </rundefinition>
 
-    <rundefinition name="Paynt-CEGIS">
+    <rundefinition name="PAYNT-CEGIS">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>build/paynt/paynt.py</option>
@@ -37,7 +37,7 @@
         <option>cegis</option>
     </rundefinition>
 
-    <rundefinition name="Paynt-Hybrid">
+    <rundefinition name="PAYNT-Hybrid">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>build/paynt/paynt.py</option>
