@@ -10,8 +10,8 @@ def main():
     method = sys.argv[1]
     folder = sys.argv[2]
 
-    if method not in ["paynt", "molehill"]:
-        print("Method must be either 'paynt' or 'molehill'")
+    if method not in ["paynt", "molehill", "smtlra"]:
+        print("Method must be either 'paynt', 'molehill' or 'smtlra'")
         sys.exit(1)
     
 
@@ -37,6 +37,15 @@ def main():
             "molehill",
             folder,
         ]
+    elif method == "smtlra":
+        invocation = [
+            "python",
+            "-m",
+            "molehill",
+            "--pure-smt",
+            folder,
+        ]
+
     invocation.extend(cli_args.split())
 
     process = subprocess.Popen(

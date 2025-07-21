@@ -24,4 +24,11 @@
         <option>misc/constrained_benchmark.py</option>
         <option>paynt</option>
     </rundefinition>
+
+    <rundefinition name="SMT(LRA)">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>misc/constrained_benchmark.py</option>
+        <option>smtlra</option>
+    </rundefinition>
 </benchmark>

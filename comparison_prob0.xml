@@ -20,11 +20,37 @@
         <option>none</option>
     </rundefinition>
 
+    <rundefinition name="SMPMC+Prob0">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>-m</option>
+        <option>molehill</option>
+        <option>--ce</option>
+        <option>none</option>
+        <option>--constraint</option>
+        <option>prob0</option>
+    </rundefinition>
+
     <rundefinition name="Paynt-CEGIS">
+      <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>cegis</option>
+        <option>--constraint</option>
+        <option>prob0</option>
+      </rundefinition>
+    </benchmark>
+
+    <rundefinition name="Paynt-CEGIS+Prob0">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>build/paynt/paynt.py</option>
         <option>--method</option>
         <option>cegis</option>
+        <option>--constraint</option>
+        <option>prob0</option>
     </rundefinition>
+
+    <!-- Adding SMT(LRA) does not help, as we will see that it cannot solve these benchmarks from C4, and the prob0 constraint is already part of the encoding -->
 </benchmark>
