@@ -83,6 +83,13 @@ done
 
 
 
+for i in $(find ../resources/benchmark-general -type d -name 'sat_*'); do
+    python create_benchmark.py benchmark-general ../../$i ../../sat.txt true
+done
+for i in $(find ../resources/benchmark-general -type d -name 'unsat_*'); do
+    python create_benchmark.py benchmark-general ../../$i ../../unsat.txt false
+done
+
 
 # Old Robust Benchmarks
 # for i in avoid-8-2 avoid-8-2-easy dpm-switch-q10 dpm-switch-q10-big obstacles-10-6-skip-easy obstacles-demo rocks-6-4 rover-100-big rover-1000 uav-operator-roz-workload uav-roz ; do

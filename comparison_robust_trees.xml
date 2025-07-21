@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <benchmark tool="tools.synthesis" timelimit="1800s" hardtimelimit="1800s" memlimit="16GB">
     <tasks name="SAT Benchmarks">
-      <include>benchmarks/files/robust/*.yml</include>
+      <include>benchmarks/files/benchmark-general/*.yml</include>
       <propertyfile>benchmarks/sat.txt</propertyfile>
     </tasks>
 
     <tasks name="UNSAT Benchmarks">
-      <include>benchmarks/files/robust/*.yml</include>
+      <include>benchmarks/files/benchmark-general/*.yml</include>
       <propertyfile>benchmarks/unsat.txt</propertyfile>
     </tasks>
 
     <!-- Define executors -->
-    <rundefinition name="Smallest-Tree">
+    <rundefinition name="SMPMC">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
         <option>misc/find_smallest_tree_robust.py</option>
