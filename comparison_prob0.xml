@@ -39,8 +39,7 @@
         <option>cegis</option>
         <option>--constraint</option>
         <option>prob0</option>
-      </rundefinition>
-    </benchmark>
+    </rundefinition>
 
     <rundefinition name="Paynt-CEGIS+Prob0">
         <column title="Iterations" value="iterations"/>

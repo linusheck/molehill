@@ -195,7 +195,16 @@ def run(
         return z3.And(*statement)
 
     # Create the valid(...) function
-    f = z3.PropagateFunction("valid", *[x.sort() for x in variables], z3.BoolSort())
+    if pure_smt:
+        from molehill.pure_smt import get_constraints
+        f = get_constraints(
+            variables,
+            variables_in_ranges,
+            quotient,
+        )
+        p = None
+    else:
+        f = z3.PropagateFunction("valid", *[x.sort() for x in variables], z3.BoolSort())
 
     s.add(
         constraint.build_constraint(
@@ -203,18 +212,7 @@ def run(
         )
     )
 
-    if pure_smt:
-        from molehill.pure_smt import get_constraints
-        constraints = get_constraints(
-            variables,
-            variables_in_ranges,
-            quotient,
-            f,
-        )
-        s.add(constraints)
-        p = None
-
-    else:
+    if not pure_smt:
         p = Mole(
             s,
             variables,
