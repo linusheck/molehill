@@ -26,7 +26,7 @@ def check_model(mdp, prop, hint, precision=1e-6):
     # environment.solver_environment.minmax_solver_environment.method = stormpy.MinMaxMethod.sound_value_iteration
 
     set_max_iterations(
-        environment.solver_environment.minmax_solver_environment, 1_000_000
+        environment.solver_environment.minmax_solver_environment, 10_000
     )
 
     # assert that prop.formula is a reachability property

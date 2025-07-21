@@ -154,7 +154,7 @@ def get_constraints(variables, variables_in_bounds, quotient, f):
                     value_vars_of_row.append(z3.RealVal(reward) + z3.RealVal(value) * value_vars[to_state](variables))
                 else:
                     value_vars_of_row.append(z3.RealVal(value) * value_vars[to_state](variables))
-            statement_for_state.append(z3.Implies(assignment_as_z3, is_approx(value_vars[state](variables), z3.Sum(value_vars_of_row))))
+            statement_for_state.append(z3.Implies(assignment_as_z3, value_vars[state](variables) == z3.Sum(value_vars_of_row)))
         assertions.append(z3.And(statement_for_state))
         assertions.append(z3.Implies(z3.Not(reachability_vars[state](variables)), value_vars[state](variables) == z3.RealVal(0)))
     assertions.append(z3_compare(value_vars[initial_state](variables), z3.RealVal(comparison_value)))
