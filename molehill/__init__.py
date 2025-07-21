@@ -198,7 +198,6 @@ def run(
     if pure_smt:
         from molehill.pure_smt import get_constraints
         f = get_constraints(
-            variables,
             variables_in_ranges,
             quotient,
         )
