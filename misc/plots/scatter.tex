@@ -23,8 +23,13 @@
 \newcommand{\scatterfile}{SCATTER_FILE}
 \begin{tikzpicture}
 \begin{loglogaxis}[
-    xlabel=CPU time for TOOL1 (\second),
-    ylabel=CPU time for TOOL2 (\second),
+    xlabel={\small CPU time for TOOL1 (\second)},
+    ylabel={\small CPU time for TOOL2 (\second)},
+    label style={font=\small},
+    xlabel near ticks,
+    ylabel near ticks,
+    xlabel shift={-1ex},
+    ylabel shift={-1ex},
     xmin=0.1, xmax=50000,
     ymin=0.1, ymax=50000,
     domain=0.1:10001,
@@ -33,11 +38,12 @@
     axis lines=left, % only left and bottom axes
     xtick={0.1,1,10,100,1000,10000,30000},
     ytick={0.1,1,10,100,1000,10000,30000},
-    xticklabels={$0.1$,$1$,$10$,$100$,$1000$,$10000$,\textbf{NR}},
-    yticklabels={$0.1$,$1$,$10$,$100$,$1000$,$10000$,\textbf{NR}},
-    xticklabel style={rotate=45, anchor=north east},
+    xticklabels={$10^{-1}$,$10^{0}$,$10^{1}$,$10^{2}$,$10^{3}$,$10^{4}$,\textbf{NR}},
+    yticklabels={$10^{-1}$,$10^{0}$,$10^{1}$,$10^{2}$,$10^{3}$,$10^{4}$,\textbf{NR}},
+    xticklabel style={rotate=45, anchor=north east, font=\small},
+    yticklabel style={font=\small},
     minor tick num=0, % Disable minor ticks
-    legend style={at={(0.9, 0)},anchor=south east}
+    legend style={at={(0.9, 0)},anchor=south east, font=\small}
     ]
     \addlegendimage{only marks, mark=square*, draw=pastelgreen, fill=pastelgreen}
     \addlegendimage{only marks, mark=*, draw=ruby, fill=ruby}

@@ -1,0 +1,35 @@
+tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set			SMPMC	SMPMC	SMPMC	SMPMC	PAYNT-AR-MDP-Eval	PAYNT-AR-MDP-Eval	PAYNT-AR-MDP-Eval	PAYNT-AR-MDP-Eval
+../../benchmarks/files/robust-q3/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+mdp-families-sat_mem_1_dpm-switch-q10-big-big-family_1.yml	sat	true	TIMEOUT	1801.459683	1802.6675594430417		true	326.290529	327.03107800893486	
+mdp-families-sat_mem_1_dpm-switch-q10-big-family_1.yml	sat	true	true	835.685605	836.577437329106		TIMEOUT	1800.652901	1801.5865132603794	
+mdp-families-sat_mem_1_dpm-switch-q10-big_1.yml	sat	true	TIMEOUT	1801.458346	1802.589701696299		true	3.672111	4.371330080553889	
+mdp-families-sat_mem_1_obstacles-10-6-skip-easy-big-family_1.yml	sat	true	true	26.029091	26.805675411596894		TIMEOUT	1800.658942	1801.4655754137784	
+mdp-families-sat_mem_1_obstacles-10-6-skip-easy_1.yml	sat	true	true	11.680004	12.440456680953503		TIMEOUT	1800.639712	1801.6527575263754	
+mdp-families-sat_mem_1_obstacles-demo_1.yml	sat	true	TIMEOUT	1801.087368	1802.6170494612306		true	0.380242	1.0393960643559694	
+mdp-families-sat_mem_1_pacman-6_1.yml	sat	true	TIMEOUT	1801.864468	1802.854784448631		true	8.349099	9.022212215699255	
+mdp-families-sat_mem_1_rocks-6-4_1.yml	sat	true	TIMEOUT	1801.531184	1802.4364839838818		true	20.941431	21.579891343601048	
+mdp-families-sat_mem_1_rover-100-big-big-family_1.yml	sat	true	true	1.002951	1.628499487414956		TIMEOUT	1800.705506	1801.387995120138	
+mdp-families-sat_mem_1_rover-1000-big-family_1.yml	sat	true	true	4.847956	5.492799570783973		TIMEOUT	1800.881029	1801.5666087819263	
+mdp-families-sat_mem_1_uav-operator-roz-workload_1.yml	sat	true	TIMEOUT	1801.558341	1802.64689083118		true	4.609891	5.182534454390407	
+mdp-families-sat_mem_1_uav-roz-big-family_1.yml	sat	true	OUT OF MEMORY	742.874081	743.5834607398137		true	34.751788	35.312109782360494	
+mdp-families-sat_mem_1_uav-roz_1.yml	sat	true	TIMEOUT	1801.795471	1802.7167237848043		true	3.77781	4.337590760551393	
+mdp-families-sat_mem_1_virus-big-family_1.yml	sat	true	true	3.171321	3.8480762941762805		unknown	2.395089	2.9582018619403243	
+other-sat_box-pushing.yml	sat	true	true	54.137423	54.32662600744516		TIMEOUT	1800.737772	1801.0396917825565	
+mdp-families-unsat_mem_1_dpm-switch-q10-big-big-family_1.yml	unsat	false	TIMEOUT	1800.804062	1801.1691829590127		false	1.960146	2.096170784905553	
+mdp-families-unsat_mem_1_dpm-switch-q10-big_1.yml	unsat	false	TIMEOUT	1800.979919	1801.4225419061258		false	0.667101	0.779785567894578	
+mdp-families-unsat_mem_1_obstacles-10-6-skip-easy-big-family_1.yml	unsat	false	false	27.516895	27.85937454365194		TIMEOUT	1800.6833	1801.1718749562278	
+mdp-families-unsat_mem_1_uav-operator-roz-workload-big-family_1.yml	unsat	false	TIMEOUT	1801.55396	1801.9629343142733		false	1.816062	1.9362454181537032	
+mdp-families-unsat_mem_1_uav-operator-roz-workload_1.yml	unsat	false	TIMEOUT	1801.108927	1801.4651079233736		false	1.04988	1.175344044342637	
+mdp-families-unsat_mem_1_uav-roz-big-family_1.yml	unsat	false	OUT OF MEMORY	950.29154	950.5788245163858		false	2.360129	2.4802665542811155	
+mdp-families-unsat_mem_1_uav-roz_1.yml	unsat	false	TIMEOUT	1801.513262	1801.8790801269934		false	1.65218	1.8054077848792076	
+mdp-families-unsat_mem_1_virus-big-family_1.yml	unsat	false	false	47.221623	47.48271196056157		unknown	3.575895	3.7334728287532926	
+other-unsat_box-pushing.yml	unsat	false	false	184.268714	184.52423146180809		TIMEOUT	1800.63255	1801.0263824099675	
+other-unsat_dpm.yml	unsat	false	false	79.113688	79.29247098602355		TIMEOUT	1800.681675	1801.3415692094713	
+pomdp-families-unsat_mem_1_dpm_1.yml	unsat	false	false	2.397088	2.66718481015414		TIMEOUT	1800.606021	1801.299802412279	
+pomdp-families-unsat_mem_1_obstacles-maze-4-2_1.yml	unsat	false	false	0.621205	0.8373187594115734		TIMEOUT	1800.589131	1801.5743013424799	
+pomdp-families-unsat_mem_1_obstacles-maze-4_1.yml	unsat	false	false	0.595388	0.7750366423279047		TIMEOUT	1800.590429	1801.3948319405317	
+pomdp-families-unsat_mem_2_avoid_2.yml	unsat	false	TIMEOUT	1800.670344	1800.914176641032		true	1123.605754	1124.2968920823187	
+pomdp-families-unsat_mem_2_dpm-switch-q10_2.yml	unsat	false	false	1331.156295	1331.40018275287		TIMEOUT	1800.597727	1801.3577722068876	
+pomdp-families-unsat_mem_2_obstacles-maze-4-2_2.yml	unsat	false	false	14.162096	14.36016893107444		TIMEOUT	1800.605652	1801.1985489055514	
+pomdp-families-unsat_mem_2_obstacles-maze-4_2.yml	unsat	false	false	12.906614	13.122508846223354		TIMEOUT	1800.603089	1801.2492930795997	

@@ -147,6 +147,8 @@ def main(args=None):
             task_id for task_id, show in zip(run_result.id, relevant_id_columns) if show
         )
         result_values = (util.remove_unit(value or "") for value in run_result.values)
+        if index == 1:
+            print(*itertools.chain([0], task_ids, result_values), sep="\t")
         print(*itertools.chain([index], task_ids, result_values), sep="\t")
 
 

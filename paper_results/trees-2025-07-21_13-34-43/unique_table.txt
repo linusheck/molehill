@@ -1,5 +1,0 @@
-Tool                       Solved    Uniquely Solved
---------------------------------------------------
-PAYNT-CEGIS                     0                  0
-SMPMC                           0                  0
-SMT(LRA)                        0                  0

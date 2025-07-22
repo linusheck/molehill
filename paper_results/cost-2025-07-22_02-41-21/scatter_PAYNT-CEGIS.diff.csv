@@ -1,0 +1,4 @@
+tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set			SMPMC	SMPMC	SMPMC	SMPMC	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS
+../../benchmarks/files/benchmark-q2-cost/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+benchmark-q2-cost-unsat_maze.yml	unsat	false	false	1.525541	1.7940138829872012		TIMEOUT	1800.614693	1800.9338606493548	

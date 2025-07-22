@@ -12,7 +12,7 @@ def process_file(input_path):
         return
 
     # Modify the data rows
-    for row in rows[4:]:
+    for row in rows[3:]:
         assert len(row) == 11
         for status_idx, cputime_idx, walltime_idx, _memory in [(3, 4, 5, 6), (7, 8, 9, 10)]:
             status = row[status_idx].strip().lower()

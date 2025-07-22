@@ -1,0 +1,13 @@
+tool	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set	SMPMC	SMPMC	SMPMC	SMPMC	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS
+../../benchmarks/files/benchmark-q2-tree/	status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+benchmark-q2-tree-sat_drone-4-1.yml	TIMEOUT	1800.606443	1801.734682360664		TIMEOUT	1800.613362	1800.9788581905887	
+benchmark-q2-tree-sat_drone-4-2.yml	TIMEOUT	1800.065239	1809.6472669020295		TIMEOUT	1800.615966	1800.9668826246634	
+benchmark-q2-tree-sat_drone-8-2.yml	TIMEOUT	1800.620458	1801.0215228516608		TIMEOUT	1800.617298	1800.9995078109205	
+benchmark-q2-tree-sat_grid-avoid-4-0.1.yml	true	0.503624	0.9420795375481248		true	0.372675	0.6437924727797508	
+benchmark-q2-tree-sat_hallway.yml	TIMEOUT	1759.956713	1831.0034086024389		TIMEOUT	1759.783719	1831.0022611981258	
+benchmark-q2-tree-sat_maze-alex.yml	true	2.03773	2.5344692757353187		true	8.229339	8.519970840774477	
+benchmark-q2-tree-sat_nrp-8.yml	true	0.550357	0.9797500483691692		true	0.393905	0.6493071867153049	
+benchmark-q2-tree-sat_refuel-06.yml	true	54.680513	55.197804872877896		true	249.661949	249.97831182461232	
+benchmark-q2-tree-sat_refuel-20.yml	true	1211.247473	1212.3318383628502		true	4.049067	4.320839513093233	
+benchmark-q2-tree-sat_rocks-12.yml	true	62.426693	62.875296854414046		true	31.415841	31.686241078190506	

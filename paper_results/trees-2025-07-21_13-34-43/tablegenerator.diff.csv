@@ -1,4 +1,0 @@
-tool	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
-run set	SMT(LRA)	SMT(LRA)	SMT(LRA)	SMT(LRA)	SMT(LRA)	SMPMC	SMPMC	SMPMC	SMPMC	SMPMC	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS
-benchmarks/files/benchmark-q2-tree/	status	CPU Time (s)	Wall Time (s)	Memory (MB)	Iterations	status	CPU Time (s)	Wall Time (s)	Memory (MB)	Iterations	status	CPU Time (s)	Wall Time (s)	Memory (MB)	Iterations
-benchmark-q2-tree-sat_refuel-20.yml	TIMEOUT	1800.74866	1801.0082935588434	2377.687040		true	1016.143409	1018.065047760494	1044.824064	1	true	3.403659	3.6731993490830064	174.264320	34

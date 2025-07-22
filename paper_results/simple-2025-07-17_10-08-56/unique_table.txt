@@ -1,7 +1,0 @@
-Tool                       Solved    Uniquely Solved
---------------------------------------------------
-Paynt-AR                       83                 10
-Paynt-CEGIS                    23                  0
-Paynt-Hybrid                   22                  0
-SMPMC                          82                  5
-SMT(LRA)                        6                  0
