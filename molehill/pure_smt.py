@@ -157,7 +157,9 @@ def get_constraints(variables_in_bounds, quotient):
                 statement_for_state.append(z3.Implies(assignment_as_z3, value_vars[state](*variables) == z3.Sum(value_vars_of_row)))
             assertions.append(z3.And(statement_for_state))
             assertions.append(z3.Implies(z3.Not(reachability_vars[state](*variables)), value_vars[state](*variables) == z3.RealVal(0)))
-        assertions.append(z3_compare(value_vars[initial_state](*variables), z3.RealVal(comparison_value)))
+        epsilon = z3.RealVal(1e-4) if comparison_operator in ["<", "<="] else -z3.RealVal(1e-4)
+
+        assertions.append(z3_compare(value_vars[initial_state](*variables), z3.RealVal(comparison_value) + epsilon))
 
         print("Done with assertions")
         return z3.And(*assertions)
