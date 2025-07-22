@@ -48,7 +48,7 @@ class Tool(BaseTool2):
     
     def determine_result(self, run):
         if run.exit_code.signal is None:
-            last_10_lines = run.output[-10:-1]
+            last_10_lines = run.output[-10:]
             # molehill
             if "sat" in last_10_lines:
                 return "true"
