@@ -1,9 +1,0 @@
-0	benchmarks/files/benchmark-q2-cost/benchmark-q2-cost-sat_maze.yml	sat	true	true	0.532483	0.8024492142722011	157798400
-1
-2	benchmarks/files/benchmark-q2-cost/benchmark-q2-cost-sat_grid-10-sl-4fsc.yml	sat	true	true	1.201235	1.4978055143728852	162734080
-3	benchmarks/files/benchmark-q2-cost/benchmark-q2-cost-unsat_grid-10-sl-4fsc.yml	unsat	false	false	1.518852	1.8096012044698	162160640
-4	benchmarks/files/benchmark-q2-cost/benchmark-q2-cost-unsat_maze.yml	unsat	false	false	1.525541	1.7940138829872012	158031872
-5	benchmarks/files/benchmark-q2-cost/benchmark-q2-cost-unsat_dpm.yml	unsat	false	false	8.447648	8.742835086770356	245440512
-6	benchmarks/files/benchmark-q2-cost/benchmark-q2-cost-sat_dpm.yml	sat	true	true	10.516413	10.794882434420288	246124544
-7	benchmarks/files/benchmark-q2-cost/benchmark-q2-cost-sat_grid-meet-sl-2fsc.yml	sat	true	true	19.436899	19.71984387282282	1020227584
-8	benchmarks/files/benchmark-q2-cost/benchmark-q2-cost-unsat_grid-meet-sl-2fsc.yml	unsat	false	false	83.962465	84.2705835616216	1019781120

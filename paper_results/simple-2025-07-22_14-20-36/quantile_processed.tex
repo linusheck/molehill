@@ -49,12 +49,12 @@
         % legend
         % legend font size smaller
         legend style={nodes={scale=0.5, transform shape}, font=\scriptsize},
-        legend entries={NAMES},
+        legend entries={PAYNT-AR,PAYNT-CEGIS,PAYNT-Hybrid,SMPMC,SMT(LRA),},
         every axis legend/.append style={at={(1,0)}, anchor=south east, outer xsep=5pt, outer ysep=5pt,},
         xticklabel style={font=\small},
         yticklabel style={font=\small},
         ]
-        \foreach \tool in {FILES} {
+        \foreach \tool in {comparison_simple.2025-07-22_14-20-36.results.PAYNT-AR.xml.bz2.quantile.csv,comparison_simple.2025-07-22_14-20-36.results.PAYNT-CEGIS.xml.bz2.quantile.csv,comparison_simple.2025-07-22_14-20-36.results.PAYNT-Hybrid.xml.bz2.quantile.csv,comparison_simple.2025-07-22_14-20-36.results.SMPMC.xml.bz2.quantile.csv,comparison_simple.2025-07-22_14-20-36.results.SMT(LRA).xml.bz2.quantile.csv} {
             \addplot+ [line width=1.5pt] table[y index=5] {\pathtostuff\tool};
         }
 \end{semilogyaxis}

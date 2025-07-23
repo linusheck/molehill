@@ -1,0 +1,5 @@
+Total number of problems: 30
+Tool                       Solved    Uniquely Solved
+--------------------------------------------------
+SMPMC                          13                 13
+SMT(LRA)                        0                  0

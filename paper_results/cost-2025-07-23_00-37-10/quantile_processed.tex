@@ -29,11 +29,8 @@
     % Which column to be taken from each file
         /pgfplots/table/header=false,
         % axis labels
-        xlabel={\small solved instances},
-        ylabel={\small CPU time (\second)},
-        label style={font=\small},
-        xlabel near ticks,
-        ylabel near ticks,
+        xlabel=solved instances,
+        ylabel=CPU time (\second),
         % axis ranges
         xmin=0,
         ymin=0.2,
@@ -48,13 +45,11 @@
         mark size=2pt,     % Adjust the marker size as you wish
         % legend
         % legend font size smaller
-        legend style={nodes={scale=0.5, transform shape}, font=\scriptsize},
-        legend entries={NAMES},
+        legend style={nodes={scale=0.5, transform shape}},
+        legend entries={PAYNT-CEGIS,SMPMC,SMT(LRA),},
         every axis legend/.append style={at={(1,0)}, anchor=south east, outer xsep=5pt, outer ysep=5pt,},
-        xticklabel style={font=\small},
-        yticklabel style={font=\small},
         ]
-        \foreach \tool in {FILES} {
+        \foreach \tool in {comparison_cost.2025-07-23_00-37-10.results.PAYNT-CEGIS.xml.bz2.quantile.csv,comparison_cost.2025-07-23_00-37-10.results.SMPMC.xml.bz2.quantile.csv,comparison_cost.2025-07-23_00-37-10.results.SMT(LRA).xml.bz2.quantile.csv} {
             \addplot+ [line width=1.5pt] table[y index=5] {\pathtostuff\tool};
         }
 \end{semilogyaxis}
