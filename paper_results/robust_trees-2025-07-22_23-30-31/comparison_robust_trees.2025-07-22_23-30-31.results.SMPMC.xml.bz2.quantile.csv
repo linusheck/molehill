@@ -1,0 +1,14 @@
+0	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rover-100-big.yml	sat	true	true	0.98042	1.776114477775991	200310784
+1
+2	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rover-100-big-big-family.yml	sat	true	true	1.06595	1.8771725613623857	248426496
+3	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rover-1000.yml	sat	true	true	2.149408	2.835754171013832	317722624
+4	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family.yml	sat	true	true	2.321655	3.1922449190169573	210935808
+5	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rocks-4-2.yml	sat	true	true	4.230712	5.024047330953181	197935104
+6	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_obstacles-10-6-skip-easy.yml	sat	true	true	4.52565	5.4392745196819305	215801856
+7	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rocks-8-1.yml	sat	true	true	4.947062	5.742299770005047	213016576
+8	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rover-1000-big-family.yml	sat	true	true	5.635759	6.393512839451432	905912320
+9	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_pacman-6.yml	sat	true	true	11.247805	12.100795703940094	357052416
+10	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_obstacles-demo.yml	sat	true	true	65.254535	66.02914554160088	255287296
+11	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rocks-6-4.yml	sat	true	true	89.181348	89.94387673679739	418967552
+12	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rocks-6-4-big-family.yml	sat	true	true	164.371278	165.19548257812858	1376714752
+13	benchmarks/files/benchmark-general/benchmark-general-sat_mem_1_rocks-6-4-signal.yml	sat	true	true	402.199072	403.0528411846608	1901268992

@@ -1,0 +1,11 @@
+digraph tree {
+    "0x0" [label="y >= 2?"];
+    "0x1" [label="right"];
+    "0x2" [label="x >= 5?"];
+    "0x3" [label="left"];
+    "0x4" [label="up"];
+    "0x0" -> "0x1";
+    "0x0" -> "0x2";
+    "0x2" -> "0x3";
+    "0x2" -> "0x4";
+}

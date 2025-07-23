@@ -1,0 +1,33 @@
+tool	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set	SMPMC	SMPMC	SMPMC	SMPMC	SMT(LRA)	SMT(LRA)	SMT(LRA)	SMT(LRA)
+../../benchmarks/files/benchmark-general/	status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+benchmark-general-sat_mem_1_avoid-8-2-big-family.yml	TIMEOUT	1800.438449	1821.516350463964		TIMEOUT	1800.884131	1801.5120398411527	
+benchmark-general-sat_mem_1_avoid-8-2-easy-big-family.yml	TIMEOUT	1800.650999	1808.3632728159428		TIMEOUT	1800.879627	1801.5171115184203	
+benchmark-general-sat_mem_1_avoid-8-2-easy.yml	TIMEOUT	1800.837253	1810.9926044289023		TIMEOUT	1800.848636	1801.5073164505884	
+benchmark-general-sat_mem_1_avoid-8-2.yml	TIMEOUT	1800.953489	1827.5799947176129		TIMEOUT	1800.866561	1801.4392855782062	
+benchmark-general-sat_mem_1_catch-5.yml	TIMEOUT	1800.62416	1801.6808325378224		OUT OF MEMORY	356.383594	359.62650745920837	
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family.yml	TIMEOUT	1800.358437	1809.616702945903		TIMEOUT	1800.741615	1801.4863211046904	
+benchmark-general-sat_mem_1_dpm-switch-q10-big-family.yml	TIMEOUT	1800.704801	1802.249029044062		OUT OF MEMORY	958.639908	958.7215202488005	
+benchmark-general-sat_mem_1_dpm-switch-q10-big.yml	TIMEOUT	1800.45257	1810.9780295677483		TIMEOUT	1800.68519	1801.4382661199197	
+benchmark-general-sat_mem_1_dpm-switch-q10.yml	TIMEOUT	1800.61665	1804.1290442869067		OUT OF MEMORY	429.204779	432.39981601107866	
+benchmark-general-sat_mem_1_dpm.yml	TIMEOUT	1756.783596	1831.0017571235076		TIMEOUT	1752.057152	1831.0020024916157	
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family.yml	true	2.321655	3.1922449190169573		TIMEOUT	1800.979734	1801.4137134542689	
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy.yml	true	4.52565	5.4392745196819305		TIMEOUT	1800.808665	1801.3860374437645	
+benchmark-general-sat_mem_1_obstacles-demo.yml	true	65.254535	66.02914554160088		TIMEOUT	1800.637978	1801.3734687278047	
+benchmark-general-sat_mem_1_pacman-6.yml	true	11.247805	12.100795703940094		OUT OF MEMORY	680.305387	680.0788457412273	
+benchmark-general-sat_mem_1_refuel-04.yml	TIMEOUT	1740.445161	1830.5606892025098		TIMEOUT	1731.545444	1831.0019838409498	
+benchmark-general-sat_mem_1_rocks-4-2.yml	true	4.230712	5.024047330953181		TIMEOUT	1800.736674	1801.3708230974153	
+benchmark-general-sat_mem_1_rocks-6-4-big-family.yml	true	164.371278	165.19548257812858		OUT OF MEMORY	282.285409	284.22102671768516	
+benchmark-general-sat_mem_1_rocks-6-4-signal.yml	true	402.199072	403.0528411846608		OUT OF MEMORY	295.90875	298.4972820924595	
+benchmark-general-sat_mem_1_rocks-6-4.yml	true	89.181348	89.94387673679739		OUT OF MEMORY	257.011578	259.9666575482115	
+benchmark-general-sat_mem_1_rocks-8-1.yml	true	4.947062	5.742299770005047		TIMEOUT	1800.680868	1801.3346373084933	
+benchmark-general-sat_mem_1_rover-100-big-big-family.yml	true	1.06595	1.8771725613623857		OUT OF MEMORY	455.922188	458.5359506569803	
+benchmark-general-sat_mem_1_rover-100-big.yml	true	0.98042	1.776114477775991		TIMEOUT	1800.923282	1801.2840160802007	
+benchmark-general-sat_mem_1_rover-100.yml	TIMEOUT	1758.839449	1831.0025677038357		TIMEOUT	1752.284347	1830.7152133053169	
+benchmark-general-sat_mem_1_rover-1000-big-family.yml	true	5.635759	6.393512839451432		TIMEOUT	1800.755439	1801.277484478429	
+benchmark-general-sat_mem_1_rover-1000.yml	true	2.149408	2.835754171013832		TIMEOUT	1800.722255	1801.2816426223144	
+benchmark-general-sat_mem_1_rover.yml	TIMEOUT	1756.911319	1831.0214618621394		TIMEOUT	1751.699988	1831.001759777777	
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family.yml	TIMEOUT	1800.870091	1800.9422517642379		TIMEOUT	1800.733359	1800.8437380287796	
+benchmark-general-sat_mem_1_uav-operator-roz-workload.yml	TIMEOUT	1800.798422	1800.9077782379463		TIMEOUT	1800.730367	1800.8492165729403	
+benchmark-general-sat_mem_1_uav-roz-big-family.yml	TIMEOUT	1801.094081	1800.9214605176821		TIMEOUT	1801.095734	1800.8767578704283	
+benchmark-general-sat_mem_1_uav-roz.yml	TIMEOUT	1800.904629	1800.9364469675347		TIMEOUT	1800.746977	1800.865681162104	
