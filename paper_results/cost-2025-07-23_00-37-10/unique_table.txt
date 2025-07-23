@@ -1,6 +1,0 @@
-Total number of problems: 8
-Tool                       Solved    Uniquely Solved
---------------------------------------------------
-PAYNT-CEGIS                     7                  0
-SMPMC                           8                  1
-SMT(LRA)                        0                  0

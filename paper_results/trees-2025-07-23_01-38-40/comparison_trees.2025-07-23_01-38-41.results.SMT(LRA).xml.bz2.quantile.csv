@@ -1,4 +1,0 @@
-0	benchmarks/files/benchmark-q2-tree/benchmark-q2-tree-sat_grid-avoid-4-0.1.yml	sat	true	true	0.514844	0.9242366580292583	193335296
-1
-2	benchmarks/files/benchmark-q2-tree/benchmark-q2-tree-sat_nrp-8.yml	sat	true	true	0.656377	1.042943175882101	193728512
-3	benchmarks/files/benchmark-q2-tree/benchmark-q2-tree-sat_refuel-06.yml	sat	true	true	1269.359991	1269.8705681040883	307298304

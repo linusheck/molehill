@@ -25,6 +25,9 @@ def analyze_benchexec_csv(file_path):
         if metric.strip() == "status":
             data_columns.append(i)
             tool_names.append(tool_row[i].strip())
+
+    # Sort tool names alphabetically
+    tool_names, data_columns = zip(*sorted(zip(tool_names, data_columns)))
         
 
     # for row in data_rows:
@@ -43,7 +46,12 @@ def analyze_benchexec_csv(file_path):
 
     prefixes = [
         "benchmark-q2-cost",
-        "benchmark-q2-tree"
+        "benchmark-q2-tree",
+        "pomdps",
+        "jair",
+        "mdp-families",
+        "pomdp-families",
+        "other"
     ]
 
     for row in data_rows:
@@ -52,7 +60,9 @@ def analyze_benchexec_csv(file_path):
             if benchmark.startswith(prefix):
                 benchmark = benchmark[len(prefix)+1:]
                 row[0] = benchmark
-                break
+            if benchmark[-2] == "_":
+                benchmark = benchmark[:-2]
+                row[0] = benchmark
 
     sorted_data_rows = sorted(
         data_rows,
