@@ -62,6 +62,9 @@ for file in pathlib.Path(folder).glob("*.log"):
 # padding=1,
 # with_header_hide=None,
 
+# sort the tables by the first column
+table_tree.sort(key=lambda x: x[0])
+table_no_tree.sort(key=lambda x: x[0])
 
 tabulate._table_formats["latex_booktabs_raw"] = tabulate.TableFormat(
     lineabove=partial(_latex_line_begin_tabular, booktabs=True),
