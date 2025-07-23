@@ -26,6 +26,7 @@ def run(
     pure_smt=False,
     dump_cache=None,
     load_cache=None,
+    print_size=False
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -37,6 +38,12 @@ def run(
     )
 
     print(quotient.family)
+    if print_size:
+        from decimal import Decimal
+        quotient.build(quotient.family)
+        print("{:.2e}".format(Decimal(quotient.family.size)), quotient.family.mdp.model.nr_states)
+        import sys
+        sys.exit(0)
     # print all python properties of quotient
     family = quotient.family
 
