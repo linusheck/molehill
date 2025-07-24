@@ -11,7 +11,6 @@
     <propertyfile>benchmarks/unsat.txt</propertyfile>
   </tasks>
 
-
     <rundefinition name="SMPMC">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
@@ -53,15 +52,6 @@
         <option>--ce</option>
         <option>none</option>
         <option>--pure-smt</option>
-    </rundefinition>
-
-    <rundefinition name="SMPMC">
-        <column title="Iterations" value="iterations"/>
-        <require cpuCores="1"/>
-        <option>-m</option>
-        <option>molehill</option>
-        <option>--ce</option>
-        <option>none</option>
     </rundefinition>
 
 </benchmark>
