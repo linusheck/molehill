@@ -117,6 +117,7 @@ class DecisionTree(Constraint):
         # A([picked0=1       & picked1=0     & picked2=1     & picked3=1     & picked4=0     & picked5=1     & picked6=1     & x=3   & y=2],0
         first_variable_name = str(policy_vars[0])
         if "A([" not in first_variable_name:
+            print(first_variable_name)
             raise ValueError(
                 "Variables must have properties (e.g., generated from POMDPs.)."
             )

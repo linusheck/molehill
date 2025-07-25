@@ -58,6 +58,7 @@ def run(
 
         if isinstance(quotient, paynt.quotient.pomdp_family.PomdpFamilyQuotient):
             obs_to_hole = []
+            assert quotient.num_observations == quotient.obs_evaluator.num_obs_classes
             for obs in range(quotient.num_observations):
                 obs_mem_holes = []
                 for mem in range(fsc_memory_size):
@@ -69,7 +70,12 @@ def run(
                             quotient.action_labels[i]
                             for i in quotient.observation_to_actions[obs]
                         ]
-                        hole_name = f"(obs_{obs},{mem})"  # getting the observation expressions is a bit more complicated, and I don't think it's important for now
+                        # To get the observation expressions, use quotient.obs_evaluator.obs_class_to_expr
+                        labels = quotient.obs_evaluator.obs_expr_label
+                        obs_map = {labels[i]: quotient.obs_evaluator.obs_class_value(obs, i) for i in range(len(labels))}
+                        obs_map["mem"] = mem
+                        print(mem)
+                        hole_name = f"A([{'&'.join([f'{k}={v}' for k, v in obs_map.items()])}])"
                         obs_mem_holes.append(quotient.family.num_holes)
                         quotient.family.add_hole(hole_name, option_labels)
                 obs_to_hole.append(obs_mem_holes)

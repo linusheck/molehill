@@ -22,7 +22,9 @@ def main():
                 "--constraint",
                 "existsforalltree",
                 "--nodes",
-                str(x)
+                str(x),
+                "--fsc-memory-size",
+                "2",
             ],
             #     "--dump-cache",
             #     cache_file,
