@@ -1,0 +1,15 @@
+digraph tree {
+    "0x0" [label="clk >= 1?"];
+    "0x1" [label="cangoeast >= 1?"];
+    "0x2" [label="east"];
+    "0x3" [label="south"];
+    "0x4" [label="cangowest >= 1?"];
+    "0x5" [label="detect1"];
+    "0x6" [label="east"];
+    "0x0" -> "0x1";
+    "0x0" -> "0x4";
+    "0x1" -> "0x2";
+    "0x1" -> "0x3";
+    "0x4" -> "0x5";
+    "0x4" -> "0x6";
+}
