@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <benchmark tool="tools.synthesis" timelimit="1800s" hardtimelimit="1800s" memlimit="16GB">
-    <tasks name="SAT Benchmarks">
+    <tasks name="Benchmarks">
       <include>benchmarks/files/benchmark-general/*.yml</include>
-      <propertyfile>benchmarks/sat.txt</propertyfile>
-    </tasks>
-
-    <tasks name="UNSAT Benchmarks">
-      <include>benchmarks/files/benchmark-general/*.yml</include>
-      <propertyfile>benchmarks/unsat.txt</propertyfile>
+      <propertyfile>benchmarks/unknown.txt</propertyfile>
     </tasks>
 
     <!-- Define executors -->

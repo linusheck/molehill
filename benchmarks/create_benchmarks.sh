@@ -34,11 +34,10 @@ for i in $(find ../resources/benchmark-q2-cost -type d -name 'unsat_*'); do
 done
 
 # Q2 Benchmarks: Tree Benchmarks
-for i in $(find ../resources/benchmark-q2-tree -type d -name 'sat_*'); do
-    python create_benchmark.py benchmark-q2-tree ../../$i ../../sat.txt true
-done
-for i in $(find ../resources/benchmark-q2-tree -type d -name 'unsat_*'); do
-    python create_benchmark.py benchmark-q2-tree ../../$i ../../unsat.txt false
+for nodes in 1 3 5 7 9 11 13 15; do
+    for i in $(find ../resources/benchmark-q2-tree -type d -name '*'); do
+        python create_benchmark.py benchmark-q2-tree ../../$i ../../unknown.txt unknown --nodes $nodes
+    done
 done
 
 # Q2 Benchmarks: Prob>0 Benchmarks
@@ -83,7 +82,7 @@ done
 
 
 for nodes in 1 3 5 7 9 11 13 15; do
-    for i in $(find ../resources/benchmark-general -type d -name 'sat_*'); do
+    for i in $(find ../resources/benchmark-general -type d -name '*'); do
         python create_benchmark.py benchmark-general ../../$i ../../unknown.txt unknown --nodes $nodes
     done
 done

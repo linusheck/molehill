@@ -24,7 +24,15 @@ class Tool(BaseTool2):
         if task.options is not None and "memory" in task.options:
             options += ["--fsc-memory-size", str(task.options["memory"])]
         if task.options is not None and "nodes" in task.options:
-            options += ["--nodes", str(task.options["nodes"])]
+            if any("paynt" in opt for opt in task.options):
+                # different option for paynt
+                options += ["--tree-nodes=" + str(task.options["nodes"])]
+            else:
+                options += ["--nodes=" + str(task.options["nodes"])]
+            # add memory information if specified in filename
+            for memory in [2, 3]:
+                if any("mem_" + str(memory) in opt for opt in task.options):
+                    options += ["--fsc-memory-size=" + str(memory)]
 
         return [executable, *options, *task.input_files_or_identifier]
 

@@ -5,5 +5,7 @@ input_files:
 - ../../../resources/benchmark-q2-tree/sat_grid-avoid-4-0.1
 
 properties:
-  - property_file: ../../sat.txt
-    expected_verdict: true
+  - property_file: ../../unknown.txt
+
+options:
+    nodes: 3
