@@ -1,0 +1,8 @@
+Total number of problems: 106
+Tool                       Solved    Uniquely Solved
+--------------------------------------------------
+PAYNT-AR                       86                  8
+PAYNT-CEGIS                    24                  0
+PAYNT-Hybrid                   25                  0
+SMPMC                          88                  5
+SMT(LRA)                       31                  0

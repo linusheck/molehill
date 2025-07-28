@@ -1,0 +1,25 @@
+0	benchmarks/files/simple-q1/pomdps-sat_mem_2_nrp-8_2.yml	sat	true	true	0.437039	0.6073100529611111	146317312
+1
+2	benchmarks/files/simple-q1/pomdps-sat_mem_1_nrp-8_1.yml	sat	true	true	0.454204	0.7357067493721843	146120704
+3	benchmarks/files/simple-q1/pomdps-unsat_mem_1_nrp-8_1.yml	unsat	false	false	0.468128	0.5968930432572961	146530304
+4	benchmarks/files/simple-q1/pomdps-sat_mem_2_grid-avoid-4-0.1_2.yml	sat	true	true	0.486866	0.7186497636139393	146448384
+5	benchmarks/files/simple-q1/pomdps-sat_mem_1_grid-avoid-4-0.1_1.yml	sat	true	true	0.519727	1.1193759348243475	145973248
+6	benchmarks/files/simple-q1/pomdps-unsat_mem_1_grid-avoid-4-0.1_1.yml	unsat	false	false	0.562481	0.7159376693889499	146067456
+7	benchmarks/files/simple-q1/pomdps-sat_mem_3_grid-avoid-4-0.1_3.yml	sat	true	true	0.564417	0.7582586165517569	146542592
+8	benchmarks/files/simple-q1/jair-unsat_grid.yml	unsat	false	false	0.62092	0.7702447939664125	147054592
+9	benchmarks/files/simple-q1/pomdps-unsat_mem_2_grid-avoid-4-0.1_2.yml	unsat	false	false	0.634003	0.787243228405714	146329600
+10	benchmarks/files/simple-q1/jair-sat_grid-10-sl-4fsc.yml	sat	true	true	0.685495	1.4265447743237019	149815296
+11	benchmarks/files/simple-q1/jair-sat_grid.yml	sat	true	true	0.727153	1.4395132949575782	147021824
+12	benchmarks/files/simple-q1/pomdps-unsat_mem_3_grid-avoid-4-0.1_3.yml	unsat	false	false	0.900714	1.0525533808395267	146337792
+13	benchmarks/files/simple-q1/pomdps-sat_mem_4_grid-avoid-4-0.1_4.yml	sat	true	true	0.928354	1.0743436245247722	146534400
+14	benchmarks/files/simple-q1/pomdps-unsat_mem_4_grid-avoid-4-0.1_4.yml	unsat	false	false	1.08405	1.2063759118318558	146595840
+15	benchmarks/files/simple-q1/pomdps-sat_mem_1_maze-alex_1.yml	sat	true	true	1.150704	1.7603263705968857	146247680
+16	benchmarks/files/simple-q1/jair-sat_dpm.yml	sat	true	true	1.219143	1.978239443153143	218939392
+17	benchmarks/files/simple-q1/pomdps-sat_mem_1_refuel-20_1.yml	sat	true	true	9.388534	9.671639346517622	161767424
+18	benchmarks/files/simple-q1/pomdps-unsat_mem_1_maze-alex_1.yml	unsat	false	false	11.545364	11.691512058489025	146341888
+19	benchmarks/files/simple-q1/jair-sat_maze.yml	sat	true	true	14.800524	15.499037271365523	147079168
+20	benchmarks/files/simple-q1/jair-unsat_grid-10-sl-4fsc.yml	unsat	false	false	22.032488	22.17222158703953	152702976
+21	benchmarks/files/simple-q1/jair-sat_grid-meet-sl-2fsc.yml	sat	true	true	39.810608	40.520906555466354	638689280
+22	benchmarks/files/simple-q1/jair-sat_herman.yml	sat	true	true	40.590602	41.30548426695168	904187904
+23	benchmarks/files/simple-q1/pomdps-sat_mem_2_maze-alex_2.yml	sat	true	true	207.564284	207.79552704561502	188280832
+24	benchmarks/files/simple-q1/pomdps-sat_mem_1_refuel-06_1.yml	sat	true	true	382.189499	382.4880479518324	189607936

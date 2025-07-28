@@ -1,0 +1,8 @@
+0	benchmarks/files/robust-q3/pomdp-families-unsat_mem_1_obstacles-8-3_1.yml	unsat	false	false	3.651941	3.9620386315509677	195604480
+1
+2	benchmarks/files/robust-q3/pomdp-families-unsat_mem_1_obstacles-8-6_1.yml	unsat	false	false	5.090515	5.32356629986316	215785472
+3	benchmarks/files/robust-q3/mdp-families-unsat_mem_1_obstacles-demo_1.yml	unsat	false	false	18.312873	18.72200412862003	223309824
+4	benchmarks/files/robust-q3/pomdp-families-unsat_mem_1_obstacles-maze-4_1.yml	unsat	false	false	54.933611	55.147899659350514	1508397056
+5	benchmarks/files/robust-q3/pomdp-families-unsat_mem_1_obstacles-maze-4-2_1.yml	unsat	false	false	166.511813	166.81558869220316	2922803200
+6	benchmarks/files/robust-q3/mdp-families-unsat_mem_1_rover-100-big_1.yml	unsat	false	false	208.957303	209.1684551294893	3414794240
+7	benchmarks/files/robust-q3/pomdp-families-unsat_mem_1_avoid_1.yml	unsat	false	false	1409.050674	1409.3475025100634	3536093184

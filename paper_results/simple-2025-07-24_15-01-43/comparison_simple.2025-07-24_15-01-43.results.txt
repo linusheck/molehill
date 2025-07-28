@@ -1,0 +1,610 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison_simple.xml
+name:                    comparison_simple
+run sets:                SMPMC, PAYNT-AR, PAYNT-CEGIS, PAYNT-Hybrid, SMT(LRA)
+date:                    Thu, 2025-07-24 15:01:43 UTC
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/molehill-U9ijTdgT/bin/python3
+options:
+parallel runs:           26
+resource limits:
+- memory:                16000.0 MB
+- time:                  1800 s
+hardware requirements:
+- memory:                16000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    localhost
+os:                      Linux-6.1.0-23-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   False
+ram:                     540660.658176 MB
+------------------------------------------------------------
+
+
+
+SMPMC
+Run set 1 of 5 with options '-m molehill --ce none' and propertyfile 'None'
+
+inputfile                                    status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------------------------
+jair-sat_box-pushing-1fsc.yml                true                             3.21        4.06        None
+jair-sat_box-pushing-2fsc.yml                true                           483.26      484.09        None
+jair-sat_dpm.yml                             true                             2.37        3.22        None
+jair-sat_grid-10-sl-4fsc.yml                 true                             0.65        1.48        None
+jair-sat_grid-meet-sl-2fsc.yml               true                            14.29       15.22        None
+jair-sat_grid.yml                            true                             0.66        1.53        None
+jair-sat_grid3x3-1fsc.yml                    true                             3.70        4.57        None
+jair-sat_grid3x3-2fsc.yml                    true                            27.27       28.11        None
+jair-sat_herman.yml                          true                            38.26       39.13        None
+jair-sat_maze-sl-5.yml                       TIMEOUT                       1800.61     1801.56        None
+jair-sat_maze.yml                            true                             0.56        1.40        None
+jair-sat_pole-res.yml                        true                             0.68        1.47        None
+jair-sat_pole.yml                            true                             1.60        2.38        None
+jair-sat_recycling-2fsc.yml                  true                             0.56        1.34        None
+jair-sat_recycling-3fsc.yml                  true                             0.62        1.38        None
+jair-sat_refuel-06-res.yml                   true                             1.54        2.22        None
+jair-sat_tiny_rewards.yml                    true                             0.46        1.15        None
+pomdps-sat_mem_1_4x3-95_1.yml                true                             0.59        1.30        None
+pomdps-sat_mem_1_4x5x2-95_1.yml              true                             0.52        1.20        None
+pomdps-sat_mem_1_drone-4-1_1.yml             TIMEOUT                       1800.71     1801.69        None
+pomdps-sat_mem_1_drone-4-2_1.yml             TIMEOUT                       1800.73     1801.59        None
+pomdps-sat_mem_1_drone-8-2_1.yml             TIMEOUT                       1800.71     1801.46        None
+pomdps-sat_mem_1_grid-avoid-4-0.1_1.yml      true                             0.49        1.15        None
+pomdps-sat_mem_1_hallway_1.yml               true                             7.53        8.23        None
+pomdps-sat_mem_1_maze-alex_1.yml             true                             0.53        1.17        None
+pomdps-sat_mem_1_milos-aaai97_1.yml          true                             7.64        8.33        None
+pomdps-sat_mem_1_network_1.yml               true                             0.55        0.79        None
+pomdps-sat_mem_1_nrp-8_1.yml                 true                             0.47        0.74        None
+pomdps-sat_mem_1_query-s2_1.yml              true                             0.54        0.90        None
+pomdps-sat_mem_1_query-s3_1.yml              true                             0.59        0.91        None
+pomdps-sat_mem_1_refuel-06_1.yml             true                             4.72        5.03        None
+pomdps-sat_mem_1_refuel-20_1.yml             true                            17.01       17.32        None
+pomdps-sat_mem_1_rocks-12_1.yml              TIMEOUT                       1800.89     1801.60        None
+pomdps-sat_mem_2_4x3-95_2.yml                true                            11.19       11.50        None
+pomdps-sat_mem_2_4x5x2-95_2.yml              true                             0.84        1.21        None
+pomdps-sat_mem_2_grid-avoid-4-0.1_2.yml      true                             0.44        0.77        None
+pomdps-sat_mem_2_maze-alex_2.yml             true                             1.19        1.40        None
+pomdps-sat_mem_2_milos-aaai97_2.yml          true                             1.06        1.31        None
+pomdps-sat_mem_2_network_2.yml               true                             1.10        1.32        None
+pomdps-sat_mem_2_nrp-8_2.yml                 true                             0.46        0.72        None
+pomdps-sat_mem_2_query-s2_2.yml              true                             0.51        0.69        None
+pomdps-sat_mem_2_query-s3_2.yml              true                             6.45        6.69        None
+pomdps-sat_mem_2_refuel-06_2.yml             TIMEOUT                       1801.00     1801.26        None
+pomdps-sat_mem_3_4x3-95_3.yml                true                           210.59      210.87        None
+pomdps-sat_mem_3_4x5x2-95_3.yml              true                            12.71       12.90        None
+pomdps-sat_mem_3_grid-avoid-4-0.1_3.yml      true                             0.48        0.69        None
+pomdps-sat_mem_3_maze-alex_3.yml             true                           227.46      227.77        None
+pomdps-sat_mem_3_network_3.yml               true                             6.05        6.27        None
+pomdps-sat_mem_3_query-s2_3.yml              true                             1.11        1.34        None
+pomdps-sat_mem_3_query-s3_3.yml              true                            66.78       67.03        None
+pomdps-sat_mem_3_refuel-06_3.yml             TIMEOUT                       1800.84     1801.20        None
+pomdps-sat_mem_4_4x3-95_4.yml                TIMEOUT                       1800.67     1800.94        None
+pomdps-sat_mem_4_grid-avoid-4-0.1_4.yml      true                             1.06        1.26        None
+jair-unsat_box-pushing-1fsc.yml              false                            4.40        4.58        None
+jair-unsat_box-pushing-2fsc.yml              false                         1129.61     1129.86        None
+jair-unsat_dpm.yml                           false                            1.37        1.58        None
+jair-unsat_grid-10-sl-4fsc.yml               false                            4.62        4.79        None
+jair-unsat_grid-meet-sl-2fsc.yml             false                           29.80       30.00        None
+jair-unsat_grid.yml                          false                            3.20        3.39        None
+jair-unsat_grid3x3-1fsc.yml                  false                            1.21        1.42        None
+jair-unsat_grid3x3-2fsc.yml                  false                          828.79      829.01        None
+jair-unsat_herman.yml                        false                          135.67      135.89        None
+jair-unsat_maze-sl-5.yml                     TIMEOUT                       1800.62     1800.96        None
+jair-unsat_maze.yml                          false                            1.05        1.23        None
+jair-unsat_pole-res.yml                      false                            1.01        1.21        None
+jair-unsat_pole.yml                          false                            3.94        4.15        None
+jair-unsat_recycling-2fsc.yml                false                            0.69        0.89        None
+jair-unsat_recycling-3fsc.yml                false                            3.44        3.66        None
+jair-unsat_refuel-06-res.yml                 false                            0.80        0.99        None
+jair-unsat_tiny_rewards.yml                  false                            0.47        0.66        None
+pomdps-unsat_mem_1_4x3-95_1.yml              false                            1.68        1.86        None
+pomdps-unsat_mem_1_4x5x2-95_1.yml            false                            0.47        0.66        None
+pomdps-unsat_mem_1_drone-4-1_1.yml           TIMEOUT                       1800.81     1801.17        None
+pomdps-unsat_mem_1_drone-4-2_1.yml           TIMEOUT                       1800.69     1800.92        None
+pomdps-unsat_mem_1_drone-8-2_1.yml           TIMEOUT                       1800.73     1801.03        None
+pomdps-unsat_mem_1_grid-avoid-4-0.1_1.yml    false                            0.55        0.75        None
+pomdps-unsat_mem_1_hallway_1.yml             TIMEOUT                       1800.62     1800.93        None
+pomdps-unsat_mem_1_maze-alex_1.yml           false                            1.24        1.43        None
+pomdps-unsat_mem_1_milos-aaai97_1.yml        false                           10.91       11.11        None
+pomdps-unsat_mem_1_network_1.yml             false                            0.54        0.79        None
+pomdps-unsat_mem_1_nrp-8_1.yml               false                            0.47        0.65        None
+pomdps-unsat_mem_1_query-s2_1.yml            false                            0.60        0.80        None
+pomdps-unsat_mem_1_query-s3_1.yml            false                            1.19        1.36        None
+pomdps-unsat_mem_1_refuel-06_1.yml           false                            3.36        3.58        None
+pomdps-unsat_mem_1_refuel-20_1.yml           TIMEOUT                       1800.73     1801.02        None
+pomdps-unsat_mem_1_rocks-12_1.yml            TIMEOUT                       1800.67     1800.99        None
+pomdps-unsat_mem_2_4x3-95_2.yml              false                           18.66       18.86        None
+pomdps-unsat_mem_2_4x5x2-95_2.yml            false                            7.34        7.55        None
+pomdps-unsat_mem_2_grid-avoid-4-0.1_2.yml    false                            0.65        0.85        None
+pomdps-unsat_mem_2_maze-alex_2.yml           false                            5.43        5.61        None
+pomdps-unsat_mem_2_milos-aaai97_2.yml        false                           11.86       12.04        None
+pomdps-unsat_mem_2_network_2.yml             false                            1.39        1.59        None
+pomdps-unsat_mem_2_nrp-8_2.yml               false                          363.75      363.96        None
+pomdps-unsat_mem_2_query-s2_2.yml            false                            1.85        2.05        None
+pomdps-unsat_mem_2_query-s3_2.yml            false                          258.48      258.68        None
+pomdps-unsat_mem_2_refuel-06_2.yml           TIMEOUT                       1800.98     1801.24        None
+pomdps-unsat_mem_3_4x3-95_3.yml              false                          660.99      661.18        None
+pomdps-unsat_mem_3_4x5x2-95_3.yml            false                          281.01      281.22        None
+pomdps-unsat_mem_3_grid-avoid-4-0.1_3.yml    false                            1.38        1.59        None
+pomdps-unsat_mem_3_maze-alex_3.yml           false                            0.63        0.85        None
+pomdps-unsat_mem_3_network_3.yml             false                          328.97      329.19        None
+pomdps-unsat_mem_3_query-s2_3.yml            false                          206.30      206.52        None
+pomdps-unsat_mem_3_query-s3_3.yml            false                          222.63      222.84        None
+pomdps-unsat_mem_3_refuel-06_3.yml           TIMEOUT                       1800.80     1801.07        None
+pomdps-unsat_mem_4_4x3-95_4.yml              TIMEOUT                       1800.71     1800.96        None
+pomdps-unsat_mem_4_grid-avoid-4-0.1_4.yml    false                            7.99        8.18        None
+----------------------------------------------------------------------------------------------------------
+Run set 1                                    done                         38136.97     2154.39           -
+
+
+PAYNT-AR
+Run set 2 of 5 with options 'build/paynt/paynt.py --method ar' and propertyfile 'None'
+
+inputfile                                    status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------------------------
+jair-sat_box-pushing-1fsc.yml                true                             2.92        3.68        None
+jair-sat_box-pushing-2fsc.yml                true                            15.75       16.52        None
+jair-sat_dpm.yml                             true                             1.62        2.37        None
+jair-sat_grid-10-sl-4fsc.yml                 TIMEOUT                       1800.60     1801.39        None
+jair-sat_grid-meet-sl-2fsc.yml               true                           761.89      762.70        None
+jair-sat_grid.yml                            true                             1.59        2.33        None
+jair-sat_grid3x3-1fsc.yml                    true                             1.18        1.93        None
+jair-sat_grid3x3-2fsc.yml                    true                             7.97        8.68        None
+jair-sat_herman.yml                          true                            37.83       38.56        None
+jair-sat_maze-sl-5.yml                       TIMEOUT                       1800.59     1801.36        None
+jair-sat_maze.yml                            TIMEOUT                       1800.59     1801.33        None
+jair-sat_pole-res.yml                        true                             0.79        1.49        None
+jair-sat_pole.yml                            true                             0.92        1.60        None
+jair-sat_recycling-2fsc.yml                  true                             0.46        1.14        None
+jair-sat_recycling-3fsc.yml                  true                             0.49        1.13        None
+jair-sat_refuel-06-res.yml                   true                             0.60        1.26        None
+jair-sat_tiny_rewards.yml                    true                             0.43        1.07        None
+pomdps-sat_mem_1_4x3-95_1.yml                true                             0.38        1.01        None
+pomdps-sat_mem_1_4x5x2-95_1.yml              true                             0.43        1.07        None
+pomdps-sat_mem_1_drone-4-1_1.yml             true                             3.56        4.13        None
+pomdps-sat_mem_1_drone-4-2_1.yml             true                             0.55        1.14        None
+pomdps-sat_mem_1_drone-8-2_1.yml             true                            12.94       13.50        None
+pomdps-sat_mem_1_grid-avoid-4-0.1_1.yml      true                             0.49        1.06        None
+pomdps-sat_mem_1_hallway_1.yml               true                            87.09       87.68        None
+pomdps-sat_mem_1_maze-alex_1.yml             TIMEOUT                       1800.60     1801.20        None
+pomdps-sat_mem_1_milos-aaai97_1.yml          true                             0.69        1.26        None
+pomdps-sat_mem_1_network_1.yml               true                             0.42        0.58        None
+pomdps-sat_mem_1_nrp-8_1.yml                 true                             0.42        0.62        None
+pomdps-sat_mem_1_query-s2_1.yml              true                             0.38        0.59        None
+pomdps-sat_mem_1_query-s3_1.yml              true                             0.57        0.79        None
+pomdps-sat_mem_1_refuel-06_1.yml             true                             0.57        0.79        None
+pomdps-sat_mem_1_refuel-20_1.yml             TIMEOUT                       1800.64     1800.91        None
+pomdps-sat_mem_1_rocks-12_1.yml              true                             1.23        1.43        None
+pomdps-sat_mem_2_4x3-95_2.yml                true                             0.37        0.57        None
+pomdps-sat_mem_2_4x5x2-95_2.yml              true                             0.45        0.61        None
+pomdps-sat_mem_2_grid-avoid-4-0.1_2.yml      true                             0.38        0.54        None
+pomdps-sat_mem_2_maze-alex_2.yml             TIMEOUT                       1800.62     1800.80        None
+pomdps-sat_mem_2_milos-aaai97_2.yml          TIMEOUT                       1800.60     1800.81        None
+pomdps-sat_mem_2_network_2.yml               true                             0.37        0.54        None
+pomdps-sat_mem_2_nrp-8_2.yml                 true                             0.40        0.63        None
+pomdps-sat_mem_2_query-s2_2.yml              true                             0.52        0.74        None
+pomdps-sat_mem_2_query-s3_2.yml              true                             6.15        6.36        None
+pomdps-sat_mem_2_refuel-06_2.yml             true                             0.74        0.98        None
+pomdps-sat_mem_3_4x3-95_3.yml                true                             1.78        1.99        None
+pomdps-sat_mem_3_4x5x2-95_3.yml              true                             0.77        0.97        None
+pomdps-sat_mem_3_grid-avoid-4-0.1_3.yml      true                             0.44        0.63        None
+pomdps-sat_mem_3_maze-alex_3.yml             TIMEOUT                       1800.62     1800.83        None
+pomdps-sat_mem_3_network_3.yml               true                            17.20       17.35        None
+pomdps-sat_mem_3_query-s2_3.yml              true                             0.69        0.81        None
+pomdps-sat_mem_3_query-s3_3.yml              true                            89.72       89.86        None
+pomdps-sat_mem_3_refuel-06_3.yml             true                             8.00        8.14        None
+pomdps-sat_mem_4_4x3-95_4.yml                true                           145.88      146.07        None
+pomdps-sat_mem_4_grid-avoid-4-0.1_4.yml      true                             0.90        1.06        None
+jair-unsat_box-pushing-1fsc.yml              false                            3.06        3.22        None
+jair-unsat_box-pushing-2fsc.yml              false                           48.90       49.06        None
+jair-unsat_dpm.yml                           false                            0.85        0.97        None
+jair-unsat_grid-10-sl-4fsc.yml               TIMEOUT                       1800.62     1800.77        None
+jair-unsat_grid-meet-sl-2fsc.yml             false                           97.80       97.91        None
+jair-unsat_grid.yml                          false                            2.25        2.39        None
+jair-unsat_grid3x3-1fsc.yml                  false                            1.02        1.14        None
+jair-unsat_grid3x3-2fsc.yml                  OUT OF MEMORY                 1286.39     1287.20        None
+jair-unsat_herman.yml                        false                           84.33       84.46        None
+jair-unsat_maze-sl-5.yml                     TIMEOUT                       1800.62     1800.78        None
+jair-unsat_maze.yml                          TIMEOUT                       1800.61     1800.82        None
+jair-unsat_pole-res.yml                      false                            0.51        0.63        None
+jair-unsat_pole.yml                          false                            1.05        1.16        None
+jair-unsat_recycling-2fsc.yml                false                            0.44        0.55        None
+jair-unsat_recycling-3fsc.yml                false                            2.87        3.02        None
+jair-unsat_refuel-06-res.yml                 false                            0.45        0.59        None
+jair-unsat_tiny_rewards.yml                  false                            0.35        0.45        None
+pomdps-unsat_mem_1_4x3-95_1.yml              false                            0.50        0.64        None
+pomdps-unsat_mem_1_4x5x2-95_1.yml            false                            0.32        0.45        None
+pomdps-unsat_mem_1_drone-4-1_1.yml           false                            1.50        1.63        None
+pomdps-unsat_mem_1_drone-4-2_1.yml           false                            0.57        0.71        None
+pomdps-unsat_mem_1_drone-8-2_1.yml           TIMEOUT                       1800.64     1800.85        None
+pomdps-unsat_mem_1_grid-avoid-4-0.1_1.yml    false                            0.47        0.60        None
+pomdps-unsat_mem_1_hallway_1.yml             TIMEOUT                       1800.74     1800.95        None
+pomdps-unsat_mem_1_maze-alex_1.yml           TIMEOUT                       1800.61     1800.79        None
+pomdps-unsat_mem_1_milos-aaai97_1.yml        false                            3.63        3.76        None
+pomdps-unsat_mem_1_network_1.yml             false                            0.35        0.47        None
+pomdps-unsat_mem_1_nrp-8_1.yml               false                            0.45        0.58        None
+pomdps-unsat_mem_1_query-s2_1.yml            false                            0.36        0.48        None
+pomdps-unsat_mem_1_query-s3_1.yml            false                            1.27        1.42        None
+pomdps-unsat_mem_1_refuel-06_1.yml           false                            0.78        0.90        None
+pomdps-unsat_mem_1_refuel-20_1.yml           TIMEOUT                       1800.67     1800.88        None
+pomdps-unsat_mem_1_rocks-12_1.yml            false                          318.13      318.27        None
+pomdps-unsat_mem_2_4x3-95_2.yml              false                            0.66        0.81        None
+pomdps-unsat_mem_2_4x5x2-95_2.yml            false                            0.80        0.94        None
+pomdps-unsat_mem_2_grid-avoid-4-0.1_2.yml    false                            0.52        0.66        None
+pomdps-unsat_mem_2_maze-alex_2.yml           TIMEOUT                       1800.62     1800.78        None
+pomdps-unsat_mem_2_milos-aaai97_2.yml        false                            1.27        1.41        None
+pomdps-unsat_mem_2_network_2.yml             false                            0.57        0.71        None
+pomdps-unsat_mem_2_nrp-8_2.yml               TIMEOUT                       1800.55     1801.45        None
+pomdps-unsat_mem_2_query-s2_2.yml            false                            0.49        0.59        None
+pomdps-unsat_mem_2_query-s3_2.yml            false                           74.33       74.46        None
+pomdps-unsat_mem_2_refuel-06_2.yml           TIMEOUT                       1800.61     1800.81        None
+pomdps-unsat_mem_3_4x3-95_3.yml              false                           14.18       14.29        None
+pomdps-unsat_mem_3_4x5x2-95_3.yml            false                            4.13        4.28        None
+pomdps-unsat_mem_3_grid-avoid-4-0.1_3.yml    false                            0.64        0.77        None
+pomdps-unsat_mem_3_maze-alex_3.yml           false                            0.50        0.64        None
+pomdps-unsat_mem_3_network_3.yml             false                           85.26       85.42        None
+pomdps-unsat_mem_3_query-s2_3.yml            false                           26.76       26.89        None
+pomdps-unsat_mem_3_query-s3_3.yml            false                           44.49       44.63        None
+pomdps-unsat_mem_3_refuel-06_3.yml           TIMEOUT                       1800.61     1800.83        None
+pomdps-unsat_mem_4_4x3-95_4.yml              false                          605.75      605.94        None
+pomdps-unsat_mem_4_grid-avoid-4-0.1_4.yml    false                            3.75        3.87        None
+----------------------------------------------------------------------------------------------------------
+Run set 2                                    done                         38156.20     1929.97           -
+
+
+PAYNT-CEGIS
+Run set 3 of 5 with options 'build/paynt/paynt.py --method cegis' and propertyfile 'None'
+
+inputfile                                    status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------------------------
+jair-sat_box-pushing-1fsc.yml                unknown                          2.86        3.55        None
+jair-sat_box-pushing-2fsc.yml                unknown                          8.31        9.04        None
+jair-sat_dpm.yml                             true                             1.01        1.70        None
+jair-sat_grid-10-sl-4fsc.yml                 true                             0.66        1.36        None
+jair-sat_grid-meet-sl-2fsc.yml               true                            39.86       40.55        None
+jair-sat_grid.yml                            true                             0.75        1.42        None
+jair-sat_grid3x3-1fsc.yml                    unknown                          0.64        1.31        None
+jair-sat_grid3x3-2fsc.yml                    unknown                          2.70        3.38        None
+jair-sat_herman.yml                          true                            44.16       44.86        None
+jair-sat_maze-sl-5.yml                       TIMEOUT                       1800.60     1801.42        None
+jair-sat_maze.yml                            true                            14.08       14.75        None
+jair-sat_pole-res.yml                        unknown                          0.53        1.21        None
+jair-sat_pole.yml                            unknown                          0.52        1.20        None
+jair-sat_recycling-2fsc.yml                  unknown                          0.48        1.16        None
+jair-sat_recycling-3fsc.yml                  unknown                          0.51        1.18        None
+jair-sat_refuel-06-res.yml                   TIMEOUT                       1800.60     1801.51        None
+jair-sat_tiny_rewards.yml                    unknown                          0.49        1.16        None
+pomdps-sat_mem_1_4x3-95_1.yml                unknown                          0.42        1.10        None
+pomdps-sat_mem_1_4x5x2-95_1.yml              unknown                          0.40        1.07        None
+pomdps-sat_mem_1_drone-4-1_1.yml             TIMEOUT                       1800.60     1801.43        None
+pomdps-sat_mem_1_drone-4-2_1.yml             TIMEOUT                       1800.60     1801.43        None
+pomdps-sat_mem_1_drone-8-2_1.yml             TIMEOUT                       1800.59     1801.66        None
+pomdps-sat_mem_1_grid-avoid-4-0.1_1.yml      true                             0.43        1.11        None
+pomdps-sat_mem_1_hallway_1.yml               unknown                          0.93        1.63        None
+pomdps-sat_mem_1_maze-alex_1.yml             true                             1.05        1.72        None
+pomdps-sat_mem_1_milos-aaai97_1.yml          unknown                          0.41        1.08        None
+pomdps-sat_mem_1_network_1.yml               unknown                          0.42        0.62        None
+pomdps-sat_mem_1_nrp-8_1.yml                 true                             0.44        0.69        None
+pomdps-sat_mem_1_query-s2_1.yml              unknown                          0.47        0.70        None
+pomdps-sat_mem_1_query-s3_1.yml              unknown                          0.48        0.78        None
+pomdps-sat_mem_1_refuel-06_1.yml             true                           348.89      349.19        None
+pomdps-sat_mem_1_refuel-20_1.yml             true                             8.13        8.43        None
+pomdps-sat_mem_1_rocks-12_1.yml              TIMEOUT                       1800.59     1801.29        None
+pomdps-sat_mem_2_4x3-95_2.yml                unknown                          0.34        0.63        None
+pomdps-sat_mem_2_4x5x2-95_2.yml              unknown                          0.41        0.69        None
+pomdps-sat_mem_2_grid-avoid-4-0.1_2.yml      true                             0.45        0.73        None
+pomdps-sat_mem_2_maze-alex_2.yml             true                           347.21      347.44        None
+pomdps-sat_mem_2_milos-aaai97_2.yml          unknown                          0.38        0.61        None
+pomdps-sat_mem_2_network_2.yml               unknown                          0.51        0.71        None
+pomdps-sat_mem_2_nrp-8_2.yml                 true                             0.44        0.59        None
+pomdps-sat_mem_2_query-s2_2.yml              unknown                          0.40        0.53        None
+pomdps-sat_mem_2_query-s3_2.yml              unknown                          0.41        0.58        None
+pomdps-sat_mem_2_refuel-06_2.yml             TIMEOUT                       1800.61     1800.97        None
+pomdps-sat_mem_3_4x3-95_3.yml                unknown                          0.39        0.53        None
+pomdps-sat_mem_3_4x5x2-95_3.yml              unknown                          0.45        0.61        None
+pomdps-sat_mem_3_grid-avoid-4-0.1_3.yml      true                             0.47        0.65        None
+pomdps-sat_mem_3_maze-alex_3.yml             TIMEOUT                       1800.62     1800.88        None
+pomdps-sat_mem_3_network_3.yml               unknown                          0.38        0.54        None
+pomdps-sat_mem_3_query-s2_3.yml              unknown                          0.40        0.56        None
+pomdps-sat_mem_3_query-s3_3.yml              unknown                          0.43        0.58        None
+pomdps-sat_mem_3_refuel-06_3.yml             TIMEOUT                       1800.62     1800.92        None
+pomdps-sat_mem_4_4x3-95_4.yml                unknown                          0.47        0.62        None
+pomdps-sat_mem_4_grid-avoid-4-0.1_4.yml      true                             0.75        0.89        None
+jair-unsat_box-pushing-1fsc.yml              unknown                          2.76        2.93        None
+jair-unsat_box-pushing-2fsc.yml              unknown                          7.98        8.16        None
+jair-unsat_dpm.yml                           TIMEOUT                       1800.63     1800.90        None
+jair-unsat_grid-10-sl-4fsc.yml               false                           21.48       21.65        None
+jair-unsat_grid-meet-sl-2fsc.yml             TIMEOUT                       1800.64     1800.96        None
+jair-unsat_grid.yml                          false                            0.69        0.87        None
+jair-unsat_grid3x3-1fsc.yml                  unknown                          0.73        0.91        None
+jair-unsat_grid3x3-2fsc.yml                  unknown                          3.51        3.68        None
+jair-unsat_herman.yml                        TIMEOUT                       1800.66     1800.87        None
+jair-unsat_maze-sl-5.yml                     TIMEOUT                       1800.63     1800.90        None
+jair-unsat_maze.yml                          TIMEOUT                       1800.61     1801.08        None
+jair-unsat_pole-res.yml                      unknown                          0.66        0.81        None
+jair-unsat_pole.yml                          unknown                          0.73        0.87        None
+jair-unsat_recycling-2fsc.yml                unknown                          0.53        0.69        None
+jair-unsat_recycling-3fsc.yml                unknown                          0.60        0.75        None
+jair-unsat_refuel-06-res.yml                 TIMEOUT                       1800.63     1800.90        None
+jair-unsat_tiny_rewards.yml                  unknown                          0.36        0.51        None
+pomdps-unsat_mem_1_4x3-95_1.yml              unknown                          0.35        0.49        None
+pomdps-unsat_mem_1_4x5x2-95_1.yml            unknown                          0.46        0.61        None
+pomdps-unsat_mem_1_drone-4-1_1.yml           TIMEOUT                       1800.63     1800.87        None
+pomdps-unsat_mem_1_drone-4-2_1.yml           TIMEOUT                       1800.60     1801.10        None
+pomdps-unsat_mem_1_drone-8-2_1.yml           TIMEOUT                       1800.64     1800.89        None
+pomdps-unsat_mem_1_grid-avoid-4-0.1_1.yml    false                            0.57        0.73        None
+pomdps-unsat_mem_1_hallway_1.yml             unknown                          0.90        1.07        None
+pomdps-unsat_mem_1_maze-alex_1.yml           false                           11.66       11.80        None
+pomdps-unsat_mem_1_milos-aaai97_1.yml        unknown                          0.34        0.47        None
+pomdps-unsat_mem_1_network_1.yml             unknown                          0.33        0.46        None
+pomdps-unsat_mem_1_nrp-8_1.yml               false                            0.41        0.54        None
+pomdps-unsat_mem_1_query-s2_1.yml            unknown                          0.40        0.52        None
+pomdps-unsat_mem_1_query-s3_1.yml            unknown                          0.35        0.48        None
+pomdps-unsat_mem_1_refuel-06_1.yml           TIMEOUT                       1800.63     1800.87        None
+pomdps-unsat_mem_1_refuel-20_1.yml           TIMEOUT                       1800.63     1800.87        None
+pomdps-unsat_mem_1_rocks-12_1.yml            TIMEOUT                       1800.63     1800.90        None
+pomdps-unsat_mem_2_4x3-95_2.yml              unknown                          0.35        0.49        None
+pomdps-unsat_mem_2_4x5x2-95_2.yml            unknown                          0.35        0.50        None
+pomdps-unsat_mem_2_grid-avoid-4-0.1_2.yml    false                            0.61        0.76        None
+pomdps-unsat_mem_2_maze-alex_2.yml           TIMEOUT                       1800.62     1800.91        None
+pomdps-unsat_mem_2_milos-aaai97_2.yml        unknown                          0.55        0.70        None
+pomdps-unsat_mem_2_network_2.yml             unknown                          0.58        0.73        None
+pomdps-unsat_mem_2_nrp-8_2.yml               TIMEOUT                       1800.62     1800.93        None
+pomdps-unsat_mem_2_query-s2_2.yml            unknown                          0.50        0.65        None
+pomdps-unsat_mem_2_query-s3_2.yml            unknown                          0.54        0.70        None
+pomdps-unsat_mem_2_refuel-06_2.yml           TIMEOUT                       1800.63     1800.87        None
+pomdps-unsat_mem_3_4x3-95_3.yml              unknown                          0.37        0.50        None
+pomdps-unsat_mem_3_4x5x2-95_3.yml            unknown                          0.37        0.50        None
+pomdps-unsat_mem_3_grid-avoid-4-0.1_3.yml    false                            0.64        0.78        None
+pomdps-unsat_mem_3_maze-alex_3.yml           TIMEOUT                       1800.60     1800.89        None
+pomdps-unsat_mem_3_network_3.yml             unknown                          0.39        0.51        None
+pomdps-unsat_mem_3_query-s2_3.yml            unknown                          0.39        0.53        None
+pomdps-unsat_mem_3_query-s3_3.yml            unknown                          0.41        0.54        None
+pomdps-unsat_mem_3_refuel-06_3.yml           TIMEOUT                       1800.62     1800.83        None
+pomdps-unsat_mem_4_4x3-95_4.yml              unknown                          0.41        0.54        None
+pomdps-unsat_mem_4_grid-avoid-4-0.1_4.yml    false                            1.17        1.31        None
+----------------------------------------------------------------------------------------------------------
+Run set 3                                    done                         47716.80     2155.72           -
+
+
+PAYNT-Hybrid
+Run set 4 of 5 with options 'build/paynt/paynt.py --method hybrid' and propertyfile 'None'
+
+inputfile                                    status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------------------------
+jair-sat_box-pushing-1fsc.yml                unknown                          3.03        3.79        None
+jair-sat_box-pushing-2fsc.yml                unknown                         10.15       10.93        None
+jair-sat_dpm.yml                             true                             2.29        3.05        None
+jair-sat_grid-10-sl-4fsc.yml                 TIMEOUT                       1800.59     1801.45        None
+jair-sat_grid-meet-sl-2fsc.yml               TIMEOUT                       1800.86     1801.69        None
+jair-sat_grid.yml                            true                             3.51        4.25        None
+jair-sat_grid3x3-1fsc.yml                    unknown                          0.78        1.53        None
+jair-sat_grid3x3-2fsc.yml                    unknown                          2.95        3.67        None
+jair-sat_herman.yml                          true                          1218.07     1218.88        None
+jair-sat_maze-sl-5.yml                       TIMEOUT                       1800.60     1801.34        None
+jair-sat_maze.yml                            TIMEOUT                       1800.60     1801.33        None
+jair-sat_pole-res.yml                        unknown                          0.51        1.20        None
+jair-sat_pole.yml                            unknown                          0.56        1.23        None
+jair-sat_recycling-2fsc.yml                  unknown                          0.49        1.16        None
+jair-sat_recycling-3fsc.yml                  unknown                          0.44        1.08        None
+jair-sat_refuel-06-res.yml                   true                             0.75        1.39        None
+jair-sat_tiny_rewards.yml                    unknown                          0.46        1.10        None
+pomdps-sat_mem_1_4x3-95_1.yml                unknown                          0.41        1.04        None
+pomdps-sat_mem_1_4x5x2-95_1.yml              unknown                          0.43        1.01        None
+pomdps-sat_mem_1_drone-4-1_1.yml             TIMEOUT                       1800.61     1801.22        None
+pomdps-sat_mem_1_drone-4-2_1.yml             TIMEOUT                       1800.60     1801.26        None
+pomdps-sat_mem_1_drone-8-2_1.yml             TIMEOUT                       1800.62     1801.23        None
+pomdps-sat_mem_1_grid-avoid-4-0.1_1.yml      true                             0.40        0.98        None
+pomdps-sat_mem_1_hallway_1.yml               unknown                          0.98        1.59        None
+pomdps-sat_mem_1_maze-alex_1.yml             TIMEOUT                       1800.61     1801.20        None
+pomdps-sat_mem_1_milos-aaai97_1.yml          unknown                          0.40        0.97        None
+pomdps-sat_mem_1_network_1.yml               unknown                          0.35        0.63        None
+pomdps-sat_mem_1_nrp-8_1.yml                 true                             0.46        0.78        None
+pomdps-sat_mem_1_query-s2_1.yml              unknown                          0.41        0.69        None
+pomdps-sat_mem_1_query-s3_1.yml              unknown                          0.41        0.70        None
+pomdps-sat_mem_1_refuel-06_1.yml             true                             0.86        1.15        None
+pomdps-sat_mem_1_refuel-20_1.yml             TIMEOUT                       1800.62     1800.97        None
+pomdps-sat_mem_1_rocks-12_1.yml              TIMEOUT                       1800.62     1800.96        None
+pomdps-sat_mem_2_4x3-95_2.yml                unknown                          0.35        0.61        None
+pomdps-sat_mem_2_4x5x2-95_2.yml              unknown                          0.42        0.65        None
+pomdps-sat_mem_2_grid-avoid-4-0.1_2.yml      true                             0.43        0.59        None
+pomdps-sat_mem_2_maze-alex_2.yml             TIMEOUT                       1800.62     1800.80        None
+pomdps-sat_mem_2_milos-aaai97_2.yml          unknown                          0.35        0.49        None
+pomdps-sat_mem_2_network_2.yml               unknown                          0.46        0.62        None
+pomdps-sat_mem_2_nrp-8_2.yml                 TIMEOUT                       1800.62     1800.85        None
+pomdps-sat_mem_2_query-s2_2.yml              unknown                          0.36        0.53        None
+pomdps-sat_mem_2_query-s3_2.yml              unknown                          0.45        0.63        None
+pomdps-sat_mem_2_refuel-06_2.yml             TIMEOUT                       1800.62     1800.83        None
+pomdps-sat_mem_3_4x3-95_3.yml                unknown                          0.40        0.57        None
+pomdps-sat_mem_3_4x5x2-95_3.yml              unknown                          0.38        0.51        None
+pomdps-sat_mem_3_grid-avoid-4-0.1_3.yml      true                             0.63        0.78        None
+pomdps-sat_mem_3_maze-alex_3.yml             TIMEOUT                       1800.62     1800.79        None
+pomdps-sat_mem_3_network_3.yml               unknown                          0.39        0.53        None
+pomdps-sat_mem_3_query-s2_3.yml              unknown                          0.36        0.49        None
+pomdps-sat_mem_3_query-s3_3.yml              unknown                          0.41        0.55        None
+pomdps-sat_mem_3_refuel-06_3.yml             TIMEOUT                       1800.62     1800.82        None
+pomdps-sat_mem_4_4x3-95_4.yml                unknown                          0.40        0.55        None
+pomdps-sat_mem_4_grid-avoid-4-0.1_4.yml      true                             4.87        5.03        None
+jair-unsat_box-pushing-1fsc.yml              unknown                          2.57        2.76        None
+jair-unsat_box-pushing-2fsc.yml              unknown                          7.84        8.01        None
+jair-unsat_dpm.yml                           false                            0.96        1.12        None
+jair-unsat_grid-10-sl-4fsc.yml               TIMEOUT                       1800.62     1800.81        None
+jair-unsat_grid-meet-sl-2fsc.yml             false                          147.66      147.82        None
+jair-unsat_grid.yml                          false                            1.38        1.54        None
+jair-unsat_grid3x3-1fsc.yml                  unknown                          0.59        0.72        None
+jair-unsat_grid3x3-2fsc.yml                  unknown                          2.87        3.01        None
+jair-unsat_herman.yml                        false                           51.74       51.87        None
+jair-unsat_maze-sl-5.yml                     TIMEOUT                       1800.62     1800.80        None
+jair-unsat_maze.yml                          TIMEOUT                       1800.62     1800.78        None
+jair-unsat_pole-res.yml                      unknown                          0.51        0.62        None
+jair-unsat_pole.yml                          unknown                          0.50        0.63        None
+jair-unsat_recycling-2fsc.yml                unknown                          0.45        0.58        None
+jair-unsat_recycling-3fsc.yml                unknown                          0.40        0.54        None
+jair-unsat_refuel-06-res.yml                 false                            0.68        0.82        None
+jair-unsat_tiny_rewards.yml                  unknown                          0.39        0.50        None
+pomdps-unsat_mem_1_4x3-95_1.yml              unknown                          0.43        0.57        None
+pomdps-unsat_mem_1_4x5x2-95_1.yml            unknown                          0.34        0.46        None
+pomdps-unsat_mem_1_drone-4-1_1.yml           false                            1.82        1.96        None
+pomdps-unsat_mem_1_drone-4-2_1.yml           false                            0.58        0.71        None
+pomdps-unsat_mem_1_drone-8-2_1.yml           TIMEOUT                       1800.63     1800.81        None
+pomdps-unsat_mem_1_grid-avoid-4-0.1_1.yml    false                            0.38        0.51        None
+pomdps-unsat_mem_1_hallway_1.yml             unknown                          1.00        1.14        None
+pomdps-unsat_mem_1_maze-alex_1.yml           TIMEOUT                       1800.61     1800.81        None
+pomdps-unsat_mem_1_milos-aaai97_1.yml        unknown                          0.36        0.48        None
+pomdps-unsat_mem_1_network_1.yml             unknown                          0.32        0.44        None
+pomdps-unsat_mem_1_nrp-8_1.yml               false                            0.38        0.53        None
+pomdps-unsat_mem_1_query-s2_1.yml            unknown                          0.32        0.44        None
+pomdps-unsat_mem_1_query-s3_1.yml            unknown                          0.36        0.48        None
+pomdps-unsat_mem_1_refuel-06_1.yml           false                            0.74        0.88        None
+pomdps-unsat_mem_1_refuel-20_1.yml           TIMEOUT                       1800.66     1800.86        None
+pomdps-unsat_mem_1_rocks-12_1.yml            false                          389.47      389.63        None
+pomdps-unsat_mem_2_4x3-95_2.yml              unknown                          0.34        0.45        None
+pomdps-unsat_mem_2_4x5x2-95_2.yml            unknown                          0.34        0.45        None
+pomdps-unsat_mem_2_grid-avoid-4-0.1_2.yml    false                            0.35        0.48        None
+pomdps-unsat_mem_2_maze-alex_2.yml           TIMEOUT                       1800.63     1800.83        None
+pomdps-unsat_mem_2_milos-aaai97_2.yml        unknown                          0.47        0.61        None
+pomdps-unsat_mem_2_network_2.yml             unknown                          0.50        0.64        None
+pomdps-unsat_mem_2_nrp-8_2.yml               TIMEOUT                       1800.62     1800.85        None
+pomdps-unsat_mem_2_query-s2_2.yml            unknown                          0.46        0.60        None
+pomdps-unsat_mem_2_query-s3_2.yml            unknown                          0.56        0.71        None
+pomdps-unsat_mem_2_refuel-06_2.yml           TIMEOUT                       1800.62     1800.82        None
+pomdps-unsat_mem_3_4x3-95_3.yml              unknown                          0.49        0.62        None
+pomdps-unsat_mem_3_4x5x2-95_3.yml            unknown                          0.52        0.66        None
+pomdps-unsat_mem_3_grid-avoid-4-0.1_3.yml    false                            0.64        0.79        None
+pomdps-unsat_mem_3_maze-alex_3.yml           false                            0.51        0.64        None
+pomdps-unsat_mem_3_network_3.yml             unknown                          0.45        0.59        None
+pomdps-unsat_mem_3_query-s2_3.yml            unknown                          0.45        0.58        None
+pomdps-unsat_mem_3_query-s3_3.yml            unknown                          0.50        0.65        None
+pomdps-unsat_mem_3_refuel-06_3.yml           TIMEOUT                       1800.61     1800.84        None
+pomdps-unsat_mem_4_4x3-95_4.yml              unknown                          0.50        0.65        None
+pomdps-unsat_mem_4_grid-avoid-4-0.1_4.yml    false                            4.68        4.83        None
+----------------------------------------------------------------------------------------------------------
+Run set 4                                    done                         46905.17     2211.06           -
+
+
+SMT(LRA)
+Run set 5 of 5 with options '-m molehill --ce none --pure-smt' and propertyfile 'None'
+
+inputfile                                    status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------------------------
+jair-sat_box-pushing-1fsc.yml                TIMEOUT                       1800.65     1801.50        None
+jair-sat_box-pushing-2fsc.yml                TIMEOUT                       1800.83     1801.81        None
+jair-sat_dpm.yml                             TIMEOUT                       1800.69     1801.68        None
+jair-sat_grid-10-sl-4fsc.yml                 TIMEOUT                       1800.70     1801.58        None
+jair-sat_grid-meet-sl-2fsc.yml               TIMEOUT                       1800.90     1801.80        None
+jair-sat_grid.yml                            true                          1144.99     1145.93        None
+jair-sat_grid3x3-1fsc.yml                    TIMEOUT                       1800.71     1801.59        None
+jair-sat_grid3x3-2fsc.yml                    TIMEOUT                       1800.65     1801.51        None
+jair-sat_herman.yml                          TIMEOUT                       1800.83     1801.76        None
+jair-sat_maze-sl-5.yml                       TIMEOUT                       1800.60     1801.42        None
+jair-sat_maze.yml                            TIMEOUT                       1800.60     1801.41        None
+jair-sat_pole-res.yml                        TIMEOUT                       1800.64     1801.49        None
+jair-sat_pole.yml                            TIMEOUT                       1800.64     1801.46        None
+jair-sat_recycling-2fsc.yml                  TIMEOUT                       1800.60     1801.44        None
+jair-sat_recycling-3fsc.yml                  TIMEOUT                       1800.63     1801.40        None
+jair-sat_refuel-06-res.yml                   TIMEOUT                       1800.61     1801.37        None
+jair-sat_tiny_rewards.yml                    true                             0.46        1.24        None
+pomdps-sat_mem_1_4x3-95_1.yml                false                         1267.00     1267.70        None
+pomdps-sat_mem_1_4x5x2-95_1.yml              true                             1.32        2.01        None
+pomdps-sat_mem_1_drone-4-1_1.yml             TIMEOUT                       1800.62     1801.36        None
+pomdps-sat_mem_1_drone-4-2_1.yml             TIMEOUT                       1800.62     1801.36        None
+pomdps-sat_mem_1_drone-8-2_1.yml             TIMEOUT                       1800.66     1801.42        None
+pomdps-sat_mem_1_grid-avoid-4-0.1_1.yml      true                             0.50        1.15        None
+pomdps-sat_mem_1_hallway_1.yml               TIMEOUT                       1800.74     1801.53        None
+pomdps-sat_mem_1_maze-alex_1.yml             true                            51.93       52.65        None
+pomdps-sat_mem_1_milos-aaai97_1.yml          TIMEOUT                       1800.62     1801.36        None
+pomdps-sat_mem_1_network_1.yml               false                            0.65        0.85        None
+pomdps-sat_mem_1_nrp-8_1.yml                 true                             0.57        0.72        None
+pomdps-sat_mem_1_query-s2_1.yml              true                           250.38      250.59        None
+pomdps-sat_mem_1_query-s3_1.yml              TIMEOUT                       1800.62     1800.87        None
+pomdps-sat_mem_1_refuel-06_1.yml             true                           149.44      149.63        None
+pomdps-sat_mem_1_refuel-20_1.yml             TIMEOUT                       1800.77     1801.01        None
+pomdps-sat_mem_1_rocks-12_1.yml              TIMEOUT                       1800.66     1800.89        None
+pomdps-sat_mem_2_4x3-95_2.yml                TIMEOUT                       1800.61     1800.88        None
+pomdps-sat_mem_2_4x5x2-95_2.yml              true                            11.96       12.14        None
+pomdps-sat_mem_2_grid-avoid-4-0.1_2.yml      true                             0.73        0.89        None
+pomdps-sat_mem_2_maze-alex_2.yml             TIMEOUT                       1800.61     1800.86        None
+pomdps-sat_mem_2_milos-aaai97_2.yml          TIMEOUT                       1800.61     1800.88        None
+pomdps-sat_mem_2_network_2.yml               true                           309.24      309.51        None
+pomdps-sat_mem_2_nrp-8_2.yml                 true                             3.37        3.71        None
+pomdps-sat_mem_2_query-s2_2.yml              TIMEOUT                       1800.61     1801.06        None
+pomdps-sat_mem_2_query-s3_2.yml              TIMEOUT                       1800.65     1801.07        None
+pomdps-sat_mem_2_refuel-06_2.yml             TIMEOUT                       1800.62     1801.05        None
+pomdps-sat_mem_3_4x3-95_3.yml                TIMEOUT                       1800.60     1801.18        None
+pomdps-sat_mem_3_4x5x2-95_3.yml              true                           248.55      249.08        None
+pomdps-sat_mem_3_grid-avoid-4-0.1_3.yml      true                             4.14        4.72        None
+pomdps-sat_mem_3_maze-alex_3.yml             TIMEOUT                       1800.61     1801.18        None
+pomdps-sat_mem_3_network_3.yml               TIMEOUT                       1800.60     1801.18        None
+pomdps-sat_mem_3_query-s2_3.yml              TIMEOUT                       1800.62     1801.20        None
+pomdps-sat_mem_3_query-s3_3.yml              TIMEOUT                       1800.72     1801.29        None
+pomdps-sat_mem_3_refuel-06_3.yml             TIMEOUT                       1800.65     1801.26        None
+pomdps-sat_mem_4_4x3-95_4.yml                TIMEOUT                       1800.61     1801.20        None
+pomdps-sat_mem_4_grid-avoid-4-0.1_4.yml      true                           115.43      115.97        None
+jair-unsat_box-pushing-1fsc.yml              TIMEOUT                       1800.67     1801.25        None
+jair-unsat_box-pushing-2fsc.yml              TIMEOUT                       1800.83     1801.40        None
+jair-unsat_dpm.yml                           TIMEOUT                       1800.68     1801.24        None
+jair-unsat_grid-10-sl-4fsc.yml               TIMEOUT                       1800.69     1801.18        None
+jair-unsat_grid-meet-sl-2fsc.yml             TIMEOUT                       1800.88     1801.42        None
+jair-unsat_grid.yml                          false                         1084.78     1085.02        None
+jair-unsat_grid3x3-1fsc.yml                  TIMEOUT                       1800.75     1801.05        None
+jair-unsat_grid3x3-2fsc.yml                  TIMEOUT                       1800.66     1800.90        None
+jair-unsat_herman.yml                        TIMEOUT                       1800.79     1801.06        None
+jair-unsat_maze-sl-5.yml                     TIMEOUT                       1800.62     1800.85        None
+jair-unsat_maze.yml                          TIMEOUT                       1800.62     1800.86        None
+jair-unsat_pole-res.yml                      TIMEOUT                       1800.65     1800.91        None
+jair-unsat_pole.yml                          TIMEOUT                       1800.66     1800.97        None
+jair-unsat_recycling-2fsc.yml                TIMEOUT                       1800.63     1800.84        None
+jair-unsat_recycling-3fsc.yml                TIMEOUT                       1800.61     1800.89        None
+jair-unsat_refuel-06-res.yml                 TIMEOUT                       1800.61     1800.84        None
+jair-unsat_tiny_rewards.yml                  false                            0.39        0.55        None
+pomdps-unsat_mem_1_4x3-95_1.yml              false                         1581.70     1581.95        None
+pomdps-unsat_mem_1_4x5x2-95_1.yml            false                           36.23       36.48        None
+pomdps-unsat_mem_1_drone-4-1_1.yml           TIMEOUT                       1800.61     1800.88        None
+pomdps-unsat_mem_1_drone-4-2_1.yml           TIMEOUT                       1800.61     1800.90        None
+pomdps-unsat_mem_1_drone-8-2_1.yml           TIMEOUT                       1800.67     1801.09        None
+pomdps-unsat_mem_1_grid-avoid-4-0.1_1.yml    false                            0.53        0.88        None
+pomdps-unsat_mem_1_hallway_1.yml             TIMEOUT                       1800.76     1801.17        None
+pomdps-unsat_mem_1_maze-alex_1.yml           false                          873.26      873.62        None
+pomdps-unsat_mem_1_milos-aaai97_1.yml        TIMEOUT                       1800.62     1801.04        None
+pomdps-unsat_mem_1_network_1.yml             false                            0.71        1.04        None
+pomdps-unsat_mem_1_nrp-8_1.yml               false                            0.71        1.05        None
+pomdps-unsat_mem_1_query-s2_1.yml            false                          865.95      866.24        None
+pomdps-unsat_mem_1_query-s3_1.yml            TIMEOUT                       1800.62     1800.93        None
+pomdps-unsat_mem_1_refuel-06_1.yml           false                          282.51      282.80        None
+pomdps-unsat_mem_1_refuel-20_1.yml           TIMEOUT                       1800.66     1800.98        None
+pomdps-unsat_mem_1_rocks-12_1.yml            TIMEOUT                       1800.66     1800.92        None
+pomdps-unsat_mem_2_4x3-95_2.yml              TIMEOUT                       1800.62     1800.81        None
+pomdps-unsat_mem_2_4x5x2-95_2.yml            false                          131.04      131.22        None
+pomdps-unsat_mem_2_grid-avoid-4-0.1_2.yml    false                            0.93        1.17        None
+pomdps-unsat_mem_2_maze-alex_2.yml           TIMEOUT                       1800.62     1800.84        None
+pomdps-unsat_mem_2_milos-aaai97_2.yml        TIMEOUT                       1800.64     1800.90        None
+pomdps-unsat_mem_2_network_2.yml             false                          947.24      947.42        None
+pomdps-unsat_mem_2_nrp-8_2.yml               false                          131.35      131.55        None
+pomdps-unsat_mem_2_query-s2_2.yml            TIMEOUT                       1800.62     1800.82        None
+pomdps-unsat_mem_2_query-s3_2.yml            TIMEOUT                       1800.65     1800.86        None
+pomdps-unsat_mem_2_refuel-06_2.yml           TIMEOUT                       1800.63     1800.90        None
+pomdps-unsat_mem_3_4x3-95_3.yml              TIMEOUT                       1800.62     1800.83        None
+pomdps-unsat_mem_3_4x5x2-95_3.yml            TIMEOUT                       1800.63     1800.86        None
+pomdps-unsat_mem_3_grid-avoid-4-0.1_3.yml    false                           18.03       18.22        None
+pomdps-unsat_mem_3_maze-alex_3.yml           TIMEOUT                       1800.61     1800.82        None
+pomdps-unsat_mem_3_network_3.yml             TIMEOUT                       1800.61     1800.92        None
+pomdps-unsat_mem_3_query-s2_3.yml            TIMEOUT                       1800.62     1800.86        None
+pomdps-unsat_mem_3_query-s3_3.yml            TIMEOUT                       1800.71     1800.95        None
+pomdps-unsat_mem_3_refuel-06_3.yml           TIMEOUT                       1800.59     1800.93        None
+pomdps-unsat_mem_4_4x3-95_4.yml              TIMEOUT                       1800.62     1800.84        None
+pomdps-unsat_mem_4_grid-avoid-4-0.1_4.yml    false                         1457.61     1457.83        None
+----------------------------------------------------------------------------------------------------------
+Run set 5                                    done                        142424.70     6278.79           -
+
+Statistics:            530 Files
+  correct:             254
+    correct true:      131
+    correct false:     123
+  incorrect:             2
+    incorrect true:      0
+    incorrect false:     2
+  unknown:             274

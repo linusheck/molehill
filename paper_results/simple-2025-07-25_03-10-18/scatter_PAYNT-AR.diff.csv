@@ -1,0 +1,27 @@
+tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set			SMPMC	SMPMC	SMPMC	SMPMC	PAYNT-AR	PAYNT-AR	PAYNT-AR	PAYNT-AR
+../../benchmarks/files/simple-q1/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+jair-sat_grid-10-sl-4fsc.yml	sat	true	true	0.624165	1.4543312704190612		TIMEOUT	1800.599034	1801.3737883735448	
+jair-sat_maze.yml	sat	true	true	0.549422	1.377068947069347		TIMEOUT	1800.59655	1801.3200931837782	
+pomdps-sat_mem_1_drone-4-1_1.yml	sat	true	TIMEOUT	1800.733013	1801.6046490455046		true	3.504814	4.077187849208713	
+pomdps-sat_mem_1_drone-4-2_1.yml	sat	true	TIMEOUT	1800.610875	1801.5566969318315		true	0.587653	1.1598853319883347	
+pomdps-sat_mem_1_drone-8-2_1.yml	sat	true	TIMEOUT	1800.711659	1801.3816441763192		true	13.026631	13.596054626628757	
+pomdps-sat_mem_1_maze-alex_1.yml	sat	true	true	0.477474	1.1625476414337754		TIMEOUT	1800.601652	1801.2534598195925	
+pomdps-sat_mem_1_refuel-20_1.yml	sat	true	true	15.564949	15.971245005726814		TIMEOUT	1800.616644	1800.8745865803212	
+pomdps-sat_mem_1_rocks-12_1.yml	sat	true	TIMEOUT	1800.940927	1801.3157754046842		true	1.283803	1.4310375498607755	
+pomdps-sat_mem_2_maze-alex_2.yml	sat	true	true	1.190351	1.4568115593865514		TIMEOUT	1800.612539	1800.7774536013603	
+pomdps-sat_mem_2_milos-aaai97_2.yml	sat	true	true	1.29624	1.5117610590532422		TIMEOUT	1800.594634	1800.876042291522	
+pomdps-sat_mem_2_refuel-06_2.yml	sat	true	TIMEOUT	1800.993275	1801.2628719005734		true	0.695487	0.8664607433602214	
+pomdps-sat_mem_3_maze-alex_3.yml	sat	true	true	190.504038	190.71667738817632		TIMEOUT	1800.615419	1800.8249177914113	
+pomdps-sat_mem_3_refuel-06_3.yml	sat	true	TIMEOUT	1800.848214	1801.1820377605036		true	7.981793	8.133415274322033	
+pomdps-sat_mem_4_4x3-95_4.yml	sat	true	TIMEOUT	1800.669772	1800.9161263536662		true	169.183537	169.3498609121889	
+jair-unsat_grid-10-sl-4fsc.yml	unsat	false	false	4.031608	4.250462572090328		TIMEOUT	1800.62025	1800.8064819741994	
+jair-unsat_grid3x3-2fsc.yml	unsat	false	false	826.956387	827.2293178252876		OUT OF MEMORY	1302.913992	1303.5941647458822	
+jair-unsat_maze.yml	unsat	false	false	1.136398	1.3267658911645412		TIMEOUT	1800.618094	1800.7478419151157	
+pomdps-unsat_mem_1_drone-4-1_1.yml	unsat	false	TIMEOUT	1800.731869	1800.9967092555016		false	1.415435	1.5537972040474415	
+pomdps-unsat_mem_1_drone-4-2_1.yml	unsat	false	TIMEOUT	1800.683651	1800.9418623587117		false	0.619424	0.7784115755930543	
+pomdps-unsat_mem_1_maze-alex_1.yml	unsat	false	false	1.217263	1.4763545133173466		TIMEOUT	1800.614942	1800.8115266757086	
+pomdps-unsat_mem_1_rocks-12_1.yml	unsat	false	TIMEOUT	1800.662333	1800.9391133487225		false	334.446675	334.5976370004937	
+pomdps-unsat_mem_2_maze-alex_2.yml	unsat	false	false	5.904992	6.074319254606962		TIMEOUT	1800.617584	1800.7499284697697	
+pomdps-unsat_mem_2_nrp-8_2.yml	unsat	false	false	327.441178	327.6617289958522		TIMEOUT	1800.552102	1801.382423019968	
+pomdps-unsat_mem_4_4x3-95_4.yml	unsat	false	TIMEOUT	1800.707286	1800.9558629738167		false	601.883565	602.0526085495949	

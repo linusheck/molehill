@@ -2,7 +2,7 @@
 
 RESULT_DIR=$1
 
-PYTHONPATH=$(pwd) python3 $(which table-generator) $(find $RESULT_DIR -type f | grep ".*results\.[^.]*\.xml\.bz2$") --all-columns -x benchmarks/tablegenerator.xml -o $RESULT_DIR
+PYTHONPATH=$(pwd) python3 $(which table-generator) $(find $RESULT_DIR -type f | grep ".*results\..*\.xml\.bz2$") --all-columns -x benchmarks/tablegenerator.xml -o $RESULT_DIR
 
 for x in $(find $RESULT_DIR -type f | grep ".*results\.[^.]*\.xml\.bz2$"); do
     echo "Processing $x"

@@ -1,0 +1,7 @@
+Total number of problems: 82
+Tool                       Solved    Uniquely Solved
+--------------------------------------------------
+PAYNT-AR-1-by-1                43                 16
+PAYNT-AR-MDP-Eval               0                  0
+SMPMC                          43                 16
+SMT(LRA)                        7                  0

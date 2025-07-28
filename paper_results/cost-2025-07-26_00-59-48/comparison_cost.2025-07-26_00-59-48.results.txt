@@ -1,0 +1,86 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison_cost.xml
+name:                    comparison_cost
+run sets:                SMPMC, PAYNT-CEGIS, SMT(LRA)
+date:                    Sat, 2025-07-26 00:59:48 UTC
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/molehill-U9ijTdgT/bin/python3
+options:
+parallel runs:           26
+resource limits:
+- memory:                16000.0 MB
+- time:                  1800 s
+hardware requirements:
+- memory:                16000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    localhost
+os:                      Linux-6.1.0-23-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   False
+ram:                     540660.658176 MB
+------------------------------------------------------------
+
+
+
+SMPMC
+Run set 1 of 3 with options 'misc/constrained_benchmark.py molehill' and propertyfile 'None'
+
+inputfile                                        status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------------------------
+benchmark-q2-cost-sat_dpm.yml                    true                            10.42       10.72        None
+benchmark-q2-cost-sat_grid-10-sl-4fsc.yml        true                             1.15        1.46        None
+benchmark-q2-cost-sat_grid-meet-sl-2fsc.yml      true                            19.31       19.65        None
+benchmark-q2-cost-sat_maze.yml                   true                             0.49        0.77        None
+benchmark-q2-cost-unsat_dpm.yml                  false                            8.33        8.66        None
+benchmark-q2-cost-unsat_grid-10-sl-4fsc.yml      false                            1.45        1.74        None
+benchmark-q2-cost-unsat_grid-meet-sl-2fsc.yml    false                           85.03       85.32        None
+benchmark-q2-cost-unsat_maze.yml                 false                            1.49        1.78        None
+--------------------------------------------------------------------------------------------------------------
+Run set 1                                        done                           127.80       85.65           -
+
+
+PAYNT-CEGIS
+Run set 2 of 3 with options 'misc/constrained_benchmark.py paynt' and propertyfile 'None'
+
+inputfile                                        status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------------------------
+benchmark-q2-cost-sat_dpm.yml                    true                             3.56        3.79        None
+benchmark-q2-cost-sat_grid-10-sl-4fsc.yml        true                             0.57        0.81        None
+benchmark-q2-cost-sat_grid-meet-sl-2fsc.yml      true                            33.17       33.43        None
+benchmark-q2-cost-sat_maze.yml                   true                           136.70      136.95        None
+benchmark-q2-cost-unsat_dpm.yml                  false                            5.50        5.74        None
+benchmark-q2-cost-unsat_grid-10-sl-4fsc.yml      false                            0.76        1.00        None
+benchmark-q2-cost-unsat_grid-meet-sl-2fsc.yml    false                           47.68       47.93        None
+benchmark-q2-cost-unsat_maze.yml                 TIMEOUT                       1800.61     1800.94        None
+--------------------------------------------------------------------------------------------------------------
+Run set 2                                        done                          2028.72     1801.74           -
+
+
+SMT(LRA)
+Run set 3 of 3 with options 'misc/constrained_benchmark.py smtlra' and propertyfile 'None'
+
+inputfile                                        status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------------------------
+benchmark-q2-cost-sat_dpm.yml                    TIMEOUT                       1800.62     1800.99        None
+benchmark-q2-cost-sat_grid-10-sl-4fsc.yml        TIMEOUT                       1800.65     1800.96        None
+benchmark-q2-cost-sat_grid-meet-sl-2fsc.yml      TIMEOUT                       1800.87     1800.99        None
+benchmark-q2-cost-sat_maze.yml                   TIMEOUT                       1800.61     1800.96        None
+benchmark-q2-cost-unsat_dpm.yml                  TIMEOUT                       1800.68     1800.94        None
+benchmark-q2-cost-unsat_grid-10-sl-4fsc.yml      TIMEOUT                       1800.67     1800.93        None
+benchmark-q2-cost-unsat_grid-meet-sl-2fsc.yml    TIMEOUT                       1800.87     1800.95        None
+benchmark-q2-cost-unsat_maze.yml                 TIMEOUT                       1800.61     1800.94        None
+--------------------------------------------------------------------------------------------------------------
+Run set 3                                        done                         14405.75     1801.77           -
+
+Statistics:             24 Files
+  correct:              15
+    correct true:        8
+    correct false:       7
+  incorrect:             0
+    incorrect true:      0
+    incorrect false:     0
+  unknown:               9

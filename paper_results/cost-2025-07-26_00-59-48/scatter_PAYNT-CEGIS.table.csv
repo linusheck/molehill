@@ -1,0 +1,11 @@
+tool			synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 	synthesis 
+run set			SMPMC	SMPMC	SMPMC	SMPMC	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS	PAYNT-CEGIS
+../../benchmarks/files/benchmark-q2-cost/			status	cputime (s)	walltime (s)	memUsage	status	cputime (s)	walltime (s)	memUsage
+benchmark-q2-cost-sat_dpm.yml	sat	true	true	10.41507	10.718495861627162		true	3.556407	3.7922574458643794	
+benchmark-q2-cost-sat_grid-10-sl-4fsc.yml	sat	true	true	1.145852	1.4617057163268328		true	0.574	0.8121156422421336	
+benchmark-q2-cost-sat_grid-meet-sl-2fsc.yml	sat	true	true	19.306511	19.65482759475708		true	33.173224	33.429779884405434	
+benchmark-q2-cost-sat_maze.yml	sat	true	true	0.487478	0.7747380752116442		true	136.699829	136.94587074778974	
+benchmark-q2-cost-unsat_dpm.yml	unsat	false	false	8.328855	8.663994455710053		false	5.499824	5.739928930066526	
+benchmark-q2-cost-unsat_grid-10-sl-4fsc.yml	unsat	false	false	1.450768	1.7377528781071305		false	0.763859	0.9999660700559616	
+benchmark-q2-cost-unsat_grid-meet-sl-2fsc.yml	unsat	false	false	85.029065	85.31991715077311		false	47.683986	47.93137476127595	
+benchmark-q2-cost-unsat_maze.yml	unsat	false	false	1.49037	1.7774261208251119		TIMEOUT	30000	30000	
