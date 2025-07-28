@@ -4,10 +4,11 @@ import tabulate
 from functools import partial
 from tabulate import Line, _latex_line_begin_tabular, _latex_row
 
-if len(sys.argv) != 2:
+if len(sys.argv) != 3:
     print("Usage: python tree-log.py <folder>")
     sys.exit(1)
 folder = sys.argv[1]
+method = sys.argv[2]
 
 tree_table = {}
 
@@ -15,9 +16,9 @@ tree_table = {}
 def nodes(lines):
     for line in lines:
         if "--nodes" in line:
-            nodes_index = line.index("--nodes") + len("--nodes")
+            nodes_index = line.index("--nodes") + len("--nodes") + 1
             next_space = line.find(" ", nodes_index)
-            return line[nodes_index:next_space].strip()
+            return int(line[nodes_index:next_space].strip())
 
 def family_size(lines):
     # e.g. Family size 7.23e+2821
@@ -33,30 +34,35 @@ def quotient_size(lines):
             return line.split()[2]
 
 for file in pathlib.Path(folder).glob("*.log"):
-    if not file.name.startswith("SMPMC"):
+    print(file)
+    if not file.name.startswith(method):
         continue
-    name = file.name.replace("SMPMC.benchmark-general-sat_", "").replace(".yml.log", "")
+    name = file.name.replace(method + ".benchmark-general-sat_", "").replace(".yml.log", "")
     with open(file, "r", encoding="utf-8") as f:
         lines = f.readlines()
         family_size_here = family_size(lines)
         quotient_size_here = quotient_size(lines)
         tree_sat = "sat\n" in lines
         tree_unsat = "unsat\n" in lines
-        nodes = nodes(lines)
+        num_nodes = nodes(lines)
         print(f"Processing {name}: Family Size: {family_size_here}, Quotient Size: {quotient_size_here}, Nodes: {nodes}, Tree SAT: {tree_sat}, Tree UNSAT: {tree_unsat}")
         if tree_sat:
-            last_nodes_line = last_nodes(lines)
             if name not in tree_table:
                 tree_table[name] = {}
-            tree_table[name][]
-        if "sat\n" in lines:
-            table_tree.append([name, last_nodes_line, family_size_here, quotient_size_here])
-        else:
-            last_nodes_line = last_nodes(lines)
-            if last_nodes_line == "?" or last_nodes_line == "1":
-                table_no_tree.append([name, last_nodes_line, family_size_here, quotient_size_here])
-            else:
-                table_no_tree.append([name, int(last_nodes_line) - 2, family_size_here, quotient_size_here])
+            tree_table[name][nodes] = {
+                "family_size": family_size_here,
+                "quotient_size": quotient_size_here,
+                "sat": True
+            }
+        #     tree_table[name][]
+        # if "sat\n" in lines:
+        #     table_tree.append([name, last_nodes_line, family_size_here, quotient_size_here])
+        # else:
+        #     last_nodes_line = last_nodes(lines)
+        #     if last_nodes_line == "?" or last_nodes_line == "1":
+        #         table_no_tree.append([name, last_nodes_line, family_size_here, quotient_size_here])
+        #     else:
+        #         table_no_tree.append([name, int(last_nodes_line) - 2, family_size_here, quotient_size_here])
 
 
 # # lineabove=_latex_line_begin_tabular,
