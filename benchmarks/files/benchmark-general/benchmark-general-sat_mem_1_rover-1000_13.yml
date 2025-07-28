@@ -1,0 +1,11 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/benchmark-general/sat_mem_1_rover-1000
+
+properties:
+  - property_file: ../../unknown.txt
+
+options:
+    nodes: 13

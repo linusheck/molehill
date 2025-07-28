@@ -82,24 +82,8 @@ for mem in 1 2 3; do
 done
 
 
-
-for i in $(find ../resources/benchmark-general -type d -name 'sat_*'); do
-    python create_benchmark.py benchmark-general ../../$i ../../sat.txt true
+for nodes in 1 3 5 7 9 11 13 15; do
+    for i in $(find ../resources/benchmark-general -type d -name 'sat_*'); do
+        python create_benchmark.py benchmark-general ../../$i ../../unknown.txt unknown --nodes $nodes
+    done
 done
-for i in $(find ../resources/benchmark-general -type d -name 'unsat_*'); do
-    python create_benchmark.py benchmark-general ../../$i ../../unsat.txt false
-done
-
-
-# Old Robust Benchmarks
-# for i in avoid-8-2 avoid-8-2-easy dpm-switch-q10 dpm-switch-q10-big obstacles-10-6-skip-easy obstacles-demo rocks-6-4 rover-100-big rover-1000 uav-operator-roz-workload uav-roz ; do
-#     python create_benchmark.py robust ../../../resources/mdp-sketches/atva-sat/$i ../../sat.txt true
-# done
-
-# for i in bridge-11-5-4 bridge-21-7-9 bridge-5-3-1 mastermind-2-4-3 pacman-6 rocks-3-2 rocks-4-1 rocks-4-2 rocks-8-1; do
-#     python create_benchmark.py robust ../../../resources/mdp-sketches/other/$i ../../sat.txt true
-# done
-
-# for i in exponential-8 exponential-20; do
-#     python create_benchmark.py robust ../../../resources/mdp-sketches/other/$i ../../unsat.txt false
-# done

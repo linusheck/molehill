@@ -16,6 +16,12 @@ argument_parser.add_argument(
     default=None,
     help="Memory bound for the benchmark (default: None)",
 )
+argument_parser.add_argument(
+    "--nodes",
+    type=int,
+    default=None,
+    help="Node bound for the benchmark (default: None)",
+)
 
 args = argument_parser.parse_args()
 input_file = args.input_file
@@ -30,7 +36,10 @@ input_files:
 
 properties:
   - property_file: {{property_file}}
-    expected_verdict: {{expected_verdict}}
+"""
+
+if expected_verdict != "unknown":
+    template += f"""    expected_verdict: {expected_verdict}
 """
 
 
@@ -47,11 +56,18 @@ def write(name, template):
             )
         )
 
-if args.memory is None:
+if args.memory is None and args.nodes is None:
     write("-".join(input_file.split('/')[-2:]), template)
-else:
+elif args.memory is not None:
     new_template = template + f"""
 options:
     memory: {args.memory}
 """
     write("-".join(input_file.split('/')[-2:]) + f"_{args.memory}", new_template)
+elif args.nodes is not None:
+    new_template = template + f"""
+options:
+    nodes: {args.nodes}
+"""
+    write("-".join(input_file.split('/')[-2:]) + f"_{args.nodes}", new_template)
+
