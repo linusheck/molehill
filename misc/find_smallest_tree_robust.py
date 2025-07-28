@@ -10,6 +10,13 @@ def main():
     arg1 = sys.argv[1]
     x = 1
 
+    # sorry this is a bit of a hack
+    mem = 1
+    if "mem" in arg1:
+        a = arg1.split("_")
+        mem_index = a.index("mem") + 1
+        mem = int(a[mem_index])
+
     cache_file = "cache.pkl"
     while True:
         print(f"Running with --nodes {x}")
@@ -23,9 +30,9 @@ def main():
                 "existsforalltree",
                 "--nodes",
                 str(x),
-                "--fsc-memory-size",
-                "2",
-            ],
+            ] + ([
+                "--fsc-memory-size", str(mem),
+            ] if mem > 1 else []),
             #     "--dump-cache",
             #     cache_file,
             # ] + (["--load-cache", cache_file] if x > 1 else []),

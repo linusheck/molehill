@@ -10,6 +10,13 @@ def main():
     arg1 = sys.argv[1]
     x = 1
 
+    # sorry this is a bit of a hack
+    mem = 1
+    if "mem" in arg1:
+        a = arg1.split("_")
+        mem_index = a.index("mem") + 1
+        mem = int(a[mem_index])
+
     while True:
         print(f"Running with --nodes {x}")
         process = subprocess.Popen(
@@ -23,7 +30,9 @@ def main():
                 "--nodes",
                 str(x),
                 "--pure-smt",
-            ],
+            ] + ([
+                "--fsc-memory-size", str(mem),
+            ] if mem > 1 else []),
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,

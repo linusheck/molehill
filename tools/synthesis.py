@@ -23,6 +23,9 @@ class Tool(BaseTool2):
     def cmdline(self, executable, options, task, rlimits):
         if task.options is not None and "memory" in task.options:
             options += ["--fsc-memory-size", str(task.options["memory"])]
+        if task.options is not None and "nodes" in task.options:
+            options += ["--nodes", str(task.options["nodes"])]
+
         return [executable, *options, *task.input_files_or_identifier]
 
     def _extract_iterations(self, output):

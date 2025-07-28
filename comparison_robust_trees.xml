@@ -14,12 +14,23 @@
     <rundefinition name="SMPMC">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
-        <option>misc/find_smallest_tree_robust.py</option>
-    </rundefinition>
+        <option>-m</option>
+        <option>molehill</option>
+        <option>--ce</option>
+        <option>none</option>
+        <option>--constraint</option>
+        <option>existsforalltree</option>
+      </rundefinition>
 
     <rundefinition name="SMT(LRA)">
         <column title="Iterations" value="iterations"/>
         <require cpuCores="1"/>
-        <option>misc/find_smallest_tree_robust_lra.py</option>
+        <option>-m</option>
+        <option>molehill</option>
+        <option>--pure-smt</option>
+        <option>--ce</option>
+        <option>none</option>
+        <option>--constraint</option>
+        <option>existsforalltree</option>
     </rundefinition>
 </benchmark>
