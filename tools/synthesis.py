@@ -31,7 +31,7 @@ class Tool(BaseTool2):
                 options += ["--nodes=" + str(task.options["nodes"])]
             # add memory information if specified in filename
             for memory in [2, 3]:
-                if any("mem_" + str(memory) in opt for opt in task.options):
+                if any("mem_" + str(memory) in opt for opt in task.input_files_or_identifier):
                     options += ["--fsc-memory-size=" + str(memory)]
 
         return [executable, *options, *task.input_files_or_identifier]
