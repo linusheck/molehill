@@ -1,0 +1,68 @@
+% Table for SMT(LRA).Benchmarks
+\begin{table*}
+\small\centering
+\begin{tabular}{lcccccccc}
+\toprule
+Benchmark & 1 & 3 & 5 & 7 & 9 & 11 & 13 & 15 \\
+\midrule
+avoid-8-2 & NR & NR & NR & NR & NR & NR & NR & NR \\
+avoid-8-2-bf & NR & NR & NR & NR & NR & NR & NR & NR \\
+catch-5 & NR & NR & NR & NR & NR & NR & NR & NR \\
+dpm-switch-q10-big & NR & NR & NR & NR & NR & NR & NR & NR \\
+dpm-switch-q10-big-bf & NR & NR & NR & NR & NR & NR & NR & NR \\
+obstacles-10-6-skip-easy & \no{} 21.13 & NR & NR & NR & NR & NR & NR & NR \\
+obstacles-10-6-skip-easy-bf & \no{} 26.62 & NR & NR & NR & NR & NR & NR & NR \\
+obstacles-demo & \no{} 290.25 & NR & NR & NR & NR & NR & NR & NR \\
+pacman-6 & NR & NR & NR & NR & NR & NR & NR & NR \\
+refuel-04 & \no{} 1.32 & \no{} 1.85 & \no{} 7.89 & \yes{} 215.85 & \yes{} 398.07 & \yes{} 249.21 & \yes{} 951.18 & \yes{} 619.68 \\
+rocks-4-2 & \no{} 5.49 & \no{} 98.91 & NR & NR & NR & NR & NR & NR \\
+rocks-6-4 & NR & NR & NR & NR & NR & NR & NR & NR \\
+rocks-6-4-bf & NR & NR & NR & NR & NR & NR & NR & NR \\
+rocks-6-4-signal & NR & NR & NR & NR & NR & NR & NR & NR \\
+rocks-8-1 & \no{} 56.82 & NR & NR & NR & NR & NR & NR & NR \\
+rover-1000 & NR & NR & NR & NR & NR & NR & NR & NR \\
+rover-1000-bf & NR & NR & NR & NR & NR & NR & NR & NR \\
+uav-operator-roz-workload & NR & NR & NR & NR & NR & NR & NR & NR \\
+uav-operator-roz-workload-bf & NR & NR & NR & NR & NR & NR & NR & NR \\
+uav-roz & NR & NR & NR & NR & NR & NR & NR & NR \\
+mem\_2\_obstacles-2-3 & \no{} 1.46 & \no{} 1.43 & \no{} 1.62 & \no{} 1.16 & \no{} 1.45 & \no{} 3.81 & NR & NR \\
+mem\_3\_obstacles-3-3 & \no{} 3.75 & \no{} 3.62 & \no{} 3.68 & \no{} 3.97 & \no{} 4.38 & \no{} 7.06 & \no{} 153.16 & \no{} 467.21 \\
+\bottomrule
+\end{tabular}
+\caption{SMT(LRA) Results for \Ca}
+\end{table*}
+
+% Table for SMPMC.Benchmarks
+\begin{table*}
+\small\centering
+\begin{tabular}{lcccccccc}
+\toprule
+Benchmark & 1 & 3 & 5 & 7 & 9 & 11 & 13 & 15 \\
+\midrule
+avoid-8-2 & \no{} 9.48 & NR & NR & NR & NR & NR & NR & NR \\
+avoid-8-2-bf & \no{} 9.85 & \yes{} 1191.84 & NR & NR & NR & NR & NR & NR \\
+catch-5 & \no{} 1.20 & \no{} 4.24 & \no{} 32.51 & \no{} 743.57 & NR & NR & NR & NR \\
+dpm-switch-q10-big & \no{} 8.93 & \no{} 53.61 & NR & NR & NR & NR & NR & NR \\
+dpm-switch-q10-big-bf & \no{} 7.10 & \no{} 551.84 & NR & NR & NR & NR & NR & NR \\
+obstacles-10-6-skip-easy & \no{} 3.63 & \yes{} 9.72 & \yes{} 671.50 & \yes{} 81.39 & \yes{} 25.91 & \yes{} 51.22 & \yes{} 50.73 & \yes{} 107.73 \\
+obstacles-10-6-skip-easy-bf & \no{} 3.74 & \yes{} 5.53 & \yes{} 16.47 & \yes{} 150.43 & \yes{} 56.61 & \yes{} 47.67 & \yes{} 37.12 & \yes{} 76.85 \\
+obstacles-demo & \no{} 1.88 & \no{} 4.78 & \yes{} 79.62 & \yes{} 9.94 & \yes{} 65.01 & \yes{} 696.48 & \yes{} 1339.31 & \yes{} 699.80 \\
+pacman-6 & \no{} 5.48 & \yes{} 11.71 & \yes{} 36.32 & \yes{} 56.55 & \yes{} 59.54 & \yes{} 193.20 & \yes{} 669.90 & \yes{} 826.07 \\
+refuel-04 & \no{} 0.68 & \no{} 0.61 & \no{} 1.06 & \yes{} 1.08 & \yes{} 1.71 & \yes{} 3.48 & \yes{} 5.94 & \yes{} 6.35 \\
+rocks-4-2 & \no{} 0.51 & \no{} 0.91 & \yes{} 2.74 & \yes{} 12.04 & \yes{} 11.56 & \yes{} 32.54 & \yes{} 28.19 & \yes{} 20.39 \\
+rocks-6-4 & \no{} 1.20 & \no{} 21.83 & \yes{} 125.52 & \yes{} 362.68 & \yes{} 1288.55 & \yes{} 1265.67 & NR & NR \\
+rocks-6-4-bf & \no{} 1.95 & \no{} 10.02 & \yes{} 177.63 & \yes{} 213.03 & \yes{} 1243.25 & NR & \yes{} 1237.43 & NR \\
+rocks-6-4-signal & \no{} 1.90 & \no{} 7.76 & \yes{} 616.76 & NR & NR & NR & NR & NR \\
+rocks-8-1 & \no{} 0.76 & \no{} 3.05 & \yes{} 4.13 & \yes{} 17.32 & \yes{} 5.82 & \yes{} 22.20 & \yes{} 259.81 & \yes{} 54.53 \\
+rover-1000 & \yes{} 2.14 & \yes{} 4.45 & \yes{} 9.60 & \yes{} 10.74 & \yes{} 11.11 & \yes{} 13.43 & \yes{} 19.68 & \yes{} 19.44 \\
+rover-1000-bf & \yes{} 6.31 & \yes{} 7.39 & \yes{} 9.26 & \yes{} 11.39 & \yes{} 13.80 & \yes{} 16.75 & \yes{} 19.98 & \yes{} 37.94 \\
+uav-operator-roz-workload & \no{} 10.67 & \no{} 89.37 & NR & NR & NR & NR & NR & NR \\
+uav-operator-roz-workload-bf & \no{} 20.90 & \no{} 57.38 & NR & NR & NR & NR & NR & NR \\
+uav-roz & \no{} 12.81 & \no{} 93.07 & NR & NR & NR & NR & NR & NR \\
+mem\_2\_obstacles-2-3 & \no{} 0.46 & \no{} 0.44 & \no{} 0.51 & \no{} 0.66 & \no{} 1.23 & \no{} 2.63 & \no{} 15.87 & \yes{} 4.50 \\
+mem\_3\_obstacles-3-3 & \no{} 0.42 & \no{} 0.69 & \no{} 1.22 & \no{} 1.44 & \no{} 1.73 & \no{} 2.69 & \no{} 25.23 & \no{} 118.62 \\
+\bottomrule
+\end{tabular}
+\caption{SMPMC Results for \Ca}
+\end{table*}
+

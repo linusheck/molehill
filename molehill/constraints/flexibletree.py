@@ -49,6 +49,7 @@ class DecisionTree(Constraint):
         )
         argument_parser.add_argument(
             "--nodes",
+            "--tree-nodes",
             type=int,
             help="Number of enabled nodes in the tree.",
         )

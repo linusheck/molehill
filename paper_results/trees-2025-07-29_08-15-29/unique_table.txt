@@ -1,0 +1,6 @@
+Total number of problems: 72
+Tool                       Solved    Uniquely Solved
+--------------------------------------------------
+PAYNT-CEGIS.Benchmarks         55                  6
+SMPMC.Benchmarks               49                  0
+SMT(LRA).Benchmarks            31                  0

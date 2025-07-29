@@ -33,7 +33,13 @@ def analyze_benchexec_csv(file_path):
     for row in data_rows:
         solved_tools = []
         for tool, col in zip(tool_names, status_columns):
-            if col < len(row) and row[col].strip().lower() == (row[2] if j > 2 else "true"):
+            result = row[col].strip().lower()
+            result_correct = False
+            if j > 2:
+                result_correct = result == row[2].strip().lower()
+            else:
+                result_correct = result in ["true", "false"]
+            if col < len(row) and result_correct:
                 if tool == "PAYNT-AR-MDP-Eval":
                     continue # This tool is in the appendix
                 solved_count[tool] += 1
