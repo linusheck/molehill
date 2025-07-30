@@ -61,6 +61,12 @@ def analyze_benchexec_csv(file_path, folder_for_size=None):
                         nr_states = "$" + nr_states + "$"
                 row.append(family_size)
                 row.append(nr_states)
+                smpmc_location = tool_names.index("SMPMC")
+                smpmc_iterations = row[data_columns[smpmc_location] + 4]
+                if smpmc_iterations:
+                    row.append(f"${smpmc_iterations}$")
+                else:
+                    row.append("NR")
         if row[0].endswith(".yml"):
             benchmark = row[0].replace(".yml", "")
         for prefix in prefixes:
@@ -78,11 +84,11 @@ def analyze_benchexec_csv(file_path, folder_for_size=None):
 
     if folder_for_size:
         # Add family size and nr states to the header
-        tool_names += ("\#Assignments", "\#States")
-        data_columns += (-1, -1)
+        tool_names += ("\#Assignments", "\#States", "SMPMC Iterations")
+        data_columns += (-1, -1, -1)
 
     # Print LaTeX booktabs table
-    print("\\begin{tabular}{l" + "c" * len(tool_names) + "}")
+    print("\\begin{tabular}{l" + "r" * len(tool_names) + "}")
     print("\\toprule")
     print("Benchmark & " + " & ".join(tool_names) + " \\\\")
     print("\\midrule")
@@ -101,10 +107,12 @@ def analyze_benchexec_csv(file_path, folder_for_size=None):
         argmin_cpu_time = min(cpu_times, key=lambda x: float(x) if x != "NR" else float('inf'))
         cpu_times = [f"\\textbf{{{float(x):.2f}}}" if x == argmin_cpu_time and x != "NR" else (f"${float(x):.2f}$" if x != "NR" else "NR") for x in cpu_times]
         if folder_for_size:
-            family_size = row[-2]
-            nr_states = row[-1]
+            family_size = row[-3]
+            nr_states = row[-2]
+            smpmc_iterations = row[-1]
             cpu_times.append(family_size)
             cpu_times.append(nr_states)
+            cpu_times.append(smpmc_iterations)
         print(f"{benchmark} & " + " & ".join(cpu_times) + " \\\\")
     print("\\bottomrule")
     print("\\end{tabular}")

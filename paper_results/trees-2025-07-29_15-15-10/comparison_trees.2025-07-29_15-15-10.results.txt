@@ -1,0 +1,254 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison_trees.xml
+name:                    comparison_trees
+run sets:                SMPMC.Benchmarks, PAYNT-CEGIS.Benchmarks, SMT(LRA).Benchmarks
+date:                    Tue, 2025-07-29 15:15:10 UTC
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/molehill-U9ijTdgT/bin/python3
+options:
+parallel runs:           26
+resource limits:
+- memory:                16000.0 MB
+- time:                  1800 s
+hardware requirements:
+- memory:                16000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    localhost
+os:                      Linux-6.1.0-23-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   False
+ram:                     540660.658176 MB
+------------------------------------------------------------
+
+
+
+SMPMC.Benchmarks
+Run set 1 of 3 with options '-m molehill --ce none --constraint tree' and propertyfile 'None'
+
+inputfile                                        status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------------------------
+benchmark-q2-tree-sat_drone-4-1_1.yml            false                            0.81        1.63        None
+benchmark-q2-tree-sat_drone-4-1_11.yml           TIMEOUT                       1800.82     1801.75        None
+benchmark-q2-tree-sat_drone-4-1_13.yml           TIMEOUT                       1800.73     1801.62        None
+benchmark-q2-tree-sat_drone-4-1_15.yml           TIMEOUT                       1800.77     1801.64        None
+benchmark-q2-tree-sat_drone-4-1_3.yml            false                           14.17       15.04        None
+benchmark-q2-tree-sat_drone-4-1_5.yml            false                          418.56      419.39        None
+benchmark-q2-tree-sat_drone-4-1_7.yml            TIMEOUT                       1800.69     1801.59        None
+benchmark-q2-tree-sat_drone-4-1_9.yml            TIMEOUT                       1800.75     1801.66        None
+benchmark-q2-tree-sat_drone-4-2_1.yml            false                            0.98        1.80        None
+benchmark-q2-tree-sat_drone-4-2_11.yml           TIMEOUT                       1800.82     1801.78        None
+benchmark-q2-tree-sat_drone-4-2_13.yml           TIMEOUT                       1800.87     1801.78        None
+benchmark-q2-tree-sat_drone-4-2_15.yml           TIMEOUT                       1800.76     1801.58        None
+benchmark-q2-tree-sat_drone-4-2_3.yml            false                          603.52      604.40        None
+benchmark-q2-tree-sat_drone-4-2_5.yml            TIMEOUT                       1800.89     1801.78        None
+benchmark-q2-tree-sat_drone-4-2_7.yml            TIMEOUT                       1800.79     1801.93        None
+benchmark-q2-tree-sat_drone-4-2_9.yml            TIMEOUT                       1800.68     1801.91        None
+benchmark-q2-tree-sat_drone-8-2_1.yml            false                            3.22        3.95        None
+benchmark-q2-tree-sat_drone-8-2_11.yml           TIMEOUT                       1800.72     1801.49        None
+benchmark-q2-tree-sat_drone-8-2_13.yml           TIMEOUT                       1800.73     1801.46        None
+benchmark-q2-tree-sat_drone-8-2_15.yml           TIMEOUT                       1800.76     1801.48        None
+benchmark-q2-tree-sat_drone-8-2_3.yml            TIMEOUT                       1800.69     1801.43        None
+benchmark-q2-tree-sat_drone-8-2_5.yml            TIMEOUT                       1800.66     1801.51        None
+benchmark-q2-tree-sat_drone-8-2_7.yml            TIMEOUT                       1800.67     1801.35        None
+benchmark-q2-tree-sat_drone-8-2_9.yml            TIMEOUT                       1800.51     1802.14        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_1.yml     true                             0.62        1.37        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_11.yml    true                             0.59        1.41        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_13.yml    true                             0.65        0.98        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_15.yml    true                             0.59        0.93        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_3.yml     true                             0.46        0.75        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_5.yml     true                             0.66        1.01        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_7.yml     true                             0.53        0.84        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_9.yml     true                             0.53        0.83        None
+benchmark-q2-tree-sat_maze-alex_1.yml            false                            0.62        0.83        None
+benchmark-q2-tree-sat_maze-alex_11.yml           true                             2.10        2.40        None
+benchmark-q2-tree-sat_maze-alex_13.yml           true                             1.27        1.58        None
+benchmark-q2-tree-sat_maze-alex_15.yml           true                             1.61        1.88        None
+benchmark-q2-tree-sat_maze-alex_3.yml            false                            0.66        0.86        None
+benchmark-q2-tree-sat_maze-alex_5.yml            false                            0.64        0.84        None
+benchmark-q2-tree-sat_maze-alex_7.yml            true                             0.95        1.24        None
+benchmark-q2-tree-sat_maze-alex_9.yml            true                             1.90        2.26        None
+benchmark-q2-tree-sat_nrp-8_1.yml                true                             0.56        0.87        None
+benchmark-q2-tree-sat_nrp-8_11.yml               true                             0.80        1.10        None
+benchmark-q2-tree-sat_nrp-8_13.yml               true                             0.68        0.97        None
+benchmark-q2-tree-sat_nrp-8_15.yml               true                             0.73        1.03        None
+benchmark-q2-tree-sat_nrp-8_3.yml                true                             0.57        0.86        None
+benchmark-q2-tree-sat_nrp-8_5.yml                true                             0.73        1.05        None
+benchmark-q2-tree-sat_nrp-8_7.yml                true                             0.59        0.90        None
+benchmark-q2-tree-sat_nrp-8_9.yml                true                             0.65        0.97        None
+benchmark-q2-tree-sat_refuel-06_1.yml            false                            0.49        0.70        None
+benchmark-q2-tree-sat_refuel-06_11.yml           true                            39.15       39.44        None
+benchmark-q2-tree-sat_refuel-06_13.yml           true                            76.02       76.34        None
+benchmark-q2-tree-sat_refuel-06_15.yml           true                            58.03       58.31        None
+benchmark-q2-tree-sat_refuel-06_3.yml            false                            0.51        0.77        None
+benchmark-q2-tree-sat_refuel-06_5.yml            false                            2.31        2.52        None
+benchmark-q2-tree-sat_refuel-06_7.yml            false                           12.56       12.79        None
+benchmark-q2-tree-sat_refuel-06_9.yml            false                           79.61       79.79        None
+benchmark-q2-tree-sat_rocks-12_1.yml             false                            4.84        5.03        None
+benchmark-q2-tree-sat_rocks-12_11.yml            true                           843.53      843.91        None
+benchmark-q2-tree-sat_rocks-12_13.yml            true                          1703.31     1703.72        None
+benchmark-q2-tree-sat_rocks-12_15.yml            true                          1325.33     1325.72        None
+benchmark-q2-tree-sat_rocks-12_3.yml             false                            8.67        8.85        None
+benchmark-q2-tree-sat_rocks-12_5.yml             true                            58.39       58.71        None
+benchmark-q2-tree-sat_rocks-12_7.yml             true                           227.96      228.30        None
+benchmark-q2-tree-sat_rocks-12_9.yml             true                           508.86      509.23        None
+--------------------------------------------------------------------------------------------------------------
+Run set 1                                        done                         38425.40     1802.95           -
+
+
+PAYNT-CEGIS.Benchmarks
+Run set 2 of 3 with options 'build/paynt/paynt.py --method cegis --constraint tree' and propertyfile 'None'
+
+inputfile                                        status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------------------------
+benchmark-q2-tree-sat_drone-4-1_1.yml            false                            0.77        1.51        None
+benchmark-q2-tree-sat_drone-4-1_11.yml           TIMEOUT                       1800.61     1801.41        None
+benchmark-q2-tree-sat_drone-4-1_13.yml           TIMEOUT                       1800.60     1801.42        None
+benchmark-q2-tree-sat_drone-4-1_15.yml           TIMEOUT                       1800.61     1801.41        None
+benchmark-q2-tree-sat_drone-4-1_3.yml            false                            4.07        4.83        None
+benchmark-q2-tree-sat_drone-4-1_5.yml            false                          417.78      418.53        None
+benchmark-q2-tree-sat_drone-4-1_7.yml            TIMEOUT                       1800.61     1801.39        None
+benchmark-q2-tree-sat_drone-4-1_9.yml            TIMEOUT                       1800.61     1801.37        None
+benchmark-q2-tree-sat_drone-4-2_1.yml            false                            1.68        2.39        None
+benchmark-q2-tree-sat_drone-4-2_11.yml           TIMEOUT                       1800.61     1801.40        None
+benchmark-q2-tree-sat_drone-4-2_13.yml           TIMEOUT                       1800.62     1801.36        None
+benchmark-q2-tree-sat_drone-4-2_15.yml           TIMEOUT                       1800.62     1801.38        None
+benchmark-q2-tree-sat_drone-4-2_3.yml            false                           10.65       11.33        None
+benchmark-q2-tree-sat_drone-4-2_5.yml            TIMEOUT                       1800.61     1801.36        None
+benchmark-q2-tree-sat_drone-4-2_7.yml            TIMEOUT                       1800.61     1801.33        None
+benchmark-q2-tree-sat_drone-4-2_9.yml            TIMEOUT                       1800.62     1801.31        None
+benchmark-q2-tree-sat_drone-8-2_1.yml            false                            6.29        6.95        None
+benchmark-q2-tree-sat_drone-8-2_11.yml           TIMEOUT                       1800.69     1801.31        None
+benchmark-q2-tree-sat_drone-8-2_13.yml           TIMEOUT                       1800.66     1801.29        None
+benchmark-q2-tree-sat_drone-8-2_15.yml           TIMEOUT                       1800.67     1801.31        None
+benchmark-q2-tree-sat_drone-8-2_3.yml            false                          118.38      118.97        None
+benchmark-q2-tree-sat_drone-8-2_5.yml            TIMEOUT                       1800.64     1801.28        None
+benchmark-q2-tree-sat_drone-8-2_7.yml            TIMEOUT                       1800.66     1801.30        None
+benchmark-q2-tree-sat_drone-8-2_9.yml            TIMEOUT                       1800.65     1801.36        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_1.yml     true                             0.43        1.05        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_11.yml    true                             0.42        1.00        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_13.yml    true                             0.38        0.53        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_15.yml    true                             0.39        0.52        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_3.yml     true                             0.48        0.63        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_5.yml     true                             0.44        0.57        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_7.yml     true                             0.42        0.57        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_9.yml     true                             0.42        0.55        None
+benchmark-q2-tree-sat_maze-alex_1.yml            false                            0.40        0.53        None
+benchmark-q2-tree-sat_maze-alex_11.yml           true                            14.51       14.66        None
+benchmark-q2-tree-sat_maze-alex_13.yml           true                             1.01        1.17        None
+benchmark-q2-tree-sat_maze-alex_15.yml           true                            10.27       10.41        None
+benchmark-q2-tree-sat_maze-alex_3.yml            false                            0.79        0.93        None
+benchmark-q2-tree-sat_maze-alex_5.yml            false                            2.06        2.20        None
+benchmark-q2-tree-sat_maze-alex_7.yml            true                             5.56        5.71        None
+benchmark-q2-tree-sat_maze-alex_9.yml            true                            16.34       16.50        None
+benchmark-q2-tree-sat_nrp-8_1.yml                true                             0.42        0.56        None
+benchmark-q2-tree-sat_nrp-8_11.yml               true                             0.88        1.01        None
+benchmark-q2-tree-sat_nrp-8_13.yml               true                             0.89        1.05        None
+benchmark-q2-tree-sat_nrp-8_15.yml               true                             1.06        1.21        None
+benchmark-q2-tree-sat_nrp-8_3.yml                true                             0.57        0.72        None
+benchmark-q2-tree-sat_nrp-8_5.yml                true                             0.60        0.77        None
+benchmark-q2-tree-sat_nrp-8_7.yml                true                             0.77        0.94        None
+benchmark-q2-tree-sat_nrp-8_9.yml                true                             0.59        0.71        None
+benchmark-q2-tree-sat_refuel-06_1.yml            false                            0.49        0.62        None
+benchmark-q2-tree-sat_refuel-06_11.yml           true                            48.91       49.03        None
+benchmark-q2-tree-sat_refuel-06_13.yml           true                            64.42       64.59        None
+benchmark-q2-tree-sat_refuel-06_15.yml           true                           256.61      256.77        None
+benchmark-q2-tree-sat_refuel-06_3.yml            false                            0.53        0.66        None
+benchmark-q2-tree-sat_refuel-06_5.yml            false                            1.37        1.53        None
+benchmark-q2-tree-sat_refuel-06_7.yml            false                           12.32       12.45        None
+benchmark-q2-tree-sat_refuel-06_9.yml            false                          216.05      216.19        None
+benchmark-q2-tree-sat_rocks-12_1.yml             false                            5.80        5.95        None
+benchmark-q2-tree-sat_rocks-12_11.yml            true                           381.47      381.63        None
+benchmark-q2-tree-sat_rocks-12_13.yml            true                           421.39      421.55        None
+benchmark-q2-tree-sat_rocks-12_15.yml            true                          1104.39     1104.59        None
+benchmark-q2-tree-sat_rocks-12_3.yml             false                           10.79       10.94        None
+benchmark-q2-tree-sat_rocks-12_5.yml             true                            45.32       45.48        None
+benchmark-q2-tree-sat_rocks-12_7.yml             true                            65.66       65.81        None
+benchmark-q2-tree-sat_rocks-12_9.yml             true                           152.73      152.89        None
+--------------------------------------------------------------------------------------------------------------
+Run set 2                                        done                         34020.41     1802.12           -
+
+
+SMT(LRA).Benchmarks
+Run set 3 of 3 with options '-m molehill --pure-smt --ce none --constraint tree' and propertyfile 'None'
+
+inputfile                                        status                       cpu time   wall time        host
+--------------------------------------------------------------------------------------------------------------
+benchmark-q2-tree-sat_drone-4-1_1.yml            TIMEOUT                       1800.62     1801.34        None
+benchmark-q2-tree-sat_drone-4-1_11.yml           TIMEOUT                       1800.62     1801.39        None
+benchmark-q2-tree-sat_drone-4-1_13.yml           TIMEOUT                       1800.62     1801.35        None
+benchmark-q2-tree-sat_drone-4-1_15.yml           TIMEOUT                       1800.62     1801.40        None
+benchmark-q2-tree-sat_drone-4-1_3.yml            TIMEOUT                       1800.61     1801.44        None
+benchmark-q2-tree-sat_drone-4-1_5.yml            TIMEOUT                       1800.64     1801.49        None
+benchmark-q2-tree-sat_drone-4-1_7.yml            TIMEOUT                       1800.62     1801.42        None
+benchmark-q2-tree-sat_drone-4-1_9.yml            TIMEOUT                       1800.61     1801.41        None
+benchmark-q2-tree-sat_drone-4-2_1.yml            TIMEOUT                       1800.62     1801.44        None
+benchmark-q2-tree-sat_drone-4-2_11.yml           TIMEOUT                       1800.69     1801.56        None
+benchmark-q2-tree-sat_drone-4-2_13.yml           TIMEOUT                       1800.66     1801.51        None
+benchmark-q2-tree-sat_drone-4-2_15.yml           TIMEOUT                       1800.68     1801.57        None
+benchmark-q2-tree-sat_drone-4-2_3.yml            TIMEOUT                       1800.64     1801.52        None
+benchmark-q2-tree-sat_drone-4-2_5.yml            TIMEOUT                       1800.64     1801.50        None
+benchmark-q2-tree-sat_drone-4-2_7.yml            TIMEOUT                       1800.66     1801.54        None
+benchmark-q2-tree-sat_drone-4-2_9.yml            TIMEOUT                       1800.67     1801.57        None
+benchmark-q2-tree-sat_drone-8-2_1.yml            TIMEOUT                       1800.72     1801.59        None
+benchmark-q2-tree-sat_drone-8-2_11.yml           TIMEOUT                       1800.70     1801.61        None
+benchmark-q2-tree-sat_drone-8-2_13.yml           TIMEOUT                       1800.72     1801.59        None
+benchmark-q2-tree-sat_drone-8-2_15.yml           TIMEOUT                       1800.72     1801.59        None
+benchmark-q2-tree-sat_drone-8-2_3.yml            TIMEOUT                       1800.72     1801.61        None
+benchmark-q2-tree-sat_drone-8-2_5.yml            TIMEOUT                       1800.69     1801.51        None
+benchmark-q2-tree-sat_drone-8-2_7.yml            TIMEOUT                       1800.72     1801.58        None
+benchmark-q2-tree-sat_drone-8-2_9.yml            TIMEOUT                       1800.70     1801.53        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_1.yml     true                             0.70        1.55        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_11.yml    true                             0.62        1.43        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_13.yml    true                             0.82        1.15        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_15.yml    true                             0.57        0.85        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_3.yml     true                             0.78        1.11        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_5.yml     true                             0.78        1.10        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_7.yml     true                             0.79        1.10        None
+benchmark-q2-tree-sat_grid-avoid-4-0.1_9.yml     true                             0.79        1.11        None
+benchmark-q2-tree-sat_maze-alex_1.yml            false                            1.92        2.13        None
+benchmark-q2-tree-sat_maze-alex_11.yml           true                          1056.54     1056.86        None
+benchmark-q2-tree-sat_maze-alex_13.yml           true                          1710.65     1710.99        None
+benchmark-q2-tree-sat_maze-alex_15.yml           true                          1256.50     1256.82        None
+benchmark-q2-tree-sat_maze-alex_3.yml            false                          318.13      318.33        None
+benchmark-q2-tree-sat_maze-alex_5.yml            TIMEOUT                       1800.61     1800.83        None
+benchmark-q2-tree-sat_maze-alex_7.yml            true                           511.86      512.26        None
+benchmark-q2-tree-sat_maze-alex_9.yml            true                          1021.02     1021.39        None
+benchmark-q2-tree-sat_nrp-8_1.yml                true                             0.78        1.37        None
+benchmark-q2-tree-sat_nrp-8_11.yml               true                             0.94        1.51        None
+benchmark-q2-tree-sat_nrp-8_13.yml               true                             1.04        1.61        None
+benchmark-q2-tree-sat_nrp-8_15.yml               true                             1.04        1.61        None
+benchmark-q2-tree-sat_nrp-8_3.yml                true                             0.70        1.24        None
+benchmark-q2-tree-sat_nrp-8_5.yml                true                             0.77        1.49        None
+benchmark-q2-tree-sat_nrp-8_7.yml                true                             0.86        1.61        None
+benchmark-q2-tree-sat_nrp-8_9.yml                true                             0.93        1.61        None
+benchmark-q2-tree-sat_refuel-06_1.yml            false                            2.21        2.81        None
+benchmark-q2-tree-sat_refuel-06_11.yml           true                           509.62      510.29        None
+benchmark-q2-tree-sat_refuel-06_13.yml           true                           142.48      143.21        None
+benchmark-q2-tree-sat_refuel-06_15.yml           true                           367.59      368.25        None
+benchmark-q2-tree-sat_refuel-06_3.yml            false                            3.43        4.02        None
+benchmark-q2-tree-sat_refuel-06_5.yml            false                           12.46       13.00        None
+benchmark-q2-tree-sat_refuel-06_7.yml            false                          128.89      129.53        None
+benchmark-q2-tree-sat_refuel-06_9.yml            false                          616.50      617.13        None
+benchmark-q2-tree-sat_rocks-12_1.yml             TIMEOUT                       1800.66     1801.26        None
+benchmark-q2-tree-sat_rocks-12_11.yml            TIMEOUT                       1800.64     1801.26        None
+benchmark-q2-tree-sat_rocks-12_13.yml            TIMEOUT                       1800.66     1801.26        None
+benchmark-q2-tree-sat_rocks-12_15.yml            TIMEOUT                       1800.66     1801.25        None
+benchmark-q2-tree-sat_rocks-12_3.yml             TIMEOUT                       1800.66     1801.34        None
+benchmark-q2-tree-sat_rocks-12_5.yml             TIMEOUT                       1800.67     1800.92        None
+benchmark-q2-tree-sat_rocks-12_7.yml             TIMEOUT                       1800.67     1800.92        None
+benchmark-q2-tree-sat_rocks-12_9.yml             TIMEOUT                       1800.67     1800.89        None
+--------------------------------------------------------------------------------------------------------------
+Run set 3                                        done                         67096.32     3605.01           -
+
+Statistics:            192 Files
+  correct:               0
+    correct true:        0
+    correct false:       0
+  incorrect:             0
+    incorrect true:      0
+    incorrect false:     0
+  unknown:              68

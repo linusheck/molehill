@@ -1,0 +1,7 @@
+digraph tree {
+    "0x0" [label="mess >= 0?"];
+    "0x1" [label="stop"];
+    "0x2" [label="stop"];
+    "0x0" -> "0x1";
+    "0x0" -> "0x2";
+}
