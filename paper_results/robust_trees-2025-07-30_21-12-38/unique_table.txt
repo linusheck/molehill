@@ -1,0 +1,5 @@
+Total number of problems: 112
+Tool                       Solved    Uniquely Solved
+--------------------------------------------------
+SMPMC.Benchmarks               79                 55
+SMT(LRA).Benchmarks            24                  0

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<benchmark tool="tools.synthesis" timelimit="1800s" hardtimelimit="1800s" memlimit="16GB">
+  <tasks name="Benchmarks">
+    <include>benchmarks/files/benchmark-q2-tree/*.yml</include>
+    <propertyfile>benchmarks/unknown.txt</propertyfile>
+  </tasks>
+
+    <rundefinition name="PAYNT-CEGISwoG">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>cegis</option>
+        <option>--constraint</option>
+        <option>tree</option>
+        <option>--ce-generator</option>
+        <option>none</option>
+    </rundefinition>
+
+
+      <rundefinition name="PAYNT-CEGIS">
+        <column title="Iterations" value="iterations"/>
+        <require cpuCores="1"/>
+        <option>build/paynt/paynt.py</option>
+        <option>--method</option>
+        <option>cegis</option>
+        <option>--constraint</option>
+        <option>tree</option>
+    </rundefinition>
+
+</benchmark>

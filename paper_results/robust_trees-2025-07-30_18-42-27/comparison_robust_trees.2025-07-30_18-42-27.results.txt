@@ -1,0 +1,277 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison_robust_trees.xml
+name:                    comparison_robust_trees
+run sets:                SMPMC.Benchmarks, SMT(LRA).Benchmarks
+date:                    Wed, 2025-07-30 18:42:27 UTC
+tool:                    synthesis
+tool executable:         /home/lheck/.local/share/virtualenvs/molehill-U9ijTdgT/bin/python3
+options:
+parallel runs:           26
+resource limits:
+- memory:                16000.0 MB
+- time:                  1800 s
+hardware requirements:
+- memory:                16000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    localhost
+os:                      Linux-6.1.0-23-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   False
+ram:                     540660.658176 MB
+------------------------------------------------------------
+
+
+
+SMPMC.Benchmarks
+Run set 1 of 2 with options '-m molehill --ce none --constraint existsforalltree' and propertyfile 'None'
+
+inputfile                                                                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------------------------------------------------------
+benchmark-general-sat_mem_1_avoid-8-2-big-family_1.yml                     false                            9.89       10.72        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_11.yml                    TIMEOUT                       1800.76     1801.81        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_13.yml                    TIMEOUT                       1800.83     1801.85        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_15.yml                    TIMEOUT                       1800.94     1801.99        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_3.yml                     true                          1557.79     1559.68        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_5.yml                     TIMEOUT                       1800.87     1802.03        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_7.yml                     TIMEOUT                       1800.95     1801.96        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_9.yml                     TIMEOUT                       1800.89     1801.95        None
+benchmark-general-sat_mem_1_catch-5_1.yml                                  false                            1.25        2.11        None
+benchmark-general-sat_mem_1_catch-5_11.yml                                 TIMEOUT                       1800.73     1801.94        None
+benchmark-general-sat_mem_1_catch-5_13.yml                                 TIMEOUT                       1800.56     1802.33        None
+benchmark-general-sat_mem_1_catch-5_15.yml                                 TIMEOUT                       1800.73     1801.79        None
+benchmark-general-sat_mem_1_catch-5_3.yml                                  false                            3.36        4.15        None
+benchmark-general-sat_mem_1_catch-5_5.yml                                  false                           37.44       38.14        None
+benchmark-general-sat_mem_1_catch-5_7.yml                                  false                          937.32      938.10        None
+benchmark-general-sat_mem_1_catch-5_9.yml                                  TIMEOUT                       1800.74     1801.81        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_1.yml            false                            7.08        7.78        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_11.yml           TIMEOUT                       1800.98     1801.90        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_13.yml           TIMEOUT                       1801.04     1801.91        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_15.yml           TIMEOUT                       1801.02     1801.89        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_3.yml            false                          366.63      367.27        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_5.yml            TIMEOUT                       1800.93     1801.81        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_7.yml            TIMEOUT                       1800.93     1801.69        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_9.yml            TIMEOUT                       1801.05     1801.86        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_1.yml      false                            0.68        1.29        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_11.yml     true                            30.49       31.20        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_13.yml     true                            18.71       19.03        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_15.yml     true                            53.20       53.55        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_3.yml      true                             1.57        1.89        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_5.yml      true                             5.50        5.81        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_7.yml      true                           139.59      139.90        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_9.yml      true                            39.00       39.33        None
+benchmark-general-sat_mem_1_obstacles-demo_1.yml                           false                            0.80        0.97        None
+benchmark-general-sat_mem_1_obstacles-demo_11.yml                          true                           480.80      481.23        None
+benchmark-general-sat_mem_1_obstacles-demo_13.yml                          true                          1343.36     1344.19        None
+benchmark-general-sat_mem_1_obstacles-demo_15.yml                          true                           565.53      565.99        None
+benchmark-general-sat_mem_1_obstacles-demo_3.yml                           false                            3.93        4.12        None
+benchmark-general-sat_mem_1_obstacles-demo_5.yml                           true                            74.67       75.00        None
+benchmark-general-sat_mem_1_obstacles-demo_7.yml                           true                             5.90        6.17        None
+benchmark-general-sat_mem_1_obstacles-demo_9.yml                           true                            60.49       60.80        None
+benchmark-general-sat_mem_1_pacman-6_1.yml                                 false                            2.08        2.26        None
+benchmark-general-sat_mem_1_pacman-6_11.yml                                true                           180.21      180.51        None
+benchmark-general-sat_mem_1_pacman-6_13.yml                                true                           526.63      527.01        None
+benchmark-general-sat_mem_1_pacman-6_15.yml                                true                           782.64      783.04        None
+benchmark-general-sat_mem_1_pacman-6_3.yml                                 true                             9.17        9.55        None
+benchmark-general-sat_mem_1_pacman-6_5.yml                                 true                            35.66       35.92        None
+benchmark-general-sat_mem_1_pacman-6_7.yml                                 true                            55.85       56.11        None
+benchmark-general-sat_mem_1_pacman-6_9.yml                                 true                            58.20       58.55        None
+benchmark-general-sat_mem_1_refuel-04_1.yml                                false                            0.45        0.65        None
+benchmark-general-sat_mem_1_refuel-04_11.yml                               true                             3.83        4.13        None
+benchmark-general-sat_mem_1_refuel-04_13.yml                               true                             4.42        4.74        None
+benchmark-general-sat_mem_1_refuel-04_15.yml                               true                             4.57        4.85        None
+benchmark-general-sat_mem_1_refuel-04_3.yml                                false                            0.87        1.07        None
+benchmark-general-sat_mem_1_refuel-04_5.yml                                false                            1.59        1.79        None
+benchmark-general-sat_mem_1_refuel-04_7.yml                                true                             1.57        1.93        None
+benchmark-general-sat_mem_1_refuel-04_9.yml                                true                             2.33        2.68        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_1.yml                     false                            1.84        2.05        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_11.yml                    TIMEOUT                       1800.61     1802.44        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_13.yml                    true                          1361.76     1362.54        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_15.yml                    TIMEOUT                       1800.57     1802.09        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_3.yml                     false                           10.31       10.48        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_5.yml                     true                           306.52      307.09        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_7.yml                     true                           398.82      399.27        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_9.yml                     true                          1253.90     1255.32        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_1.yml                         false                            4.62        5.39        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_11.yml                        TIMEOUT                       1800.80     1803.28        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_13.yml                        TIMEOUT                       1800.86     1802.41        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_15.yml                        true                          1751.68     1752.05        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_3.yml                         false                            9.01        9.18        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_5.yml                         true                           775.37      775.78        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_7.yml                         true                          1402.41     1402.92        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_9.yml                         TIMEOUT                       1800.86     1804.43        None
+benchmark-general-sat_mem_1_rover-1000-big-family_1.yml                    true                             6.51        6.79        None
+benchmark-general-sat_mem_1_rover-1000-big-family_11.yml                   true                            26.96       27.29        None
+benchmark-general-sat_mem_1_rover-1000-big-family_13.yml                   true                            31.29       31.63        None
+benchmark-general-sat_mem_1_rover-1000-big-family_15.yml                   true                            39.47       39.80        None
+benchmark-general-sat_mem_1_rover-1000-big-family_3.yml                    true                             8.07        8.37        None
+benchmark-general-sat_mem_1_rover-1000-big-family_5.yml                    true                             9.41        9.71        None
+benchmark-general-sat_mem_1_rover-1000-big-family_7.yml                    true                            17.43       17.74        None
+benchmark-general-sat_mem_1_rover-1000-big-family_9.yml                    true                            13.95       14.26        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_1.yml     false                           13.57       13.79        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_11.yml    TIMEOUT                       1801.07     1801.41        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_13.yml    TIMEOUT                       1800.88     1801.32        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_15.yml    TIMEOUT                       1800.94     1801.33        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_3.yml     false                           56.41       56.79        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_5.yml     TIMEOUT                       1800.95     1801.36        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_7.yml     TIMEOUT                       1800.94     1801.33        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_9.yml     TIMEOUT                       1800.98     1801.39        None
+benchmark-general-sat_mem_1_uav-roz-big-family_1.yml                       false                           35.79       36.20        None
+benchmark-general-sat_mem_1_uav-roz-big-family_11.yml                      TIMEOUT                       1801.51     1801.92        None
+benchmark-general-sat_mem_1_uav-roz-big-family_13.yml                      TIMEOUT                       1801.58     1802.06        None
+benchmark-general-sat_mem_1_uav-roz-big-family_15.yml                      OUT OF MEMORY                  379.88      380.70        None
+benchmark-general-sat_mem_1_uav-roz-big-family_3.yml                       false                          154.48      154.85        None
+benchmark-general-sat_mem_1_uav-roz-big-family_5.yml                       TIMEOUT                       1801.32     1801.76        None
+benchmark-general-sat_mem_1_uav-roz-big-family_7.yml                       TIMEOUT                       1801.34     1801.73        None
+benchmark-general-sat_mem_1_uav-roz-big-family_9.yml                       TIMEOUT                       1801.39     1801.70        None
+benchmark-general-sat_mem_2_obstacles-2-3_1.yml                            false                            0.45        0.75        None
+benchmark-general-sat_mem_2_obstacles-2-3_11.yml                           false                            2.28        2.53        None
+benchmark-general-sat_mem_2_obstacles-2-3_13.yml                           false                           10.48       10.76        None
+benchmark-general-sat_mem_2_obstacles-2-3_15.yml                           true                             3.81        4.12        None
+benchmark-general-sat_mem_2_obstacles-2-3_3.yml                            false                            0.71        0.91        None
+benchmark-general-sat_mem_2_obstacles-2-3_5.yml                            false                            0.80        0.98        None
+benchmark-general-sat_mem_2_obstacles-2-3_7.yml                            false                            0.98        1.18        None
+benchmark-general-sat_mem_2_obstacles-2-3_9.yml                            false                            1.93        2.12        None
+benchmark-general-sat_mem_3_obstacles-3-3_1.yml                            false                            0.66        0.86        None
+benchmark-general-sat_mem_3_obstacles-3-3_11.yml                           false                            2.82        2.98        None
+benchmark-general-sat_mem_3_obstacles-3-3_13.yml                           false                           25.30       25.50        None
+benchmark-general-sat_mem_3_obstacles-3-3_15.yml                           false                          108.54      108.77        None
+benchmark-general-sat_mem_3_obstacles-3-3_3.yml                            false                            0.72        0.93        None
+benchmark-general-sat_mem_3_obstacles-3-3_5.yml                            false                            1.02        1.22        None
+benchmark-general-sat_mem_3_obstacles-3-3_7.yml                            false                            1.45        1.66        None
+benchmark-general-sat_mem_3_obstacles-3-3_9.yml                            false                            1.86        2.06        None
+----------------------------------------------------------------------------------------------------------------------------------------
+Run set 1                                                                  done                         73282.75     3605.01           -
+
+
+SMT(LRA).Benchmarks
+Run set 2 of 2 with options '-m molehill --pure-smt --ce none --constraint existsforalltree' and propertyfile 'None'
+
+inputfile                                                                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------------------------------------------------------
+benchmark-general-sat_mem_1_avoid-8-2-big-family_1.yml                     TIMEOUT                       1800.80     1801.73        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_11.yml                    TIMEOUT                       1800.81     1801.71        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_13.yml                    TIMEOUT                       1800.79     1801.67        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_15.yml                    TIMEOUT                       1800.81     1801.70        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_3.yml                     TIMEOUT                       1800.82     1801.70        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_5.yml                     TIMEOUT                       1800.90     1801.85        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_7.yml                     TIMEOUT                       1800.93     1801.86        None
+benchmark-general-sat_mem_1_avoid-8-2-big-family_9.yml                     TIMEOUT                       1800.93     1801.78        None
+benchmark-general-sat_mem_1_catch-5_1.yml                                  OUT OF MEMORY                  330.80      334.17        None
+benchmark-general-sat_mem_1_catch-5_11.yml                                 OUT OF MEMORY                  227.47      228.47        None
+benchmark-general-sat_mem_1_catch-5_13.yml                                 OUT OF MEMORY                  374.29      379.46        None
+benchmark-general-sat_mem_1_catch-5_15.yml                                 OUT OF MEMORY                  241.01      244.10        None
+benchmark-general-sat_mem_1_catch-5_3.yml                                  OUT OF MEMORY                  222.03      223.49        None
+benchmark-general-sat_mem_1_catch-5_5.yml                                  OUT OF MEMORY                  251.31      255.70        None
+benchmark-general-sat_mem_1_catch-5_7.yml                                  OUT OF MEMORY                  285.34      286.28        None
+benchmark-general-sat_mem_1_catch-5_9.yml                                  OUT OF MEMORY                  228.21      229.55        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_1.yml            TIMEOUT                       1800.74     1801.53        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_11.yml           TIMEOUT                       1800.76     1801.53        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_13.yml           TIMEOUT                       1800.76     1801.54        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_15.yml           TIMEOUT                       1800.78     1801.58        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_3.yml            TIMEOUT                       1800.76     1801.53        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_5.yml            TIMEOUT                       1800.76     1801.53        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_7.yml            TIMEOUT                       1800.74     1801.55        None
+benchmark-general-sat_mem_1_dpm-switch-q10-big-big-family_9.yml            TIMEOUT                       1800.76     1801.53        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_1.yml      false                           50.21       50.92        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_11.yml     TIMEOUT                       1800.77     1801.50        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_13.yml     TIMEOUT                       1800.69     1800.92        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_15.yml     TIMEOUT                       1800.70     1800.94        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_3.yml      TIMEOUT                       1800.84     1801.05        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_5.yml      TIMEOUT                       1800.69     1801.02        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_7.yml      TIMEOUT                       1800.69     1800.94        None
+benchmark-general-sat_mem_1_obstacles-10-6-skip-easy-big-family_9.yml      TIMEOUT                       1800.72     1800.93        None
+benchmark-general-sat_mem_1_obstacles-demo_1.yml                           false                          303.39      303.59        None
+benchmark-general-sat_mem_1_obstacles-demo_11.yml                          TIMEOUT                       1800.61     1800.94        None
+benchmark-general-sat_mem_1_obstacles-demo_13.yml                          TIMEOUT                       1800.62     1800.85        None
+benchmark-general-sat_mem_1_obstacles-demo_15.yml                          TIMEOUT                       1800.62     1800.88        None
+benchmark-general-sat_mem_1_obstacles-demo_3.yml                           TIMEOUT                       1800.61     1801.12        None
+benchmark-general-sat_mem_1_obstacles-demo_5.yml                           TIMEOUT                       1800.60     1801.07        None
+benchmark-general-sat_mem_1_obstacles-demo_7.yml                           TIMEOUT                       1800.60     1801.12        None
+benchmark-general-sat_mem_1_obstacles-demo_9.yml                           TIMEOUT                       1800.61     1801.10        None
+benchmark-general-sat_mem_1_pacman-6_1.yml                                 OUT OF MEMORY                  708.75      712.67        None
+benchmark-general-sat_mem_1_pacman-6_11.yml                                OUT OF MEMORY                  700.08      703.99        None
+benchmark-general-sat_mem_1_pacman-6_13.yml                                OUT OF MEMORY                  740.18      742.82        None
+benchmark-general-sat_mem_1_pacman-6_15.yml                                OUT OF MEMORY                  771.66      774.82        None
+benchmark-general-sat_mem_1_pacman-6_3.yml                                 OUT OF MEMORY                  666.88      668.57        None
+benchmark-general-sat_mem_1_pacman-6_5.yml                                 OUT OF MEMORY                  670.85      671.95        None
+benchmark-general-sat_mem_1_pacman-6_7.yml                                 OUT OF MEMORY                  688.45      692.05        None
+benchmark-general-sat_mem_1_pacman-6_9.yml                                 OUT OF MEMORY                  680.54      682.61        None
+benchmark-general-sat_mem_1_refuel-04_1.yml                                false                            1.40        1.78        None
+benchmark-general-sat_mem_1_refuel-04_11.yml                               true                           245.28      245.79        None
+benchmark-general-sat_mem_1_refuel-04_13.yml                               true                           965.92      966.45        None
+benchmark-general-sat_mem_1_refuel-04_15.yml                               true                           695.99      696.47        None
+benchmark-general-sat_mem_1_refuel-04_3.yml                                false                            1.78        2.19        None
+benchmark-general-sat_mem_1_refuel-04_5.yml                                false                            4.54        4.76        None
+benchmark-general-sat_mem_1_refuel-04_7.yml                                true                           185.78      186.11        None
+benchmark-general-sat_mem_1_refuel-04_9.yml                                true                           429.97      430.29        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_1.yml                     OUT OF MEMORY                  414.76      415.74        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_11.yml                    OUT OF MEMORY                  249.42      251.48        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_13.yml                    OUT OF MEMORY                  251.81      252.66        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_15.yml                    OUT OF MEMORY                  254.34      256.93        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_3.yml                     OUT OF MEMORY                  261.14      265.11        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_5.yml                     OUT OF MEMORY                  246.29      248.37        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_7.yml                     OUT OF MEMORY                  339.41      345.04        None
+benchmark-general-sat_mem_1_rocks-6-4-big-family_9.yml                     OUT OF MEMORY                  282.64      283.29        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_1.yml                         OUT OF MEMORY                  329.69      331.70        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_11.yml                        OUT OF MEMORY                  314.47      316.22        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_13.yml                        OUT OF MEMORY                  277.09      281.00        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_15.yml                        OUT OF MEMORY                  273.50      275.43        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_3.yml                         OUT OF MEMORY                  313.68      318.53        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_5.yml                         OUT OF MEMORY                  298.32      299.70        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_7.yml                         OUT OF MEMORY                  281.39      284.84        None
+benchmark-general-sat_mem_1_rocks-6-4-signal_9.yml                         OUT OF MEMORY                  259.70      260.94        None
+benchmark-general-sat_mem_1_rover-1000-big-family_1.yml                    TIMEOUT                       1800.65     1800.92        None
+benchmark-general-sat_mem_1_rover-1000-big-family_11.yml                   TIMEOUT                       1800.68     1800.91        None
+benchmark-general-sat_mem_1_rover-1000-big-family_13.yml                   TIMEOUT                       1800.68     1800.92        None
+benchmark-general-sat_mem_1_rover-1000-big-family_15.yml                   TIMEOUT                       1800.68     1800.93        None
+benchmark-general-sat_mem_1_rover-1000-big-family_3.yml                    TIMEOUT                       1800.68     1800.92        None
+benchmark-general-sat_mem_1_rover-1000-big-family_5.yml                    TIMEOUT                       1800.68     1800.93        None
+benchmark-general-sat_mem_1_rover-1000-big-family_7.yml                    TIMEOUT                       1800.68     1800.93        None
+benchmark-general-sat_mem_1_rover-1000-big-family_9.yml                    TIMEOUT                       1800.68     1800.94        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_1.yml     TIMEOUT                       1800.74     1800.97        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_11.yml    TIMEOUT                       1800.73     1800.99        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_13.yml    TIMEOUT                       1800.73     1800.93        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_15.yml    TIMEOUT                       1800.72     1801.00        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_3.yml     TIMEOUT                       1800.74     1800.97        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_5.yml     TIMEOUT                       1800.72     1800.95        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_7.yml     TIMEOUT                       1800.73     1800.96        None
+benchmark-general-sat_mem_1_uav-operator-roz-workload-big-family_9.yml     TIMEOUT                       1800.74     1800.96        None
+benchmark-general-sat_mem_1_uav-roz-big-family_1.yml                       TIMEOUT                       1800.99     1801.25        None
+benchmark-general-sat_mem_1_uav-roz-big-family_11.yml                      TIMEOUT                       1800.99     1801.24        None
+benchmark-general-sat_mem_1_uav-roz-big-family_13.yml                      TIMEOUT                       1800.99     1801.21        None
+benchmark-general-sat_mem_1_uav-roz-big-family_15.yml                      TIMEOUT                       1800.99     1801.23        None
+benchmark-general-sat_mem_1_uav-roz-big-family_3.yml                       TIMEOUT                       1800.99     1801.29        None
+benchmark-general-sat_mem_1_uav-roz-big-family_5.yml                       TIMEOUT                       1800.97     1801.25        None
+benchmark-general-sat_mem_1_uav-roz-big-family_7.yml                       TIMEOUT                       1801.11     1801.37        None
+benchmark-general-sat_mem_1_uav-roz-big-family_9.yml                       TIMEOUT                       1801.06     1801.31        None
+benchmark-general-sat_mem_2_obstacles-2-3_1.yml                            false                            1.47        1.69        None
+benchmark-general-sat_mem_2_obstacles-2-3_11.yml                           false                            2.33        2.53        None
+benchmark-general-sat_mem_2_obstacles-2-3_13.yml                           OUT OF MEMORY                  163.90      189.79        None
+benchmark-general-sat_mem_2_obstacles-2-3_15.yml                           OUT OF MEMORY                   92.88      103.17        None
+benchmark-general-sat_mem_2_obstacles-2-3_3.yml                            false                            1.51        1.71        None
+benchmark-general-sat_mem_2_obstacles-2-3_5.yml                            false                            1.63        1.83        None
+benchmark-general-sat_mem_2_obstacles-2-3_7.yml                            false                            1.32        1.49        None
+benchmark-general-sat_mem_2_obstacles-2-3_9.yml                            false                            1.33        1.50        None
+benchmark-general-sat_mem_3_obstacles-3-3_1.yml                            false                            3.60        3.75        None
+benchmark-general-sat_mem_3_obstacles-3-3_11.yml                           false                            6.45        6.65        None
+benchmark-general-sat_mem_3_obstacles-3-3_13.yml                           false                          144.84      145.05        None
+benchmark-general-sat_mem_3_obstacles-3-3_15.yml                           false                          503.29      503.56        None
+benchmark-general-sat_mem_3_obstacles-3-3_3.yml                            false                            3.55        3.79        None
+benchmark-general-sat_mem_3_obstacles-3-3_5.yml                            false                            7.17        7.37        None
+benchmark-general-sat_mem_3_obstacles-3-3_7.yml                            false                            6.73        6.93        None
+benchmark-general-sat_mem_3_obstacles-3-3_9.yml                            false                            8.37        8.57        None
+----------------------------------------------------------------------------------------------------------------------------------------
+Run set 2                                                                  done                        113514.96     5405.07           -
+
+Statistics:            224 Files
+  correct:               0
+    correct true:        0
+    correct false:       0
+  incorrect:             0
+    incorrect true:      0
+    incorrect false:     0
+  unknown:             121
