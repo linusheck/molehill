@@ -17,7 +17,7 @@ pyparsing==3.2.1
 pytest==8.3.4
 python-dateutil==2.9.0.post0
 six==1.17.0
-z3-solver==4.13.3.0
+z3-solver==4.15.3.0
 setuptools==70.0.0
 mercury-settrie==1.5.1
 pytest==8.3.4

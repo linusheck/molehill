@@ -6,8 +6,6 @@ import z3
 class SearchMarkovChain(z3.UserPropagateBase):
     def __init__(self, solver, ctx, data):
         super().__init__(solver, ctx)
-        self.vars_registered = False
-
         self.add_fixed(self._fixed)
         self.add_final(self._final)
         self.add_created(self._created)

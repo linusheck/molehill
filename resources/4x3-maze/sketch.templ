@@ -1,0 +1,36 @@
+pomdp
+
+observables
+    x
+    y
+endobservables
+
+// can go in this direction
+formula u = y<2 & !(x=1 & y=0);
+formula r = x<3 & !(x=0 & y=1);
+formula d = y>0 & !(x=1 & y=2);
+formula l = x>0 & !(x=2 & y=1);
+
+// target cell
+formula goal = x=3 & y=1;
+formula bad = x=3 & y=0;
+
+// updates of coordinates (if possible)
+formula yu = u ? (y+1) : y;
+formula xr = r ? (x+1) : x;
+formula yd = d ? (y-1) : y;
+formula xl = l ? (x-1) : x;
+
+module maze
+
+    x : [0..3] init 0;
+    y : [0..2] init 0;
+
+
+    [up] true -> 0.9 : (y'=yu) + 0.1 : (x'=xr);
+    [right] true -> 0.9 : (x'=xr) + 0.1 : (y'=yd);
+    [down] true -> 0.9 : (y'=yd) + 0.1 : (x'=xl);
+    [left] true -> 0.9 : (x'=xl) + 0.1 : (y'=yu);
+
+
+endmodule

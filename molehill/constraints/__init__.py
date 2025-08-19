@@ -9,3 +9,4 @@ from .fixedtree import FixedDecisionTree
 from .flexibletree import DecisionTree
 from .prob_goal import ProbGoal
 from .costs import CostsConstraint
+from .split import SplitConstraint

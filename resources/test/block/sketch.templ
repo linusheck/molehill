@@ -1,0 +1,18 @@
+// ??
+pomdp
+
+observables
+	done
+endobservables
+
+module clk
+    s : [0..3] init 0;
+	done : bool init false;
+
+	[alpha] s=0 -> (s'=1);
+	[beta] s=0 -> (s'=3) & (done'=true);
+	[alpha] s=1 -> (s'=3) & (done'=true);
+	[beta] s=1 -> (s'=2) & (done'=true);
+endmodule
+
+label "bad" = s=2;

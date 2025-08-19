@@ -5,17 +5,21 @@ import paynt.quotient.mdp_family
 import paynt.quotient.pomdp
 import z3
 import paynt.parser.sketch
+import paynt.synthesizer.synthesizer_ar
 import math
 import payntbind.synthesis
 import json
 
 from molehill.mole import Mole
 
+import settrie
+
 
 def run(
     project_path,
     considered_counterexamples,
     constraint,
+    mode="search",
     exact=False,
     search_space_test=False,
     fsc_memory_size=1,
@@ -175,37 +179,44 @@ def run(
 
     constraint.solver_settings(s)
 
-    bit_nums = set()
-
-    num_bits = (
-        max(
-            [
-                math.ceil(math.log2(len(family.hole_options(hole)) + 1))
-                for hole in range(family.num_holes)
-            ]
-        )
-        + 1
-    )
-
     variables = []
-
-    for hole in range(family.num_holes):
-        name = family.hole_name(hole)
-        bit_nums.add(num_bits)
-        var = z3.BitVec(name, num_bits)
-        variables.append(var)
-
-    def variables_in_ranges(variables):
-        statement = []
+    variables_in_ranges = None
+    if mode == "split":
+        # In split mode, each bit corresponds to the enabling or disabling of one hole
         for hole in range(family.num_holes):
-            options = family.hole_options(hole)
-            # it gets guaranteed by paynt that this is actually the range
-            # (these are just the indices, not the actual values in the final model :)
-            assert min(options) == 0
-            var = variables[hole]
-            statement.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
-            statement.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
-        return z3.And(*statement)
+            name = family.hole_name(hole)
+            var = z3.BitVec(name, len(family.hole_options(hole)))
+            variables.append(var)
+    elif mode == "search":
+        # In search mode, the bitvector, intepreted as a number, is the selected hole
+        num_bits = (
+            max(
+                [
+                    math.ceil(math.log2(len(family.hole_options(hole)) + 1))
+                    for hole in range(family.num_holes)
+                ]
+            )
+            + 1
+        )
+        for hole in range(family.num_holes):
+            name = family.hole_name(hole)
+            var = z3.BitVec(name, num_bits)
+            variables.append(var)
+
+        def variables_in_ranges2(variables):
+            statement = []
+            for hole in range(family.num_holes):
+                options = family.hole_options(hole)
+                # it gets guaranteed by paynt that this is actually the range
+                # (these are just the indices, not the actual values in the final model :)
+                assert min(options) == 0
+                var = variables[hole]
+                statement.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
+                statement.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
+            return z3.And(*statement)
+        variables_in_ranges = variables_in_ranges2
+    else:
+        raise ValueError(f"Unknown mode: {mode}")
 
     # Create the valid(...) function
     if pure_smt:
@@ -229,6 +240,7 @@ def run(
             s,
             variables,
             quotient,
+            mode=mode,
             exact=exact,
             draw_image=(image or search_space_test),
             considered_counterexamples=considered_counterexamples,
@@ -257,6 +269,32 @@ def run(
         constraint.show_result(model, s, family=family)
     else:
         print("unsat")
+        if mode == "split":
+            def pretty_print(l):
+                quotient.specification = quotient.specification.negate()
+                for x in l:
+                    family = quotient.family.copy()
+                    blocked_choices = {}
+                    for var in variables:
+                        blocked_choices[str(var)] = set()
+                    for assignment in x:
+                        variable, choice = assignment.split(";")
+                        blocked_choices[variable].add(int(choice))
+                    for hole in range(family.num_holes):
+                        var = str(variables[hole])
+                        hole_options = [x for x in family.hole_options(hole) if x not in blocked_choices[var]]
+                        family.hole_set_options(hole, hole_options)
+                    print(family)
+                    # quotient.build(family)
+                    # synthesizer = paynt.synthesizer.synthesizer_ar.SynthesizerAR(quotient)
+                    # result = synthesizer.synthesize(family)
+                    # print(result)
+                return l
+            pretty_print(p.plugin.policies[False])
+            print(len(p.plugin.policies[False]), "safe policies")
+            # print("Unsafe policies:", pretty_print(p.plugin.policies[True]))
+            # for item in p.plugin.policies[True]:
+            #     print(list(settrie.Result(settrie.elements(item.st_id, item.set_id), auto_serialize=False)))
     if not pure_smt:
         print(f"Considered {p.mc_calls} models")
         if print_reasons:

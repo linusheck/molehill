@@ -7,7 +7,8 @@ from molehill.constraints import (
     ExistsForallConstraint,
     ForallExistsConstraint,
     ProbGoal,
-    CostsConstraint
+    CostsConstraint,
+    SplitConstraint
 )
 
 
@@ -37,6 +38,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--plot-args", action="store_true", help="Plot function arguments."
+    )
+    parser.add_argument(
+        "--mode", type=str, default="search", choices=["search", "split"], help="Mode to run the tool in."
     )
     parser.add_argument("--verbose", action="store_true", help="Verbose mode.")
     # number of tree nodes
@@ -79,9 +83,11 @@ if __name__ == "__main__":
     parser.add_argument("--load-cache", type=str, default=None, help="Load the cache from a file")
     args, unknown = parser.parse_known_args()
 
-    if args.constraint == "none":
+    if args.mode == "split":
+        assert args.constraint == "none", "Split mode does not support custom constraints for now."
+        new_constraint = SplitConstraint()
+    elif args.constraint == "none":
         new_constraint = ExistsConstraint()
-    # get class of new constraint
     elif args.constraint == "tree":
         new_constraint = DecisionTree()
     elif args.constraint == "existsforalltree":
@@ -110,6 +116,7 @@ if __name__ == "__main__":
         args.project_path,
         args.ce,
         new_constraint,
+        mode=args.mode,
         exact=args.exact,
         fsc_memory_size=args.fsc_memory_size,
         print_reasons=args.reasons,

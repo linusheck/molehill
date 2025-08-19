@@ -115,3 +115,39 @@ def check(
     # some holes are unreachable. The statement is only about the reachable holes,
     # so we get a "core" without any further work.
     return CECheckResult(all_schedulers_violate_full, fixed_holes, holes_as_mdp, result)
+
+
+def check_hole_options(
+    matrix_generator,
+    hole_options,
+    spec,
+):
+    prop = spec.negate().all_properties()[0]
+    num_holes = len(hole_options)
+    # These are the options for each hole.
+    matrix_generator.build_submodel(BitVector(num_holes, False), hole_options)
+    mdp = matrix_generator.get_current_mdp()
+
+    all_schedulers_violate_full, result = check_model(mdp, prop, None)
+    if not all_schedulers_violate_full:
+        # Optionally, we can check if the scheduler is consistent (not implemented).
+        # sched_consistent_result = matrix_generator.is_scheduler_consistent(result.scheduler)
+        # if sched_consistent_result is not None:
+        #     return CECheckResult(False, None, None, result, sched_consistent_result)
+        return CECheckResult(False, None, None, result)
+
+    # The CEs currently get abstracted in BFS order.
+    bfs_order = matrix_generator.get_current_bfs_order()
+    reachable_hole_order, _append_these = matrix_generator.hole_order(
+        bfs_order, set(range(num_holes))
+    )
+
+    # Only holes that are reachable are interesting for the CE core. We can
+    # immediately "delete" the other ones.
+    fixed_holes = [hole for hole in range(len(hole_options)) if hole in reachable_hole_order]
+    holes_as_mdp = None
+
+    # Even if we do not compute a counterexample, we can use the knowledge that
+    # some holes are unreachable. The statement is only about the reachable holes,
+    # so we get a "core" without any further work.
+    return CECheckResult(all_schedulers_violate_full, fixed_holes, holes_as_mdp, result)

@@ -4,11 +4,12 @@ from settrie import SetTrie
 from stormpy import model_checking, CheckTask
 from decimal import Decimal
 from fastmole import MatrixGeneratorDouble, MatrixGeneratorRationalNumber
-from molehill.counterexamples import check
-from molehill.plugin import SearchMarkovChain
+from molehill.counterexamples import check, check_hole_options
+from molehill.plugins.search import SearchMarkovChain
+from molehill.plugins.split import SplitMarkovChain
 import time
 import z3
-
+from stormpy import BitVector
 
 class Mole:
     def __init__(
@@ -16,12 +17,14 @@ class Mole:
         solver,
         variables,
         quotient,
+        mode="search",
         exact=False,
         draw_image=False,
         considered_counterexamples="all",
     ):
         self.quotient = quotient
         self.exact = exact
+        self.mode = mode
         # models we have already analyzed
         self.all_violated_models = [SetTrie(), SetTrie()]
         self.inconclusive_models = [SetTrie(), SetTrie()]
@@ -59,24 +62,6 @@ class Mole:
 
         self.fixed_something = False
 
-        # TODO: We should definitely check that there are no nontrivial end components
-
-        # if prop.formula.optimality_type == OptimizationDirection.Maximize:
-        #     bad_states, good_states = prob01max_states(self.quotient.family.mdp.model, prop.formula.subformula)
-        # elif prop.formula.optimality_type == OptimizationDirection.Minimize:
-        #     bad_states, good_states = prob01min_states(self.quotient.family.mdp.model, prop.formula.subformula)
-        # else:
-        #     raise ValueError("Unknown operator in property")
-
-        # # check whether there are nontrivial end components
-        # maximal_end_components = get_maximal_end_components(quotient.family.mdp.model)
-        # for maximal_end_component in maximal_end_components:
-        #     for state, _choices in maximal_end_component:
-        #         if state not in good_states and state not in bad_states:
-        #             raise ValueError("Nontrivial end component")
-
-        # because the quotient has no nontrivial end component, no sub-MDP does either :)
-
         self.complete_transition_matrix = (
             self.quotient.family.mdp.model.transition_matrix
         )
@@ -93,7 +78,12 @@ class Mole:
         self.considered_counterexamples = considered_counterexamples
         self.counterexamples = []
 
-        self.plugin = SearchMarkovChain(solver, None, self)
+        if mode == "search":
+            self.plugin = SearchMarkovChain(solver, None, self)
+        elif mode == "split":
+            self.plugin = SplitMarkovChain(solver, None, self)
+        else:
+            raise ValueError(f"Unknown mode: {mode}")
         self.variables = variables
         self.model_variable_names = [str(x) for x in variables]
 
@@ -314,6 +304,49 @@ class Mole:
                 )
 
                 return False, check_result.consistent_scheduler
+            return False, None
+
+    def hole_options_consistent(self, hole_options, invert=False):
+        """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
+
+        if time.time() - self.time_last_print > 1:
+            print(
+                f"Considered {self.mc_calls} models so far (cache hits: {self.considered_models - self.mc_calls})"
+            )
+            self.time_last_print = time.time()
+
+        hole_options_bv = []
+        for i in range(len(self.variables)):
+            bv = BitVector(self.variables[i].size(), 1)
+            if self.model_variable_names[i] in hole_options:
+                for bit, decision in hole_options[self.model_variable_names[i]].items():
+                    if decision == 1:
+                        bv.set(bit, False)
+            hole_options_bv.append(bv)
+        
+        # print(self.variables)
+        # print([str(x) for x in hole_options_bv])
+
+        # Prop is always rechability, even if our input was until (thanks paynt :)).
+        prop = self.quotient.specification
+        if invert:
+            prop = self.quotient.specification.negate()
+
+        # Check the sub-MDP (see counterexample.py).
+        check_result = check_hole_options(
+            self.get_matrix_generator(invert),
+            hole_options_bv,
+            prop,
+        )
+        self.mc_calls += 1
+        all_violated = check_result.all_schedulers_violate
+        counterexample = check_result.fixed_holes
+        if all_violated:
+            counterexample_names = [
+                self.model_variable_names[i] for i in counterexample
+            ]
+            return True, counterexample_names
+        else:
             return False, None
 
     def load_cache(self, cache_file):

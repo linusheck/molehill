@@ -1,0 +1,43 @@
+"""Base class for constraints."""
+
+import z3
+import argparse
+from molehill.constraints.constraint import Constraint
+from typing import Callable
+
+
+class SplitConstraint(Constraint):
+    """Standard constraint for split mode."""
+
+    def register_arguments(self, argument_parser: argparse.ArgumentParser) -> None:
+        argument_parser.add_argument(
+            "--deterministic",
+            action="store_true",
+            help="Deterministic Z3 assignment.",
+            default=None,
+        )
+
+    def solver_settings(self, solver: z3.Solver) -> None:
+        if not self.args.deterministic:
+            # Random phase selection works well here
+            solver.set("phase_selection", 5)
+
+    def build_constraint(
+        self,
+        function: z3.Function,
+        variables: list[z3.Var],
+        variables_in_ranges: Callable[[list[z3.Var]], z3.ExprRef],
+        **args
+    ) -> z3.ExprRef:
+        """Implement your constraint here. Arguments are passed by args."""
+        # for each bitvector in variables, at least one bit should be one
+        def bit2bool(var, i):
+            return z3.BoolRef(z3.Z3_mk_bit2bool(var.ctx.ref(), i, var.as_ast()))
+
+        or_clauses = [
+            z3.PbEq([(z3.Not(bit2bool(var, i)), 1) for i in range(var.size())], 1)
+            for var in variables
+        ]
+
+        return z3.And(function(*variables), z3.And(*or_clauses))
+
