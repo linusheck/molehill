@@ -20,6 +20,10 @@ class Constraint:
     def set_args(self, args: argparse.Namespace) -> None:
         """Set the arguments for the constraint."""
         self.args = args
+    
+    def optimize(self) -> z3.ExprRef:
+        """Optimize something?"""
+        return None
 
     def build_constraint(
         self,

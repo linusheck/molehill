@@ -8,7 +8,8 @@ from molehill.constraints import (
     ForallExistsConstraint,
     ProbGoal,
     CostsConstraint,
-    SplitConstraint
+    SplitConstraint,
+    CounterfactualConstraint
 )
 
 
@@ -64,6 +65,7 @@ if __name__ == "__main__":
             "prob0",
             "prob1",
             "costs",
+            "counterfactual",
             "custom",
         ],
         default="none",
@@ -104,6 +106,8 @@ if __name__ == "__main__":
         new_constraint = ProbGoal(prob=1)
     elif args.constraint == "costs":
         new_constraint = CostsConstraint(project_path=args.project_path)
+    elif args.constraint == "counterfactual":
+        new_constraint = CounterfactualConstraint()
     else:
         new_constraint = load_constraint_class(f"{args.project_path}/constraint.py")
     new_parser = argparse.ArgumentParser()

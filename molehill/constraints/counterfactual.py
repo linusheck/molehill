@@ -9,6 +9,10 @@ from typing import Callable
 class CounterfactualConstraint(Constraint):
     """Counterfactual constraint."""
 
+    def __init__(self):
+        super().__init__()
+        self.num_var_in_cause = z3.Int("num_var_in_cause")
+
     def register_arguments(self, argument_parser: argparse.ArgumentParser) -> None:
         argument_parser.add_argument(
             "--deterministic",
@@ -31,63 +35,40 @@ class CounterfactualConstraint(Constraint):
     ) -> z3.ExprRef:
         """Implement your constraint here. Arguments are passed by args."""
         self.variables = variables
+        self.counterfactual_vars = [z3.Const(f"counterfactual_{var}", var.sort()) for i, var in enumerate(variables)]
 
         # if you change any variable in cause_variables, the function should not hold anymore
 
         constraints = []
         
-        constraints.append(function(*variables))
         constraints.append(variables_in_ranges(variables))
+        constraints.append(variables_in_ranges(self.counterfactual_vars))
 
-        cause_sets = []
-        self.cause_sets = cause_sets
+        constraints.append(function(*variables)) # This is the actual world
+        constraints.append(z3.Not(function(*self.counterfactual_vars))) # This is the counterfactual world
 
-        alternative_sets = []
-        self.alternative_sets = alternative_sets
+        self.var_in_cause = [z3.Bool(f"cause_{i}") for i in range(len(variables))]
 
-        for j in range(1):
-            # We search for one counterfactual cause for the assignment
-            cause_variables = [z3.Bool(f"cause_var_{i}_{j}") for i in range(len(variables))]
-            cause_sets.append(cause_variables)
-
-
-            # # all extensions of the cause variables must satisfy the function
-            # forall_vars = [z3.BitVec(f"forall_var_{i}", variables[0].sort().size()) for i in range(len(variables))]
-            # constraints.append(z3.ForAll(
-            #     forall_vars,
-            #     z3.Implies(variables_in_ranges(forall_vars),
-            #     function(*[
-            #         z3.If(cause_variables[k], variables[k], forall_vars[k])
-            #         for k in range(len(variables))
-            #     ]))))
-
-
-
-            # for i, var in enumerate(variables):
-            #     alternative_vars = [z3.BitVec(f"alternative_var_{i}_{j}_{k}", variables[i].sort().size()) for k in range(len(variables))]
-            #     constraints.append(variables_in_ranges(alternative_vars))
-            #     constraints.append(
-            #         z3.Not(function(*[
-            #             z3.If(cause_variables[k] if k != i else True, variables[k], alternative_vars[k])
-            #             for k in range(len(variables))
-            #         ]))
-            #     )
-
-            constraints.append(z3.Or(*cause_variables)) 
-        print(constraints)
-        # cause sets are different from each other
-        # for i in range(len(cause_sets)):
-        #     for j in range(i + 1, len(cause_sets)):
-        #         constraints.append(z3.Or([cause_sets[i][k] != cause_sets[j][k] for k in range(len(cause_sets[i]))]))
+        for i in range(len(variables)):
+            constraints.append(
+                self.var_in_cause[i] == (self.variables[i] == self.counterfactual_vars[i])
+            )
+        
+        
+        constraints.append(
+            self.num_var_in_cause == z3.Sum([z3.If(v, 1, 0) for v in self.var_in_cause])
+        )
+        constraints.append(self.num_var_in_cause >= 1)
 
         return z3.And(*constraints)
+
+    def optimize(self) -> z3.ExprRef:
+        """Optimize something?"""
+        return self.num_var_in_cause
     
     def show_result(self, model, solver, **args):
-        print(model)
-        for j in range(len(self.cause_sets)):
-            cause = []
-            cause_variables = self.cause_sets[j]
-            for i in range(len(cause_variables)):
-                if model[cause_variables[i]]:
-                    cause.append(f"{self.variables[i]} == {model[self.variables[i]]}")
-            print(", ".join(cause))
+        cause = []
+        for i in range(len(self.variables)):
+            if model[self.var_in_cause[i]]:
+                cause.append(f"{self.variables[i]} == {model[self.variables[i]]}")
+        print("Cause:", ", ".join(cause))

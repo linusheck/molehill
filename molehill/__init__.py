@@ -249,6 +249,10 @@ def run(
         if load_cache is not None:
             p.load_cache(load_cache)
 
+    # TODO add binary search for optimal value?
+    if constraint.optimize() is not None:
+        s.add(constraint.optimize() <= 10)
+
     model = None
     if s.check() == z3.sat:
         print("sat")
