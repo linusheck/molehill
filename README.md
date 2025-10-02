@@ -29,6 +29,7 @@ Please refer to [Storm documentation](https://www.stormchecker.org/documentation
 
 ```shell
 python3 -m venv venv && source venv/bin/activate
+pip install -r build-requirements.txt 
 mkdir prerequisites && cd prerequisites
 git clone https://github.com/moves-rwth/storm.git
 git clone https://github.com/moves-rwth/stormpy.git
@@ -37,9 +38,9 @@ mkdir storm/build && cd storm/build
 cmake ..
 make storm storm-cli storm-pomdp
 cd - && cd stormpy
-pip install . --config-settings=cmake.define.USE_STORM_DFT=OFF --config-settings=cmake.define.USE_STORM_GSPN=OFF
+pip install . --config-settings=cmake.define.USE_STORM_DFT=OFF --config-settings=cmake.define.USE_STORM_GSPN=OFF --config-settings=cmake.define.STORM_DIR_HINT=../storm/build
 cd - && cd synthesis
-pip install . --no-build-isolation
+pip install . --no-build-isolation --config-settings=cmake.define.STORM_DIR_HINT=../storm/build
 ```
 
 ## Run molehill
