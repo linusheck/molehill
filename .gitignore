@@ -168,3 +168,5 @@ cython_debug/
 doc/_build
 
 results*
+
+prerequisites/
