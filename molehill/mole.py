@@ -3,7 +3,7 @@
 from settrie import SetTrie
 from stormpy import model_checking, CheckTask
 from decimal import Decimal
-from fastmole import MatrixGeneratorDouble, MatrixGeneratorRationalNumber
+from molehill.fastmole import MatrixGeneratorDouble, MatrixGeneratorRationalNumber
 from molehill.counterexamples import check, check_hole_options
 from molehill.plugins.search import SearchMarkovChain
 from molehill.plugins.split import SplitMarkovChain

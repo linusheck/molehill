@@ -1,14 +1,14 @@
 """Model checking."""
 
 import stormpy
-from stormpy.core import parse_properties_without_context
+from stormpy import parse_properties_without_context
 from stormpy import check_model_sparse
 from stormpy.pycarl.gmp import Rational
-from fastmole import set_max_iterations
+from molehill.fastmole import set_max_iterations
 import os
 
 def check_model(mdp, prop, hint, precision=1e-6):
-    environment = stormpy.core.Environment()
+    environment = stormpy.Environment()
     environment.solver_environment.minmax_solver_environment.precision = Rational(
         precision
     )

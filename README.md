@@ -2,29 +2,45 @@
 
 ## Installation
 
-We currently use `setuptools` because I can't find another way to install `stormpy`, but that might change soon.
-Create a virtualenv, e.g., with pipenv:
+### (a) For users
+
+To build **molehill** from source run (NOTE THIS WILL WORK ONLY AFTER WE RELEASE PAYNT ON PYPI): 
 ```
-pipenv shell
-```
-and install `requirements.txt`:
-```
-pip install -r requirements.txt
+git clone https://github.com/linusheck/molehill.git
+cd molehill
+python3 -m venv venv && source venv/bin/activate
+pip install .
 ```
 
-## Storm setup
+### (b) For developers
 
-Install Storm. Currently, I can't keep `stormpy` from asking the CMake Cache for the location of Storm. So please check your
+**molehill** depends on [Storm](https://github.com/moves-rwth/storm), [stormpy](https://github.com/moves-rwth/stormpy) and [paynt](https://github.com/randriu/synthesis). For developers, we recommend having local installations of all Storm,stormpy and paynt (see [section below](#installing-dependencies)). If you have stormpy and paynt already installed in your developer environment, you can use:
+
+```shell
+pip install -r build-requirements.txt
+pip install . --no-build-isolation
 ```
-~/.cmake/packages/storm/<UUID>
-~/.cmake/packages/carl/<UUID>
+
+which builds and installs molehill directly into your environment. **Note that the Storm backends used by molehill, paynt and stormpy need to be the same.**
+
+#### installing-dependencies
+
+Please refer to [Storm documentation](https://www.stormchecker.org/documentation/obtain-storm/build.html), [stormpy documentation](https://moves-rwth.github.io/stormpy/installation.html) and [paynt README](https://github.com/randriu/synthesis/blob/master/README.md) for more information. Here we provide a list of commands that build master branch of Storm, stormpy and paynt in virtual environment without further explanation:
+
+```shell
+python3 -m venv venv && source venv/bin/activate
+mkdir prerequisites && cd prerequisites
+git clone https://github.com/moves-rwth/storm.git
+git clone https://github.com/moves-rwth/stormpy.git
+git clone https://github.com/randriu/synthesis.git
+mkdir storm/build && cd storm/build
+cmake ..
+make storm storm-cli storm-pomdp
+cd - && cd stormpy
+pip install . --config-settings=cmake.define.USE_STORM_DFT=OFF --config-settings=cmake.define.USE_STORM_GSPN=OFF
+cd - && cd synthesis
+pip install . --no-build-isolation
 ```
-and make sure you have one file in this folder that points to the Storm you want `stormpy` to compile against. Sorry, I'll fix this soon.
-Then run setup.py
-```
-python setup.py install
-```
-which will (hopefully) build and install `pycarl`, `stormpy`, `PAYNT`, and finally `fastmole` and `molehill`.
 
 ## Run molehill
 

@@ -1,4 +1,4 @@
-import fastmole
+import molehill.fastmole
 import stormpy
 import stormpy.examples
 import stormpy.examples.files
@@ -10,7 +10,7 @@ prism_program = stormpy.parse_prism_program(path)
 formula_str = 'Rmin=? [F "finished"]'
 properties = stormpy.parse_properties_for_prism_program(formula_str, prism_program)
 
-environment = stormpy.core.Environment()
+environment = stormpy.Environment()
 environment.solver_environment.minmax_solver_environment.precision = Rational(
     1e-6
 )
@@ -27,7 +27,7 @@ time0 = time.time() - time0
 hint = stormpy.ExplicitModelCheckerHintDouble()
 hint.set_result_hint([x + 0.2 for x in result.get_values()])
 
-hint = fastmole.set_end_components_true(hint)
+hint = molehill.fastmole.set_end_components_true(hint)
 
 time1 = time.time()
 for i in range(1000):
