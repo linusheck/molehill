@@ -1,0 +1,20 @@
+pomdp
+
+observables
+	s
+endobservables
+
+module causality
+	// local state
+	s : [0..7] init 0;
+
+	[] s=0 -> 0.2 : (s'=1) + 0.2 : (s'=2) + 0.2 : (s'=3) + 0.2 : (s'=4) + 0.2 : (s'=5);
+
+	[a] s>0 & s<6 -> (s'=6);
+	[b] s>0 & s<6 -> (s'=7);
+
+    [] s>=6 -> (s'=s);
+endmodule
+
+label "good" = s=6;
+label "bad" = s=7;

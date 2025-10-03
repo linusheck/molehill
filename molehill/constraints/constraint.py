@@ -35,7 +35,8 @@ class Constraint:
         """Implement your constraint here. Arguments are passed by args. Call
         variables_in_ranges on variables to get a Z3 expression that represents
         that the variables are in-range."""
+        self.variables = variables
         raise NotImplementedError("Constraint does not implement build_constraint")
-
+    
     def show_result(self, model: z3.Model, solver: z3.Solver, **args) -> None:
         """Called after SAT. Print and/or show your result here."""

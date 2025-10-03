@@ -12,11 +12,7 @@
 // as for example otherwise an adversary can prevent the process from actually drawing
 // in the current round by not scheduling it after it has performed the first step
 
-pomdp
-
-observables
-	c, b, r, p1, p2, p3, b1, b2, b3, r1, r2, r3, draw1, draw2, draw3
-endobservables
+mdp
 
 // size of shared counter
 const int K = 6; // 4+ceil(log_2 N)

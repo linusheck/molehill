@@ -30,7 +30,8 @@ def run(
     pure_smt=False,
     dump_cache=None,
     load_cache=None,
-    print_size=False
+    print_size=False,
+    enumerate_solutions=False,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -41,7 +42,6 @@ def run(
         sketch_path, properties_path, use_exact=exact
     )
 
-    print(quotient.family)
     if print_size:
         from decimal import Decimal
         quotient.build(quotient.family)
@@ -249,13 +249,11 @@ def run(
         if load_cache is not None:
             p.load_cache(load_cache)
 
-    # TODO add binary search for optimal value?
-    if constraint.optimize() is not None:
-        s.add(constraint.optimize() <= 10)
-
     model = None
-    if s.check() == z3.sat:
+    num_solutions = 0
+    while s.check() == z3.sat:
         print("sat")
+        num_solutions += 1
         model = s.model()
         new_family = quotient.family.copy()
         new_family.add_parent_info(quotient.family)
@@ -271,8 +269,21 @@ def run(
         result = mdp.model_check_property(prop)
         print(f"Found {new_family} with value {result}")
         constraint.show_result(model, s, family=family)
+        if enumerate_solutions:
+            # Create a new constraint the blocks the current model
+            block = []
+            for d in model:
+                if d.arity() > 0:
+                    raise Z3Exception("uninterpreted functions are not supported")
+                c = d()
+                block.append(c != model[d])
+            s.add(z3.Or(block))
+        else:
+            break
     else:
         print("unsat")
+        if enumerate_solutions:
+            print(f"Found {num_solutions} solutions")
         if mode == "split":
             def pretty_print(l):
                 quotient.specification = quotient.specification.negate()
