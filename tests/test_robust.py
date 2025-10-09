@@ -16,7 +16,7 @@ import paynt
 def test_robust(project_path, considered_counterexamples, tree):
     if tree > 0:
         constraint = DecisionTree(robust=True)
-        constraint.set_args(Namespace(forall="sketch_hole", random=False, nodes=tree))
+        constraint.set_args(Namespace(forall="sketch_hole", random=False, nodes=tree, pictures=None))
     else:
         constraint = ExistsForallConstraint()
         constraint.set_args(Namespace(forall="sketch_hole", random=False))
