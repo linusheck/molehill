@@ -12,6 +12,9 @@ class CounterfactualConstraint(Constraint):
     def __init__(self):
         super().__init__()
         self.num_var_in_cause = z3.Int("num_var_in_cause")
+        self.var_in_cause = None
+        self.actual_values = None
+        self.variables = None
     
     def register_arguments(self, argument_parser: argparse.ArgumentParser) -> None:
         argument_parser.add_argument(
@@ -70,12 +73,17 @@ class CounterfactualConstraint(Constraint):
         self.actual_values = {}
         hole_to_name_without_spaces = [x.replace(" ", "").replace("\t", "") for x in family.hole_to_name]
         if self.args.actual is not None:
+            if self.args.actual.endswith(".txt"):
+                with open(self.args.actual, "r", encoding="utf-8") as f:
+                    self.args.actual = f.read().strip()
             actual_assignments = self.args.actual.split(", ")
+            def process_variable_name(name: str) -> str:
+                return name.strip().replace(" ", "").replace("\t", "")
             for assignment in actual_assignments:
                 split = assignment.split("=")
                 key = "=".join(split[:-1])
                 value = split[-1]
-                key = key.strip().replace(" ", "").replace("\t", "")
+                key = process_variable_name(key)
                 value = value.strip()
                 if not key in hole_to_name_without_spaces:
                     raise ValueError(f"Unknown variable in actual world: {key}")
@@ -83,53 +91,16 @@ class CounterfactualConstraint(Constraint):
                 if not value in family.hole_to_option_labels[hole_num]:
                     raise ValueError(f"Unknown value for variable {key} in actual world: {value}")
                 val = family.hole_to_option_labels[hole_num].index(value)
+                found_var = False
                 for i, var in enumerate(variables):
-                    if var.decl().name() == key:
+                    if process_variable_name(var.decl().name()) == key:
+                        found_var = True
                         constraints.append(
                             self.var_in_cause[hole_num] == (self.variables[hole_num] != int(val))
                         )
                         self.actual_values[hole_num] = int(val)
                         break
-        elif self.args.actual_sched is not None:
-            num_assignments = 0
-            import json
-            with open(self.args.actual_sched, "r", encoding="utf-8") as f:
-                sched = json.load(f)
-            # Use the entire scheduler as the actual world
-            # Each state corresponds to a single hole assignment
-            counter = -1
-            for idx, state in enumerate(sched):
-                if len(state["c"][0]["labels"]) == 0:
-                    continue
-                # print(state["c"])
-                counter += 1
-                # actual_state = state["s"]
-                # # actual state: {'s1': 0, 's2': 0, 'w12': 0, 'w21': 0, 'x1': 0, 'x2': 0, 'y1': 0, 'y2': 0, 'z1': 0, 'z2': 0}
-                # # corresponding hole name: A([s1=0&s2=0&w12=0&w21=0&x1=0&x2=0&y1=0&y2=0&z1=0&z2=0],0)
-                # corresponding_hole_name = f"A([{ '&'.join(f'{k}={v}' for k, v in actual_state.items()) }],0)"
-                # print(hole_to_name_without_spaces)
-                # print(corresponding_hole_name)
-                # if corresponding_hole_name not in hole_to_name_without_spaces:
-                #     assert len(state["c"][0]["labels"]) == 0, str(state["c"][0]["labels"])
-                #     continue
-                # print(state["s"])
-                hole_num = counter #hole_to_name_without_spaces.index(corresponding_hole_name)
-                if len(state["c"][0]["labels"]) == 0:
-                    continue
-                value_str = state["c"][0]["labels"][0]
-
-                if value_str not in family.hole_to_option_labels[hole_num]:
-                    raise ValueError(f"Unknown value for variable {value_str} in actual world: {family.hole_to_option_labels[hole_num]}")
-                val = family.hole_to_option_labels[hole_num].index(value_str)
-                # Only set for the corresponding hole
-                constraints.append(
-                    self.var_in_cause[hole_num] == (self.variables[hole_num] != int(val))
-                )
-                self.actual_values[hole_num] = int(val)
-                # print(f"Actual assignment: {hole_num} -> {val}")
-                num_assignments += 1
-            # print(f"Total assignments in actual world: {num_assignments}")
-            # print(f"Total holes: {len(variables)}")
+                assert found_var, f"Could not find variable {key} in variables"
 
         constraints.append(variables_in_ranges(variables))
 
@@ -145,14 +116,61 @@ class CounterfactualConstraint(Constraint):
         print()
         family = args["family"]
         cause = []
+        counterfactual = []
         for i in range(len(self.variables)):
             if model[self.var_in_cause[i]]:
+                print(f"Variable in cause: {family.hole_to_name[i]}")
+                 # If we don't know the actual value, just print "?"
                 if not i in self.actual_values:
                     cause.append("?")
                 else:
                     option = family.hole_options_to_string(i, [self.actual_values[i]])
                     cause.append(option)
+                counterfactual_value = model[self.variables[i]]
+                counterfactual.append(family.hole_options_to_string(i, [counterfactual_value.as_long()]))
         print("Cause:", ", ".join(cause))
+        print("Counterfactual:", ", ".join(counterfactual))
 
-        print()
+# Dead research code:
 
+# # TODO This doesn't work yet
+# elif self.args.actual_sched is not None:
+#     num_assignments = 0
+#     import json
+#     with open(self.args.actual_sched, "r", encoding="utf-8") as f:
+#         sched = json.load(f)
+#     # Use the entire scheduler as the actual world
+#     # Each state corresponds to a single hole assignment
+#     counter = -1
+#     for idx, state in enumerate(sched):
+#         if len(state["c"][0]["labels"]) == 0:
+#             continue
+#         # print(state["c"])
+#         counter += 1
+#         # actual_state = state["s"]
+#         # # actual state: {'s1': 0, 's2': 0, 'w12': 0, 'w21': 0, 'x1': 0, 'x2': 0, 'y1': 0, 'y2': 0, 'z1': 0, 'z2': 0}
+#         # # corresponding hole name: A([s1=0&s2=0&w12=0&w21=0&x1=0&x2=0&y1=0&y2=0&z1=0&z2=0],0)
+#         # corresponding_hole_name = f"A([{ '&'.join(f'{k}={v}' for k, v in actual_state.items()) }],0)"
+#         # print(hole_to_name_without_spaces)
+#         # print(corresponding_hole_name)
+#         # if corresponding_hole_name not in hole_to_name_without_spaces:
+#         #     assert len(state["c"][0]["labels"]) == 0, str(state["c"][0]["labels"])
+#         #     continue
+#         # print(state["s"])
+#         hole_num = counter #hole_to_name_without_spaces.index(corresponding_hole_name)
+#         if len(state["c"][0]["labels"]) == 0:
+#             continue
+#         value_str = state["c"][0]["labels"][0]
+
+#         if value_str not in family.hole_to_option_labels[hole_num]:
+#             raise ValueError(f"Unknown value for variable {value_str} in actual world: {family.hole_to_option_labels[hole_num]}")
+#         val = family.hole_to_option_labels[hole_num].index(value_str)
+#         # Only set for the corresponding hole
+#         constraints.append(
+#             self.var_in_cause[hole_num] == (self.variables[hole_num] != int(val))
+#         )
+#         self.actual_values[hole_num] = int(val)
+#         # print(f"Actual assignment: {hole_num} -> {val}")
+#         num_assignments += 1
+#     # print(f"Total assignments in actual world: {num_assignments}")
+#     # print(f"Total holes: {len(variables)}")
