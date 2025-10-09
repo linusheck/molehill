@@ -101,12 +101,11 @@ class Mole:
         prop = spec.all_properties()[0]
         check_task = CheckTask(prop.formula)
 
-        # does there exist a model that satisfies the property?
-        # print("Quotient size", self.quotient.family.mdp.model.nr_states)
-        # result = model_checking(self.quotient.family.mdp.model, prop.formula)
-        # global_bounds = result.get_values()
-
-        global_bounds = [0.0 for i in range(self.quotient.family.mdp.model.transition_matrix.nr_columns)]
+        if self.considered_counterexamples == "none":
+            global_bounds = [0.0 for i in range(self.quotient.family.mdp.model.transition_matrix.nr_columns)]
+        else:
+            result = model_checking(self.quotient.family.mdp.model, prop.formula)
+            global_bounds = result.get_values()
 
         target_states = model_checking(
             self.quotient.family.mdp.model, prop.formula.subformula.subformula
