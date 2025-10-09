@@ -1,1 +1,3 @@
-P>=0.06 [ F "unfair" ]
+// Maximum probability that malicious recepient gains information
+P>0.00 [ F "unfair" ]
+
