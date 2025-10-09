@@ -4,7 +4,7 @@
 
 ### (a) For users
 
-To build **molehill** from source run (NOTE THIS WILL WORK ONLY AFTER WE RELEASE PAYNT ON PYPI): 
+To build **molehill** from source run:
 ```
 git clone https://github.com/linusheck/molehill.git
 cd molehill

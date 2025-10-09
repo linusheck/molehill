@@ -16,10 +16,10 @@ import paynt
 def test_robust(project_path, considered_counterexamples, tree):
     if tree > 0:
         constraint = DecisionTree(robust=True)
-        constraint.set_args(Namespace(forall="sketch_hole", random=False, nodes=tree, pictures="pictures"))
+        constraint.set_args(Namespace(forall="sketch_hole", random=False, nodes=tree, pictures=None))
     else:
         constraint = ExistsForallConstraint()
-        constraint.set_args(Namespace(forall="sketch_hole", random=False, pictures="pictures"))
+        constraint.set_args(Namespace(forall="sketch_hole", random=False))
     model, _solver, plugin = run(project_path, considered_counterexamples, constraint, search_space_test=False, print_reasons=False, image=False)
 
     assert model is not None, "solver says unsat even though we have a model"
