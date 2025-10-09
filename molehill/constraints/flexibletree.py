@@ -377,6 +377,8 @@ class DecisionTree(Constraint):
                 return node
 
         root = build_anytree(0)
+        if self.args.pictures is None:
+            return
         picture_path = self.args.pictures
         os.makedirs(picture_path, exist_ok=True)
 
