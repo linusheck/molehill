@@ -119,7 +119,6 @@ class CounterfactualConstraint(Constraint):
         counterfactual = []
         for i in range(len(self.variables)):
             if model[self.var_in_cause[i]]:
-                print(f"Variable in cause: {family.hole_to_name[i]}")
                  # If we don't know the actual value, just print "?"
                 if not i in self.actual_values:
                     cause.append("?")
