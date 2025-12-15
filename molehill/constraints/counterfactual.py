@@ -90,7 +90,7 @@ class CounterfactualConstraint(Constraint):
     def show_result(self, model, solver, **args):
         family = args.get("family")
 
-        # Print actual scheduler
+        print("\n")
         print("Actual Example (Satisfies Spec):")
         actual_elements = []
         for i in range(len(self.variables)):
@@ -99,7 +99,6 @@ class CounterfactualConstraint(Constraint):
             actual_elements.append(f"State {i}: {val_str}")
         print("{ " + ", ".join(actual_elements) + " }")
 
-        # Reconstruct the Cause (psi)
         cause_elements = []
         for i, in_cause in enumerate(self.var_in_cause):
             if model[in_cause]:
@@ -110,7 +109,6 @@ class CounterfactualConstraint(Constraint):
         print(f"Cause (Size {len(cause_elements)}):")
         print("{ " + ", ".join(cause_elements) + " }")
 
-        # Reconstruct the Counterfactual (pi')
         print("\nCounterfactual Example (Differs from Cause & Fails Spec):")
         cf_diff = []
         for i, cf_var in enumerate(self.cf_variables):
@@ -118,12 +116,6 @@ class CounterfactualConstraint(Constraint):
             actual_val = model[self.variables[i]]
             cf_val = model[cf_var]
             
-            # Highlight deviations within the cause domain (if any)
             if is_in_z and (actual_val.as_long() != cf_val.as_long()):
                 val_str = family.hole_options_to_string(i, [cf_val.as_long()]) if family else str(cf_val)
                 cf_diff.append(f"State {i} (in Z) changed to {val_str}")
-                
-        if not cf_diff:
-            print("(Deviation occurred outside the cause domain Z)")
-        else:
-            print(", ".join(cf_diff))
