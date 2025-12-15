@@ -119,3 +119,6 @@ class CounterfactualConstraint(Constraint):
             if is_in_z and (actual_val.as_long() != cf_val.as_long()):
                 val_str = family.hole_options_to_string(i, [cf_val.as_long()]) if family else str(cf_val)
                 cf_diff.append(f"State {i} (in Z) changed to {val_str}")
+                
+        print(", ".join(cf_diff))
+        print("\n")
