@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(fastmole LANGUAGES CXX)
+project(fastmole LANGUAGES CXX C)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/macros.cmake)
 
