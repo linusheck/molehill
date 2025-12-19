@@ -91,7 +91,7 @@ class CounterfactualConstraint(Constraint):
         family = args.get("family")
 
         print("\n")
-        print("Actual Example (Satisfies Spec):")
+        print("Actual Scheduler (Satisfies Spec):")
         actual_elements = []
         for i in range(len(self.variables)):
             val = model[self.variables[i]].as_long()
@@ -109,7 +109,7 @@ class CounterfactualConstraint(Constraint):
         print(f"Cause (Size {len(cause_elements)}):")
         print("{ " + ", ".join(cause_elements) + " }")
 
-        print("\nCounterfactual Example (Differs from Cause & Fails Spec):")
+        print("\n\"Repair\" Counterfactual:")
         cf_diff = []
         for i, cf_var in enumerate(self.cf_variables):
             is_in_z = model[self.var_in_cause[i]]

@@ -1,0 +1,48 @@
+@type: MDP
+@parameters
+
+@reward_models
+
+@nr_states
+8
+@nr_choices
+13
+@model
+state 0 init
+	action initialdistr
+		1 : 0.2
+		2 : 0.2
+		3 : 0.2
+		4 : 0.2
+		5 : 0.2
+state 1
+	action cycle
+		6 : 1
+	action bus
+		7 : 1
+state 2
+	action cycle
+		6 : 1
+	action bus
+		7 : 1
+state 3
+	action cycle
+		6 : 1
+	action bus
+		7 : 1
+state 4
+	action cycle
+		6 : 1
+	action bus
+		7 : 1
+state 5
+	action cycle
+		6 : 1
+	action bus
+		7 : 1
+state 6 good
+	action loop
+		6 : 1
+state 7 bad
+	action loop
+		7 : 1
