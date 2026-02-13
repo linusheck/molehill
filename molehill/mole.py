@@ -7,6 +7,7 @@ from molehill.fastmole import MatrixGeneratorDouble, MatrixGeneratorRationalNumb
 from molehill.counterexamples import check, check_hole_options
 from molehill.plugins.search import SearchMarkovChain
 from molehill.plugins.split import SplitMarkovChain
+from molehill.plugins.searchmdp import SearchMDP
 import time
 import z3
 from stormpy import BitVector
@@ -36,7 +37,6 @@ class Mole:
         self.time_last_print = time.time()
 
         self.quotient.build(quotient.family)
-        # TODO new choice to assignment?
         self.choice_to_assignment = self.quotient.coloring.getChoiceToAssignment()
 
         # some states were removed as they were not reachable in the quotient MDP, we need to recompute the choice_to_assignment when this happens
@@ -82,12 +82,14 @@ class Mole:
             self.plugin = SearchMarkovChain(solver, None, self)
         elif mode == "split":
             self.plugin = SplitMarkovChain(solver, None, self)
+        elif mode == "searchmdp":
+            self.plugin = SearchMDP(solver, None, self)
         else:
             raise ValueError(f"Unknown mode: {mode}")
         self.variables = variables
         self.model_variable_names = [str(x) for x in variables]
 
-        self.first_dtmc_checked = False
+        self.first_dtmc_checked = True
 
         self.function_argument_tracker = []
 
@@ -130,9 +132,9 @@ class Mole:
         self.matrix_generators[invert] = generator
         return generator
 
-    def partial_model_consistent(self, partial_model, invert=False):
+    def partial_model_consistent(self, partial_model, invert=False, unassigned_allowed=False):
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
-
+        print(partial_model)
         if time.time() - self.time_last_print > 1:
             print(
                 f"Considered {self.mc_calls} models so far (cache hits: {self.considered_models - self.mc_calls})"
@@ -187,10 +189,22 @@ class Mole:
         # Make a PAYNT family from the current partial model.
         new_family = self.quotient.family.copy()
         new_family.add_parent_info(self.quotient.family)
+        
+        opponent_holes = None
+        if unassigned_allowed:
+            opponent_holes = BitVector(new_family.num_holes, False)
+            for hole in range(new_family.num_holes):
+                var = self.model_variable_names[hole]
+                if var in partial_model and partial_model[var] == -1:
+                    opponent_holes.set(hole, False)
+
         for hole in range(new_family.num_holes):
             var = self.model_variable_names[hole]
             if var in partial_model:
-                new_family.hole_set_options(hole, [partial_model[var]])
+                if not (unassigned_allowed and partial_model[var] == -1):
+                    new_family.hole_set_options(hole, [partial_model[var]])
+                else:
+                    print(f"Hole {hole} ({var}) left unassigned.")
 
         # Prop is always rechability, even if our input was until (thanks paynt :)).
         prop = self.quotient.specification
@@ -217,6 +231,7 @@ class Mole:
             prop,
             compute_counterexample,
             remove_optimal_holes,
+            opponent_holes=opponent_holes,
         )
         self.mc_calls += 1
         all_violated = check_result.all_schedulers_violate
@@ -231,7 +246,7 @@ class Mole:
                 self.mdp_fails_and_wins[0] += 1
         if all_violated:
             counterexample_names = [
-                self.model_variable_names[i] for i in counterexample
+                self.model_variable_names[i] for i in counterexample if len(self.quotient.family.hole_options(i)) > 1
             ]
             filtered_partial_model = {
                 name: partial_model[name] for name in counterexample_names

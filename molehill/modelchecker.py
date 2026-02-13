@@ -6,6 +6,7 @@ from stormpy import check_model_sparse
 from stormpy.pycarl.gmp import Rational
 from molehill.fastmole import set_max_iterations
 import os
+import payntbind.synthesis
 
 def check_model(mdp, prop, hint, precision=1e-6):
     environment = stormpy.Environment()
@@ -37,8 +38,22 @@ def check_model(mdp, prop, hint, precision=1e-6):
         str(prop).split()[0] + ' [ F "counterexample_target" ]'
     )[0]
 
-    result = check_model_sparse(
-        mdp, new_prop, extract_scheduler=False, hint=hint, environment=environment
-    )
+    print(f"Checking model of type {type(mdp)}")
+
+    if isinstance(mdp, stormpy.SparseSmg):
+        results = []
+        for i in range(10):
+            result = payntbind.synthesis.model_check_smg(mdp, new_prop.raw_formula, env=environment)
+            results.append(result)
+        # check that all results are the same
+        for i in range(1, len(results)):
+            for s in mdp.states:
+                assert results[0].at(s) == results[i].at(s), f"Results differ at state {s}: {results[0].at(s)} vs {results[i].at(s)}"
+
+    else:
+        result = check_model_sparse(
+            mdp, new_prop, extract_scheduler=False, hint=hint, environment=environment
+        )
+
     all_schedulers_violate = result.at(mdp.initial_states[0])
     return all_schedulers_violate, result

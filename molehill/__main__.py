@@ -41,7 +41,7 @@ if __name__ == "__main__":
         "--plot-args", action="store_true", help="Plot function arguments."
     )
     parser.add_argument(
-        "--mode", type=str, default="search", choices=["search", "split"], help="Mode to run the tool in."
+        "--mode", type=str, default="search", choices=["search", "split", "searchmdp"], help="Mode to run the tool in."
     )
     parser.add_argument("--verbose", action="store_true", help="Verbose mode.")
     # number of tree nodes

@@ -215,6 +215,37 @@ def run(
                 statement.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
             return z3.And(*statement)
         variables_in_ranges = variables_in_ranges2
+    elif mode == "searchmdp":
+        # SearchMDP mode is like search mode, but a hole can be unassigned
+        num_bits = (
+            max(
+                [
+                    math.ceil(math.log2(len(family.hole_options(hole)) + 1))
+                    for hole in range(family.num_holes)
+                ]
+            )
+            + 2
+        )
+        for hole in range(family.num_holes):
+            name = family.hole_name(hole)
+            var = z3.BitVec(name, num_bits)
+            variables.append(var)
+
+        def variables_in_ranges2(variables):
+            statement = []
+            for hole in range(family.num_holes):
+                options = family.hole_options(hole)
+                # it gets guaranteed by paynt that this is actually the range
+                # (these are just the indices, not the actual values in the final model :)
+                assert min(options) == 0
+                var = variables[hole]
+                statement.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
+                # Here, we allow the variable to be equal to max(options) + 1, which means "unassigned"
+                statement.append(z3.ULE(var, z3.BitVecVal(max(options) + 1, num_bits)))
+                # statement.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
+            return z3.And(*statement)
+        variables_in_ranges = variables_in_ranges2
+
     else:
         raise ValueError(f"Unknown mode: {mode}")
 
@@ -261,13 +292,21 @@ def run(
             var = variables[hole]
             # if var has as_long attribute
             if hasattr(model.eval(var), "as_long"):
-                new_family.hole_set_options(hole, [model.eval(var).as_long()])
+                val = model.eval(var).as_long()
+                if val <= max(new_family.hole_options(hole)):
+                    new_family.hole_set_options(hole, [val])
+                else:
+                    pass # This hole is unassigned
         # re-check DTMC
-        quotient.build(new_family)
-        mdp = new_family.mdp
-        prop = quotient.specification.all_properties()[0]
-        result = mdp.model_check_property(prop)
-        print(f"Found {new_family} with value {result}")
+        if mode != "searchmdp":
+            quotient.build(new_family)
+            mdp = new_family.mdp
+            prop = quotient.specification.all_properties()[0]
+            result = mdp.model_check_property(prop)
+            print(f"Found {new_family} with value {result}")
+        else:
+            print(f"Found {new_family}")
+            pass # TODO
         constraint.show_result(model, s, family=family)
         if enumerate_solutions:
             # Create a new constraint the blocks the current model

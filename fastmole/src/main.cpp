@@ -46,8 +46,9 @@ PYBIND11_MODULE(fastmole, m) {
         .def(py::init<const storm::models::sparse::Mdp<double> &, const storm::modelchecker::CheckTask<storm::logic::Formula, double> &,
                         const storm::storage::BitVector &, const std::vector<double> &, const std::vector<std::vector<std::pair<int, int>>> &>())
         .def("build_submodel", &MatrixGenerator<double>::buildSubModel, py::arg("abstracted_holes"), py::arg("hole_options"),
-                py::arg("reachable_states") = py::none(), "Build sub model")
+                py::arg("reachable_states") = py::none(), py::arg("opponent_holes") = py::none(), "Build sub model")
         .def("get_current_mdp", &MatrixGenerator<double>::getCurrentMDP, "Get current MDP")
+        .def("get_current_smg", &MatrixGenerator<double>::getCurrentSMG, "Get current SMG")
         .def("get_current_reachable_states", &MatrixGenerator<double>::getCurrentReachableStates, "Get current reachable states")
         .def("get_current_bfs_order", &MatrixGenerator<double>::getCurrentBFSOrder, "Get current BFS order")
         .def("hole_order", &MatrixGenerator<double>::holeOrder, py::arg("bfs_order"), py::arg("possible_holes"), "Get hole order")
@@ -59,8 +60,9 @@ PYBIND11_MODULE(fastmole, m) {
         .def(py::init<const storm::models::sparse::Mdp<storm::RationalNumber> &, const storm::modelchecker::CheckTask<storm::logic::Formula, storm::RationalNumber> &,
                         const storm::storage::BitVector &, const std::vector<storm::RationalNumber> &, const std::vector<std::vector<std::pair<int, int>>> &>())
         .def("build_submodel", &MatrixGenerator<storm::RationalNumber>::buildSubModel, py::arg("abstracted_holes"), py::arg("hole_options"),
-                py::arg("reachable_states") = py::none(), "Build sub model")
+                py::arg("reachable_states") = py::none(), py::arg("opponent_holes") = py::none(), "Build sub model")
         .def("get_current_mdp", &MatrixGenerator<storm::RationalNumber>::getCurrentMDP, "Get current MDP")
+        .def("get_current_smg", &MatrixGenerator<storm::RationalNumber>::getCurrentSMG, "Get current SMG")
         .def("get_current_reachable_states", &MatrixGenerator<storm::RationalNumber>::getCurrentReachableStates, "Get current reachable states")
         .def("get_current_bfs_order", &MatrixGenerator<storm::RationalNumber>::getCurrentBFSOrder, "Get current BFS order")
         .def("hole_order", &MatrixGenerator<storm::RationalNumber>::holeOrder, py::arg("bfs_order"), py::arg("possible_holes"), "Get hole order")
