@@ -40,7 +40,6 @@ def check(
         mdp = matrix_generator.get_current_mdp()
         prop = spec.negate().all_properties()[0]
         all_schedulers_violate_full, result = check_model(mdp, prop, None)
-        print(all_schedulers_violate_full)
 
 
     if not all_schedulers_violate_full:
@@ -59,6 +58,8 @@ def check(
     # Only holes that are reachable are interesting for the CE core. We can
     # immediately "delete" the other ones.
     fixed_holes = [hole for hole in fixed_holes if hole in reachable_hole_order]
+    for hole in opponent_holes:
+        fixed_holes.append(hole)
     # Every hole that is not fixed is currently abstracted by MDP.
     holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
 

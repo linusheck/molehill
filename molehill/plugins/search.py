@@ -84,7 +84,6 @@ class SearchMarkovChain(z3.UserPropagateBase):
                 assert False  # in the current code, this should never happen
 
     def push(self):
-        # print(self.partial_model)
         """This method is called if Z3 pushes a new context. This is where we check the sub-MDP."""
         # Keep track of the new context
         self.fixed_count.append(len(self.fixed_values))

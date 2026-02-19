@@ -60,8 +60,6 @@ class Mole:
         # reasons for new assertion
         self.reasons = []
 
-        self.fixed_something = False
-
         self.complete_transition_matrix = (
             self.quotient.family.mdp.model.transition_matrix
         )
@@ -89,7 +87,7 @@ class Mole:
         self.variables = variables
         self.model_variable_names = [str(x) for x in variables]
 
-        self.first_dtmc_checked = True
+        self.first_dtmc_checked = False
 
         self.function_argument_tracker = []
 
@@ -134,7 +132,6 @@ class Mole:
 
     def partial_model_consistent(self, partial_model, invert=False, unassigned_allowed=False):
         """Analyze the current sub-MDP and (perhaps) push theory lemmas."""
-        print(partial_model)
         if time.time() - self.time_last_print > 1:
             print(
                 f"Considered {self.mc_calls} models so far (cache hits: {self.considered_models - self.mc_calls})"
@@ -196,15 +193,13 @@ class Mole:
             for hole in range(new_family.num_holes):
                 var = self.model_variable_names[hole]
                 if var in partial_model and partial_model[var] == -1:
-                    opponent_holes.set(hole, False)
+                    opponent_holes.set(hole, True)
 
         for hole in range(new_family.num_holes):
             var = self.model_variable_names[hole]
             if var in partial_model:
                 if not (unassigned_allowed and partial_model[var] == -1):
                     new_family.hole_set_options(hole, [partial_model[var]])
-                else:
-                    print(f"Hole {hole} ({var}) left unassigned.")
 
         # Prop is always rechability, even if our input was until (thanks paynt :)).
         prop = self.quotient.specification

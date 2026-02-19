@@ -165,6 +165,23 @@ def run(
             )
 
         family = quotient.family
+    
+    if mode == "searchmdp":
+        choice_to_hole_options = quotient.coloring.getChoiceToAssignment()
+        transition_matrix = quotient.quotient_mdp.transition_matrix
+        # go through transition matrix 
+        hole_names = set()
+        for state in range(quotient.quotient_mdp.nr_states):
+            first_row = transition_matrix.get_rows_for_group(state)[0]
+            if len(choice_to_hole_options[first_row]) == 0:
+                assert len(transition_matrix.get_rows_for_group(state)) == 1, "Input model not an MDP"
+                continue
+            hole_name = choice_to_hole_options[first_row][0][0]
+            assert hole_name not in hole_names, "Multiple states have the same hole, not supported in searchmdp mode"
+            hole_names.add(hole_name)
+            for row in transition_matrix.get_rows_for_group(state):
+                assert choice_to_hole_options[row][0][0] == hole_name, "Multiple holes for one state, not supported in searchmdp mode"
+                assert len(choice_to_hole_options[row]) == 1, "Multiple choices for one state, not supported in searchmdp mode"
 
     if verbose:
         z3.set_param("smt.mbqi", True)
@@ -210,6 +227,7 @@ def run(
                 # it gets guaranteed by paynt that this is actually the range
                 # (these are just the indices, not the actual values in the final model :)
                 assert min(options) == 0
+                assert min(options) <= max(options)
                 var = variables[hole]
                 statement.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
                 statement.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
@@ -260,11 +278,10 @@ def run(
     else:
         f = z3.PropagateFunction("valid", *[x.sort() for x in variables], z3.BoolSort())
 
-    s.add(
-        constraint.build_constraint(
-            f, variables, variables_in_ranges, family=family, quotient=quotient
-        )
-    )
+
+    s.add(constraint.build_constraint(
+        f, variables, variables_in_ranges, family=family, quotient=quotient
+    ))
 
     if not pure_smt:
         p = Mole(

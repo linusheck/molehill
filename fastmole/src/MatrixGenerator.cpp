@@ -1,4 +1,5 @@
 #include "MatrixGenerator.h"
+#include <cstdint>
 #include <optional>
 #include <queue>
 #include <stdexcept>
@@ -276,6 +277,7 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
         auto reachableStatesIterator = reachableStates.begin();
         for (std::size_t state = 0; state < submatrix.getColumnCount(); ++state) {
             bool isP2 = true;
+            uint64_t numChoices = 0;
             if (state < submatrix.getColumnCount() - 2) {
                 uint64_t globalState = *reachableStatesIterator;
                 reachableStatesIterator++;
@@ -284,17 +286,18 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
                 auto rowGroupEndQ = quotient.getTransitionMatrix().getRowGroupIndices()[globalState + 1];
                 for (uint64_t row = rowGroupStartQ; row < rowGroupEndQ; ++row) {
                     if (isChoicePossible(abstractedHoles, holeOptions, row)) {
+                        numChoices++;
                         for (auto const& [hole, val] : choiceToAssignment[row]) {
                             if (!opponentHoles->get(hole)) {
+                                // std::cout << "State " << state << " is not P2 because of hole " << hole << std::endl;
                                 isP2 = false;
-                                break;
                             }
                         }
                     }
                 }
             }
-            if (isP2) {
-                std::cout << "State " << state << " is P2" << std::endl;
+            if (isP2 && numChoices > 1) {
+                // std::cout << "State " << state << " is P2" << std::endl;
                 statePlayerIndications[state] = 1;
             }
         }

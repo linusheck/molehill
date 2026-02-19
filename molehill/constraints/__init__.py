@@ -11,3 +11,4 @@ from .prob_goal import ProbGoal
 from .costs import CostsConstraint
 from .split import SplitConstraint
 from .counterfactual import CounterfactualConstraint
+from .mdpcausality import CausalityConstraint
