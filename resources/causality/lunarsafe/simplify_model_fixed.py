@@ -69,12 +69,8 @@ def process_file(input_path, output_path):
                 break
         
         if all_same:
-            # Replace!
-            # The replacement: 
-            # state <id> {<label>} ...
-            #     action noop
-            #         4751 : 1
-            return [header_line, "\taction noop\n", "\t\t4751 : 1\n"]
+            print(block)
+            return [header_line, "\taction noop\n", block[2]]
         else:
             return block
 
