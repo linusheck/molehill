@@ -11,6 +11,7 @@ from molehill.constraints import (
     SplitConstraint,
     CounterfactualConstraint,
     CausalityConstraint,
+    MDPCause,
 )
 
 
@@ -68,6 +69,7 @@ if __name__ == "__main__":
             "costs",
             "counterfactual",
             "causality",
+            "mdpcause",
             "custom",
         ],
         default="none",
@@ -113,6 +115,8 @@ if __name__ == "__main__":
         new_constraint = CounterfactualConstraint()
     elif args.constraint == "causality":
         new_constraint = CausalityConstraint()
+    elif args.constraint == "mdpcause":
+        new_constraint = MDPCause()
     else:
         new_constraint = load_constraint_class(f"{args.project_path}/constraint.py")
     new_parser = argparse.ArgumentParser()

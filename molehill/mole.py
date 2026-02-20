@@ -87,7 +87,8 @@ class Mole:
         self.variables = variables
         self.model_variable_names = [str(x) for x in variables]
 
-        self.first_dtmc_checked = False
+        # self.first_dtmc_checked = False
+        self.first_dtmc_checked = True
 
         self.function_argument_tracker = []
 

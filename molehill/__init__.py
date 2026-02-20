@@ -280,7 +280,7 @@ def run(
 
 
     s.add(constraint.build_constraint(
-        f, variables, variables_in_ranges, family=family, quotient=quotient
+        f, variables, variables_in_ranges, family=family, quotient=quotient, project_path=project_path
     ))
 
     if not pure_smt:
@@ -323,7 +323,6 @@ def run(
             print(f"Found {new_family} with value {result}")
         else:
             print(f"Found {new_family}")
-            pass # TODO
         constraint.show_result(model, s, family=family)
         if enumerate_solutions:
             # Create a new constraint the blocks the current model
