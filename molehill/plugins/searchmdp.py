@@ -48,10 +48,12 @@ class SearchMDP(z3.UserPropagateBase):
             self.ast_map[ast_hash] = ast_str
         return ast_str
 
-    def analyse_current_model(self):
+
+    def analyse_current_model(self, final=False):
         valid_calls = [
             (x, y) for x, y in self.partial_model.items() if isinstance(y, bool)
         ]
+
         for name, value in valid_calls:
             backwards_variables = {}
             model_for_checker = {}
@@ -59,21 +61,22 @@ class SearchMDP(z3.UserPropagateBase):
             involved_variables = self.function_arguments[name]
             for i, var in enumerate(involved_variables):
                 var_original = self.data.model_variable_names[i]
+
                 if var in self.partial_model:
                     model_for_checker[var_original] = self.partial_model[var]
                 elif var.isdigit():
-                    # Suppose the function assignment is something like valid(0)
-                    # Then the conflict is just "valid(0)", not "valid(0) and 0=0"
                     model_for_checker[var_original] = int(var)
+
                 if var_original in model_for_checker:
                     if model_for_checker[var_original] > max(self.data.quotient.family.hole_options(i)):
-                        # Unassigned variable, set it to -1 to indicate that
-                        model_for_checker[var_original] = -1               
+                        model_for_checker[var_original] = -1
+
                 backwards_variables[var_original] = var
 
             all_violated, counterexample = self.data.partial_model_consistent(
                 model_for_checker, invert=not value, unassigned_allowed=True
             )
+
             if all_violated:
                 conflicting_vars = [self.names_to_vars[name]] + [
                     self.names_to_vars[backwards_variables[x]]
@@ -81,11 +84,51 @@ class SearchMDP(z3.UserPropagateBase):
                     if backwards_variables[x] in self.names_to_vars
                 ]
                 self.conflict(conflicting_vars)
+                return
             else:
-                if counterexample is None:
-                    continue
+                if final and value:
+                    print("Final minimality check for model:", model_for_checker)
+                    support = []
+                    for i, var in enumerate(involved_variables):
+                        if var.isdigit():
+                            continue
+                        if var not in self.partial_model:
+                            continue
 
-                assert False  # in the current code, this should never happen
+                        var_original = self.data.model_variable_names[i]
+                        current_val = model_for_checker.get(var_original, -1)
+
+                        if current_val == -1:
+                            continue
+                        if var not in self.names_to_vars:
+                            continue
+
+                        support.append((var, var_original))
+
+                    for deleted_var, deleted_name in support:
+                        reduced_model = dict(model_for_checker)
+                        reduced_model[deleted_name] = -1
+
+                        reduced_all_violated, _ = self.data.partial_model_consistent(
+                            reduced_model,
+                            invert=False,
+                            unassigned_allowed=True,
+                        )
+
+                        if not reduced_all_violated:
+                            print(f"Found non-minimal variable {deleted_name} with value {model_for_checker[deleted_name]}!")
+                            conflict_vars = [self.names_to_vars[name]]
+                            for kept_var, _ in support:
+                                if kept_var != deleted_var:
+                                    conflict_vars.append(self.names_to_vars[kept_var])
+
+                            self.conflict(conflict_vars)
+                            return
+
+            if counterexample is None:
+                continue
+
+            assert False
 
     def push(self):
         """This method is called if Z3 pushes a new context. This is where we check the sub-MDP."""
@@ -106,7 +149,7 @@ class SearchMDP(z3.UserPropagateBase):
     def _final(self):
         # This is what is called if Z3 creates a FULL assignment.
         # We do the same thing as in push.
-        self.analyse_current_model()
+        self.analyse_current_model(final=True)
 
     def _fixed(self, ast, value):
         # This is called when Z3 fixes a variable. We need to keep track of that.
@@ -144,6 +187,5 @@ class SearchMDP(z3.UserPropagateBase):
                 self.function_arguments[strx].append(str(argument.as_long()))
 
     def fresh(self, new_ctx):
-        # assert self.child_plugin is None
-        self.child_plugin = SearchMarkovChain(None, new_ctx, self.data)
+        self.child_plugin = SearchMDP(None, new_ctx, self.data)
         return self.child_plugin

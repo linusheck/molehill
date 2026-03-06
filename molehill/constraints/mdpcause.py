@@ -1,35 +1,20 @@
-"""A classic decision tree."""
+"""A rectangle-rule-list cause for an MDP.
+
+Each rule is: IF prop_0 in [lo, hi] AND ... THEN action (ignoring inactive properties)
+Rules are checked in order; first match wins. If nothing matches → '*'.
+
+Features included:
+  1. Integer Discretization: Bounds are indices over sorted unique observed values.
+  2. Derived Activity: prop_active is purely derived from whether bounds are non-trivial.
+  3. Sparsity/Cap: Hard cap on constraints per rule + optional soft penalty for active flags.
+  4. Symmetry Breaking: Inactive rules pushed to bottom, identical rules forbidden,
+     and lexicographical ordering for adjacent rules sharing the same label.
+"""
 
 import z3
 from molehill.constraints import Constraint
 from itertools import chain
 import os
-
-
-def piecewise_select(array, z3_int):
-    """Select an element of an array based on a z3 integer."""
-    sum_expr = array[0]
-    for i in range(1, len(array)):
-        sum_expr = z3.If(z3_int == i, array[i], sum_expr)
-    return sum_expr
-
-
-def get_property_names(variable_name):
-    return [
-        x.strip().split("=")[0].replace("!", "")
-        for x in variable_name[
-            variable_name.find("[") + 1 : variable_name.find("]")
-        ].split("&")
-    ]
-
-
-def get_property_values(variable_name):
-    return [
-        int(x.strip().split("=")[1]) if "=" in x else (0 if x.strip()[0] == "!" else 1)
-        for x in variable_name[
-            variable_name.find("[") + 1 : variable_name.find("]")
-        ].split("&")
-    ]
 
 
 class MDPCause(Constraint):
@@ -39,32 +24,93 @@ class MDPCause(Constraint):
         self.policy_vars = None
         self.labels = None
         self.label_to_index = None
-        self.left_child_ranges = None
-        self.right_child_ranges = None
+        self.property_names = None
+        self.prop_sorted_vals = None
 
     def register_arguments(self, argument_parser):
         argument_parser.add_argument(
             "--pictures",
             type=str,
-            help="Path to write tree pictures to.",
+            help="Path to write rule output to.",
             default="pictures",
         )
         argument_parser.add_argument(
-            "--nodes",
-            "--tree-nodes",
+            "--rules",
+            "--num-rules",
             type=int,
-            help="Number of enabled nodes in the tree.",
+            help="Number of rectangle rules (excluding the default '*' fallback).",
+        )
+        argument_parser.add_argument(
+            "--constraints-per-rule",
+            type=int,
+            default=None,
+            help=(
+                "Hard cap on the number of properties each rule may constrain. "
+                "None means all properties are available."
+            ),
+        )
+        argument_parser.add_argument(
+            "--sparsity-weight",
+            type=int,
+            default=1,
+            help="Soft-constraint weight penalizing each active property flag (default: 1).",
         )
         argument_parser.add_argument(
             "--relax",
-            help="Relax the constraint to allow for * labels to be used when the decision tree's value is out of range.",
+            help=(
+                "Relax the constraint to allow for * labels to be used when "
+                "the decision value is out of range."
+            ),
+            action="store_true",
+            default=False,
+        )
+        argument_parser.add_argument(
+            "--no-minimality",
+            help=(
+                "Disable minimality constraints that push for HP-minimal causes. "
+            ),
             action="store_true",
             default=False,
         )
 
+    # ------------------------------------------------------------------
+    # Helper: encode "apply rule list to a concrete property vector"
+    # ------------------------------------------------------------------
+    def _apply_rules(
+        self,
+        prop_indices_concrete,
+        rule_lows_idx,
+        rule_highs_idx,
+        rule_prop_active,
+        rule_labels,
+        num_rules,
+        star_index,
+        num_bits,
+    ):
+        num_properties = len(prop_indices_concrete)
+
+        def rule_fires(r):
+            per_prop = []
+            for p in range(num_properties):
+                prop_check = z3.And(
+                    prop_indices_concrete[p] >= rule_lows_idx[r][p],
+                    prop_indices_concrete[p] <= rule_highs_idx[r][p],
+                )
+                per_prop.append(
+                    z3.If(rule_prop_active[r][p], prop_check, z3.BoolVal(True))
+                )
+            return z3.And(*per_prop)
+
+        # Build right-folded chain from last rule up to first (rule 0 wins)
+        result = z3.BitVecVal(star_index, num_bits)
+        for r in reversed(range(num_rules)):
+            result = z3.If(rule_fires(r), rule_labels[r], result)
+        return result
+
+    # ------------------------------------------------------------------
     def build_constraint(self, function, variables, variables_in_ranges, **args):
         self.variables = variables
-        num_nodes = self.args.nodes
+        num_rules = self.args.rules
 
         num_bits = max([x.size() for x in variables])
 
@@ -72,316 +118,276 @@ class MDPCause(Constraint):
         policy_vars = [variables[i] for i in policy_indices]
         self.policy_vars = policy_vars
 
-        assert "family" in args, "Family must be provided to MDPCause."
-        assert "project_path" in args, "Project path must be provided to MDPCause."
+        assert "family" in args, "Family must be provided to MDPCauseRectangles."
+        assert "project_path" in args, "Project path must be provided."
 
-        # Collect all action labels and put them into an order
+        # ---- collect labels -------------------------------------------
         labels = list(
             dict.fromkeys(
                 chain(
                     *[args["family"].hole_to_option_labels[i] for i in policy_indices]
                 )
             )
-        ) + ["*"] # special whatever label maps to max(actions)+1
+        ) + ["*"]
         print("Labels:", labels)
         label_to_index = {label: i for i, label in enumerate(labels)}
         self.labels = labels
         self.label_to_index = label_to_index
-        hole_to_label_indices = []
+        star_index = label_to_index["*"]
+
         assert 2**num_bits > len(labels)
 
-        # Check that the available action labels of policy vars are consistent
-        for i in policy_indices:
-            hole_to_label_indices.append(
-                [
-                    label_to_index[label]
-                    for label in args["family"].hole_to_option_labels[i]
-                ] + [label_to_index["*"]]
-            )
-        
-        # parse values.csv to get variable-value pairs
+        # ---- load values.csv and filter to controllable states --------
         variable_value_pairs_orig = []
         with open(os.path.join(args["project_path"], "values.csv"), "r") as f:
             header = f.readline().strip().split(",")
             for line in f:
-                values = line.strip().split(",")
+                vals = line.strip().split(",")
                 variable_value_pairs_orig.append(
-                    {header[i]: float(values[i]) for i in range(len(header))}
+                    {header[i]: float(vals[i]) for i in range(len(header))}
                 )
 
         variable_value_pairs = []
-        
         quotient = args["quotient"]
         choice_to_hole_options = quotient.coloring.getChoiceToAssignment()
         transition_matrix = quotient.quotient_mdp.transition_matrix
-        
-        # go through transition matrix 
+
         for state in range(quotient.quotient_mdp.nr_states):
             first_row = transition_matrix.get_rows_for_group(state)[0]
-            if len(choice_to_hole_options[first_row]) == 0:
-                pass
-            else:
+            if len(choice_to_hole_options[first_row]) != 0:
                 variable_value_pairs.append(variable_value_pairs_orig[state])
 
-        # Use filtered variable_value_pairs
         property_names = list(variable_value_pairs[0].keys())
         self.property_names = property_names
         num_properties = len(property_names)
 
-        property_ranges = [(float("inf"), float("-inf")) for _ in range(num_properties)]
-        for var_values in variable_value_pairs:
-            for i, prop_name in enumerate(property_names):
-                val = var_values[prop_name]
-                property_ranges[i] = (
-                    min(property_ranges[i][0], val),
-                    max(property_ranges[i][1], val),
-                )
+        # ---- Precompute sorted unique values per property -------------
+        self.prop_sorted_vals = []
+        for p, pname in enumerate(property_names):
+            unique_vals = sorted(list(set(vv[pname] for vv in variable_value_pairs)))
+            self.prop_sorted_vals.append(unique_vals)
 
         constraints = []
+        self.soft_constraints = []
 
-        decision_functions = []
-        for i in range(num_nodes):
-            decision_functions.append(
-                z3.Function(
-                    f"decision_{i}",
-                    *[z3.RealSort()] * num_properties,
-                    z3.BitVecSort(num_bits),
-                )
-            )
+        # ----------------------------------------------------------------
+        # Declare per-rule z3 variables using integer indices
+        # ----------------------------------------------------------------
+        rule_lows_idx    = []
+        rule_highs_idx   = []
+        rule_prop_active = []
+        rule_labels      = []
+        rule_active      = []
 
-        self.left_child_ranges = [
-            [j for j in range(i + 1, min(2 * (i + 1), num_nodes)) if j % 2 == 1]
-            for i in range(num_nodes)
-        ]
-        self.right_child_ranges = [
-            [j for j in range(i + 2, min(2 * (i + 1) + 1, num_nodes)) if j % 2 == 0]
-            for i in range(num_nodes)
-        ]
+        for r in range(num_rules):
+            lows_r   = [z3.Int(f"rule_{r}_lo_idx_{p}") for p in range(num_properties)]
+            highs_r  = [z3.Int(f"rule_{r}_hi_idx_{p}") for p in range(num_properties)]
+            label_r  = z3.BitVec(f"rule_{r}_label", num_bits)
+            rule_active_r = z3.Bool(f"rule_{r}_active")
 
-        node_constants = []
-        property_indices = []
-        node_is_leaf = []
-        left_children = []
-        right_children = []
+            prop_active_r = []
+            for p in range(num_properties):
+                max_idx = len(self.prop_sorted_vals[p]) - 1
 
-        for i in range(num_nodes):
-            is_leaf = z3.Bool(f"leaf_{i}")
-            node_is_leaf.append(is_leaf)
-
-            constant_var = z3.BitVec(f"const_{i}", num_bits)
-            node_constants.append(constant_var)
-            
-            threshold_var = z3.Real(f"threshold_{i}")
-
-            prop_index = z3.Int(f"prop_index_{i}")
-            constraints.append(prop_index >= 0)
-            constraints.append(prop_index < num_properties)
-            property_indices.append(prop_index)
-
-            constraints.append(z3.UGE(constant_var, 0))
-            constraints.append(
-                z3.If(
-                    is_leaf,
-                    z3.ULT(constant_var, len(labels)),
-                    z3.And(
-                        threshold_var
-                        <= piecewise_select(
-                            [z3.RealVal(x[1]) for x in property_ranges],
-                            prop_index,
-                        ),
-                        threshold_var
-                        >= piecewise_select(
-                            [z3.RealVal(x[0]) for x in property_ranges],
-                            prop_index,
-                        ),
-                    ),
-                )
-            )
-
-            left_child = z3.Int(f"left_{i}")
-            left_children.append(left_child)
-            right_child = z3.Int(f"right_{i}")
-            right_children.append(right_child)
-
-            constraints.append(
-                z3.If(
-                    is_leaf,
-                    left_child == 0,
-                    left_child <= len(self.left_child_ranges[i]),
-                )
-            )
-            constraints.append(
-                z3.If(
-                    is_leaf,
-                    right_child == 0,
-                    right_child <= len(self.right_child_ranges[i]),
-                )
-            )
-            constraints.append(z3.Implies(is_leaf, prop_index == 0))
-
-            all_property_values = []
-            for variable_values_dict in variable_value_pairs:
-                tmp_values = []
-                for name in property_names:
-                    tmp_values.append(variable_values_dict[name])
-                all_property_values.append(tmp_values)
-
-            for values in all_property_values:
-                prop_vals = [z3.RealVal(v) for v in values]
+                derived = z3.Bool(f"rule_{r}_prop_{p}_active")
+                # Active iff bounds don't cover the full index range
                 constraints.append(
-                    z3.If(
-                        is_leaf,
-                        decision_functions[i](*prop_vals) == constant_var,
-                        z3.If(
-                            piecewise_select(prop_vals, prop_index) >= threshold_var,
-                            z3.Or(
-                                *[
-                                    z3.And(
-                                        left_child == j,
-                                        decision_functions[i](*prop_vals)
-                                        == decision_functions[
-                                            self.left_child_ranges[i][j]
-                                        ](*prop_vals),
-                                    )
-                                    for j in range(len(self.left_child_ranges[i]))
-                                ]
-                            ),
-                            z3.Or(
-                                *[
-                                    z3.And(
-                                        right_child == j,
-                                        decision_functions[i](*prop_vals)
-                                        == decision_functions[
-                                            self.right_child_ranges[i][j]
-                                        ](*prop_vals),
-                                    )
-                                    for j in range(len(self.right_child_ranges[i]))
-                                ]
-                            ),
-                        ),
+                    derived == z3.Or(lows_r[p] > 0, highs_r[p] < max_idx)
+                )
+                prop_active_r.append(derived)
+
+                # enforce valid index ranges
+                constraints.append(lows_r[p] >= 0)
+                constraints.append(highs_r[p] <= max_idx)
+                constraints.append(lows_r[p] <= highs_r[p])
+                
+                # if inactive, perfectly pin to full range
+                constraints.append(
+                    z3.Implies(
+                        z3.Not(derived),
+                        z3.And(lows_r[p] == 0, highs_r[p] == max_idx),
                     )
                 )
 
-        constraints.append(z3.Sum(node_is_leaf) == (num_nodes + 1) // 2)
+            rule_lows_idx.append(lows_r)
+            rule_highs_idx.append(highs_r)
+            rule_prop_active.append(prop_active_r)
+            rule_labels.append(label_r)
+            rule_active.append(rule_active_r)
 
-        for i in range(1, num_nodes):
-            left_children_ranges = [
-                j for j in range(num_nodes) if i in self.left_child_ranges[j]
-            ]
-            right_children_ranges = [
-                j for j in range(num_nodes) if i in self.right_child_ranges[j]
-            ]
-            parent_constraint = z3.Or(
-                *[
-                    z3.And(
-                        left_children[x] == self.left_child_ranges[x].index(i),
-                        z3.Not(node_is_leaf[x]),
-                    )
-                    for x in left_children_ranges
-                    if i in self.left_child_ranges[x]
-                ]
-                + [
-                    z3.And(
-                        right_children[x] == self.right_child_ranges[x].index(i),
-                        z3.Not(node_is_leaf[x]),
-                    )
-                    for x in right_children_ranges
-                    if i in self.right_child_ranges[x]
-                ]
-            )
-            constraints.append(parent_constraint)
+            constraints.append(z3.UGE(label_r, 0))
+            constraints.append(z3.ULT(label_r, star_index))
 
-        for i, variable in enumerate(policy_vars):
-            values_dict = variable_value_pairs[i]
-            property_values_z3 = [z3.RealVal(values_dict[p]) for p in property_names]
+            # Optional hard cap on active flags
+            k = self.args.constraints_per_rule
+            if k is not None:
+                constraints.append(
+                    z3.Sum([z3.If(prop_active_r[p], 1, 0) for p in range(num_properties)]) <= k
+                )
 
-            label_range = args["family"].hole_to_option_labels[policy_indices[i]] + ["*"]
+            # An active rule must constrain at least one property
+            constraints.append(z3.Implies(rule_active_r, z3.Or(*prop_active_r)))
             
+            # An inactive rule has no active properties
+            constraints.append(
+                z3.Implies(
+                    z3.Not(rule_active_r),
+                    z3.And(*[z3.Not(prop_active_r[p]) for p in range(num_properties)]),
+                )
+            )
+
+            # Collect soft constraints to push for sparsity
+            w = self.args.sparsity_weight
+            for p in range(num_properties):
+                self.soft_constraints.append((z3.Not(prop_active_r[p]), w))
+
+        # --- SYMMETRY BREAKING ---
+        
+        # 1. Push inactive rules to the bottom (if rule r is inactive, r+1 must be inactive)
+        for r in range(num_rules - 1):
+            constraints.append(
+                z3.Implies(z3.Not(rule_active[r]), z3.Not(rule_active[r+1]))
+            )
+
+        # 2. Lexicographical tie-breaking for adjacent rules with identical action labels
+        #    (Prevents solver from pointlessly swapping two disjoint rules of the same color)
+        for r in range(num_rules - 1):
+            same_label = z3.And(
+                rule_active[r], 
+                rule_active[r+1], 
+                rule_labels[r] == rule_labels[r+1]
+            )
+            constraints.append(
+                z3.Implies(same_label, rule_lows_idx[r][0] <= rule_lows_idx[r+1][0])
+            )
+
+        # 3. Prevent perfectly identical active rules (anti-shadowing)
+        for r1 in range(num_rules):
+            for r2 in range(r1 + 1, num_rules):
+                same_bounds = z3.And([
+                    z3.And(rule_lows_idx[r1][p] == rule_lows_idx[r2][p],
+                           rule_highs_idx[r1][p] == rule_highs_idx[r2][p])
+                    for p in range(num_properties)
+                ])
+                constraints.append(
+                    z3.Implies(z3.And(rule_active[r1], rule_active[r2]), z3.Not(same_bounds))
+                )
+
+        # At least one rule must be active overall
+        constraints.append(z3.Or(*rule_active))
+        
+        # ----------------------------------------------------------------
+        # Evaluate rules against every valid state
+        # ----------------------------------------------------------------
+        for i, variable in enumerate(policy_vars):
+            values_dict  = variable_value_pairs[i]
+            
+            # Map float property values to precomputed integer indices
+            prop_indices_concrete = []
+            for p, pname in enumerate(property_names):
+                val = values_dict[pname]
+                idx = self.prop_sorted_vals[p].index(val)
+                prop_indices_concrete.append(z3.IntVal(idx))
+
+            chosen = self._apply_rules(
+                prop_indices_concrete,
+                rule_lows_idx,
+                rule_highs_idx,
+                rule_prop_active,
+                rule_labels,
+                num_rules,
+                star_index,
+                num_bits,
+            )
+
+            label_range = (
+                args["family"].hole_to_option_labels[policy_indices[i]] + ["*"]
+            )
+
             if label_range == labels:
-                constraints.append(variable == decision_functions[0](*property_values_z3))
+                constraints.append(variable == chosen)
             else:
-                label_indices = [label_to_index[label] for label in label_range]
-                x = decision_functions[0](*property_values_z3)
+                label_indices = [label_to_index[l] for l in label_range]
                 for index, label_index in enumerate(label_indices):
                     if self.args.relax:
-                        if label_index != label_to_index["*"]:
-                            constraints.append((variable == index) == (x == label_index))
+                        if label_index != star_index:
+                            constraints.append((variable == index) == (chosen == label_index))
                         else:
-                            constraints.append((variable == index) == z3.Or(x == label_index, x == label_to_index["*"]))
+                            constraints.append(
+                                (variable == index)
+                                == z3.Or(chosen == label_index, chosen == star_index)
+                            )
                     else:
-                        constraints.append((variable == index) == (x == label_index))
+                        constraints.append((variable == index) == (chosen == label_index))
 
         arguments = variables
-
         var_in_range_statement = variables_in_ranges(arguments)
         constraints += [function(*arguments), var_in_range_statement]
+
+        # Add cause minimality: setting any variable that is fixed to "*" should imply that the constraint no longer holds
+        # (This is HP minimality)
+        # This has nothing to do with the rule list
+        # for all i, if i is not "*", then the constraint with i set to "*" should not hold
+        for i, variable in enumerate(policy_vars):
+            label_range = (
+                args["family"].hole_to_option_labels[policy_indices[i]] + ["*"]
+            )
+            copied_args = list(arguments)
+            copied_args[i] = z3.BitVecVal(star_index, num_bits)
+            constraints.append(
+                z3.Implies(variable != star_index, z3.Not(function(*copied_args)))
+            )
+
         return constraints
 
+    def add_soft_constraints(self, solver):
+        """
+        Called after build_constraint() if the running solver is z3.Optimize.
+        Adds penalties for active property flags to promote rule sparsity.
+        """
+        for expr, weight in self.soft_constraints:
+            solver.add_soft(expr, weight=weight)
 
-
+    # ------------------------------------------------------------------
     def show_result(self, model, _solver, **args):
-        from anytree import Node
-        from anytree.exporter import UniqueDotExporter
-
         property_names = self.property_names
+        num_rules      = self.args.rules
+        num_bits       = max([x.size() for x in self.policy_vars])
 
-        num_nodes = self.args.nodes
-        num_bits = max([x.size() for x in self.policy_vars])
+        print("\n=== Rectangle Rule List ===")
+        active_rules = []
 
-        is_leaf = [model[z3.Bool(f"leaf_{i}")] for i in range(num_nodes)]
-        left_children = [model[z3.Int(f"left_{i}")] for i in range(num_nodes)]
-        right_children = [model[z3.Int(f"right_{i}")] for i in range(num_nodes)]
-        node_constants = [
-            model[z3.BitVec(f"const_{i}", num_bits)] for i in range(num_nodes)
-        ]
-        node_thresholds = [
-            model[z3.Real(f"threshold_{i}")] for i in range(num_nodes)
-        ]
-        node_properties = [model[z3.Int(f"prop_index_{i}")] for i in range(num_nodes)]
+        for r in range(num_rules):
+            rule_active = model[z3.Bool(f"rule_{r}_active")]
+            if not rule_active:
+                continue
 
-        # a bit of code duplication, sorry
-        def build_anytree(node_index):
-            if is_leaf[node_index]:
-                if "family" in args:
-                    # get action names from family
-                    if node_constants[node_index].as_long() >= len(self.labels):
-                        # This can happen if this node is never visited
-                        return Node("noop")
-                    else:
-                        return Node(
-                            self.labels[node_constants[node_index].as_long()],
-                        )
-                return Node(node_constants[node_index])
-            else:
-                i = node_index
-                val = node_thresholds[i]
-                val_str = val.as_decimal(3) if hasattr(val, "as_decimal") else str(val)
-                # remove trailing zeros
-                if "?" in val_str:
-                    val_str = val_str.replace("?", "")
-                
-                calc = (
-                    property_names[node_properties[i].as_long()]
-                    + f" >= {val_str}?"
-                )
-                node = Node(calc)
-                left_child = self.left_child_ranges[i][
-                    left_children[node_index].as_long()
-                ]
-                right_child = self.right_child_ranges[i][
-                    right_children[node_index].as_long()
-                ]
-                node.children = [
-                    build_anytree(right_child),
-                    build_anytree(left_child),
-                ]
-                return node
+            label_idx  = model[z3.BitVec(f"rule_{r}_label", num_bits)].as_long()
+            label_name = self.labels[label_idx]
 
-        root = build_anytree(0)
-        if self.args.pictures is None:
-            return
-        picture_path = self.args.pictures
-        os.makedirs(picture_path, exist_ok=True)
+            conditions = []
+            for p, pname in enumerate(property_names):
+                prop_active = model[z3.Bool(f"rule_{r}_prop_{p}_active")]
+                if not prop_active:
+                    continue
 
-        UniqueDotExporter(root).to_dotfile(picture_path + "/tree.dot")
-        UniqueDotExporter(root).to_picture(picture_path + "/tree.png")
+                lo_idx = model[z3.Int(f"rule_{r}_lo_idx_{p}")].as_long()
+                hi_idx = model[z3.Int(f"rule_{r}_hi_idx_{p}")].as_long()
+
+                lo_val = self.prop_sorted_vals[p][lo_idx]
+                hi_val = self.prop_sorted_vals[p][hi_idx]
+
+                conditions.append(f"{lo_val:.4f} <= {pname} <= {hi_val:.4f}")
+
+            rule_str = "IF " + " AND ".join(conditions) + f"  THEN  {label_name}"
+            active_rules.append(rule_str)
+            print(f"  Rule {r}: {rule_str}")
+
+        print("  DEFAULT: *")
+
+        if self.args.pictures is not None:
+            os.makedirs(self.args.pictures, exist_ok=True)
+            with open(os.path.join(self.args.pictures, "rules.txt"), "w") as f:
+                for line in active_rules:
+                    f.write(line + "\n")
+                f.write("DEFAULT: *\n")

@@ -12,6 +12,7 @@ from molehill.constraints import (
     CounterfactualConstraint,
     CausalityConstraint,
     MDPCause,
+    MDPCauseTree,
 )
 
 
@@ -70,6 +71,7 @@ if __name__ == "__main__":
             "counterfactual",
             "causality",
             "mdpcause",
+            "mdpcausetree",
             "custom",
         ],
         default="none",
@@ -117,6 +119,8 @@ if __name__ == "__main__":
         new_constraint = CausalityConstraint()
     elif args.constraint == "mdpcause":
         new_constraint = MDPCause()
+    elif args.constraint == "mdpcausetree":
+        new_constraint = MDPCauseTree()
     else:
         new_constraint = load_constraint_class(f"{args.project_path}/constraint.py")
     new_parser = argparse.ArgumentParser()

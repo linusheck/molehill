@@ -32,7 +32,7 @@ def get_property_values(variable_name):
     ]
 
 
-class MDPCause(Constraint):
+class MDPCauseTree(Constraint):
     def __init__(self, robust=False):
         super().__init__()
         self.variables = None
@@ -61,6 +61,15 @@ class MDPCause(Constraint):
             action="store_true",
             default=False,
         )
+        argument_parser.add_argument(
+            "--no-minimality",
+            help=(
+                "Disable minimality constraints that push for HP-minimal causes. "
+            ),
+            action="store_true",
+            default=False,
+        )
+
 
     def build_constraint(self, function, variables, variables_in_ranges, **args):
         self.variables = variables
@@ -122,50 +131,6 @@ class MDPCause(Constraint):
                 pass
             else:
                 variable_value_pairs.append(variable_value_pairs_orig[state])
-
-        # =====================================================================
-        # FEATURE SELECTION BLOCK: Variance & Correlation Filter
-        # =====================================================================
-        import pandas as pd
-        import numpy as np
-
-        print(f"Original properties count: {len(variable_value_pairs[0])}")
-        
-        # 1. Convert to DataFrame
-        df_features = pd.DataFrame(variable_value_pairs)
-        
-        # 2. Drop features with zero or near-zero variance (they are useless for splits)
-        variances = df_features.var()
-        high_variance_cols = variances[variances > 1e-5].index
-        df_features = df_features[high_variance_cols]
-        
-        # 3. Drop highly correlated features (keep one from each correlated pair)
-        # Create absolute correlation matrix
-        corr_matrix = df_features.corr().abs()
-        
-        # Select upper triangle of correlation matrix
-        upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
-        
-        # Find features with correlation greater than 0.85
-        to_drop = [column for column in upper.columns if any(upper[column] > 0.85)]
-        df_features = df_features.drop(columns=to_drop)
-        
-        # 4. If we STILL have too many features (> 8), just take the 8 with the highest variance
-        MAX_FEATURES = 8
-        if df_features.shape[1] > MAX_FEATURES:
-            top_var_cols = df_features.var().sort_values(ascending=False).head(MAX_FEATURES).index
-            df_features = df_features[top_var_cols]
-            
-        final_features = df_features.columns.tolist()
-        print(f"Selected {len(final_features)} non-correlated features: {final_features}")
-        
-        # 5. Filter the dictionary array back down
-        filtered_pairs = []
-        for pair in variable_value_pairs:
-            filtered_pairs.append({k: pair[k] for k in final_features})
-            
-        variable_value_pairs = filtered_pairs
-        # =====================================================================
 
         # Use filtered variable_value_pairs
         property_names = list(variable_value_pairs[0].keys())
@@ -359,6 +324,7 @@ class MDPCause(Constraint):
 
         var_in_range_statement = variables_in_ranges(arguments)
         constraints += [function(*arguments), var_in_range_statement]
+
         return constraints
 
 
