@@ -64,14 +64,6 @@ class MDPCause(Constraint):
             action="store_true",
             default=False,
         )
-        argument_parser.add_argument(
-            "--no-minimality",
-            help=(
-                "Disable minimality constraints that push for HP-minimal causes. "
-            ),
-            action="store_true",
-            default=False,
-        )
 
     # ------------------------------------------------------------------
     # Helper: encode "apply rule list to a concrete property vector"
@@ -323,20 +315,6 @@ class MDPCause(Constraint):
         arguments = variables
         var_in_range_statement = variables_in_ranges(arguments)
         constraints += [function(*arguments), var_in_range_statement]
-
-        # Add cause minimality: setting any variable that is fixed to "*" should imply that the constraint no longer holds
-        # (This is HP minimality)
-        # This has nothing to do with the rule list
-        # for all i, if i is not "*", then the constraint with i set to "*" should not hold
-        for i, variable in enumerate(policy_vars):
-            label_range = (
-                args["family"].hole_to_option_labels[policy_indices[i]] + ["*"]
-            )
-            copied_args = list(arguments)
-            copied_args[i] = z3.BitVecVal(star_index, num_bits)
-            constraints.append(
-                z3.Implies(variable != star_index, z3.Not(function(*copied_args)))
-            )
 
         return constraints
 
