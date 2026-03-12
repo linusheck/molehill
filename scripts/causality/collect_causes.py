@@ -8,6 +8,8 @@ import argparse
 import paynt
 from multiprocessing import Process, Queue
 
+from queue import Empty
+
 from stormpy import CheckTask, model_checking
 from molehill.fastmole import MatrixGeneratorDouble
 
@@ -207,9 +209,13 @@ def main(project_path):
     )
     process.start()
 
-    while process.is_alive():
-        while not queue.empty():
-            process_conflict(queue.get(), quotient, matrix_generator)
+    while process.is_alive() or not queue.empty():
+        try:
+            partial_model = queue.get(timeout=0.1)
+        except Empty:
+            continue
+        process_conflict(partial_model, quotient, matrix_generator)
+    process.join()
 
 if __name__ == "__main__":
     main()

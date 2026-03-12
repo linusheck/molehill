@@ -81,10 +81,14 @@ class FindConflicts(z3.UserPropagateBase):
                         for x in counterexample
                         if backwards_variables[x] in self.names_to_vars
                     ]
+                    if invert == value and self.conflict_queue is not None:
+                        minimized_partial_model = {
+                            variable: model_for_checker[variable]
+                            for variable in counterexample
+                            if variable in model_for_checker
+                        }
+                        self.conflict_queue.put(minimized_partial_model)
                     self.conflict(conflicting_vars)
-                    if invert == value:
-                        if self.conflict_queue is not None:
-                            self.conflict_queue.put(model_for_checker)
                     break
                 
 

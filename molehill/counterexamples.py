@@ -58,11 +58,9 @@ def check(
     # Only holes that are reachable are interesting for the CE core. We can
     # immediately "delete" the other ones.
     fixed_holes = [hole for hole in fixed_holes if hole in reachable_hole_order]
-    if opponent_holes:
-        for hole in opponent_holes:
-            fixed_holes.append(hole)
-    # Every hole that is not fixed is currently abstracted by MDP.
-    holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
+    if opponent_holes is not None:
+        fixed_holes.extend(opponent_holes)
+    fixed_holes = list(dict.fromkeys(fixed_holes))
 
     if remove_optimal_holes:
         assert False, "Not tested."
@@ -76,51 +74,52 @@ def check(
                 fixed_holes.remove(h)
 
     if all_schedulers_violate_full and compute_counterexample:
-        assert False, "Not tested."
-        # We abstract in the order of which holes we saw first, which holes we saw second, etc...
-
-        def check_ce_candidate(ith_hole, abstracted_holes, hint=None):
-            abstracted_holes_here = (abstracted_holes + append_these)[ith_hole:]
+        # Repeatedly abstract fixed holes until no further local generalization is possible.
+        def check_ce_candidate(candidate_fixed_holes):
+            candidate_fixed_holes = set(candidate_fixed_holes)
+            abstracted_holes_here = [
+                hole for hole in reachable_hole_order if hole not in candidate_fixed_holes
+            ] + append_these
 
             matrix_generator.build_submodel(
-                BitVector(family.num_holes, abstracted_holes_here), hole_options
+                BitVector(family.num_holes, abstracted_holes_here),
+                hole_options,
+                opponent_holes=opponent_holes,
             )
-            mdp_holes = matrix_generator.get_current_mdp()
+            if opponent_holes is not None:
+                mdp_holes = matrix_generator.get_current_smg()
+            else:
+                mdp_holes = matrix_generator.get_current_mdp()
 
-            all_schedulers_violate, result = check_model(mdp_holes, prop, None)
+            all_schedulers_violate, check_result = check_model(mdp_holes, prop, None)
+            if opponent_holes is not None:
+                all_schedulers_violate = not all_schedulers_violate
 
             if all_schedulers_violate:
-                # Counterexample found
                 counterexample_holes = [
-                    hole for hole in fixed_holes if hole not in abstracted_holes_here
+                    hole for hole in fixed_holes if hole in candidate_fixed_holes
                 ]
                 return CECheckResult(
-                    all_schedulers_violate, counterexample_holes, None, result
+                    all_schedulers_violate, counterexample_holes, None, check_result
                 )
-            else:
-                # Not a counterexample
-                return CECheckResult(all_schedulers_violate, None, None, result)
+            return CECheckResult(all_schedulers_violate, None, None, check_result)
 
-        # first, check the weakest counterexample candidate
-        weakest_ce_result = check_ce_candidate(
-            len(reachable_hole_order) - 1, reachable_hole_order
-        )
-        if weakest_ce_result.all_schedulers_violate:
-            # Do a binary search to find the smallest counterexample
-            left = 1
-            right = len(reachable_hole_order) - 2
-            num_steps = 0
-            while left < right:
-                num_steps += 1
-                mid = (left + right) // 2
-                check_result = check_ce_candidate(mid, reachable_hole_order, None)
-                if not check_result.all_schedulers_violate:
-                    result = check_result.result
-                    left = mid + 1
-                else:
+        fixed_holes = list(fixed_holes)
+        while True:
+            removed_hole = False
+            for hole in list(fixed_holes):
+                candidate_fixed_holes = [h for h in fixed_holes if h != hole]
+                check_result = check_ce_candidate(candidate_fixed_holes)
+                result = check_result.result
+                if check_result.all_schedulers_violate:
                     fixed_holes = check_result.fixed_holes
-                    result = check_result.result
-                    right = mid
+                    removed_hole = True
+                    break
+            if not removed_hole:
+                break
+
+    # Every hole that is not fixed is currently abstracted by MDP.
+    holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
 
     # Even if we do not compute a counterexample, we can use the knowledge that
     # some holes are unreachable. The statement is only about the reachable holes,

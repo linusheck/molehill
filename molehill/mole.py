@@ -224,6 +224,9 @@ class Mole:
         elif self.considered_counterexamples == "mc" and model == "MDP":
             compute_counterexample = False
 
+        if self.mode == "conflicts":
+            compute_counterexample = True
+
         # Check the sub-MDP (see counterexample.py).
         check_result = check(
             self.get_matrix_generator(invert),
@@ -248,6 +251,8 @@ class Mole:
             counterexample_names = [
                 self.model_variable_names[i] for i in counterexample if len(self.quotient.family.hole_options(i)) > 1
             ]
+            if len(counterexample_names) == 0 and len(partial_model) > 0:
+                counterexample_names = list(partial_model.keys())
             filtered_partial_model = {
                 name: partial_model[name] for name in counterexample_names
             }
