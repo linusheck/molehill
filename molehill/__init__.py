@@ -187,7 +187,7 @@ def run(
             name = family.hole_name(hole)
             var = z3.BitVec(name, len(family.hole_options(hole)))
             variables.append(var)
-    elif mode == "search":
+    elif mode == "search" or mode == "conflicts":
         # In search mode, the bitvector, intepreted as a number, is the selected hole
         num_bits = (
             max(

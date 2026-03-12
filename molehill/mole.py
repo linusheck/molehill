@@ -7,6 +7,7 @@ from molehill.fastmole import MatrixGeneratorDouble, MatrixGeneratorRationalNumb
 from molehill.counterexamples import check, check_hole_options
 from molehill.plugins.search import SearchMarkovChain
 from molehill.plugins.split import SplitMarkovChain
+from molehill.plugins.conflicts import FindConflicts
 import time
 import z3
 from stormpy import BitVector
@@ -82,6 +83,8 @@ class Mole:
             self.plugin = SearchMarkovChain(solver, None, self)
         elif mode == "split":
             self.plugin = SplitMarkovChain(solver, None, self)
+        elif mode == "conflicts":
+            self.plugin = FindConflicts(solver, None, self)
         else:
             raise ValueError(f"Unknown mode: {mode}")
         self.variables = variables
