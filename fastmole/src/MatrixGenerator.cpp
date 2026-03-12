@@ -1,4 +1,5 @@
 #include "MatrixGenerator.h"
+#include <cstdint>
 #include <optional>
 #include <queue>
 #include <stdexcept>
@@ -113,7 +114,8 @@ bool MatrixGenerator<ValueType>::isChoicePossible(const storm::storage::BitVecto
 
 template<typename ValueType>
 void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &abstractedHoles, const std::vector<storm::storage::BitVector> &holeOptions,
-                                               const std::optional<storm::storage::BitVector> &reachableStatesFixed) {
+                                               const std::optional<storm::storage::BitVector> &reachableStatesFixed,
+                                               const std::optional<storm::storage::BitVector> &opponentHoles) {
     auto const &completeTransitionMatrix = quotient.getTransitionMatrix();
 
     this->currentAbstractedHoles = abstractedHoles;
@@ -233,7 +235,7 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
         currentBFSOrder = std::nullopt;
     }
 
-    auto const &submatrix = decisionMatrix.getSubmatrix(false, includeRowBitVector, reachableStates, false);
+    auto submatrix = decisionMatrix.getSubmatrix(false, includeRowBitVector, reachableStates, false);
 
     storm::models::sparse::StateLabeling stateLabeling(submatrix.getColumnCount());
     stateLabeling.addLabel("counterexample_target");
@@ -270,10 +272,53 @@ void MatrixGenerator<ValueType>::buildSubModel(const storm::storage::BitVector &
         rewardModels[checkTask.getRewardModel()] = rewardModel;
     }
 
-    storm::storage::sparse::ModelComponents<ValueType> modelComponents(std::move(submatrix), std::move(stateLabeling), std::move(rewardModels));
+    if (opponentHoles) {
+        std::vector<storm::storage::PlayerIndex> statePlayerIndications(submatrix.getColumnCount(), 0);
+        auto reachableStatesIterator = reachableStates.begin();
+        for (std::size_t state = 0; state < submatrix.getColumnCount(); ++state) {
+            bool isP2 = true;
+            uint64_t numChoices = 0;
+            if (state < submatrix.getColumnCount() - 2) {
+                uint64_t globalState = *reachableStatesIterator;
+                reachableStatesIterator++;
+                
+                auto rowGroupStartQ = quotient.getTransitionMatrix().getRowGroupIndices()[globalState];
+                auto rowGroupEndQ = quotient.getTransitionMatrix().getRowGroupIndices()[globalState + 1];
+                for (uint64_t row = rowGroupStartQ; row < rowGroupEndQ; ++row) {
+                    if (isChoicePossible(abstractedHoles, holeOptions, row)) {
+                        numChoices++;
+                        for (auto const& [hole, val] : choiceToAssignment[row]) {
+                            if (!opponentHoles->get(hole)) {
+                                // std::cout << "State " << state << " is not P2 because of hole " << hole << std::endl;
+                                isP2 = false;
+                            }
+                        }
+                    }
+                }
+            }
+            if (isP2 && numChoices > 1) {
+                // std::cout << "State " << state << " is P2" << std::endl;
+                statePlayerIndications[state] = 1;
+            }
+        }
+        
+        storm::storage::sparse::ModelComponents<ValueType> modelComponents(std::move(submatrix), std::move(stateLabeling), std::move(rewardModels));
+        modelComponents.statePlayerIndications = statePlayerIndications;
 
-    currentMDP = std::move(storm::models::sparse::Mdp<ValueType>(modelComponents));
+        currentSMG = std::nullopt;
+        currentSMG = std::move(storm::models::sparse::Smg<ValueType>(std::move(modelComponents)));
+        currentMDP = std::nullopt;
+    } else {
+        storm::storage::sparse::ModelComponents<ValueType> modelComponents(std::move(submatrix), std::move(stateLabeling), std::move(rewardModels));
+        currentMDP = std::move(storm::models::sparse::Mdp<ValueType>(modelComponents));
+        currentSMG = std::nullopt;
+    }
     currentReachableStates = std::move(reachableStates);
+}
+
+template<typename ValueType>
+const storm::models::sparse::Smg<ValueType> &MatrixGenerator<ValueType>::getCurrentSMG() const {
+    return *this->currentSMG;
 }
 
 template<typename ValueType>

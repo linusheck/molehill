@@ -30,7 +30,8 @@ def run(
     pure_smt=False,
     dump_cache=None,
     load_cache=None,
-    print_size=False
+    print_size=False,
+    enumerate_solutions=False,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -41,7 +42,6 @@ def run(
         sketch_path, properties_path, use_exact=exact
     )
 
-    print(quotient.family)
     if print_size:
         from decimal import Decimal
         quotient.build(quotient.family)
@@ -165,6 +165,23 @@ def run(
             )
 
         family = quotient.family
+    
+    if mode == "searchmdp":
+        choice_to_hole_options = quotient.coloring.getChoiceToAssignment()
+        transition_matrix = quotient.quotient_mdp.transition_matrix
+        # go through transition matrix 
+        hole_names = set()
+        for state in range(quotient.quotient_mdp.nr_states):
+            first_row = transition_matrix.get_rows_for_group(state)[0]
+            if len(choice_to_hole_options[first_row]) == 0:
+                assert len(transition_matrix.get_rows_for_group(state)) == 1, "Input model not an MDP"
+                continue
+            hole_name = choice_to_hole_options[first_row][0][0]
+            assert hole_name not in hole_names, "Multiple states have the same hole, not supported in searchmdp mode"
+            hole_names.add(hole_name)
+            for row in transition_matrix.get_rows_for_group(state):
+                assert choice_to_hole_options[row][0][0] == hole_name, "Multiple holes for one state, not supported in searchmdp mode"
+                assert len(choice_to_hole_options[row]) == 1, "Multiple choices for one state, not supported in searchmdp mode"
 
     if verbose:
         z3.set_param("smt.mbqi", True)
@@ -210,11 +227,43 @@ def run(
                 # it gets guaranteed by paynt that this is actually the range
                 # (these are just the indices, not the actual values in the final model :)
                 assert min(options) == 0
+                assert min(options) <= max(options)
                 var = variables[hole]
                 statement.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
                 statement.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
             return z3.And(*statement)
         variables_in_ranges = variables_in_ranges2
+    elif mode == "searchmdp":
+        # SearchMDP mode is like search mode, but a hole can be unassigned
+        num_bits = (
+            max(
+                [
+                    math.ceil(math.log2(len(family.hole_options(hole)) + 1))
+                    for hole in range(family.num_holes)
+                ]
+            )
+            + 2
+        )
+        for hole in range(family.num_holes):
+            name = family.hole_name(hole)
+            var = z3.BitVec(name, num_bits)
+            variables.append(var)
+
+        def variables_in_ranges2(variables):
+            statement = []
+            for hole in range(family.num_holes):
+                options = family.hole_options(hole)
+                # it gets guaranteed by paynt that this is actually the range
+                # (these are just the indices, not the actual values in the final model :)
+                assert min(options) == 0
+                var = variables[hole]
+                statement.append(z3.UGE(var, z3.BitVecVal(min(options), num_bits)))
+                # Here, we allow the variable to be equal to max(options) + 1, which means "unassigned"
+                statement.append(z3.ULE(var, z3.BitVecVal(max(options) + 1, num_bits)))
+                # statement.append(z3.ULE(var, z3.BitVecVal(max(options), num_bits)))
+            return z3.And(*statement)
+        variables_in_ranges = variables_in_ranges2
+
     else:
         raise ValueError(f"Unknown mode: {mode}")
 
@@ -229,11 +278,10 @@ def run(
     else:
         f = z3.PropagateFunction("valid", *[x.sort() for x in variables], z3.BoolSort())
 
-    s.add(
-        constraint.build_constraint(
-            f, variables, variables_in_ranges, family=family, quotient=quotient
-        )
-    )
+
+    s.add(constraint.build_constraint(
+        f, variables, variables_in_ranges, family=family, quotient=quotient, project_path=project_path
+    ))
 
     if not pure_smt:
         p = Mole(
@@ -249,13 +297,11 @@ def run(
         if load_cache is not None:
             p.load_cache(load_cache)
 
-    # TODO add binary search for optimal value?
-    if constraint.optimize() is not None:
-        s.add(constraint.optimize() <= 10)
-
     model = None
-    if s.check() == z3.sat:
+    num_solutions = 0
+    while s.check() == z3.sat:
         print("sat")
+        num_solutions += 1
         model = s.model()
         new_family = quotient.family.copy()
         new_family.add_parent_info(quotient.family)
@@ -263,16 +309,36 @@ def run(
             var = variables[hole]
             # if var has as_long attribute
             if hasattr(model.eval(var), "as_long"):
-                new_family.hole_set_options(hole, [model.eval(var).as_long()])
+                val = model.eval(var).as_long()
+                if val <= max(new_family.hole_options(hole)):
+                    new_family.hole_set_options(hole, [val])
+                else:
+                    pass # This hole is unassigned
         # re-check DTMC
-        quotient.build(new_family)
-        mdp = new_family.mdp
-        prop = quotient.specification.all_properties()[0]
-        result = mdp.model_check_property(prop)
-        print(f"Found {new_family} with value {result}")
+        if mode != "searchmdp":
+            quotient.build(new_family)
+            mdp = new_family.mdp
+            prop = quotient.specification.all_properties()[0]
+            result = mdp.model_check_property(prop)
+            print(f"Found {new_family} with value {result}")
+        else:
+            print(f"Found {new_family}")
         constraint.show_result(model, s, family=family)
+        if enumerate_solutions:
+            # Create a new constraint the blocks the current model
+            block = []
+            for d in model:
+                if d.arity() > 0:
+                    raise Z3Exception("uninterpreted functions are not supported")
+                c = d()
+                block.append(c != model[d])
+            s.add(z3.Or(block))
+        else:
+            break
     else:
         print("unsat")
+        if enumerate_solutions:
+            print(f"Found {num_solutions} solutions")
         if mode == "split":
             def pretty_print(l):
                 quotient.specification = quotient.specification.negate()

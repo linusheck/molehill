@@ -6,6 +6,7 @@
 #include <vector>
 #include "storm/adapters/RationalFunctionAdapter.h"
 #include "storm/models/sparse/Mdp.h"
+#include "storm/models/sparse/Smg.h"
 #include "storm/models/sparse/StateLabeling.h"
 #include "storm/storage/BitVector.h"
 #include "storm/storage/SparseMatrix.h"
@@ -35,10 +36,12 @@ class MatrixGenerator {
      * @param abstractedHoles abstracedHoles[i] is true if the hole i is deleted (as in a counterexample candidate), false if it is not deleted.
      * @param holeOptions holeOptions[i] is a bit vector representing the possible choices for hole i.
      * @param reachableStatesFixed If given, the reachable states are fixed to this value. Currently not supported.
+     * @param opponentStates States where the opponent chooses the move (only for StochasticTwoPlayerGame)
      * @return void
      */
     void buildSubModel(const storm::storage::BitVector &abstractedHoles, const std::vector<storm::storage::BitVector> &holeOptions,
-                       const std::optional<storm::storage::BitVector> &reachableStatesFixed = std::nullopt);
+                       const std::optional<storm::storage::BitVector> &reachableStatesFixed = std::nullopt,
+                       const std::optional<storm::storage::BitVector> &opponentHoles = std::nullopt);
 
     /**
      * @brief Get the current MDP
@@ -46,6 +49,14 @@ class MatrixGenerator {
      * @return const storm::models::sparse::Mdp<ValueType>&
      */
     const storm::models::sparse::Mdp<ValueType> &getCurrentMDP() const;
+
+    /**
+     * @brief Get the current Stochastic Two Player Game
+     *
+     * @return const storm::models::sparse::Smg<ValueType>&
+     */
+    const storm::models::sparse::Smg<ValueType> &getCurrentSMG() const;
+
 
     /**
      * @brief Get the current reachable states
@@ -113,6 +124,7 @@ class MatrixGenerator {
     bool isChoicePossible(const storm::storage::BitVector &abstractedHoles, const std::vector<storm::storage::BitVector> &holeOptions, uint64_t choice);
 
     std::optional<storm::models::sparse::Mdp<ValueType>> currentMDP;
+    std::optional<storm::models::sparse::Smg<ValueType>> currentSMG;
     std::optional<storm::storage::BitVector> currentReachableStates;
     std::optional<std::vector<uint64_t>> currentBFSOrder;
 

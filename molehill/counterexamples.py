@@ -20,8 +20,8 @@ def check(
     spec,
     compute_counterexample=True,
     remove_optimal_holes=True,
+    opponent_holes=None,
 ):
-    prop = spec.negate().all_properties()[0]
     # These are the options for each hole.
     hole_options = [
         family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
@@ -30,10 +30,18 @@ def check(
     fixed_holes = [
         hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1
     ]
-    matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
-    mdp = matrix_generator.get_current_mdp()
+    matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options, opponent_holes=opponent_holes)
+    if opponent_holes is not None:
+        mdp = matrix_generator.get_current_smg()
+        prop = spec.all_properties()[0]
+        all_schedulers_violate_full, result = check_model(mdp, prop, None)
+        all_schedulers_violate_full = not all_schedulers_violate_full
+    else:
+        mdp = matrix_generator.get_current_mdp()
+        prop = spec.negate().all_properties()[0]
+        all_schedulers_violate_full, result = check_model(mdp, prop, None)
 
-    all_schedulers_violate_full, result = check_model(mdp, prop, None)
+
     if not all_schedulers_violate_full:
         # Optionally, we can check if the scheduler is consistent (not implemented).
         # sched_consistent_result = matrix_generator.is_scheduler_consistent(result.scheduler)
@@ -50,6 +58,8 @@ def check(
     # Only holes that are reachable are interesting for the CE core. We can
     # immediately "delete" the other ones.
     fixed_holes = [hole for hole in fixed_holes if hole in reachable_hole_order]
+    for hole in opponent_holes:
+        fixed_holes.append(hole)
     # Every hole that is not fixed is currently abstracted by MDP.
     holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
 

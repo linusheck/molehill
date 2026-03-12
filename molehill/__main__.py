@@ -9,7 +9,10 @@ from molehill.constraints import (
     ProbGoal,
     CostsConstraint,
     SplitConstraint,
-    CounterfactualConstraint
+    CounterfactualConstraint,
+    CausalityConstraint,
+    MDPCause,
+    MDPCauseTree,
 )
 
 
@@ -41,7 +44,7 @@ if __name__ == "__main__":
         "--plot-args", action="store_true", help="Plot function arguments."
     )
     parser.add_argument(
-        "--mode", type=str, default="search", choices=["search", "split", "conflicts"], help="Mode to run the tool in."
+        "--mode", type=str, default="search", choices=["search", "split", "searchmdp", "conflicts"], help="Mode to run the tool in."
     )
     parser.add_argument("--verbose", action="store_true", help="Verbose mode.")
     # number of tree nodes
@@ -66,6 +69,9 @@ if __name__ == "__main__":
             "prob1",
             "costs",
             "counterfactual",
+            "causality",
+            "mdpcause",
+            "mdpcausetree",
             "custom",
         ],
         default="none",
@@ -80,6 +86,7 @@ if __name__ == "__main__":
     parser.add_argument("--reasons", action="store_true", help="Print reasons")
     parser.add_argument("--pure-smt", action="store_true", help="Use pure SMT solver")
     parser.add_argument("--print-size", action="store_true", help="Print size of the problem and quit")
+    parser.add_argument("--enumerate", action="store_true", help="Enumerate all solutions")
 
     parser.add_argument("--dump-cache", type=str, default=None, help="Dump the cache to a file")
     parser.add_argument("--load-cache", type=str, default=None, help="Load the cache from a file")
@@ -108,6 +115,12 @@ if __name__ == "__main__":
         new_constraint = CostsConstraint(project_path=args.project_path)
     elif args.constraint == "counterfactual":
         new_constraint = CounterfactualConstraint()
+    elif args.constraint == "causality":
+        new_constraint = CausalityConstraint()
+    elif args.constraint == "mdpcause":
+        new_constraint = MDPCause()
+    elif args.constraint == "mdpcausetree":
+        new_constraint = MDPCauseTree()
     else:
         new_constraint = load_constraint_class(f"{args.project_path}/constraint.py")
     new_parser = argparse.ArgumentParser()
@@ -130,5 +143,6 @@ if __name__ == "__main__":
         pure_smt=args.pure_smt,
         dump_cache=args.dump_cache,
         load_cache=args.load_cache,
-        print_size=args.print_size
+        print_size=args.print_size,
+        enumerate_solutions=args.enumerate,
     )
