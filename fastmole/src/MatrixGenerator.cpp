@@ -3,7 +3,6 @@
 #include <optional>
 #include <queue>
 #include <stdexcept>
-#include <storm/adapters/RationalFunctionAdapter_Private.h>
 #include <storm/adapters/RationalNumberForward.h>
 #include <storm/models/sparse/StandardRewardModel.h>
 #include <storm/solver/OptimizationDirection.h>

@@ -12,8 +12,6 @@ import json
 
 from molehill.mole import Mole
 
-import settrie
-
 
 def run(
     project_path,
@@ -32,6 +30,7 @@ def run(
     load_cache=None,
     print_size=False,
     enumerate_solutions=False,
+    conflict_queue=None,
 ):
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
@@ -292,6 +291,7 @@ def run(
             exact=exact,
             draw_image=(image or search_space_test),
             considered_counterexamples=considered_counterexamples,
+            conflict_queue=conflict_queue,
         )
 
         if load_cache is not None:

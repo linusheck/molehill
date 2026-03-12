@@ -58,8 +58,9 @@ def check(
     # Only holes that are reachable are interesting for the CE core. We can
     # immediately "delete" the other ones.
     fixed_holes = [hole for hole in fixed_holes if hole in reachable_hole_order]
-    for hole in opponent_holes:
-        fixed_holes.append(hole)
+    if opponent_holes:
+        for hole in opponent_holes:
+            fixed_holes.append(hole)
     # Every hole that is not fixed is currently abstracted by MDP.
     holes_as_mdp = [hole for hole in reachable_hole_order if hole not in fixed_holes]
 

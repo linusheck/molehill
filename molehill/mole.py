@@ -23,6 +23,7 @@ class Mole:
         exact=False,
         draw_image=False,
         considered_counterexamples="all",
+        conflict_queue=None,
     ):
         self.quotient = quotient
         self.exact = exact
@@ -82,7 +83,7 @@ class Mole:
         elif mode == "split":
             self.plugin = SplitMarkovChain(solver, None, self)
         elif mode == "conflicts":
-            self.plugin = FindConflicts(solver, None, self)
+            self.plugin = FindConflicts(solver, None, self, conflict_queue)
         elif mode == "searchmdp":
             self.plugin = SearchMDP(solver, None, self)
         else:

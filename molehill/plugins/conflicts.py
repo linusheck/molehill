@@ -4,7 +4,7 @@ import z3
 
 
 class FindConflicts(z3.UserPropagateBase):
-    def __init__(self, solver, ctx, data):
+    def __init__(self, solver, ctx, data, conflict_queue=None):
         super().__init__(solver, ctx)
         self.add_fixed(self._fixed)
         self.add_final(self._final)
@@ -33,6 +33,8 @@ class FindConflicts(z3.UserPropagateBase):
         self.valid_function = None
     
         self.stored_conflicts = []
+
+        self.conflict_queue = conflict_queue
 
     def is_in_ast_map(self, ast):
         return hash(ast) in self.ast_map
@@ -69,7 +71,7 @@ class FindConflicts(z3.UserPropagateBase):
                     model_for_checker[var_original] = int(var)
                 backwards_variables[var_original] = var
 
-            for invert in [not value, value]:
+            for invert in [value, not value]:
                 all_violated, counterexample = self.data.partial_model_consistent(
                     model_for_checker, invert=invert
                 )
@@ -80,9 +82,9 @@ class FindConflicts(z3.UserPropagateBase):
                         if backwards_variables[x] in self.names_to_vars
                     ]
                     self.conflict(conflicting_vars)
-                    if invert != value:
-                        self.stored_conflicts.append(conflicting_vars)
-                        print(model_for_checker)
+                    if invert == value:
+                        if self.conflict_queue is not None:
+                            self.conflict_queue.put(model_for_checker)
                     break
                 
 
