@@ -9,4 +9,4 @@ properties:
 
 options:
     threshold: 0.1111111111111111
-    time_limit: 3600
+    time_limit: 30

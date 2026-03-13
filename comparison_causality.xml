@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="tools.causality_collect" timelimit="3600s" hardtimelimit="3600s" memlimit="16GB">
-  <tasks name="Causality Benchmarks">
+<benchmark tool="tools.causality_collect" timelimit="60s" hardtimelimit="90s" memlimit="16GB">
+  <tasks name="Causality">
     <include>benchmarks/files/causality-grid/*.yml</include>
     <propertyfile>benchmarks/unknown.txt</propertyfile>
   </tasks>

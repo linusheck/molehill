@@ -1,0 +1,74 @@
+   BENCHMARK INFORMATION
+benchmark definition:    comparison_causality.xml
+name:                    comparison_causality
+run sets:                Collect-Causes.Causality
+date:                    Fri, 2026-03-13 13:29:38 CET
+tool:                    causality-collect
+tool executable:         /home/lheck/git/molehill/venv/bin/python3
+options:
+parallel runs:           10
+resource limits:
+- memory:                16000.0 MB
+- time:                  60 s
+hardware requirements:
+- memory:                16000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    ernie
+os:                      Linux-6.1.0-37-amd64-x86_64-with-glibc2.36
+cpu:                     AMD Ryzen Threadripper PRO 5965WX 24-Cores
+- cores:                 48
+- max frequency:         3800.0 MHz
+- turbo boost enabled:   True
+ram:                     540666.564608 MB
+------------------------------------------------------------
+
+
+
+Collect-Causes.Causality
+Run set 1 of 1 with options 'scripts/causality/collect_causes.py' and propertyfile 'None'
+
+inputfile                 status                       cpu time   wall time        host
+---------------------------------------------------------------------------------------
+causality-5days-00.yml    done                             4.71        4.33        None
+causality-5days-01.yml    done                             6.93        4.40        None
+causality-5days-02.yml    done                             4.73        4.33        None
+causality-5days-03.yml    done                             4.93        4.33        None
+causality-5days-04.yml    done                             5.01        4.51        None
+causality-5days-05.yml    done                             5.63        4.27        None
+causality-5days-06.yml    done                             6.61        4.10        None
+causality-5days-07.yml    done                             6.11        4.44        None
+causality-5days-08.yml    done                             5.82        4.30        None
+causality-5days-09.yml    done                             4.80        4.21        None
+causality-icu-00.yml      done                             9.55        4.72        None
+causality-icu-01.yml      TIMEOUT                         60.86       40.69        None
+causality-icu-02.yml      TIMEOUT                         60.59       44.58        None
+causality-icu-03.yml      done                            35.20       34.14        None
+causality-icu-04.yml      done                            35.47       34.08        None
+causality-icu-05.yml      done                            36.55       34.22        None
+causality-icu-06.yml      done                            35.96       34.08        None
+causality-icu-07.yml      done                            35.28       34.28        None
+causality-icu-08.yml      done                            37.31       34.12        None
+causality-icu-09.yml      done                            36.49       34.09        None
+causality-lunar-00.yml    done                             8.86        3.95        None
+causality-lunar-01.yml    done                            40.86       34.01        None
+causality-lunar-02.yml    done                            40.42       34.23        None
+causality-lunar-03.yml    done                            39.21       34.38        None
+causality-lunar-04.yml    done                            38.02       34.22        None
+causality-lunar-05.yml    done                            37.65       34.27        None
+causality-lunar-06.yml    done                            37.69       34.19        None
+causality-lunar-07.yml    done                            36.88       34.22        None
+causality-lunar-08.yml    done                            47.38       34.52        None
+causality-lunar-09.yml    done                             8.45        4.14        None
+---------------------------------------------------------------------------------------
+Run set 1                 done                           774.47       74.29           -
+
+Statistics:             30 Files
+  correct:               0
+    correct true:        0
+    correct false:       0
+  incorrect:             0
+    incorrect true:      0
+    incorrect false:     0
+  unknown:               2

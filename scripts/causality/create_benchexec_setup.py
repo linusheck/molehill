@@ -23,7 +23,7 @@ import stormpy
 
 MODELS = ["5days", "icu", "lunar"]
 NUM_THRESHOLDS = 10
-TIME_LIMIT = 3600  # 1 hour per run
+TIME_LIMIT = 30  # 1 hour per run
 
 RESOURCES_ROOT = "resources/causality"
 BENCHMARKS_DIR = "benchmarks/files/causality-grid"
@@ -93,8 +93,8 @@ options:
 def write_comparison_xml(path, tasks_glob):
     """Write the BenchExec comparison XML."""
     content = f"""<?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="tools.causality_collect" timelimit="{TIME_LIMIT}s" hardtimelimit="{TIME_LIMIT}s" memlimit="16GB">
-  <tasks name="Causality Benchmarks">
+<benchmark tool="tools.causality_collect" timelimit="{TIME_LIMIT+30}s" hardtimelimit="{TIME_LIMIT+60}s" memlimit="16GB">
+  <tasks name="Causality">
     <include>{tasks_glob}</include>
     <propertyfile>{PROPERTY_FILE}</propertyfile>
   </tasks>

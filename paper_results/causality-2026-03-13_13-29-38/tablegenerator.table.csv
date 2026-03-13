@@ -1,0 +1,33 @@
+tool	causality-collect 	causality-collect 	causality-collect 	causality-collect 	causality-collect 
+run set	Collect-Causes.Causality	Collect-Causes.Causality	Collect-Causes.Causality	Collect-Causes.Causality	Collect-Causes.Causality
+benchmarks/files/causality-grid/	status	CPU Time (s)	Wall Time (s)	Memory (MB)	Iterations
+causality-5days-00.yml	done	4.714328	4.328270725905895	762.392576	
+causality-5days-01.yml	done	6.925959	4.400949388742447	773.898240	
+causality-5days-02.yml	done	4.725712	4.3293141312897205	778.334208	
+causality-5days-03.yml	done	4.926929	4.325858950614929	781.131776	
+causality-5days-04.yml	done	5.009324	4.5068216025829315	781.516800	
+causality-5days-05.yml	done	5.633666	4.267588395625353	782.290944	
+causality-5days-06.yml	done	6.609689	4.09987124055624	773.849088	
+causality-5days-07.yml	done	6.105866	4.443556129932404	772.849664	
+causality-5days-08.yml	done	5.817249	4.299614351242781	768.888832	
+causality-5days-09.yml	done	4.803894	4.214341830462217	765.546496	
+causality-icu-00.yml	done	9.552997	4.7159124203026295	820.883456	
+causality-icu-01.yml	TIMEOUT	60.855797	40.68678832054138	5080.305664	
+causality-icu-02.yml	TIMEOUT	60.585315	44.58050920814276	3961.913344	
+causality-icu-03.yml	done	35.199398	34.140386782586575	819.339264	
+causality-icu-04.yml	done	35.468149	34.0835924372077	812.482560	
+causality-icu-05.yml	done	36.551083	34.2180395424366	813.232128	
+causality-icu-06.yml	done	35.961824	34.07767744734883	814.477312	
+causality-icu-07.yml	done	35.284328	34.28053019195795	814.161920	
+causality-icu-08.yml	done	37.307659	34.11970065534115	811.155456	
+causality-icu-09.yml	done	36.491682	34.08825483173132	810.491904	
+causality-lunar-00.yml	done	8.860449	3.9528440721333027	826.597376	
+causality-lunar-01.yml	done	40.864132	34.00867719948292	1076.137984	
+causality-lunar-02.yml	done	40.417051	34.22958855703473	1188.577280	
+causality-lunar-03.yml	done	39.208032	34.377500992268324	981.127168	
+causality-lunar-04.yml	done	38.019879	34.217807687819004	967.098368	
+causality-lunar-05.yml	done	37.651062	34.27006708458066	926.375936	
+causality-lunar-06.yml	done	37.686552	34.18802536278963	1002.610688	
+causality-lunar-07.yml	done	36.875347	34.216108195483685	977.993728	
+causality-lunar-08.yml	done	47.378191	34.519045036286116	2080.206848	
+causality-lunar-09.yml	done	8.446416	4.144523590803146	823.328768	

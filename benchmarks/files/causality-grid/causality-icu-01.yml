@@ -8,5 +8,5 @@ properties:
   - property_file: ../../unknown.txt
 
 options:
-    threshold: 0.004735786619824166
-    time_limit: 3600
+    threshold: 0.0047357866198241665
+    time_limit: 30
