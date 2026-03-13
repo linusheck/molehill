@@ -5,14 +5,17 @@
     <propertyfile>benchmarks/unknown.txt</propertyfile>
   </tasks>
 
+  <columns>
+    <column title="Threshold">threshold</column>
+    <column title="Smallest Tree">smallest_tree_nodes</column>
+    <column title="Conflicts">conflicts_processed</column>
+    <column title="Elapsed (s)">elapsed_seconds</column>
+    <column title="Timed Out">timed_out</column>
+    <column title="Tree Size Dist">tree_size_dist</column>
+    <column title="Cause Size Dist">cause_size_dist</column>
+  </columns>
+
   <rundefinition name="Collect-Causes">
-    <column title="Threshold" value="threshold"/>
-    <column title="Smallest Tree" value="smallest_tree_nodes"/>
-    <column title="Conflicts" value="conflicts_processed"/>
-    <column title="Elapsed (s)" value="elapsed_seconds"/>
-    <column title="Timed Out" value="timed_out"/>
-    <column title="Tree Size Dist" value="tree_size_dist"/>
-    <column title="Cause Size Dist" value="cause_size_dist"/>
     <require cpuCores="1"/>
     <option>scripts/causality/collect_causes.py</option>
   </rundefinition>
