@@ -60,7 +60,6 @@ def check(
     fixed_holes = [hole for hole in fixed_holes if hole in reachable_hole_order]
     if opponent_holes is not None:
         fixed_holes.extend(opponent_holes)
-    fixed_holes = list(dict.fromkeys(fixed_holes))
 
     if remove_optimal_holes:
         assert False, "Not tested."

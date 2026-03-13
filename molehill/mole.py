@@ -225,7 +225,10 @@ class Mole:
             compute_counterexample = False
 
         if self.mode == "conflicts":
-            compute_counterexample = True
+            assert self.considered_counterexamples == "conflicts"
+            # we are interested in minimizing the CEs that prove satisfaction of the prop (and thus don't disprove dissatisfaction)
+            compute_counterexample = invert
+            remove_optimal_holes = False
 
         # Check the sub-MDP (see counterexample.py).
         check_result = check(

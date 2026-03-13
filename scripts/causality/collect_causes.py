@@ -19,170 +19,71 @@ from molehill.modelchecker import check_model
 
 from dataclasses import dataclass
 
-def get_matrix_generator(quotient):
-    spec = quotient.specification
-    spec = spec.negate()
-    prop = spec.all_properties()[0]
-    check_task = CheckTask(prop.formula)
+import os.path
 
-    result = model_checking(quotient.family.mdp.model, prop.formula)
-    global_bounds = result.get_values()
+from itertools import chain
 
-    target_states = model_checking(
-        quotient.family.mdp.model, prop.formula.subformula.subformula
-    ).get_truth_values()
-    generator = MatrixGeneratorDouble(
-        quotient.family.mdp.model,
-        check_task,
-        target_states,
-        global_bounds,
-        quotient.coloring.getChoiceToAssignment()
+from sklearn import tree
+import matplotlib.pyplot as plt
+
+def process_conflict(partial_model, quotient, variables, header, values, labels, running_totals):
+    # print(partial_model)
+
+    variable_map = {variables[i]: i for i in range(len(variables))}
+    labels_map = {labels[i]: i for i in range(len(labels))}
+
+    X = values
+    Y = [labels_map["*"] for _row in range(len(values))]
+    print(Y)
+    print(labels_map)
+    for var in partial_model:
+        var_index = variable_map[var] # the same as hole_index
+        label = quotient.family.hole_to_option_labels[var_index][partial_model[var]]
+        Y[var_index] = labels_map[label]
+    # print(X, Y)
+
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(X, Y)
+
+    tree_size = clf.tree_.node_count
+
+    if tree_size >= running_totals["smallest"]:
+        return
+    running_totals["smallest"] = tree_size
+    n_features = len(header)
+    # Adjust plot size dynamically based on tree structure
+    n_nodes = clf.tree_.node_count
+    max_depth = clf.tree_.max_depth
+    width = max(5, n_features * 2)
+    height = max(5, (max_depth + 1) * 2, n_nodes // 2)
+
+    print(X, Y, labels)
+
+    class_names = [labels[c] for c in clf.classes_]
+
+    fig, ax = plt.subplots(figsize=(width, height))
+    tree.plot_tree(
+        clf,
+        feature_names=header,
+        class_names=class_names,
+        filled=True,
+        rounded=True,
+        fontsize=12,
+        ax=ax
     )
-    return generator
-
-
-
-@dataclass
-class CECheckResult:
-    all_schedulers_violate: bool
-    fixed_holes: list
-    nondet_holes: list
-    result: any
-    consistent_scheduler: any = None
-
-def get_counterexample_cores(family, quotient, matrix_generator):
-    spec = quotient.specification
-
-    # These are the options for each hole.
-    hole_options = [
-        family.family.holeOptionsMask(hole) for hole in range(family.num_holes)
-    ]
-    # These are the holes that are fixed to a single value.
-    fixed_holes = [
-        hole for hole in range(family.num_holes) if len(family.hole_options(hole)) <= 1
-    ]
-    matrix_generator.build_submodel(BitVector(family.num_holes, False), hole_options)
-    mdp = matrix_generator.get_current_mdp()
-    prop = spec.all_properties()[0]
-    all_schedulers_violate_full, result = check_model(mdp, prop, None)
-
-    if not all_schedulers_violate_full:
-        print("The property is not satisfied??", result.at(0))
-
-    # The CEs currently get abstracted in BFS order.
-    bfs_order = matrix_generator.get_current_bfs_order()
-    reachable_hole_order, append_these = matrix_generator.hole_order(
-        bfs_order, set(range(family.num_holes))
-    )
-
-    # Only holes that are reachable are interesting for the CE core. We can
-    # immediately "delete" the other ones.
-    fixed_holes = [hole for hole in fixed_holes if hole in reachable_hole_order]
-
-    # Repeatedly abstract fixed holes until no further local generalization is possible.
-    def check_ce_candidate(candidate_fixed_holes):
-        candidate_fixed_holes = set(candidate_fixed_holes)
-        abstracted_holes_here = [
-            hole for hole in reachable_hole_order if hole not in candidate_fixed_holes
-        ] + append_these
-
-        matrix_generator.build_submodel(
-            BitVector(family.num_holes, abstracted_holes_here), hole_options
-        )
-        mdp_holes = matrix_generator.get_current_mdp()
-
-        all_schedulers_violate, result = check_model(mdp_holes, prop, None)
-
-        if all_schedulers_violate:
-            # Counterexample found
-            counterexample_holes = [
-                hole for hole in fixed_holes if hole in candidate_fixed_holes
-            ]
-            return CECheckResult(
-                all_schedulers_violate, counterexample_holes, None, result
-            )
-        # Not a counterexample
-        return CECheckResult(all_schedulers_violate, None, None, result)
-
-    fixed_holes = list(fixed_holes)
-    while True:
-        removed_hole = False
-        for hole in list(fixed_holes):
-            candidate_fixed_holes = [h for h in fixed_holes if h != hole]
-            check_result = check_ce_candidate(candidate_fixed_holes)
-            result = check_result.result
-            if check_result.all_schedulers_violate:
-                fixed_holes = check_result.fixed_holes
-                removed_hole = True
-                break
-        if not removed_hole:
-            break
-    # Create family with a locally minimal counterexample core.
-    new_family = quotient.family.copy()
-    for hole in fixed_holes:
-        new_family.hole_set_options(hole, hole_options[hole])
-    # Also create an action-to-label dict
-    cause_dict = {}
-    for hole in fixed_holes:
-        hole_name = quotient.family.hole_name(hole)
-        assert len(family.hole_options(hole)) == 1
-        hole_option = family.hole_options(hole)[0]
-        cause_dict[hole_name] = quotient.family.hole_to_option_labels[hole][hole_option]
-    return new_family, cause_dict
-
-def process_conflict(partial_model, quotient, matrix_generator):
-    # Make a PAYNT family from the current partial model.
-    new_family = quotient.family.copy()
-    new_family.add_parent_info(quotient.family)
-
-    model_variable_names = [quotient.family.hole_name(hole) for hole in range(new_family.num_holes)]
-
-    for hole in range(new_family.num_holes):
-        var = model_variable_names[hole]
-        if var in partial_model:
-            new_family.hole_set_options(hole, [partial_model[var]])
-
-    core, cause_dict = get_counterexample_cores(new_family, quotient, matrix_generator)
-
-    print(cause_dict)
-    # # Decide whether we want to compute a counterexample.
-    # compute_counterexample = True
-    # remove_optimal_holes = True
-    # if self.considered_counterexamples == "none":
-    #     compute_counterexample = False
-    #     remove_optimal_holes = False
-    # elif self.considered_counterexamples == "sched":
-    #     compute_counterexample = False
-    # elif self.considered_counterexamples == "mc" and model == "MDP":
-    #     compute_counterexample = False
-
-    # # Check the sub-MDP (see counterexample.py).
-    # check_result = check(
-    #     self.get_matrix_generator(invert),
-    #     new_family,
-    #     prop,
-    #     compute_counterexample,
-    #     remove_optimal_holes,
-    #     opponent_holes=opponent_holes,
-    # )
-    # self.mc_calls += 1
-    # all_violated = check_result.all_schedulers_violate
-    # # print("All violated", all_violated, check_result.result.at(0))
-    # counterexample = check_result.fixed_holes
-
-
-
+    plt.tight_layout()
+    plt.savefig(f"pics/tree_{tree_size}.png", bbox_inches="tight")
+    plt.close(fig)
 @click.command()
 @click.argument("project_path")
 def main(project_path):
-
     sketch_path = f"{project_path}/sketch.templ"
     properties_path = f"{project_path}/sketch.props"
     quotient = paynt.parser.sketch.Sketch.load_sketch(
         sketch_path, properties_path
     )
-    quotient.build(quotient.family)
-    matrix_generator = get_matrix_generator(quotient)
+    family = quotient.family
+    quotient.build(family)
 
     # seed = random.randint(1, 2**32 - 1)
 
@@ -199,22 +100,77 @@ def main(project_path):
 
     # z3.set_param("smt.random_seed", random.randint(1, 2**32 - 1))
 
+    vars_to_states = dict()
+
+    choice_to_hole_options = quotient.coloring.getChoiceToAssignment()
+    transition_matrix = quotient.quotient_mdp.transition_matrix
+    # go through transition matrix 
+    hole_indices = set()
+    for state in range(quotient.quotient_mdp.nr_states):
+        first_row = transition_matrix.get_rows_for_group(state)[0]
+        if len(choice_to_hole_options[first_row]) == 0:
+            assert len(transition_matrix.get_rows_for_group(state)) == 1, "Input model not an MDP"
+            continue
+        hole_index = choice_to_hole_options[first_row][0][0]
+        assert hole_index not in hole_indices, "Multiple states have the same hole, not supported"
+        hole_indices.add(hole_index)
+        var_name = family.hole_name(hole_index)
+        for row in transition_matrix.get_rows_for_group(state):
+            assert choice_to_hole_options[row][0][0] == hole_index, "Multiple holes for one state, not supported"
+            assert len(choice_to_hole_options[row]) == 1, "Multiple choices for one state, not supported"
+            vars_to_states[var_name] = state
+
+    variables = list(vars_to_states.keys())
+    # print(variables)
+
+    labels = list(
+        dict.fromkeys(
+            chain(
+                *[quotient.family.hole_to_option_labels[i] for i in hole_indices]
+            )
+        )
+    ) + ["*"] # special whatever label maps to max(actions)+1
+
+    # print(labels)
+
+    values_orig = []
+    header = []
+    with open(os.path.join(project_path, "values.csv"), "r", encoding="utf-8") as f:
+        header = f.readline().strip().split(",")
+        for line in f:
+            values = line.strip().split(",")
+            values_orig.append(
+                [float(values[i]) for i in range(len(header))]
+            )
+
+    values = []
+
+    choice_to_hole_options = quotient.coloring.getChoiceToAssignment()
+    transition_matrix = quotient.quotient_mdp.transition_matrix
+
+    # go through transition matrix 
+    for state in vars_to_states.values():
+        values.append(values_orig[state])
+    
     constraint = ExistsConstraint()
     constraint.args = argparse.Namespace(deterministic=False)
     queue = Queue()
     process = Process(
         target=molehill.run,
-        args=(project_path, "none", constraint),
+        args=(project_path, "conflicts", constraint),
         kwargs={"mode": "conflicts", "conflict_queue": queue},
     )
     process.start()
 
+    running_totals = {
+        "smallest": float("inf"),
+    }
     while process.is_alive() or not queue.empty():
         try:
             partial_model = queue.get(timeout=0.1)
         except Empty:
             continue
-        process_conflict(partial_model, quotient, matrix_generator)
+        process_conflict(partial_model, quotient, variables, header, values, labels, running_totals)
     process.join()
 
 if __name__ == "__main__":
