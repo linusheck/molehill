@@ -93,7 +93,7 @@ options:
 def write_comparison_xml(path, tasks_glob):
     """Write the BenchExec comparison XML."""
     content = f"""<?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="tools.causality_collect" timelimit="{TIME_LIMIT+30}s" hardtimelimit="{TIME_LIMIT+60}s" memlimit="16GB">
+<benchmark tool="tools.causality_collect" timelimit="{TIME_LIMIT+120}s" hardtimelimit="{TIME_LIMIT+120}s" memlimit="16GB">
   <tasks name="Causality">
     <include>{tasks_glob}</include>
     <propertyfile>{PROPERTY_FILE}</propertyfile>
