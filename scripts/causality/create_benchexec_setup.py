@@ -93,7 +93,7 @@ options:
 def write_comparison_xml(path, tasks_glob):
     """Write the BenchExec comparison XML."""
     content = f"""<?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="tools.causality_collect" timelimit="{TIME_LIMIT+120}s" hardtimelimit="{TIME_LIMIT+120}s" memlimit="16GB">
+<benchmark tool="tools.causality_collect" timelimit="{TIME_LIMIT+200}s" hardtimelimit="{TIME_LIMIT+200}s" memlimit="16GB">
   <tasks name="Causality">
     <include>{tasks_glob}</include>
     <propertyfile>{PROPERTY_FILE}</propertyfile>
@@ -102,11 +102,10 @@ def write_comparison_xml(path, tasks_glob):
   <columns>
     <column title="Threshold">threshold</column>
     <column title="Smallest Tree">smallest_tree_nodes</column>
-    <column title="Conflicts">conflicts_processed</column>
+    <column title="Smallest Cause">smallest_cause</column>
+    <column title="Causes">causes</column>
     <column title="Elapsed (s)">elapsed_seconds</column>
     <column title="Timed Out">timed_out</column>
-    <column title="Tree Size Dist">tree_size_dist</column>
-    <column title="Cause Size Dist">cause_size_dist</column>
   </columns>
 
   <rundefinition name="Collect-Causes">

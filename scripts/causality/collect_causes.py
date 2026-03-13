@@ -52,6 +52,8 @@ def process_conflict(partial_model, quotient, variables, header, values, labels,
 
     running_totals["tree_size_counts"][tree_size] += 1
     running_totals["cause_size_counts"][cause_size] += 1
+    if cause_size < running_totals["smallest_cause"]:
+        running_totals["smallest_cause"] = cause_size
 
     if tree_size >= running_totals["smallest"]:
         return
@@ -192,6 +194,7 @@ def main(project_path, threshold, time_limit):
         "conflicts_processed": 0,
         "tree_size_counts": Counter(),
         "cause_size_counts": Counter(),
+        "smallest_cause": float("inf"),
     }
     start_time = _time.monotonic()
     deadline = start_time + time_limit if time_limit is not None else None
@@ -209,6 +212,29 @@ def main(project_path, threshold, time_limit):
 
     if timed_out:
         process.terminate()
+
+    elapsed = _time.monotonic() - start_time
+    smallest = running_totals["smallest"]
+    smallest_str = str(int(smallest)) if smallest != float("inf") else "none"
+    smallest_cause = running_totals["smallest_cause"]
+    smallest_cause_str = str(int(smallest_cause)) if smallest_cause != float("inf") else "none"
+    effective_threshold = threshold if threshold is not None else "original"
+
+    tree_counts = running_totals["tree_size_counts"]
+    cause_counts = running_totals["cause_size_counts"]
+
+    print(f"CAUSALITY_RESULT"
+          f" threshold={effective_threshold}"
+          f" smallest_tree_nodes={smallest_str}"
+          f" smallest_cause={smallest_cause_str}"
+          f" causes={running_totals['conflicts_processed']}"
+          f" elapsed_seconds={elapsed:.2f}"
+          f" timed_out={'yes' if timed_out else 'no'}",
+          flush=True)
+
+    # --- Everything below is best-effort; benchexec may kill us here ---
+
+    if timed_out:
         process.join(timeout=5)
         if process.is_alive():
             process.kill()
@@ -223,14 +249,6 @@ def main(project_path, threshold, time_limit):
                 break
     else:
         process.join()
-
-    elapsed = _time.monotonic() - start_time
-    smallest = running_totals["smallest"]
-    smallest_str = str(int(smallest)) if smallest != float("inf") else "none"
-    effective_threshold = threshold if threshold is not None else "original"
-
-    tree_counts = running_totals["tree_size_counts"]
-    cause_counts = running_totals["cause_size_counts"]
 
     # --- Distribution tables ---
     if tree_counts:
@@ -280,21 +298,7 @@ def main(project_path, threshold, time_limit):
         plt.savefig("pics/cause_size_distribution.png", bbox_inches="tight")
         plt.close(fig)
 
-    # Encode distributions as compact JSON for machine parsing
-    tree_dist_json = json.dumps(dict(sorted(tree_counts.items())), separators=(",", ":"))
-    cause_dist_json = json.dumps(dict(sorted(cause_counts.items())), separators=(",", ":"))
-
-    print(f"CAUSALITY_RESULT"
-          f" threshold={effective_threshold}"
-          f" smallest_tree_nodes={smallest_str}"
-          f" conflicts_processed={running_totals['conflicts_processed']}"
-          f" elapsed_seconds={elapsed:.2f}"
-          f" timed_out={'yes' if timed_out else 'no'}"
-          f" tree_size_dist={tree_dist_json}"
-          f" cause_size_dist={cause_dist_json}")
-
     if tmp_dir is not None:
         shutil.rmtree(tmp_dir, ignore_errors=True)
-
 if __name__ == "__main__":
     main()

@@ -8,11 +8,10 @@
   <columns>
     <column title="Threshold">threshold</column>
     <column title="Smallest Tree">smallest_tree_nodes</column>
-    <column title="Conflicts">conflicts_processed</column>
+    <column title="Smallest Cause">smallest_cause</column>
+    <column title="Causes">causes</column>
     <column title="Elapsed (s)">elapsed_seconds</column>
     <column title="Timed Out">timed_out</column>
-    <column title="Tree Size Dist">tree_size_dist</column>
-    <column title="Cause Size Dist">cause_size_dist</column>
   </columns>
 
   <rundefinition name="Collect-Causes">
