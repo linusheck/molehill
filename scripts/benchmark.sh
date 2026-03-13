@@ -8,8 +8,8 @@ python3 -m benchexec.benchexec "comparison_$1.xml" --numOfThreads $2 --outputpat
 
 if [ "$1" = "robust_trees" ] || [ "$1" = "trees" ]; then
     # Generate table
-    ./tree_tables.sh $RESULT_DIR
+    ./scripts/tree_tables.sh $RESULT_DIR
 else
     # Do whole plot thing
-    ./plot.sh $RESULT_DIR
+    ./scripts/plot.sh $RESULT_DIR
 fi
