@@ -1,0 +1,12 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/causality/lunar
+
+properties:
+  - property_file: ../../unknown.txt
+
+options:
+    threshold: 1.0
+    time_limit: 3600

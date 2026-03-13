@@ -1,0 +1,12 @@
+
+format_version: "2.0"
+
+input_files:
+- ../../../resources/causality/5days
+
+properties:
+  - property_file: ../../unknown.txt
+
+options:
+    threshold: 0.8888888888888888
+    time_limit: 3600
