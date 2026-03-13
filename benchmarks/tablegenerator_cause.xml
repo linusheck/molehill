@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<!--
+This file is part of BenchExec, a framework for reliable benchmarking:
+https://github.com/sosy-lab/benchexec
+
+SPDX-FileCopyrightText: 2007-2020 Dirk Beyer <https://www.sosy-lab.org>
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
+<!DOCTYPE table PUBLIC "+//IDN sosy-lab.org//DTD BenchExec table 1.10//EN" "https://www.sosy-lab.org/benchexec/table-1.10.dtd">
+<table>
+  <column title="status"/>
+  <column title="cputime" displayTitle="CPU Time"/>
+  <column title="walltime" displayTitle="Wall Time"/>
+  <column title="memory" displayTitle="Memory" sourceUnit="B" displayUnit="MB"/>
+  <column title="threshold" displayTitle="Threshold">threshold</column>
+  <column title="smallest_tree_nodes" displayTitle="Smallest Tree">smallest_tree_nodes</column>
+  <column title="conflicts_processed" displayTitle="Conflicts">conflicts_processed</column>
+  <column title="elapsed_seconds" displayTitle="Elapsed (s)">elapsed_seconds</column>
+  <column title="timed_out" displayTitle="Timed Out">timed_out</column>
+  <column title="tree_size_dist" displayTitle="Tree Size Dist">tree_size_dist</column>
+  <column title="cause_size_dist" displayTitle="Cause Size Dist">cause_size_dist</column>
+</table>
