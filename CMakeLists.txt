@@ -59,20 +59,20 @@ else()
     execute_process(
         COMMAND "${Python_EXECUTABLE}" -c "from importlib.metadata import distribution; print(distribution('paynt').locate_file(''))"
         RESULT_VARIABLE _sitepackages_result
-        OUTPUT_VARIABLE PYTHON_SITE_PACKAGES
+        OUTPUT_VARIABLE PAYNT_SITE_PACKAGES
         ERROR_VARIABLE _sitepackages_error
         OUTPUT_STRIP_TRAILING_WHITESPACE
     )
 
     if(NOT _sitepackages_result EQUAL 0)
         message(WARNING "molehill - paynt package not found: ${_sitepackages_error}")
-        set(PYTHON_SITE_PACKAGES "")
+        set(PAYNT_SITE_PACKAGES "")
     endif()
 
-    set(STORM_PIP_CMAKE_DIR "${PYTHON_SITE_PACKAGES}/lib/cmake/storm")
+    set(STORM_PIP_CMAKE_DIR "${PAYNT_SITE_PACKAGES}/lib/cmake/storm")
 
-    if(NOT PYTHON_SITE_PACKAGES STREQUAL "" AND EXISTS "${STORM_PIP_CMAKE_DIR}/stormConfig.cmake")
-        message(STATUS "molehill - Found bundled Storm installation at: ${PYTHON_SITE_PACKAGES}")
+    if(NOT PAYNT_SITE_PACKAGES STREQUAL "" AND EXISTS "${STORM_PIP_CMAKE_DIR}/stormConfig.cmake")
+        message(STATUS "molehill - Found bundled Storm installation at: ${PAYNT_SITE_PACKAGES}")
         set(STORM_FROM_PIP TRUE)
         set(ALLOW_STORM_SYSTEM OFF)
         set(ALLOW_STORM_FETCH OFF)
@@ -155,10 +155,10 @@ if(STORM_FROM_PIP)
     # Create storm target manually from paynt's bundled Storm installation.
     # The bundled cmake configs have hardcoded build-time paths, so we bypass
     # find_package and set up the target directly.
-    set(STORM_PIP_INCLUDE_DIR "${PYTHON_SITE_PACKAGES}/include/storm")
-    set(STORM_PIP_RESOURCE_INCLUDE_DIR "${PYTHON_SITE_PACKAGES}/include/storm/resources")
-    set(STORM_PIP_LIB_DIR "${PYTHON_SITE_PACKAGES}/lib/storm")
-    set(STORM_PIP_RESOURCE_LIB_DIR "${PYTHON_SITE_PACKAGES}/lib/storm/resources")
+    set(STORM_PIP_INCLUDE_DIR "${PAYNT_SITE_PACKAGES}/include/storm")
+    set(STORM_PIP_RESOURCE_INCLUDE_DIR "${PAYNT_SITE_PACKAGES}/include/storm/resources")
+    set(STORM_PIP_LIB_DIR "${PAYNT_SITE_PACKAGES}/lib/storm")
+    set(STORM_PIP_RESOURCE_LIB_DIR "${PAYNT_SITE_PACKAGES}/lib/storm/resources")
 
     # Collect all resource sub-include directories (l3pp, gmm, exprtk, etc.)
     file(GLOB STORM_RESOURCE_SUBDIRS "${STORM_PIP_RESOURCE_INCLUDE_DIR}/*/")
