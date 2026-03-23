@@ -22,7 +22,12 @@ jobs:
     - name: Install molehill from source
       run: |
         python3 -m venv venv && source venv/bin/activate
-        pip install -e ".[all]"
+        pip install .
+    
+    - name: Install test requirements
+      run: |
+        source venv/bin/activate
+        pip install matplotlib numpy scipy pytest nbval numpy
 
     - name: Run tests
       run: |
