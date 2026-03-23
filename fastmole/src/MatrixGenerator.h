@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include <optional>
+#include <queue>
 #include <storm/modelchecker/CheckTask.h>
 #include <storm/storage/Scheduler.h>
 #include <vector>
