@@ -17,7 +17,6 @@ jobs:
 
     - name: Install molehill from source
       run: |
-        git clone https://github.com/linusheck/molehill.git
         cd molehill
         python3 -m venv venv && source venv/bin/activate
         pip install .
