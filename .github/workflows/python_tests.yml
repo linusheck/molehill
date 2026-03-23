@@ -24,7 +24,7 @@ jobs:
     - name: Install system build dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake libboost-dev libgmp-dev libcln-dev
+        sudo apt-get install -y build-essential cmake libboost-dev libgmp-dev libcln-dev libginac-dev
 
     - name: Create virtual environment
       run: |
