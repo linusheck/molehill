@@ -15,36 +15,13 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install build requirements
+    - name: Install molehill from source
       run: |
-        python3 -m venv venv
-        source venv/bin/activate
-        pip install -r build-requirements.txt
+        git clone https://github.com/linusheck/molehill.git
+        cd molehill
+        python3 -m venv venv && source venv/bin/activate
+        pip install .
 
-    - name: Build Storm
-      run: |
-        source venv/bin/activate
-        mkdir prerequisites && cd prerequisites
-        git clone https://github.com/moves-rwth/storm.git
-        git clone https://github.com/moves-rwth/stormpy.git
-        git clone https://github.com/randriu/synthesis.git
-        mkdir storm/build && cd storm/build
-        cmake ..
-        make storm storm-cli storm-pomdp
-
-    - name: Install stormpy and paynt
-      run: |
-        source venv/bin/activate
-        cd prerequisites/stormpy
-        pip install . --config-settings=cmake.define.USE_STORM_DFT=OFF --config-settings=cmake.define.USE_STORM_GSPN=OFF --config-settings=cmake.define.STORM_DIR_HINT=../storm/build
-        cd ../synthesis
-        pip install . --no-build-isolation --config-settings=cmake.define.STORM_DIR_HINT=../storm/build
-
-    - name: Install molehill
-      run: |
-        source venv/bin/activate
-        pip install -r build-requirements.txt
-        pip install . --no-build-isolation
 
     - name: Run tests
       run: |
