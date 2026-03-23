@@ -17,10 +17,8 @@ jobs:
 
     - name: Install molehill from source
       run: |
-        cd molehill
         python3 -m venv venv && source venv/bin/activate
         pip install .
-
 
     - name: Run tests
       run: |
