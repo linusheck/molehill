@@ -14,6 +14,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+    
+    - name: Install build requirements
+      run: |
+        apt install automake build-essential cmake git libboost-dev libginac-dev libglpk-dev libgmp-dev libhwloc-dev libarchive-dev libxerces-c-dev libz3-dev
 
     - name: Install molehill from source
       run: |
