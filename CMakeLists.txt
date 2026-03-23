@@ -50,49 +50,78 @@ if(STORMPY_FROM_SYSTEM STREQUAL "True")
     set(ALLOW_STORM_SYSTEM ON)
     set(ALLOW_STORM_FETCH OFF)
 else()
-    message(STATUS "molehill - StormPy uses fetched Storm - querying Storm origin information")
+    message(STATUS "molehill - StormPy uses pip-installed Storm - looking for bundled Storm cmake config")
 
-    # Get Storm origin information
+    # When stormpy is installed from pip, paynt ships a complete Storm installation
+    # in site-packages (headers, libs, cmake config). Use that instead of fetching Storm.
+    # Use importlib.metadata to find paynt's actual install location, which works
+    # correctly even inside pip's isolated build environment.
     execute_process(
-        COMMAND "${Python_EXECUTABLE}" -c "import stormpy.info; repo, tag = stormpy.info.storm_origin_info(); print(f'{repo or \"\"};{tag or \"\"}')"
-        RESULT_VARIABLE _origin_result
-        OUTPUT_VARIABLE STORM_ORIGIN_INFO
-        ERROR_VARIABLE _origin_error
+        COMMAND "${Python_EXECUTABLE}" -c "from importlib.metadata import distribution; print(distribution('paynt').locate_file(''))"
+        RESULT_VARIABLE _sitepackages_result
+        OUTPUT_VARIABLE PAYNT_SITE_PACKAGES
+        ERROR_VARIABLE _sitepackages_error
         OUTPUT_STRIP_TRAILING_WHITESPACE
     )
-    
-    if(NOT _origin_result EQUAL 0)
-        message(FATAL_ERROR "molehill - Failed to query stormpy.info.storm_origin_info(): ${_origin_error}")
+
+    if(NOT _sitepackages_result EQUAL 0)
+        message(WARNING "molehill - paynt package not found: ${_sitepackages_error}")
+        set(PAYNT_SITE_PACKAGES "")
     endif()
-    
-    # Parse repo and tag
-    list(GET STORM_ORIGIN_INFO 0 STORM_ORIGIN_REPO)
-    list(GET STORM_ORIGIN_INFO 1 STORM_ORIGIN_TAG)
-    
-    message(STATUS "molehill - Storm origin repo: ${STORM_ORIGIN_REPO}")
-    message(STATUS "molehill - Storm origin tag: ${STORM_ORIGIN_TAG}")
-    
-    # Configure to fetch the same Storm version as stormpy
-    set(ALLOW_STORM_SYSTEM OFF)
-    set(ALLOW_STORM_FETCH ON)
-    
-    if(NOT STORM_ORIGIN_REPO STREQUAL "")
-        set(STORM_GIT_REPO "${STORM_ORIGIN_REPO}")
+
+    set(STORM_PIP_CMAKE_DIR "${PAYNT_SITE_PACKAGES}/lib/cmake/storm")
+
+    if(NOT PAYNT_SITE_PACKAGES STREQUAL "" AND EXISTS "${STORM_PIP_CMAKE_DIR}/stormConfig.cmake")
+        message(STATUS "molehill - Found bundled Storm installation at: ${PAYNT_SITE_PACKAGES}")
+        set(STORM_FROM_PIP TRUE)
+        set(ALLOW_STORM_SYSTEM OFF)
+        set(ALLOW_STORM_FETCH OFF)
     else()
-        message(FATAL_ERROR "molehill - Failed to determine Storm origin repository")
+        message(STATUS "molehill - No bundled Storm cmake config found, falling back to fetch")
+
+        # Get Storm origin information
+        execute_process(
+            COMMAND "${Python_EXECUTABLE}" -c "import stormpy.info; repo, tag = stormpy.info.storm_origin_info(); print(f'{repo or \"\"};{tag or \"\"}')"
+            RESULT_VARIABLE _origin_result
+            OUTPUT_VARIABLE STORM_ORIGIN_INFO
+            ERROR_VARIABLE _origin_error
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+
+        if(NOT _origin_result EQUAL 0)
+            message(FATAL_ERROR "molehill - Failed to query stormpy.info.storm_origin_info(): ${_origin_error}")
+        endif()
+
+        # Parse repo and tag
+        list(GET STORM_ORIGIN_INFO 0 STORM_ORIGIN_REPO)
+        list(GET STORM_ORIGIN_INFO 1 STORM_ORIGIN_TAG)
+
+        message(STATUS "molehill - Storm origin repo: ${STORM_ORIGIN_REPO}")
+        message(STATUS "molehill - Storm origin tag: ${STORM_ORIGIN_TAG}")
+
+        # Configure to fetch the same Storm version as stormpy
+        set(ALLOW_STORM_SYSTEM OFF)
+        set(ALLOW_STORM_FETCH ON)
+        set(STORM_FROM_PIP FALSE)
+
+        if(NOT STORM_ORIGIN_REPO STREQUAL "")
+            set(STORM_GIT_REPO "${STORM_ORIGIN_REPO}")
+        else()
+            message(FATAL_ERROR "molehill - Failed to determine Storm origin repository")
+        endif()
+
+        if(NOT STORM_ORIGIN_TAG STREQUAL "")
+            set(STORM_GIT_TAG "${STORM_ORIGIN_TAG}")
+        else()
+            message(FATAL_ERROR "molehill - Failed to determine Storm origin tag")
+        endif()
+
+        message(STATUS "molehill - Configured to fetch Storm from: ${STORM_GIT_REPO} (tag: ${STORM_GIT_TAG})")
     endif()
-    
-    if(NOT STORM_ORIGIN_TAG STREQUAL "")
-        set(STORM_GIT_TAG "${STORM_ORIGIN_TAG}")
-    else()
-        message(FATAL_ERROR "molehill - Failed to determine Storm origin tag")
-    endif()
-    
-    message(STATUS "molehill - Configured to fetch Storm from: ${STORM_GIT_REPO} (tag: ${STORM_GIT_TAG})")
 endif()
 
 # Check whether inputs are sane.
-if (NOT ALLOW_STORM_SYSTEM AND NOT ALLOW_STORM_FETCH)
+if (NOT STORM_FROM_PIP AND NOT ALLOW_STORM_SYSTEM AND NOT ALLOW_STORM_FETCH)
     message(FATAL_ERROR "molehill - Storm must be either fetched or used from system, yet ALLOW_STORM_SYSTEM=OFF and ALLOW_STORM_FETCH=OFF was set.")
 endif()
 
@@ -122,7 +151,59 @@ function(check_hint NAME DIR_FOUND HINT_DIR FOUND_VERSION)
     endif()
 endfunction(check_hint)
 
-if(ALLOW_STORM_SYSTEM)
+if(STORM_FROM_PIP)
+    # Create storm target manually from paynt's bundled Storm installation.
+    # The bundled cmake configs have hardcoded build-time paths, so we bypass
+    # find_package and set up the target directly.
+    set(STORM_PIP_INCLUDE_DIR "${PAYNT_SITE_PACKAGES}/include/storm")
+    set(STORM_PIP_RESOURCE_INCLUDE_DIR "${PAYNT_SITE_PACKAGES}/include/storm/resources")
+    set(STORM_PIP_LIB_DIR "${PAYNT_SITE_PACKAGES}/lib/storm")
+    set(STORM_PIP_RESOURCE_LIB_DIR "${PAYNT_SITE_PACKAGES}/lib/storm/resources")
+
+    # Collect all resource sub-include directories (l3pp, gmm, exprtk, etc.)
+    file(GLOB STORM_RESOURCE_SUBDIRS "${STORM_PIP_RESOURCE_INCLUDE_DIR}/*/")
+    set(STORM_PIP_ALL_INCLUDES "${STORM_PIP_INCLUDE_DIR};${STORM_PIP_RESOURCE_INCLUDE_DIR}")
+    foreach(subdir ${STORM_RESOURCE_SUBDIRS})
+        if(IS_DIRECTORY "${subdir}")
+            list(APPEND STORM_PIP_ALL_INCLUDES "${subdir}")
+        endif()
+    endforeach()
+
+    # Find libstorm.so in the bundled location
+    find_library(STORM_PIP_LIBRARY
+        NAMES storm
+        PATHS "${STORM_PIP_LIB_DIR}"
+        NO_DEFAULT_PATH
+    )
+    if(NOT STORM_PIP_LIBRARY)
+        message(FATAL_ERROR "molehill - Could not find libstorm.so in ${STORM_PIP_LIB_DIR}")
+    endif()
+    message(STATUS "molehill - Using bundled Storm from pip: ${STORM_PIP_LIBRARY}")
+
+    # Storm headers require Boost, GMP, and CLN headers from the system.
+    find_package(Boost REQUIRED)
+    list(APPEND STORM_PIP_ALL_INCLUDES ${Boost_INCLUDE_DIRS})
+
+    find_path(GMP_INCLUDE_DIR gmp.h)
+    if(GMP_INCLUDE_DIR)
+        list(APPEND STORM_PIP_ALL_INCLUDES ${GMP_INCLUDE_DIR})
+    else()
+        message(FATAL_ERROR "molehill - gmp.h not found. Install libgmp-dev (Linux) or gmp (macOS: brew install gmp).")
+    endif()
+
+    find_path(CLN_INCLUDE_DIR cln/cln.h)
+    if(CLN_INCLUDE_DIR)
+        list(APPEND STORM_PIP_ALL_INCLUDES ${CLN_INCLUDE_DIR})
+    else()
+        message(FATAL_ERROR "molehill - cln/cln.h not found. Install libcln-dev (Linux) or cln (macOS: brew install cln).")
+    endif()
+
+    add_library(storm SHARED IMPORTED)
+    set_target_properties(storm PROPERTIES
+        IMPORTED_LOCATION "${STORM_PIP_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${STORM_PIP_ALL_INCLUDES}"
+    )
+elseif(ALLOW_STORM_SYSTEM)
     set(STORM_MIN_VERSION "1.11.0")
     if (ALLOW_STORM_FETCH)
         find_package(storm HINTS ${STORM_DIR_HINT}) # NOT REQUIRED, can be fetched.
@@ -149,8 +230,8 @@ if(ALLOW_STORM_SYSTEM)
     storm_with_lib(GSPN)
     storm_with_lib(PARS)
     storm_with_lib(POMDP)
-endif ()
-if (NOT storm_FOUND AND ALLOW_STORM_FETCH)
+endif()
+if (NOT STORM_FROM_PIP AND NOT storm_FOUND AND ALLOW_STORM_FETCH)
     include(FetchContent)
     SET(FETCHCONTENT_QUIET OFF)
     SET(STORM_BUILD_EXECUTABLES OFF)
@@ -192,6 +273,14 @@ pybind11_add_module(fastmole ${FASTMOLE_SOURCES})
 
 # Link Storm library
 target_link_libraries(fastmole PRIVATE storm)
+
+# Set RPATH so fastmole finds the bundled Storm libs at runtime (pip install case)
+if(STORM_FROM_PIP)
+    set_target_properties(fastmole PROPERTIES
+        INSTALL_RPATH "$ORIGIN/../../lib/storm:$ORIGIN/../../lib/storm/resources:$ORIGIN/../../paynt.libs:$ORIGIN/../../stormpy.libs"
+        BUILD_WITH_INSTALL_RPATH TRUE
+    )
+endif()
 
 # Place the built extension in the Python package directory
 set_target_properties(fastmole PROPERTIES
