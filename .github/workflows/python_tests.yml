@@ -19,10 +19,27 @@ jobs:
       run: |
         sudo apt install automake build-essential cmake git libboost-dev libginac-dev libglpk-dev libgmp-dev libhwloc-dev libarchive-dev libxerces-c-dev libz3-dev
 
-    - name: Install molehill from source
+    - name: Install requirements from source
       run: |
         python3 -m venv venv && source venv/bin/activate
-        pip install .
+        pip install -r build-requirements.txt 
+        mkdir prerequisites && cd prerequisites
+        git clone https://github.com/moves-rwth/storm.git
+        git clone https://github.com/moves-rwth/stormpy.git
+        git clone https://github.com/randriu/synthesis.git
+        mkdir storm/build && cd storm/build
+        cmake ..
+        make storm storm-cli storm-pomdp
+        cd - && cd stormpy
+        pip install . --config-settings=cmake.define.USE_STORM_DFT=OFF --config-settings=cmake.define.USE_STORM_GSPN=OFF --config-settings=cmake.define.STORM_DIR_HINT=../storm/build
+        cd - && cd synthesis
+        pip install . --no-build-isolation --config-settings=cmake.define.STORM_DIR_HINT=../storm/build
+
+    - name: Install molehill from source
+      run: |
+        pip install -r build-requirements.txt
+        pip install . --no-build-isolation
+
     
     - name: Install test requirements
       run: |
