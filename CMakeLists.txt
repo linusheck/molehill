@@ -180,6 +180,24 @@ if(STORM_FROM_PIP)
     endif()
     message(STATUS "molehill - Using bundled Storm from pip: ${STORM_PIP_LIBRARY}")
 
+    # Storm headers require Boost, GMP, and CLN headers from the system.
+    find_package(Boost REQUIRED)
+    list(APPEND STORM_PIP_ALL_INCLUDES ${Boost_INCLUDE_DIRS})
+
+    find_path(GMP_INCLUDE_DIR gmp.h)
+    if(GMP_INCLUDE_DIR)
+        list(APPEND STORM_PIP_ALL_INCLUDES ${GMP_INCLUDE_DIR})
+    else()
+        message(FATAL_ERROR "molehill - gmp.h not found. Install libgmp-dev (Linux) or gmp (macOS: brew install gmp).")
+    endif()
+
+    find_path(CLN_INCLUDE_DIR cln/cln.h)
+    if(CLN_INCLUDE_DIR)
+        list(APPEND STORM_PIP_ALL_INCLUDES ${CLN_INCLUDE_DIR})
+    else()
+        message(FATAL_ERROR "molehill - cln/cln.h not found. Install libcln-dev (Linux) or cln (macOS: brew install cln).")
+    endif()
+
     add_library(storm SHARED IMPORTED)
     set_target_properties(storm PROPERTIES
         IMPORTED_LOCATION "${STORM_PIP_LIBRARY}"
