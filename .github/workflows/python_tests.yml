@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-24.04
+    runs-on: debian-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
     - name: Install system build dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake libboost-dev libgmp-dev libcln-dev libginac13 libginac13-dbgsym
+        sudo apt-get install -y build-essential cmake libboost-dev libgmp-dev libcln-dev libginac-dev
 
     - name: Create virtual environment
       run: |
