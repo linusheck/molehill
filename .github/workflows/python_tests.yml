@@ -14,8 +14,11 @@ jobs:
 
 
     steps:
-    - name: Install git
-      run: apt-get update && apt-get install -y git
+
+    - name: Install base dependencies
+      run: |
+        apt-get update
+        apt-get install -y git lsb-release ca-certificates curl git
 
     - uses: actions/checkout@v4
       with:
